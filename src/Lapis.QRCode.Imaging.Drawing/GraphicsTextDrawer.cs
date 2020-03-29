@@ -31,7 +31,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 			Console.WriteLine(imageHeight);
             using (var graph = Graphics.FromImage(bmp))
             {
-                graph.Clear(ColorHelper.FromIntRgb24(Background));
+                //graph.Clear(ColorHelper.FromIntRgb24(Background));
                 //var foreBrush = new SolidBrush(ColorHelper.FromIntRgb24(Foreground));
                 var foreBrush = new SolidBrush(Color.FromArgb(40,40,40));
                 var foreBrushB = new SolidBrush(Color.FromArgb(0,0,120));
