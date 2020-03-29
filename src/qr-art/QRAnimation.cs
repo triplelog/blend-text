@@ -42,23 +42,23 @@ namespace Lapis.QrArt
             }
         }
 
-        private static bool CheckFormatAnimation(string format, out IBitMatrixDrawer drawer, out ITripMatrixDrawer textDrawer)
+        private static bool CheckFormatAnimation(string format, out ITripMatrixDrawer textDrawer)
         {
         	textDrawer = null;
             if (format == null)
             {
                 LogError("Format required.");
-                drawer = null;
+                //drawer = null;
                 return false;
             }
             if (format.Equals("gif", StringComparison.OrdinalIgnoreCase))
             {
                 // drawer = new GraphicsDrawer();
-                drawer = new Rgb24BitmapDrawer();
+                //drawer = new Rgb24BitmapDrawer();
                 return true;
             }
             LogError("Only gif format is supported for animated QR code.");
-            drawer = null;
+            //drawer = null;
             
             return false;
         }

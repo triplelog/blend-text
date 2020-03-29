@@ -73,38 +73,37 @@ namespace Lapis.QrArt
             }
         }
 
-        private static bool CheckFormat(string format, out IBitMatrixDrawer drawer, out ITripMatrixDrawer textDrawer)
+        private static bool CheckFormat(string format, out ITripMatrixDrawer textDrawer)
         {
         	textDrawer = new GraphicsTextDrawer();
             if (format == null)
             {
                 LogError("Format required.");
-                drawer = null;
+                //drawer = null;
                 return false;
             }
             if (format.Equals("svg", StringComparison.OrdinalIgnoreCase))
             {
-                drawer = new SvgDrawer();
+                //drawer = new SvgDrawer();
                 return true;
             }
             if (format.Equals("gif", StringComparison.OrdinalIgnoreCase))
             {
-                drawer = new Rgb24BitmapDrawer();
+                //drawer = new Rgb24BitmapDrawer();
                 return true;
             }
             if (format.Equals("png", StringComparison.OrdinalIgnoreCase))
             {
-                drawer = new GraphicsDrawer();
+                //drawer = new GraphicsDrawer();
                 return true;
             }
             if (format.Equals("txt", StringComparison.OrdinalIgnoreCase))
             {
                 textDrawer = new GraphicsTextDrawer();
-                drawer = new GraphicsDrawer();
+                //drawer = new GraphicsDrawer();
                 return true;
             }
             LogError("Format not supported.");
-            drawer = null;
             textDrawer = null;
             return false;
         }

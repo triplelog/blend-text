@@ -11,11 +11,10 @@ namespace Lapis.QRCode.Art
     public class QRAnimationCreator : QRArtCreator
     {
         public QRAnimationCreator(
-            IQRCodeEncoder qrCodeEncoder,
             IBinarizer binarizer, ITriparizer triparizer, IColorizer colorizer, IMerger merger,
-            IBitMatrixDrawer bitMatrixDrawer, ITripMatrixDrawer tripMatrixDrawer,
+            ITripMatrixDrawer tripMatrixDrawer,
             Func<IReadOnlyList<IRgb24BitmapFrame>, IRgb24BitmapBase> frameMerger)
-            : base(qrCodeEncoder, binarizer, triparizer, colorizer, merger, bitMatrixDrawer, tripMatrixDrawer)
+            : base(binarizer, triparizer, colorizer, merger, tripMatrixDrawer)
         {
             FrameMerger = frameMerger;
         }
@@ -27,8 +26,7 @@ namespace Lapis.QRCode.Art
             var bitmap = image as IRgb24Bitmap;
             if (bitmap?.FrameCount > 1)
             {
-                var bitMatrix = QRCodeEncoder.Build(data);
-                int moduleCount = bitMatrix.Size;
+            	/*
                 var images = Enumerable.Range(0, bitmap.FrameCount).Select(i => 
                 {
 					var imgBitMatrix = Binarizer.Binarize(image, moduleCount * 3, moduleCount * 3);
@@ -45,10 +43,12 @@ namespace Lapis.QRCode.Art
                 var frames = images.Select(img => img as IRgb24BitmapFrame).ToList();
                 if (frames.Contains(null))
                     return images[0];
-                return FrameMerger(frames);                
+                return FrameMerger(frames);   
+                */
+                return null;             
             }
             else
-                return base.Create(data, image, imageText);
+                return null;
         }
     }
 }

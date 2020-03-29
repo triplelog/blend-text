@@ -40,7 +40,7 @@ namespace Lapis.QrArt
                 {                    
                     if (CheckContent(contentArg.Value) &&
                         CheckImagePath(imageArg.Value, out var bitmap, out var bitmapText) &&
-                        CheckFormat(formatArg.Value, out var drawer, out var textDrawer) &&
+                        CheckFormat(formatArg.Value, out var textDrawer) &&
                         CheckType(typeOpt.Value(), out var type) &&
                         CheckErrorCorrectLevel(errcorOpt.Value(), out var errcor) &&
                         CheckForeground(foregdOpt.Value(), out var foregd) &&
@@ -51,23 +51,15 @@ namespace Lapis.QrArt
                     	
         				
                         var builder = new QRArtCreator(
-                            new QRCodeEncoder()
-                            {
-                                TypeNumber = type,
-                                ErrorCorrectLevel = errcor
-                            },
                             new Binarizer(),
                             new Triparizer(),
                             new Colorizer(),
                             new Merger(),
-                            drawer,
                             textDrawer
                         );
                         {
-                            drawer.CellSize = cell;
-                            drawer.Margin = margin;
-                            drawer.Foreground = foregd;
-                            drawer.Background = backgd;
+                            textDrawer.Foreground = foregd;
+                            textDrawer.Background = backgd;
                         }
 						
 						
@@ -103,7 +95,7 @@ namespace Lapis.QrArt
                 {
                     if (CheckContent(contentArg.Value) &&
                         CheckImagePathAnimation(imageArg.Value, out var animation, out var animationText) &&
-                        CheckFormatAnimation(formatArg.Value, out var drawer, out var textDrawer) &&
+                        CheckFormatAnimation(formatArg.Value, out var textDrawer) &&
                         CheckType(typeOpt.Value(), out var type) &&
                         CheckErrorCorrectLevel(errcorOpt.Value(), out var errcor) &&
                         CheckForeground(foregdOpt.Value(), out var foregd) &&
@@ -112,25 +104,17 @@ namespace Lapis.QrArt
                         CheckMargin(marginOpt.Value(), out var margin))
                     {               
                         var builder = new QRAnimationCreator(
-                            new QRCodeEncoder()
-                            {
-                                TypeNumber = type,
-                                ErrorCorrectLevel = errcor
-                            },
                             new Binarizer(),
                             new Triparizer(),
                             new Colorizer(),
                             new Merger(),
-                            drawer,
                             textDrawer,
                             // frames => new BitmapImage(frames.Select(f => f as BitmapFrame))
                             frames => new Rgb24Bitmap(frames.Select(f => f as Rgb24BitmapFrame))
                         );
                         {
-                            drawer.CellSize = cell;
-                            drawer.Margin = margin;
-                            drawer.Foreground = foregd;
-                            drawer.Background = backgd;
+                            textDrawer.Foreground = foregd;
+                            textDrawer.Background = backgd;
                         }
 						
         				
