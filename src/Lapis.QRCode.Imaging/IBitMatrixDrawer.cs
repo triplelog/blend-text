@@ -63,7 +63,7 @@ namespace Lapis.QRCode.Imaging
 
         int Background { get; set; }
 
-        IImage Draw(TripMatrix tripMatrix, ColorMatrix colorMatrix);
+        IImage Draw(TripMatrix tripMatrix, ColorMatrix colorMatrix, string imagePath);
     }
 
     public abstract class TripMatrixDrawerBase : ITripMatrixDrawer
