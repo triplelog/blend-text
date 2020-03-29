@@ -41,7 +41,12 @@ namespace Lapis.QrArt
             }
             try
             {
-            	SizeF stringSize = Graphics.MeasureString("Text",new Font("Tahoma",40));
+            	string measureString = "Text";
+				Font stringFont = new Font("Tahoma",40);
+
+				// Measure string.
+				SizeF stringSize = new SizeF();
+				stringSize = Graphics.MeasureString(measureString, stringFont);
             	Console.WriteLine("width "+stringSize.Width + " height "+ stringSize.Height);
             	Bitmap bmpp = (Bitmap) new Bitmap(500,500);
 				using (Graphics graph = Graphics.FromImage(bmpp))
