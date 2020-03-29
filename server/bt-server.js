@@ -59,6 +59,9 @@ wss.on('connection', function connection(ws) {
 			return;
 		}
 		console.log(`stdout: ${stdout}`);
+		var jsonmessage = {'src':'../out'+fontSize+'.png'};
+		console.log(jsonmessage);
+		ws.send(JSON.stringify(jsonmessage));
 	});
   });
 });
