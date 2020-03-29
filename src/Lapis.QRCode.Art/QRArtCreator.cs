@@ -144,7 +144,7 @@ namespace Lapis.QRCode.Art
 				Console.WriteLine("QRArtCreatorTime " + elapsedTime);
                 
                 
-                return TripMatrixDrawer.Draw(tripMatrix, imgColorMatrix);
+                return TripMatrixDrawer.Draw(tripMatrix, imgColorMatrix, "test.jpg");
             }
             else {
             	return null;
