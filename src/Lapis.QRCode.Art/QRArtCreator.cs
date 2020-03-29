@@ -53,14 +53,15 @@ namespace Lapis.QRCode.Art
 
             if (image != null) //text on image
             {
-            	
+            	int twidth = (int)imageText.Width;
+            	int theight = (int)imageText.Height;
         		//image.Height, image.Width
-                var imgColorMatrix = Colorizer.Colorize(image, 500, 500);
-                var tripMatrix = new TripSquare(500);
+                var imgColorMatrix = Colorizer.Colorize(image, theight,twidth);
+                var tripMatrix = new TripMatrix(theight,twidth);
         		
-                for (var i=0;i<500;i++){
-                	for (var ii=0;ii<500;ii++){
-                		tripMatrix[i,ii] = 0;
+                for (var i=0;i<theight;i++){
+                	for (var ii=0;ii<twidth;ii++){
+                		tripMatrix[ii,i] = 0;
                 	}
                 }//~20 ms since else if
                 
@@ -69,8 +70,8 @@ namespace Lapis.QRCode.Art
 				Stopwatch stopWatch = new Stopwatch();
         		stopWatch.Start();
 				
-                for (var i=5;i<495;i++){
-                	for (var ii=5;ii<495;ii++){
+                for (var i=0;i<theight;i++){
+                	for (var ii=0;ii<twidth;ii++){
                 		if (imageText.GetPixel(i,ii) < 12000000){
                 			tripMatrix[ii,i] = 1;
                 		}
@@ -87,42 +88,24 @@ namespace Lapis.QRCode.Art
 				
 				
         		
-                for (var i=10;i<500-10;i++){
-                	for (var ii=10;ii<500-10;ii++){
-                		/*
-                		if (tripMatrix[i,ii] == 0){
-                			var minDist = 999;
-                			for (var iii=i-10;iii<i+11;iii++){
-								for (var iiii=ii-10;iiii<ii+11;iiii++){
-									if (tripMatrix[iii,iiii] > 0){
-										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
-										if (d< minDist){
-											minDist = d;
-										}
-									}
-								}
-							}
-							if (minDist < 51){
-								tripMatrix[i,ii] = (2*minDist-150)/5;
-							}
-                		}
-                		*/
+                for (var i=10;i<theight-10;i++){
+                	for (var ii=10;ii<twidth-10;ii++){
                 		
-                		if (tripMatrix[i,ii] > 0){
+                		if (tripMatrix[ii,i] > 0){
                 			for (var iii=i-10;iii<i+11;iii++){
 								for (var iiii=ii-10;iiii<ii+11;iiii++){
-									if (tripMatrix[iii,iiii] == 0){
+									if (tripMatrix[iiii,iii] == 0){
 										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
 										if ( d < 51){
-										tripMatrix[iii,iiii] = (2*d-150)/5;
+										tripMatrix[iiii,iii] = (2*d-150)/5;
 										}
 									}
-									else if (tripMatrix[iii,iiii] < 0){
+									else if (tripMatrix[iiii,iii] < 0){
 										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
 										if ( d < 51 ){
 											var dd = (2*d-150)/5;
-											if (dd < tripMatrix[iii,iiii]) {
-												tripMatrix[iii,iiii] = dd;
+											if (dd < tripMatrix[iiii,iii]) {
+												tripMatrix[iiii,iii] = dd;
 											}
 										}
 									}
