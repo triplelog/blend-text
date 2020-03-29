@@ -24,6 +24,8 @@ namespace Lapis.QRCode.Imaging.Drawing
             int columnCount = colorMatrix.ColumnCount;
             int imageHeight = rowCount;
             int imageWidth = columnCount;
+            int theight = tripMatrix.RowCount;
+            int twidth = tripMatrix.ColumnCount;
             //var bitmap = new Bitmap(imageHeight, imageWidth);
             var bmp = Bitmap.FromFile(imagePath) as Bitmap;
 			Console.WriteLine(CellSize);
@@ -41,11 +43,11 @@ namespace Lapis.QRCode.Imaging.Drawing
                 {
                     for (var c = 0; c < columnCount; c += 1)
                     {
-                        if (r >= 500 || c >= 500 || tripMatrix[r, c] == 0)
+                        if (r >= theight || c >= twidth || tripMatrix[r, c] == 0)
                         {
                         	
-                            var x = Margin + c;
-                            var y = Margin + r;
+                            var x = c;
+                            var y = r;
                             /*
 							int re = (colorMatrix[r,c] & 0xFF0000) >> 16;
 							int gr = (colorMatrix[r,c] & 0xFF00) >> 8;
@@ -58,8 +60,8 @@ namespace Lapis.QRCode.Imaging.Drawing
                         }
                         else if (tripMatrix[r, c] > 0)
                         {
-                            var x = Margin + c;
-                            var y = Margin + r;
+                            var x = c;
+                            var y = r;
 							int re = (colorMatrix[r,c] & 0xFF0000) >> 16;
 							int gr = (colorMatrix[r,c] & 0xFF00) >> 8;
 							int bl = colorMatrix[r,c] & 0xFF;
@@ -76,8 +78,8 @@ namespace Lapis.QRCode.Imaging.Drawing
 							graph.FillRectangle(foreBrushCustom, x, y, 1,1);
                         }
                         else {
-                        	var x = Margin + c;
-                            var y = Margin + r;
+                        	var x = c;
+                            var y = r;
 							int re = (colorMatrix[r,c] & 0xFF0000) >> 16;
 							int gr = (colorMatrix[r,c] & 0xFF00) >> 8;
 							int bl = colorMatrix[r,c] & 0xFF;
