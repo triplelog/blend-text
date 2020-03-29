@@ -54,9 +54,8 @@ namespace Lapis.QRCode.Art
             if (image != null) //text on image
             {
             	
-        		
-                int moduleCount = 500;
-                var imgColorMatrix = Colorizer.Colorize(image, image.Height, image.Width);
+        		//image.Height, image.Width
+                var imgColorMatrix = Colorizer.Colorize(image, 500, 500);
                 var tripMatrix = new TripSquare(500);
         		
                 for (var i=0;i<500;i++){
