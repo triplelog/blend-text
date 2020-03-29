@@ -55,8 +55,8 @@ namespace Lapis.QRCode.Art
             {
             	
         		
-                int moduleCount = bitMatrix.Size;
-                var imgColorMatrix = Colorizer.Colorize(image, moduleCount * 3, moduleCount * 3);
+                int moduleCount = 500;
+                var imgColorMatrix = Colorizer.Colorize(image, image.Height, image.Width);
                 var tripMatrix = new TripSquare(500);
         		
                 for (var i=0;i<500;i++){
