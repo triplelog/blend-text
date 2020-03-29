@@ -54,7 +54,7 @@ namespace Lapis.QrArt
             	Bitmap bmpp = (Bitmap) new Bitmap(twidth,theight);
 				using (Graphics graph = Graphics.FromImage(bmpp))
 				{
-					Rectangle ImageSize = new Rectangle(0,0,twidth,theight);
+					Rectangle ImageSize = new Rectangle(0,0,twidth+20,theight+20);
 					graph.FillRectangle(Brushes.White, ImageSize);
 					graph.SmoothingMode = SmoothingMode.AntiAlias;
 					graph.InterpolationMode = InterpolationMode.HighQualityBicubic;
@@ -65,7 +65,7 @@ namespace Lapis.QrArt
 						Alignment = StringAlignment.Center,
 						LineAlignment = StringAlignment.Center
 					};
-					RectangleF rectf = new RectangleF(0, 0, twidth,theight);
+					RectangleF rectf = new RectangleF(10, 10, twidth,theight);
 					graph.DrawString("Text", new Font("Tahoma",80), Brushes.Black, rectf, format);
 				}
 				bitmapText = new BitmapFrame(bmpp);

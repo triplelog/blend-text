@@ -26,6 +26,8 @@ namespace Lapis.QRCode.Imaging.Drawing
             int imageWidth = columnCount;
             int theight = tripMatrix.RowCount;
             int twidth = tripMatrix.ColumnCount;
+            int MarginL = 100;
+            int MarginT = 100;
             //var bitmap = new Bitmap(imageHeight, imageWidth);
             var bmp = Bitmap.FromFile(imagePath) as Bitmap;
 			Console.WriteLine(CellSize);
@@ -39,32 +41,21 @@ namespace Lapis.QRCode.Imaging.Drawing
                 var foreBrushB = new SolidBrush(Color.FromArgb(0,0,120));
                 
         		var foreBrushCustom = new SolidBrush(Color.FromArgb(0,0,120));
-                for (var r = 0; r < rowCount; r += 1)
+                for (var r = 0; r < theight; r += 1)
                 {
-                    for (var c = 0; c < columnCount; c += 1)
+                    for (var c = 0; c < twidth; c += 1)
                     {
-                        if (r >= theight || c >= twidth || tripMatrix[r, c] == 0)
+                        if (tripMatrix[r, c] == 0)
                         {
-                        	
-                            var x = c;
-                            var y = r;
-                            /*
-							int re = (colorMatrix[r,c] & 0xFF0000) >> 16;
-							int gr = (colorMatrix[r,c] & 0xFF00) >> 8;
-							int bl = colorMatrix[r,c] & 0xFF;
-
-								
-							foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
-							graph.FillRectangle(foreBrushCustom, x, y, 1,1);*/
-							//graph.FillRectangle(foreBrush, x, y, 1,1);
+                        	//keep color as is
                         }
                         else if (tripMatrix[r, c] > 0)
                         {
-                            var x = c;
-                            var y = r;
-							int re = (colorMatrix[r,c] & 0xFF0000) >> 16;
-							int gr = (colorMatrix[r,c] & 0xFF00) >> 8;
-							int bl = colorMatrix[r,c] & 0xFF;
+                            var x = MarginL + c;
+                            var y = MarginT + r;
+							int re = (colorMatrix[y,x] & 0xFF0000) >> 16;
+							int gr = (colorMatrix[y,x] & 0xFF00) >> 8;
+							int bl = colorMatrix[y,x] & 0xFF;
 							
 							//Darken uniformly
 									
@@ -78,11 +69,11 @@ namespace Lapis.QRCode.Imaging.Drawing
 							graph.FillRectangle(foreBrushCustom, x, y, 1,1);
                         }
                         else {
-                        	var x = c;
-                            var y = r;
-							int re = (colorMatrix[r,c] & 0xFF0000) >> 16;
-							int gr = (colorMatrix[r,c] & 0xFF00) >> 8;
-							int bl = colorMatrix[r,c] & 0xFF;
+                        	var x = MarginL + c;
+                            var y = MarginT + r;
+							int re = (colorMatrix[y,x] & 0xFF0000) >> 16;
+							int gr = (colorMatrix[y,x] & 0xFF00) >> 8;
+							int bl = colorMatrix[y,x] & 0xFF;
 							
 							//Lighten uniformly
 							
