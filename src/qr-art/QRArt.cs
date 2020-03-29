@@ -43,7 +43,7 @@ namespace Lapis.QrArt
             {
             	var bmp = Bitmap.FromFile(imagePath) as Bitmap;
             	
-            	
+            	Bitmap bmpp = (Bitmap) new Bitmap(500,500);
 				using (Graphics graph = Graphics.FromImage(bmp))
 				{
 					string measureString = "Text";
