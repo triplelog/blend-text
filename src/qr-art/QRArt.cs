@@ -48,9 +48,10 @@ namespace Lapis.QrArt
 				SizeF stringSize = new SizeF();
 				stringSize = graph1.MeasureString(measureString, stringFont);
             	Console.WriteLine("width "+stringSize.Width + " height "+ stringSize.Height);
+            	int twidth = stringSize.Width;
+            	int theight = stringSize.Height;
             	
-            	
-            	Bitmap bmpp = (Bitmap) new Bitmap(stringSize.Width,stringSize.Height);
+            	Bitmap bmpp = (Bitmap) new Bitmap(twidth,theight);
 				using (Graphics graph = Graphics.FromImage(bmpp))
 				{
 					Rectangle ImageSize = new Rectangle(0,0,stringSize.Width,stringSize.Height);
