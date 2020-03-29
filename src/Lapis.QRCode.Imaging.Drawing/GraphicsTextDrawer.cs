@@ -53,9 +53,10 @@ namespace Lapis.QRCode.Imaging.Drawing
                         {
                             var x = MarginL + c;
                             var y = MarginT + r;
-							int re = (colorMatrix[y,x] & 0xFF0000) >> 16;
-							int gr = (colorMatrix[y,x] & 0xFF00) >> 8;
-							int bl = colorMatrix[y,x] & 0xFF;
+							int imgC = ColorHelper.ToIntRgb24(bmp.GetPixel(x, y));
+							int re = (imgC & 0xFF0000) >> 16;
+							int gr = (imgC & 0xFF00) >> 8;
+							int bl = imgC & 0xFF;
 							
 							//Darken uniformly
 									
