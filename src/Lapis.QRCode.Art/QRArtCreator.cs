@@ -100,7 +100,7 @@ namespace Lapis.QRCode.Art
 										tripMatrix[iii,iiii] = (2*d-150)/5;
 										}
 									}
-									else if (tripMatrix[iiii,iiii] < 0){
+									else if (tripMatrix[iii,iiii] < 0){
 										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
 										if ( d < 51 ){
 											var dd = (2*d-150)/5;
