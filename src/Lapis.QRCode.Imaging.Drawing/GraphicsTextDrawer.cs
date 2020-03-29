@@ -22,8 +22,8 @@ namespace Lapis.QRCode.Imaging.Drawing
         		
             int rowCount = colorMatrix.RowCount;
             int columnCount = colorMatrix.ColumnCount;
-            int imageHeight = rowCount + Margin * 2;
-            int imageWidth = rowCount + Margin * 2;
+            int imageHeight = rowCount;
+            int imageWidth = columnCount;
             //var bitmap = new Bitmap(imageHeight, imageWidth);
             var bmp = Bitmap.FromFile(imagePath) as Bitmap;
 			Console.WriteLine(CellSize);

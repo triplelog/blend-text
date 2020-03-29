@@ -47,7 +47,7 @@ namespace Lapis.QRCode.Art
         
         public ITripMatrixDrawer TripMatrixDrawer { get; }
 
-        public virtual IImage Create(string data, IRgb24BitmapBase image, IRgb24BitmapBase imageText)
+        public virtual IImage Create(string data, IRgb24BitmapBase image, IRgb24BitmapBase imageText, string imagePath)
         {
         	
 
@@ -144,7 +144,7 @@ namespace Lapis.QRCode.Art
 				Console.WriteLine("QRArtCreatorTime " + elapsedTime);
                 
                 
-                return TripMatrixDrawer.Draw(tripMatrix, imgColorMatrix, "test.jpg");
+                return TripMatrixDrawer.Draw(tripMatrix, imgColorMatrix, imagePath);
             }
             else {
             	return null;

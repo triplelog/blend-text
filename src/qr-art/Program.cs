@@ -68,7 +68,7 @@ namespace Lapis.QrArt
         				stopWatch.Start();
         				Console.WriteLine("Start Program ");
         				
-                        var image = builder.Create(contentArg.Value, bitmap, bitmapText);
+                        var image = builder.Create(contentArg.Value, bitmap, bitmapText, imageArg.Value);
                         //bitmap.Save("static/newbmp1.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
                         
                          stopWatch.Stop();
