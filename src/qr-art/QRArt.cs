@@ -41,13 +41,19 @@ namespace Lapis.QrArt
             }
             try
             {
+            	var bmp = Bitmap.FromFile(imagePath) as Bitmap;
+            	
+            	
+            	Graphics graph = Graphics.FromImage(bmp);
             	string measureString = "Text";
 				Font stringFont = new Font("Tahoma",40);
 
 				// Measure string.
 				SizeF stringSize = new SizeF();
-				stringSize = Graphics.MeasureString(measureString, stringFont);
+				stringSize = graph.MeasureString(measureString, stringFont);
             	Console.WriteLine("width "+stringSize.Width + " height "+ stringSize.Height);
+            	
+            	
             	Bitmap bmpp = (Bitmap) new Bitmap(500,500);
 				using (Graphics graph = Graphics.FromImage(bmpp))
 				{
@@ -68,7 +74,7 @@ namespace Lapis.QrArt
 				bitmapText = new BitmapFrame(bmpp);
 				
 				
-                var bmp = Bitmap.FromFile(imagePath) as Bitmap;
+                
                 bitmap = new BitmapFrame(bmp);
                 return true;
             }
