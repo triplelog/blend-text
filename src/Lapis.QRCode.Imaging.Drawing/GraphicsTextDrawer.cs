@@ -71,7 +71,7 @@ namespace Lapis.QRCode.Imaging.Drawing
                         else {
                         	var x = MarginL + c;
                             var y = MarginT + r;
-                            int imgC = bmp.GetPixel(x,y);
+                            int imgC = ColorHelper.ToIntRgb24(bmp.GetPixel(x, y));
 							int re = (imgC & 0xFF0000) >> 16;
 							int gr = (imgC & 0xFF00) >> 8;
 							int bl = imgC & 0xFF;
