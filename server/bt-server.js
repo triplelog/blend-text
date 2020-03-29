@@ -34,5 +34,3 @@ const server1 = https.createServer(options, app);
 server1.listen(12312);
 
 
-
-module.exports = {loginApp: app2, tempKeys: tempKeys, Chart: Chart}
