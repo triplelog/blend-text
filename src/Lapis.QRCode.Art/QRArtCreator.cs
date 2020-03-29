@@ -55,8 +55,10 @@ namespace Lapis.QRCode.Art
             {
             	int twidth = (int)imageText.Width;
             	int theight = (int)imageText.Height;
+            	int iwidth = (int)image.Width;
+            	int iheight = (int)image.Height;
         		//image.Height, image.Width
-                var imgColorMatrix = Colorizer.Colorize(image, theight,twidth);
+                var imgColorMatrix = Colorizer.Colorize(image, iheight,iwidth);
                 var tripMatrix = new TripMatrix(theight,twidth);
         		
                 for (var i=0;i<theight;i++){
