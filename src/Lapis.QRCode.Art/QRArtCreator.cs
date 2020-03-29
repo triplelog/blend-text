@@ -61,7 +61,7 @@ namespace Lapis.QRCode.Art
         		
                 for (var i=0;i<theight;i++){
                 	for (var ii=0;ii<twidth;ii++){
-                		tripMatrix[ii,i] = 0;
+                		tripMatrix[i,ii] = 0; //first is row, second is col
                 	}
                 }//~20 ms since else if
                 
@@ -72,14 +72,14 @@ namespace Lapis.QRCode.Art
 				
                 for (var i=0;i<theight;i++){
                 	for (var ii=0;ii<twidth;ii++){
-                		if (imageText.GetPixel(i,ii) < 12000000){
-                			tripMatrix[ii,i] = 1;
+                		if (imageText.GetPixel(ii,i) < 12000000){//first is x (col), second is y
+                			tripMatrix[i,ii] = 1;
                 		}
-                		if (imageText.GetPixel(i,ii) < 8000000){
-                			tripMatrix[ii,i] = 2;
+                		if (imageText.GetPixel(ii,i) < 8000000){
+                			tripMatrix[i,ii] = 2;
                 		}
-                		if (imageText.GetPixel(i,ii) < 4000000){
-                			tripMatrix[ii,i] = 3;
+                		if (imageText.GetPixel(ii,i) < 4000000){
+                			tripMatrix[i,ii] = 3;
                 		}
                 	}
                 }//~110 ms for this double loop
@@ -91,21 +91,21 @@ namespace Lapis.QRCode.Art
                 for (var i=10;i<theight-10;i++){
                 	for (var ii=10;ii<twidth-10;ii++){
                 		
-                		if (tripMatrix[ii,i] > 0){
+                		if (tripMatrix[i,ii] > 0){
                 			for (var iii=i-10;iii<i+11;iii++){
 								for (var iiii=ii-10;iiii<ii+11;iiii++){
-									if (tripMatrix[iiii,iii] == 0){
+									if (tripMatrix[iii,iiii] == 0){
 										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
 										if ( d < 51){
-										tripMatrix[iiii,iii] = (2*d-150)/5;
+										tripMatrix[iii,iiii] = (2*d-150)/5;
 										}
 									}
-									else if (tripMatrix[iiii,iii] < 0){
+									else if (tripMatrix[iiii,iiii] < 0){
 										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
 										if ( d < 51 ){
 											var dd = (2*d-150)/5;
-											if (dd < tripMatrix[iiii,iii]) {
-												tripMatrix[iiii,iii] = dd;
+											if (dd < tripMatrix[iii,iiii]) {
+												tripMatrix[iii,iiii] = dd;
 											}
 										}
 									}
