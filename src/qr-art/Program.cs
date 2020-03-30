@@ -48,7 +48,7 @@ namespace Lapis.QrArt
                         CheckImagePath(imageArg.Value) &&
                         CheckFormat(formatArg.Value, out var textDrawer) &&
                         CheckFontSize(fontSizeOpt.Value(), out var fontSize) &&
-                        CheckParams(locXOpt.Value(), locYOpt.Value(), blurRadiusOpt.Value(), blurColorOpt.Value(), textColorOpt.Value(), fontOpt.Value()) &&
+                        CheckParams(locXOpt.Value(), locYOpt.Value(), blurRadiusOpt.Value(), blurColorOpt.Value(), textColorOpt.Value(), fontOpt.Value())
                         //add actual checks for above values
                         //CheckForeground(foregdOpt.Value(), out var foregd) &&
                         //CheckBackground(backgdOpt.Value(), out var backgd) &&
@@ -142,7 +142,7 @@ namespace Lapis.QrArt
                         CheckImagePathAnimation(imageArg.Value, out var animation, out var animationText) &&
                         CheckFormatAnimation(formatArg.Value, out var textDrawer) &&
                         CheckFontSize(fontSizeOpt.Value(), out var fontSize) &&
-                        CheckParams(locXOpt.Value(), locYOpt.Value(), blurRadiusOpt.Value(), blurColorOpt.Value(), textColorOpt.Value(), fontOpt.Value()) &&
+                        CheckParams(locXOpt.Value(), locYOpt.Value(), blurRadiusOpt.Value(), blurColorOpt.Value(), textColorOpt.Value(), fontOpt.Value())
                         //CheckForeground(foregdOpt.Value(), out var foregd) &&
                         //CheckBackground(backgdOpt.Value(), out var backgd) &&
                     {               
