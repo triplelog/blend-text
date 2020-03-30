@@ -18,7 +18,8 @@ function updateImage(evt){
 	var el = evt.target;
 	imgData[el.id] = el.value;
 	clearTimeout(myTimeout);
-	myTimeout = setTimeout(function(){ ws.send(JSON.stringify(imgData)); }, 1000);
+	console.log(myTimeout);
+	myTimeout = setTimeout(function(){ ws.send(JSON.stringify(imgData)); }, 500);
 	
 }
 var textEl = document.getElementById('text');

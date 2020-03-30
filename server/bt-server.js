@@ -43,13 +43,24 @@ const WebSocket = require('ws');
 const wss = new WebSocket.Server({ server });
 
 wss.on('connection', function connection(ws) {
-  
+  var myTimeout;
   ws.on('message', function incoming(message) {
   	var dm = JSON.parse(message);
   	var fontSize = dm.fontSize;
+  	
+  	
+	
   	var execCmd = '../src/qr-art/bin/Debug/netcoreapp3.1/publish/qr-art "hello" test.jpg png static/out'+fontSize+'.png';
-  	console.log(execCmd);
-  	exec(execCmd, (error, stdout, stderr) => {
+  	var imgSrc = '../out'+fontSize+'.png';
+  	clearTimeout(myTimeout);
+	myTimeout = setTimeout(function(){ runCommand(ws,execCmd,imgSrc); }, 500);
+  	
+  	
+  });
+});
+
+function runCommand(ws,execCmd,imgSrc) {
+	exec(execCmd, (error, stdout, stderr) => {
 		if (error) {
 			console.log(`error: ${error.message}`);
 			return;
@@ -59,9 +70,7 @@ wss.on('connection', function connection(ws) {
 			return;
 		}
 		console.log(`stdout: ${stdout}`);
-		var jsonmessage = {'src':'../out'+fontSize+'.png'};
-		console.log(jsonmessage);
+		var jsonmessage = {'src':imgSrc};
 		ws.send(JSON.stringify(jsonmessage));
 	});
-  });
-});
+}
