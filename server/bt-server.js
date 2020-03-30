@@ -52,8 +52,14 @@ wss.on('connection', function connection(ws) {
 	
   	var execCmd = '../src/qr-art/bin/Debug/netcoreapp3.1/publish/qr-art "hello" test.jpg png static/out'+fontSize+'.png';
   	var imgSrc = '../out'+fontSize+'.png';
-  	clearTimeout(myTimeout);
-	myTimeout = setTimeout(function(){ runCommand(ws,execCmd,imgSrc); }, 500);
+  	if (myTimeout){
+		clearTimeout(myTimeout);
+		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,imgSrc); }, 500);
+	}
+	else {
+		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,imgSrc); }, 200);
+	}
+  	
   	
   	
   });

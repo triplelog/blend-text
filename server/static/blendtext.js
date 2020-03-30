@@ -18,7 +18,7 @@ function updateImage(evt){
 	var el = evt.target;
 	imgData[el.id] = el.value;
 	//check imgData is valid?
-	console.log(myTimeout);
+
 	if (myTimeout){
 		clearTimeout(myTimeout);
 		myTimeout = setTimeout(function(){ ws.send(JSON.stringify(imgData)); }, 500);
