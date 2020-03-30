@@ -68,7 +68,7 @@ namespace Lapis.QrArt
                             //textDrawer.Background = backgd;
                         }
 						PrivateFontCollection collection = new PrivateFontCollection();
-						collection.AddFontFile("/home/rwilcox/blend-text/fonts/ABeeZee-Regular.otf");
+						collection.AddFontFile(L"/home/rwilcox/blend-text/fonts/ABeeZee-Regular.otf");
 						FontFamily fontFamily = new FontFamily("Abeezee", collection);
 						//Font font = new Font(fontFamily, fontSize);
 						Font font = new Font(fontOpt.Value(), fontSize);
