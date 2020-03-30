@@ -20,6 +20,7 @@ namespace Lapis.QrArt
             if (content == null)
             {
                 LogError("Content required.");
+                bitmapText = null;
                 return false;
             }
             try
