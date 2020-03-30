@@ -62,7 +62,7 @@ wss.on('connection', function connection(ws) {
   	execCmd += ' -b '+dm.blurColor;
   	execCmd += ' -f '+dm.textColor;
   	console.log(execCmd);
-  	var imgSrc = '../out'+fontSize+'.png';
+  	var imgSrc = '../out'+dm.fontSize+'.png';
   	if (myTimeout){
 		clearTimeout(myTimeout);
 		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,imgSrc); }, 500);
