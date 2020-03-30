@@ -15,55 +15,17 @@ namespace Lapis.QrArt
 {
     partial class Program
     {
-        private static bool CheckContent(string content, string imagePath, out IRgb24BitmapBase bitmapText)
+        private static bool CheckContent(string content)
         {
             if (content == null)
             {
                 LogError("Content required.");
-                bitmapText = null;
                 return false;
             }
-            try
-            {
-            	var bmp = Bitmap.FromFile(imagePath) as Bitmap;
-            	Graphics graph1 = Graphics.FromImage(bmp);
-            	string measureString = content;
-				Font stringFont = new Font("Tahoma",80);
-				SizeF stringSize = new SizeF();
-				stringSize = graph1.MeasureString(measureString, stringFont);
-            	Console.WriteLine("width "+stringSize.Width + " height "+ stringSize.Height);
-            	int twidth = (int)stringSize.Width;
-            	int theight = (int)stringSize.Height;
-            	
-            	Bitmap bmpp = (Bitmap) new Bitmap(twidth,theight);
-				using (Graphics graph = Graphics.FromImage(bmpp))
-				{
-					Rectangle ImageSize = new Rectangle(0,0,twidth+20,theight+20);
-					graph.FillRectangle(Brushes.White, ImageSize);
-					graph.SmoothingMode = SmoothingMode.AntiAlias;
-					graph.InterpolationMode = InterpolationMode.HighQualityBicubic;
-					graph.PixelOffsetMode = PixelOffsetMode.HighQuality;
-					graph.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-					StringFormat format = new StringFormat()
-					{
-						Alignment = StringAlignment.Center,
-						LineAlignment = StringAlignment.Center
-					};
-					RectangleF rectf = new RectangleF(10, 10, twidth,theight);
-					graph.DrawString("Text", new Font("Tahoma",80), Brushes.Black, rectf, format);
-				}
-				bitmapText = new BitmapFrame(bmpp);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                LogError(ex.Message);
-                bitmapText = null;
-                return false;
-            }
+            return true;
         }
 
-        private static bool CheckImagePath(string imagePath, out IRgb24BitmapBase bitmap)
+        private static bool CheckImagePath(string imagePath)
         {
             if (imagePath == null)
             {
@@ -78,9 +40,6 @@ namespace Lapis.QrArt
             }
             try
             {
-            	var bmp = Bitmap.FromFile(imagePath) as Bitmap;
-                
-                bitmap = new BitmapFrame(bmp);
                 return true;
             }
             catch (Exception ex)

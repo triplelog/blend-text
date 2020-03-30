@@ -38,8 +38,8 @@ namespace Lapis.QrArt
             {
                 if (!animationOpt.HasValue())
                 {                    
-                    if (CheckContent(contentArg.Value, imageArg.Value, out var bitmapText) &&
-                        CheckImagePath(imageArg.Value, out var bitmap) &&
+                    if (CheckContent(contentArg.Value) &&
+                        CheckImagePath(imageArg.Value) &&
                         CheckFormat(formatArg.Value, out var textDrawer) &&
                         CheckFontSize(fontSizeOpt.Value(), out var fontSize) &&
                         CheckErrorCorrectLevel(errcorOpt.Value(), out var errcor) &&
@@ -68,6 +68,45 @@ namespace Lapis.QrArt
         				stopWatch.Start();
         				Console.WriteLine("Start Program ");
         				
+        				
+        				try
+						{
+							var bmp = Bitmap.FromFile(imageArg.Value) as Bitmap;
+							Graphics graph1 = Graphics.FromImage(bmp);
+							string measureString = content;
+							Font stringFont = new Font("Tahoma",fontSize);
+							SizeF stringSize = new SizeF();
+							stringSize = graph1.MeasureString(measureString, stringFont);
+							Console.WriteLine("width "+stringSize.Width + " height "+ stringSize.Height);
+							int twidth = (int)stringSize.Width;
+							int theight = (int)stringSize.Height;
+				
+							Bitmap bmpp = (Bitmap) new Bitmap(twidth,theight);
+							using (Graphics graph = Graphics.FromImage(bmpp))
+							{
+								Rectangle ImageSize = new Rectangle(0,0,twidth+20,theight+20);
+								graph.FillRectangle(Brushes.White, ImageSize);
+								graph.SmoothingMode = SmoothingMode.AntiAlias;
+								graph.InterpolationMode = InterpolationMode.HighQualityBicubic;
+								graph.PixelOffsetMode = PixelOffsetMode.HighQuality;
+								graph.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+								StringFormat format = new StringFormat()
+								{
+									Alignment = StringAlignment.Center,
+									LineAlignment = StringAlignment.Center
+								};
+								RectangleF rectf = new RectangleF(10, 10, twidth,theight);
+								graph.DrawString(content, new Font("Tahoma",fontSize), Brushes.Black, rectf, format);
+							}
+							IRgb24BitmapBase bitmapText = new BitmapFrame(bmpp);
+						}
+						catch (Exception ex)
+						{
+							LogError(ex.Message);
+							bitmapText = null;
+						}
+        				IRgb24BitmapBase bitmap = new BitmapFrame(bmp);
+        				
                         var image = builder.Create(contentArg.Value, bitmap, bitmapText, imageArg.Value);
                         //bitmap.Save("static/newbmp1.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
                         
@@ -93,7 +132,7 @@ namespace Lapis.QrArt
                 }
                 else
                 {
-                    if (CheckContent(contentArg.Value, imageArg.Value, out var bitmapText) &&
+                    if (CheckContent(contentArg.Value) &&
                         CheckImagePathAnimation(imageArg.Value, out var animation, out var animationText) &&
                         CheckFormatAnimation(formatArg.Value, out var textDrawer) &&
                         CheckFontSize(fontSizeOpt.Value(), out var fontSize) &&
