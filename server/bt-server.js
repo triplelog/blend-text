@@ -65,7 +65,13 @@ wss.on('connection', function connection(ws) {
   	execCmd += ' -r '+dm.blurRadius;
   	execCmd += ' -b '+dm.blurColor;
   	execCmd += ' -c '+dm.textColor;
-  	execCmd += ' -f '+dm.font;
+  	if (dm.font.indexOf('"')==-1 && dm.font.indexOf(' ')>0){
+  		execCmd += ' -f "'+dm.font+'"';
+  	}
+  	else {
+  		execCmd += ' -f '+dm.font;
+  	}
+  	
   	console.log(execCmd);
   	var imgSrc = '../out'+imgid+'.png';
   	if (myTimeout){

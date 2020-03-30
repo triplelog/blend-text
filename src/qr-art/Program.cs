@@ -68,17 +68,12 @@ namespace Lapis.QrArt
                             //textDrawer.Background = backgd;
                         }
 						
-						
-						Font font = new Font(fontOpt.Value(), fontSize);
+						string fontVal = getFont(fontOpt.Value());
+						Font font = new Font(fontVal, fontSize);
         				
         				Stopwatch stopWatch = new Stopwatch();
         				stopWatch.Start();
-        				FontFamily[] ffArray = FontFamily.Families;
-						foreach (FontFamily ff in ffArray)
-						{
-							//Add ff.Name to your drop-down list
-							Console.WriteLine(ff.Name);
-						}
+        				
         				Console.WriteLine("Start Program ");
         				Bitmap bmp = null;
         				IRgb24BitmapBase bitmapText = null;
@@ -196,6 +191,16 @@ namespace Lapis.QrArt
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Error.WriteLine(message);
             Console.ForegroundColor = color;
+        }
+        private string getFont(string input_str)
+        {
+        	FontFamily[] ffArray = FontFamily.Families;
+			foreach (FontFamily ff in ffArray)
+			{
+				//Add ff.Name to your drop-down list
+				//Console.WriteLine(ff.Name);
+			}
+            return input_str;
         }
     }
 }
