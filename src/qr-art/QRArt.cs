@@ -61,7 +61,6 @@ namespace Lapis.QrArt
                 bitmapText = null;
                 return false;
             }
-            return true;
         }
 
         private static bool CheckImagePath(string imagePath, out IRgb24BitmapBase bitmap)
