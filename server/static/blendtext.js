@@ -1,10 +1,6 @@
 var ws = new WebSocket('wss://matherrors.com:8080');
 ws.onopen = function(evt) {
 	
-	var jsonmessage = {'fontSize':'30'};
-	ws.send(JSON.stringify(jsonmessage));
-	console.log(jsonmessage);
-	
 }
 ws.onmessage = function(evt){
 	var dm = JSON.parse(evt.data);
@@ -14,3 +10,13 @@ ws.onmessage = function(evt){
 	el.innerHTML = '';
 	el.appendChild(img);
 }
+var imgData = {};
+imgData.text = "";
+imgData.fontSize = "";
+function updateImage(evt){
+	var el = evt.target;
+	imgData[el.id] = el.value;
+	ws.send(JSON.stringify(imgData));
+}
+var textEl = document.getElementById('text');
+textEl.addEventListener('change',updateImage);
