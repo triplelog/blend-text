@@ -96,7 +96,7 @@ namespace Lapis.QrArt
                     if (CheckContent(contentArg.Value, imageArg.Value, out var bitmapText) &&
                         CheckImagePathAnimation(imageArg.Value, out var animation, out var animationText) &&
                         CheckFormatAnimation(formatArg.Value, out var textDrawer) &&
-                        CheckType(fontSizeOpt.Value(), out var type) &&
+                        CheckFontSize(fontSizeOpt.Value(), out var fontSize) &&
                         CheckErrorCorrectLevel(errcorOpt.Value(), out var errcor) &&
                         CheckForeground(foregdOpt.Value(), out var foregd) &&
                         CheckBackground(backgdOpt.Value(), out var backgd) &&
