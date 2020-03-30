@@ -38,7 +38,7 @@ namespace Lapis.QrArt
             //legacy below
             //var foregdOpt = app.Option("-f|--foreground <color>", "Foreground color.", CommandOptionType.SingleValue);
             //var backgdOpt = app.Option("-b|--background <color>", "Background color.", CommandOptionType.SingleValue);
-            //var animationOpt = app.Option("-a|--animation", "Generate animated QR code.", CommandOptionType.NoValue);
+            var animationOpt = app.Option("-a|--animation", "Generate animated QR code.", CommandOptionType.NoValue);
 
             app.OnExecute(() =>
             {

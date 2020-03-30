@@ -101,6 +101,7 @@ namespace Lapis.QrArt
             {
                 return true;
             }
+            int locXout;
             if (int.TryParse(locX, out locXout))
                 return true;
             return true;
