@@ -67,8 +67,11 @@ namespace Lapis.QrArt
                             //textDrawer.Foreground = foregd;
                             //textDrawer.Background = backgd;
                         }
-						
-						var myFont = fontOpt.Value();
+						PrivateFontCollection collection = new PrivateFontCollection();
+						collection.AddFontFile(@"/home/rwilcox/blend-text/fonts/ABeeZee-Regular.otf");
+						FontFamily fontFamily = new FontFamily("Abeezee", collection);
+						Font font = new Font(fontFamily, height);
+						//var myFont = fontOpt.Value();
         				
         				Stopwatch stopWatch = new Stopwatch();
         				stopWatch.Start();
@@ -87,10 +90,9 @@ namespace Lapis.QrArt
 							bmp = Bitmap.FromFile(imageArg.Value) as Bitmap;
 							Graphics graph1 = Graphics.FromImage(bmp);
 							string measureString = contentArg.Value;
-							Font stringFont = new Font(myFont,fontSize);
-							Console.WriteLine(stringFont.FontFamily);
+							Console.WriteLine(font.FontFamily);
 							SizeF stringSize = new SizeF();
-							stringSize = graph1.MeasureString(measureString, stringFont);
+							stringSize = graph1.MeasureString(measureString, font);
 							Console.WriteLine("font " +myFont+ " width "+stringSize.Width + " height "+ stringSize.Height + "fSize "+fontSize);
 							int twidth = (int)stringSize.Width;
 							int theight = (int)stringSize.Height;
@@ -110,7 +112,7 @@ namespace Lapis.QrArt
 									LineAlignment = StringAlignment.Center
 								};
 								RectangleF rectf = new RectangleF(20, 20, twidth,theight);
-								graph.DrawString(contentArg.Value, new Font(myFont,fontSize), Brushes.Black, rectf, format);
+								graph.DrawString(contentArg.Value, font, Brushes.Black, rectf, format);
 							}
 							bitmapText = new BitmapFrame(bmpp);
 							bitmap = new BitmapFrame(bmp);

@@ -54,7 +54,8 @@ wss.on('connection', function connection(ws) {
   	
   	
 	//make src a crypto random file
-  	var execCmd = '../src/qr-art/bin/Debug/netcoreapp3.1/publish/qr-art "'+dm.text+'" test.jpg png static/out'+dm.fontSize+'.png';
+	var imgid = parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12);
+  	var execCmd = '../src/qr-art/bin/Debug/netcoreapp3.1/publish/qr-art "'+dm.text+'" test.jpg png static/out'+imgid+'.png';
   	execCmd += ' -s '+dm.fontSize;
   	execCmd += ' -x '+dm.locX;
   	execCmd += ' -y '+dm.locY;
@@ -63,7 +64,7 @@ wss.on('connection', function connection(ws) {
   	execCmd += ' -c '+dm.textColor;
   	execCmd += ' -f '+dm.font;
   	console.log(execCmd);
-  	var imgSrc = '../out'+dm.fontSize+'.png';
+  	var imgSrc = '../out'+imgid+'.png';
   	if (myTimeout){
 		clearTimeout(myTimeout);
 		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,imgSrc); }, 500);
