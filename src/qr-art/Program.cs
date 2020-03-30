@@ -66,9 +66,11 @@ namespace Lapis.QrArt
                         {
                             //textDrawer.Foreground = foregd;
                             //textDrawer.Background = backgd;
+                            textDrawer.MarginL = 200;
+                            textDrawer.MarginT = 100;
                         }
 						
-						string fontVal = getFont(fontOpt.Value());
+						string fontVal = getFont(fontOpt.Value().ToLower());
 						Font font = new Font(fontVal, fontSize);
         				Console.WriteLine(font.FontFamily);
         				
@@ -202,7 +204,7 @@ namespace Lapis.QrArt
         	FontFamily[] ffArray = FontFamily.Families;
 			foreach (FontFamily ff in ffArray)
 			{
-				myLev = LevenshteinDistance(input_str, ff.Name);
+				myLev = LevenshteinDistance(input_str, ff.Name.ToLower());
 				if (myLev < minLev){
 					minLev = myLev;
 					outFont = ff.Name;
