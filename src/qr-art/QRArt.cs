@@ -15,35 +15,18 @@ namespace Lapis.QrArt
 {
     partial class Program
     {
-        private static bool CheckContent(string content)
+        private static bool CheckContent(string content, string imagePath, out IRgb24BitmapBase bitmapText)
         {
             if (content == null)
             {
                 LogError("Content required.");
                 return false;
             }
-            return true;
-        }
-
-        private static bool CheckImagePath(string imagePath, out IRgb24BitmapBase bitmap, out IRgb24BitmapBase bitmapText)
-        {
-        	bitmapText = null;
-            if (imagePath == null)
-            {
-                bitmap = null;
-                return true;
-            }
-            if (!File.Exists(imagePath))
-            {
-                LogError("File not found.");
-                bitmap = null;
-                return false;
-            }
             try
             {
             	var bmp = Bitmap.FromFile(imagePath) as Bitmap;
             	Graphics graph1 = Graphics.FromImage(bmp);
-            	string measureString = "Text";
+            	string measureString = content;
 				Font stringFont = new Font("Tahoma",80);
 				SizeF stringSize = new SizeF();
 				stringSize = graph1.MeasureString(measureString, stringFont);
@@ -69,8 +52,33 @@ namespace Lapis.QrArt
 					graph.DrawString("Text", new Font("Tahoma",80), Brushes.Black, rectf, format);
 				}
 				bitmapText = new BitmapFrame(bmpp);
-				
-				
+                return true;
+            }
+            catch (Exception ex)
+            {
+                LogError(ex.Message);
+                bitmapText = null;
+                return false;
+            }
+            return true;
+        }
+
+        private static bool CheckImagePath(string imagePath, out IRgb24BitmapBase bitmap)
+        {
+            if (imagePath == null)
+            {
+                bitmap = null;
+                return true;
+            }
+            if (!File.Exists(imagePath))
+            {
+                LogError("File not found.");
+                bitmap = null;
+                return false;
+            }
+            try
+            {
+            	var bmp = Bitmap.FromFile(imagePath) as Bitmap;
                 
                 bitmap = new BitmapFrame(bmp);
                 return true;

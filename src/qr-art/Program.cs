@@ -22,11 +22,11 @@ namespace Lapis.QrArt
             app.HelpOption("-?|-h|--help");
             app.VersionOption("-v|--version", "qr-art 1.0");
 
-            var contentArg = app.Argument("content", "Text to encode.");
+            var contentArg = app.Argument("content", "Text to overlay.");
             var imageArg = app.Argument("image", "An image to be used as background.");
             var formatArg = app.Argument("format", "Output image format. [png|gif|svg]");
             var pathArg = app.Argument("outpath", "Output path.");
-            var typeOpt = app.Option("-t|--type <type>", "Type number of QR code. [1-39]", CommandOptionType.SingleValue);
+            var fontSizeOpt = app.Option("-s|--size <number>", "Font Size", CommandOptionType.SingleValue);
             var errcorOpt = app.Option("-e|--errcor <level>", "Error correct level. [L|M|Q|H]", CommandOptionType.SingleValue);
             var foregdOpt = app.Option("-f|--foreground <color>", "Foreground color.", CommandOptionType.SingleValue);
             var backgdOpt = app.Option("-b|--background <color>", "Background color.", CommandOptionType.SingleValue);
@@ -38,10 +38,10 @@ namespace Lapis.QrArt
             {
                 if (!animationOpt.HasValue())
                 {                    
-                    if (CheckContent(contentArg.Value) &&
-                        CheckImagePath(imageArg.Value, out var bitmap, out var bitmapText) &&
+                    if (CheckContent(contentArg.Value, imageArg.Value, out var bitmapText) &&
+                        CheckImagePath(imageArg.Value, out var bitmap) &&
                         CheckFormat(formatArg.Value, out var textDrawer) &&
-                        CheckType(typeOpt.Value(), out var type) &&
+                        CheckFontSize(fontSizeOpt.Value(), out var fontSize) &&
                         CheckErrorCorrectLevel(errcorOpt.Value(), out var errcor) &&
                         CheckForeground(foregdOpt.Value(), out var foregd) &&
                         CheckBackground(backgdOpt.Value(), out var backgd) &&
@@ -96,7 +96,7 @@ namespace Lapis.QrArt
                     if (CheckContent(contentArg.Value) &&
                         CheckImagePathAnimation(imageArg.Value, out var animation, out var animationText) &&
                         CheckFormatAnimation(formatArg.Value, out var textDrawer) &&
-                        CheckType(typeOpt.Value(), out var type) &&
+                        CheckFontSize(fontSizeOpt.Value(), out var fontSize) &&
                         CheckErrorCorrectLevel(errcorOpt.Value(), out var errcor) &&
                         CheckForeground(foregdOpt.Value(), out var foregd) &&
                         CheckBackground(backgdOpt.Value(), out var backgd) &&
