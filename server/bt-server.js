@@ -75,6 +75,7 @@ wss.on('connection', function connection(ws) {
 	else {
 		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,imgSrc,imgIndex); }, 200);
 	}
+	imgIndex++;
   	
   	
   	
@@ -94,6 +95,5 @@ function runCommand(ws,execCmd,imgSrc,imgIndex) {
 		console.log(`stdout: ${stdout}`);
 		var jsonmessage = {'src':imgSrc+'?'+imgIndex};
 		ws.send(JSON.stringify(jsonmessage));
-		imgIndex++;
 	});
 }
