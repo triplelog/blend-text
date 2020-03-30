@@ -126,15 +126,14 @@ namespace Lapis.QrArt
             return false;
         }
 
-        private static bool CheckType(string type, out int typeNumber)
+        private static bool CheckFontSize(string s, out int fontSize)
         {
             if (string.IsNullOrWhiteSpace(type))
             {
-                typeNumber = 4;
+                fontSize = 40;
                 return true;
             }
-            if (int.TryParse(type, out typeNumber) &&
-                typeNumber > 0 && typeNumber < 40)
+            if (int.TryParse(s, out fontSize) && fontSize > 0)
                 return true;
             LogError("Invalid type number.");
             return false;
