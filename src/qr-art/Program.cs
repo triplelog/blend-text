@@ -84,7 +84,7 @@ namespace Lapis.QrArt
 							int twidth = (int)stringSize.Width;
 							int theight = (int)stringSize.Height;
 				
-							Bitmap bmpp = (Bitmap) new Bitmap(twidth,theight);
+							Bitmap bmpp = (Bitmap) new Bitmap(twidth+40,theight+40);
 							using (Graphics graph = Graphics.FromImage(bmpp))
 							{
 								Rectangle ImageSize = new Rectangle(0,0,twidth+40,theight+40);
