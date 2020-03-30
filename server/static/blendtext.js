@@ -17,9 +17,16 @@ imgData.fontSize = "";
 function updateImage(evt){
 	var el = evt.target;
 	imgData[el.id] = el.value;
-	clearTimeout(myTimeout);
+	//check imgData is valid?
 	console.log(myTimeout);
-	myTimeout = setTimeout(function(){ ws.send(JSON.stringify(imgData)); }, 500);
+	if (myTimeout){
+		clearTimeout(myTimeout);
+		myTimeout = setTimeout(function(){ ws.send(JSON.stringify(imgData)); }, 500);
+	}
+	else {
+		myTimeout = setTimeout(function(){ ws.send(JSON.stringify(imgData)); }, 200);
+	}
+	
 	
 }
 var textEl = document.getElementById('text');
