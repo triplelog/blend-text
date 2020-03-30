@@ -57,7 +57,9 @@ namespace Lapis.QRCode.Imaging
     {
         int CellSize { get; set; }
 
-        int Margin { get; set; }
+        int MarginL { get; set; }
+        
+        int MarginT { get; set; }
 
         int Foreground { get; set; }
 
@@ -79,16 +81,10 @@ namespace Lapis.QRCode.Imaging
         }
 
         private int _cellSize = 3;
-
-        public int Margin
-        { 
-            get { return _margin; } 
-            set 
-            {
-                if (value <= 0)
-                    throw new ArgumentOutOfRangeException(nameof(Margin));
-            }
-        }
+		
+		public int MarginL { get; set; } = 0;
+		
+		public int MarginT { get; set; } = 0;
 
         private int _margin = 8;
 
