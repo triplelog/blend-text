@@ -11,12 +11,18 @@ ws.onmessage = function(evt){
 	el.appendChild(img);
 }
 var imgData = {};
+var myTimeout;
 imgData.text = "";
 imgData.fontSize = "";
 function updateImage(evt){
 	var el = evt.target;
 	imgData[el.id] = el.value;
-	ws.send(JSON.stringify(imgData));
+	clearTimeout(myTimeout);
+	myTimeout = setTimeout(function(){ ws.send(JSON.stringify(imgData)); }, 1000);
+	
 }
 var textEl = document.getElementById('text');
 textEl.addEventListener('change',updateImage);
+
+var fontSizeEl = document.getElementById('fontSize');
+fontSizeEl.addEventListener('change',updateImage);
