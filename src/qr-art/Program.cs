@@ -71,7 +71,7 @@ namespace Lapis.QrArt
         				Console.WriteLine("Start Program ");
         				Bitmap bmp;
         				IRgb24BitmapBase bitmapText;
-        				
+        				IRgb24BitmapBase bitmap;
         				try
 						{
 							bmp = Bitmap.FromFile(imageArg.Value) as Bitmap;
@@ -102,13 +102,13 @@ namespace Lapis.QrArt
 								graph.DrawString(contentArg.Value, new Font("Tahoma",fontSize), Brushes.Black, rectf, format);
 							}
 							bitmapText = new BitmapFrame(bmpp);
+							bitmap = new BitmapFrame(bmp);
 						}
 						catch (Exception ex)
 						{
 							LogError(ex.Message);
 							bitmapText = null;
 						}
-        				IRgb24BitmapBase bitmap = new BitmapFrame(bmp);
         				
                         var image = builder.Create(contentArg.Value, bitmap, bitmapText, imageArg.Value);
                         //bitmap.Save("static/newbmp1.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
