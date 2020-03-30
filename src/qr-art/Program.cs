@@ -67,10 +67,8 @@ namespace Lapis.QrArt
                             //textDrawer.Foreground = foregd;
                             //textDrawer.Background = backgd;
                         }
-						PrivateFontCollection collection = new PrivateFontCollection();
-						collection.AddFontFile("/home/rwilcox/blend-text/fonts/abel-regular.ttf");
-						FontFamily fontFamily = new FontFamily("Abel", collection);
-						//Font font = new Font(fontFamily, fontSize);
+						
+						
 						Font font = new Font(fontOpt.Value(), fontSize);
         				
         				Stopwatch stopWatch = new Stopwatch();
