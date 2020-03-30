@@ -202,7 +202,7 @@ namespace Lapis.QrArt
         	FontFamily[] ffArray = FontFamily.Families;
 			foreach (FontFamily ff in ffArray)
 			{
-				myLev = LevenshteinDistance(input_str, ff.Name)
+				myLev = LevenshteinDistance(input_str, ff.Name);
 				if (myLev < minLev){
 					minLev = myLev;
 					outFont = ff.Name;
