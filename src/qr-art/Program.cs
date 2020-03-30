@@ -9,6 +9,8 @@ using Lapis.QRCode.Imaging.Drawing;
 using Lapis.QRCode.Art;
 using System.Collections.Generic;
 using System.Linq;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 
 namespace Lapis.QrArt
 {
@@ -73,7 +75,7 @@ namespace Lapis.QrArt
 						{
 							var bmp = Bitmap.FromFile(imageArg.Value) as Bitmap;
 							Graphics graph1 = Graphics.FromImage(bmp);
-							string measureString = content;
+							string measureString = contentArg.Value;
 							Font stringFont = new Font("Tahoma",fontSize);
 							SizeF stringSize = new SizeF();
 							stringSize = graph1.MeasureString(measureString, stringFont);
@@ -96,7 +98,7 @@ namespace Lapis.QrArt
 									LineAlignment = StringAlignment.Center
 								};
 								RectangleF rectf = new RectangleF(10, 10, twidth,theight);
-								graph.DrawString(content, new Font("Tahoma",fontSize), Brushes.Black, rectf, format);
+								graph.DrawString(contentArg.Value, new Font("Tahoma",fontSize), Brushes.Black, rectf, format);
 							}
 							IRgb24BitmapBase bitmapText = new BitmapFrame(bmpp);
 						}
