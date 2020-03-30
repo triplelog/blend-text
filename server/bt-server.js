@@ -45,6 +45,7 @@ const wss = new WebSocket.Server({ server });
 wss.on('connection', function connection(ws) {
   var myTimeout;
   var imgid = parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12);
+  var imgIndex = 0;
   ws.on('message', function incoming(message) {
   	var dm = JSON.parse(message);
   	console.log(dm);
@@ -69,10 +70,10 @@ wss.on('connection', function connection(ws) {
   	var imgSrc = '../out'+imgid+'.png';
   	if (myTimeout){
 		clearTimeout(myTimeout);
-		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,imgSrc); }, 500);
+		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,imgSrc,imgIndex); }, 500);
 	}
 	else {
-		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,imgSrc); }, 200);
+		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,imgSrc,imgIndex); }, 200);
 	}
   	
   	
@@ -80,7 +81,7 @@ wss.on('connection', function connection(ws) {
   });
 });
 
-function runCommand(ws,execCmd,imgSrc) {
+function runCommand(ws,execCmd,imgSrc,imgIndex) {
 	exec(execCmd, (error, stdout, stderr) => {
 		if (error) {
 			console.log(`error: ${error.message}`);
@@ -91,7 +92,8 @@ function runCommand(ws,execCmd,imgSrc) {
 			return;
 		}
 		console.log(`stdout: ${stdout}`);
-		var jsonmessage = {'src':imgSrc};
+		var jsonmessage = {'src':imgSrc+'?'+imgIndex};
 		ws.send(JSON.stringify(jsonmessage));
+		imgIndex++;
 	});
 }
