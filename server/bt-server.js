@@ -46,6 +46,7 @@ wss.on('connection', function connection(ws) {
   var myTimeout;
   ws.on('message', function incoming(message) {
   	var dm = JSON.parse(message);
+  	console.log(dm);
   	var fontSize = dm.fontSize;
   	var text = dm.text;
   	
