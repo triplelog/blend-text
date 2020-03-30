@@ -95,17 +95,15 @@ namespace Lapis.QrArt
             return false;
         }
 
-        private static bool CheckErrorCorrectLevel(string errcor, out ErrorCorrectLevel errorCorrectLevel)
+        private static bool CheckParams(string locX, string locY, string blurRadius, string blurColor, string textColor, string font)
         {
-            if (string.IsNullOrWhiteSpace(errcor))
+            if (string.IsNullOrWhiteSpace(locX))
             {
-                errorCorrectLevel = ErrorCorrectLevel.M;
                 return true;
             }
-            if (Enum.TryParse<ErrorCorrectLevel>(errcor, out errorCorrectLevel))
+            if (int.TryParse(locX, out locXout))
                 return true;
-            LogError("Invalid error correct level.");
-            return false;
+            return true;
         }
 
         private static bool CheckForeground(string foregd, out int color)
@@ -134,33 +132,7 @@ namespace Lapis.QrArt
             return false;
         }
 
-        private static bool CheckCell(string cell, out int cellSize)
-        {
-            if (string.IsNullOrWhiteSpace(cell))
-            {
-                cellSize = 3;
-                return true;
-            }
-            if (int.TryParse(cell, out cellSize) &&
-                cellSize > 0 && cellSize < 50)
-                return true;
-            LogError("Invalid cell size.");
-            return false;
-        }
-
-        private static bool CheckMargin(string margin, out int marginValue)
-        {
-            if (string.IsNullOrWhiteSpace(margin))
-            {
-                marginValue = 8;
-                return true;
-            }
-            if (int.TryParse(margin, out marginValue) &&
-                marginValue > 0 && marginValue < 50)
-                return true;
-            LogError("Invalid margin.");
-            return false;
-        }
+        
 
         private static void Write(IImage image, string path)
         {

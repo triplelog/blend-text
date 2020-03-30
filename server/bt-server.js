@@ -47,12 +47,21 @@ wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
   	var dm = JSON.parse(message);
   	console.log(dm);
-  	var fontSize = dm.fontSize;
-  	var text = dm.text;
+  	if (!dm.fontSize){
+  		return;
+  	}
+  	// add more checks
   	
   	
-	
-  	var execCmd = '../src/qr-art/bin/Debug/netcoreapp3.1/publish/qr-art "'+text+'" test.jpg png static/out'+fontSize+'.png -s '+fontSize;
+	//make src a crypto random file
+  	var execCmd = '../src/qr-art/bin/Debug/netcoreapp3.1/publish/qr-art "'+dm.text+'" test.jpg png static/out'+dm.fontSize+'.png';
+  	execCmd += ' -s '+dm.fontSize;
+  	execCmd += ' -x '+dm.locX;
+  	execCmd += ' -y '+dm.locY;
+  	execCmd += ' -r '+dm.blurRadius;
+  	execCmd += ' -b '+dm.blurColor;
+  	execCmd += ' -f '+dm.textColor;
+  	console.log(execCmd);
   	var imgSrc = '../out'+fontSize+'.png';
   	if (myTimeout){
 		clearTimeout(myTimeout);

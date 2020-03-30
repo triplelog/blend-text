@@ -29,12 +29,16 @@ namespace Lapis.QrArt
             var formatArg = app.Argument("format", "Output image format. [png|gif|svg]");
             var pathArg = app.Argument("outpath", "Output path.");
             var fontSizeOpt = app.Option("-s|--size <number>", "Font Size", CommandOptionType.SingleValue);
-            var errcorOpt = app.Option("-e|--errcor <level>", "Error correct level. [L|M|Q|H]", CommandOptionType.SingleValue);
-            var foregdOpt = app.Option("-f|--foreground <color>", "Foreground color.", CommandOptionType.SingleValue);
-            var backgdOpt = app.Option("-b|--background <color>", "Background color.", CommandOptionType.SingleValue);
-            var cellOpt = app.Option("-c|--cell <size>", "Cell size.", CommandOptionType.SingleValue);
-            var marginOpt = app.Option("-m|--margin <margin>", "Margin.", CommandOptionType.SingleValue);
-            var animationOpt = app.Option("-a|--animation", "Generate animated QR code.", CommandOptionType.NoValue);
+            var locXOpt = app.Option("-x <number>", "location X", CommandOptionType.SingleValue);
+            var locYOpt = app.Option("-y <number>", "location Y", CommandOptionType.SingleValue);
+            var blurRadiusOpt = app.Option("-r <number>", "Blur Radius", CommandOptionType.SingleValue);
+            var blurColorOpt = app.Option("-b <number>", "Blur Color", CommandOptionType.SingleValue);
+            var textColorOpt = app.Option("-c <number>", "Text Color", CommandOptionType.SingleValue);
+            var fontOpt = app.Option("-f <string>", "Font", CommandOptionType.SingleValue);
+            //legacy below
+            //var foregdOpt = app.Option("-f|--foreground <color>", "Foreground color.", CommandOptionType.SingleValue);
+            //var backgdOpt = app.Option("-b|--background <color>", "Background color.", CommandOptionType.SingleValue);
+            //var animationOpt = app.Option("-a|--animation", "Generate animated QR code.", CommandOptionType.NoValue);
 
             app.OnExecute(() =>
             {
@@ -44,11 +48,10 @@ namespace Lapis.QrArt
                         CheckImagePath(imageArg.Value) &&
                         CheckFormat(formatArg.Value, out var textDrawer) &&
                         CheckFontSize(fontSizeOpt.Value(), out var fontSize) &&
-                        CheckErrorCorrectLevel(errcorOpt.Value(), out var errcor) &&
-                        CheckForeground(foregdOpt.Value(), out var foregd) &&
-                        CheckBackground(backgdOpt.Value(), out var backgd) &&
-                        CheckCell(cellOpt.Value(), out var cell) &&
-                        CheckMargin(marginOpt.Value(), out var margin))
+                        CheckParams(locXOpt.Value(), locYOpt.Value(), blurRadiusOpt.Value(), blurColorOpt.Value(), textColorOpt.Value(), fontOpt.Value()) &&
+                        //add actual checks for above values
+                        //CheckForeground(foregdOpt.Value(), out var foregd) &&
+                        //CheckBackground(backgdOpt.Value(), out var backgd) &&
                     {
                     	
         				
@@ -60,11 +63,11 @@ namespace Lapis.QrArt
                             textDrawer
                         );
                         {
-                            textDrawer.Foreground = foregd;
-                            textDrawer.Background = backgd;
+                            //textDrawer.Foreground = foregd;
+                            //textDrawer.Background = backgd;
                         }
 						
-						
+						var myFont = fontOpt.Value();
         				
         				Stopwatch stopWatch = new Stopwatch();
         				stopWatch.Start();
@@ -77,7 +80,7 @@ namespace Lapis.QrArt
 							bmp = Bitmap.FromFile(imageArg.Value) as Bitmap;
 							Graphics graph1 = Graphics.FromImage(bmp);
 							string measureString = contentArg.Value;
-							Font stringFont = new Font("Tahoma",fontSize);
+							Font stringFont = new Font(myFont,fontSize);
 							SizeF stringSize = new SizeF();
 							stringSize = graph1.MeasureString(measureString, stringFont);
 							Console.WriteLine("width "+stringSize.Width + " height "+ stringSize.Height + "fSize "+fontSize);
@@ -99,7 +102,7 @@ namespace Lapis.QrArt
 									LineAlignment = StringAlignment.Center
 								};
 								RectangleF rectf = new RectangleF(20, 20, twidth,theight);
-								graph.DrawString(contentArg.Value, new Font("Tahoma",fontSize), Brushes.Black, rectf, format);
+								graph.DrawString(contentArg.Value, new Font(myFont,fontSize), Brushes.Black, rectf, format);
 							}
 							bitmapText = new BitmapFrame(bmpp);
 							bitmap = new BitmapFrame(bmp);
@@ -139,11 +142,9 @@ namespace Lapis.QrArt
                         CheckImagePathAnimation(imageArg.Value, out var animation, out var animationText) &&
                         CheckFormatAnimation(formatArg.Value, out var textDrawer) &&
                         CheckFontSize(fontSizeOpt.Value(), out var fontSize) &&
-                        CheckErrorCorrectLevel(errcorOpt.Value(), out var errcor) &&
-                        CheckForeground(foregdOpt.Value(), out var foregd) &&
-                        CheckBackground(backgdOpt.Value(), out var backgd) &&
-                        CheckCell(cellOpt.Value(), out var cell) &&
-                        CheckMargin(marginOpt.Value(), out var margin))
+                        CheckParams(locXOpt.Value(), locYOpt.Value(), blurRadiusOpt.Value(), blurColorOpt.Value(), textColorOpt.Value(), fontOpt.Value()) &&
+                        //CheckForeground(foregdOpt.Value(), out var foregd) &&
+                        //CheckBackground(backgdOpt.Value(), out var backgd) &&
                     {               
                         var builder = new QRAnimationCreator(
                             new Binarizer(),
@@ -155,8 +156,8 @@ namespace Lapis.QrArt
                             frames => new Rgb24Bitmap(frames.Select(f => f as Rgb24BitmapFrame))
                         );
                         {
-                            textDrawer.Foreground = foregd;
-                            textDrawer.Background = backgd;
+                            //textDrawer.Foreground = foregd;
+                            //textDrawer.Background = backgd;
                         }
 						
         				
