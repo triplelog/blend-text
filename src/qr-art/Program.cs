@@ -69,9 +69,9 @@ namespace Lapis.QrArt
         				Stopwatch stopWatch = new Stopwatch();
         				stopWatch.Start();
         				Console.WriteLine("Start Program ");
-        				Bitmap bmp;
-        				IRgb24BitmapBase bitmapText;
-        				IRgb24BitmapBase bitmap;
+        				Bitmap bmp = null;
+        				IRgb24BitmapBase bitmapText = null;
+        				IRgb24BitmapBase bitmap = null;
         				try
 						{
 							bmp = Bitmap.FromFile(imageArg.Value) as Bitmap;
