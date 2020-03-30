@@ -47,10 +47,11 @@ wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
   	var dm = JSON.parse(message);
   	var fontSize = dm.fontSize;
+  	var text = dm.text;
   	
   	
 	
-  	var execCmd = '../src/qr-art/bin/Debug/netcoreapp3.1/publish/qr-art "hello" test.jpg png static/out'+fontSize+'.png';
+  	var execCmd = '../src/qr-art/bin/Debug/netcoreapp3.1/publish/qr-art "'+text+'" test.jpg png static/out'+fontSize+'.png -s '+fontSize;
   	var imgSrc = '../out'+fontSize+'.png';
   	if (myTimeout){
 		clearTimeout(myTimeout);
