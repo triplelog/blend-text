@@ -192,7 +192,7 @@ namespace Lapis.QrArt
             Console.Error.WriteLine(message);
             Console.ForegroundColor = color;
         }
-        private string getFont(string input_str)
+        private static string getFont(string input_str)
         {
         	FontFamily[] ffArray = FontFamily.Families;
 			foreach (FontFamily ff in ffArray)
