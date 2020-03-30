@@ -52,6 +52,7 @@ namespace Lapis.QrArt
                         //add actual checks for above values
                         //CheckForeground(foregdOpt.Value(), out var foregd) &&
                         //CheckBackground(backgdOpt.Value(), out var backgd) &&
+                        )
                     {
                     	
         				
@@ -145,6 +146,7 @@ namespace Lapis.QrArt
                         CheckParams(locXOpt.Value(), locYOpt.Value(), blurRadiusOpt.Value(), blurColorOpt.Value(), textColorOpt.Value(), fontOpt.Value())
                         //CheckForeground(foregdOpt.Value(), out var foregd) &&
                         //CheckBackground(backgdOpt.Value(), out var backgd) &&
+                        )
                     {               
                         var builder = new QRAnimationCreator(
                             new Binarizer(),
