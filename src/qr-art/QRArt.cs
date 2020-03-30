@@ -29,13 +29,11 @@ namespace Lapis.QrArt
         {
             if (imagePath == null)
             {
-                bitmap = null;
-                return true;
+                return false;
             }
             if (!File.Exists(imagePath))
             {
                 LogError("File not found.");
-                bitmap = null;
                 return false;
             }
             try
@@ -45,7 +43,6 @@ namespace Lapis.QrArt
             catch (Exception ex)
             {
                 LogError(ex.Message);
-                bitmap = null;
                 return false;
             }
         }

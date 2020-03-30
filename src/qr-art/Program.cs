@@ -69,11 +69,12 @@ namespace Lapis.QrArt
         				Stopwatch stopWatch = new Stopwatch();
         				stopWatch.Start();
         				Console.WriteLine("Start Program ");
-        				
+        				Bitmap bmp;
+        				IRgb24BitmapBase bitmapText;
         				
         				try
 						{
-							var bmp = Bitmap.FromFile(imageArg.Value) as Bitmap;
+							bmp = Bitmap.FromFile(imageArg.Value) as Bitmap;
 							Graphics graph1 = Graphics.FromImage(bmp);
 							string measureString = contentArg.Value;
 							Font stringFont = new Font("Tahoma",fontSize);
@@ -100,7 +101,7 @@ namespace Lapis.QrArt
 								RectangleF rectf = new RectangleF(10, 10, twidth,theight);
 								graph.DrawString(contentArg.Value, new Font("Tahoma",fontSize), Brushes.Black, rectf, format);
 							}
-							IRgb24BitmapBase bitmapText = new BitmapFrame(bmpp);
+							bitmapText = new BitmapFrame(bmpp);
 						}
 						catch (Exception ex)
 						{
