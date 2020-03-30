@@ -72,6 +72,12 @@ namespace Lapis.QrArt
         				
         				Stopwatch stopWatch = new Stopwatch();
         				stopWatch.Start();
+        				FontFamily[] ffArray = FontFamily.Families;
+						foreach (FontFamily ff in ffArray)
+						{
+							//Add ff.Name to your drop-down list
+							Console.WriteLine(ff.Name);
+						}
         				Console.WriteLine("Start Program ");
         				Bitmap bmp = null;
         				IRgb24BitmapBase bitmapText = null;
@@ -82,9 +88,10 @@ namespace Lapis.QrArt
 							Graphics graph1 = Graphics.FromImage(bmp);
 							string measureString = contentArg.Value;
 							Font stringFont = new Font(myFont,fontSize);
+							Console.WriteLine(stringFont.FontFamily);
 							SizeF stringSize = new SizeF();
 							stringSize = graph1.MeasureString(measureString, stringFont);
-							Console.WriteLine("font " +myFont+ "width "+stringSize.Width + " height "+ stringSize.Height + "fSize "+fontSize);
+							Console.WriteLine("font " +myFont+ " width "+stringSize.Width + " height "+ stringSize.Height + "fSize "+fontSize);
 							int twidth = (int)stringSize.Width;
 							int theight = (int)stringSize.Height;
 				
