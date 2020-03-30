@@ -14,6 +14,7 @@ ws.onmessage = function(evt){
 
 var imgData = {};
 var myTimeout;
+imgData.imageSrc = document.getElementById('imageSrc').value;
 imgData.text = document.getElementById('text').value;
 imgData.fontSize = document.getElementById('fontSize').value;
 imgData.font = document.getElementById('font').value;
@@ -48,11 +49,16 @@ function updateImage(evt){
 	else {
 		myTimeout = setTimeout(function(){ ws.send(JSON.stringify(imgData)); }, 200);
 	}
+	var el = document.getElementById('imageHolder');
+	var img = document.createElement('img');
+	img.setAttribute('src','loading.png');
+	el.innerHTML = '';
+	el.appendChild(img);
 	
 	
 }
-var singleEls = ['text','font','fontSize','blurRadius'];
-for (var i=0;i<4;i++){
+var singleEls = ['text','font','fontSize','blurRadius','imageSrc'];
+for (var i=0;i<5;i++){
 	var el = document.getElementById(singleEls[i]);
 	el.addEventListener('change',updateImage);
 }

@@ -44,6 +44,7 @@ const wss = new WebSocket.Server({ server });
 
 wss.on('connection', function connection(ws) {
   var myTimeout;
+  var imgid = parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12);
   ws.on('message', function incoming(message) {
   	var dm = JSON.parse(message);
   	console.log(dm);
@@ -52,10 +53,11 @@ wss.on('connection', function connection(ws) {
   	}
   	// add more checks
   	
-  	
-	//make src a crypto random file
-	var imgid = parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12);
-  	var execCmd = '../src/qr-art/bin/Debug/netcoreapp3.1/publish/qr-art "'+dm.text+'" test.jpg png static/out'+imgid+'.png';
+
+	//download or upload file to 'inputs/imgid'+fileExt and set inputSrc
+	var inputSrc = 'test.jpg';
+	
+  	var execCmd = '../src/qr-art/bin/Debug/netcoreapp3.1/publish/qr-art "'+dm.text+'" '+inputSrc+' png static/out'+imgid+'.png';
   	execCmd += ' -s '+dm.fontSize;
   	execCmd += ' -x '+dm.locX;
   	execCmd += ' -y '+dm.locY;
