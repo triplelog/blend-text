@@ -93,7 +93,7 @@ namespace Lapis.QrArt
 							Console.WriteLine(font.FontFamily);
 							SizeF stringSize = new SizeF();
 							stringSize = graph1.MeasureString(measureString, font);
-							Console.WriteLine("font " +myFont+ " width "+stringSize.Width + " height "+ stringSize.Height + "fSize "+fontSize);
+							Console.WriteLine("width "+stringSize.Width + " height "+ stringSize.Height + "fSize "+fontSize);
 							int twidth = (int)stringSize.Width;
 							int theight = (int)stringSize.Height;
 				
