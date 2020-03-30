@@ -12,8 +12,8 @@ ws.onmessage = function(evt){
 }
 var imgData = {};
 var myTimeout;
-imgData.text = "";
-imgData.fontSize = "";
+imgData.text = document.getElementById('text').value;
+imgData.fontSize = document.getElementById('fontSize').value;
 function updateImage(evt){
 	var el = evt.target;
 	imgData[el.id] = el.value;

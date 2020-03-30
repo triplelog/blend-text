@@ -80,14 +80,14 @@ namespace Lapis.QrArt
 							Font stringFont = new Font("Tahoma",fontSize);
 							SizeF stringSize = new SizeF();
 							stringSize = graph1.MeasureString(measureString, stringFont);
-							Console.WriteLine("width "+stringSize.Width + " height "+ stringSize.Height);
+							Console.WriteLine("width "+stringSize.Width + " height "+ stringSize.Height + "fSize "+fontSize);
 							int twidth = (int)stringSize.Width;
 							int theight = (int)stringSize.Height;
 				
 							Bitmap bmpp = (Bitmap) new Bitmap(twidth,theight);
 							using (Graphics graph = Graphics.FromImage(bmpp))
 							{
-								Rectangle ImageSize = new Rectangle(0,0,twidth+20,theight+20);
+								Rectangle ImageSize = new Rectangle(0,0,twidth+40,theight+40);
 								graph.FillRectangle(Brushes.White, ImageSize);
 								graph.SmoothingMode = SmoothingMode.AntiAlias;
 								graph.InterpolationMode = InterpolationMode.HighQualityBicubic;
@@ -98,7 +98,7 @@ namespace Lapis.QrArt
 									Alignment = StringAlignment.Center,
 									LineAlignment = StringAlignment.Center
 								};
-								RectangleF rectf = new RectangleF(10, 10, twidth,theight);
+								RectangleF rectf = new RectangleF(20, 20, twidth,theight);
 								graph.DrawString(contentArg.Value, new Font("Tahoma",fontSize), Brushes.Black, rectf, format);
 							}
 							bitmapText = new BitmapFrame(bmpp);
