@@ -129,7 +129,7 @@ namespace Lapis.QrArt
 
         private static bool CheckFontSize(string s, out int fontSize)
         {
-            if (string.IsNullOrWhiteSpace(type))
+            if (string.IsNullOrWhiteSpace(s))
             {
                 fontSize = 40;
                 return true;
