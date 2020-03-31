@@ -83,6 +83,8 @@ for (var i=0;i<2;i++){
 
 var oldcode = '';
 var workspace = Blockly.inject('blocklyDiv', {toolbox: document.getElementById('toolbox')});
+Blockly.Variables.createVariable(button.getTargetWorkspace(), null, 'l');
+
 function myUpdateFunction(event) {
 	
 	var code = Blockly.Lua.workspaceToCode(workspace);
