@@ -178,7 +178,10 @@ namespace Lapis.QrArt
 							bitmapText = null;
 						}
         				
-                        var image = builder.Create(contentArg.Value, bitmap, bitmapText, imageArg.Value, 5);
+        				int blurRadius = 5;
+        				if (int.TryParse(blurRadiusOpt.Value(), out blurRadius)){}
+        				
+                        var image = builder.Create(contentArg.Value, bitmap, bitmapText, imageArg.Value, blurRadius);
                         //bitmap.Save("static/newbmp1.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
                         
                          stopWatch.Stop();
