@@ -39,9 +39,9 @@ namespace Lapis.QRCode.Imaging.Drawing
                 var foreBrushB = new SolidBrush(Color.FromArgb(0,0,120));
                 
         		var foreBrushCustom = new SolidBrush(Color.FromArgb(0,0,120));
-                for (var r = 0; r < theight; r += 1)
+                for (var r = 0; r < theight && r + MarginT < bmp.Height; r += 1)
                 {
-                    for (var c = 0; c < twidth; c += 1)
+                    for (var c = 0; c < twidth && c + MarginL < bmp.Width; c += 1)
                     {
                         if (tripMatrix[r, c] == 0)
                         {
