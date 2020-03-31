@@ -98,6 +98,13 @@ namespace Lapis.QRCode.Art
 									if (tripMatrix[iii,iiii] == 0){
 										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
 										if ( d <= maxD/2){
+											tripMatrix[iii,iiii] = -10;
+										}
+									}
+									/*
+									if (tripMatrix[iii,iiii] == 0){
+										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
+										if ( d <= maxD/2){
 											tripMatrix[iii,iiii] = (20*d-15*maxD)*2/maxD;
 										}
 									}
@@ -109,7 +116,7 @@ namespace Lapis.QRCode.Art
 												tripMatrix[iii,iiii] = dd;
 											}
 										}
-									}
+									}*/
 								}
 							}
                 		}
