@@ -63,7 +63,12 @@ wss.on('connection', function connection(ws) {
   	execCmd += ' -x '+dm.locX;
   	execCmd += ' -y '+dm.locY;
   	execCmd += ' -r '+dm.blurRadius;
-  	dm.blurFormula = `function ScriptFunc (val,l,s)
+  	luaBlurFormula = `function ScriptFunc (val,h,s,l)
+  	`+dm.blurFormula+`
+  	return h,s,l
+  	end
+  	`
+   var oldForm = `function ScriptFunc (val,h,s,l)
 					if val < -25 then
 						if l < .6 then
 							l = .6
@@ -81,12 +86,9 @@ wss.on('connection', function connection(ws) {
 					end
 					return l,s
 				end`
-  	if (dm.blurFormula.indexOf('"')==-1){
-  		execCmd += ' -b "'+dm.blurFormula+'"';
-  	}
-  	else {
-  		execCmd += ' -b '+dm.blurFormula;
-  	}
+	console.log(luaBlurFormula);
+  	execCmd += ' -b "'+luaBlurFormula+'"';
+
   	execCmd += ' -c '+dm.textFormula;
   	if (dm.font.indexOf('"')==-1 && dm.font.indexOf(' ')>0){
   		execCmd += ' -f "'+dm.font+'"';

@@ -103,7 +103,7 @@ function myUpdateFunction(event) {
 		
 		oldcode = code;
 		document.getElementById('blurFormula').querySelector('textarea').value = code;
-		//updateImage(false);
+		updateImage(false);
 	}
 }
 workspace.addChangeListener(myUpdateFunction);
