@@ -66,7 +66,7 @@
     			</div>
     			<div id="blurFormula">
     				Blur Formula:
-    				<textarea rows="4" cols="50"></textarea>
+    				<!--<textarea rows="4" cols="50"></textarea>-->
     			</div>
     			<div id="textFormula">
     				Text Formula:
@@ -95,10 +95,11 @@
 <script src="../js/blockly_compressed.js"></script>
 <script src="../js/blocks_compressed.js"></script>
 <script src="../js/blocklyen.js"></script>
+<script src="../js/cycle.js"></script>
 <script>
   var workspace = Blockly.inject('blocklyDiv', {toolbox: document.getElementById('toolbox')});
   function myUpdateFunction(event) {
-	console.log(JSON.stringify(workspace));
+	console.log(JSON.decycle(workspace));
 	  //var code = Blockly.JavaScript.workspaceToCode(workspace);
 	  //document.getElementById('textarea').value = code;
   }
