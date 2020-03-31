@@ -115,20 +115,14 @@ namespace Lapis.QrArt
 							}
 							else if (xType == 1){
 								//left at (bmp.Width * xPct)/100
-								textDrawer.MarginL = (bmp.Width * xPct)/100;
+								textDrawer.MarginL = (bmp.Width * xPct)/100 - 20;
 							}
 							else if (xType == 2){
 								//right at (bmp.Width * xPct)/100
-								textDrawer.MarginL = (bmp.Width * xPct)/100 - (twidth+40);
+								textDrawer.MarginL = (bmp.Width * xPct)/100 - (twidth+40) + 40;
 							}
 							else {
 								textDrawer.MarginL = bmp.Width/2 - (twidth+40)/2;
-							}
-							if (textDrawer.MarginL < 0){
-								textDrawer.MarginL = 0;
-							}
-							else if (textDrawer.MarginL > bmp.Width - 1){
-								textDrawer.MarginL = bmp.Width - 1;
 							}
 							
 							if (yType == 0){
@@ -137,20 +131,14 @@ namespace Lapis.QrArt
 							}
 							else if (yType == 1){
 								//top at (bmp.Width * xPct)/100
-								textDrawer.MarginT = (bmp.Height * yPct)/100;
+								textDrawer.MarginT = (bmp.Height * yPct)/100 - 20;
 							}
 							else if (yType == 2){
 								//bottom at (bmp.Width * xPct)/100
-								textDrawer.MarginT = (bmp.Height * yPct)/100 - (theight+40);
+								textDrawer.MarginT = (bmp.Height * yPct)/100 - (theight+40) + 40;
 							}
 							else {
 								textDrawer.MarginT = bmp.Height/2 - (theight+40)/2;
-							}
-							if (textDrawer.MarginT < 0){
-								textDrawer.MarginT = 0;
-							}
-							else if (textDrawer.MarginT > bmp.Height - 1){
-								textDrawer.MarginT = bmp.Height - 1;
 							}
 							
 							using (Graphics graph = Graphics.FromImage(bmpp))
