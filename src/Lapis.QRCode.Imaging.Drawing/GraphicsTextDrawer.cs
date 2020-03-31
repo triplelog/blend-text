@@ -119,8 +119,8 @@ namespace Lapis.QRCode.Imaging.Drawing
 							//l = 1 - (1-l)*10/(-1*tripMatrix[r, c]*Math.Log((1-l)+1.5)/Math.Log(2));
 							//l = 1 - (1-l)/2;
 							if (tripMatrix[r, c] < -25){
-								if (l < .7){
-									l = .7;
+								if (l < .6){
+									l = .6;
 								
 								}
 								if (s > .4){
@@ -128,8 +128,8 @@ namespace Lapis.QRCode.Imaging.Drawing
 								}
 							}
 							else {
-								if (l < .6){
-									l = .6;
+								if (l < .5){
+									l = .5;
 								
 								}
 								if (s > .4){
