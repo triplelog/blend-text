@@ -153,6 +153,14 @@ namespace Lapis.QRCode.Art
                 		
                 	}
                 }
+                for (var i=0;i<theight;i++){
+                	for (var ii=0;ii<twidth;ii++){
+                		if (tripMatrix[i,ii] == 0){
+                			int dd = (10*maxD-15*maxD)*2/maxD;
+                			tripMatrix[i,ii] = dd;
+                		}
+                	}
+                }
                 
                 stopWatch.Stop();
 				// Get the elapsed time as a TimeSpan value.
