@@ -11,7 +11,7 @@ namespace Lapis.QRCode.Art
 {
     public interface IQRArtCreator
     {
-        IImage Create(string data, IRgb24BitmapBase image, IRgb24BitmapBase imageText, string imagePath);
+        IImage Create(string data, IRgb24BitmapBase image, IRgb24BitmapBase imageText, string imagePath, int blurRadius);
     }
 
     public class QRArtCreator : IQRArtCreator
@@ -47,7 +47,7 @@ namespace Lapis.QRCode.Art
         
         public ITripMatrixDrawer TripMatrixDrawer { get; }
 
-        public virtual IImage Create(string data, IRgb24BitmapBase image, IRgb24BitmapBase imageText, string imagePath)
+        public virtual IImage Create(string data, IRgb24BitmapBase image, IRgb24BitmapBase imageText, string imagePath, int blurRadius)
         {
         	
 
@@ -87,7 +87,6 @@ namespace Lapis.QRCode.Art
                 }//~110 ms for this double loop
 				
 				
-				int blurRadius = 5;
 				int maxD = blurRadius*blurRadius;
         		
                 for (var i=blurRadius;i<theight-blurRadius;i++){

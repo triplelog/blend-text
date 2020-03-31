@@ -227,7 +227,7 @@ namespace Lapis.QrArt
                         }
 						
         				
-                        var image = builder.Create(contentArg.Value, animation, animationText, imageArg.Value);
+                        var image = builder.Create(contentArg.Value, animation, animationText, imageArg.Value, 5);
                         
                        
                                                 
