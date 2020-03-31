@@ -76,7 +76,8 @@
     		<div class="l-box pure-u-1" id="imageHolder">
     		</div>
     		<div class="l-box pure-u-1">
-    			<div id="blocklyDiv" style="height: 480px; width: 900px;"></div>
+    			<div id="blocklyDiv" style="height: 280px; width: 500px;"></div>
+    			<div id="codearea" style="height: 280px; width: 500px;"></div>
 			</div>
 		</div>
 
@@ -96,16 +97,6 @@
 <script src="../js/blocks_compressed.js"></script>
 <script src="../js/blocklyen.js"></script>
 <script src="../js/cycle.js"></script>
-<script>
-  var workspace = Blockly.inject('blocklyDiv', {toolbox: document.getElementById('toolbox')});
-  function myUpdateFunction(event) {
-	console.log(JSON.stringify(JSON.decycle(workspace)));
-	  //var code = Blockly.JavaScript.workspaceToCode(workspace);
-	  //document.getElementById('textarea').value = code;
-  }
-  workspace.addChangeListener(myUpdateFunction);
-
-</script>
 
 <script src="../js/blendtext.js"></script>
 </body>

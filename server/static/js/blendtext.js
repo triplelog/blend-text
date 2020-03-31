@@ -23,8 +23,8 @@ imgData.locY += parseInt(document.getElementById('locY').querySelector('input').
 imgData.locX = parseInt(document.getElementById('locX').querySelector('select').value);
 imgData.locX += parseInt(document.getElementById('locX').querySelector('input').value);
 imgData.blurRadius = document.getElementById('blurRadius').value;
-imgData.blurFormula = document.getElementById('blurFormula').querySelector('textarea').textContent;
-imgData.textFormula = document.getElementById('textFormula').querySelector('textarea').textContent;
+imgData.blurFormula = document.getElementById('blurFormula').querySelector('textarea').value;
+imgData.textFormula = document.getElementById('textFormula').querySelector('textarea').value;
 
 function updateImage(evt){
 	var el = evt.target;
@@ -39,7 +39,7 @@ function updateImage(evt){
 		}
 		else if (el.parentElement.id == 'blurFormula' || el.parentElement.id == 'textFormula'){
 			var id = el.parentElement.id;
-			imgData[id] = document.getElementById(id).querySelector('textarea').textContent;
+			imgData[id] = document.getElementById(id).querySelector('textarea').value;
 		}
 	}
 	//check imgData is valid?
@@ -75,3 +75,16 @@ for (var i=0;i<2;i++){
 	var el = document.getElementById(formulaEls[i]);
 	el.querySelector('textarea').addEventListener('change',updateImage);
 }
+
+var oldcode = '';
+var workspace = Blockly.inject('blocklyDiv', {toolbox: document.getElementById('toolbox')});
+function myUpdateFunction(event) {
+	
+	var code = Blockly.JavaScript.workspaceToCode(workspace);
+	document.getElementById('codearea').value = code;
+	if (code != oldcode){
+		oldcode = code;
+		console.log(JSON.stringify(JSON.decycle(workspace)));
+	}
+}
+workspace.addChangeListener(myUpdateFunction);
