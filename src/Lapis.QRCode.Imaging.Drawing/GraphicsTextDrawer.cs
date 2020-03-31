@@ -148,8 +148,8 @@ namespace Lapis.QRCode.Imaging.Drawing
 							//l = 1 - (1-l)/2;
 							//var luax = state.DoString("return 3 + 4")[0];
 							var res = scriptFunc.Call (tripMatrix[r, c],l,s);
-							l = res[0];
-							s = res[1];
+							l = (double)res[0];
+							s = (double)res[1];
 							/*
 							if (tripMatrix[r, c] < -25){
 								if (l < .6){
