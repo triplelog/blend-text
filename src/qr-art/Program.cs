@@ -68,6 +68,7 @@ namespace Lapis.QrArt
                             //textDrawer.Background = backgd;
                             textDrawer.MarginL = 0;
                             textDrawer.MarginT = 0;
+                            textDrawer.BlurFormula = blurFormulaOpt.Value();
                         }
 						
 						int blurRadius = 5;

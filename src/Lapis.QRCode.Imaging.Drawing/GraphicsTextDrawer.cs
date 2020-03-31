@@ -50,7 +50,7 @@ namespace Lapis.QRCode.Imaging.Drawing
         		if (MarginL < 0){
         			startC = 0 - MarginL;
         		}
-        		
+        		Console.WriteLine(BlurFormula);
         		string luaString = @"
 				function ScriptFunc (val,l,s)
 					if val < -25 then

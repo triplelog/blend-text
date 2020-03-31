@@ -48,7 +48,7 @@ wss.on('connection', function connection(ws) {
   var imgIndex = 0;
   ws.on('message', function incoming(message) {
   	var dm = JSON.parse(message);
-  	console.log(dm);
+  	//console.log(dm);
   	if (!dm.fontSize){
   		return;
   	}
@@ -103,7 +103,7 @@ function runCommand(ws,execCmd,imgSrc,imgIndex) {
 			console.log(`stderr: ${stderr}`);
 			return;
 		}
-		console.log(`stdout: ${stdout}`);
+		//console.log(`stdout: ${stdout}`);
 		var jsonmessage = {'src':imgSrc+'?'+imgIndex};
 		ws.send(JSON.stringify(jsonmessage));
 	});
