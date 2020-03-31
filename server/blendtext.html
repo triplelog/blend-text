@@ -97,6 +97,13 @@
 <script src="../js/blocklyen.js"></script>
 <script>
   var workspace = Blockly.inject('blocklyDiv', {toolbox: document.getElementById('toolbox')});
+  function myUpdateFunction(event) {
+	console.log(workspace);
+	  //var code = Blockly.JavaScript.workspaceToCode(workspace);
+	  //document.getElementById('textarea').value = code;
+  }
+  workspace.addChangeListener(myUpdateFunction);
+
 </script>
 
 <script src="../js/blendtext.js"></script>
