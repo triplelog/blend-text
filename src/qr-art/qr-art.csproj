@@ -18,5 +18,6 @@
   <ItemGroup>
     <PackageReference Include="CoreCompat.System.Drawing.v2" Version="5.2.0-*" />
     <PackageReference Include="Microsoft.Extensions.CommandLineUtils" Version="1.1.1" />
+    <PackageReference Include="NLua" Version="1.4.30" />
   </ItemGroup>
 </Project>
