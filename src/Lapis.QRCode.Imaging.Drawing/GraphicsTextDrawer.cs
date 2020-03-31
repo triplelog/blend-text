@@ -142,9 +142,9 @@ namespace Lapis.QRCode.Imaging.Drawing
                             int re = (imgC & 0xFF0000) >> 16;
 							int gr = (imgC & 0xFF00) >> 8;
 							int bl = imgC & 0xFF;
-							re = (re/2)*2;
-							gr = (gr/2)*2;
-							bl = (bl/2)*2;
+							//re = (re/2)*2;
+							//gr = (gr/2)*2;
+							//bl = (bl/2)*2;
 							imgC = re << 16 + gr << 8 + bl;
 								
                             int outval = 0;
