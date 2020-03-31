@@ -73,7 +73,9 @@ namespace Lapis.QRCode.Imaging.Drawing
 				end
 				";*/
 				
-				Dictionary<int, int> hash = new Dictionary<int, int>();
+				Dictionary<int, int> lighthash = new Dictionary<int, int>();
+				Dictionary<int, int> darkhash = new Dictionary<int, int>();
+				
         		state.DoString (BlurFormula);
 				var scriptFunc = state ["ScriptFunc"] as LuaFunction;
 				int newcell =0;
@@ -102,7 +104,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 							int imgC = hashColor.GetHashCode();
 								
                             int outval = 0;
-                            if (hash.TryGetValue(imgC, out outval))
+                            if (darkhash.TryGetValue(imgC, out outval))
 							{
 								re = (outval & 0xFF0000) >> 16;
 								gr = (outval & 0xFF00) >> 8;
@@ -148,7 +150,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 								HlsToRgb(h, l, s,out re, out gr, out bl);
 								
 								int newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
-								hash.Add(imgC, newcol);
+								darkhash.Add(imgC, newcol);
 								
 								foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
 								graph.FillRectangle(foreBrushCustom, x, y, 1,1);
@@ -170,7 +172,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 							int imgC = hashColor.GetHashCode();
 								
                             int outval = 0;
-                            if (hash.TryGetValue(imgC, out outval))
+                            if (lighthash.TryGetValue(imgC, out outval))
 							{
 								re = (outval & 0xFF0000) >> 16;
 								gr = (outval & 0xFF00) >> 8;
@@ -193,7 +195,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 								HlsToRgb(h, l, s,out re, out gr, out bl);
 								
 								int newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
-								hash.Add(imgC, newcol);
+								lighthash.Add(imgC, newcol);
 							
 								foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
 								graph.FillRectangle(foreBrushCustom, x, y, 1,1);
