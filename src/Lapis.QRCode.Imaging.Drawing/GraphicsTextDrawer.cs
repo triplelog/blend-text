@@ -50,7 +50,7 @@ namespace Lapis.QRCode.Imaging.Drawing
         		if (MarginL < 0){
         			startC = 0 - MarginL;
         		}
-        		
+        		/*
         		state.DoString (@"
 				function ScriptFunc (val,l,s)
 					if val < -25 then
@@ -70,6 +70,12 @@ namespace Lapis.QRCode.Imaging.Drawing
 						end
 					end
 					return [l,s]
+				end
+				");
+				*/
+				state.DoString (@"
+				function ScriptFunc (val,l,s)
+					return l, s
 				end
 				");
 				var scriptFunc = state ["ScriptFunc"] as LuaFunction;
