@@ -92,10 +92,18 @@ namespace Lapis.QRCode.Art
         		int endiii = 0;
         		int startiiii = 0;
         		int endiiii = 0;
+        		int maxX = 0;
+        		int minX = twidth;
+        		int maxY = 0;
+        		int minY = theight;
                 for (var i=blurRadius;i<theight-blurRadius;i++){
                 	for (var ii=blurRadius;ii<twidth-blurRadius;ii++){
                 		
                 		if (tripMatrix[i,ii] > 0){
+                			if (i>maxY){maxY = i;}
+                			if (i<minY){minY = i;}
+                			if (ii>maxX){maxX = ii;}
+                			if (ii<minX){minX = ii;}
                 			if (tripMatrix[i-1,ii] > 0){
                 				startiii = i;
                 			}
@@ -153,8 +161,12 @@ namespace Lapis.QRCode.Art
                 		
                 	}
                 }
-                for (var i=0;i<theight;i++){
-                	for (var ii=0;ii<twidth;ii++){
+                if (minY < blurRadius){minY = blurRadius;}
+                if (maxY + blurRadius >= theight){maxY = theight -blurRadius;}
+                if (minX < blurRadius){minX = blurRadius;}
+                if (maxX + blurRadius >= twidth){maxX = twidth -blurRadius;}
+                for (var i=minY-blurRadius;i<maxY+blurRadius;i++){
+                	for (var ii=minX-blurRadius;ii<maxX+blurRadius;ii++){
                 		if (tripMatrix[i,ii] == 0){
                 			int dd = (10*maxD-15*maxD)*2/maxD;
                 			tripMatrix[i,ii] = dd;
