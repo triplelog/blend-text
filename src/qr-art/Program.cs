@@ -70,27 +70,7 @@ namespace Lapis.QrArt
                             textDrawer.MarginT = 0;
                         }
 						
-						int xPct = 0;
-						int xType = 0;
-						if (int.TryParse(locXOpt.Value(), out int locXout)){
-							xPct = (locXout+200)%200;
-							xType = locXout/200;
-							if (xPct > 149){
-								xPct -= 200;
-								xType += 1;
-							}
-							
-						}
-						int yPct = 0;
-						int yType = 0;
-						if (int.TryParse(locYOpt.Value(), out int locYout)){
-							yPct = (locYout+200)%200;
-							yType = locYout/200;
-							if (yPct > 149){
-								yPct -= 200;
-								yType += 1;
-							}
-						}
+						
 						
 						string fontVal = getFont(fontOpt.Value().ToLower());
 						Font font = new Font(fontVal, fontSize);
@@ -118,37 +98,60 @@ namespace Lapis.QrArt
 							
 							Bitmap bmpp = (Bitmap) new Bitmap(twidth+40,theight+40);
 							
-							if (xType == 0){
-								//middle at (bmp.Width * xPct)/100
-								textDrawer.MarginL = (bmp.Width * xPct)/100 - (twidth+40)/2;
-							}
-							else if (xType == 1){
-								//left at (bmp.Width * xPct)/100
-								textDrawer.MarginL = (bmp.Width * xPct)/100 - 20;
-							}
-							else if (xType == 2){
-								//right at (bmp.Width * xPct)/100
-								textDrawer.MarginL = (bmp.Width * xPct)/100 - (twidth+40) + 20;
-							}
-							else {
-								textDrawer.MarginL = bmp.Width/2 - (twidth+40)/2;
-							}
+							{
+								int xPct = 0;
+								int xType = 0;
+								if (int.TryParse(locXOpt.Value(), out int locXout)){
+									xPct = (locXout+200)%200;
+									xType = locXout/200;
+									if (xPct > 149){
+										xPct -= 200;
+										xType += 1;
+									}
 							
-							if (yType == 0){
-								//middle at (bmp.Height * yPct)/100
-								textDrawer.MarginT = (bmp.Height * yPct)/100 - (theight+40)/2;
-							}
-							else if (yType == 1){
-								//top at 
-								textDrawer.MarginT = (bmp.Height * yPct)/100 - 20;
-							}
-							else if (yType == 2){
-								//bottom at 
-								textDrawer.MarginT = (bmp.Height * yPct)/100 - (theight+40) + 20;
-							}
-							else {
-								textDrawer.MarginT = bmp.Height/2 - (theight+40)/2;
-							}
+								}
+								int yPct = 0;
+								int yType = 0;
+								if (int.TryParse(locYOpt.Value(), out int locYout)){
+									yPct = (locYout+200)%200;
+									yType = locYout/200;
+									if (yPct > 149){
+										yPct -= 200;
+										yType += 1;
+									}
+								}
+								if (xType == 0){
+									//middle at (bmp.Width * xPct)/100
+									textDrawer.MarginL = (bmp.Width * xPct)/100 - (twidth+40)/2;
+								}
+								else if (xType == 1){
+									//left at (bmp.Width * xPct)/100
+									textDrawer.MarginL = (bmp.Width * xPct)/100 - 20;
+								}
+								else if (xType == 2){
+									//right at (bmp.Width * xPct)/100
+									textDrawer.MarginL = (bmp.Width * xPct)/100 - (twidth+40) + 20;
+								}
+								else {
+									textDrawer.MarginL = bmp.Width/2 - (twidth+40)/2;
+								}
+							
+								if (yType == 0){
+									//middle at (bmp.Height * yPct)/100
+									textDrawer.MarginT = (bmp.Height * yPct)/100 - (theight+40)/2;
+								}
+								else if (yType == 1){
+									//top at 
+									textDrawer.MarginT = (bmp.Height * yPct)/100 - 20;
+								}
+								else if (yType == 2){
+									//bottom at 
+									textDrawer.MarginT = (bmp.Height * yPct)/100 - (theight+40) + 20;
+								}
+								else {
+									textDrawer.MarginT = bmp.Height/2 - (theight+40)/2;
+								}
+							} //set margins
 							
 							using (Graphics graph = Graphics.FromImage(bmpp))
 							{
