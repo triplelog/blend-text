@@ -121,7 +121,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 							//l = 1 - (1-l)/6;
 							//l = 1 - (1-l)*10/(-1*tripMatrix[r, c]*Math.Log((1-l)+1.5)/Math.Log(2));
 							//l = 1 - (1-l)/2;
-							int luax = state.DoString("return 3 + 4")[0] as int;
+							var luax = state.DoString("return 3 + 4")[0] as int;
 							if (tripMatrix[r, c] < -25){
 								if (l < .6){
 									l = .6;
