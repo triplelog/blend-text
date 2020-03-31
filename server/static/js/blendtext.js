@@ -84,7 +84,8 @@ function myUpdateFunction(event) {
 	
 	if (code != oldcode){
 		oldcode = code;
-		console.log(JSON.stringify(JSON.decycle(workspace)));
+		//console.log(JSON.stringify(JSON.decycle(workspace)));
+		console.log(code);
 		document.getElementById('codearea').value = code;
 	}
 }
