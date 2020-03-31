@@ -66,9 +66,22 @@ namespace Lapis.QrArt
                         {
                             //textDrawer.Foreground = foregd;
                             //textDrawer.Background = backgd;
-                            textDrawer.MarginL = 200;
-                            textDrawer.MarginT = 100;
+                            textDrawer.MarginL = 0;
+                            textDrawer.MarginT = 0;
                         }
+						
+						int xPct = 0;
+						int xType = 0;
+						if (int.TryParse(locXOpt.Value(), out int locXout)){
+							xPct = locXout%200;
+							xType = locXout/200;
+						}
+						int yPct = 0;
+						int yType = 0;
+						if (int.TryParse(locYOpt.Value(), out int locYout)){
+							yPct = locYout%200;
+							yType = locYout/200;
+						}
 						
 						string fontVal = getFont(fontOpt.Value().ToLower());
 						Font font = new Font(fontVal, fontSize);
@@ -93,8 +106,41 @@ namespace Lapis.QrArt
 							Console.WriteLine("width "+stringSize.Width + " height "+ stringSize.Height + "fSize "+fontSize);
 							int twidth = (int)stringSize.Width;
 							int theight = (int)stringSize.Height;
-				
+							
 							Bitmap bmpp = (Bitmap) new Bitmap(twidth+40,theight+40);
+							
+							if (xType == 0){
+								//middle at (bmp.Width * xPct)/100
+								textDrawer.MarginL = (bmp.Width * xPct)/100 - (twidth+40)/2;
+							}
+							else if (xType == 1){
+								//left at (bmp.Width * xPct)/100
+								textDrawer.MarginL = (bmp.Width * xPct)/100;
+							}
+							else if (xType == 2){
+								//right at (bmp.Width * xPct)/100
+								textDrawer.MarginL = (bmp.Width * xPct)/100 - (twidth+40);
+							}
+							else {
+								textDrawer.MarginL = bmp.Width/2 - (twidth+40)/2;
+							}
+							
+							if (yType == 0){
+								//middle at (bmp.Width * xPct)/100
+								textDrawer.MarginT = (bmp.Height * yPct)/100 - (theight+40)/2;
+							}
+							else if (yType == 1){
+								//top at (bmp.Width * xPct)/100
+								textDrawer.MarginT = (bmp.Height * yPct)/100;
+							}
+							else if (yType == 2){
+								//bottom at (bmp.Width * xPct)/100
+								textDrawer.MarginT = (bmp.Height * yPct)/100 - (theight+40);
+							}
+							else {
+								textDrawer.MarginT = bmp.Height/2 - (theight+40)/2;
+							}
+							
 							using (Graphics graph = Graphics.FromImage(bmpp))
 							{
 								Rectangle ImageSize = new Rectangle(0,0,twidth+40,theight+40);

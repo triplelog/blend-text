@@ -86,8 +86,6 @@ namespace Lapis.QRCode.Imaging
 		
 		public int MarginT { get; set; } = 0;
 
-        private int _margin = 8;
-
         public int Foreground { get; set; } = 0x000000;
 
         public int Background { get; set; } = 0xFFFFFF;
