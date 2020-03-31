@@ -138,7 +138,7 @@ namespace Lapis.QRCode.Imaging.Drawing
                         else {
                         	var x = MarginL + c;
                             var y = MarginT + r;
-                            int imgC = ColorHelper.ToIntRgb24(bmp.GetPixel(x, y));
+                            //int imgC = ColorHelper.ToIntRgb24(bmp.GetPixel(x, y));
                             //int re = (imgC & 0xFF0000) >> 16;
 							//int gr = (imgC & 0xFF00) >> 8;
 							//int bl = imgC & 0xFF;
@@ -150,7 +150,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 							//re = (re/2)*2;
 							//gr = (gr/2)*2;
 							//bl = (bl/2)*2;
-							//imgC = re << 16 + gr << 8 + bl;
+							int imgC = re << 16 + gr << 8 + bl;
 								
                             int outval = 0;
                             if (hash.TryGetValue(imgC, out outval))
