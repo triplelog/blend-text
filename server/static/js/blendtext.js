@@ -84,7 +84,7 @@ for (var i=0;i<2;i++){
 var oldcode = '';
 var workspace = Blockly.inject('blocklyDiv', {toolbox: document.getElementById('toolbox')});
 console.log(Blockly.Variables);
-console.log(Blockly.Variables.allDeveloperVariables);
+console.log(Blockly.Variables.createVariable);
 function myUpdateFunction(event) {
 	
 	var code = Blockly.Lua.workspaceToCode(workspace);
@@ -107,7 +107,5 @@ function myUpdateFunction(event) {
 		document.getElementById('blurFormula').querySelector('textarea').value = code;
 		updateImage(false);
 	}
-	console.log(Blockly.Variables);
-	console.log(Blockly.Variables.allDeveloperVariables);
 }
 workspace.addChangeListener(myUpdateFunction);
