@@ -120,8 +120,9 @@ namespace Lapis.QRCode.Imaging.Drawing
 							//l = 1 - (1-l)/2;
 							if (l < .67){
 								l = .67;
-								s = s/2;
+								
 							}
+							s = s*2/3;
 							
 							HlsToRgb(h, l, s,out re, out gr, out bl);
 							
