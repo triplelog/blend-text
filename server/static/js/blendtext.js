@@ -27,19 +27,24 @@ imgData.blurFormula = document.getElementById('blurFormula').querySelector('text
 imgData.textFormula = document.getElementById('textFormula').querySelector('textarea').value;
 
 function updateImage(evt){
-	var el = evt.target;
-	if (el.id){
-		imgData[el.id] = el.value;
+	if (!evt){
+		imgData['blurFormula'] = document.getElementById('blurFormula').querySelector('textarea').value;
 	}
 	else {
-		if (el.parentElement.id == 'locY' || el.parentElement.id == 'locX'){
-			var id = el.parentElement.id;
-			imgData[id] = parseInt(document.getElementById(id).querySelector('select').value);
-			imgData[id] += parseInt(document.getElementById(id).querySelector('input').value);
+		var el = evt.target;
+		if (el.id){
+			imgData[el.id] = el.value;
 		}
-		else if (el.parentElement.id == 'blurFormula' || el.parentElement.id == 'textFormula'){
-			var id = el.parentElement.id;
-			imgData[id] = document.getElementById(id).querySelector('textarea').value;
+		else {
+			if (el.parentElement.id == 'locY' || el.parentElement.id == 'locX'){
+				var id = el.parentElement.id;
+				imgData[id] = parseInt(document.getElementById(id).querySelector('select').value);
+				imgData[id] += parseInt(document.getElementById(id).querySelector('input').value);
+			}
+			/*else if (el.parentElement.id == 'blurFormula' || el.parentElement.id == 'textFormula'){
+				var id = el.parentElement.id;
+				imgData[id] = document.getElementById(id).querySelector('textarea').value;
+			}*/
 		}
 	}
 	//check imgData is valid?
@@ -70,11 +75,11 @@ for (var i=0;i<2;i++){
 	el.querySelector('select').addEventListener('change',updateImage);
 	el.querySelector('input').addEventListener('change',updateImage);
 }
-var formulaEls = ['blurFormula','textFormula'];
+/*var formulaEls = ['blurFormula','textFormula'];
 for (var i=0;i<2;i++){
 	var el = document.getElementById(formulaEls[i]);
 	el.querySelector('textarea').addEventListener('change',updateImage);
-}
+}*/
 
 var oldcode = '';
 var workspace = Blockly.inject('blocklyDiv', {toolbox: document.getElementById('toolbox')});
@@ -98,6 +103,7 @@ function myUpdateFunction(event) {
 		
 		oldcode = code;
 		document.getElementById('blurFormula').querySelector('textarea').value = code;
+		updateImage(false);
 	}
 }
 workspace.addChangeListener(myUpdateFunction);
