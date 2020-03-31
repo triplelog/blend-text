@@ -73,6 +73,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 				end
 				";*/
 				
+				Dictionary<int, int> hash = new Dictionary<int, int>();
         		state.DoString (BlurFormula);
 				var scriptFunc = state ["ScriptFunc"] as LuaFunction;
 	
@@ -145,35 +146,19 @@ namespace Lapis.QRCode.Imaging.Drawing
 							
 							double h; double s; double l;
 							RgbToHls(re,gr,bl,out h,out l,out s);
-							//l = 1 - (1-l)/6;
-							//l = 1 - (1-l)*10/(-1*tripMatrix[r, c]*Math.Log((1-l)+1.5)/Math.Log(2));
-							//l = 1 - (1-l)/2;
-							//var luax = state.DoString("return 3 + 4")[0];
 							var res = scriptFunc.Call (tripMatrix[r, c],h,s,l);
 							l = (double)res[2];
 							s = (double)res[1];
-							/*
-							if (tripMatrix[r, c] < -25){
-								if (l < .6){
-									l = .6;
-								
-								}
-								if (s > .4){
-									s = .4;
-								}
-							}
-							else {
-								if (l < .5){
-									l = .5;
-								
-								}
-								if (s > .4){
-									s = .4;
-								}
-							}*/
-							//s = s*2/3;
 							
 							HlsToRgb(h, l, s,out re, out gr, out bl);
+							int outval = 0;
+							if (hash.TryGetValue(imgC, out outval))
+							{
+							
+							}
+							else {
+								hash.Add(imgC, 500);
+							}
 							
 							foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
 							graph.FillRectangle(foreBrushCustom, x, y, 1,1);

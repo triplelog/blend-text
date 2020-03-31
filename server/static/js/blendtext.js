@@ -83,6 +83,9 @@ for (var i=0;i<2;i++){
 
 var oldcode = '';
 var workspace = Blockly.inject('blocklyDiv', {toolbox: document.getElementById('toolbox')});
+workspace.createVariable("d");
+workspace.createVariable("h");
+workspace.createVariable("s");
 workspace.createVariable("l");
 function myUpdateFunction(event) {
 	

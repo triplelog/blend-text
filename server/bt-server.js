@@ -68,25 +68,7 @@ wss.on('connection', function connection(ws) {
   	return h,s,l
   	end
   	`
-   var oldForm = `function ScriptFunc (val,h,s,l)
-					if val < -25 then
-						if l < .6 then
-							l = .6
-						end
-						if s > .4 then
-							s = .4
-						end
-					else 
-						if l < .5 then
-							l = .5
-						end
-						if s > .4 then
-							s = .4
-						end
-					end
-					return l,s
-				end`
-	console.log(luaBlurFormula);
+
   	execCmd += ' -b "'+luaBlurFormula+'"';
 
   	execCmd += ' -c '+dm.textFormula;
