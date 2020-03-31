@@ -72,9 +72,11 @@ namespace Lapis.QRCode.Imaging.Drawing
 							//s = 1 - (1-s)/1.25;
 							if (tripMatrix[r, c] ==1){
 								l = .5 + l/2;
+								s = s/5;
 							}
 							else if (tripMatrix[r, c] == 2){
 								l = .333 + l*2/3;
+								s = s/3;
 							}
 							else{
 								l = l/3;
