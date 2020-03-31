@@ -86,7 +86,7 @@ function myUpdateFunction(event) {
 		oldcode = code;
 		//console.log(JSON.stringify(JSON.decycle(workspace)));
 		//console.log(code);
-		document.getElementById('blurFormula').value = code;
+		document.getElementById('blurFormula').querySelector('textarea').value = code;
 	}
 }
 workspace.addChangeListener(myUpdateFunction);
