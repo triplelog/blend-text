@@ -102,12 +102,14 @@ namespace Lapis.QRCode.Art
                 					endiii = i+1;
                 				}
                 				else {
+                					startiii = i-blurRadius;
                 					endiii = i+blurRadius+1;
                 				}
                 			}
                 			else if (tripMatrix[i+1,ii] > 0) {
                 				startiii = i-blurRadius;
                 				endiii = i+1;
+                				endiii = i+blurRadius+1;
                 			}
                 			else {
                 				startiii = i-blurRadius;
@@ -120,12 +122,14 @@ namespace Lapis.QRCode.Art
                 					endiiii = ii+1;
                 				}
                 				else {
+                					startiiii = ii-blurRadius;
                 					endiiii = ii+blurRadius+1;
                 				}
                 			}
                 			else if (tripMatrix[i,ii+1] > 0) {
                 				startiiii = ii-blurRadius;
                 				endiiii = ii+1;
+                				endiiii = ii+blurRadius+1;
                 			}
                 			else {
                 				startiiii = ii-blurRadius;
