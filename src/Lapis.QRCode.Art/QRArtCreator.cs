@@ -111,23 +111,17 @@ namespace Lapis.QRCode.Art
                 			
                 			if (tripMatrix[i,ii-1] > 0){
                 				startiiii = ii;
-                				if (tripMatrix[i,ii+1] > 0) {
-                					endiiii = ii+1;
-                				}
-                				else {
-                					startiiii = ii-blurRadius;
-                					endiiii = ii+blurRadius+1;
-                				}
-                			}
-                			else if (tripMatrix[i,ii+1] > 0) {
-                				startiiii = ii-blurRadius;
-                				endiiii = ii+1;
-                				endiiii = ii+blurRadius+1;
                 			}
                 			else {
                 				startiiii = ii-blurRadius;
+                			}
+                			if (tripMatrix[i,ii+1] > 0){
+                				endiiii = ii+1;
+                			}
+                			else {
                 				endiiii = ii+blurRadius+1;
                 			}
+                			
                 			
                 			for (var iii=startiii;iii<endiii;iii++){
 								for (var iiii=startiiii;iiii<endiiii;iiii++){
