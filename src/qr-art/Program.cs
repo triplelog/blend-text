@@ -32,8 +32,8 @@ namespace Lapis.QrArt
             var locXOpt = app.Option("-x <number>", "location X", CommandOptionType.SingleValue);
             var locYOpt = app.Option("-y <number>", "location Y", CommandOptionType.SingleValue);
             var blurRadiusOpt = app.Option("-r <number>", "Blur Radius", CommandOptionType.SingleValue);
-            var blurColorOpt = app.Option("-b <number>", "Blur Color", CommandOptionType.SingleValue);
-            var textColorOpt = app.Option("-c <number>", "Text Color", CommandOptionType.SingleValue);
+            var blurFormulaOpt = app.Option("-b <number>", "Blur Formula", CommandOptionType.SingleValue);
+            var textFormulaOpt = app.Option("-c <number>", "Text Formula", CommandOptionType.SingleValue);
             var fontOpt = app.Option("-f <string>", "Font", CommandOptionType.SingleValue);
             //legacy below
             //var foregdOpt = app.Option("-f|--foreground <color>", "Foreground color.", CommandOptionType.SingleValue);
@@ -48,7 +48,7 @@ namespace Lapis.QrArt
                         CheckImagePath(imageArg.Value) &&
                         CheckFormat(formatArg.Value, out var textDrawer) &&
                         CheckFontSize(fontSizeOpt.Value(), out var fontSize) &&
-                        CheckParams(locXOpt.Value(), locYOpt.Value(), blurRadiusOpt.Value(), blurColorOpt.Value(), textColorOpt.Value(), fontOpt.Value())
+                        CheckParams(locXOpt.Value(), locYOpt.Value(), blurRadiusOpt.Value(), blurFormulaOpt.Value(), textFormulaOpt.Value(), fontOpt.Value())
                         //add actual checks for above values
                         //CheckForeground(foregdOpt.Value(), out var foregd) &&
                         //CheckBackground(backgdOpt.Value(), out var backgd) &&
