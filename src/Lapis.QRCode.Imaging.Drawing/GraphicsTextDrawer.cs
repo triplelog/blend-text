@@ -52,8 +52,24 @@ namespace Lapis.QRCode.Imaging.Drawing
         		}
         		
         		state.DoString (@"
-				function ScriptFunc (val1, val2)
-					return val1 + val2
+				function ScriptFunc (val,l,s)
+					if val < -25 then
+						if l < .6 then
+							l = .6
+						end
+						if s > .4 then
+							s = .4
+						end
+					}
+					else 
+						if l < .5 then
+							l = .5
+						end
+						if s > .4 then
+							s = .4
+						end
+					end
+					return l,s
 				end
 				");
 				var scriptFunc = state ["ScriptFunc"] as LuaFunction;
@@ -131,7 +147,10 @@ namespace Lapis.QRCode.Imaging.Drawing
 							//l = 1 - (1-l)*10/(-1*tripMatrix[r, c]*Math.Log((1-l)+1.5)/Math.Log(2));
 							//l = 1 - (1-l)/2;
 							//var luax = state.DoString("return 3 + 4")[0];
-							var res = scriptFunc.Call (3, 5).First ();
+							var res = scriptFunc.Call (tripMatrix[r, c],l,s).First ();
+							l = res[0];
+							s = res[1];
+							/*
 							if (tripMatrix[r, c] < -25){
 								if (l < .6){
 									l = .6;
@@ -149,7 +168,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 								if (s > .4){
 									s = .4;
 								}
-							}
+							}*/
 							//s = s*2/3;
 							
 							HlsToRgb(h, l, s,out re, out gr, out bl);
