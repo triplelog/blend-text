@@ -71,7 +71,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 							//l = (l*1)/(tripMatrix[r, c]*Math.Log(l+1.5)/Math.Log(2));
 							//s = 1 - (1-s)/1.25;
 							l = l/3;
-							s = 1 - (1-s)/2;
+							//s = 1 - (1-s)/2;
 							HlsToRgb(h, l, s,out re, out gr, out bl);
 										
 							foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));

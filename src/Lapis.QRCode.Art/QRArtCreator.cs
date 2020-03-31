@@ -88,38 +88,75 @@ namespace Lapis.QRCode.Art
 				
 				
 				int maxD = blurRadius*blurRadius;
-        		
+        		int startiii = 0;
+        		int endiii = 0;
+        		int startiiii = 0;
+        		int endiiii = 0;
                 for (var i=blurRadius;i<theight-blurRadius;i++){
                 	for (var ii=blurRadius;ii<twidth-blurRadius;ii++){
                 		
                 		if (tripMatrix[i,ii] > 0){
-                			if (tripMatrix[i-1,ii] <= 0 || tripMatrix[i+1,ii] <= 0 || tripMatrix[i,ii-1] <= 0 || tripMatrix[i,ii+1] <= 0){
-								for (var iii=i-blurRadius;iii<i+blurRadius+1;iii++){
-									for (var iiii=ii-blurRadius;iiii<ii+blurRadius+1;iiii++){
-										if (tripMatrix[iii,iiii] == 0){
-											//var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
-											//if ( d <= maxD/2){
-											//	tripMatrix[iii,iiii] = -10;
-											//}
-											tripMatrix[iii,iiii] = -10;
-										}
-										/*
-										if (tripMatrix[iii,iiii] == 0){
-											var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
-											if ( d <= maxD/2){
-												tripMatrix[iii,iiii] = (20*d-15*maxD)*2/maxD;
-											}
-										}
-										else if (tripMatrix[iii,iiii] < 0){
-											var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
-											if ( d <= maxD/2 ){
-												var dd = (20*d-15*maxD)*2/maxD;
-												if (dd < tripMatrix[iii,iiii]) {
-													tripMatrix[iii,iiii] = dd;
-												}
-											}
-										}*/
+                			if (tripMatrix[i-1,ii] > 0){
+                				startiii = i;
+                				if (tripMatrix[i+1,ii] > 0) {
+                					endiii = i+1;
+                				}
+                				else {
+                					endiii = i+blurRadius+1;
+                				}
+                			}
+                			else if (tripMatrix[i+1,ii] > 0) {
+                				startiii = i-blurRadius;
+                				endiii = i+1;
+                			}
+                			else {
+                				startiii = i-blurRadius;
+                				endiii = i+blurRadius+1;
+                			}
+                			
+                			if (tripMatrix[i,ii-1] > 0){
+                				startiiii = ii;
+                				if (tripMatrix[i,ii+1] > 0) {
+                					endiiii = ii+1;
+                				}
+                				else {
+                					endiiii = ii+blurRadius+1;
+                				}
+                			}
+                			else if (tripMatrix[i,ii+1] > 0) {
+                				startiiii = ii-blurRadius;
+                				endiiii = ii+1;
+                			}
+                			else {
+                				startiiii = ii-blurRadius;
+                				endiiii = ii+blurRadius+1;
+                			}
+                			
+                			for (var iii=startiii;iii<endiii;iii++){
+								for (var iiii=startiiii;iiii<endiiii;iiii++){
+									if (tripMatrix[iii,iiii] == 0){
+										//var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
+										//if ( d <= maxD/2){
+										//	tripMatrix[iii,iiii] = -10;
+										//}
+										tripMatrix[iii,iiii] = -10;
 									}
+									/*
+									if (tripMatrix[iii,iiii] == 0){
+										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
+										if ( d <= maxD/2){
+											tripMatrix[iii,iiii] = (20*d-15*maxD)*2/maxD;
+										}
+									}
+									else if (tripMatrix[iii,iiii] < 0){
+										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
+										if ( d <= maxD/2 ){
+											var dd = (20*d-15*maxD)*2/maxD;
+											if (dd < tripMatrix[iii,iiii]) {
+												tripMatrix[iii,iiii] = dd;
+											}
+										}
+									}*/
 								}
 							}
                 		}
