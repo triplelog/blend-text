@@ -139,9 +139,14 @@ namespace Lapis.QRCode.Imaging.Drawing
                         	var x = MarginL + c;
                             var y = MarginT + r;
                             int imgC = ColorHelper.ToIntRgb24(bmp.GetPixel(x, y));
-                            int re = (imgC & 0xFF0000) >> 16;
-							int gr = (imgC & 0xFF00) >> 8;
-							int bl = imgC & 0xFF;
+                            //int re = (imgC & 0xFF0000) >> 16;
+							//int gr = (imgC & 0xFF00) >> 8;
+							//int bl = imgC & 0xFF;
+							
+                            Color pixColor = bmp.GetPixel(x, y);
+                            int re = pixColor.R;
+                            int gr = pixColor.G;
+                            int bl = pixColor.B;
 							//re = (re/2)*2;
 							//gr = (gr/2)*2;
 							//bl = (bl/2)*2;
