@@ -76,7 +76,8 @@ namespace Lapis.QRCode.Imaging.Drawing
 				Dictionary<int, int> hash = new Dictionary<int, int>();
         		state.DoString (BlurFormula);
 				var scriptFunc = state ["ScriptFunc"] as LuaFunction;
-	
+				int newcell =0;
+				int repcell = 0;
 	
                 for (var r = startR; r < theight && r + MarginT < bmp.Height; r += 1)
                 {
@@ -138,42 +139,53 @@ namespace Lapis.QRCode.Imaging.Drawing
                         	var x = MarginL + c;
                             var y = MarginT + r;
                             int imgC = ColorHelper.ToIntRgb24(bmp.GetPixel(x, y));
-							int re = (imgC & 0xFF0000) >> 16;
-							int gr = (imgC & 0xFF00) >> 8;
-							int bl = imgC & 0xFF;
-							
-							//Lighten uniformly
-							
-							double h; double s; double l;
-							RgbToHls(re,gr,bl,out h,out l,out s);
-							var res = scriptFunc.Call (tripMatrix[r, c],h,s,l);
-							l = (double)res[2];
-							s = (double)res[1];
-							
-							HlsToRgb(h, l, s,out re, out gr, out bl);
-							int outval = 0;
-							if (hash.TryGetValue(imgC, out outval))
+                            int outval = 0;
+                            if (hash.TryGetValue(imgC, out outval))
 							{
-							
+								int re = (outval & 0xFF0000) >> 16;
+								int gr = (outval & 0xFF00) >> 8;
+								int bl = outval & 0xFF;
+								foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
+								graph.FillRectangle(foreBrushCustom, x, y, 1,1);
+								repcell++;
 							}
 							else {
-								hash.Add(imgC, 500);
+								int re = (imgC & 0xFF0000) >> 16;
+								int gr = (imgC & 0xFF00) >> 8;
+								int bl = imgC & 0xFF;
+							
+								//Lighten uniformly
+							
+								double h; double s; double l;
+								RgbToHls(re,gr,bl,out h,out l,out s);
+								var res = scriptFunc.Call (tripMatrix[r, c],h,s,l);
+								l = (double)res[2];
+								s = (double)res[1];
+							
+								HlsToRgb(h, l, s,out re, out gr, out bl);
+								
+								int newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
+								hash.Add(imgC, newcol);
+							
+								foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
+								graph.FillRectangle(foreBrushCustom, x, y, 1,1);
+								newcell++;
 							}
 							
-							foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
-							graph.FillRectangle(foreBrushCustom, x, y, 1,1);
                         }
                     }
                 }
                 stopWatch.Stop();
 				// Get the elapsed time as a TimeSpan value.
 				TimeSpan ts = stopWatch.Elapsed;
+				
+				
 
 				// Format and display the TimeSpan value.
 				string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
 					ts.Hours, ts.Minutes, ts.Seconds,
 					ts.Milliseconds / 10);
-				Console.WriteLine("GraphicsTextDrawerTime " + elapsedTime);
+				Console.WriteLine("GraphicsTextDrawerTime " + elapsedTime +" new/rep "+newcell+'/'+repcell);
             }
 
             return new BitmapFrame(bmp);
