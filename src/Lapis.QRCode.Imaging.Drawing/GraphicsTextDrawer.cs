@@ -93,8 +93,8 @@ namespace Lapis.QRCode.Imaging.Drawing
 							}
 							else{
 								//l = l/3;
-								if (l > .3){
-									l = .3;
+								if (l > .2){
+									l = .2;
 								}
 							}
 							//s = 1 - (1-s)/2;
