@@ -70,7 +70,8 @@ namespace Lapis.QrArt
                             textDrawer.MarginT = 0;
                         }
 						
-						
+						int blurRadius = 5;
+        				if (int.TryParse(blurRadiusOpt.Value(), out blurRadius)){}
 						
 						string fontVal = getFont(fontOpt.Value().ToLower());
 						Font font = new Font(fontVal, fontSize);
@@ -96,7 +97,7 @@ namespace Lapis.QrArt
 							int twidth = (int)stringSize.Width;
 							int theight = (int)stringSize.Height;
 							
-							Bitmap bmpp = (Bitmap) new Bitmap(twidth+40,theight+40);
+							Bitmap bmpp = (Bitmap) new Bitmap(twidth+2*blurRadius,theight+2*blurRadius);
 							
 							{
 								int xPct = 0;
@@ -122,40 +123,40 @@ namespace Lapis.QrArt
 								}
 								if (xType == 0){
 									//middle at (bmp.Width * xPct)/100
-									textDrawer.MarginL = (bmp.Width * xPct)/100 - (twidth+40)/2;
+									textDrawer.MarginL = (bmp.Width * xPct)/100 - (twidth+2*blurRadius)/2;
 								}
 								else if (xType == 1){
 									//left at (bmp.Width * xPct)/100
-									textDrawer.MarginL = (bmp.Width * xPct)/100 - 20;
+									textDrawer.MarginL = (bmp.Width * xPct)/100 - blurRadius;
 								}
 								else if (xType == 2){
 									//right at (bmp.Width * xPct)/100
-									textDrawer.MarginL = (bmp.Width * xPct)/100 - (twidth+40) + 20;
+									textDrawer.MarginL = (bmp.Width * xPct)/100 - (twidth+2*blurRadius) + blurRadius;
 								}
 								else {
-									textDrawer.MarginL = bmp.Width/2 - (twidth+40)/2;
+									textDrawer.MarginL = bmp.Width/2 - (twidth+2*blurRadius)/2;
 								}
 							
 								if (yType == 0){
 									//middle at (bmp.Height * yPct)/100
-									textDrawer.MarginT = (bmp.Height * yPct)/100 - (theight+40)/2;
+									textDrawer.MarginT = (bmp.Height * yPct)/100 - (theight+2*blurRadius)/2;
 								}
 								else if (yType == 1){
 									//top at 
-									textDrawer.MarginT = (bmp.Height * yPct)/100 - 20;
+									textDrawer.MarginT = (bmp.Height * yPct)/100 - blurRadius;
 								}
 								else if (yType == 2){
 									//bottom at 
-									textDrawer.MarginT = (bmp.Height * yPct)/100 - (theight+40) + 20;
+									textDrawer.MarginT = (bmp.Height * yPct)/100 - (theight+2*blurRadius) + blurRadius;
 								}
 								else {
-									textDrawer.MarginT = bmp.Height/2 - (theight+40)/2;
+									textDrawer.MarginT = bmp.Height/2 - (theight+2*blurRadius)/2;
 								}
 							} //set margins
 							
 							using (Graphics graph = Graphics.FromImage(bmpp))
 							{
-								Rectangle ImageSize = new Rectangle(0,0,twidth+40,theight+40);
+								Rectangle ImageSize = new Rectangle(0,0,twidth+2*blurRadius,theight+2*blurRadius);
 								graph.FillRectangle(Brushes.White, ImageSize);
 								graph.SmoothingMode = SmoothingMode.AntiAlias;
 								graph.InterpolationMode = InterpolationMode.HighQualityBicubic;
@@ -166,7 +167,7 @@ namespace Lapis.QrArt
 									Alignment = StringAlignment.Center,
 									LineAlignment = StringAlignment.Center
 								};
-								RectangleF rectf = new RectangleF(20, 20, twidth,theight);
+								RectangleF rectf = new RectangleF(blurRadius, blurRadius, twidth,theight);
 								graph.DrawString(contentArg.Value, font, Brushes.Black, rectf, format);
 							}
 							bitmapText = new BitmapFrame(bmpp);
@@ -178,8 +179,7 @@ namespace Lapis.QrArt
 							bitmapText = null;
 						}
         				
-        				int blurRadius = 5;
-        				if (int.TryParse(blurRadiusOpt.Value(), out blurRadius)){}
+        				
         				
                         var image = builder.Create(contentArg.Value, bitmap, bitmapText, imageArg.Value, blurRadius);
                         //bitmap.Save("static/newbmp1.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
