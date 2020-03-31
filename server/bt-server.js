@@ -63,7 +63,12 @@ wss.on('connection', function connection(ws) {
   	execCmd += ' -x '+dm.locX;
   	execCmd += ' -y '+dm.locY;
   	execCmd += ' -r '+dm.blurRadius;
-  	execCmd += ' -b '+dm.blurFormula;
+  	if (dm.blurFormula.indexOf('"')==-1){
+  		execCmd += ' -b "'+dm.blurFormula+'"';
+  	}
+  	else {
+  		execCmd += ' -b '+dm.blurFormula;
+  	}
   	execCmd += ' -c '+dm.textFormula;
   	if (dm.font.indexOf('"')==-1 && dm.font.indexOf(' ')>0){
   		execCmd += ' -f "'+dm.font+'"';

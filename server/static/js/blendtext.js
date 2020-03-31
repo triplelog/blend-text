@@ -86,6 +86,7 @@ function myUpdateFunction(event) {
 		oldcode = code;
 		//console.log(JSON.stringify(JSON.decycle(workspace)));
 		//console.log(code);
+		console.log(code.substr(code.length-5));
 		document.getElementById('blurFormula').querySelector('textarea').value = code;
 	}
 }
