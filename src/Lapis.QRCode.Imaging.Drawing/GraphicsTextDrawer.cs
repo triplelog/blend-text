@@ -147,12 +147,12 @@ namespace Lapis.QRCode.Imaging.Drawing
                             int re = pixColor.R;
                             int gr = pixColor.G;
                             int bl = pixColor.B;
-                            pixColor.R /= 2;
-                            pixColor.R *= 2;
+                            //pixColor.R /= 2;
+                            //pixColor.R *= 2;
 							//re = (re/2)*2;
 							//gr = (gr/2)*2;
 							//bl = (bl/2)*2;
-							int imgC = ColorHelper.ToIntRgb24(pixColor);
+							int imgC = pixColor.GetHashCode();
 								
                             int outval = 0;
                             if (hash.TryGetValue(imgC, out outval))
