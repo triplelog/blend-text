@@ -93,7 +93,7 @@ namespace Lapis.QRCode.Art
                 	for (var ii=blurRadius;ii<twidth-blurRadius;ii++){
                 		
                 		if (tripMatrix[i,ii] > 0){
-                			if (tripMatrix[i-1,ii] <= 0 || tripMatrix[i+1,ii] <= 0 || tripMatrix[i,ii-1] != 0 || tripMatrix[i,ii+1] != 0){
+                			if (tripMatrix[i-1,ii] <= 0 || tripMatrix[i+1,ii] <= 0 || tripMatrix[i,ii-1] <= 0 || tripMatrix[i,ii+1] <= 0){
 								for (var iii=i-blurRadius;iii<i+blurRadius+1;iii++){
 									for (var iiii=ii-blurRadius;iiii<ii+blurRadius+1;iiii++){
 										if (tripMatrix[iii,iiii] == 0){
