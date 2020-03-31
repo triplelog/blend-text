@@ -78,6 +78,8 @@ namespace Lapis.QRCode.Imaging.Drawing
 				var scriptFunc = state ["ScriptFunc"] as LuaFunction;
 				int newcell =0;
 				int repcell = 0;
+				int newdarkcell =0;
+				int repdarkcell = 0;
 	
                 for (var r = startR; r < theight && r + MarginT < bmp.Height; r += 1)
                 {
@@ -91,67 +93,79 @@ namespace Lapis.QRCode.Imaging.Drawing
                         {
                             var x = MarginL + c;
                             var y = MarginT + r;
-							int imgC = ColorHelper.ToIntRgb24(bmp.GetPixel(x, y));
-							int re = (imgC & 0xFF0000) >> 16;
-							int gr = (imgC & 0xFF00) >> 8;
-							int bl = imgC & 0xFF;
-							
-							//Darken uniformly
-									
-							double h; double s; double l;
-							RgbToHls(re,gr,bl,out h,out l,out s);
-							//l = (l*1)/(tripMatrix[r, c]*Math.Log(l+1.5)/Math.Log(2));
-							//s = 1 - (1-s)/1.25;
-							if (tripMatrix[r, c] ==1){
-								//l = ( (1 - (1-l)/2)*2 + (l/3) )/3;
-								if (l > .7){
-									l = .6;
-								}
-								else {
-									l = (l*2 + .3*1)/3;
-								}
-								s = s*1/2;
-							}
-							else if (tripMatrix[r, c] == 2){
-								//l = ( (1 - (1-l)/2) + (l/3)*2 )/3;
-								if (l > .7){
-									l = .45;
-								}
-								else {
-									l = (l + .3*2)/3;
-								}
+                            //Darken uniformly
+                            Color pixColor = bmp.GetPixel(x, y);
+                            int re = pixColor.R;
+                            int gr = pixColor.G;
+                            int bl = pixColor.B;
+							Color hashColor = Color.FromArgb((re/4)*4,(gr/4)*4,(bl/4)*4);
+							int imgC = hashColor.GetHashCode();
 								
-								s = s*2/3;
+                            int outval = 0;
+                            if (hash.TryGetValue(imgC, out outval))
+							{
+								re = (outval & 0xFF0000) >> 16;
+								gr = (outval & 0xFF00) >> 8;
+								bl = outval & 0xFF;
+								foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
+								graph.FillRectangle(foreBrushCustom, x, y, 1,1);
+								repdarkcell++;
 							}
-							else{
-								//l = l/3;
-								if (l > .2){
-									l = .2;
+							else
+							{
+								double h; double s; double l;
+								RgbToHls(re,gr,bl,out h,out l,out s);
+								//l = (l*1)/(tripMatrix[r, c]*Math.Log(l+1.5)/Math.Log(2));
+								//s = 1 - (1-s)/1.25;
+								if (tripMatrix[r, c] ==1){
+									//l = ( (1 - (1-l)/2)*2 + (l/3) )/3;
+									if (l > .7){
+										l = .6;
+									}
+									else {
+										l = (l*2 + .3*1)/3;
+									}
+									s = s*1/2;
 								}
+								else if (tripMatrix[r, c] == 2){
+									//l = ( (1 - (1-l)/2) + (l/3)*2 )/3;
+									if (l > .7){
+										l = .45;
+									}
+									else {
+										l = (l + .3*2)/3;
+									}
+								
+									s = s*2/3;
+								}
+								else{
+									//l = l/3;
+									if (l > .2){
+										l = .2;
+									}
+								}
+								//s = 1 - (1-s)/2;
+								HlsToRgb(h, l, s,out re, out gr, out bl);
+								
+								int newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
+								hash.Add(imgC, newcol);
+								
+								foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
+								graph.FillRectangle(foreBrushCustom, x, y, 1,1);
+								newdarkcell++;
 							}
-							//s = 1 - (1-s)/2;
-							HlsToRgb(h, l, s,out re, out gr, out bl);
-										
-							foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
-							graph.FillRectangle(foreBrushCustom, x, y, 1,1);
+							
+									
+							
                         }
                         else {
                         	var x = MarginL + c;
                             var y = MarginT + r;
-                            //int imgC = ColorHelper.ToIntRgb24(bmp.GetPixel(x, y));
-                            //int re = (imgC & 0xFF0000) >> 16;
-							//int gr = (imgC & 0xFF00) >> 8;
-							//int bl = imgC & 0xFF;
 							
                             Color pixColor = bmp.GetPixel(x, y);
                             int re = pixColor.R;
                             int gr = pixColor.G;
                             int bl = pixColor.B;
-                            //pixColor.R /= 2;
-                            //pixColor.R *= 2;
-							//re = (re/2)*2;
-							//gr = (gr/2)*2;
-							//bl = (bl/2)*2;
 							Color hashColor = Color.FromArgb((re/4)*4,(gr/4)*4,(bl/4)*4);
 							int imgC = hashColor.GetHashCode();
 								
@@ -199,7 +213,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 				string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
 					ts.Hours, ts.Minutes, ts.Seconds,
 					ts.Milliseconds / 10);
-				Console.WriteLine("GraphicsTextDrawerTime " + elapsedTime +" new/rep "+newcell+'/'+repcell);
+				Console.WriteLine("GraphicsTextDrawerTime " + elapsedTime +" new/rep "+newcell+'/'+repcell +" newd/repd "+newdarkcell+'/'+repdarkcell);
             }
 
             return new BitmapFrame(bmp);
