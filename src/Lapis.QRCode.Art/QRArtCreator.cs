@@ -93,31 +93,33 @@ namespace Lapis.QRCode.Art
                 	for (var ii=blurRadius;ii<twidth-blurRadius;ii++){
                 		
                 		if (tripMatrix[i,ii] > 0){
-                			for (var iii=i-blurRadius;iii<i+blurRadius+1;iii++){
-								for (var iiii=ii-blurRadius;iiii<ii+blurRadius+1;iiii++){
-									if (tripMatrix[iii,iiii] == 0){
-										//var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
-										//if ( d <= maxD/2){
-										//	tripMatrix[iii,iiii] = -10;
-										//}
-										tripMatrix[iii,iiii] = -10;
-									}
-									/*
-									if (tripMatrix[iii,iiii] == 0){
-										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
-										if ( d <= maxD/2){
-											tripMatrix[iii,iiii] = (20*d-15*maxD)*2/maxD;
+                			if (tripMatrix[i-1,ii] <= 0 || tripMatrix[i+1,ii] <= 0 || tripMatrix[i,ii-1] != 0 || tripMatrix[i,ii+1] != 0){
+								for (var iii=i-blurRadius;iii<i+blurRadius+1;iii++){
+									for (var iiii=ii-blurRadius;iiii<ii+blurRadius+1;iiii++){
+										if (tripMatrix[iii,iiii] == 0){
+											//var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
+											//if ( d <= maxD/2){
+											//	tripMatrix[iii,iiii] = -10;
+											//}
+											tripMatrix[iii,iiii] = -10;
 										}
-									}
-									else if (tripMatrix[iii,iiii] < 0){
-										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
-										if ( d <= maxD/2 ){
-											var dd = (20*d-15*maxD)*2/maxD;
-											if (dd < tripMatrix[iii,iiii]) {
-												tripMatrix[iii,iiii] = dd;
+										/*
+										if (tripMatrix[iii,iiii] == 0){
+											var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
+											if ( d <= maxD/2){
+												tripMatrix[iii,iiii] = (20*d-15*maxD)*2/maxD;
 											}
 										}
-									}*/
+										else if (tripMatrix[iii,iiii] < 0){
+											var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
+											if ( d <= maxD/2 ){
+												var dd = (20*d-15*maxD)*2/maxD;
+												if (dd < tripMatrix[iii,iiii]) {
+													tripMatrix[iii,iiii] = dd;
+												}
+											}
+										}*/
+									}
 								}
 							}
                 		}
