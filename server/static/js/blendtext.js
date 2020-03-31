@@ -80,7 +80,7 @@ var oldcode = '';
 var workspace = Blockly.inject('blocklyDiv', {toolbox: document.getElementById('toolbox')});
 function myUpdateFunction(event) {
 	
-	var code = Blockly.JavaScript.workspaceToCode(workspace);
+	var code = Blockly.Lua.workspaceToCode(workspace);
 	document.getElementById('codearea').value = code;
 	if (code != oldcode){
 		oldcode = code;
