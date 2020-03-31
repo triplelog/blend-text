@@ -100,11 +100,11 @@ namespace Lapis.QRCode.Imaging.Drawing
                             int re = pixColor.R;
                             int gr = pixColor.G;
                             int bl = pixColor.B;
-							Color hashColor = Color.FromArgb((re/4)*4,(gr/4)*4,(bl/4)*4);
+							Color hashColor = Color.FromArgb(re,gr,bl);
 							int imgC = hashColor.GetHashCode();
 								
                             int outval = 0;
-                            if (darkhash.TryGetValue(imgC, out outval))
+                            if (tripMatrix[r, c] > 2 && darkhash.TryGetValue(imgC, out outval))
 							{
 								re = (outval & 0xFF0000) >> 16;
 								gr = (outval & 0xFF00) >> 8;
@@ -149,8 +149,10 @@ namespace Lapis.QRCode.Imaging.Drawing
 								//s = 1 - (1-s)/2;
 								HlsToRgb(h, l, s,out re, out gr, out bl);
 								
-								int newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
-								darkhash.Add(imgC, newcol);
+								if (tripMatrix[r, c] > 2){
+									int newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
+									darkhash.Add(imgC, newcol);
+								}
 								
 								foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
 								graph.FillRectangle(foreBrushCustom, x, y, 1,1);
