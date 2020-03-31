@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using NLua;
 
 namespace Lapis.QRCode.Imaging.Drawing
 {
@@ -31,6 +31,9 @@ namespace Lapis.QRCode.Imaging.Drawing
 			Console.WriteLine(CellSize);
 			Console.WriteLine(rowCount);
 			Console.WriteLine(imageHeight);
+			
+			Lua state = new Lua ();
+			
             using (var graph = Graphics.FromImage(bmp))
             {
                 //graph.Clear(ColorHelper.FromIntRgb24(Background));
