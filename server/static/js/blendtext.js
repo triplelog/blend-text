@@ -83,9 +83,11 @@ function myUpdateFunction(event) {
 	var code = Blockly.Lua.workspaceToCode(workspace);
 	
 	if (code != oldcode){
+		console.log(code);
+		console.log(oldcode);
 		oldcode = code;
 		//console.log(JSON.stringify(JSON.decycle(workspace)));
-		console.log(code);
+		//console.log(code);
 		document.getElementById('codearea').value = code;
 	}
 }
