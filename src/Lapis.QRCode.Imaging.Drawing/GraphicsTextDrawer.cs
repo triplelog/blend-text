@@ -72,29 +72,29 @@ namespace Lapis.QRCode.Imaging.Drawing
 							//s = 1 - (1-s)/1.25;
 							if (tripMatrix[r, c] ==1){
 								//l = ( (1 - (1-l)/2)*2 + (l/3) )/3;
-								if (l > .67){
-									l = .55;
+								if (l > .7){
+									l = .6;
 								}
 								else {
-									l = (l*2 + .33*1)/3;
+									l = (l*2 + .3*1)/3;
 								}
-								s = s*3/4;
+								s = s*1/2;
 							}
 							else if (tripMatrix[r, c] == 2){
 								//l = ( (1 - (1-l)/2) + (l/3)*2 )/3;
-								if (l > .67){
-									l = .44;
+								if (l > .7){
+									l = .45;
 								}
 								else {
-									l = (l + .33*2)/3;
+									l = (l + .3*2)/3;
 								}
 								
-								s = s*4/5;
+								s = s*2/3;
 							}
 							else{
-								l = l/3;
-								if (l > .33){
-									l = .33;
+								//l = l/3;
+								if (l > .3){
+									l = .3;
 								}
 							}
 							//s = 1 - (1-s)/2;
@@ -118,11 +118,11 @@ namespace Lapis.QRCode.Imaging.Drawing
 							//l = 1 - (1-l)/6;
 							//l = 1 - (1-l)*10/(-1*tripMatrix[r, c]*Math.Log((1-l)+1.5)/Math.Log(2));
 							//l = 1 - (1-l)/2;
-							if (l < .67){
-								l = .67;
+							if (l < .7){
+								l = .7;
 								
 							}
-							s = s*2/3;
+							s = s*1/3;
 							
 							HlsToRgb(h, l, s,out re, out gr, out bl);
 							
