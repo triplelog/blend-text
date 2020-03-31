@@ -71,15 +71,15 @@ namespace Lapis.QRCode.Imaging.Drawing
 							//l = (l*1)/(tripMatrix[r, c]*Math.Log(l+1.5)/Math.Log(2));
 							//s = 1 - (1-s)/1.25;
 							if (tripMatrix[r, c] ==1){
-								l = .667 + l/3;
+								l = .6 + l/3;
 								s = s/5;
 							}
 							else if (tripMatrix[r, c] == 2){
-								l = .5 + l/2;
+								l = .3 + l/3;
 								s = s/3;
 							}
 							else{
-								l = l/2;
+								l = l/3;
 							}
 							//s = 1 - (1-s)/2;
 							HlsToRgb(h, l, s,out re, out gr, out bl);
@@ -101,7 +101,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 							RgbToHls(re,gr,bl,out h,out l,out s);
 							//l = 1 - (1-l)/6;
 							//l = 1 - (1-l)*10/(-1*tripMatrix[r, c]*Math.Log((1-l)+1.5)/Math.Log(2));
-							l = 1 - (1-l)/3;
+							l = 1 - (1-l)/2;
 							s = s/2;
 							HlsToRgb(h, l, s,out re, out gr, out bl);
 							
