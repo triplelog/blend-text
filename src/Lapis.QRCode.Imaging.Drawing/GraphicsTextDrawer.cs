@@ -144,15 +144,15 @@ namespace Lapis.QRCode.Imaging.Drawing
 							//int bl = imgC & 0xFF;
 							
                             Color pixColor = bmp.GetPixel(x, y);
-                            int re = (pixColor.R/2)*2;
-                            int gr = (pixColor.G/2)*2;
-                            int bl = (pixColor.B/2)*2;
+                            int re = pixColor.R;
+                            int gr = pixColor.G;
+                            int bl = pixColor.B;
                             //pixColor.R /= 2;
                             //pixColor.R *= 2;
 							//re = (re/2)*2;
 							//gr = (gr/2)*2;
 							//bl = (bl/2)*2;
-							Color hashColor = Color.FromArgb(re,gr,bl);
+							Color hashColor = Color.FromArgb((re/4)*4,(gr/4)*4,(bl/4)*4);
 							int imgC = hashColor.GetHashCode();
 								
                             int outval = 0;
