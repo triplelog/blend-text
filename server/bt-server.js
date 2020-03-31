@@ -63,8 +63,8 @@ wss.on('connection', function connection(ws) {
   	execCmd += ' -x '+dm.locX;
   	execCmd += ' -y '+dm.locY;
   	execCmd += ' -r '+dm.blurRadius;
-  	execCmd += ' -b '+dm.blurColor;
-  	execCmd += ' -c '+dm.textColor;
+  	execCmd += ' -b '+dm.blurFormula;
+  	execCmd += ' -c '+dm.textFormula;
   	if (dm.font.indexOf('"')==-1 && dm.font.indexOf(' ')>0){
   		execCmd += ' -f "'+dm.font+'"';
   	}
