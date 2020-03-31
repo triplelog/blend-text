@@ -66,11 +66,11 @@
     			</div>
     			<div id="blurFormula">
     				Blur Formula:
-    				<textarea value="40"></textarea>
+    				<textarea value="40" />
     			</div>
     			<div id="textFormula">
     				Text Formula:
-    				<textarea value="40"></textarea>
+    				<textarea value="40" />
     			</div>
     		</div>
     		<div class="l-box pure-u-1" id="imageHolder">
@@ -98,7 +98,7 @@
 <script>
   var workspace = Blockly.inject('blocklyDiv', {toolbox: document.getElementById('toolbox')});
   function myUpdateFunction(event) {
-	console.log(workspace);
+	console.log(JSON.stringify(workspace));
 	  //var code = Blockly.JavaScript.workspaceToCode(workspace);
 	  //document.getElementById('textarea').value = code;
   }
