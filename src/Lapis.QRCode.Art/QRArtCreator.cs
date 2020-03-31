@@ -98,21 +98,14 @@ namespace Lapis.QRCode.Art
                 		if (tripMatrix[i,ii] > 0){
                 			if (tripMatrix[i-1,ii] > 0){
                 				startiii = i;
-                				if (tripMatrix[i+1,ii] > 0) {
-                					endiii = i+1;
-                				}
-                				else {
-                					startiii = i-blurRadius;
-                					endiii = i+blurRadius+1;
-                				}
-                			}
-                			else if (tripMatrix[i+1,ii] > 0) {
-                				startiii = i-blurRadius;
-                				endiii = i+1;
-                				endiii = i+blurRadius+1;
                 			}
                 			else {
                 				startiii = i-blurRadius;
+                			}
+                			if (tripMatrix[i+1,ii] > 0){
+                				endiii = i+1;
+                			}
+                			else {
                 				endiii = i+blurRadius+1;
                 			}
                 			
