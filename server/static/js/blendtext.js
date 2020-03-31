@@ -23,12 +23,8 @@ imgData.locY += parseInt(document.getElementById('locY').querySelector('input').
 imgData.locX = parseInt(document.getElementById('locX').querySelector('select').value);
 imgData.locX += parseInt(document.getElementById('locX').querySelector('input').value);
 imgData.blurRadius = document.getElementById('blurRadius').value;
-console.log(document.querySelector('#blurFormula'));
-
-//console.log(document.getElementById('blurFormula').querySelector('textarea'));
-//console.log(document.getElementById('blurFormula').querySelector('textarea').value);
-//imgData.blurFormula = document.getElementById('blurFormula').querySelector('textarea').textContent;
-//imgData.textFormula = document.getElementById('textFormula').querySelector('textarea').textContent;
+imgData.blurFormula = document.getElementById('blurFormula').querySelector('textarea').textContent;
+imgData.textFormula = document.getElementById('textFormula').querySelector('textarea').textContent;
 
 function updateImage(evt){
 	var el = evt.target;
