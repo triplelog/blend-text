@@ -87,7 +87,7 @@ namespace Lapis.QRCode.Art
                 }//~110 ms for this double loop
 				
 				
-				int maxD = blurRadius*blurRadius;
+				int maxD = blurRadius*blurRadius*2;
         		
                 for (var i=blurRadius;i<theight-blurRadius;i++){
                 	for (var ii=blurRadius;ii<twidth-blurRadius;ii++){
@@ -98,13 +98,13 @@ namespace Lapis.QRCode.Art
 									if (tripMatrix[iii,iiii] == 0){
 										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
 										if ( d <= maxD){
-											tripMatrix[iii,iiii] = 10*(2*d-3*maxD)/maxD;
+											tripMatrix[iii,iiii] = (20*d-30*maxD)/maxD;
 										}
 									}
 									else if (tripMatrix[iii,iiii] < 0){
 										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
 										if ( d <= maxD ){
-											var dd = 10*(2*d-3*maxD)/maxD;
+											var dd = (20*d-30*maxD)/maxD;
 											if (dd < tripMatrix[iii,iiii]) {
 												tripMatrix[iii,iiii] = dd;
 											}
