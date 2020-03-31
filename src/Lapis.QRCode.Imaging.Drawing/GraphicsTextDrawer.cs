@@ -145,7 +145,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 							//re = (re/2)*2;
 							//gr = (gr/2)*2;
 							//bl = (bl/2)*2;
-							imgC = re << 16 + gr << 8 + bl;
+							//imgC = re << 16 + gr << 8 + bl;
 								
                             int outval = 0;
                             if (hash.TryGetValue(imgC, out outval))
