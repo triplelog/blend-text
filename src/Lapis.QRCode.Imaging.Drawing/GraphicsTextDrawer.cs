@@ -69,7 +69,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 							s = .4
 						end
 					end
-					return l,s
+					return [l,s]
 				end
 				");
 				var scriptFunc = state ["ScriptFunc"] as LuaFunction;
