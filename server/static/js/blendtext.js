@@ -51,10 +51,10 @@ function updateImage(evt){
 
 	if (myTimeout){
 		clearTimeout(myTimeout);
-		myTimeout = setTimeout(function(){ ws.send(JSON.stringify(imgData)); }, 500);
+		myTimeout = setTimeout(function(){ ws.send(JSON.stringify(imgData)); }, 1000);
 	}
 	else {
-		myTimeout = setTimeout(function(){ ws.send(JSON.stringify(imgData)); }, 200);
+		myTimeout = setTimeout(function(){ ws.send(JSON.stringify(imgData)); }, 1000);
 	}
 	var el = document.getElementById('imageHolder');
 	var img = document.createElement('img');
@@ -103,7 +103,7 @@ function myUpdateFunction(event) {
 		
 		oldcode = code;
 		document.getElementById('blurFormula').querySelector('textarea').value = code;
-		updateImage(false);
+		//updateImage(false);
 	}
 }
 workspace.addChangeListener(myUpdateFunction);

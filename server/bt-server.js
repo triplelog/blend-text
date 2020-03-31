@@ -99,10 +99,10 @@ wss.on('connection', function connection(ws) {
   	var imgSrc = '../out'+imgid+'.png';
   	if (myTimeout){
 		clearTimeout(myTimeout);
-		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,imgSrc,imgIndex); }, 500);
+		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,imgSrc,imgIndex); }, 1000);
 	}
 	else {
-		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,imgSrc,imgIndex); }, 200);
+		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,imgSrc,imgIndex); }, 1000);
 	}
 	imgIndex++;
   	
