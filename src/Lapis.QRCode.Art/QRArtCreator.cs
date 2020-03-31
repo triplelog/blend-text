@@ -125,14 +125,13 @@ namespace Lapis.QRCode.Art
                 			
                 			for (var iii=startiii;iii<endiii;iii++){
 								for (var iiii=startiiii;iiii<endiiii;iiii++){
-									if (tripMatrix[iii,iiii] == 0){
-										//var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
-										//if ( d <= maxD/2){
-										//	tripMatrix[iii,iiii] = -10;
-										//}
-										tripMatrix[iii,iiii] = -10;
-									}
-									/*
+									/*if (tripMatrix[iii,iiii] == 0){
+										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
+										if ( d <= maxD/2){
+											tripMatrix[iii,iiii] = -10;
+										}
+									}*/
+									
 									if (tripMatrix[iii,iiii] == 0){
 										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
 										if ( d <= maxD/2){
@@ -147,7 +146,7 @@ namespace Lapis.QRCode.Art
 												tripMatrix[iii,iiii] = dd;
 											}
 										}
-									}*/
+									}
 								}
 							}
                 		}
