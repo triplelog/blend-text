@@ -51,6 +51,7 @@ namespace Lapis.QRCode.Imaging.Drawing
         			startC = 0 - MarginL;
         		}
         		Console.WriteLine(BlurFormula);
+        		/*
         		string luaString = @"
 				function ScriptFunc (val,l,s)
 					if val < -25 then
@@ -70,9 +71,9 @@ namespace Lapis.QRCode.Imaging.Drawing
 					end
 					return l,s
 				end
-				";
+				";*/
 				
-        		state.DoString (luaString);
+        		state.DoString (BlurFormula);
 				var scriptFunc = state ["ScriptFunc"] as LuaFunction;
 	
 	
