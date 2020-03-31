@@ -123,8 +123,8 @@ namespace Lapis.QRCode.Imaging.Drawing
 									l = .7;
 								
 								}
-								if (s > .5){
-									s = .5;
+								if (s > .4){
+									s = .4;
 								}
 							}
 							else {
@@ -132,8 +132,8 @@ namespace Lapis.QRCode.Imaging.Drawing
 									l = .6;
 								
 								}
-								if (s > .6){
-									s = .6;
+								if (s > .4){
+									s = .4;
 								}
 							}
 							//s = s*2/3;
