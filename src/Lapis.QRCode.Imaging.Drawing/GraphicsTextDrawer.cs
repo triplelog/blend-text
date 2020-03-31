@@ -71,12 +71,12 @@ namespace Lapis.QRCode.Imaging.Drawing
 							//l = (l*1)/(tripMatrix[r, c]*Math.Log(l+1.5)/Math.Log(2));
 							//s = 1 - (1-s)/1.25;
 							if (tripMatrix[r, c] ==1){
-								l = .6 + l/3;
-								s = s/5;
+								l = ( (1 - (1-l)/2)*2 + (l/3) )/3;
+								s = s*3/4;
 							}
 							else if (tripMatrix[r, c] == 2){
-								l = .3 + l/3;
-								s = s/3;
+								l = ( (1 - (1-l)/2) + (l/3)*2 )/3;
+								s = s*4/5;
 							}
 							else{
 								l = l/3;
