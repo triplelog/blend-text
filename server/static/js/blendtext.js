@@ -81,12 +81,22 @@ var workspace = Blockly.inject('blocklyDiv', {toolbox: document.getElementById('
 function myUpdateFunction(event) {
 	
 	var code = Blockly.Lua.workspaceToCode(workspace);
-	
+	lastNew = true;
+	while (lastNew) {
+		if (code.length == 0){break;}
+		if (code[code.length-1]=='\n'){
+			code = code.substring(0,code.length-1);
+		}
+		else {
+			lastNew = false;
+		}
+	}
 	if (code != oldcode){
-		oldcode = code;
+		
 		//console.log(JSON.stringify(JSON.decycle(workspace)));
 		//console.log(code);
-		console.log(code.substr(code.length-5));
+		
+		oldcode = code;
 		document.getElementById('blurFormula').querySelector('textarea').value = code;
 	}
 }
