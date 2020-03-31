@@ -50,6 +50,15 @@ namespace Lapis.QRCode.Imaging.Drawing
         		if (MarginL < 0){
         			startC = 0 - MarginL;
         		}
+        		
+        		state.DoString (@"
+				function ScriptFunc (val1, val2)
+					return val1 + val2
+				end
+				");
+				var scriptFunc = state ["ScriptFunc"] as LuaFunction;
+	
+	
                 for (var r = startR; r < theight && r + MarginT < bmp.Height; r += 1)
                 {
                     for (var c = startC; c < twidth && c + MarginL < bmp.Width; c += 1)
@@ -121,7 +130,8 @@ namespace Lapis.QRCode.Imaging.Drawing
 							//l = 1 - (1-l)/6;
 							//l = 1 - (1-l)*10/(-1*tripMatrix[r, c]*Math.Log((1-l)+1.5)/Math.Log(2));
 							//l = 1 - (1-l)/2;
-							var luax = state.DoString("return 3 + 4")[0];
+							//var luax = state.DoString("return 3 + 4")[0];
+							var res = (int)scriptFunc.Call (3, 5).First ();
 							if (tripMatrix[r, c] < -25){
 								if (l < .6){
 									l = .6;
