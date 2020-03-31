@@ -119,7 +119,7 @@ namespace Lapis.QrArt
 							}
 							else if (xType == 2){
 								//right at (bmp.Width * xPct)/100
-								textDrawer.MarginL = (bmp.Width * xPct)/100 - (twidth+40) + 40;
+								textDrawer.MarginL = (bmp.Width * xPct)/100 - (twidth+40) + 20;
 							}
 							else {
 								textDrawer.MarginL = bmp.Width/2 - (twidth+40)/2;
@@ -135,7 +135,7 @@ namespace Lapis.QrArt
 							}
 							else if (yType == 2){
 								//bottom at (bmp.Width * xPct)/100
-								textDrawer.MarginT = (bmp.Height * yPct)/100 - (theight+40) + 40;
+								textDrawer.MarginT = (bmp.Height * yPct)/100 - (theight+40) + 20;
 							}
 							else {
 								textDrawer.MarginT = bmp.Height/2 - (theight+40)/2;
