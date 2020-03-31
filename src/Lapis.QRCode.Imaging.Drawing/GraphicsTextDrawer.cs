@@ -139,21 +139,27 @@ namespace Lapis.QRCode.Imaging.Drawing
                         	var x = MarginL + c;
                             var y = MarginT + r;
                             int imgC = ColorHelper.ToIntRgb24(bmp.GetPixel(x, y));
+                            int re = (imgC & 0xFF0000) >> 16;
+							int gr = (imgC & 0xFF00) >> 8;
+							int bl = imgC & 0xFF;
+							re = (re/5)*5;
+							gr = (gr/5)*5;
+							bl = (bl/5)*5;
+							imgC = re << 16 + gr << 8 + bl;
+								
                             int outval = 0;
                             if (hash.TryGetValue(imgC, out outval))
 							{
-								int re = (outval & 0xFF0000) >> 16;
-								int gr = (outval & 0xFF00) >> 8;
-								int bl = outval & 0xFF;
+								re = (outval & 0xFF0000) >> 16;
+								gr = (outval & 0xFF00) >> 8;
+								bl = outval & 0xFF;
 								foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
 								graph.FillRectangle(foreBrushCustom, x, y, 1,1);
 								repcell++;
 							}
 							else {
-								int re = (imgC & 0xFF0000) >> 16;
-								int gr = (imgC & 0xFF00) >> 8;
-								int bl = imgC & 0xFF;
-							
+								
+								
 								//Lighten uniformly
 							
 								double h; double s; double l;
