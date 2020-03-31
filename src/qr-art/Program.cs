@@ -73,14 +73,23 @@ namespace Lapis.QrArt
 						int xPct = 0;
 						int xType = 0;
 						if (int.TryParse(locXOpt.Value(), out int locXout)){
-							xPct = locXout%200;
+							xPct = (locXout+200)%200;
 							xType = locXout/200;
+							if (xPct > 149){
+								xPct -= 200;
+								xType += 1;
+							}
+							
 						}
 						int yPct = 0;
 						int yType = 0;
 						if (int.TryParse(locYOpt.Value(), out int locYout)){
-							yPct = locYout%200;
+							yPct = (locYout+200)%200;
 							yType = locYout/200;
+							if (yPct > 149){
+								yPct -= 200;
+								yType += 1;
+							}
 						}
 						
 						string fontVal = getFont(fontOpt.Value().ToLower());
@@ -126,15 +135,15 @@ namespace Lapis.QrArt
 							}
 							
 							if (yType == 0){
-								//middle at (bmp.Width * xPct)/100
+								//middle at (bmp.Height * yPct)/100
 								textDrawer.MarginT = (bmp.Height * yPct)/100 - (theight+40)/2;
 							}
 							else if (yType == 1){
-								//top at (bmp.Width * xPct)/100
+								//top at 
 								textDrawer.MarginT = (bmp.Height * yPct)/100 - 20;
 							}
 							else if (yType == 2){
-								//bottom at (bmp.Width * xPct)/100
+								//bottom at 
 								textDrawer.MarginT = (bmp.Height * yPct)/100 - (theight+40) + 20;
 							}
 							else {
