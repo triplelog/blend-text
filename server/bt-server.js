@@ -103,7 +103,7 @@ function runCommand(ws,execCmd,imgSrc,imgIndex) {
 			console.log(`stderr: ${stderr}`);
 			return;
 		}
-		//console.log(`stdout: ${stdout}`);
+		console.log(`stdout: ${stdout}`);
 		var jsonmessage = {'src':imgSrc+'?'+imgIndex};
 		ws.send(JSON.stringify(jsonmessage));
 	});
