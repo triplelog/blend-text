@@ -96,10 +96,11 @@ namespace Lapis.QRCode.Art
                 			for (var iii=i-blurRadius;iii<i+blurRadius+1;iii++){
 								for (var iiii=ii-blurRadius;iiii<ii+blurRadius+1;iiii++){
 									if (tripMatrix[iii,iiii] == 0){
-										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
-										if ( d <= maxD/2){
-											tripMatrix[iii,iiii] = -10;
-										}
+										//var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
+										//if ( d <= maxD/2){
+										//	tripMatrix[iii,iiii] = -10;
+										//}
+										tripMatrix[iii,iiii] = -10;
 									}
 									/*
 									if (tripMatrix[iii,iiii] == 0){
