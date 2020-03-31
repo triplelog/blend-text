@@ -74,7 +74,7 @@ namespace Lapis.QRCode.Art
 				
                 for (var i=0;i<theight;i++){
                 	for (var ii=0;ii<twidth;ii++){
-                		if (imageText.GetPixel(ii,i) < 12000000){//first is x (col), second is y
+                		if (imageText.GetPixel(ii,i) < 16000000){//first is x (col), second is y
                 			tripMatrix[i,ii] = 1;
                 		}
                 		if (imageText.GetPixel(ii,i) < 8000000){
