@@ -24,6 +24,7 @@ imgData.locX = parseInt(document.getElementById('locX').querySelector('select').
 imgData.locX += parseInt(document.getElementById('locX').querySelector('input').value);
 imgData.blurRadius = document.getElementById('blurRadius').value;
 imgData.blurFormula = document.getElementById('blurFormula').querySelector('textarea').value;
+imgData.blurType = 'hsl';
 imgData.textFormula = document.getElementById('textFormula').querySelector('textarea').value;
 imgData.type = type;
 
@@ -47,6 +48,7 @@ function updateImage(evt){
 				var id = el.parentElement.id;
 				document.getElementById(id+'HSL').style.display = 'none';
 				document.getElementById(id+'RGB').style.display = 'block';
+				imgData.blurType = 'rgb';
 			}
 		}
 	}
@@ -118,7 +120,7 @@ workspaceTRGB.createVariable("b",null,"qblur_b");
 //Blockly.Xml.domToWorkspace(wxml,workspaceTRGB);
 
 function myUpdateFunction(event) {
-	
+	console.log(this);
 	var code = Blockly.Lua.workspaceToCode(workspace);
 	lastNew = true;
 	while (lastNew) {
@@ -139,4 +141,4 @@ function myUpdateFunction(event) {
 		updateImage(false);
 	}
 }
-workspace.addChangeListener(myUpdateFunction);
+workspaceB.addChangeListener(myUpdateFunction);
