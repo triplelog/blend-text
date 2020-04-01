@@ -101,7 +101,8 @@ function myUpdateFunction(event) {
 		}
 	}
 	if (code != oldcode){
-		
+		var wxml = Blockly.Xml.workspaceToDom(workspace);
+		console.log(Blockly.Xml.domToText(wxml));
 		//console.log(JSON.stringify(JSON.decycle(workspace)));
 		//console.log(code);
 		
