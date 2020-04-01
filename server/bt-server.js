@@ -39,7 +39,7 @@ app.get('/qr',
 	function(req, res) {
 		
 		res.write(nunjucks.render('blendtext.html',{
-			type: '"qr"',
+			type: 'qr',
 		}));
 		res.end();
 	}
@@ -49,7 +49,7 @@ app.get('/text',
 	function(req, res) {
 		
 		res.write(nunjucks.render('blendtext.html',{
-			type: '"text"',
+			type: 'text',
 		}));
 		res.end();
 	}
@@ -59,7 +59,7 @@ app.get('/image',
 	function(req, res) {
 		
 		res.write(nunjucks.render('blendtext.html',{
-			type: '"image"',
+			type: 'image',
 		}));
 		res.end();
 	}
@@ -69,7 +69,7 @@ app.get('/chart',
 	function(req, res) {
 		
 		res.write(nunjucks.render('blendtext.html',{
-			type: '"chart"',
+			type: 'chart',
 		}));
 		res.end();
 	}
