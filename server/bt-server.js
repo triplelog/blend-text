@@ -6,7 +6,7 @@ const { exec } = require('child_process');
 const bodyParser = require('body-parser');
 var nunjucks = require('nunjucks');
 var crypto = require("crypto");
-import Blockly from 'blockly';
+var Blockly = require('blockly');
 //require("./static/js/blockly_compressed.js");
 //require("./static/js/blocks_compressed.js");
 //require("./static/js/blocklyen.js");
