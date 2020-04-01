@@ -185,9 +185,9 @@ namespace Lapis.QRCode.Imaging.Drawing
 								}
 								else {
 									var res = scriptFunc.Call (tripMatrix[r, c],re,gr,bl);
-									re = (int)res[0];
-									gr = (int)res[1];
-									bl = (int)res[2];
+									re = Convert.ToInt32(res[0]);
+									gr = Convert.ToInt32(res[1]);
+									bl = Convert.ToInt32(res[2]);
 								
 									int newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
 									lighthash.Add(imgC, newcol);
