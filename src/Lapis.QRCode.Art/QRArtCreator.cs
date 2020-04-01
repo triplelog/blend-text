@@ -37,11 +37,38 @@ namespace Lapis.QRCode.Art
             {
             	int twidth = (int)imageText.Width;
             	int theight = (int)imageText.Height;
-            	int iwidth = (int)image.Width;
-            	int iheight = (int)image.Height;
             	
                 var tripMatrix = new TripMatrix(theight,twidth);
         		
+        		int minI = blurRadius;
+        		int minII = blurRadius;
+        		bool foundminI = false;
+                for (var i=blurRadius;i<theight-blurRadius;i++){
+                	if (foundminI){
+                		for (var ii=blurRadius;ii<minII;ii++){
+							if (imageText.GetPixel(ii,i) < 16000000){
+								minII = ii;
+								break;
+							}
+						}
+                	}
+                	else {
+                		for (var ii=blurRadius;ii<twidth-blurRadius;ii++){
+							if (imageText.GetPixel(ii,i) < 16000000){
+								minI = i;
+								minII = ii;
+								foundminI = true;
+								break;
+							}
+						}
+                	}
+                }//~20 ms since else if
+                
+                twidth -= minII - blurRadius;
+            	theight -= minI - blurRadius;
+            	
+                var tripMatrix = new TripMatrix(theight,twidth);
+                
                 for (var i=0;i<theight;i++){
                 	for (var ii=0;ii<twidth;ii++){
                 		tripMatrix[i,ii] = 0; //first is row, second is col
@@ -53,26 +80,33 @@ namespace Lapis.QRCode.Art
 				Stopwatch stopWatch = new Stopwatch();
         		stopWatch.Start();
 				
-                for (var i=0;i<theight;i++){
-                	for (var ii=0;ii<twidth;ii++){
-                		if (imageText.GetPixel(ii,i) < 16000000){//first is x (col), second is y
-                			tripMatrix[i,ii] = 1;
+				int p;
+                for (var i=blurRadius;i<theight-blurRadius;i++){
+                	for (var ii=blurRadius;ii<twidth-blurRadius;ii++){
+                		p = imageText.GetPixel(ii-minII,i-minI);
+                		if (p < 16000000){//first is x (col), second is y
+                			
+                			if (p < 8000000){
+								if (p < 4000000){
+									tripMatrix[i,ii] = 3;
+								}
+								else {
+									tripMatrix[i,ii] = 2;
+								}
+							}
+							else {
+								tripMatrix[i,ii] = 1;
+							}
+							
                 		}
-                		if (imageText.GetPixel(ii,i) < 8000000){
-                			tripMatrix[i,ii] = 2;
-                		}
-                		if (imageText.GetPixel(ii,i) < 4000000){
-                			tripMatrix[i,ii] = 3;
-                		}
+                		
                 	}
                 }//~110 ms for this double loop
 				
 				//TripMatrixDrawer.MarginL -= (minX-blurRadius)/2;
                 //TripMatrixDrawer.MarginT -= (minY-blurRadius)/2;
                 TripMatrixDrawer.THeight = tripMatrix.RowCount;
-                //TripMatrixDrawer.THeight -= theight - (maxY+blurRadius);
             	TripMatrixDrawer.TWidth = tripMatrix.ColumnCount;
-                //TripMatrixDrawer.TWidth -= twidth - (maxX+blurRadius);
                 
 				int maxD = blurRadius*blurRadius;
         		int startiii = 0;
@@ -161,6 +195,8 @@ namespace Lapis.QRCode.Art
                 	}
                 }
                 
+                TripMatrixDrawer.THeight -= theight - (maxY+blurRadius);
+                TripMatrixDrawer.TWidth -= twidth - (maxX+blurRadius);
                 
                 stopWatch.Stop();
 				// Get the elapsed time as a TimeSpan value.
