@@ -87,8 +87,8 @@ workspace.createVariable("d",null,"qblur_d");
 workspace.createVariable("h",null,"qblur_h");
 workspace.createVariable("s",null,"qblur_s");
 workspace.createVariable("l",null,"qblur_l");
-//var wxml = Blockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="qblur_d">d</variable></variables><block type="variables_get" id=";q(I?%Zbq*}/Ksz)jmh)" x="129" y="60"><field name="VAR" id="qblur_d">d</field></block></xml>');
-//Blockly.Xml.domToWorkspace(workspace, wxml);
+var wxml = Blockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="qblur_d">d</variable><variable id="qblur_l">l</variable></variables><block type="variables_get" id="s?--7z9hZ/R^k0O;LvK8" x="160" y="49"><field name="VAR" id="qblur_d">d</field></block><block type="variables_get" id="z@^1uBjFU^[PEMP$1M{*" x="146" y="101"><field name="VAR" id="qblur_l">l</field></block></xml>');
+Blockly.Xml.domToWorkspace(workspace, wxml);
 function myUpdateFunction(event) {
 	
 	var code = Blockly.Lua.workspaceToCode(workspace);
