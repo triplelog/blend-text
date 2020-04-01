@@ -120,7 +120,7 @@ workspaceTRGB.createVariable("b",null,"qblur_b");
 //Blockly.Xml.domToWorkspace(wxml,workspaceTRGB);
 
 function myUpdateFunction(event) {
-	console.log(this);
+	console.log(event.target);
 	var code = Blockly.Lua.workspaceToCode(workspace);
 	lastNew = true;
 	while (lastNew) {
