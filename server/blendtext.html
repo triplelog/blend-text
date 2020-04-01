@@ -116,16 +116,21 @@
 					</div>
 					<div id="blurFormula">
 						Blur Formula:
+						<input type="checkbox"></input>
 						<textarea rows="4" cols="50"></textarea>
 					</div>
 					<div id="textFormula">
 						Text Formula:
+						<input type="checkbox"></input>
 						<textarea rows="4" cols="50"></textarea>
 					</div>
 				</div>
 			{% endif %}
     		<div class="l-box pure-u-1 pure-u-md-1-4 pure-u-lg-1-2">
-    			<div id="blocklyDiv" style="height: 280px; width: 500px;"></div>
+    			<div id="blurFormulaHSL" style="height: 280px; width: 500px;"></div>
+    			<div id="textFormulaHSL" style="height: 280px; width: 500px; display: none"></div>
+    			<div id="blurFormulaRGB" style="height: 280px; width: 500px; display: none;"></div>
+    			<div id="textFormulaRGB" style="height: 280px; width: 500px; display: none"></div>
     			<!--<div id="codearea" style="height: 280px; width: 200px; border: 1px solid black;"></div>-->
     		</div>
     		<div class="l-box pure-u-1" id="imageHolder">
