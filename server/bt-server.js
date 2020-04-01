@@ -129,6 +129,6 @@ function runCommand(ws,execCmd,imgSrc,imgIndex, luaBlurFormula) {
 				ws.send(JSON.stringify(jsonmessage));
 			});
   		}
-  	}
+  	});
 	
 }
