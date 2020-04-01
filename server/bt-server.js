@@ -6,10 +6,11 @@ const { exec } = require('child_process');
 const bodyParser = require('body-parser');
 var nunjucks = require('nunjucks');
 var crypto = require("crypto");
-require("./static/js/blockly_compressed.js");
-require("./static/js/blocks_compressed.js");
-require("./static/js/blocklyen.js");
-require("./static/js/lua_compressed.js");
+import Blockly from 'blockly';
+//require("./static/js/blockly_compressed.js");
+//require("./static/js/blocks_compressed.js");
+//require("./static/js/blocklyen.js");
+//require("./static/js/lua_compressed.js");
 const options = {
   key: fs.readFileSync('/etc/letsencrypt/live/matherrors.com/privkey.pem'),
   cert: fs.readFileSync('/etc/letsencrypt/live/matherrors.com/fullchain.pem')
