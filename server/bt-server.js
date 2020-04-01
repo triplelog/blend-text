@@ -123,14 +123,26 @@ wss.on('connection', function connection(ws) {
   	Blockly.Xml.domToWorkspace(wxml, workspace);
   	var code = Blockly.Lua.workspaceToCode(workspace);
   	
-  	luaBlurFormula = `function ScriptFunc (val,h,s,l)
-  	`+code+`
-  	return h,s,l
-  	end
-  	`
-  	
-  	execCmd += ' -b "'+luaBlurFormula+'"';
-  	execCmd += ' -B hsl';
+  	if (2==2){
+		luaBlurFormula = `function ScriptFunc (val,h,s,l)
+		`+code+`
+		return h,s,l
+		end
+		`
+	
+		execCmd += ' -b "'+luaBlurFormula+'"';
+		execCmd += ' -B hsl';
+  	}
+  	else {
+  		luaBlurFormula = `function ScriptFunc (val,r,g,b)
+		`+code+`
+		return r,g,b
+		end
+		`
+	
+		execCmd += ' -b "'+luaBlurFormula+'"';
+		execCmd += ' -B rgb';
+  	}
 
   	execCmd += ' -c '+dm.textFormula;
   	if (dm.font.indexOf('"')==-1 && dm.font.indexOf(' ')>0){
