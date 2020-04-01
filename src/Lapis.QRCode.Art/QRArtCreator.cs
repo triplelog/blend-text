@@ -1,10 +1,6 @@
 using Lapis.QRCode.Encoding;
 using Lapis.QRCode.Imaging;
 using System;
-using System.Drawing;
-using Lapis.QRCode.Imaging.Drawing;
-using Lapis.QRCode.Art;
-using System.Drawing.Drawing2D;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,11 +63,6 @@ namespace Lapis.QRCode.Art
                 	}
                 }//~20 ms since else if
                 
-                Bitmap imgT = (Bitmap)imageText.Bitmap;
-				Bitmap nb = new Bitmap(twidth-(minII-blurRadius), theight - (minI-blurRadius));
-				Graphics g = Graphics.FromImage(nb);
-				g.DrawImage(imgT, -1*(minII-blurRadius), -1*(minI-blurRadius));
-				imageText = new BitmapFrame(nb);
 				
                 twidth = (int)imageText.Width;
             	theight = (int)imageText.Height;
