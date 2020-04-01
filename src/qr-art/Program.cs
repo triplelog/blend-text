@@ -35,6 +35,7 @@ namespace Lapis.QrArt
             var blurFormulaOpt = app.Option("-b <number>", "Blur Formula", CommandOptionType.SingleValue);
             var textFormulaOpt = app.Option("-c <number>", "Text Formula", CommandOptionType.SingleValue);
             var fontOpt = app.Option("-f <string>", "Font", CommandOptionType.SingleValue);
+            var typeOpt = app.Option("-t <string>", "Type", CommandOptionType.SingleValue);
             //legacy below
             //var foregdOpt = app.Option("-f|--foreground <color>", "Foreground color.", CommandOptionType.SingleValue);
             //var backgdOpt = app.Option("-b|--background <color>", "Background color.", CommandOptionType.SingleValue);
@@ -90,7 +91,13 @@ namespace Lapis.QrArt
         				IRgb24BitmapBase bitmap = null;
         				try
 						{
-							bmp = Bitmap.FromFile(imageArg.Value) as Bitmap;
+							if (typeOpt.Value == 'image'){
+								bmp = Bitmap.FromFile(imageArg.Value) as Bitmap;
+							}
+							else {
+								bmp = (Bitmap) new Bitmap(3000+2*blurRadius,2000+2*blurRadius);
+							}
+							
 							Graphics graph1 = Graphics.FromImage(bmp);
 							string measureString = contentArg.Value;
 							
@@ -101,6 +108,10 @@ namespace Lapis.QrArt
 							int theight = (int)stringSize.Height;
 							
 							Bitmap bmpp = (Bitmap) new Bitmap(twidth+2*blurRadius,theight+2*blurRadius);
+							
+							if (typeOpt.Value == 'text'){
+								bmp = (Bitmap) new Bitmap(twidth+2*blurRadius,theight+2*blurRadius);
+							}
 							
 							{
 								int xPct = 0;

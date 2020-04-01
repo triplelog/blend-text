@@ -28,8 +28,48 @@ app.use('/',express.static('static'));
 app.get('/', 
 	function(req, res) {
 		
-		res.write(nunjucks.render('blendtext.html',{
+		res.write(nunjucks.render('index.html',{
+			
+		}));
+		res.end();
+	}
+);
+
+app.get('/qr', 
+	function(req, res) {
 		
+		res.write(nunjucks.render('blendtext.html',{
+			type: 'qr',
+		}));
+		res.end();
+	}
+);
+
+app.get('/text', 
+	function(req, res) {
+		
+		res.write(nunjucks.render('blendtext.html',{
+			type: 'text',
+		}));
+		res.end();
+	}
+);
+
+app.get('/image', 
+	function(req, res) {
+		
+		res.write(nunjucks.render('blendtext.html',{
+			type: 'image',
+		}));
+		res.end();
+	}
+);
+
+app.get('/chart', 
+	function(req, res) {
+		
+		res.write(nunjucks.render('blendtext.html',{
+			type: 'chart',
 		}));
 		res.end();
 	}
@@ -79,8 +119,6 @@ wss.on('connection', function connection(ws) {
   	return h,s,l
   	end
   	`
-	
-	
   	
   	execCmd += ' -b "'+luaBlurFormula+'"';
 
@@ -91,6 +129,8 @@ wss.on('connection', function connection(ws) {
   	else {
   		execCmd += ' -f '+dm.font;
   	}
+  	
+  	execCmd += ' -t "image"';
   	
   	console.log(execCmd);
   	var imgSrc = '../out'+imgid+'.png';
