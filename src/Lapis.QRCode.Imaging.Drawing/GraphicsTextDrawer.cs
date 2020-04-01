@@ -100,27 +100,38 @@ namespace Lapis.QRCode.Imaging.Drawing
 								if (TextType == "hsl"){
 									double h; double s; double l;
 									RgbToHls(re,gr,bl,out h,out l,out s);
-									if (tripMatrix[r, c] ==1){
-										var resD = textFunc.Call (tripMatrix[r, c],h,s,l);
-										var resL = scriptFunc.Call (-1,h,s,l);
-										h = (Convert.ToDouble(resD[0])*1 + Convert.ToDouble(resL[0])*2)/3);
-										s = (Convert.ToDouble(resD[1])*1 + Convert.ToDouble(resL[1])*2)/3);
-										l = (Convert.ToDouble(resD[2])*1 + Convert.ToDouble(resL[2])*2)/3);
-									}
-									else if (tripMatrix[r, c] == 2){
-										var resD = textFunc.Call (tripMatrix[r, c],h,s,l);
-										var resL = scriptFunc.Call (-1,h,s,l);
-										h = (Convert.ToDouble(resD[0])*2 + Convert.ToDouble(resL[0])*1)/3);
-										s = (Convert.ToDouble(resD[1])*2 + Convert.ToDouble(resL[1])*1)/3);
-										l = (Convert.ToDouble(resD[2])*2 + Convert.ToDouble(resL[2])*1)/3);
-									}
-									else{
+									
+									if (tripMatrix[r, c] > 2){
 										var res = textFunc.Call (tripMatrix[r, c],h,s,l);
 										h = Convert.ToDouble(res[0]);
 										s = Convert.ToDouble(res[1]);
 										l = Convert.ToDouble(res[2]);
 									}
-									//s = 1 - (1-s)/2;
+									else {
+										var resD = textFunc.Call (tripMatrix[r, c],h,s,l);
+										var resL = scriptFunc.Call (-1,h,s,l);
+										h = Convert.ToDouble(resD[0]);
+										h += Convert.ToDouble(resL[0]);
+										s = Convert.ToDouble(resD[1]);
+										s += Convert.ToDouble(resL[1]);
+										l = Convert.ToDouble(resD[2]);
+										l += Convert.ToDouble(resL[2]);
+										
+										if (tripMatrix[r, c] ==1){
+											h += Convert.ToDouble(resL[0]);
+											s += Convert.ToDouble(resL[0]);
+											l += Convert.ToDouble(resL[0]);
+										}
+										else if (tripMatrix[r, c] == 2){
+											h += Convert.ToDouble(resD[0]);
+											s += Convert.ToDouble(resD[0]);
+											l += Convert.ToDouble(resD[0]);
+										}
+										h /= 3;
+										s /= 3;
+										l /= 3;
+									}
+									
 									HlsToRgb(h, l, s,out re, out gr, out bl);
 								
 									if (tripMatrix[r, c] > 2){
@@ -134,18 +145,10 @@ namespace Lapis.QRCode.Imaging.Drawing
 								}
 								else {
 									if (tripMatrix[r, c] ==1){
-										var resD = textFunc.Call (tripMatrix[r, c],re,gr,bl);
-										var resL = scriptFunc.Call (-1,re,gr,bl);
-										re = (Convert.ToInt32(resD[0])*1 + Convert.ToInt32(resL[0])*2)/3);
-										gr = (Convert.ToInt32(resD[1])*1 + Convert.ToInt32(resL[1])*2)/3);
-										bl = (Convert.ToInt32(resD[2])*1 + Convert.ToInt32(resL[2])*2)/3);
+										
 									}
 									else if (tripMatrix[r, c] == 2){
-										var resD = textFunc.Call (tripMatrix[r, c],re,gr,bl);
-										var resL = scriptFunc.Call (-1,re,gr,bl);
-										re = (Convert.ToInt32(resD[0])*2 + Convert.ToInt32(resL[0])*1)/3);
-										gr = (Convert.ToInt32(resD[1])*2 + Convert.ToInt32(resL[1])*1)/3);
-										bl = (Convert.ToInt32(resD[2])*2 + Convert.ToInt32(resL[2])*1)/3);
+										
 									}
 									else{
 										var res = textFunc.Call (tripMatrix[r, c],re,gr,bl);
