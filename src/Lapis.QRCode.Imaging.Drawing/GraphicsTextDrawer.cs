@@ -90,7 +90,12 @@ namespace Lapis.QRCode.Imaging.Drawing
                         if (tripMatrix[r, c] == 0)
                         {
                         	//keep color as is
-                        	if (2==2){graph.FillRectangle(foreBrushB, x, y, 1,1);}
+                        	
+                        	if (2==2){
+                        		var x = MarginL + c;
+                            	var y = MarginT + r;
+                        		graph.FillRectangle(foreBrushB, x, y, 1,1);
+                        	}
                         }
                         else if (tripMatrix[r, c] > 0)
                         {
