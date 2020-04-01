@@ -80,8 +80,8 @@ namespace Lapis.QRCode.Art
         		stopWatch.Start();
 				
 				int p;
-                for (var i=blurRadius;i<theight-blurRadius;i++){
-                	for (var ii=blurRadius;ii<twidth-blurRadius;ii++){
+                for (var i=minI;i<theight-blurRadius;i++){
+                	for (var ii=minII;ii<twidth-blurRadius;ii++){
                 		p = imageText.GetPixel(ii-minII+blurRadius,i-minI+blurRadius);
                 		if (p < 16000000){//first is x (col), second is y
                 			
@@ -194,8 +194,8 @@ namespace Lapis.QRCode.Art
                 	}
                 }
                 
-                TripMatrixDrawer.THeight -= theight - (maxY+blurRadius);
-                TripMatrixDrawer.TWidth -= twidth - (maxX+blurRadius);
+                //TripMatrixDrawer.THeight -= theight - (maxY+blurRadius);
+                //TripMatrixDrawer.TWidth -= twidth - (maxX+blurRadius);
                 
                 stopWatch.Stop();
 				// Get the elapsed time as a TimeSpan value.
