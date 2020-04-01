@@ -38,7 +38,6 @@ namespace Lapis.QRCode.Art
             	int twidth = (int)imageText.Width;
             	int theight = (int)imageText.Height;
             	
-                var tripMatrix = new TripMatrix(theight,twidth);
         		
         		int minI = blurRadius;
         		int minII = blurRadius;
