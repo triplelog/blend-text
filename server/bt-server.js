@@ -90,9 +90,17 @@ const wss = new WebSocket.Server({ server });
 wss.on('connection', function connection(ws) {
   var myTimeout;
   var imgid = parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12);
+  var outSrc = '../out/'+imgid+'.png';
+  var inSrc = '../in/'+imgid+'.png';
   var imgIndex = 0;
   ws.on('message', function incoming(message) {
   	console.log(message);
+  	if (typeof message !== 'string'){
+  		fs.writeFile(inSrc, Buffer.from(message), function (err) {
+  		
+  		});
+  		return;
+  	}
   	var dm = JSON.parse(message);
   	//console.log(dm);
   	if (!dm.fontSize || dm.textFormula == "" || dm.blurFormula == ""){
@@ -102,9 +110,9 @@ wss.on('connection', function connection(ws) {
   	
 
 	//download or upload file to 'inputs/imgid'+fileExt and set inputSrc
-	var inputSrc = 'test.jpg';
+	//var inSrc = 'test.jpg';
 	
-  	var execCmd = '../src/qr-art/bin/Debug/netcoreapp3.1/publish/qr-art "'+dm.text+'" '+inputSrc+' png static/out'+imgid+'.png';
+  	var execCmd = '../src/qr-art/bin/Debug/netcoreapp3.1/publish/qr-art "'+dm.text+'" '+inSrc+' png static/out'+imgid+'.png';
   	execCmd += ' -s '+dm.fontSize;
   	execCmd += ' -x '+dm.locX;
   	execCmd += ' -y '+dm.locY;
@@ -134,13 +142,13 @@ wss.on('connection', function connection(ws) {
   	execCmd += ' -t '+dm.type;
   	
   	console.log(execCmd);
-  	var imgSrc = '../out'+imgid+'.png';
+  	
   	if (myTimeout){
 		clearTimeout(myTimeout);
-		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,imgSrc,imgIndex, luaBlurFormula); }, 1000);
+		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,outSrc,imgIndex, luaBlurFormula); }, 1000);
 	}
 	else {
-		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,imgSrc,imgIndex, luaBlurFormula); }, 1000);
+		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,outSrc,imgIndex, luaBlurFormula); }, 1000);
 	}
 	imgIndex++;
   	
@@ -149,7 +157,7 @@ wss.on('connection', function connection(ws) {
   });
 });
 
-function runCommand(ws,execCmd,imgSrc,imgIndex, luaBlurFormula) {
+function runCommand(ws,execCmd,outSrc,imgIndex, luaBlurFormula) {
 	var formulaName = 'test';
 	fs.writeFile("formulas/"+formulaName+".txt", luaBlurFormula, function(err) {
   		if (err){
@@ -166,7 +174,7 @@ function runCommand(ws,execCmd,imgSrc,imgIndex, luaBlurFormula) {
 					return;
 				}
 				console.log(`stdout: ${stdout}`);
-				var jsonmessage = {'src':imgSrc+'?'+imgIndex};
+				var jsonmessage = {'src':outSrc+'?'+imgIndex};
 				ws.send(JSON.stringify(jsonmessage));
 			});
   		}
