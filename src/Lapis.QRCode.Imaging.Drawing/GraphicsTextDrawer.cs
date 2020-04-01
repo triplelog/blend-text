@@ -79,9 +79,9 @@ namespace Lapis.QRCode.Imaging.Drawing
                             var y = MarginT + r;
                             //Darken uniformly
                             Color pixColor = bmp.GetPixel(x, y);
-                            int re = pixColor.R;
-                            int gr = pixColor.G;
-                            int bl = pixColor.B;
+                            int re = pixColor.R * pixColor.A / 255 + (255-pixColor.A);
+                            int gr = pixColor.G * pixColor.A / 255 + (255-pixColor.A);
+                            int bl = pixColor.B * pixColor.A / 255 + (255-pixColor.A);
 							Color hashColor = Color.FromArgb(re,gr,bl);
 							int imgC = hashColor.GetHashCode();
 								
@@ -120,9 +120,9 @@ namespace Lapis.QRCode.Imaging.Drawing
 									}
 									else{
 										var res = textFunc.Call (tripMatrix[r, c],h,s,l);
-										h = (double)res[0];
-										s = (double)res[1];
-										l = (double)res[2];
+										h = Convert.ToDouble(res[0]);
+										s = Convert.ToDouble(res[1]);
+										l = Convert.ToDouble(res[2]);
 									}
 									//s = 1 - (1-s)/2;
 									HlsToRgb(h, l, s,out re, out gr, out bl);
@@ -194,9 +194,9 @@ namespace Lapis.QRCode.Imaging.Drawing
 									double h; double s; double l;
 									RgbToHls(re,gr,bl,out h,out l,out s);
 									var res = scriptFunc.Call (tripMatrix[r, c],h,s,l);
-									h = (double)res[0];
-									s = (double)res[1];
-									l = (double)res[2];
+									h = Convert.ToDouble(res[0]);
+									s = Convert.ToDouble(res[1]);
+									l = Convert.ToDouble(res[2]);
 							
 									HlsToRgb(h, l, s,out re, out gr, out bl);
 								
