@@ -20,17 +20,12 @@ namespace Lapis.QRCode.Imaging.Drawing
 			Stopwatch stopWatch = new Stopwatch();
         	stopWatch.Start();
         		
-            int imageHeight = rowCount;
-            int imageWidth = columnCount;
             int theight = tripMatrix.RowCount;
             int twidth = tripMatrix.ColumnCount;
             //var bitmap = new Bitmap(imageHeight, imageWidth);
             var bmp = Bitmap.FromFile(imagePath) as Bitmap;
-            int rowCount = bmp.Height;
-            int columnCount = bmp.Width;
-			Console.WriteLine(CellSize);
-			Console.WriteLine(rowCount);
-			Console.WriteLine(imageHeight);
+            int imageHeight = bmp.Height;
+            int imageWidth = bmp.Width;
 			
 			Lua state = new Lua ();
 			
