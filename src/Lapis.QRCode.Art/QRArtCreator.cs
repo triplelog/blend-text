@@ -17,8 +17,7 @@ namespace Lapis.QRCode.Art
     public class QRArtCreator : IQRArtCreator
     {
         public QRArtCreator(
-            IBinarizer binarizer, ITriparizer triparizer, IColorizer colorizer, IMerger merger,
-            ITripMatrixDrawer tripMatrixDrawer)
+            ITriparizer triparizer, ITripMatrixDrawer tripMatrixDrawer)
         {
             if (binarizer == null)
                 throw new ArgumentNullException(nameof(binarizer));
@@ -28,22 +27,11 @@ namespace Lapis.QRCode.Art
                 throw new ArgumentNullException(nameof(triparizer));
             if (merger == null)
                 throw new ArgumentNullException(nameof(merger));
-            Binarizer = binarizer;
             Triparizer = triparizer;
-            Colorizer = colorizer;
-            Merger = merger;
             TripMatrixDrawer = tripMatrixDrawer;
         }
-
-        public IQRCodeEncoder QRCodeEncoder { get; }
-
-        public IBinarizer Binarizer { get; }
         
         public ITriparizer Triparizer { get; }
-        
-        public IColorizer Colorizer { get; }
-
-        public IMerger Merger { get; }
         
         public ITripMatrixDrawer TripMatrixDrawer { get; }
 

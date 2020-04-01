@@ -58,10 +58,7 @@ namespace Lapis.QrArt
                     	
         				
                         var builder = new QRArtCreator(
-                            new Binarizer(),
                             new Triparizer(),
-                            new Colorizer(),
-                            new Merger(),
                             textDrawer
                         );
                         {
