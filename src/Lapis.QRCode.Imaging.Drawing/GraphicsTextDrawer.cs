@@ -159,8 +159,8 @@ namespace Lapis.QRCode.Imaging.Drawing
 										darkhash.Add(imgC, newcol);
 									}
 									else {
-										var resD = textFunc.Call (tripMatrix[r, c],h,s,l);
-										var resL = scriptFunc.Call (-1,h,s,l);
+										var resD = textFunc.Call (tripMatrix[r, c],re,gr,bl);
+										var resL = scriptFunc.Call (-1,re,gr,bl);
 										re = Convert.ToInt32(resD[0]);
 										gr = Convert.ToInt32(resD[1]);
 										bl = Convert.ToInt32(resD[2]);
