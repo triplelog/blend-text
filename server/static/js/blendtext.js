@@ -87,7 +87,7 @@ workspace.createVariable("d",null,"qblur_d");
 workspace.createVariable("h",null,"qblur_h");
 workspace.createVariable("s",null,"qblur_s");
 workspace.createVariable("l",null,"qblur_l");
-var wxml = Blockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="qblur_d">d</variable><variable id="qblur_l">l</variable></variables><block type="variables_get" id="s?--7z9hZ/R^k0O;LvK8" x="160" y="49"><field name="VAR" id="qblur_d">d</field></block><block type="variables_get" id="z@^1uBjFU^[PEMP$1M{*" x="146" y="101"><field name="VAR" id="qblur_l">l</field></block></xml>');
+var wxml = Blockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="qblur_l">l</variable></variables><block type="controls_if" id="Wd;mk5}4Of9%Iw%Z7Zp@" x="35" y="18"><value name="IF0"><block type="logic_compare" id="Y]b.Mo8c|Gg]GFgx]d}."><field name="OP">LT</field><value name="A"><block type="variables_get" id="z@^1uBjFU^[PEMP$1M{*"><field name="VAR" id="qblur_l">l</field></block></value><value name="B"><block type="math_number" id="q#8h__fG*5qOgK`l1]dN"><field name="NUM">0.6</field></block></value></block></value><statement name="DO0"><block type="variables_set" id="!{OE7jG|eOuI%-Gmeh$z"><field name="VAR" id="qblur_l">l</field><value name="VALUE"><block type="math_number" id="eSak{(`N-^$A8:Y!TfoB"><field name="NUM">0.6</field></block></value></block></statement></block></xml>');
 Blockly.Xml.domToWorkspace(workspace, wxml);
 function myUpdateFunction(event) {
 	
@@ -105,8 +105,6 @@ function myUpdateFunction(event) {
 	if (code != oldcode){
 		var wxml = Blockly.Xml.workspaceToDom(workspace);
 		console.log(Blockly.Xml.domToText(wxml));
-		//console.log(JSON.stringify(JSON.decycle(workspace)));
-		//console.log(code);
 		
 		oldcode = code;
 		document.getElementById('blurFormula').querySelector('textarea').value = code;
