@@ -134,6 +134,7 @@ namespace Lapis.QrArt
 									if ((twidth*100/bmp.Width) == widthout){
 										break;
 									}
+									oldSize = newSize;
 								}
 								
 							}
