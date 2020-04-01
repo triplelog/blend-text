@@ -83,7 +83,7 @@ for (var i=0;i<2;i++){
 
 var oldcode = '';
 var workspace = Blockly.inject('blocklyDiv', {toolbox: document.getElementById('toolbox')});
-workspace.createVariable("d",opt_id="qblur_d");
+workspace.createVariable("d",null,"qblur_d");
 workspace.createVariable("h","double","qblur_h");
 workspace.createVariable("s","double","qblur_s");
 workspace.createVariable("l","double","qblur_l");
