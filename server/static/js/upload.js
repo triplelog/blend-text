@@ -1,14 +1,16 @@
+/*
 var ctypestr = "";
 var filen = "";
 var syncWorker = new Worker('../wasm/uploadworker.js');
 var syncWorker2 = new Worker('../wasm/datatypeworker.js');
+
 
 document.getElementById('dropArea').addEventListener('drop', handleDrop, false);
 var names = ['dragenter', 'dragover', 'dragleave', 'drop'];
 names.forEach(eventName => {
   document.getElementById('dropArea').addEventListener(eventName, preventDefaults, false)
 })
-
+*/
 function preventDefaults(e) {
 	e.preventDefault();
     e.stopPropagation();
