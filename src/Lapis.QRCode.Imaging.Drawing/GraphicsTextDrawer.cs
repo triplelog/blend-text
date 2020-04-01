@@ -170,9 +170,9 @@ namespace Lapis.QRCode.Imaging.Drawing
                             var y = MarginT + r;
 							
                             Color pixColor = bmp.GetPixel(x, y);
-                            int re = pixColor.R;
-                            int gr = pixColor.G;
-                            int bl = pixColor.B;
+                            int re = pixColor.R * pixColor.A / 255 + (255-pixColor.A);
+                            int gr = pixColor.G * pixColor.A / 255 + (255-pixColor.A);
+                            int bl = pixColor.B * pixColor.A / 255 + (255-pixColor.A);
 							Color hashColor = Color.FromArgb((re/4)*4,(gr/4)*4,(bl/4)*4);
 							int imgC = hashColor.GetHashCode();
 								
