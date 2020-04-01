@@ -150,16 +150,37 @@ namespace Lapis.QRCode.Imaging.Drawing
 									else if (tripMatrix[r, c] == 2){
 										
 									}
-									else{
+									if (tripMatrix[r, c] > 2){
 										var res = textFunc.Call (tripMatrix[r, c],re,gr,bl);
 										re = Convert.ToInt32(res[0]);
 										gr = Convert.ToInt32(res[1]);
 										bl = Convert.ToInt32(res[2]);
-									}
-								
-									if (tripMatrix[r, c] > 2){
 										int newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
 										darkhash.Add(imgC, newcol);
+									}
+									else {
+										var resD = textFunc.Call (tripMatrix[r, c],h,s,l);
+										var resL = scriptFunc.Call (-1,h,s,l);
+										re = Convert.ToInt32(resD[0]);
+										gr = Convert.ToInt32(resD[1]);
+										bl = Convert.ToInt32(resD[2]);
+										re += Convert.ToInt32(resL[0]);
+										gr += Convert.ToInt32(resL[1]);
+										bl += Convert.ToInt32(resL[2]);
+										
+										if (tripMatrix[r, c] ==1){
+											re += Convert.ToInt32(resL[0]);
+											gr += Convert.ToInt32(resL[1]);
+											bl += Convert.ToInt32(resL[2]);
+										}
+										else if (tripMatrix[r, c] == 2){
+											re += Convert.ToInt32(resD[0]);
+											gr += Convert.ToInt32(resD[1]);
+											bl += Convert.ToInt32(resD[2]);
+										}
+										re /= 3;
+										gr /= 3;
+										bl /= 3;
 									}
 								
 									foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
