@@ -104,10 +104,10 @@ function myUpdateFunction(event) {
 	}
 	if (code != oldcode){
 		var wxml = Blockly.Xml.workspaceToDom(workspace);
-		console.log(Blockly.Xml.domToText(wxml));
+		var outspace = Blockly.Xml.domToText(wxml);
 		
 		oldcode = code;
-		document.getElementById('blurFormula').querySelector('textarea').value = code;
+		document.getElementById('blurFormula').querySelector('textarea').value = outspace;
 		updateImage(false);
 	}
 }
