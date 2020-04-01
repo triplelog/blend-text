@@ -84,10 +84,10 @@ for (var i=0;i<2;i++){
 var oldcode = '';
 var workspace = Blockly.inject('blocklyDiv', {toolbox: document.getElementById('toolbox')});
 workspace.createVariable("d",null,"qblur_d");
-workspace.createVariable("h","double","qblur_h");
-workspace.createVariable("s","double","qblur_s");
-workspace.createVariable("l","double","qblur_l");
-//var wxml = Blockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id=",;:rq?OTC,Jk8]jU5cA+">d</variable><variable id="?h%P(UR^$,ia)$nuyDBZ">h</variable></variables><block type="variables_get" id="7?~hoIxng@7*Onq/,x/0" x="181" y="73"><field name="VAR" id=",;:rq?OTC,Jk8]jU5cA+">d</field></block><block type="variables_get" id="VRUA7AnH=$PnID^I!p]M" x="88" y="106"><field name="VAR" id="?h%P(UR^$,ia)$nuyDBZ">h</field></block></xml>');
+workspace.createVariable("h",null,"qblur_h");
+workspace.createVariable("s",null,"qblur_s");
+workspace.createVariable("l",null,"qblur_l");
+//var wxml = Blockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="qblur_d">d</variable></variables><block type="variables_get" id=";q(I?%Zbq*}/Ksz)jmh)" x="129" y="60"><field name="VAR" id="qblur_d">d</field></block></xml>');
 //Blockly.Xml.domToWorkspace(workspace, wxml);
 function myUpdateFunction(event) {
 	
