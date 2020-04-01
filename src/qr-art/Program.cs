@@ -91,7 +91,7 @@ namespace Lapis.QrArt
         				IRgb24BitmapBase bitmap = null;
         				try
 						{
-							if (typeOpt.Value == 'image'){
+							if (typeOpt.Value == "image"){
 								bmp = Bitmap.FromFile(imageArg.Value) as Bitmap;
 							}
 							else {
@@ -109,7 +109,7 @@ namespace Lapis.QrArt
 							
 							Bitmap bmpp = (Bitmap) new Bitmap(twidth+2*blurRadius,theight+2*blurRadius);
 							
-							if (typeOpt.Value == 'text'){
+							if (typeOpt.Value == "text"){
 								bmp = (Bitmap) new Bitmap(twidth+2*blurRadius,theight+2*blurRadius);
 							}
 							
