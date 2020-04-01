@@ -82,7 +82,7 @@ namespace Lapis.QRCode.Art
 				int p;
                 for (var i=blurRadius;i<theight-blurRadius;i++){
                 	for (var ii=blurRadius;ii<twidth-blurRadius;ii++){
-                		p = imageText.GetPixel(ii-minII,i-minI);
+                		p = imageText.GetPixel(ii-minII+blurRadius,i-minI+blurRadius);
                 		if (p < 16000000){//first is x (col), second is y
                 			
                 			if (p < 8000000){
