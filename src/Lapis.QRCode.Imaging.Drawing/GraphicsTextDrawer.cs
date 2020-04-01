@@ -213,6 +213,9 @@ namespace Lapis.QRCode.Imaging.Drawing
                         }
                     }
                 }
+                
+                
+
                 stopWatch.Stop();
 				// Get the elapsed time as a TimeSpan value.
 				TimeSpan ts = stopWatch.Elapsed;
@@ -225,7 +228,15 @@ namespace Lapis.QRCode.Imaging.Drawing
 					ts.Milliseconds / 10);
 				Console.WriteLine("GraphicsTextDrawerTime " + elapsedTime +" new/rep "+newcell+'/'+repcell +" newd/repd "+newdarkcell+'/'+repdarkcell);
             }
-
+			
+			if (2==2){
+				Rectangle r = new Rectangle(MarginL,MarginT,twidth,theight);
+				Bitmap nb = new Bitmap(twidth, theight);
+				Graphics g = Graphics.FromImage(nb);
+				g.DrawImage(bmp, -MarginL, -MarginT);
+				bmp = nb;
+			}
+				
             return new BitmapFrame(bmp);
         }     
         
