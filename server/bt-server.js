@@ -76,7 +76,7 @@ wss.on('connection', function connection(ws) {
   	
   	
   	luaBlurFormula = `function ScriptFunc (val,h,s,l)
-  	`+dm.blurFormula+`
+  	`+code+`
   	return h,s,l
   	end
   	`
