@@ -55,6 +55,7 @@ namespace Lapis.QRCode.Art
                 		for (var ii=blurRadius;ii<twidth-blurRadius;ii++){
 							if (imageText.GetPixel(ii,i) < 16000000){
 								minI = i;
+								Console.WriteLine("minI "+minI+" blurRadius "+blurRadius);
 								minII = ii;
 								foundminI = true;
 								break;
