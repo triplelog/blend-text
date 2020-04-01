@@ -117,12 +117,25 @@ namespace Lapis.QrArt
 							int twidth = (int)stringSize.Width;
 							int theight = (int)stringSize.Height;
 							if (widthout > -1){
-								font = new Font(fontVal, 16 * widthout * bmp.Width / 100 / twidth );
-								stringSize = graph1.MeasureString(measureString, font);
+								int oldSize = 16;
+								int newSize = 0;
+								int idx = 0;
+								for (idx=0;idx<10;idx++){
+									newSize = oldSize * widthout * bmp.Width / 100 / twidth
+									font = new Font(fontVal, newSize );
+									stringSize = graph1.MeasureString(measureString, font);
 								
-								twidth = (int)stringSize.Width;
-								theight = (int)stringSize.Height;
-								Console.WriteLine("Percent "+ (twidth*100/bmp.Width) );
+									twidth = (int)stringSize.Width;
+									theight = (int)stringSize.Height;
+									Console.WriteLine("Percent "+ (twidth*100/bmp.Width) );
+									if (newSize == oldSize){
+										break;
+									}
+									if ((twidth*100/bmp.Width) == widthout){
+										break;
+									}
+								}
+								
 							}
 							Bitmap bmpp = (Bitmap) new Bitmap(twidth+2*blurRadius,theight+2*blurRadius);
 							
