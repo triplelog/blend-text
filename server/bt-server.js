@@ -91,8 +91,7 @@ wss.on('connection', function connection(ws) {
   var myTimeout;
   var imgid = parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12);
   var outSrc = 'out/'+imgid+'.png';
-  var inSrc = 'images/in/'+imgid+'.png';
-  inSrc = "test.jpg";
+  var inSrc = 'images/in/'+imgid+'.jpg';
   var imgIndex = 0;
   ws.on('message', function incoming(message) {
   	console.log(message);
