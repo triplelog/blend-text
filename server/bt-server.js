@@ -74,13 +74,14 @@ wss.on('connection', function connection(ws) {
   	Blockly.Xml.domToWorkspace(wxml, workspace);
   	var code = Blockly.Lua.workspaceToCode(workspace);
   	
-  	
   	luaBlurFormula = `function ScriptFunc (val,h,s,l)
   	`+code+`
   	return h,s,l
   	end
   	`
-
+	
+	
+  	
   	execCmd += ' -b "'+luaBlurFormula+'"';
 
   	execCmd += ' -c '+dm.textFormula;
@@ -95,10 +96,10 @@ wss.on('connection', function connection(ws) {
   	var imgSrc = '../out'+imgid+'.png';
   	if (myTimeout){
 		clearTimeout(myTimeout);
-		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,imgSrc,imgIndex); }, 1000);
+		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,imgSrc,imgIndex, luaBlurFormula); }, 1000);
 	}
 	else {
-		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,imgSrc,imgIndex); }, 1000);
+		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,imgSrc,imgIndex, luaBlurFormula); }, 1000);
 	}
 	imgIndex++;
   	
@@ -107,18 +108,27 @@ wss.on('connection', function connection(ws) {
   });
 });
 
-function runCommand(ws,execCmd,imgSrc,imgIndex) {
-	exec(execCmd, (error, stdout, stderr) => {
-		if (error) {
-			console.log(`error: ${error.message}`);
-			return;
-		}
-		if (stderr) {
-			console.log(`stderr: ${stderr}`);
-			return;
-		}
-		console.log(`stdout: ${stdout}`);
-		var jsonmessage = {'src':imgSrc+'?'+imgIndex};
-		ws.send(JSON.stringify(jsonmessage));
-	});
+function runCommand(ws,execCmd,imgSrc,imgIndex, luaBlurFormula) {
+	var formulaName = 'test';
+	fs.writeFile("formulas/"+formulaName+".txt", luaBlurFormula, function(err) {
+  		if (err){
+  		
+  		}
+  		else {
+  			exec(execCmd, (error, stdout, stderr) => {
+				if (error) {
+					console.log(`error: ${error.message}`);
+					return;
+				}
+				if (stderr) {
+					console.log(`stderr: ${stderr}`);
+					return;
+				}
+				console.log(`stdout: ${stdout}`);
+				var jsonmessage = {'src':imgSrc+'?'+imgIndex};
+				ws.send(JSON.stringify(jsonmessage));
+			});
+  		}
+  	}
+	
 }
