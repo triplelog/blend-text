@@ -157,7 +157,6 @@ namespace Lapis.QrArt
 								};
 								RectangleF rectf = new RectangleF(blurRadius, blurRadius, twidth,theight);
 								graph.DrawString(contentArg.Value, font, Brushes.Black, rectf, format);
-								bmpp.GetPixel(10,10);
 							}
 							bitmapText = new BitmapFrame(bmpp);
 							bitmap = new BitmapFrame(bmp);

@@ -155,6 +155,7 @@ namespace Lapis.QRCode.Art
                 	}
                 }
                 
+                Console.WriteLine("MarginL from QRAC "+TripMatrixDrawer.MarginL);
                 stopWatch.Stop();
 				// Get the elapsed time as a TimeSpan value.
 				TimeSpan ts = stopWatch.Elapsed;
