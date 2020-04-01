@@ -84,9 +84,9 @@ for (var i=0;i<2;i++){
 var oldcode = '';
 var workspace = Blockly.inject('blocklyDiv', {toolbox: document.getElementById('toolbox')});
 //workspace.createVariable("d");
-//workspace.createVariable("h");
-//workspace.createVariable("s");
-//workspace.createVariable("l");
+workspace.createVariable("h");
+workspace.createVariable("s");
+workspace.createVariable("l");
 var wxml = Blockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id=",;:rq?OTC,Jk8]jU5cA+">d</variable></variables><block type="variables_get" id="7?~hoIxng@7*Onq/,x/0" x="181" y="73"><field name="VAR" id=",;:rq?OTC,Jk8]jU5cA+">d</field></block></xml>');
 Blockly.Xml.domToWorkspace(workspace, wxml);
 function myUpdateFunction(event) {
