@@ -94,7 +94,7 @@ wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
   	var dm = JSON.parse(message);
   	//console.log(dm);
-  	if (!dm.fontSize){
+  	if (!dm.fontSize || dm.textFormula == "" || dm.blurFormula == ""){
   		return;
   	}
   	// add more checks

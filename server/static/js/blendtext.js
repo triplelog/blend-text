@@ -29,6 +29,7 @@ imgData.textFormula = document.getElementById('textFormula').querySelector('text
 function updateImage(evt){
 	if (!evt){
 		imgData['blurFormula'] = document.getElementById('blurFormula').querySelector('textarea').value;
+		imgData['textFormula'] = document.getElementById('textFormula').querySelector('textarea').value;
 	}
 	else {
 		var el = evt.target;
