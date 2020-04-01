@@ -268,7 +268,6 @@ namespace Lapis.QRCode.Imaging.Drawing
             }
 			
 			if (Type == "text"){
-				Rectangle r = new Rectangle(MarginL,MarginT,TWidth,THeight);
 				Bitmap nb = new Bitmap(TWidth, THeight);
 				Graphics g = Graphics.FromImage(nb);
 				g.DrawImage(bmp, -MarginL, -MarginT);

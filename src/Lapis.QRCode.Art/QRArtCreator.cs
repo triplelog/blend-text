@@ -63,8 +63,14 @@ namespace Lapis.QRCode.Art
                 	}
                 }//~20 ms since else if
                 
-                twidth -= minII - blurRadius;
-            	theight -= minI - blurRadius;
+                Bitmap imgT = imageText.Bitmap();
+				Bitmap nb = new Bitmap(twidth-(minII-blurRadius), theight - (minI-blurRadius));
+				Graphics g = Graphics.FromImage(nb);
+				g.DrawImage(imgT, -1*(minII-blurRadius), -1*(minI-blurRadius));
+				imageText = new BitmapFrame(nb);
+				
+                twidth = (int)imageText.Width;
+            	theight = (int)imageText.Height;
             	
                 var tripMatrix = new TripMatrix(theight,twidth);
                 
@@ -82,7 +88,7 @@ namespace Lapis.QRCode.Art
 				int p;
                 for (var i=blurRadius;i<theight-blurRadius;i++){
                 	for (var ii=blurRadius;ii<twidth-blurRadius;ii++){
-                		p = imageText.GetPixel(ii+minII-blurRadius,i+minI-blurRadius);
+                		p = imageText.GetPixel(ii,i);
                 		if (p < 16000000){//first is x (col), second is y
                 			
                 			if (p < 8000000){
