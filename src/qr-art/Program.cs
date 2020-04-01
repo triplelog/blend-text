@@ -121,7 +121,7 @@ namespace Lapis.QrArt
 								int newSize = 0;
 								int idx = 0;
 								for (idx=0;idx<10;idx++){
-									newSize = oldSize * widthout * bmp.Width / 100 / twidth
+									newSize = oldSize * widthout * bmp.Width / 100 / twidth;
 									font = new Font(fontVal, newSize );
 									stringSize = graph1.MeasureString(measureString, font);
 								
