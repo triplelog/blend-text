@@ -92,6 +92,7 @@ wss.on('connection', function connection(ws) {
   var imgid = parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12);
   var imgIndex = 0;
   ws.on('message', function incoming(message) {
+  	console.log(message);
   	var dm = JSON.parse(message);
   	//console.log(dm);
   	if (!dm.fontSize || dm.textFormula == "" || dm.blurFormula == ""){

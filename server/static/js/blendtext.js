@@ -14,7 +14,7 @@ ws.onmessage = function(evt){
 
 var imgData = {};
 var myTimeout;
-imgData.imageSrc = document.getElementById('imageSrc').value;
+//imgData.imageSrc = document.getElementById('imageSrc').value;
 imgData.text = document.getElementById('text').value;
 imgData.fontSize = document.getElementById('fontSize').value;
 imgData.font = document.getElementById('font').value;
@@ -66,8 +66,8 @@ function updateImage(evt){
 	
 	
 }
-var singleEls = ['text','font','fontSize','blurRadius','imageSrc'];
-for (var i=0;i<5;i++){
+var singleEls = ['text','font','fontSize','blurRadius'];
+for (var i=0;i<4;i++){
 	var el = document.getElementById(singleEls[i]);
 	el.addEventListener('change',updateImage);
 }
