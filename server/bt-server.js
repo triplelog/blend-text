@@ -102,6 +102,7 @@ wss.on('connection', function connection(ws) {
   		return;
   	}
   	var dm = JSON.parse(message);
+
   	//console.log(dm);
   	if (!dm.fontSize || dm.textFormula == "" || dm.blurFormula == ""){
   		return;
@@ -143,8 +144,33 @@ wss.on('connection', function connection(ws) {
 		execCmd += ' -b "'+luaBlurFormula+'"';
 		execCmd += ' -B rgb';
   	}
+  	
+  	workspace = new Blockly.Workspace();
+  	wxml = Blockly.Xml.textToDom(dm.textFormula);
+  	Blockly.Xml.domToWorkspace(wxml, workspace);
+  	code = Blockly.Lua.workspaceToCode(workspace);
+  	
+  	if (dm.textType == 'hsl'){
+		luaTextFormula = `function TextFunc (val,h,s,l)
+		`+code+`
+		return h,s,l
+		end
+		`
+	
+		execCmd += ' -c "'+luaTextFormula+'"';
+		execCmd += ' -C hsl';
+  	}
+  	else {
+  		luaTextFormula = `function TextFunc (val,r,g,b)
+		`+code+`
+		return r,g,b
+		end
+		`
+	
+		execCmd += ' -c "'+luaTextFormula+'"';
+		execCmd += ' -C rgb';
+  	}
 
-  	execCmd += ' -c '+dm.textFormula;
   	if (dm.font.indexOf('"')==-1 && dm.font.indexOf(' ')>0){
   		execCmd += ' -f "'+dm.font+'"';
   	}
