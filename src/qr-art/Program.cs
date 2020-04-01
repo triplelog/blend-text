@@ -35,6 +35,7 @@ namespace Lapis.QrArt
             var blurFormulaOpt = app.Option("-b <number>", "Blur Formula", CommandOptionType.SingleValue);
             var blurTypeOpt = app.Option("-B <string>", "Blur Formula Color Type", CommandOptionType.SingleValue);
             var textFormulaOpt = app.Option("-c <number>", "Text Formula", CommandOptionType.SingleValue);
+            var textTypeOpt = app.Option("-C <string>", "Text Formula Color Type", CommandOptionType.SingleValue);
             var fontOpt = app.Option("-f <string>", "Font", CommandOptionType.SingleValue);
             var typeOpt = app.Option("-t <string>", "Type", CommandOptionType.SingleValue);
             //legacy below
