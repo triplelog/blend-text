@@ -130,6 +130,7 @@ wss.on('connection', function connection(ws) {
   	`
   	
   	execCmd += ' -b "'+luaBlurFormula+'"';
+  	execCmd += ' -B hsl';
 
   	execCmd += ' -c '+dm.textFormula;
   	if (dm.font.indexOf('"')==-1 && dm.font.indexOf(' ')>0){

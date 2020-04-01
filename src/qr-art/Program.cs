@@ -33,6 +33,7 @@ namespace Lapis.QrArt
             var locYOpt = app.Option("-y <number>", "location Y", CommandOptionType.SingleValue);
             var blurRadiusOpt = app.Option("-r <number>", "Blur Radius", CommandOptionType.SingleValue);
             var blurFormulaOpt = app.Option("-b <number>", "Blur Formula", CommandOptionType.SingleValue);
+            var blurTypeOpt = app.Option("-B <string>", "Blur Formula Color Type", CommandOptionType.SingleValue);
             var textFormulaOpt = app.Option("-c <number>", "Text Formula", CommandOptionType.SingleValue);
             var fontOpt = app.Option("-f <string>", "Font", CommandOptionType.SingleValue);
             var typeOpt = app.Option("-t <string>", "Type", CommandOptionType.SingleValue);
@@ -67,6 +68,7 @@ namespace Lapis.QrArt
                             textDrawer.MarginL = 0;
                             textDrawer.MarginT = 0;
                             textDrawer.Type = typeOpt.Value();
+                            textDrawer.BlurType = blurTypeOpt;
                             //textDrawer.BlurFormula = blurFormulaOpt.Value();
                             textDrawer.BlurFormula = System.IO.File.ReadAllText(@"/home/rwilcox/blend-text/server/formulas/test.txt");
 

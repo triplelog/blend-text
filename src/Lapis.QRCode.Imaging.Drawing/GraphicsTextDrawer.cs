@@ -45,28 +45,7 @@ namespace Lapis.QRCode.Imaging.Drawing
         		if (MarginL < 0){
         			startC = 0 - MarginL;
         		}
-        		Console.WriteLine(BlurFormula);
-        		/*
-        		string luaString = @"
-				function ScriptFunc (val,l,s)
-					if val < -25 then
-						if l < .6 then
-							l = .6
-						end
-						if s > .4 then
-							s = .4
-						end
-					else 
-						if l < .5 then
-							l = .5
-						end
-						if s > .4 then
-							s = .4
-						end
-					end
-					return l,s
-				end
-				";*/
+        		//Console.WriteLine(BlurFormula);
 				
 				Dictionary<int, int> lighthash = new Dictionary<int, int>();
 				Dictionary<int, int> darkhash = new Dictionary<int, int>();
@@ -188,20 +167,34 @@ namespace Lapis.QRCode.Imaging.Drawing
 								
 								
 								//Lighten uniformly
+								if (BlurType == "hsl"){
+									double h; double s; double l;
+									RgbToHls(re,gr,bl,out h,out l,out s);
+									var res = scriptFunc.Call (tripMatrix[r, c],h,s,l);
+									h = (double)res[0];
+									s = (double)res[1];
+									l = (double)res[2];
 							
-								double h; double s; double l;
-								RgbToHls(re,gr,bl,out h,out l,out s);
-								var res = scriptFunc.Call (tripMatrix[r, c],h,s,l);
-								l = (double)res[2];
-								s = (double)res[1];
-							
-								HlsToRgb(h, l, s,out re, out gr, out bl);
+									HlsToRgb(h, l, s,out re, out gr, out bl);
 								
-								int newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
-								lighthash.Add(imgC, newcol);
+									int newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
+									lighthash.Add(imgC, newcol);
 							
-								foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
-								graph.FillRectangle(foreBrushCustom, x, y, 1,1);
+									foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
+									graph.FillRectangle(foreBrushCustom, x, y, 1,1);
+								}
+								else {
+									var res = scriptFunc.Call (tripMatrix[r, c],re,gr,bl);
+									re = (double)res[0];
+									gr = (double)res[1];
+									bl = (double)res[2];
+								
+									int newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
+									lighthash.Add(imgC, newcol);
+							
+									foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
+									graph.FillRectangle(foreBrushCustom, x, y, 1,1);
+								}
 								newcell++;
 							}
 							

@@ -63,7 +63,13 @@ namespace Lapis.QRCode.Imaging
         
         string BlurFormula { get; set; }
         
+        string TextFormula { get; set; }
+        
         string Type {get; set; }
+        
+        string BlurType {get; set; }
+        
+        string TextType {get; set; }
 
         int Foreground { get; set; }
 
@@ -92,7 +98,13 @@ namespace Lapis.QRCode.Imaging
 		
 		public string BlurFormula { get; set; } = "";
 		
+		public string TextFormula { get; set; } = "";
+		
 		public string Type { get; set; } = "";
+		
+		public string BlurType { get; set; } = "";
+		
+		public string TextType { get; set; } = "";
 
         public int Foreground { get; set; } = 0x000000;
 
