@@ -123,7 +123,7 @@ wss.on('connection', function connection(ws) {
   	Blockly.Xml.domToWorkspace(wxml, workspace);
   	var code = Blockly.Lua.workspaceToCode(workspace);
   	
-  	if (2==2){
+  	if (2==3){
 		luaBlurFormula = `function ScriptFunc (val,h,s,l)
 		`+code+`
 		return h,s,l
