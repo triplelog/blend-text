@@ -136,11 +136,32 @@ namespace Lapis.QrArt
 									}
 									oldSize = newSize;
 								}
-								
 							}
 							Bitmap bmpp = (Bitmap) new Bitmap(twidth+2*blurRadius,theight+2*blurRadius);
 							
 						
+							
+							
+							using (Graphics graph = Graphics.FromImage(bmpp))
+							{
+								Rectangle ImageSize = new Rectangle(0,0,twidth+2*blurRadius,theight+2*blurRadius);
+								graph.FillRectangle(Brushes.White, ImageSize);
+								graph.SmoothingMode = SmoothingMode.AntiAlias;
+								graph.InterpolationMode = InterpolationMode.HighQualityBicubic;
+								graph.PixelOffsetMode = PixelOffsetMode.HighQuality;
+								graph.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+								StringFormat format = new StringFormat()
+								{
+									Alignment = StringAlignment.Center,
+									LineAlignment = StringAlignment.Center
+								};
+								RectangleF rectf = new RectangleF(blurRadius, blurRadius, twidth,theight);
+								graph.DrawString(contentArg.Value, font, Brushes.Black, rectf, format);
+								graph.GetPixel(10,10);
+							}
+							bitmapText = new BitmapFrame(bmpp);
+							bitmap = new BitmapFrame(bmp);
+							
 							{
 								int xPct = 0;
 								int xType = 0;
@@ -195,25 +216,6 @@ namespace Lapis.QrArt
 									textDrawer.MarginT = bmp.Height/2 - (theight+2*blurRadius)/2;
 								}
 							} //set margins
-							
-							using (Graphics graph = Graphics.FromImage(bmpp))
-							{
-								Rectangle ImageSize = new Rectangle(0,0,twidth+2*blurRadius,theight+2*blurRadius);
-								graph.FillRectangle(Brushes.White, ImageSize);
-								graph.SmoothingMode = SmoothingMode.AntiAlias;
-								graph.InterpolationMode = InterpolationMode.HighQualityBicubic;
-								graph.PixelOffsetMode = PixelOffsetMode.HighQuality;
-								graph.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-								StringFormat format = new StringFormat()
-								{
-									Alignment = StringAlignment.Center,
-									LineAlignment = StringAlignment.Center
-								};
-								RectangleF rectf = new RectangleF(blurRadius, blurRadius, twidth,theight);
-								graph.DrawString(contentArg.Value, font, Brushes.Black, rectf, format);
-							}
-							bitmapText = new BitmapFrame(bmpp);
-							bitmap = new BitmapFrame(bmp);
 						}
 						catch (Exception ex)
 						{
