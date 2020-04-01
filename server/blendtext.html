@@ -116,13 +116,19 @@
 					</div>
 					<div id="blurFormula">
 						Blur Formula:
-						<input type="checkbox"></input>
-						<textarea rows="4" cols="50"></textarea>
+						<select>
+							<option value="hsl" selected="selected">Custom HSL</option>
+							<option value="rgb">Custom RGB</option>
+						</select>
+						<textarea rows="4" cols="50" style="display: none;"></textarea>
 					</div>
 					<div id="textFormula">
 						Text Formula:
-						<input type="checkbox"></input>
-						<textarea rows="4" cols="50"></textarea>
+						<select>
+							<option value="hsl" selected="selected">Custom HSL</option>
+							<option value="rgb">Custom RGB</option>
+						</select>
+						<textarea rows="4" cols="50" style="display: none;"></textarea>
 					</div>
 				</div>
 			{% endif %}

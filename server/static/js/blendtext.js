@@ -47,6 +47,7 @@ function updateImage(evt){
 			}
 			else if (el.parentElement.id == 'blurFormula'){
 				var id = el.parentElement.id;
+				console.log(el.value);
 				if (imgData.blurType =='hsl'){
 					document.getElementById(id+'HSL').style.display = 'none';
 					document.getElementById(id+'RGB').style.display = 'block';
@@ -102,7 +103,7 @@ for (var i=0;i<2;i++){
 var formulaEls = ['blurFormula','textFormula'];
 for (var i=0;i<2;i++){
 	var el = document.getElementById(formulaEls[i]);
-	el.querySelector('input').addEventListener('change',updateImage);
+	el.querySelector('select').addEventListener('change',updateImage);
 }
 
 var oldcode = '';
@@ -174,6 +175,7 @@ function updateBRGB(event) {
 	if (code != oldcode){
 		var wxml = Blockly.Xml.workspaceToDom(workspaceBRGB);
 		var outspace = Blockly.Xml.domToText(wxml);
+		console.log(outspace);
 		
 		oldcode = code;
 		document.getElementById('blurFormula').querySelector('textarea').value = outspace;
