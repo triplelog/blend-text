@@ -131,7 +131,7 @@ wss.on('connection', function connection(ws) {
 		end
 		`
 	
-		execCmd += ' -b "'+luaBlurFormula+'"';
+		execCmd += ' -b "testBlur"';
 		execCmd += ' -B hsl';
   	}
   	else {
@@ -141,7 +141,7 @@ wss.on('connection', function connection(ws) {
 		end
 		`
 	
-		execCmd += ' -b "'+luaBlurFormula+'"';
+		execCmd += ' -b "testBlur"';
 		execCmd += ' -B rgb';
   	}
   	
@@ -157,7 +157,7 @@ wss.on('connection', function connection(ws) {
 		end
 		`
 	
-		execCmd += ' -c "'+luaTextFormula+'"';
+		execCmd += ' -c "testText"';
 		execCmd += ' -C hsl';
   	}
   	else {
@@ -167,7 +167,7 @@ wss.on('connection', function connection(ws) {
 		end
 		`
 	
-		execCmd += ' -c "'+luaTextFormula+'"';
+		execCmd += ' -c "testText"';
 		execCmd += ' -C rgb';
   	}
 
@@ -184,10 +184,10 @@ wss.on('connection', function connection(ws) {
   	
   	if (myTimeout){
 		clearTimeout(myTimeout);
-		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,outSrc,imgIndex, luaBlurFormula); }, 1000);
+		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,outSrc,imgIndex, luaBlurFormula, luaTextFormula); }, 1000);
 	}
 	else {
-		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,outSrc,imgIndex, luaBlurFormula); }, 1000);
+		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,outSrc,imgIndex, luaBlurFormula, luaTextFormula); }, 1000);
 	}
 	imgIndex++;
   	
@@ -196,27 +196,29 @@ wss.on('connection', function connection(ws) {
   });
 });
 
-function runCommand(ws,execCmd,outSrc,imgIndex, luaBlurFormula) {
+function runCommand(ws,execCmd,outSrc,imgIndex, luaBlurFormula, luaTextFormula) {
 	var formulaName = 'test';
-	fs.writeFile("formulas/"+formulaName+".txt", luaBlurFormula, function(err) {
-  		if (err){
-  		
-  		}
-  		else {
-  			exec(execCmd, (error, stdout, stderr) => {
-				if (error) {
-					console.log(`error: ${error.message}`);
-					return;
-				}
-				if (stderr) {
-					console.log(`stderr: ${stderr}`);
-					return;
-				}
-				console.log(`stdout: ${stdout}`);
-				var jsonmessage = {'src':outSrc+'?'+imgIndex};
-				ws.send(JSON.stringify(jsonmessage));
-			});
-  		}
+	fs.writeFile("formulas/"+formulaName+"Blur.txt", luaBlurFormula, function(err) {
+  		fs.writeFile("formulas/"+formulaName+"Text.txt", luaTextFormula, function(err) {
+			if (err){
+	
+			}
+			else {
+				exec(execCmd, (error, stdout, stderr) => {
+					if (error) {
+						console.log(`error: ${error.message}`);
+						return;
+					}
+					if (stderr) {
+						console.log(`stderr: ${stderr}`);
+						return;
+					}
+					console.log(`stdout: ${stdout}`);
+					var jsonmessage = {'src':outSrc+'?'+imgIndex};
+					ws.send(JSON.stringify(jsonmessage));
+				});
+			}
+		});
   	});
 	
 }

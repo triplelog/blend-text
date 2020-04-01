@@ -51,7 +51,9 @@ namespace Lapis.QRCode.Imaging.Drawing
 				Dictionary<int, int> darkhash = new Dictionary<int, int>();
 				
         		state.DoString (BlurFormula);
+        		state.DoString (TextFormula);
 				var scriptFunc = state ["ScriptFunc"] as LuaFunction;
+				var textFunc = state ["TextFunc"] as LuaFunction;
 				int newcell =0;
 				int repcell = 0;
 				int newdarkcell =0;
@@ -95,48 +97,69 @@ namespace Lapis.QRCode.Imaging.Drawing
 							}
 							else
 							{
-								double h; double s; double l;
-								RgbToHls(re,gr,bl,out h,out l,out s);
-								//l = (l*1)/(tripMatrix[r, c]*Math.Log(l+1.5)/Math.Log(2));
-								//s = 1 - (1-s)/1.25;
-								if (tripMatrix[r, c] ==1){
-									//l = ( (1 - (1-l)/2)*2 + (l/3) )/3;
-									if (l > .7){
-										l = .6;
+								if (TextType == "hsl"){
+									double h; double s; double l;
+									RgbToHls(re,gr,bl,out h,out l,out s);
+									if (tripMatrix[r, c] ==1){
+										if (l > .7){
+											l = .6;
+										}
+										else {
+											l = (l*2 + .3*1)/3;
+										}
+										s = s*1/2;
 									}
-									else {
-										l = (l*2 + .3*1)/3;
+									else if (tripMatrix[r, c] == 2){
+										if (l > .7){
+											l = .45;
+										}
+										else {
+											l = (l + .3*2)/3;
+										}
+										s = s*2/3;
 									}
-									s = s*1/2;
-								}
-								else if (tripMatrix[r, c] == 2){
-									//l = ( (1 - (1-l)/2) + (l/3)*2 )/3;
-									if (l > .7){
-										l = .45;
+									else{
+										var res = textFunc.Call (tripMatrix[r, c],h,s,l);
+										h = (double)res[0];
+										s = (double)res[1];
+										l = (double)res[2];
 									}
-									else {
-										l = (l + .3*2)/3;
+									//s = 1 - (1-s)/2;
+									HlsToRgb(h, l, s,out re, out gr, out bl);
+								
+									if (tripMatrix[r, c] > 2){
+										int newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
+										darkhash.Add(imgC, newcol);
 									}
 								
-									s = s*2/3;
+									foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
+									graph.FillRectangle(foreBrushCustom, x, y, 1,1);
+									
 								}
-								else{
-									//l = l/3;
-									if (l > .2){
-										l = .2;
+								else {
+									if (tripMatrix[r, c] ==1){
+									
 									}
-								}
-								//s = 1 - (1-s)/2;
-								HlsToRgb(h, l, s,out re, out gr, out bl);
+									else if (tripMatrix[r, c] == 2){
+									
+									}
+									else{
+										var res = textFunc.Call (tripMatrix[r, c],re,gr,bl);
+										re = Convert.ToInt32(res[0]);
+										gr = Convert.ToInt32(res[1]);
+										bl = Convert.ToInt32(res[2]);
+									}
 								
-								if (tripMatrix[r, c] > 2){
-									int newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
-									darkhash.Add(imgC, newcol);
-								}
+									if (tripMatrix[r, c] > 2){
+										int newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
+										darkhash.Add(imgC, newcol);
+									}
 								
-								foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
-								graph.FillRectangle(foreBrushCustom, x, y, 1,1);
+									foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
+									graph.FillRectangle(foreBrushCustom, x, y, 1,1);
+								}
 								newdarkcell++;
+								
 							}
 							
 									

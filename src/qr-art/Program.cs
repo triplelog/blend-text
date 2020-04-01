@@ -70,8 +70,10 @@ namespace Lapis.QrArt
                             textDrawer.MarginT = 0;
                             textDrawer.Type = typeOpt.Value();
                             textDrawer.BlurType = blurTypeOpt.Value();
+                            textDrawer.TextType = textTypeOpt.Value();
                             //textDrawer.BlurFormula = blurFormulaOpt.Value();
-                            textDrawer.BlurFormula = System.IO.File.ReadAllText(@"/home/rwilcox/blend-text/server/formulas/test.txt");
+                            textDrawer.BlurFormula = System.IO.File.ReadAllText(@"/home/rwilcox/blend-text/server/formulas/"+blurFormulaOpt.Value()+".txt");
+							textDrawer.TextFormula = System.IO.File.ReadAllText(@"/home/rwilcox/blend-text/server/formulas/"+textFormulaOpt.Value()+".txt");
 
                         }
 						
