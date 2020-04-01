@@ -36,7 +36,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 			
             using (var graph = Graphics.FromImage(bmp))
             {
-                graph.Clear(Color.FromArgb(255,255,255));
+                //graph.Clear(Color.FromArgb(255,255,255));
                 //var foreBrush = new SolidBrush(ColorHelper.FromIntRgb24(Foreground));
                 var foreBrush = new SolidBrush(Color.FromArgb(40,40,40));
                 var foreBrushB = new SolidBrush(Color.FromArgb(255,255,255));
@@ -90,6 +90,7 @@ namespace Lapis.QRCode.Imaging.Drawing
                         if (tripMatrix[r, c] == 0)
                         {
                         	//keep color as is
+                        	if (2==2){graph.FillRectangle(foreBrushB, x, y, 1,1);}
                         }
                         else if (tripMatrix[r, c] > 0)
                         {

@@ -169,7 +169,7 @@ namespace Lapis.QRCode.Art
                 	for (var ii=minX-blurRadius;ii<maxX+blurRadius;ii++){
                 		if (tripMatrix[i,ii] == 0){
                 			int dd = (10*maxD-15*maxD)*2/maxD;
-                			tripMatrix[i,ii] = dd;
+                			//tripMatrix[i,ii] = dd;
                 		}
                 	}
                 }
