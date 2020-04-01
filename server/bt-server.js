@@ -90,14 +90,14 @@ const wss = new WebSocket.Server({ server });
 wss.on('connection', function connection(ws) {
   var myTimeout;
   var imgid = parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12);
-  var outSrc = '../out/'+imgid+'.png';
-  var inSrc = '../in/'+imgid+'.png';
+  var outSrc = 'out/'+imgid+'.png';
+  var inSrc = 'images/in/'+imgid+'.png';
   var imgIndex = 0;
   ws.on('message', function incoming(message) {
   	console.log(message);
   	if (typeof message !== 'string'){
   		fs.writeFile(inSrc, Buffer.from(message), function (err) {
-  		
+  			console.log(err);
   		});
   		return;
   	}
@@ -112,7 +112,7 @@ wss.on('connection', function connection(ws) {
 	//download or upload file to 'inputs/imgid'+fileExt and set inputSrc
 	//var inSrc = 'test.jpg';
 	
-  	var execCmd = '../src/qr-art/bin/Debug/netcoreapp3.1/publish/qr-art "'+dm.text+'" '+inSrc+' png static/out'+imgid+'.png';
+  	var execCmd = '../src/qr-art/bin/Debug/netcoreapp3.1/publish/qr-art "'+dm.text+'" '+inSrc+' png static/'+outSrc;
   	execCmd += ' -s '+dm.fontSize;
   	execCmd += ' -x '+dm.locX;
   	execCmd += ' -y '+dm.locY;
