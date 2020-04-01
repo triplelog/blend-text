@@ -101,22 +101,18 @@ namespace Lapis.QRCode.Imaging.Drawing
 									double h; double s; double l;
 									RgbToHls(re,gr,bl,out h,out l,out s);
 									if (tripMatrix[r, c] ==1){
-										if (l > .7){
-											l = .6;
-										}
-										else {
-											l = (l*2 + .3*1)/3;
-										}
-										s = s*1/2;
+										var resD = textFunc.Call (tripMatrix[r, c],h,s,l);
+										var resL = scriptFunc.Call (tripMatrix[r, c],h,s,l);
+										h = Convert.ToDouble((resD[0]*1 + resL[0]*2)/3);
+										s = Convert.ToDouble((resD[1]*1 + resL[1]*2)/3);
+										l = Convert.ToDouble((resD[2]*1 + resL[2]*2)/3);
 									}
 									else if (tripMatrix[r, c] == 2){
-										if (l > .7){
-											l = .45;
-										}
-										else {
-											l = (l + .3*2)/3;
-										}
-										s = s*2/3;
+										var resD = textFunc.Call (tripMatrix[r, c],h,s,l);
+										var resL = scriptFunc.Call (tripMatrix[r, c],h,s,l);
+										h = Convert.ToDouble((resD[0]*2 + resL[0]*1)/3);
+										s = Convert.ToDouble((resD[1]*2 + resL[1]*1)/3);
+										l = Convert.ToDouble((resD[2]*2 + resL[2]*1)/3);
 									}
 									else{
 										var res = textFunc.Call (tripMatrix[r, c],h,s,l);
@@ -138,10 +134,20 @@ namespace Lapis.QRCode.Imaging.Drawing
 								}
 								else {
 									if (tripMatrix[r, c] ==1){
-									
+										var resD = textFunc.Call (tripMatrix[r, c],re,gr,bl);
+										
+										var resL = scriptFunc.Call (tripMatrix[r, c],re,gr,bl);
+										re = Convert.ToInt32((resD[0]*1 + resL[0]*2)/3);
+										gr = Convert.ToInt32((resD[1]*1 + resL[1]*2)/3);
+										bl = Convert.ToInt32((resD[2]*1 + resL[2]*2)/3);
 									}
 									else if (tripMatrix[r, c] == 2){
-									
+										var resD = textFunc.Call (tripMatrix[r, c],re,gr,bl);
+										
+										var resL = scriptFunc.Call (tripMatrix[r, c],re,gr,bl);
+										re = Convert.ToInt32((resD[0]*2 + resL[0]*1)/3);
+										gr = Convert.ToInt32((resD[1]*2 + resL[1]*1)/3);
+										bl = Convert.ToInt32((resD[2]*2 + resL[2]*1)/3);
 									}
 									else{
 										var res = textFunc.Call (tripMatrix[r, c],re,gr,bl);
