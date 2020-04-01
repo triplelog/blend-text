@@ -19,14 +19,8 @@ namespace Lapis.QRCode.Art
         public QRArtCreator(
             ITriparizer triparizer, ITripMatrixDrawer tripMatrixDrawer)
         {
-            if (binarizer == null)
-                throw new ArgumentNullException(nameof(binarizer));
-            if (colorizer == null)
-                throw new ArgumentNullException(nameof(colorizer));
             if (triparizer == null)
                 throw new ArgumentNullException(nameof(triparizer));
-            if (merger == null)
-                throw new ArgumentNullException(nameof(merger));
             Triparizer = triparizer;
             TripMatrixDrawer = tripMatrixDrawer;
         }

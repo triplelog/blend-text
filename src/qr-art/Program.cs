@@ -221,10 +221,7 @@ namespace Lapis.QrArt
                         )
                     {               
                         var builder = new QRAnimationCreator(
-                            new Binarizer(),
                             new Triparizer(),
-                            new Colorizer(),
-                            new Merger(),
                             textDrawer,
                             // frames => new BitmapImage(frames.Select(f => f as BitmapFrame))
                             frames => new Rgb24Bitmap(frames.Select(f => f as Rgb24BitmapFrame))
