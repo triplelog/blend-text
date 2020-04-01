@@ -20,8 +20,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 			Stopwatch stopWatch = new Stopwatch();
         	stopWatch.Start();
         		
-            int theight = tripMatrix.RowCount;
-            int twidth = tripMatrix.ColumnCount;
+            
             //var bitmap = new Bitmap(imageHeight, imageWidth);
             var bmp = Bitmap.FromFile(imagePath) as Bitmap;
             int imageHeight = bmp.Height;
@@ -59,9 +58,9 @@ namespace Lapis.QRCode.Imaging.Drawing
 				int newdarkcell =0;
 				int repdarkcell = 0;
 	
-                for (var r = startR; r < theight && r + MarginT < bmp.Height; r += 1)
+                for (var r = startR; r < THeight && r + MarginT < bmp.Height; r += 1)
                 {
-                    for (var c = startC; c < twidth && c + MarginL < bmp.Width; c += 1)
+                    for (var c = startC; c < TWidth && c + MarginL < bmp.Width; c += 1)
                     {
                         if (tripMatrix[r, c] == 0)
                         {
@@ -269,8 +268,8 @@ namespace Lapis.QRCode.Imaging.Drawing
             }
 			
 			if (Type == "text"){
-				Rectangle r = new Rectangle(MarginL,MarginT,twidth,theight);
-				Bitmap nb = new Bitmap(twidth, theight);
+				Rectangle r = new Rectangle(MarginL,MarginT,TWidth,THeight);
+				Bitmap nb = new Bitmap(TWidth, THeight);
 				Graphics g = Graphics.FromImage(nb);
 				g.DrawImage(bmp, -MarginL, -MarginT);
 				bmp = nb;

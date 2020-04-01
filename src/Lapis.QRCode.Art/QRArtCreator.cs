@@ -67,7 +67,13 @@ namespace Lapis.QRCode.Art
                 	}
                 }//~110 ms for this double loop
 				
-				
+				//TripMatrixDrawer.MarginL -= (minX-blurRadius)/2;
+                //TripMatrixDrawer.MarginT -= (minY-blurRadius)/2;
+                TripMatrixDrawer.THeight = tripMatrix.RowCount;
+                //TripMatrixDrawer.THeight -= theight - (maxY+blurRadius);
+            	TripMatrixDrawer.TWidth = tripMatrix.ColumnCount;
+                //TripMatrixDrawer.TWidth -= twidth - (maxX+blurRadius);
+                
 				int maxD = blurRadius*blurRadius;
         		int startiii = 0;
         		int endiii = 0;
@@ -155,7 +161,7 @@ namespace Lapis.QRCode.Art
                 	}
                 }
                 
-                Console.WriteLine("MarginL from QRAC "+TripMatrixDrawer.MarginL);
+                
                 stopWatch.Stop();
 				// Get the elapsed time as a TimeSpan value.
 				TimeSpan ts = stopWatch.Elapsed;

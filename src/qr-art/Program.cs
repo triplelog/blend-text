@@ -69,6 +69,8 @@ namespace Lapis.QrArt
                             //textDrawer.Background = backgd;
                             textDrawer.MarginL = 0;
                             textDrawer.MarginT = 0;
+                            textDrawer.THeight = 0;
+            				textDrawer.TWidth = 0;
                             textDrawer.Type = typeOpt.Value();
                             textDrawer.BlurType = blurTypeOpt.Value();
                             textDrawer.TextType = textTypeOpt.Value();
