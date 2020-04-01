@@ -91,7 +91,7 @@ namespace Lapis.QRCode.Imaging.Drawing
                         {
                         	//keep color as is
                         	
-                        	if (2==2){
+                        	if (Type == "text"){
                         		var x = MarginL + c;
                             	var y = MarginT + r;
                         		graph.FillRectangle(foreBrushB, x, y, 1,1);
@@ -229,7 +229,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 				Console.WriteLine("GraphicsTextDrawerTime " + elapsedTime +" new/rep "+newcell+'/'+repcell +" newd/repd "+newdarkcell+'/'+repdarkcell);
             }
 			
-			if (2==2){
+			if (Type == "text"){
 				Rectangle r = new Rectangle(MarginL,MarginT,twidth,theight);
 				Bitmap nb = new Bitmap(twidth, theight);
 				Graphics g = Graphics.FromImage(nb);

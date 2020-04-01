@@ -62,6 +62,8 @@ namespace Lapis.QRCode.Imaging
         int MarginT { get; set; }
         
         string BlurFormula { get; set; }
+        
+        string Type {get; set; };
 
         int Foreground { get; set; }
 
@@ -89,6 +91,8 @@ namespace Lapis.QRCode.Imaging
 		public int MarginT { get; set; } = 0;
 		
 		public string BlurFormula { get; set; } = "";
+		
+		public string Type { get; set; } = "";
 
         public int Foreground { get; set; } = 0x000000;
 
