@@ -26,6 +26,7 @@ imgData.blurRadius = document.getElementById('blurRadius').value;
 imgData.blurFormula = document.getElementById('blurFormula').querySelector('textarea').value;
 imgData.blurType = 'hsl';
 imgData.textFormula = document.getElementById('textFormula').querySelector('textarea').value;
+imgData.textType = 'hsl';
 imgData.type = type;
 
 function updateImage(evt){
@@ -44,11 +45,29 @@ function updateImage(evt){
 				imgData[id] = parseInt(document.getElementById(id).querySelector('select').value);
 				imgData[id] += parseInt(document.getElementById(id).querySelector('input').value);
 			}
-			else if (el.parentElement.id == 'blurFormula' || el.parentElement.id == 'textFormula'){
+			else if (el.parentElement.id == 'blurFormula'){
+				var id = el.parentElement.id;
+				if (imgData.blurType =='hsl'){
+					document.getElementById(id+'HSL').style.display = 'none';
+					document.getElementById(id+'RGB').style.display = 'block';
+					imgData.blurType = 'rgb';
+					updateBRGB();
+				}
+				else {
+					document.getElementById(id+'HSL').style.display = 'block';
+					document.getElementById(id+'RGB').style.display = 'none';
+					imgData.blurType = 'hsl';
+					updateBHSL();
+				}
+				
+			
+			}
+			else if (el.parentElement.id == 'textFormula'){
 				var id = el.parentElement.id;
 				document.getElementById(id+'HSL').style.display = 'none';
 				document.getElementById(id+'RGB').style.display = 'block';
-				imgData.blurType = 'rgb';
+				imgData.textType = 'rgb';
+				
 			}
 		}
 	}
@@ -163,3 +182,5 @@ function updateBRGB(event) {
 }
 workspaceB.addChangeListener(updateBHSL);
 workspaceBRGB.addChangeListener(updateBRGB);
+document.getElementById('blurFormulaRGB').style.display = 'none';
+document.getElementById('textFormulaRGB').style.display = 'none';
