@@ -36,10 +36,10 @@ namespace Lapis.QRCode.Imaging.Drawing
 			
             using (var graph = Graphics.FromImage(bmp))
             {
-                //graph.Clear(ColorHelper.FromIntRgb24(Background));
+                graph.Clear(Color.FromArgb(255,255,255));
                 //var foreBrush = new SolidBrush(ColorHelper.FromIntRgb24(Foreground));
                 var foreBrush = new SolidBrush(Color.FromArgb(40,40,40));
-                var foreBrushB = new SolidBrush(Color.FromArgb(0,0,120));
+                var foreBrushB = new SolidBrush(Color.FromArgb(255,255,255));
                 
         		var foreBrushCustom = new SolidBrush(Color.FromArgb(0,0,120));
         		int startR = 0;

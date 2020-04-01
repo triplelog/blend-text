@@ -130,7 +130,7 @@ wss.on('connection', function connection(ws) {
   		execCmd += ' -f '+dm.font;
   	}
   	
-  	execCmd += ' -t "image"';
+  	execCmd += ' -t '+dm.type;
   	
   	console.log(execCmd);
   	var imgSrc = '../out'+imgid+'.png';

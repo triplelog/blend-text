@@ -25,7 +25,7 @@ imgData.locX += parseInt(document.getElementById('locX').querySelector('input').
 imgData.blurRadius = document.getElementById('blurRadius').value;
 imgData.blurFormula = document.getElementById('blurFormula').querySelector('textarea').value;
 imgData.textFormula = document.getElementById('textFormula').querySelector('textarea').value;
-
+imgData.type = type;
 function updateImage(evt){
 	if (!evt){
 		imgData['blurFormula'] = document.getElementById('blurFormula').querySelector('textarea').value;
