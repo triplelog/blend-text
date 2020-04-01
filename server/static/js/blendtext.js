@@ -119,9 +119,8 @@ workspaceTRGB.createVariable("b",null,"qblur_b");
 //var wxml = Blockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="qblur_l">l</variable></variables><block type="controls_if" id="Wd;mk5}4Of9%Iw%Z7Zp@" x="35" y="18"><value name="IF0"><block type="logic_compare" id="Y]b.Mo8c|Gg]GFgx]d}."><field name="OP">LT</field><value name="A"><block type="variables_get" id="z@^1uBjFU^[PEMP$1M{*"><field name="VAR" id="qblur_l">l</field></block></value><value name="B"><block type="math_number" id="q#8h__fG*5qOgK`l1]dN"><field name="NUM">0.6</field></block></value></block></value><statement name="DO0"><block type="variables_set" id="!{OE7jG|eOuI%-Gmeh$z"><field name="VAR" id="qblur_l">l</field><value name="VALUE"><block type="math_number" id="eSak{(`N-^$A8:Y!TfoB"><field name="NUM">0.6</field></block></value></block></statement></block></xml>');
 //Blockly.Xml.domToWorkspace(wxml,workspaceTRGB);
 
-function myUpdateFunction(event) {
-	console.log(event.target);
-	var code = Blockly.Lua.workspaceToCode(workspace);
+function updatBHSL(event) {
+	var code = Blockly.Lua.workspaceToCode(workspaceB);
 	lastNew = true;
 	while (lastNew) {
 		if (code.length == 0){break;}
@@ -133,7 +132,7 @@ function myUpdateFunction(event) {
 		}
 	}
 	if (code != oldcode){
-		var wxml = Blockly.Xml.workspaceToDom(workspace);
+		var wxml = Blockly.Xml.workspaceToDom(workspaceB);
 		var outspace = Blockly.Xml.domToText(wxml);
 		
 		oldcode = code;
@@ -141,4 +140,26 @@ function myUpdateFunction(event) {
 		updateImage(false);
 	}
 }
-workspaceB.addChangeListener(myUpdateFunction);
+function updatBRGB(event) {
+	var code = Blockly.Lua.workspaceToCode(workspaceBRGB);
+	lastNew = true;
+	while (lastNew) {
+		if (code.length == 0){break;}
+		if (code[code.length-1]=='\n'){
+			code = code.substring(0,code.length-1);
+		}
+		else {
+			lastNew = false;
+		}
+	}
+	if (code != oldcode){
+		var wxml = Blockly.Xml.workspaceToDom(workspaceBRGB);
+		var outspace = Blockly.Xml.domToText(wxml);
+		
+		oldcode = code;
+		document.getElementById('blurFormula').querySelector('textarea').value = outspace;
+		updateImage(false);
+	}
+}
+workspaceB.addChangeListener(updateBHSL);
+workspaceBRGB.addChangeListener(updateBRGB);
