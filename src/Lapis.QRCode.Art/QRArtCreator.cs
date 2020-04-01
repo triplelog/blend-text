@@ -72,7 +72,8 @@ namespace Lapis.QRCode.Art
                 twidth -= blankL;
             	theight = (int)imageText.Height;
             	theight -= blankT;
-            	
+            	TripMatrixDrawer.MarginL -= (blankL)/2;
+                TripMatrixDrawer.MarginT -= (blankT)/2;
                 var tripMatrix = new TripMatrix(theight,twidth);
                 
                 for (var i=0;i<theight;i++){
@@ -109,8 +110,7 @@ namespace Lapis.QRCode.Art
                 	}
                 }//~110 ms for this double loop
 				
-				//TripMatrixDrawer.MarginL -= (minX-blurRadius)/2;
-                //TripMatrixDrawer.MarginT -= (minY-blurRadius)/2;
+				
                 TripMatrixDrawer.THeight = tripMatrix.RowCount;
             	TripMatrixDrawer.TWidth = tripMatrix.ColumnCount;
                 
