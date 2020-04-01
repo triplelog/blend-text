@@ -63,7 +63,8 @@ namespace Lapis.QRCode.Art
                 	}
                 }//~20 ms since else if
                 
-				
+                int blankL = minII-blurRadius;
+				Console.WriteLine("Blank Left "+blankL);
                 twidth = (int)imageText.Width;
             	theight = (int)imageText.Height;
             	
