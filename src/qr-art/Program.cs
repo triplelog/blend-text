@@ -29,6 +29,7 @@ namespace Lapis.QrArt
             var formatArg = app.Argument("format", "Output image format. [png|gif|svg]");
             var pathArg = app.Argument("outpath", "Output path.");
             var fontSizeOpt = app.Option("-s|--size <number>", "Font Size", CommandOptionType.SingleValue);
+            var widthOpt = app.Option("-w|--width <number>", "Width", CommandOptionType.SingleValue);
             var locXOpt = app.Option("-x <number>", "location X", CommandOptionType.SingleValue);
             var locYOpt = app.Option("-y <number>", "location Y", CommandOptionType.SingleValue);
             var blurRadiusOpt = app.Option("-r <number>", "Blur Radius", CommandOptionType.SingleValue);
@@ -77,13 +78,23 @@ namespace Lapis.QrArt
 
                         }
 						
+						
+						
+						
 						int blurRadius = 5;
         				if (int.TryParse(blurRadiusOpt.Value(), out blurRadius)){}
 						
 						string fontVal = getFont(fontOpt.Value().ToLower());
-						Font font = new Font(fontVal, fontSize);
+						Font font = new Font(fontVal, 16);
+						int widthout = -1;
+						if (int.TryParse(widthOpt.Value(), out widthout)){
+							
+						}
+						else {
+							font = new Font(fontVal, fontSize);
+						}
+						
         				Console.WriteLine(font.FontFamily);
-        				
         				
         				Stopwatch stopWatch = new Stopwatch();
         				stopWatch.Start();
@@ -105,7 +116,14 @@ namespace Lapis.QrArt
 							Console.WriteLine("width "+stringSize.Width + " height "+ stringSize.Height + "fSize "+fontSize);
 							int twidth = (int)stringSize.Width;
 							int theight = (int)stringSize.Height;
-							
+							if (widthout > -1){
+								font = new Font(fontVal, 16 * widthout * bmp.Width / 100 / twidth );
+								stringSize = graph1.MeasureString(measureString, font);
+								
+								twidth = (int)stringSize.Width;
+								theight = (int)stringSize.Height;
+								Console.WriteLine("Percent "+ (twidth*100/bmp.Width) );
+							}
 							Bitmap bmpp = (Bitmap) new Bitmap(twidth+2*blurRadius,theight+2*blurRadius);
 							
 						
