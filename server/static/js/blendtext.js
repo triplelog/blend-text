@@ -196,7 +196,7 @@ function updateWork(workspace,bort) {
 		code = Blockly.Python.workspaceToCode(workspace);
 	}
 	else if (lang == 'php'){
-		code = Blockly.Php.workspaceToCode(workspace);
+		code = Blockly.PHP.workspaceToCode(workspace);
 	}
 	else if (lang == 'javascript'){
 		code = Blockly.Javascript.workspaceToCode(workspace);
