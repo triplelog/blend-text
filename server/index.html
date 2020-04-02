@@ -12,8 +12,8 @@
 	width: calc(100vw - 3rem);
 	margin: 1rem auto;
 	/*border: 1px dotted blue;*/
-	grid-template-columns: 1fr 193px 1fr;
-  	grid-template-rows: 1fr 204px 1fr;
+	grid-template-columns: calc((100vw - 3rem - 193px) / 2) 193px calc((100vw - 3rem - 193px) / 2);
+  	grid-template-rows: calc((100vh - 3rem - 204px) / 2) 204px calc((100vh - 3rem - 204px) / 2);
 }
 
 .header {
