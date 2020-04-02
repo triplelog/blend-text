@@ -94,7 +94,7 @@ wss.on('connection', function connection(ws) {
   var inSrc = 'images/in/'+imgid+'.png';
   var imgIndex = 0;
   ws.on('message', function incoming(message) {
-  	
+  	console.log(message);
   	if (typeof message !== 'string'){
   		fs.writeFile(inSrc, Buffer.from(message), function (err) {
   			console.log(err);
