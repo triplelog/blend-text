@@ -156,21 +156,73 @@
 
 
 	<div class="content-11">
+		<div class="title">Edit</div>
 		<div class="content">
-			<div class="title">Text</div>
+				
+			<div>
+				Image: <input type="file" name="imgSrc" id="imgSrc"></input>
+			</div>
+			<div>
+				Text: <input type="text" id="text" value=" "></input>
+			</div>
+			<div>
+				Font: <input type="text" id="font" value="Tahoma">Autocomplete w/ fonts</input>
+			</div>
+			<div>
+				Font Size: <input type="number" id="fontSize" value="40"></input>
+			</div>
+			<div id="locY">
+				Location Y: 
+				<select>
+					<option value="0">Middle</option>
+					<option value="200">Top</option>
+					<option value="400">Bottom</option>
+				</select>
+				 = 
+				 <input type="number" value="50"></input>%
+			</div>
+			<div id="locX">
+				Location X: 
+				<select>
+					<option value="0">Middle</option>
+					<option value="200">Left</option>
+					<option value="400">Right</option>
+				</select>
+				 = 
+				 <input type="number" value="50"></input>%
+			</div>
+			<div>
+				Blur Radius: <input type="number" id="blurRadius" value="10"></input>
+			</div>
+			
 		</div>
 	</div>
 	<div class="content-13">
-		<div class="title">Charts</div>
+		<div class="title">Preview</div>
 		<div class="content">
 			<img src="../img/chart.gif">
 		</div>
 	</div>
 	<div class="content-31">
 		
-		<div class="title">Formulas</div>
+		<div class="title">Formula</div>
 		<div class="content">
-			Create custom formulas or borrow from others!
+			<div id="blurFormula">
+				Blur Formula:
+				<select>
+					<option value="hsl" selected="selected">Custom HSL</option>
+					<option value="rgb">Custom RGB</option>
+				</select>
+				<textarea rows="4" cols="50" style="display: none;"></textarea>
+			</div>
+			<div id="textFormula">
+				Text Formula:
+				<select>
+					<option value="hsl" selected="selected">Custom HSL</option>
+					<option value="rgb">Custom RGB</option>
+				</select>
+				<textarea rows="4" cols="50" style="display: none;"></textarea>
+			</div>
 		</div>
 	</div>
 	<div class="content-33">

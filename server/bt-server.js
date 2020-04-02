@@ -38,7 +38,7 @@ app.get('/',
 app.get('/qr', 
 	function(req, res) {
 		
-		res.write(nunjucks.render('blendtext.html',{
+		res.write(nunjucks.render('qblur.html',{
 			type: 'qr',
 		}));
 		res.end();
