@@ -199,7 +199,7 @@ function updateWork(workspace,bort) {
 		code = Blockly.PHP.workspaceToCode(workspace);
 	}
 	else if (lang == 'javascript'){
-		code = Blockly.Javascript.workspaceToCode(workspace);
+		code = Blockly.JavaScript.workspaceToCode(workspace);
 	}
 	else if (lang == 'dart'){
 		code = Blockly.Dart.workspaceToCode(workspace);
