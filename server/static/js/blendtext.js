@@ -204,12 +204,23 @@ function chgLanguage(event){
 	codeEl.classList.add('language-'+lang);
 	el.appendChild(codeEl);
 	//Add a check to get blur or fore
-	if (document.getElementById('blurFormula').querySelector('select').value == 'hsl'){
-		updateBHSL();
+	if (blurOrText == 'blur'){
+		if (imgData.blurType == 'hsl') {
+			updateBHSL();
+		}
+		else {
+			updateBRGB();
+		}
 	}
 	else {
-		updateBRGB();
+		if (imgData.textType == 'hsl') {
+			updateTHSL();
+		}
+		else {
+			updateTRGB();
+		}
 	}
+	
 	
 }
 var code;
