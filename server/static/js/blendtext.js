@@ -232,7 +232,7 @@ function updateWork(workspace,bort) {
 		Prism.highlightAll();
 	}
 }
-function updateBHSL(event) {updateWork(workspaceB'b');}
+function updateBHSL(event) {updateWork(workspaceB,'b');}
 function updateBRGB(event) {updateWork(workspaceBRGB,'b');}
 function updateTHSL(event) {updateWork(workspaceT,'t');}
 function updateTRGB(event) {updateWork(workspaceTRGB,'t');}
