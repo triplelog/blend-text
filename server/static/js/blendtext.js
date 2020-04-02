@@ -45,11 +45,13 @@ function updateImage(evt){
 			if (el.value == 'blur'){
 				blurOrText = 'blur';
 				if (imgData.blurType == 'hsl') {
+					document.getElementById('hslrgb').value = 'hsl';
 					document.getElementById('blurFormulaHSL').style.display = 'block';
 					document.getElementById('textFormulaHSL').style.display = 'none';
 					updateBHSL();
 				}
 				else {
+					document.getElementById('hslrgb').value = 'rgb';
 					document.getElementById('blurFormulaRGB').style.display = 'block';
 					document.getElementById('textFormulaRGB').style.display = 'none';
 					updateBRGB();
@@ -57,12 +59,14 @@ function updateImage(evt){
 			}
 			else {
 				blurOrText = 'text';
-				if (imgData.blurType == 'hsl') {
+				if (imgData.textType == 'hsl') {
+					document.getElementById('hslrgb').value = 'hsl';
 					document.getElementById('textFormulaHSL').style.display = 'block';
 					document.getElementById('blurFormulaHSL').style.display = 'none';
 					updateTHSL();
 				}
 				else {
+					document.getElementById('hslrgb').value = 'rgb';
 					document.getElementById('textFormulaRGB').style.display = 'block';
 					document.getElementById('blurFormulaRGB').style.display = 'none';
 					updateTRGB();
@@ -203,7 +207,6 @@ function chgLanguage(event){
 	var codeEl = document.createElement('code');
 	codeEl.classList.add('language-'+lang);
 	el.appendChild(codeEl);
-	//Add a check to get blur or fore
 	if (blurOrText == 'blur'){
 		if (imgData.blurType == 'hsl') {
 			updateBHSL();
