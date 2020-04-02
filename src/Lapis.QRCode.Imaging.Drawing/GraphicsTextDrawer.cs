@@ -120,13 +120,13 @@ namespace Lapis.QRCode.Imaging.Drawing
 										
 										if (tripMatrix[r, c] ==1){
 											h += Convert.ToDouble(resL[0]);
-											s += Convert.ToDouble(resL[0]);
-											l += Convert.ToDouble(resL[0]);
+											s += Convert.ToDouble(resL[1]);
+											l += Convert.ToDouble(resL[2]);
 										}
 										else if (tripMatrix[r, c] == 2){
 											h += Convert.ToDouble(resD[0]);
-											s += Convert.ToDouble(resD[0]);
-											l += Convert.ToDouble(resD[0]);
+											s += Convert.ToDouble(resD[1]);
+											l += Convert.ToDouble(resD[2]);
 										}
 										h /= 3;
 										s /= 3;
@@ -139,15 +139,16 @@ namespace Lapis.QRCode.Imaging.Drawing
 										int newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
 										darkhash.Add(imgC, newcol);
 									}
+									
 									if (re > 255 || gr > 255 || bl > 255){
 										Console.WriteLine(" red: "+re+" gr: "+gr+" bl: "+bl+" a: "+pixColor.A);
 										Console.WriteLine(" redC: "+pixColor.R+" grC: "+pixColor.G+" blC: "+pixColor.B);
-										break;
+										
 									}
 									else if (re < 0 || gr < 0 || bl < 0){
 										Console.WriteLine(" red0: "+re+" gr: "+gr+" bl: "+bl+" a: "+pixColor.A);
 										Console.WriteLine(" redC: "+pixColor.R+" grC: "+pixColor.G+" blC: "+pixColor.B);
-										break;
+										
 									}
 									else {
 										foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
