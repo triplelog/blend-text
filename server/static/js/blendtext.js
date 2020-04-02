@@ -16,7 +16,11 @@ var imgData = {};
 var myTimeout;
 //imgData.imageSrc = document.getElementById('imageSrc').value;
 imgData.text = document.getElementById('text').value;
-imgData.fontSize = document.getElementById('fontSize').value;
+imgData.fontSize = document.getElementById('fontSize').querySelector('input').value;
+if (document.getElementById('fontSize').querySelector('select').value == "width"){
+	imgData.width = document.getElementById('fontSize').querySelector('input').value;
+	document.getElementById('fontSize').querySelector('span').textContent = '%';
+}
 imgData.font = document.getElementById('font').value;
 imgData.locY = parseInt(document.getElementById('locY').querySelector('select').value);
 imgData.locY += parseInt(document.getElementById('locY').querySelector('input').value);
@@ -44,6 +48,18 @@ function updateImage(evt){
 				var id = el.parentElement.id;
 				imgData[id] = parseInt(document.getElementById(id).querySelector('select').value);
 				imgData[id] += parseInt(document.getElementById(id).querySelector('input').value);
+			}
+			else if (el.parentElement.id == 'fontSize'){
+				var id = el.parentElement.id;
+				imgData.fontSize = document.getElementById('fontSize').querySelector('input').value;
+				if (el.parentElement.querySelector('select').value == 'width'){
+					imgData.width = document.getElementById('fontSize').querySelector('input').value;
+					document.getElementById('fontSize').querySelector('span').textContent = '%';
+				}
+				else {
+					delete imgData.width;
+					document.getElementById('fontSize').querySelector('span').textContent = '';
+				}
 			}
 			else if (el.parentElement.id == 'blurFormula'){
 				var id = el.parentElement.id;
@@ -97,13 +113,13 @@ function updateImage(evt){
 	
 	
 }
-var singleEls = ['text','font','fontSize','blurRadius'];
-for (var i=0;i<4;i++){
+var singleEls = ['text','font','blurRadius'];
+for (var i=0;i<3;i++){
 	var el = document.getElementById(singleEls[i]);
 	el.addEventListener('change',updateImage);
 }
-var doubleEls = ['locY','locX'];
-for (var i=0;i<2;i++){
+var doubleEls = ['locY','locX','fontSize'];
+for (var i=0;i<3;i++){
 	var el = document.getElementById(doubleEls[i]);
 	el.querySelector('select').addEventListener('change',updateImage);
 	el.querySelector('input').addEventListener('change',updateImage);
