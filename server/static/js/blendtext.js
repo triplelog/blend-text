@@ -176,6 +176,13 @@ function chgLanguage(event){
 	codeEl.classList.add('language-'+lang);
 	el.appendChild(codeEl);
 	//Add a call to update the code
+	if (document.getElementById('blurFormula').querySelector('select').value == 'hsl'){
+		updateBHSL();
+	}
+	else {
+		updateBRGB();
+	}
+	
 }
 function updateBHSL(event) {
 	var code;
