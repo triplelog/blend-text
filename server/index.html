@@ -63,14 +63,30 @@
 .content-23 {
 	grid-row:  2;
 	grid-column:  3;
+	height: calc(100% + 2rem);
   	border: 1px solid black;
   	border-radius: 3rem;
+  	z-index: 2;
+}
+.content-23h {
+	grid-row:  2;
+	grid-column:  3;
+	height: calc(100%);
+  	border: 1px solid black;
+  	background: white;
+  	z-index: 3;
 }
 .content-33 {
 	grid-row:  3;
 	grid-column:  3;
   	border: 1px solid black;
   	border-radius: 3rem;
+  	z-index: 1;
+}
+.title {
+	line-height: 2rem;
+	text-align: center;
+	font-size: 1.5rem;
 }
 
 </style>
@@ -112,9 +128,14 @@
 			
 		</div>
 	</div>
+	<div class="content-23h">
+		<div class="content">
+			
+		</div>
+	</div>
 	<div class="content-33">
 		<div class="content">
-			<center><h2>QR Code</h2></center>
+			<span class="title">QR Code</span>
 
 		</div>
 	</div>
