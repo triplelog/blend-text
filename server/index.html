@@ -15,9 +15,7 @@
 	grid-template-columns: auto 193px auto;
   	grid-template-rows: auto 204px auto;
 }
-#rotate-11, #rotate-13, #rotate-31 {
-	display: none;
-}
+
 .header {
 	position: relative;
 	top: 0px;
@@ -75,34 +73,18 @@
   	position: relative;
 }
 .content-11:hover ~ .content-22 {
-	animation: rotatein11 3s linear 0s 1 normal forwards;
+	transition: all 3s ease-in;
+	rotate(180deg);
 }
-/*
-.content-13:hover ~ .content-22 #rotate-13 {
-	display: block;
+.content-13:hover ~ .content-22 {
+	transition: all 3s ease-in;
+	rotate(-90deg);
 }
-.content-31:hover ~ .content-22 #rotate-31 {
-	display: block;
-	transform: rotate(45deg);
+.content-31:hover ~ .content-22 {
+	transition: all 3s ease-in;
+	rotate(90deg);
 }
-.content-11:hover ~ .content-22 #rotate-33 {
-	display: none;
-}
-.content-13:hover ~ .content-22 #rotate-33 {
-	display: none;
-}
-.content-31:hover ~ .content-22 #rotate-33 {
-	display: none;
-}*/
-@keyframes rotatein11 {
-  from {
-    transform: rotate(0deg); 
-  }
 
-  to {
-    transform: rotate(270deg);
-  }
-}
 
 .content-23 {
   
@@ -171,9 +153,6 @@
 		<div class="header">
 			
 			<img src="../img/logo.png" id="rotate-33" />
-			<img src="../img/logo11.png" id="rotate-11"/>
-			<img src="../img/logo13.png" id="rotate-13" />
-			<img src="../img/logo31.png" id="rotate-31" />
 			<!--<span>Text</span>
 			<span>Chart</span>
 			<span>QR Code</span>
