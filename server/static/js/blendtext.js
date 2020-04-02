@@ -48,12 +48,14 @@ function updateImage(evt){
 					document.getElementById('hslrgb').value = 'hsl';
 					document.getElementById('blurFormulaHSL').style.display = 'block';
 					document.getElementById('textFormulaHSL').style.display = 'none';
+					document.getElementById('textFormulaRGB').style.display = 'none';
 					updateBHSL();
 				}
 				else {
 					document.getElementById('hslrgb').value = 'rgb';
 					document.getElementById('blurFormulaRGB').style.display = 'block';
 					document.getElementById('textFormulaRGB').style.display = 'none';
+					document.getElementById('textFormulaHSL').style.display = 'none';
 					updateBRGB();
 				}
 			}
@@ -63,12 +65,14 @@ function updateImage(evt){
 					document.getElementById('hslrgb').value = 'hsl';
 					document.getElementById('textFormulaHSL').style.display = 'block';
 					document.getElementById('blurFormulaHSL').style.display = 'none';
+					document.getElementById('blurFormulaRGB').style.display = 'none';
 					updateTHSL();
 				}
 				else {
 					document.getElementById('hslrgb').value = 'rgb';
 					document.getElementById('textFormulaRGB').style.display = 'block';
 					document.getElementById('blurFormulaRGB').style.display = 'none';
+					document.getElementById('blurFormulaHSL').style.display = 'none';
 					updateTRGB();
 				}
 			}
