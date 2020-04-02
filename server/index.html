@@ -74,9 +74,11 @@
   	border-radius: 1.5rem;
   	position: relative;
 }
-.content-11:hover ~ .content-22 #rotate-11 {
-	display: block;
+.content-11:hover ~ .content-22 {
+	animation-duration: 3s;
+  	animation-name: rotatein11;
 }
+/*
 .content-13:hover ~ .content-22 #rotate-13 {
 	display: block;
 }
@@ -92,6 +94,15 @@
 }
 .content-31:hover ~ .content-22 #rotate-33 {
 	display: none;
+}*/
+@keyframes rotatein11 {
+  from {
+    transform: rotate(0deg); 
+  }
+
+  to {
+    transform: rotate(270deg);
+  }
 }
 
 .content-23 {
