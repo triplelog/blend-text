@@ -14,8 +14,9 @@
   	grid-template-rows: auto 204px auto;
 }
 .header {
+	grid-row:  2;
 	grid-column:  2;
-  	grid-row:  2;
+  	
 }
 .header img{
 	position: relative;
@@ -36,8 +37,23 @@
 	top: 110px;
 }
 .content-11 {
+	grid-row:  1;
 	grid-column:  1;
-  	grid-row:  1;
+  	border: 1px solid black;
+}
+.content-31 {
+	grid-row:  3;
+	grid-column:  1;
+  	border: 1px solid black;
+}
+.content-13 {
+	grid-row:  1;
+	grid-column:  3;
+  	border: 1px solid black;
+}
+.content-33 {
+	grid-row:  3;
+	grid-column:  3;
   	border: 1px solid black;
 }
 
@@ -104,38 +120,50 @@
 						<textarea rows="4" cols="50"></textarea>
 					</div>
 				</div>
+			</div>
+
+		</div>
+	</div>
+	<div class="content-13">
+		<div class="content">
+			<div class="pure-g">
 				<div class="l-box pure-u-1 pure-u-md-1-4 pure-u-lg-1-2">
 					<div id="blocklyDiv" style="height: 280px; width: 500px;"></div>
 					<!--<div id="codearea" style="height: 280px; width: 200px; border: 1px solid black;"></div>-->
 				</div>
+			</div>
+
+		</div>
+	</div>
+	<div class="content-31">
+		<div class="content">
+			<div class="pure-g">
 				<div class="l-box pure-u-1" id="imageHolder">
 				</div>
 			</div>
 
 		</div>
-		<xml id="toolbox" style="display: none">
-	  
-		  <category name="Control">
-			<block type="controls_if"></block>
-			<block type="controls_whileUntil"></block>
-			<block type="controls_for">
-		  </category>
-		  <category name="Logic">
-			<block type="logic_compare"></block>
-			<block type="logic_operation"></block>
-			<block type="logic_boolean"></block>
-		  </category>
-		  <category name="Math">
-			<block type="math_number"></block>
-			<block type="math_arithmetic"></block>
-		  </category>
-		  <category name="Variables" custom="VARIABLE"></category>
-		  <category name="Functions" custom="PROCEDURE"></category>
-
-		</xml>
-
 	</div>
 </div>
+<xml id="toolbox" style="display: none">
+  <category name="Control">
+	<block type="controls_if"></block>
+	<block type="controls_whileUntil"></block>
+	<block type="controls_for">
+  </category>
+  <category name="Logic">
+	<block type="logic_compare"></block>
+	<block type="logic_operation"></block>
+	<block type="logic_boolean"></block>
+  </category>
+  <category name="Math">
+	<block type="math_number"></block>
+	<block type="math_arithmetic"></block>
+  </category>
+  <category name="Variables" custom="VARIABLE"></category>
+  <category name="Functions" custom="PROCEDURE"></category>
+
+</xml>
 <script src="../js/blockly_compressed.js"></script>
 <script src="../js/blocks_compressed.js"></script>
 <script src="../js/blocklyen.js"></script>
