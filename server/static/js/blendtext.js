@@ -170,7 +170,7 @@ function chgLanguage(event){
 	var el = document.getElementById('myCode');
 	el.innerHTML = '';
 	var codeEl = document.createElement('code');
-	codeEl.add('language-'+lang);
+	codeEl.classList.add('language-'+lang);
 	el.appendChild(codeEl);
 	//Add a call to update the code
 }
