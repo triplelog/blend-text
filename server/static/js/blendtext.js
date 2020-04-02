@@ -243,3 +243,5 @@ workspaceT.addChangeListener(updateTHSL);
 workspaceTRGB.addChangeListener(updateTRGB);
 document.getElementById('blurFormulaRGB').style.display = 'none';
 document.getElementById('textFormulaRGB').style.display = 'none';
+updateTHSL();
+updateBHSL();
