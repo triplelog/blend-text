@@ -163,13 +163,15 @@ workspaceTRGB.createVariable("b",null,"qblur_b");
 var wxml = Blockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="qblur_r">r</variable></variables><block type="controls_if" id="Il^^YLd2NrFN:|;KKrjz" x="53" y="8"><value name="IF0"><block type="logic_compare" id="ziTZ^NbMl,qw@.Jp?R,B"><field name="OP">LT</field><value name="A"><block type="variables_get" id="]$l^IlghlBfr{3nXw`e{"><field name="VAR" id="qblur_r">r</field></block></value><value name="B"><block type="math_number" id="h2X9B|l.elRcnP+Je:;u"><field name="NUM">200</field></block></value></block></value><statement name="DO0"><block type="variables_set" id="D;pLu7Mt]Bf4$r!guo;-"><field name="VAR" id="qblur_r">r</field><value name="VALUE"><block type="math_number" id="i~V0T-jtCz[Wz(P4:BIV"><field name="NUM">200</field></block></value></block></statement></block></xml>');
 Blockly.Xml.domToWorkspace(wxml,workspaceTRGB);
 
-var lang = 'lua';
+var lang = 'python';
 document.getElementById('langOption').addEventListener('change',chgLanguage);
 function chgLanguage(event){
 	lang = document.getElementById('langOption').value;
-	document.getElementById('myCode').classList.remove('language-lua');
-	document.getElementById('myCode').classList.remove('language-python');
-	document.getElementById('myCode').classList.add('language-'+lang);
+	var el = document.getElementById('myCode');
+	el.innerHTML = '';
+	var codeEl = document.createElement('code');
+	codeEl.add('language-'+lang);
+	el.appendChild(codeEl);
 	//Add a call to update the code
 }
 function updateBHSL(event) {
@@ -197,7 +199,7 @@ function updateBHSL(event) {
 		oldcode = code;
 		document.getElementById('blurFormula').querySelector('textarea').value = outspace;
 		updateImage(false);
-		document.getElementById('myCode').textContent = code;
+		document.getElementById('myCode').querySelector('code').textContent = code;
 		Prism.highlightAll();
 	}
 }
