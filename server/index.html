@@ -14,8 +14,9 @@
   	grid-template-rows: auto 204px auto;
 }
 .header {
-	grid-row:  2;
-	grid-column:  2;
+	position: relative;
+	top: 0px;
+	left:0px;
   	
 }
 .header img{
@@ -46,6 +47,10 @@
 	grid-column:  1;
   	border: 1px solid black;
 }
+.content-22 {
+	grid-row:  2;
+	grid-column:  2;
+}
 .content-13 {
 	grid-row:  1;
 	grid-column:  3;
@@ -63,12 +68,14 @@
 <body>
 
 <div class="container">
-	<div class="header">
-		<img src="../img/logo.png" />
-		<span>Text</span>
-		<span>Chart</span>
-		<span>QR Code</span>
-		<span>Account</span>
+	<div class="content-22">
+		<div class="header">
+			<img src="../img/logo.png" />
+			<span>Text</span>
+			<span>Chart</span>
+			<span>QR Code</span>
+			<span>Account</span>
+		</div>
 	</div>
 
 
