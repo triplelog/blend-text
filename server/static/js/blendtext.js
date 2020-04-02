@@ -171,6 +171,9 @@ function chgLanguage(event){
 	el.innerHTML = '';
 	el.classList.remove('language-python');
 	el.classList.remove('language-lua');
+	el.classList.remove('language-php');
+	el.classList.remove('language-js');
+	el.classList.remove('language-dart');
 	el.classList.add('language-'+lang);
 	var codeEl = document.createElement('code');
 	codeEl.classList.add('language-'+lang);
@@ -184,15 +187,24 @@ function chgLanguage(event){
 	}
 	
 }
-function updateBHSL(event) {
-	var code;
+var code;
+function updateWork(workspace,bort) {
 	if (lang == 'lua'){
-		code = Blockly.Lua.workspaceToCode(workspaceB);
+		code = Blockly.Lua.workspaceToCode(workspace);
 	}
 	else if (lang == 'python'){
-		code = Blockly.Python.workspaceToCode(workspaceB);
+		code = Blockly.Python.workspaceToCode(workspace);
 	}
-	lastNew = true;
+	else if (lang == 'php'){
+		code = Blockly.Php.workspaceToCode(workspace);
+	}
+	else if (lang == 'javascript'){
+		code = Blockly.Javascript.workspaceToCode(workspace);
+	}
+	else if (lang == 'dart'){
+		code = Blockly.Dart.workspaceToCode(workspace);
+	}
+	var lastNew = true;
 	while (lastNew) {
 		if (code.length == 0){break;}
 		if (code[code.length-1]=='\n'){
@@ -202,80 +214,29 @@ function updateBHSL(event) {
 			lastNew = false;
 		}
 	}
+	
 	if (code != oldcode){
-		var wxml = Blockly.Xml.workspaceToDom(workspaceB);
+		var wxml = Blockly.Xml.workspaceToDom(workspace);
 		var outspace = Blockly.Xml.domToText(wxml);
 		
 		oldcode = code;
-		document.getElementById('blurFormula').querySelector('textarea').value = outspace;
+		if (bort == 'b'){
+			document.getElementById('blurFormula').querySelector('textarea').value = outspace;
+		}
+		else {
+			document.getElementById('textFormula').querySelector('textarea').value = outspace;
+		}
+		
 		updateImage(false);
 		document.getElementById('myCode').querySelector('code').textContent = code;
 		Prism.highlightAll();
 	}
 }
-function updateBRGB(event) {
-	var code = Blockly.Lua.workspaceToCode(workspaceBRGB);
-	lastNew = true;
-	while (lastNew) {
-		if (code.length == 0){break;}
-		if (code[code.length-1]=='\n'){
-			code = code.substring(0,code.length-1);
-		}
-		else {
-			lastNew = false;
-		}
-	}
-	if (code != oldcode){
-		var wxml = Blockly.Xml.workspaceToDom(workspaceBRGB);
-		var outspace = Blockly.Xml.domToText(wxml);
-		
-		oldcode = code;
-		document.getElementById('blurFormula').querySelector('textarea').value = outspace;
-		updateImage(false);
-	}
-}
-function updateTHSL(event) {
-	var code = Blockly.Lua.workspaceToCode(workspaceT);
-	lastNew = true;
-	while (lastNew) {
-		if (code.length == 0){break;}
-		if (code[code.length-1]=='\n'){
-			code = code.substring(0,code.length-1);
-		}
-		else {
-			lastNew = false;
-		}
-	}
-	if (code != oldcode){
-		var wxml = Blockly.Xml.workspaceToDom(workspaceT);
-		var outspace = Blockly.Xml.domToText(wxml);
-		
-		oldcode = code;
-		document.getElementById('textFormula').querySelector('textarea').value = outspace;
-		updateImage(false);
-	}
-}
-function updateTRGB(event) {
-	var code = Blockly.Lua.workspaceToCode(workspaceTRGB);
-	lastNew = true;
-	while (lastNew) {
-		if (code.length == 0){break;}
-		if (code[code.length-1]=='\n'){
-			code = code.substring(0,code.length-1);
-		}
-		else {
-			lastNew = false;
-		}
-	}
-	if (code != oldcode){
-		var wxml = Blockly.Xml.workspaceToDom(workspaceTRGB);
-		var outspace = Blockly.Xml.domToText(wxml);
-		
-		oldcode = code;
-		document.getElementById('textFormula').querySelector('textarea').value = outspace;
-		updateImage(false);
-	}
-}
+function updateBHSL(event) {updateWork(workspaceB'b');}
+function updateBRGB(event) {updateWork(workspaceBRGB,'b');}
+function updateTHSL(event) {updateWork(workspaceT,'t');}
+function updateTRGB(event) {updateWork(workspaceTRGB,'t');}
+
 workspaceB.addChangeListener(updateBHSL);
 workspaceBRGB.addChangeListener(updateBRGB);
 workspaceT.addChangeListener(updateTHSL);
