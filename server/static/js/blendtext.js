@@ -182,6 +182,7 @@ function updateBHSL(event) {
 		oldcode = code;
 		document.getElementById('blurFormula').querySelector('textarea').value = outspace;
 		updateImage(false);
+		document.getElementById('myCode').textContent = code;
 	}
 }
 function updateBRGB(event) {
