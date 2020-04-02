@@ -11,7 +11,7 @@
 	height: calc(100vh - 3rem);
 	width: calc(100vw - 3rem);
 	margin: 1rem auto;
-	border: 1px dotted blue;
+	/*border: 1px dotted blue;*/
 	grid-template-columns: auto 193px auto;
   	grid-template-rows: auto 204px auto;
 }
@@ -64,6 +64,16 @@
   	border-radius: 1.5rem;
   	position: relative;
 }
+.content-33 {
+	grid-row:  3;
+	grid-column:  3;
+  	border: 2px solid black;
+  	border-radius: 1.5rem;
+  	position: relative;
+}
+.content-13:hover ~ .content-22 {
+	background: red;
+}
 .content-23 {
   
   grid-row:  2;
@@ -74,13 +84,7 @@
 
 
 
-.content-33 {
-	grid-row:  3;
-	grid-column:  3;
-  	border: 2px solid black;
-  	border-radius: 1.5rem;
-  	position: relative;
-}
+
 .title {
 	line-height: 3rem;
 	text-align: center;
@@ -100,15 +104,7 @@
 <body>
 
 <div class="container">
-	<div class="content-22">
-		<div class="header">
-			<img src="../img/logo.png" />
-			<span>Text</span>
-			<span>Chart</span>
-			<span>QR Code</span>
-			<span>Account</span>
-		</div>
-	</div>
+	
 
 
 	<div class="content-11">
@@ -128,15 +124,26 @@
 
 		</div>
 	</div>
+	<div class="content-33">
+		<div class="content">
+			<div class="title">QR Codes</div>
+
+		</div>
+	</div>
+	
 	<div class="content-23">
 		<div class="content">
 			
 		</div>
 	</div>
-	<div class="content-33">
-		<div class="content">
-			<div class="title">QR Codes</div>
-
+	
+	<div class="content-22">
+		<div class="header">
+			<img src="../img/logo.png" />
+			<!--<span>Text</span>
+			<span>Chart</span>
+			<span>QR Code</span>
+			<span>Account</span>-->
 		</div>
 	</div>
 </div>
