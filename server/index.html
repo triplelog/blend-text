@@ -5,12 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content=".">    <title>QbluR</title>    
 
+<style>
+.header {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+.header img{
+	position: absolute;
+}
+.header span{
+	position: absolute;
+	left: 40px;
+	top: 40px;
+}
+.header span ~ span{
+	top: 60px;
+}
+.header span ~ span ~ span{
+	top: 80px;
+}
+.header span ~ span ~ span ~ span{
+	top: 100px;
+}
+.content-wrapper {
+	position: absolute;
+	top: 200px;
+}
+
+</style>
 
 </head>
 <body>
 
 <div class="header">
-	<img src="">
+	<img src="../img/logo.png">
+	<span>Text</span>
+	<span>Chart</span>
+	<span>QR Code</span>
+	<span>Account</span>
 </div>
 
 
