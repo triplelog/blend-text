@@ -14,14 +14,14 @@
   	grid-template-rows: auto 204px auto;
 }
 .header {
-	grid-column:  1 ;
-  	grid-row:  1;
+	grid-column:  2;
+  	grid-row:  2;
 }
 .header img{
-	position: absolute;
+	position: relative;
 }
 .header span{
-	position: absolute;
+	position: relative;
 	left: 50px;
 	top: 50px;
 	width: 100px;
@@ -35,9 +35,10 @@
 .header span ~ span ~ span ~ span{
 	top: 110px;
 }
-.content-wrapper {
-	position: absolute;
-	top: 200px;
+.content-11 {
+	grid-column:  1;
+  	grid-row:  1;
+  	border: 1px solid black;
 }
 
 </style>
@@ -55,7 +56,7 @@
 	</div>
 
 
-	<div class="content-wrapper">
+	<div class="content-11">
 		<div class="content">
 			<div class="pure-g">
 				<div class="l-box pure-u-1 pure-u-md-1-4 pure-u-lg-1-2">
