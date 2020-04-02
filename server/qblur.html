@@ -56,6 +56,7 @@
 }
 .content-31 select {
 	float: left;
+	margin-top: 1rem;
 }
 .content-31:hover {
 	grid-row:  2 / 4;
@@ -117,7 +118,9 @@
   grid-column:  2; 
 }
 
-
+.container div {
+	background: white;
+}
 
 
 .title {
@@ -232,22 +235,22 @@
 		</div>
 		<div class="content">
 			<div id="blurFormulaHSL" style="height: 100%; width: 100%;"></div>
-			<!--<div id="blurFormula">
+			<div id="blurFormula" style="display: none;">
 				Blur Formula:
 				<select>
 					<option value="hsl" selected="selected">Custom HSL</option>
 					<option value="rgb">Custom RGB</option>
 				</select>
-				<textarea rows="4" cols="50" style="display: none;"></textarea>
+				<textarea rows="4" cols="50"></textarea>
 			</div>
-			<div id="textFormula">
+			<div id="textFormula" style="display: none;">
 				Text Formula:
 				<select>
 					<option value="hsl" selected="selected">Custom HSL</option>
 					<option value="rgb">Custom RGB</option>
 				</select>
 				<textarea rows="4" cols="50" style="display: none;"></textarea>
-			</div>-->
+			</div>
 		</div>
 	</div>
 	<div class="content-33">
@@ -284,6 +287,7 @@
   <category name="Functions" custom="PROCEDURE"></category>
 
 </xml>
+
 <script src="../js/blockly_compressed.js"></script>
 <script src="../js/blocks_compressed.js"></script>
 <script src="../js/blocklyen.js"></script>
