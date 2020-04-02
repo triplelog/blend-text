@@ -94,7 +94,7 @@ wss.on('connection', function connection(ws) {
   var inSrc = 'images/in/'+imgid+'.png';
   var imgIndex = 0;
   ws.on('message', function incoming(message) {
-  	console.log(message);
+  	
   	if (typeof message !== 'string'){
   		fs.writeFile(inSrc, Buffer.from(message), function (err) {
   			console.log(err);
@@ -124,7 +124,7 @@ wss.on('connection', function connection(ws) {
   	var wxml = Blockly.Xml.textToDom(dm.blurFormula);
   	Blockly.Xml.domToWorkspace(wxml, workspace);
   	var code = Blockly.Lua.workspaceToCode(workspace);
-  	
+  	console.log(code);
   	if (dm.blurType == 'hsl'){
 		luaBlurFormula = `function ScriptFunc (val,h,s,l)
 		`+code+`
@@ -150,7 +150,7 @@ wss.on('connection', function connection(ws) {
   	wxml = Blockly.Xml.textToDom(dm.textFormula);
   	Blockly.Xml.domToWorkspace(wxml, workspace);
   	code = Blockly.Lua.workspaceToCode(workspace);
-  	
+  	console.log(code);
   	if (dm.textType == 'hsl'){
 		luaTextFormula = `function TextFunc (val,h,s,l)
 		`+code+`
