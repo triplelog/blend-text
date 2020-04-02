@@ -54,6 +54,9 @@
   	border-radius: 1.5rem;
   	position: relative;
 }
+.content-31 select {
+	float: left;
+}
 .content-31:hover {
 	grid-row:  2 / 4;
 	grid-column:  1 / 3;
@@ -94,39 +97,7 @@
 	grid-row:  2 / 4;
 	grid-column:  2 / 4;
 }
-/*
-.content-11:hover ~ .content-22 {
-	transition: all 1s ease-in;
-	transform: rotate(180deg);
-}
-.content-13:hover ~ .content-22 {
-	transition: all 1s ease-in;
-	transform: rotate(270deg);
-}
-.content-31:hover ~ .content-22 {
-	transition: all 1s ease-in;
-	transform: rotate(90deg);
-}
-.content-12:hover ~ .content-22 {
-	transition: all 1s ease-in;
-	transform: rotate(225deg);
-}
-.content-21:hover ~ .content-22 {
-	transition: all 1s ease-in;
-	transform: rotate(135deg);
-}
-.content-23:hover ~ .content-22 {
-	transition: all 1s ease-in;
-	transform: rotate(315deg);
-}
-.content-32:hover ~ .content-22 {
-	transition: all 1s ease-in;
-	transform: rotate(45deg);
-}
-.content-33:hover ~ .content-22 {
-	transition: all 1s ease-in;
-	transform: rotate(0deg);
-}*/
+
 
 
 .content-12 { 
@@ -169,7 +140,38 @@
 
 <div class="container">
 	
-
+	<div class="content-22">
+		<div class="header">
+			
+			<img src="../img/logo.png" id="rotate-33" />
+			<!--<span>Text</span>
+			<span>Chart</span>
+			<span>QR Code</span>
+			<span>Account</span>-->
+		</div>
+	</div>
+	
+	<div class="content-12">
+		<div class="content">
+			
+		</div>
+	</div>
+	<div class="content-21">
+		<div class="content">
+			
+		</div>
+	</div>
+	<div class="content-23">
+		<div class="content">
+			
+		</div>
+	</div>
+	<div class="content-32">
+		<div class="content">
+			
+		</div>
+	</div>
+	
 
 	<div class="content-11">
 		<div class="title">Edit</div>
@@ -221,9 +223,16 @@
 	</div>
 	<div class="content-31">
 		
-		<div class="title">Formula</div>
+		<div class="title">
+			<select>
+				<option>Blur</option>
+				<option>Fore</option>
+			</select>
+			Formula
+		</div>
 		<div class="content">
-			<div id="blurFormula">
+			<div id="blurFormulaHSL" style="height: 100%; width: 100%;"></div>
+			<!--<div id="blurFormula">
 				Blur Formula:
 				<select>
 					<option value="hsl" selected="selected">Custom HSL</option>
@@ -238,7 +247,7 @@
 					<option value="rgb">Custom RGB</option>
 				</select>
 				<textarea rows="4" cols="50" style="display: none;"></textarea>
-			</div>
+			</div>-->
 		</div>
 	</div>
 	<div class="content-33">
@@ -252,37 +261,9 @@
 		</div>
 	</div>
 	
-	<div class="content-12">
-		<div class="content">
-			
-		</div>
-	</div>
-	<div class="content-21">
-		<div class="content">
-			
-		</div>
-	</div>
-	<div class="content-23">
-		<div class="content">
-			
-		</div>
-	</div>
-	<div class="content-32">
-		<div class="content">
-			
-		</div>
-	</div>
 	
-	<div class="content-22">
-		<div class="header">
-			
-			<img src="../img/logo.png" id="rotate-33" />
-			<!--<span>Text</span>
-			<span>Chart</span>
-			<span>QR Code</span>
-			<span>Account</span>-->
-		</div>
-	</div>
+	
+	
 </div>
 <xml id="toolbox" style="display: none">
   <category name="Control">
