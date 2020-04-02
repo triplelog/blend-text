@@ -184,6 +184,7 @@ function updateBHSL(event) {
 		document.getElementById('blurFormula').querySelector('textarea').value = outspace;
 		updateImage(false);
 		document.getElementById('myCode').textContent = code;
+		Prism.highlightAll(async, callback);
 	}
 }
 function updateBRGB(event) {
