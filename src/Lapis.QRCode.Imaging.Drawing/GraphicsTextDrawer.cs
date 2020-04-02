@@ -81,8 +81,17 @@ namespace Lapis.QRCode.Imaging.Drawing
                             int re = pixColor.R * pixColor.A / 255 + (255-pixColor.A);
                             int gr = pixColor.G * pixColor.A / 255 + (255-pixColor.A);
                             int bl = pixColor.B * pixColor.A / 255 + (255-pixColor.A);
-                            Console.WriteLine(" red: "+re+" gr: "+gr+" bl: "+bl+" a: "+pixColor.A);
-                            Console.WriteLine(" redC: "+pixColor.R+" grC: "+pixColor.G+" blC: "+pixColor.B);
+                            
+                            if (re > 255 || gr > 255 || bl > 255){
+                            	Console.WriteLine(" red: "+re+" gr: "+gr+" bl: "+bl+" a: "+pixColor.A);
+                            	Console.WriteLine(" redC: "+pixColor.R+" grC: "+pixColor.G+" blC: "+pixColor.B);
+                            	break;
+                            }
+                            if (re < 0 || gr < 0 || bl < 0){
+                            	Console.WriteLine(" red0: "+re+" gr: "+gr+" bl: "+bl+" a: "+pixColor.A);
+                            	Console.WriteLine(" redC: "+pixColor.R+" grC: "+pixColor.G+" blC: "+pixColor.B);
+                            	break;
+                            }
 							Color hashColor = Color.FromArgb(re,gr,bl);
 							int imgC = hashColor.GetHashCode();
 								
