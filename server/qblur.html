@@ -93,6 +93,11 @@
   	border-radius: 1.5rem;
   	position: relative;
 }
+.content-33 select {
+	float: left;
+	margin-top: 15px;
+	margin-left: 4px;
+}
 .content-33 .content {
 	overflow-y: auto;
 }
@@ -266,7 +271,16 @@
 	</div>
 	<div class="content-33">
 		
-		<div class="title">Code</div>
+		<div class="title">
+			<select id="langOption">
+				<option value="python">Python</option>
+				<option value="javascript">Javascript</option>
+				<option value="lua">Lua</option>
+				<option value="php">PHP</option>
+				<option value="dart">Dart</option>
+			</select>
+			Code
+		</div>
 		<div class="content">
 			<pre><code class="language-lua" id="myCode"></code></pre>
 		</div>
@@ -300,6 +314,7 @@
 <script src="../js/blocks_compressed.js"></script>
 <script src="../js/blocklyen.js"></script>
 <script src="../js/lua_compressed.js"></script>
+<script src="../js/python_compressed.js"></script>
 <script>var type = {{ type | dump | safe }}</script>
 
 <script src="../js/blendtext.js"></script>
