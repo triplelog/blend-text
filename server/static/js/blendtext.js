@@ -169,6 +169,9 @@ function chgLanguage(event){
 	lang = document.getElementById('langOption').value;
 	var el = document.getElementById('myCode');
 	el.innerHTML = '';
+	el.classList.remove('language-python');
+	el.classList.remove('language-lua');
+	el.classList.add('language-'+lang);
 	var codeEl = document.createElement('code');
 	codeEl.classList.add('language-'+lang);
 	el.appendChild(codeEl);
