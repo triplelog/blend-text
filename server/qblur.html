@@ -62,7 +62,6 @@
 
 .container div.content-31 .title .titleLeft {
 	float: left;
-	margin-top: 15px;
 	margin-left: 4px;
 	width: 100px;
 }
@@ -71,7 +70,6 @@
 }
 .container div.content-31 .title .titleRight {
 	float: right;
-	margin-top: 15px;
 	margin-right: 4px;
 	width: 100px;
 }
@@ -256,11 +254,14 @@
 		
 		<div class="title">
 			<span class="titleLeft">
-				<select>
+				<select id="bort">
 					<option value="blur">Blur</option>
-					<option value="fore">Fore</option>
+					<option value="text">Fore</option>
 				</select>
-				<input type="checkbox" id="hslrgb"></input>
+				<select id="hslrgb">
+					<option value="hsl" selected="selected">Custom HSL</option>
+					<option value="rgb">Custom RGB</option>
+				</select>
 			</span>
 			<span class="titleCenter">
 				Formula
@@ -277,20 +278,10 @@
 			<div id="textFormulaHSL" style="height: 400px; width: 500px;"></div>
 			<div id="textFormulaRGB" style="height: 400px; width: 500px;"></div>
 			<div id="blurFormula" style="display: none;">
-				Blur Formula:
-				<select>
-					<option value="hsl" selected="selected">Custom HSL</option>
-					<option value="rgb">Custom RGB</option>
-				</select>
 				<textarea rows="4" cols="50"></textarea>
 			</div>
 			<div id="textFormula" style="display: none;">
-				Text Formula:
-				<select>
-					<option value="hsl" selected="selected">Custom HSL</option>
-					<option value="rgb">Custom RGB</option>
-				</select>
-				<textarea rows="4" cols="50" style="display: none;"></textarea>
+				<textarea rows="4" cols="50"></textarea>
 			</div>
 		</div>
 	</div>
