@@ -241,7 +241,7 @@ label[for="formula--1"] {
 				
 			</span>
 			<span class="titleCenter">
-				My Formulas
+				Formulas
 			</span>
 			<span class="titleRight">
 				<label for="size11-1"><i class="fas fa-compress-alt"></i></label>
@@ -275,10 +275,9 @@ label[for="formula--1"] {
 		<div class="title">
 			<span class="titleLeft">
 				<i class="far fa-plus-square"></i>
-				<i class="fas fa-trash"></i>
 			</span>
 			<span class="titleCenter">
-				My Images
+				Images
 			</span>
 			<span class="titleRight">
 				<label for="size13-1"><i class="fas fa-compress-alt"></i></label>
@@ -288,7 +287,9 @@ label[for="formula--1"] {
 		</div>
 		
 		<div class="content">
-			<img src="">
+			{% for image in images %}
+			<img src="{{image.src}}">
+			{% endfor %}
 		</div>
 	</div>
 	<div class="content-31">
@@ -299,7 +300,7 @@ label[for="formula--1"] {
 				<i class="fas fa-trash"></i>
 			</span>
 			<span class="titleCenter">
-				My Templates
+				Templates
 			</span>
 			<span class="titleRight">
 				<label for="size31-1"><i class="fas fa-compress-alt"></i></label>
@@ -333,6 +334,9 @@ label[for="formula--1"] {
 			</span>
 		</div>
 		<div class="content">
+			{% for creation in creations %}
+			<img src="{{creation}}">
+			{% endfor %}
 		</div>
 	</div>
 	

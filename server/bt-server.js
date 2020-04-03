@@ -106,6 +106,7 @@ wss.on('connection', function connection(ws) {
   var inSrc = 'images/in/'+imgid+'.png';
   var imgIndex = 0;
   var username = '';
+  var newCreation = true;
   ws.on('message', function incoming(message) {
   	
   	if (typeof message !== 'string'){
@@ -124,9 +125,8 @@ wss.on('connection', function connection(ws) {
 	
 	if (dm.type && dm.type == 'saveFormula'){
 		if (dm.message && username != ''){
-			console.log(dm.message);
 			var formula = {'name':dm.name,'workspace':dm.message};
-			//Check that there does not exist a formula of that name already.
+			//Add a Check that there does not exist a formula of that name already.
 			User.updateOne({ username: username }, {$push: {"formulas": formula}}, function(err, result) {});
 		}
 		return;
@@ -218,6 +218,12 @@ wss.on('connection', function connection(ws) {
   	
   	console.log(execCmd);
   	
+  	if (newCreation && username != ''){
+		//Add a Check that there does not exist a creation of that name already.
+		User.updateOne({ username: username }, {$push: {"creations": outSrc}}, function(err, result) {});
+		newCreation = false;
+	}
+		
   	if (myTimeout){
 		clearTimeout(myTimeout);
 		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,outSrc,imgIndex, luaBlurFormula, luaTextFormula); }, 1000);

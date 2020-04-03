@@ -75,6 +75,12 @@ app.get('/account',
   			code = Blockly.Lua.workspaceToCode(workspace);
 			formulas[i].code = code;
 		}
+		
+		var images = req.user.images;
+		var templates = req.user.templates;
+		var creations = req.user.creations;
+		
+		
   		res.write(nunjucks.render('account.html',{
   			username: req.user.options.displayName || req.user.username,
   			name: req.user.name || '',
@@ -82,6 +88,9 @@ app.get('/account',
   			friends: req.user.friends,
   			tkey: tkey,
   			formulas: formulas,
+  			images: images,
+  			templates: templates,
+  			creations: creations,
   		}));
 		res.end();
   	}
@@ -92,7 +101,7 @@ app.get('/account',
 app.post('/register',
   function(req, res){
   	console.log('registering: ',performance.now());
-  	var user = new User({username: req.body.username.toLowerCase(), formulas: [], friends: [], followers: [],  options: {displayName: req.body.username,robot:1}});
+  	var user = new User({username: req.body.username.toLowerCase(), formulas: [], images: [], templates: [], creations: [], friends: [], followers: [],  options: {displayName: req.body.username,robot:1}});
 	User.register(user,req.body.password, function(err) {
 		if (err) {
 		  if (err.name == 'UserExistsError'){
