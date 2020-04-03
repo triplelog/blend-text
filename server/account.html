@@ -235,7 +235,7 @@ label[for="formula--1"] {
 		<div class="title">
 			<span class="titleLeft">
 				<i class="far fa-plus-square"></i>
-				<i class="fas fa-trash"></i>
+				
 			</span>
 			<span class="titleCenter">
 				My Formulas
@@ -256,6 +256,11 @@ label[for="formula--1"] {
 			{% for formula in formulas %}
 			<label class="formulaLabel" for="formula-{{ formula.id }}">{{ formula.name }}</label>
 			<div class="formulaCode">
+				<div>
+					<i class="fas fa-trash"></i>
+					<i class="fas fa-edit"></i>
+					<i class="fas fa-copy"></i>
+				</div>
 				<pre class="language-python"><code class="language-python">{{ formula.code }}</code></pre>
 				
 			</div>
@@ -367,6 +372,6 @@ label[for="formula--1"] {
 
 </xml>
 <script src="../js/prism.js"></script>
-<script></script>
+
 </body>
 </html>
