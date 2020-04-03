@@ -63,13 +63,16 @@ app.get('/account',
   		var tkey = crypto.randomBytes(100).toString('hex').substr(2, 18);
 		tempKeys[tkey] = {username:req.user.username};
 
-
+		var formulas = [];
+		formulas.push({'name':"Formula 1",'id':formulas.length,'code':"x = 10"});
+		formulas.push({'name':"Formula 1",'id':formulas.length,'code':"x = 10"});
   		res.write(nunjucks.render('account.html',{
   			username: req.user.options.displayName || req.user.username,
   			name: req.user.name || '',
   			options: req.user.options,
   			friends: req.user.friends,
   			tkey: tkey,
+  			formulas: formulas,
   		}));
 		res.end();
   	}
