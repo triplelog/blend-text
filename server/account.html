@@ -199,13 +199,17 @@ label[for="formula--1"] {
 {% for formula in formulas %}
 #formula-{{formula.id}}:checked ~ label[for="formula-{{formula.id}}"] {
 	pointer-events: none;
+	
 }
 #formula-{{formula.id}}:checked ~ label[for="formula-{{formula.id}}"] + div {
 	display: block;
 	pointer-events: none;
 }
 {% endfor %}
-
+.formulaLabel {
+	position: absolute;
+	display: block;
+}
 
 
 </style>
