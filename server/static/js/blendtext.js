@@ -168,7 +168,7 @@ for (var i=1;i<4;i++){
 }
 
 function onresize(evt) {
-	var element = document.querySelector('.content-31');
+	var element = document.querySelector('.content-31 .content');
     var x = 0;
     var y = 0;
     do {
@@ -176,15 +176,16 @@ function onresize(evt) {
       y += element.offsetTop;
       element = element.offsetParent;
     } while (element);
+    console.log(x,y);
     // Position blocklyDiv over blocklyArea.
     blocklyDiv.style.left = x + 'px';
     blocklyDiv.style.top = y + 'px';
-    blocklyDiv.style.width = document.querySelector('.content-31').offsetWidth + 'px';
-    blocklyDiv.style.height = document.querySelector('.content-31').offsetHeight + 'px';
-    Blockly.svgResize(workspaceBRGB);
+    blocklyDiv.style.width = document.querySelector('.content-31 .content').offsetWidth + 'px';
+    blocklyDiv.style.height = document.querySelector('.content-31 .content').offsetHeight + 'px';
+    Blockly.svgResize(workspaceB);
 }
-var blocklyDiv = document.getElementById('blurFormulaRGB');
-var workspaceBRGB = Blockly.inject(blocklyDiv, {toolbox: document.getElementById('toolbox')});
+
+var workspaceBRGB = Blockly.inject('blurFormulaRGB', {toolbox: document.getElementById('toolbox')});
 workspaceBRGB.createVariable("d",null,"qblur_d");
 workspaceBRGB.createVariable("r",null,"qblur_r");
 workspaceBRGB.createVariable("g",null,"qblur_g");
@@ -200,7 +201,8 @@ workspaceTRGB.createVariable("b",null,"qblur_b");
 var wxml = Blockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="qblur_r">r</variable></variables><block type="controls_if" id="Il^^YLd2NrFN:|;KKrjz" x="53" y="8"><value name="IF0"><block type="logic_compare" id="ziTZ^NbMl,qw@.Jp?R,B"><field name="OP">LT</field><value name="A"><block type="variables_get" id="]$l^IlghlBfr{3nXw`e{"><field name="VAR" id="qblur_r">r</field></block></value><value name="B"><block type="math_number" id="h2X9B|l.elRcnP+Je:;u"><field name="NUM">200</field></block></value></block></value><statement name="DO0"><block type="variables_set" id="D;pLu7Mt]Bf4$r!guo;-"><field name="VAR" id="qblur_r">r</field><value name="VALUE"><block type="math_number" id="i~V0T-jtCz[Wz(P4:BIV"><field name="NUM">200</field></block></value></block></statement></block></xml>');
 Blockly.Xml.domToWorkspace(wxml,workspaceTRGB);
 
-var workspaceB = Blockly.inject('blurFormulaHSL', {toolbox: document.getElementById('toolbox')});
+var blocklyDiv = document.getElementById('blurFormulaHSL');
+var workspaceB = Blockly.inject(blocklyDiv, {toolbox: document.getElementById('toolbox')});
 workspaceB.createVariable("d",null,"qblur_d");
 workspaceB.createVariable("h",null,"qblur_h");
 workspaceB.createVariable("s",null,"qblur_s");
