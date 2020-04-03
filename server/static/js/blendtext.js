@@ -311,11 +311,14 @@ updateBHSL();
 
 
 function saveFormula() {
+	console.log(bort);
+	console.log(imgData.blurType);
 	if (bort == 'b'){
 		if (imgData.blurType == 'hsl'){
 			var wxml = Blockly.Xml.workspaceToDom(workspaceB);
 			var outspace = Blockly.Xml.domToText(wxml);
 			var jsonmessage = {'type':'saveFormula','message':outspace};
+			console.log(jsonmessage);
 			ws.send(JSON.stringify(jsonmessage));
 		}
 	}
