@@ -176,13 +176,14 @@ function onresize(evt) {
       y += element.offsetTop;
       element = element.offsetParent;
     } while (element);
-    console.log(x,y);
     // Position blocklyDiv over blocklyArea.
-    blocklyDiv.style.left = x + 'px';
-    blocklyDiv.style.top = y + 'px';
-    blocklyDiv.style.width = document.querySelector('.content-31 .content').offsetWidth + 'px';
-    blocklyDiv.style.height = document.querySelector('.content-31 .content').offsetHeight + 'px';
-    Blockly.svgResize(workspaceB);
+    for (var i=0;i<4;i++){
+		blocklyDivs[i].style.left = x + 'px';
+		blocklyDivs[i].style.top = y + 'px';
+		blocklyDivs[i].style.width = document.querySelector('.content-31 .content').offsetWidth + 'px';
+		blocklyDivs[i].style.height = document.querySelector('.content-31 .content').offsetHeight + 'px';
+		Blockly.svgResize(workspaces[i]);
+    }
 }
 
 var defaults = ['<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="qblur_r">r</variable></variables><block type="controls_if" id="Il^^YLd2NrFN:|;KKrjz" x="53" y="8"><value name="IF0"><block type="logic_compare" id="ziTZ^NbMl,qw@.Jp?R,B"><field name="OP">LT</field><value name="A"><block type="variables_get" id="]$l^IlghlBfr{3nXw`e{"><field name="VAR" id="qblur_r">r</field></block></value><value name="B"><block type="math_number" id="h2X9B|l.elRcnP+Je:;u"><field name="NUM">200</field></block></value></block></value><statement name="DO0"><block type="variables_set" id="D;pLu7Mt]Bf4$r!guo;-"><field name="VAR" id="qblur_r">r</field><value name="VALUE"><block type="math_number" id="i~V0T-jtCz[Wz(P4:BIV"><field name="NUM">200</field></block></value></block></statement></block></xml>'];
