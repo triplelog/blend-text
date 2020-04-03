@@ -91,7 +91,7 @@ app.get('/account',
 app.post('/register',
   function(req, res){
   	console.log('registering: ',performance.now());
-  	var user = new User({username: req.body.username.toLowerCase(), charts: {created:[],forked:[],edited:[],viewed:[]}, friends:[], followers:[], options: {displayName: req.body.username,favorites:{},robot:1}});
+  	var user = new User({username: req.body.username.toLowerCase(), formulas: [], friends: [], followers: [],  options: {displayName: req.body.username,robot:1}});
 	User.register(user,req.body.password, function(err) {
 		if (err) {
 		  if (err.name == 'UserExistsError'){
