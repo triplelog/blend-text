@@ -7,10 +7,6 @@ const bodyParser = require('body-parser');
 var nunjucks = require('nunjucks');
 var crypto = require("crypto");
 var Blockly = require('blockly');
-//require("./static/js/blockly_compressed.js");
-//require("./static/js/blocks_compressed.js");
-//require("./static/js/blocklyen.js");
-//require("./static/js/lua_compressed.js");
 const options = {
   key: fs.readFileSync('/etc/letsencrypt/live/matherrors.com/privkey.pem'),
   cert: fs.readFileSync('/etc/letsencrypt/live/matherrors.com/fullchain.pem')
@@ -18,11 +14,22 @@ const options = {
 const { PerformanceObserver, performance } = require('perf_hooks');
 
 
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/qblur', {useNewUrlParser: true});
+
+
 var express = require('express');
 
 
+var fromLogin = require('./login-server.js');
+var app = fromLogin.loginApp;
+var tempKeys = fromLogin.tempKeys;
 
-var app = express();
+
+
+
+
+
 app.use('/',express.static('static'));
 
 app.get('/', 
