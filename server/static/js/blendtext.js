@@ -311,7 +311,7 @@ updateBHSL();
 
 
 function saveFormula() {
-	if (blurOrText == 'b'){
+	if (blurOrText == 'blur'){
 		if (imgData.blurType == 'hsl'){
 			var wxml = Blockly.Xml.workspaceToDom(workspaceB);
 			var outspace = Blockly.Xml.domToText(wxml);
