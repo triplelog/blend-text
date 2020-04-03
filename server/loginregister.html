@@ -181,20 +181,12 @@ form button {
 		<div class="content">
 			<form class="" action="/login" method="post">
 				<div><fieldset {% if badlogin %}style="border-color: red;"{% endif %}>
-					{% if badlogin %}
-						<legend style="color: red;">Username (Username and/or password incorrect.)</legend>
-					{% else %}
-						<legend>Username</legend>
-					{% endif %}
+					<legend>Username</legend>
 					<input id="username" name="username" type="text">
 					
 				</fieldset></div>
 				<div><fieldset {% if badlogin %}style="border-color: red;"{% endif %}>
-					{% if badlogin %}
-						<legend style="color: red;">Password (Username and/or password incorrect.)</legend>
-					{% else %}
-						<legend>Password</legend>
-					{% endif %}
+					<legend>Password</legend>
 					<input id="password" name="password" type="password">
 
 					
@@ -202,6 +194,11 @@ form button {
 				<div>
 					<button type="submit" class="">Sign In</button>
 				</div>
+				{% if badlogin %}
+				<div>
+					Username and/or password incorrect.
+				</div>
+				{% endif %}
 			</form>
 		</div>
 	</div>
