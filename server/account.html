@@ -187,7 +187,6 @@ form button {
 	height: calc(100% - 3rem);
 }
 label[for="formula--1"] {
-	background: rgba(0,0,0,.1);
 	position: absolute;
 	display: block;
 	left: 0px;
@@ -213,6 +212,8 @@ label[for="formula--1"] {
 .formulaCode {
 	display: none;
 	position: absolute;
+	left: 1rem;
+	padding: 1rem;
 	pointer-events: none;
 	z-index: 5;
 	border: 1px solid black;
@@ -255,7 +256,8 @@ label[for="formula--1"] {
 			{% for formula in formulas %}
 			<label class="formulaLabel" for="formula-{{ formula.id }}">{{ formula.name }}</label>
 			<div class="formulaCode">
-				{{ formula.code }}
+				<pre class="language-python"><code class="language-python">{{ formula.code }}</code></pre>
+				
 			</div>
 			{% endfor %}
 			
@@ -365,5 +367,6 @@ label[for="formula--1"] {
 
 </xml>
 <script src="../js/prism.js"></script>
+<script></script>
 </body>
 </html>
