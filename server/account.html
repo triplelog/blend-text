@@ -198,10 +198,10 @@ label[for="formula--1"] {
 }
 
 {% for formula in formulas %}
-#formula-{{formula.id}}:checked ~ div label[for="formula-{{formula.id}}"] {
+#formula-{{formula.id}}:checked ~ label[for="formula-{{formula.id}}"] {
 	z-index: 1;
 }
-#formula-{{formula.id}}:checked ~ div label[for="formula-{{formula.id}}"] + div {
+#formula-{{formula.id}}:checked ~ label[for="formula-{{formula.id}}"] + div {
 	display: block;
 	z-index: 1;
 }
@@ -243,11 +243,9 @@ label[for="formula--1"] {
 			<input type="radio" name="formula" style="display: none;" id="formula-{{ formula.id }}"></input>
 			{% endfor %}
 			{% for formula in formulas %}
-			<div>
-				<label class="formulaLabel" for="formula-{{ formula.id }}">{{ formula.name }}</label>
-				<div style="display: none;">
-					{{ formula.code }}
-				</div>
+			<label class="formulaLabel" for="formula-{{ formula.id }}">{{ formula.name }}</label>
+			<div style="display: none;">
+				{{ formula.code }}
 			</div>
 			{% endfor %}
 			<label for="formula--1"></label>
