@@ -308,3 +308,20 @@ document.getElementById('textFormulaHSL').style.display = 'none';
 document.getElementById('textFormulaRGB').style.display = 'none';
 updateTHSL();
 updateBHSL();
+
+
+function saveFormula() {
+	if (bort == 'b'){
+		if (imgData.blurType == 'hsl'){
+			var wxml = Blockly.Xml.workspaceToDom(workspaceB);
+			var outspace = Blockly.Xml.domToText(wxml);
+			var jsonmessage = {'type':'saveFormula','message':outspace};
+			ws.send(JSON.stringify(jsonmessage));
+		}
+	}
+}
+
+
+
+
+

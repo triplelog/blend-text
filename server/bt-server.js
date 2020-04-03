@@ -117,10 +117,18 @@ wss.on('connection', function connection(ws) {
   	var dm = JSON.parse(message);
 	if (dm.type && dm.type == 'key'){
 		if (dm.message && tempKeys[dm.message]){
-			username = tempKeys[dm.message];
+			username = tempKeys[dm.message].username;
 		}
 		return;
 	}
+	
+	if (dm.type && dm.type == 'saveFormula'){
+		if (dm.message && username != ''){
+			console.log(dm.message);
+		}
+		return;
+	}
+	
 	
 	if (username != ''){
 		console.log('username: '+username);
