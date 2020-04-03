@@ -67,6 +67,7 @@ app.get('/account',
 		var workspace = new Blockly.Workspace();
   		var wxml;
   		var code;
+  		console.log(req.user);
 		for (var i=0;i<formulas.length;i++){
 			formulas[i].id = i;
 			wxml = Blockly.Xml.textToDom(formulas[i].workspace);
