@@ -44,9 +44,14 @@ app.get('/',
 
 app.get('/qr', 
 	function(req, res) {
+		var tkey = crypto.randomBytes(100).toString('hex').substr(2, 18);
+		if (req.isAuthenticated()){
+			tempKeys[tkey] = {username:req.user.username};
+		}
 		
 		res.write(nunjucks.render('qblur.html',{
 			type: 'qr',
+			tkey: tkey,
 		}));
 		res.end();
 	}
@@ -100,6 +105,7 @@ wss.on('connection', function connection(ws) {
   var outSrc = 'out/'+imgid+'.png';
   var inSrc = 'images/in/'+imgid+'.png';
   var imgIndex = 0;
+  var username = '';
   ws.on('message', function incoming(message) {
   	
   	if (typeof message !== 'string'){
@@ -109,7 +115,16 @@ wss.on('connection', function connection(ws) {
   		return;
   	}
   	var dm = JSON.parse(message);
-
+	if (dm.type && dm.type == 'key'){
+		if (dm.message && tempKeys[dm.message]){
+			username = tempKeys[dm.message];
+		}
+		return;
+	}
+	
+	if (username != ''){
+		console.log('username: '+username);
+	}
   	//console.log(dm);
   	if (!dm.fontSize || dm.textFormula == "" || dm.blurFormula == ""){
   		return;
