@@ -201,14 +201,18 @@ label[for="formula--1"] {
 	pointer-events: none;
 	
 }
-#formula-{{formula.id}}:checked ~ label[for="formula-{{formula.id}}"] + div {
+#formula-{{formula.id}}:checked ~ label[for="formula-{{formula.id}}"] + div.formulaCode {
 	display: block;
+	position: absolute;
 	pointer-events: none;
 }
 {% endfor %}
 .formulaLabel {
-	position: absolute;
+	position: relative;
 	display: block;
+}
+.formulaCode {
+	display: none;
 }
 
 
@@ -246,7 +250,7 @@ label[for="formula--1"] {
 			<label for="formula--1"></label>
 			{% for formula in formulas %}
 			<label class="formulaLabel" for="formula-{{ formula.id }}">{{ formula.name }}</label>
-			<div style="display: none;">
+			<div class="formulaCode">
 				{{ formula.code }}
 			</div>
 			{% endfor %}
