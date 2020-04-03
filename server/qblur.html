@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content=".">    <title>QbluR</title>    
 <link href="../css/prism.css" rel="stylesheet" />
+<link rel="stylesheet" href="../icons/fontawesome/css/all.css">
 <style>
 .container {
 	display: grid;
@@ -63,7 +64,7 @@
 .container div.content-31 .title .titleLeft {
 	float: left;
 	margin-left: 4px;
-	width: 200px;
+	width: 100px;
 }
 .container div.content-31 .title .titleCenter {
 
@@ -71,7 +72,7 @@
 .container div.content-31 .title .titleRight {
 	float: right;
 	margin-right: 4px;
-	width: 200px;
+	width: 100px;
 }
 .content-31 .content {
 	clear: both;
@@ -279,21 +280,19 @@ input[name="size31"] {
 					<option value="blur">Blur</option>
 					<option value="text">Fore</option>
 				</select>
-				<select id="hslrgb">
-					<option value="hsl" selected="selected">Custom HSL</option>
-					<option value="rgb">Custom RGB</option>
-				</select>
+				
 			</span>
 			<span class="titleCenter">
 				Formula
 			</span>
 			<span class="titleRight">
-				<label for="size31-1">1</label>
-				<label for="size31-2">2</label>
-				<label for="size31-3">3</label>
+				<label for="size31-1"><i class="fas fa-compress-alt"></i></label>
+				<label for="size31-2"><i class="fas fa-expand-alt"></i></label>
+				<label for="size31-3"><i class="fas fa-expand"></i></label>
 			</span>
 		</div>
 		<div class="content">
+			
 			<div id="blurFormulaHSL" style="height: 400px; width: 500px;"></div>
 			<div id="blurFormulaRGB" style="height: 400px; width: 500px;"></div>
 			<div id="textFormulaHSL" style="height: 400px; width: 500px;"></div>
@@ -305,6 +304,10 @@ input[name="size31"] {
 				<textarea rows="4" cols="50"></textarea>
 			</div>
 		</div>
+		<select id="hslrgb">
+			<option value="hsl" selected="selected">Custom HSL</option>
+			<option value="rgb">Custom RGB</option>
+		</select>
 	</div>
 	<div class="content-33">
 		
