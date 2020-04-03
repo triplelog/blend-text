@@ -203,8 +203,7 @@ label[for="formula--1"] {
 }
 #formula-{{formula.id}}:checked ~ label[for="formula-{{formula.id}}"] + div.formulaCode {
 	display: block;
-	position: absolute;
-	pointer-events: none;
+	
 }
 {% endfor %}
 .formulaLabel {
@@ -213,6 +212,11 @@ label[for="formula--1"] {
 }
 .formulaCode {
 	display: none;
+	position: absolute;
+	pointer-events: none;
+	z-index: 5;
+	border: 1px solid black;
+	background: white;
 }
 
 
