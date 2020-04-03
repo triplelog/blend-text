@@ -164,7 +164,7 @@ for (var i=0;i<3;i++){
 var oldcode = '';
 
 for (var i=1;i<4;i++){
-	document.getElementById('size31-1').addEventListener('change', onresize, false);
+	document.getElementById('size31-'+i).addEventListener('change', onresize, false);
 }
 
 function onresize(evt) {
@@ -179,8 +179,8 @@ function onresize(evt) {
     // Position blocklyDiv over blocklyArea.
     blocklyDiv.style.left = x + 'px';
     blocklyDiv.style.top = y + 'px';
-    blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
-    blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+    blocklyDiv.style.width = document.querySelector('.content-31').offsetWidth + 'px';
+    blocklyDiv.style.height = document.querySelector('.content-31').offsetHeight + 'px';
     Blockly.svgResize(workspaceBRGB);
 }
 var blocklyDiv = document.getElementById('blurFormulaRGB');
