@@ -185,39 +185,30 @@ function onresize(evt) {
     Blockly.svgResize(workspaceB);
 }
 
-var workspaceBRGB = Blockly.inject('blurFormulaRGB', {toolbox: document.getElementById('toolbox')});
-workspaceBRGB.createVariable("d",null,"qblur_d");
-workspaceBRGB.createVariable("r",null,"qblur_r");
-workspaceBRGB.createVariable("g",null,"qblur_g");
-workspaceBRGB.createVariable("b",null,"qblur_b");
-var wxml = Blockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="qblur_r">r</variable></variables><block type="controls_if" id="Il^^YLd2NrFN:|;KKrjz" x="53" y="8"><value name="IF0"><block type="logic_compare" id="ziTZ^NbMl,qw@.Jp?R,B"><field name="OP">LT</field><value name="A"><block type="variables_get" id="]$l^IlghlBfr{3nXw`e{"><field name="VAR" id="qblur_r">r</field></block></value><value name="B"><block type="math_number" id="h2X9B|l.elRcnP+Je:;u"><field name="NUM">200</field></block></value></block></value><statement name="DO0"><block type="variables_set" id="D;pLu7Mt]Bf4$r!guo;-"><field name="VAR" id="qblur_r">r</field><value name="VALUE"><block type="math_number" id="i~V0T-jtCz[Wz(P4:BIV"><field name="NUM">200</field></block></value></block></statement></block></xml>');
-Blockly.Xml.domToWorkspace(wxml,workspaceBRGB);
+var defaults = ['<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="qblur_r">r</variable></variables><block type="controls_if" id="Il^^YLd2NrFN:|;KKrjz" x="53" y="8"><value name="IF0"><block type="logic_compare" id="ziTZ^NbMl,qw@.Jp?R,B"><field name="OP">LT</field><value name="A"><block type="variables_get" id="]$l^IlghlBfr{3nXw`e{"><field name="VAR" id="qblur_r">r</field></block></value><value name="B"><block type="math_number" id="h2X9B|l.elRcnP+Je:;u"><field name="NUM">200</field></block></value></block></value><statement name="DO0"><block type="variables_set" id="D;pLu7Mt]Bf4$r!guo;-"><field name="VAR" id="qblur_r">r</field><value name="VALUE"><block type="math_number" id="i~V0T-jtCz[Wz(P4:BIV"><field name="NUM">200</field></block></value></block></statement></block></xml>'];
+defaults.push('<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="qblur_l">l</variable></variables><block type="controls_if" id="Wd;mk5}4Of9%Iw%Z7Zp@" x="35" y="18"><value name="IF0"><block type="logic_compare" id="Y]b.Mo8c|Gg]GFgx]d}."><field name="OP">LT</field><value name="A"><block type="variables_get" id="z@^1uBjFU^[PEMP$1M{*"><field name="VAR" id="qblur_l">l</field></block></value><value name="B"><block type="math_number" id="q#8h__fG*5qOgK`l1]dN"><field name="NUM">0.6</field></block></value></block></value><statement name="DO0"><block type="variables_set" id="!{OE7jG|eOuI%-Gmeh$z"><field name="VAR" id="qblur_l">l</field><value name="VALUE"><block type="math_number" id="eSak{(`N-^$A8:Y!TfoB"><field name="NUM">0.6</field></block></value></block></statement></block></xml>');
 
-var workspaceTRGB = Blockly.inject('textFormulaRGB', {toolbox: document.getElementById('toolbox')});
-workspaceTRGB.createVariable("d",null,"qblur_d");
-workspaceTRGB.createVariable("r",null,"qblur_r");
-workspaceTRGB.createVariable("g",null,"qblur_g");
-workspaceTRGB.createVariable("b",null,"qblur_b");
-var wxml = Blockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="qblur_r">r</variable></variables><block type="controls_if" id="Il^^YLd2NrFN:|;KKrjz" x="53" y="8"><value name="IF0"><block type="logic_compare" id="ziTZ^NbMl,qw@.Jp?R,B"><field name="OP">LT</field><value name="A"><block type="variables_get" id="]$l^IlghlBfr{3nXw`e{"><field name="VAR" id="qblur_r">r</field></block></value><value name="B"><block type="math_number" id="h2X9B|l.elRcnP+Je:;u"><field name="NUM">200</field></block></value></block></value><statement name="DO0"><block type="variables_set" id="D;pLu7Mt]Bf4$r!guo;-"><field name="VAR" id="qblur_r">r</field><value name="VALUE"><block type="math_number" id="i~V0T-jtCz[Wz(P4:BIV"><field name="NUM">200</field></block></value></block></statement></block></xml>');
-Blockly.Xml.domToWorkspace(wxml,workspaceTRGB);
+var blocklyDivs = [document.getElementById('blurFormulaRGB'),document.getElementById('textFormulaRGB'),document.getElementById('blurFormulaHSL'),document.getElementById('textFormulaHSL')];
+var workspaceBRGB = Blockly.inject(blocklyDivs[0], {toolbox: document.getElementById('toolbox')});
+var workspaceTRGB = Blockly.inject(blocklyDivs[1], {toolbox: document.getElementById('toolbox')});
+var workspaceB = Blockly.inject(blocklyDivs[2], {toolbox: document.getElementById('toolbox')});
+var workspaceT = Blockly.inject(blocklyDivs[3], {toolbox: document.getElementById('toolbox')});
+var workspaces = [workspaceBRGB,workspaceTRGB,workspaceB,workspaceT];
+for (var i=0;i<4;i++){
+	var workspace = workspaces[i];
+	var vars = ["d","r","g","b"];
+	if (i>=2){
+		vars = ["d","h","s","l"];
+	}
+	for (var ii=0;ii<4;ii++){
+		workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
+	}
+	var wxml = Blockly.Xml.textToDom(defaults[parseInt(i/2)]);
+	Blockly.Xml.domToWorkspace(wxml,workspace);
+	onresize();
+}
 
-var blocklyDiv = document.getElementById('blurFormulaHSL');
-var workspaceB = Blockly.inject(blocklyDiv, {toolbox: document.getElementById('toolbox')});
-workspaceB.createVariable("d",null,"qblur_d");
-workspaceB.createVariable("h",null,"qblur_h");
-workspaceB.createVariable("s",null,"qblur_s");
-workspaceB.createVariable("l",null,"qblur_l");
-var wxml = Blockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="qblur_l">l</variable></variables><block type="controls_if" id="Wd;mk5}4Of9%Iw%Z7Zp@" x="35" y="18"><value name="IF0"><block type="logic_compare" id="Y]b.Mo8c|Gg]GFgx]d}."><field name="OP">LT</field><value name="A"><block type="variables_get" id="z@^1uBjFU^[PEMP$1M{*"><field name="VAR" id="qblur_l">l</field></block></value><value name="B"><block type="math_number" id="q#8h__fG*5qOgK`l1]dN"><field name="NUM">0.6</field></block></value></block></value><statement name="DO0"><block type="variables_set" id="!{OE7jG|eOuI%-Gmeh$z"><field name="VAR" id="qblur_l">l</field><value name="VALUE"><block type="math_number" id="eSak{(`N-^$A8:Y!TfoB"><field name="NUM">0.6</field></block></value></block></statement></block></xml>');
-Blockly.Xml.domToWorkspace(wxml,workspaceB);
-onresize();
 
-var workspaceT = Blockly.inject('textFormulaHSL', {toolbox: document.getElementById('toolbox')});
-workspaceT.createVariable("d",null,"qblur_d");
-workspaceT.createVariable("h",null,"qblur_h");
-workspaceT.createVariable("s",null,"qblur_s");
-workspaceT.createVariable("l",null,"qblur_l");
-var wxml = Blockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="qblur_l">l</variable></variables><block type="controls_if" id="Wd;mk5}4Of9%Iw%Z7Zp@" x="35" y="18"><value name="IF0"><block type="logic_compare" id="Y]b.Mo8c|Gg]GFgx]d}."><field name="OP">LT</field><value name="A"><block type="variables_get" id="z@^1uBjFU^[PEMP$1M{*"><field name="VAR" id="qblur_l">l</field></block></value><value name="B"><block type="math_number" id="q#8h__fG*5qOgK`l1]dN"><field name="NUM">0.6</field></block></value></block></value><statement name="DO0"><block type="variables_set" id="!{OE7jG|eOuI%-Gmeh$z"><field name="VAR" id="qblur_l">l</field><value name="VALUE"><block type="math_number" id="eSak{(`N-^$A8:Y!TfoB"><field name="NUM">0.6</field></block></value></block></statement></block></xml>');
-Blockly.Xml.domToWorkspace(wxml,workspaceT);
 
 var lang = 'python';
 document.getElementById('langOption').addEventListener('change',chgLanguage);
