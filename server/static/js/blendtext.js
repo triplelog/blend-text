@@ -76,6 +76,7 @@ function updateImage(evt){
 					updateTRGB();
 				}
 			}
+			onresize();
 		}
 		else if (el.id && el.id == 'hslrgb'){
 			if (blurOrText == 'blur'){
@@ -107,6 +108,7 @@ function updateImage(evt){
 				}
 				
 			}
+			onresize();
 		}
 		else if (el.id){
 			imgData[el.id] = el.value;
