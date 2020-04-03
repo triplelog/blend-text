@@ -194,18 +194,20 @@
 				<fieldset>
 					<legend>Username</legend>
 
-					<label for="email">Email</label>
-					<input id="email" name="email" type="email" placeholder="Email">
-					
-					<label for="username">Username</label>
 					<input id="username" name="username" type="text" placeholder="Username">
 					{% if duplicate %}<div style="color: red;">Username already taken!</div>{% endif %}
+
+					
+				</fieldset>
+				<fieldset>
+					<legend>Password</legend>
 
 					<label for="password">Password</label>
 					<input id="password" name="password" type="password" placeholder="Password">
 
-					<button type="submit" class="">Register</button>
+					
 				</fieldset>
+				<button type="submit" class="">Register</button>
 			</form>
 		</div>
 	</div>
