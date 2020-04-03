@@ -63,9 +63,17 @@ app.get('/account',
   		var tkey = crypto.randomBytes(100).toString('hex').substr(2, 18);
 		tempKeys[tkey] = {username:req.user.username};
 
-		var formulas = [];
-		formulas.push({'name':"Formula 1",'id':formulas.length,'code':"x = 10"});
-		formulas.push({'name':"Formula 2",'id':formulas.length,'code':"x = 11"});
+		var formulas = req.user.formulas;
+		var workspace = new Blockly.Workspace();
+  		var wxml;
+  		var code;
+		for (var i=0;i<formulas.length;i++){
+			formulas[i].id = i;
+			wxml = Blockly.Xml.textToDom(formulas[i].workspace);
+  			Blockly.Xml.domToWorkspace(wxml, workspace);
+  			code = Blockly.Lua.workspaceToCode(workspace);
+			formulas[i].code = code;
+		}
   		res.write(nunjucks.render('account.html',{
   			username: req.user.options.displayName || req.user.username,
   			name: req.user.name || '',

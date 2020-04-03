@@ -311,15 +311,27 @@ updateBHSL();
 
 
 function saveFormula() {
+	var wxml;
 	if (blurOrText == 'blur'){
 		if (imgData.blurType == 'hsl'){
-			var wxml = Blockly.Xml.workspaceToDom(workspaceB);
-			var outspace = Blockly.Xml.domToText(wxml);
-			var jsonmessage = {'type':'saveFormula','message':outspace};
-			console.log(jsonmessage);
-			ws.send(JSON.stringify(jsonmessage));
+			wxml = Blockly.Xml.workspaceToDom(workspaceB);
+		}
+		else{
+			wxml = Blockly.Xml.workspaceToDom(workspaceBRGB);
 		}
 	}
+	else {
+		if (imgData.blurType == 'hsl'){
+			wxml = Blockly.Xml.workspaceToDom(workspaceT);
+		}
+		else{
+			wxml = Blockly.Xml.workspaceToDom(workspaceTRGB);
+		}
+	}
+	
+	var outspace = Blockly.Xml.domToText(wxml);
+	var jsonmessage = {'type':'saveFormula','name':'First Formula','message':outspace};
+	ws.send(JSON.stringify(jsonmessage));
 }
 
 
