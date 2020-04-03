@@ -161,7 +161,7 @@ fieldset input {
 form button {
 	display: block;
 	margin: auto;
-	width: 20rem;
+	width: 10rem;
 	font-size: 1.5rem;
 }
 
@@ -180,20 +180,28 @@ form button {
 		
 		<div class="content">
 			<form class="" action="/login" method="post">
-				<div>
-					<label for="username">Username</label>
-					<input id="username" name="username" type="text" placeholder="Username">
-					{% if badlogin %}<div style="color: red;">Username or password not correct!</div>{% endif %}
-				</div>
-				<div>
-					<label for="password">Password</label>
-					<input id="password" name="password" type="password" placeholder="Password">
-				</div>
-					<!--<label for="remember" class="pure-checkbox">
-						<input id="remember" type="checkbox"> Remember me
-					</label>-->
+				<div><fieldset {% if badlogin %}style="border-color: red;"{% endif %}>
+					{% if badlogin %}
+						<legend style="color: red;">Username (Username and/or password incorrect.)</legend>
+					{% else %}
+						<legend>Username</legend>
+					{% endif %}
+					<input id="username" name="username" type="text">
+					
+				</fieldset></div>
+				<div><fieldset {% if badlogin %}style="border-color: red;"{% endif %}>
+					{% if badlogin %}
+						<legend style="color: red;">Password (Username and/or password incorrect.)</legend>
+					{% else %}
+						<legend>Password</legend>
+					{% endif %}
+					<input id="password" name="password" type="password">
 
-				<button type="submit" class="">Sign in</button>
+					
+				</fieldset></div>
+				<div>
+					<button type="submit" class="">Sign In</button>
+				</div>
 			</form>
 		</div>
 	</div>
@@ -209,12 +217,13 @@ form button {
 					<input id="email" name="email" type="email">
 					
 				</fieldset></div>
-				<div><fieldset>
-					<legend>Username</legend>
-
+				<div><fieldset {% if duplicate %}style="border-color: red;"{% endif %}>
+					{% if duplicate %}
+						<legend style="color: red;">Username (Username not available.)</legend>
+					{% else %}
+						<legend>Username</legend>
+					{% endif %}
 					<input id="username" name="username" type="text">
-					{% if duplicate %}<div style="color: red;">Username already taken!</div>{% endif %}
-
 					
 				</fieldset></div>
 				<div><fieldset>
