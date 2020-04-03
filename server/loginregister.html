@@ -161,21 +161,20 @@
 		
 		<div class="content">
 			<form class="" action="/login" method="post">
-				<fieldset>
-
+				<div>
 					<label for="username">Username</label>
 					<input id="username" name="username" type="text" placeholder="Username">
 					{% if badlogin %}<div style="color: red;">Username or password not correct!</div>{% endif %}
-
+				</div>
+				<div>
 					<label for="password">Password</label>
 					<input id="password" name="password" type="password" placeholder="Password">
-
+				</div>
 					<!--<label for="remember" class="pure-checkbox">
 						<input id="remember" type="checkbox"> Remember me
 					</label>-->
 
-					<button type="submit" class="">Sign in</button>
-				</fieldset>
+				<button type="submit" class="">Sign in</button>
 			</form>
 		</div>
 	</div>
@@ -202,7 +201,6 @@
 				<fieldset>
 					<legend>Password</legend>
 
-					<label for="password">Password</label>
 					<input id="password" name="password" type="password" placeholder="Password">
 
 					
