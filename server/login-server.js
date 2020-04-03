@@ -38,7 +38,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(passport.initialize());
 app.use(passport.session());
-app2.get('/account',
+app.get('/account',
   function(req, res){
   	if (!req.isAuthenticated()){
   		if (req.query.e && req.query.e=='duplicate'){
@@ -93,7 +93,7 @@ app2.get('/account',
   }
 );
 
-app2.post('/register',
+app.post('/register',
   function(req, res){
   	console.log('registering: ',performance.now());
   	var user = new User({username: req.body.username.toLowerCase(), charts: {created:[],forked:[],edited:[],viewed:[]}, friends:[], followers:[], options: {displayName: req.body.username,favorites:{},robot:1}});
@@ -135,11 +135,11 @@ function usernameToLowerCase(req, res, next){
 	req.body.username = req.body.username.toLowerCase();
 	next();
 } 
-app2.post('/login',  usernameToLowerCase,
+app.post('/login',  usernameToLowerCase,
 	passport.authenticate('local', { successRedirect: '/account', failureRedirect: '/account?e=badlogin' })
 );
 
-app2.get('/logout', 
+app.get('/logout', 
 	function(req, res) {
 	  req.logout();
 	  res.redirect('../');
