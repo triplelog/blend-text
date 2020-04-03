@@ -145,6 +145,14 @@
   	width: calc(100% + 0px);
   	background: red;
 }
+fieldset {
+	display: inline-block;
+	margin: auto;
+}
+form button {
+	display: inline-block;
+	margin: auto;
+}
 
 </style>
 
@@ -183,29 +191,31 @@
 		
 		<div class="content">
 			<form class="" action="/register" method="post">
-				<fieldset>
+				<div><fieldset>
 					<legend>Email</legend>
 
 					
 					<input id="email" name="email" type="email" placeholder="Email">
 					
-				</fieldset>
-				<fieldset>
+				</fieldset></div>
+				<div><fieldset>
 					<legend>Username</legend>
 
 					<input id="username" name="username" type="text" placeholder="Username">
 					{% if duplicate %}<div style="color: red;">Username already taken!</div>{% endif %}
 
 					
-				</fieldset>
-				<fieldset>
+				</fieldset></div>
+				<div><fieldset>
 					<legend>Password</legend>
 
 					<input id="password" name="password" type="password" placeholder="Password">
 
 					
-				</fieldset>
-				<button type="submit" class="">Register</button>
+				</fieldset></div>
+				<div>
+					<button type="submit" class="">Register</button>
+				</div>
 			</form>
 		</div>
 	</div>
