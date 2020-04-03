@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content=".">    <title>QbluR</title>    
+<link href="../css/prism.css" rel="stylesheet" />
 <link rel="stylesheet" href="../icons/fontawesome/css/all.css">
 <style>
 .container {
@@ -181,6 +182,34 @@ form button {
 	margin-right: 4px;
 }
 
+.content-11 .content {
+	position: relative;
+}
+label[for="formula--1"] {
+	background: rgba(0,0,0,.1);
+	position: absolute;
+	dispaly: block;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+}
+
+{% for formula in formulas %}
+#formula-{{formula.id}}:checked ~ div label[for="formula-{{formula.id}}"] {
+	z-index: 1;
+}
+#formula-{{formula.id}}:checked ~ div label[for="formula-{{formula.id}}"] + div {
+	display: block;
+	z-index: 1;
+}
+{% endfor %}
+
+.formulaLabel {
+	z-index: 3;
+}
+
 </style>
 
 </head>
@@ -208,12 +237,19 @@ form button {
 		</div>
 		
 		<div class="content">
+			<input type="radio" name="formula" style="display: none;" id="formula--1" checked="checked"></input>
+			{% for formula in formulas %}
+			<input type="radio" name="formula" style="display: none;" id="formula-{{ formula.id }}"></input>
+			{% endfor %}
+			{% for formula in formulas %}
 			<div>
-				<span>Name of Formula</span>
+				<label class="formulaLabel" for="formula-{{ formula.id }}">{{ formula.name }}</label>
 				<div style="display: none;">
-					x = 10;
+					{{ formula.code }}
 				</div>
 			</div>
+			{% endfor %}
+			<label for="formula--1"></label>
 		</div>
 	</div>
 	<div class="content-13">
@@ -319,6 +355,6 @@ form button {
   <category name="Functions" custom="PROCEDURE"></category>
 
 </xml>
-
+<script src="../js/prism.js"></script>
 </body>
 </html>
