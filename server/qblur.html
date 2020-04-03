@@ -155,7 +155,21 @@
   	width: calc(100% + 0px);
   	background: red;
 }
-
+input[name="size31"] {
+	display: none;
+}
+#size31-1:checked ~ .content-31 {
+	grid-row:  3;
+	grid-column:  1;
+}
+#size31-2:checked ~ .content-31 {
+	grid-row:  2 / 4;
+	grid-column:  1 / 3;
+}
+#size31-3:checked ~ .content-31 {
+	grid-row:  1 / 4;
+	grid-column:  1 / 4;
+}
 </style>
 
 </head>
@@ -250,6 +264,9 @@
     		</div>
 		</div>
 	</div>
+	<input type="radio" name="size31" id="size31-1"></input>
+	<input type="radio" name="size31" id="size31-2"></input>
+	<input type="radio" name="size31" id="size31-3"></input>
 	<div class="content-31">
 		
 		<div class="title">
@@ -267,9 +284,9 @@
 				Formula
 			</span>
 			<span class="titleRight">
-				<a onclick="">1</a>
-				<a onclick="">2</a>
-				<a onclick="">3</a>
+				<label for="size31-1">1</label>
+				<label for="size31-2">2</label>
+				<label for="size31-3">3</label>
 			</span>
 		</div>
 		<div class="content">
