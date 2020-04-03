@@ -62,30 +62,14 @@ app.get('/account',
   	else {
   		var tkey = crypto.randomBytes(100).toString('hex').substr(2, 18);
 		tempKeys[tkey] = {username:req.user.username};
-  		var charts = {created:[],edited:[],forked:[],viewed:[]};
-  		console.log('len of viewed: ',req.user.charts.viewed.length);
-  		if (req.user.charts.viewed.length > 5999){
-  			req.user.charts.viewed.splice(0,1000);
-  			User.updateOne({username:req.user.username},{'charts.viewed': req.user.charts.viewed}, function(err,result){});
-  		}
-  		charts.created = req.user.charts.created || [];
-  		charts.forked = req.user.charts.forked || [];
-  		charts.edited = req.user.charts.edited || [];
-  		charts.viewed = req.user.charts.viewed || [];
-  		var chartkeys = ['created','forked','edited','viewed'];
-  		var startTab = 'charts';
-  		if (req.query.t){
-  			startTab = req.query.t;
-  		}
+
+
   		res.write(nunjucks.render('account.html',{
   			username: req.user.options.displayName || req.user.username,
   			name: req.user.name || '',
   			options: req.user.options,
-  			charts: charts || {},
-  			chartkeys: chartkeys || [],
   			friends: req.user.friends,
   			tkey: tkey,
-  			startTab: startTab,
   		}));
 		res.end();
   	}
