@@ -132,6 +132,15 @@ wss.on('connection', function connection(ws) {
 		return;
 	}
 	
+	if (dm.type && dm.type == 'copyFormula'){
+		if (dm.message && username != ''){
+			User.findOne({ username: username }, formulas, function(err, result) {
+				console.log(result);
+			});
+		}
+		return;
+	}
+	
 	
 	if (username != ''){
 		console.log('username: '+username);

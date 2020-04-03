@@ -270,7 +270,7 @@ label[for="formula--1"] {
 				<div>
 					<i class="fas fa-trash"></i>
 					<i class="fas fa-edit"></i>
-					<i class="fas fa-copy"></i>
+					<i class="fas fa-copy" onclick="copyFormula({{ formula.id }})"></i>
 				</div>
 				<pre class="language-python"><code class="language-python">{{ formula.code }}</code></pre>
 				
@@ -400,6 +400,8 @@ label[for="formula--1"] {
 
 </xml>
 <script src="../js/prism.js"></script>
+<script>var tkey = {{ tkey | dump | safe }}</script>
+<script src="../js/account.js"></script>
 
 </body>
 </html>
