@@ -163,6 +163,10 @@ for (var i=0;i<3;i++){
 
 var oldcode = '';
 
+document.querySelector('.content-31').addEventListener('resize', onresize, false);
+function onresize(evt) {
+	alert(evt);
+}
 
 var workspaceBRGB = Blockly.inject('blurFormulaRGB', {toolbox: document.getElementById('toolbox')});
 workspaceBRGB.createVariable("d",null,"qblur_d");
