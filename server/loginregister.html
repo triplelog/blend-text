@@ -181,12 +181,12 @@ form button {
 		<div class="content">
 			<form class="" action="/login" method="post">
 				<div><fieldset {% if badlogin %}style="border-color: red;"{% endif %}>
-					<legend>Username</legend>
+					<legend {% if badlogin %}style="color: red;"{% endif %}>Username</legend>
 					<input id="username" name="username" type="text">
 					
 				</fieldset></div>
 				<div><fieldset {% if badlogin %}style="border-color: red;"{% endif %}>
-					<legend>Password</legend>
+					<legend {% if badlogin %}style="color: red;"{% endif %}>Password</legend>
 					<input id="password" name="password" type="password">
 
 					
