@@ -163,12 +163,28 @@ for (var i=0;i<3;i++){
 
 var oldcode = '';
 
-document.querySelector('.content-31').addEventListener('resize', onresize, false);
-function onresize(evt) {
-	alert(evt);
+for (var i=1;i<4;i++){
+	document.getElementById('size31-1').addEventListener('change', onresize, false);
 }
 
-var workspaceBRGB = Blockly.inject('blurFormulaRGB', {toolbox: document.getElementById('toolbox')});
+function onresize(evt) {
+	var element = document.querySelector('.content-31');
+    var x = 0;
+    var y = 0;
+    do {
+      x += element.offsetLeft;
+      y += element.offsetTop;
+      element = element.offsetParent;
+    } while (element);
+    // Position blocklyDiv over blocklyArea.
+    blocklyDiv.style.left = x + 'px';
+    blocklyDiv.style.top = y + 'px';
+    blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
+    blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+    Blockly.svgResize(workspaceBRGB);
+}
+var blocklyDiv = document.getElementById('blurFormulaRGB');
+var workspaceBRGB = Blockly.inject(blocklyDiv, {toolbox: document.getElementById('toolbox')});
 workspaceBRGB.createVariable("d",null,"qblur_d");
 workspaceBRGB.createVariable("r",null,"qblur_r");
 workspaceBRGB.createVariable("g",null,"qblur_g");
