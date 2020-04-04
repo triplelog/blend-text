@@ -36,7 +36,7 @@ ws.onmessage = function(evt){
 			var icon = document.createElement('i');
 			icon.classList.add('fas');
 			icon.classList.add('fa-copy');
-			icon.setAttribute('onclick',"copyFormula('"+ formulas[i].name +"')";
+			icon.setAttribute('onclick',"copyFormula('"+ formulas[i].name +"')");
 			div2.appendChild(icon);
 			div.appendChild(div2);
 			var pre = document.createElement('pre');
