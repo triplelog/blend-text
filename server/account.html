@@ -195,7 +195,7 @@ label[for="formula--1"] {
 	height: 100%;
 }
 
-{% for formula in formulas %}
+{% for formula in range(0,10 + formulas.length*3/2) %}
 #formula-{{formula.id}}:checked ~ label[for="formula-{{formula.id}}"] {
 	pointer-events: none;
 	
