@@ -9,8 +9,8 @@ ws.onmessage = function(evt){
 
 }
 
-function copyFormula(id){
+function copyFormula(name){
 	var jsonmessage = {'type':'copyFormula'};
-	jsonmessage.message = id;
+	jsonmessage.message = name;
 	ws.send(JSON.stringify(jsonmessage));
 }
