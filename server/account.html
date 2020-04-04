@@ -196,11 +196,11 @@ label[for="formula--1"] {
 }
 
 {% for formula in range(0,10 + formulas.length*3/2) %}
-#formula-{{formula.id}}:checked ~ label[for="formula-{{formula.id}}"] {
+#formula-{{formula}}:checked ~ label[for="formula-{{formula}}"] {
 	pointer-events: none;
 	
 }
-#formula-{{formula.id}}:checked ~ label[for="formula-{{formula.id}}"] + div.formulaCode {
+#formula-{{formula}}:checked ~ label[for="formula-{{formula}}"] + div.formulaCode {
 	display: block;
 	
 }
