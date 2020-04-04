@@ -7,7 +7,7 @@ ws.onopen = function(evt) {
 ws.onmessage = function(evt){
 	var dm = JSON.parse(evt.data);
 	if (dm.type == 'newFormulas'){
-		var formulas = dm.formulas;
+		var formulas = dm.message;
 		console.log(formulas);
 		var el = document.getElementById('formulas');
 		el.innerHTML = '<input type="radio" name="formula" style="display: none;" id="formula--1" checked="checked"></input>';
