@@ -138,6 +138,24 @@ wss.on('connection', function connection(ws) {
 				return;
 			}
 			User.findOne({ username: username }, "formulas", function(err, result) {
+				var newFormula = {};
+				newFormula.name = dm.message + ' 1';
+				var foundMatch = false;
+				for (var i=0;i<result.formulas.length;i++){
+					if (result.formulas[i].name == newFormula.name){
+						newFormula.name += '1';
+					}
+					if (result.formulas[i].name == dm.message){
+						newFormula.workspace = result.formulas[i].workspace;
+						foundMatch = true;
+					}
+				}
+				if (foundMatch){
+					result.formulas.push(newFormula);
+					result.markModified("formulas");
+					result.save(function (err, result2) {
+					});
+				}
 				console.log(result);
 			});
 		}
