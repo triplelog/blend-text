@@ -137,7 +137,7 @@ wss.on('connection', function connection(ws) {
 			if (!dm.message && dm.message !== 0){
 				return;
 			}
-			User.findOne({ username: username }, formulas, function(err, result) {
+			User.findOne({ username: username }, "formulas", function(err, result) {
 				console.log(result);
 			});
 		}
