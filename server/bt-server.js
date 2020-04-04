@@ -141,14 +141,27 @@ wss.on('connection', function connection(ws) {
 				var newFormula = {};
 				newFormula.name = dm.message + ' 1';
 				var foundMatch = false;
+				var foundOne = false;
 				for (var i=0;i<result.formulas.length;i++){
 					if (result.formulas[i].name == newFormula.name){
-						newFormula.name += '1';
+						foundOne = true;
 					}
 					if (result.formulas[i].name == dm.message){
 						newFormula.workspace = result.formulas[i].workspace;
 						foundMatch = true;
 					}
+				}
+				while (foundOne){
+					var ii = 2;
+					newFormula.name = dm.message + ' '+ii;
+					foundOne = false;
+					for (var i=0;i<result.formulas.length;i++){
+						if (result.formulas[i].name == newFormula.name){
+							foundOne = true;
+							break;
+						}
+					}
+					ii++;
 				}
 				if (foundMatch){
 					result.formulas.push(newFormula);
