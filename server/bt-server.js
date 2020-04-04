@@ -182,7 +182,6 @@ wss.on('connection', function connection(ws) {
 						}
 						var jsonmessage = {'type':'newFormulas'};
 						jsonmessage.formulas = formulas;
-						console.log(formulas);
 						ws.send(JSON.stringify(jsonmessage));
 					});
 					
