@@ -13,22 +13,43 @@ ws.onmessage = function(evt){
 		el.innerHTML = '<input type="radio" name="formula" style="display: none;" id="formula--1" checked="checked"></input>';
 		
 		for (i in formulas) {
-			el.innerHTML += '<input type="radio" name="formula" style="display: none;" id="formula-"'+ formulas[i].id+'"></input>';
+			var input = document.createElement('input');
+			input.setAttribute('type','radio');
+			input.setAttribute('name','formula');
+			input.setAttribute('style','display: none;');
+			input.id = 'formula-'+ formulas[i].id;
+			el.appendChild(input);
 		}
 		el.innerHTML += '<label for="formula--1"></label>';
 		
 		for (i in formulas) {
-			el.innerHTML += '<label class="formulaLabel" for="formula-'+ formulas[i].id +'">'+ formulas[i].name +'</label>';
-			el.innerHTML += '<div class="formulaCode">';
-				el.innerHTML += '<div>';
-					el.innerHTML += '<i class="fas fa-trash"></i>';
-					el.innerHTML += '<i class="fas fa-edit"></i>';
-					el.innerHTML += '<i class="fas fa-copy" onclick="copyFormula(\''+ formulas[i].name +'\')"></i>';
-				el.innerHTML += '</div>';
-				el.innerHTML += '<pre class="language-python"><code class="language-python">'+ formulas[i].code +'</code></pre>';
-				
-			el.innerHTML += '</div>';
+			var label = document.createElement('label');
+			label.classList.add('formulaLabel');
+			label.setAttribute('for','formula-'+ formulas[i].id);
+			label.textContent = formulas[i].name;
+			el.appendChild(label);
+			var div = document.createElement('div');
+			div.classList.add('formulaCode');
+			var div2 = document.createElement('div');
+			div2.innerHTML = '<i class="fas fa-trash"></i>';
+			div2.innerHTML += '<i class="fas fa-edit"></i>';
+			var icon = document.createElement('i');
+			icon.classList.add('fas');
+			icon.classList.add('fa-copy');
+			icon.setAttribute('onclick',"copyFormula('"+ formulas[i].name +"')";
+			div2.appendChild(icon);
+			div.appendChild(div2);
+			var pre = document.createElement('pre');
+			pre.classList.add('language-lua');
+			var code = document.createElement('code');
+			code.classList.add('language-lua');
+			code.textContent = formulas[i].code;
+			pre.appendChild(code);
+			div.appendChild(pre)
+			el.appendChild(div);
+			
 		}
+		Prism.highlightAll();
 	}
 }
 
