@@ -133,8 +133,10 @@ wss.on('connection', function connection(ws) {
 	}
 	
 	if (dm.type && dm.type == 'copyFormula'){
-		console.log(dm);
-		if (dm.message && username != ''){
+		if (username != ''){
+			if (!dm.message && dm.message !== 0){
+				return;
+			}
 			User.findOne({ username: username }, formulas, function(err, result) {
 				console.log(result);
 			});
