@@ -79,7 +79,7 @@ app.get('/account',
 		
 		var images = req.user.images;
 		var templates = req.user.templates;
-		for (var i=0;i<tempaltes.length;i++){
+		for (var i=0;i<templates.length;i++){
 			templates[i].id = i;
 		}
 		var creations = req.user.creations;
