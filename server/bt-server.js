@@ -167,25 +167,26 @@ wss.on('connection', function connection(ws) {
 					result.formulas.push(newFormula);
 					result.markModified("formulas");
 					result.save(function (err, result2) {
-					});
-					var formulas = result.formulas;
+						var formulas = result.formulas;
 					
-					var workspace;
-					var wxml;
-					var code;
-					for (var i=0;i<formulas.length;i++){
-						formulas[i].id = i;
-						workspace = new Blockly.Workspace();
-						wxml = Blockly.Xml.textToDom(formulas[i].workspace);
-						Blockly.Xml.domToWorkspace(wxml, workspace);
-						code = Blockly.Lua.workspaceToCode(workspace);
-						formulas[i].code = code;
-					}
-					var jsonmessage = {'type':'newFormulas'};
-					jsonmessage.formulas = formulas;
-					ws.send(JSON.stringify(jsonmessage));
+						var workspace;
+						var wxml;
+						var code;
+						for (var i=0;i<formulas.length;i++){
+							formulas[i].id = i;
+							workspace = new Blockly.Workspace();
+							wxml = Blockly.Xml.textToDom(formulas[i].workspace);
+							Blockly.Xml.domToWorkspace(wxml, workspace);
+							code = Blockly.Lua.workspaceToCode(workspace);
+							formulas[i].code = code;
+						}
+						var jsonmessage = {'type':'newFormulas'};
+						jsonmessage.formulas = formulas;
+						console.log(formulas);
+						ws.send(JSON.stringify(jsonmessage));
+					});
+					
 				}
-				console.log(result);
 			});
 		}
 		return;
