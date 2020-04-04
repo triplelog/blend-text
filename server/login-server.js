@@ -64,12 +64,13 @@ app.get('/account',
 		tempKeys[tkey] = {username:req.user.username};
 
 		var formulas = req.user.formulas;
-		var workspace = new Blockly.Workspace();
+		var workspace;
   		var wxml;
   		var code;
   		console.log(req.user);
 		for (var i=0;i<formulas.length;i++){
 			formulas[i].id = i;
+			workspace = new Blockly.Workspace();
 			wxml = Blockly.Xml.textToDom(formulas[i].workspace);
   			Blockly.Xml.domToWorkspace(wxml, workspace);
   			code = Blockly.Lua.workspaceToCode(workspace);
