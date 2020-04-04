@@ -210,7 +210,7 @@ label[for="formula--1"] {
 }
 .formulaLabel {
 	position: relative;
-	display: inline-block;
+	display: block;
 }
 .formulaCode {
 	display: none;
@@ -268,7 +268,7 @@ label[for="formula--1"] {
 			{% endfor %}
 			<label for="formula--1"></label>
 			{% for formula in formulas %}
-			<label class="formulaLabel" for="formula-{{ formula.id }}">{{ formula.name }}</label><br />
+			<label class="formulaLabel" for="formula-{{ formula.id }}">{{ formula.name }}</label>
 			<div class="formulaCode">
 				<div>
 					<i class="fas fa-trash"></i>
