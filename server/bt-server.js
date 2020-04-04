@@ -151,8 +151,8 @@ wss.on('connection', function connection(ws) {
 						foundMatch = true;
 					}
 				}
+				var ii = 2;
 				while (foundOne){
-					var ii = 2;
 					newFormula.name = dm.message + ' '+ii;
 					foundOne = false;
 					for (var i=0;i<result.formulas.length;i++){
