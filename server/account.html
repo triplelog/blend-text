@@ -320,12 +320,9 @@ label[for="formula--1"] {
 			</span>
 		</div>
 		<div class="content">
-			<div>
-				<span>Name of Template</span>
-				<div style="display: none;">
-					x = 10;
-				</div>
-			</div>
+			{% for template in templates %}
+			<label class="templateLabel" for="template-{{ template.id }}">{{ template.name }}</label>
+			{% endfor %}
 		</div>
 	</div>
 	<div class="content-33 creations">

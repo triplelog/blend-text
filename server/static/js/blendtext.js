@@ -334,6 +334,11 @@ function saveFormula() {
 	ws.send(JSON.stringify(jsonmessage));
 }
 
+function saveTemplate() {
+	var jsonmessage = {'type':'saveTemplate','name':'First Template','message':imgData};
+	ws.send(JSON.stringify(jsonmessage));
+}
+
 
 
 

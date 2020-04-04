@@ -60,22 +60,23 @@
   	overflow: hidden;
 }
 
-
-.container div.content-31 .title .titleLeft {
+.container div .title .titleLeft {
 	float: left;
 	margin-left: 4px;
 	width: 100px;
 }
-.container div.content-31 .title .titleCenter {
+.container div .title .titleCenter {
 
 }
-.container div.content-31 .title .titleRight {
+.container div .title .titleRight {
 	float: right;
 	width: 100px;
 }
-.container div.content-31 .title .titleRight label{
+.container div .title .titleRight label{
 	margin-right: 4px;
 }
+
+
 .content-31 .content {
 	clear: both;
 	height: calc(100% - 5rem);
@@ -219,7 +220,18 @@ input[name="size31"] {
 	
 
 	<div class="content-11">
-		<div class="title">Edit</div>
+		<span class="titleLeft">
+			<i class="fas fa-save" onclick="saveTemplate()"></i>
+			
+		</span>
+		<span class="titleCenter">
+			Edit
+		</span>
+		<span class="titleRight">
+			<label for="size11-1"><i class="fas fa-compress-alt"></i></label>
+			<label for="size11-2"><i class="fas fa-expand-alt"></i></label>
+			<label for="size11-3"><i class="fas fa-expand"></i></label>
+		</span>
 		<div class="content">
 				
 			<div>

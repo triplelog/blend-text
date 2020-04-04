@@ -122,8 +122,7 @@ wss.on('connection', function connection(ws) {
 		}
 		return;
 	}
-	
-	if (dm.type && dm.type == 'saveFormula'){
+	else if (dm.type && dm.type == 'saveFormula'){
 		if (dm.message && username != ''){
 			var formula = {'name':dm.name,'workspace':dm.message};
 			//Add a Check that there does not exist a formula of that name already.
@@ -131,8 +130,15 @@ wss.on('connection', function connection(ws) {
 		}
 		return;
 	}
-	
-	if (dm.type && dm.type == 'copyFormula'){
+	else if (dm.type && dm.type == 'saveTemplate'){
+		if (dm.message && username != ''){
+			var template = {'name':dm.name,'workspace':dm.message};
+			//Add a Check that there does not exist a template of that name already.
+			User.updateOne({ username: username }, {$push: {"templates": template}}, function(err, result) {});
+		}
+		return;
+	}
+	else if (dm.type && dm.type == 'copyFormula'){
 		if (username != ''){
 			if (!dm.message && dm.message !== 0){
 				return;
@@ -192,6 +198,8 @@ wss.on('connection', function connection(ws) {
 	}
 	
 	
+	
+	//Start creating image if made it this far
 	if (username != ''){
 		console.log('username: '+username);
 	}
