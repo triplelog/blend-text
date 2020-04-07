@@ -180,7 +180,10 @@ namespace Lapis.QRCode.Art
                 			
                 			
                 			for (var iii=startiii;iii<endiii;iii++){
+                				int[] arr = new int[endiiii-startiiii];
+                				
 								for (var iiii=startiiii;iiii<endiiii;iiii++){
+									arr[iiii-startiiii]=tripMatrix[iii,iiii];
 									/*if (tripMatrix[iii,iiii] == 0){
 										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
 										if ( d <= maxD/2){
@@ -192,7 +195,7 @@ namespace Lapis.QRCode.Art
 										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
 										if ( d <= maxD/2){
 											//res = script.Call(luaFactFunction, DynValue.NewNumber(d), DynValue.NewNumber(maxD));
-											res = scriptFunc.Call (d, maxD);
+											//res = scriptFunc.Call (d, maxD);
 											//tripMatrix[iii,iiii] = Convert.ToInt32(res[0]);
 											//tripMatrix[iii,iiii] = (20*d-15*maxD)*2/maxD;
 											tripMatrix[iii,iiii] = -10;
@@ -208,6 +211,9 @@ namespace Lapis.QRCode.Art
 										}
 									}
 								}
+								int d = 5;
+								int maxD = 10;
+								res = scriptFunc.Call (d, maxD);
 							}
                 		}
                 		
