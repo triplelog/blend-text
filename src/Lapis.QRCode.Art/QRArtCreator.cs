@@ -62,9 +62,6 @@ namespace Lapis.QRCode.Art
         		arr[i]=(20*i-15*1000)*2/1000
         		end
         		function DistanceFunc (d,maxD,ii)
-        		for i=0,ii-1 do
-        		arr[i]=(20*d[i]-15*maxD)*2/maxD
-        		end
         		return arr
         		end
         		";
