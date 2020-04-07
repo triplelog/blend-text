@@ -33,12 +33,13 @@ namespace Lapis.QrArt
             var locXOpt = app.Option("-x <number>", "location X", CommandOptionType.SingleValue);
             var locYOpt = app.Option("-y <number>", "location Y", CommandOptionType.SingleValue);
             var blurRadiusOpt = app.Option("-r <number>", "Blur Radius", CommandOptionType.SingleValue);
-            var blurFormulaOpt = app.Option("-b <number>", "Blur Formula", CommandOptionType.SingleValue);
+            var blurFormulaOpt = app.Option("-b <string>", "Blur Formula", CommandOptionType.SingleValue);
             var blurTypeOpt = app.Option("-B <string>", "Blur Formula Color Type", CommandOptionType.SingleValue);
-            var textFormulaOpt = app.Option("-c <number>", "Text Formula", CommandOptionType.SingleValue);
+            var textFormulaOpt = app.Option("-c <string>", "Text Formula", CommandOptionType.SingleValue);
             var textTypeOpt = app.Option("-C <string>", "Text Formula Color Type", CommandOptionType.SingleValue);
             var fontOpt = app.Option("-f <string>", "Font", CommandOptionType.SingleValue);
             var typeOpt = app.Option("-t <string>", "Type", CommandOptionType.SingleValue);
+            var distanceFormulaOpt = app.Option("-d <string>", "Distance Formula", CommandOptionType.SingleValue);
             //legacy below
             //var foregdOpt = app.Option("-f|--foreground <color>", "Foreground color.", CommandOptionType.SingleValue);
             //var backgdOpt = app.Option("-b|--background <color>", "Background color.", CommandOptionType.SingleValue);
@@ -77,7 +78,7 @@ namespace Lapis.QrArt
                             //textDrawer.BlurFormula = blurFormulaOpt.Value();
                             textDrawer.BlurFormula = System.IO.File.ReadAllText(@"/home/rwilcox/blend-text/server/formulas/"+blurFormulaOpt.Value()+".txt");
 							textDrawer.TextFormula = System.IO.File.ReadAllText(@"/home/rwilcox/blend-text/server/formulas/"+textFormulaOpt.Value()+".txt");
-
+							
                         }
 						
 						
@@ -230,8 +231,9 @@ namespace Lapis.QrArt
 						}
         				
         				
-        				
-                        var image = builder.Create(contentArg.Value, bitmap, bitmapText, imageArg.Value, blurRadius);
+        				string DistanceFormula = System.IO.File.ReadAllText(@"/home/rwilcox/blend-text/server/formulas/"+distanceFormulaOpt.Value()+".txt");
+
+                        var image = builder.Create(contentArg.Value, bitmap, bitmapText, imageArg.Value, blurRadius, DistanceFormula);
                         //bitmap.Save("static/newbmp1.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
                         
                          stopWatch.Stop();
@@ -277,7 +279,7 @@ namespace Lapis.QrArt
                         }
 						
         				
-                        var image = builder.Create(contentArg.Value, animation, animationText, imageArg.Value, 5);
+                        var image = builder.Create(contentArg.Value, animation, animationText, imageArg.Value, 5, "");
                         
                        
                                                 

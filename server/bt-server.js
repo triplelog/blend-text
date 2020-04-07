@@ -283,6 +283,12 @@ wss.on('connection', function connection(ws) {
   	
   	execCmd += ' -t '+dm.type;
   	
+  	var luaDistanceFormula = `function DistanceFunc (d,maxD)
+        		return (20*d-15*maxD)*2/maxD
+        		end
+        		"`
+    execCmd += ' -d '+'test'+'Distance';
+    
   	console.log(execCmd);
   	
   	if (newCreation && username != ''){
@@ -293,10 +299,10 @@ wss.on('connection', function connection(ws) {
 		
   	if (myTimeout){
 		clearTimeout(myTimeout);
-		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,outSrc,imgIndex, luaBlurFormula, luaTextFormula); }, 1000);
+		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,outSrc,imgIndex, luaBlurFormula, luaTextFormula, luaDistanceFormula); }, 1000);
 	}
 	else {
-		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,outSrc,imgIndex, luaBlurFormula, luaTextFormula); }, 1000);
+		myTimeout = setTimeout(function(){ runCommand(ws,execCmd,outSrc,imgIndex, luaBlurFormula, luaTextFormula, luaDistanceFormula); }, 1000);
 	}
 	imgIndex++;
   	
@@ -305,28 +311,30 @@ wss.on('connection', function connection(ws) {
   });
 });
 
-function runCommand(ws,execCmd,outSrc,imgIndex, luaBlurFormula, luaTextFormula) {
+function runCommand(ws,execCmd,outSrc,imgIndex, luaBlurFormula, luaTextFormula, luaDistanceFormula) {
 	var formulaName = 'test';
 	fs.writeFile("formulas/"+formulaName+"Blur.txt", luaBlurFormula, function(err) {
   		fs.writeFile("formulas/"+formulaName+"Text.txt", luaTextFormula, function(err) {
-			if (err){
+			fs.writeFile("formulas/"+formulaName+"Distance.txt", luaDistanceFormula, function(err) {
+				if (err){
 	
-			}
-			else {
-				exec(execCmd, (error, stdout, stderr) => {
-					if (error) {
-						console.log(`error: ${error.message}`);
-						return;
-					}
-					if (stderr) {
-						console.log(`stderr: ${stderr}`);
-						return;
-					}
-					console.log(`stdout: ${stdout}`);
-					var jsonmessage = {'src':outSrc+'?'+imgIndex};
-					ws.send(JSON.stringify(jsonmessage));
-				});
-			}
+				}
+				else {
+					exec(execCmd, (error, stdout, stderr) => {
+						if (error) {
+							console.log(`error: ${error.message}`);
+							return;
+						}
+						if (stderr) {
+							console.log(`stderr: ${stderr}`);
+							return;
+						}
+						console.log(`stdout: ${stdout}`);
+						var jsonmessage = {'src':outSrc+'?'+imgIndex};
+						ws.send(JSON.stringify(jsonmessage));
+					});
+				}
+			});
 		});
   	});
 	

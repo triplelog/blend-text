@@ -14,7 +14,7 @@ namespace Lapis.QRCode.Art
 {
     public interface IQRArtCreator
     {
-        IImage Create(string data, IRgb24BitmapBase image, IRgb24BitmapBase imageText, string imagePath, int blurRadius);
+        IImage Create(string data, IRgb24BitmapBase image, IRgb24BitmapBase imageText, string imagePath, int blurRadius, string DistanceFormula);
     }
 
     public class QRArtCreator : IQRArtCreator
@@ -32,7 +32,7 @@ namespace Lapis.QRCode.Art
         
         public ITripMatrixDrawer TripMatrixDrawer { get; }
 
-        public virtual IImage Create(string data, IRgb24BitmapBase image, IRgb24BitmapBase imageText, string imagePath, int blurRadius)
+        public virtual IImage Create(string data, IRgb24BitmapBase image, IRgb24BitmapBase imageText, string imagePath, int blurRadius, string DistanceFormula)
         {
         	
 
@@ -41,47 +41,17 @@ namespace Lapis.QRCode.Art
             	int twidth = (int)imageText.Width;
             	int theight = (int)imageText.Height;
             	
-				//var engine = new V8ScriptEngine();
-        		//V8ScriptEngine v8 = new V8ScriptEngine();
+
 				Lua state = new Lua ();
         		
-            	string scriptCode = @"function DistanceFunc (d,maxD)
-        		return (20*d-15*maxD)*2/maxD
-        		end
-        		";
+            	string scriptCode = DistanceFormula;
         		
-        		
-        		
-        		
-        		/*string arrCode = @"arr = {}
-        		for i=0,999 do
-        		arr[i]=i
-        		end
-        		function DistanceFunc (i,maxD,maxii)
-        		
-        		for ii=0,maxii-1 do
-					d = i*i+ii*ii
-					arr[ii]=(20*d-15*maxD)*2/maxD
-        		end
-        		return arr
-        		end
-        		";*/
         		
         		
         		state.DoString (scriptCode);
 				var scriptFunc = state ["DistanceFunc"] as LuaFunction;
 				var res = scriptFunc.Call (1,10);
-        		//Console.WriteLine("Luafunc test return "+res[0]);
-        		/*string scriptCode = @"function DistanceFunc (d,maxD)
-        		return -10
-        		end
-        		";*/
-        		
-        		/*
-        		state.DoString (scriptCode);
-				var scriptFunc = state ["DistanceFunc"] as LuaFunction;
-				var res = scriptFunc.Call (1,10);
-				*/
+
 				
         		int minI = blurRadius;
         		int minII = blurRadius;
