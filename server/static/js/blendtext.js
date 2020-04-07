@@ -99,6 +99,10 @@ function updateImage(evt){
 					if (formula.formulaType == 'rgb'){
 						var wxml = Blockly.Xml.textToDom(formula.workspace);
 						workspaceBRGB.clear();
+						var vars = ["d","r","g","b"];
+						for (var ii=0;ii<4;ii++){
+							workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
+						}
 						Blockly.Xml.domToWorkspace(wxml,workspaceBRGB);
 						document.getElementById('blurFormulaHSL').style.display = 'none';
 						document.getElementById('blurFormulaRGB').style.display = 'block';
@@ -108,6 +112,10 @@ function updateImage(evt){
 					else {
 						var wxml = Blockly.Xml.textToDom(formula.workspace);
 						workspaceB.clear();
+						var vars = ["d","h","s","l"];
+						for (var ii=0;ii<4;ii++){
+							workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
+						}
 						Blockly.Xml.domToWorkspace(wxml,workspaceB);
 						document.getElementById('blurFormulaHSL').style.display = 'block';
 						document.getElementById('blurFormulaRGB').style.display = 'none';
@@ -129,6 +137,35 @@ function updateImage(evt){
 					document.getElementById('textFormulaRGB').style.display = 'none';
 					imgData.textType = 'hsl';
 					updateTHSL();
+				}
+				else {
+					var formula = formulas[parseInt(el.value)];
+					if (formula.formulaType == 'rgb'){
+						var wxml = Blockly.Xml.textToDom(formula.workspace);
+						workspaceTRGB.clear();
+						var vars = ["d","r","g","b"];
+						for (var ii=0;ii<4;ii++){
+							workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
+						}
+						Blockly.Xml.domToWorkspace(wxml,workspaceTRGB);
+						document.getElementById('textFormulaHSL').style.display = 'none';
+						document.getElementById('textFormulaRGB').style.display = 'block';
+						imgData.textType = 'rgb';
+						updateTRGB();
+					}
+					else {
+						var wxml = Blockly.Xml.textToDom(formula.workspace);
+						workspaceT.clear();
+						var vars = ["d","h","s","l"];
+						for (var ii=0;ii<4;ii++){
+							workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
+						}
+						Blockly.Xml.domToWorkspace(wxml,workspaceT);
+						document.getElementById('textFormulaHSL').style.display = 'block';
+						document.getElementById('textFormulaRGB').style.display = 'none';
+						imgData.textType = 'hsl';
+						updateTHSL();
+					}
 				}
 				
 			}
