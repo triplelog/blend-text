@@ -211,9 +211,9 @@ namespace Lapis.QRCode.Art
 										}
 									}
 								}
-								int d = 5;
-								int maxD = 10;
-								res = scriptFunc.Call (d, maxD);
+								int d2 = 5;
+								int maxD2 = 10;
+								res = scriptFunc.Call (d2, maxD2);
 							}
                 		}
                 		
