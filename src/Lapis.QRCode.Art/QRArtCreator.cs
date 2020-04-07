@@ -53,7 +53,7 @@ namespace Lapis.QRCode.Art
         		
         		
         		
-        		string arrCode = @"arr = {}
+        		/*string arrCode = @"arr = {}
         		for i=0,999 do
         		arr[i]=i
         		end
@@ -65,12 +65,12 @@ namespace Lapis.QRCode.Art
         		end
         		return arr
         		end
-        		";
+        		";*/
         		
         		
-        		state.DoString (arrCode);
-				var arrFunc = state ["DistanceFunc"] as LuaFunction;
-				var res = arrFunc.Call (0,10,100);
+        		state.DoString (scriptCode);
+				var scriptFunc = state ["DistanceFunc"] as LuaFunction;
+				var res = scriptFunc.Call (1,10);
         		//Console.WriteLine("Luafunc test return "+res[0]);
         		/*string scriptCode = @"function DistanceFunc (d,maxD)
         		return -10
@@ -174,13 +174,13 @@ namespace Lapis.QRCode.Art
 						
 						if (d <= 1000*1000/2){
 							//arr[ii] = d;
-							/*if (dhash.TryGetValue(d, out outval)){
+							if (dhash.TryGetValue(d, out outval)){
 							
 							}
 							else {
 								res = scriptFunc.Call (d, maxD);
 								dhash[d] = Convert.ToInt32(res[0]);
-							}*/
+							}
 							
 						}
 						else {
@@ -188,7 +188,7 @@ namespace Lapis.QRCode.Art
 							break;
 						}
 					}
-					res = arrFunc.Call (i,maxD,maxii);
+					/*res = arrFunc.Call (i,maxD,maxii);
 					LuaTable tab = res[0] as LuaTable;
 					for (var ii=0;ii<maxii;ii++) {
 						int d = ii*ii + i*i;
@@ -198,7 +198,7 @@ namespace Lapis.QRCode.Art
 						else {
 							dhash[d] = Convert.ToInt32(tab[ii]);
 						}
-					}
+					}*/
 					
 					
 				}
