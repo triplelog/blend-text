@@ -11,6 +11,8 @@ using Microsoft.ClearScript;
 using Microsoft.ClearScript.JavaScript;
 using Microsoft.ClearScript.V8;
 
+using Nlua;
+
 namespace Lapis.QRCode.Art
 {
     public interface IQRArtCreator
@@ -43,10 +45,11 @@ namespace Lapis.QRCode.Art
             	int theight = (int)imageText.Height;
             	
 				//var engine = new V8ScriptEngine();
-        		V8ScriptEngine v8 = new V8ScriptEngine();
+        		//V8ScriptEngine v8 = new V8ScriptEngine();
 
-        		/*
+        		
             	Lua state = new Lua ();
+            	/*
         		state.DoString (@"function DistanceFunc (d,maxD)
         		return (20*d-15*maxD)*2/maxD
         		end
