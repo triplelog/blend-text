@@ -55,7 +55,7 @@ namespace Lapis.QRCode.Art
         		
         		string arrCode = @"arr = {}
         		for i=0,999 do
-        		arr[i]=(20*i-15*1000)*2/1000
+        		arr[i]=i
         		end
         		function DistanceFunc (i,maxD,maxii)
         		
@@ -192,7 +192,7 @@ namespace Lapis.QRCode.Art
 					
 					if (i== 0){
 						LuaTable tab = res[0] as LuaTable;
-						Console.WriteLine("Luafunc test return "+res[0]);
+						Console.WriteLine("Luafunc test return "+tab[0]);
 					}
 					
 					
