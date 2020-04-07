@@ -88,7 +88,7 @@ namespace Lapis.QrArt
                             {
                                 TypeNumber = 5,
                                 ErrorCorrectLevel = ErrorCorrectLevel.M
-                            },
+                            };
 							var bitMatrix = qrEncoder.Build("espn.com");
 						}
 						
