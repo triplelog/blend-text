@@ -40,17 +40,16 @@ namespace Lapis.QRCode.Art
             	int twidth = (int)imageText.Width;
             	int theight = (int)imageText.Height;
             	
-            	//luaSvr = new LuaSvr();
+
             	var luaState = new LuaState();
             	
-            	var distanceFunc = luaState.doString (@"function DistanceFunc (d,maxD)
+            	luaState.doString (@"function DistanceFunc (d,maxD)
         		return (20*d-15*maxD)*2/maxD
         		end
         		return DistanceFunc
-        		") as LuaFunction;
+        		");
         		
-        		
-        		//var distanceFunc = luaState ["DistanceFunc"] as LuaFunction;
+        		var distanceFunc = luaState ["DistanceFunc"] as LuaFunction;
         		
         		/*
             	Lua state = new Lua ();
@@ -193,7 +192,7 @@ namespace Lapis.QRCode.Art
 									if (tripMatrix[iii,iiii] == 0){
 										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
 										if ( d <= maxD/2){
-											var res = distanceFunc.Call (d, maxD);
+											var res = distanceFunc.call (d, maxD);
 											//tripMatrix[iii,iiii] = Convert.ToInt32(res[0]);
 											//tripMatrix[iii,iiii] = (20*d-15*maxD)*2/maxD;
 											tripMatrix[iii,iiii] = -10;
