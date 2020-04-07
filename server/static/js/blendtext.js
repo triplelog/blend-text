@@ -98,6 +98,7 @@ function updateImage(evt){
 					var formula = formulas[parseInt(el.value)];
 					if (formula.formulaType == 'rgb'){
 						var wxml = Blockly.Xml.textToDom(formula.workspace);
+						workspaceBRGB.clear();
 						Blockly.Xml.domToWorkspace(wxml,workspaceBRGB);
 						document.getElementById('blurFormulaHSL').style.display = 'none';
 						document.getElementById('blurFormulaRGB').style.display = 'block';
@@ -106,6 +107,7 @@ function updateImage(evt){
 					}
 					else {
 						var wxml = Blockly.Xml.textToDom(formula.workspace);
+						workspaceB.clear();
 						Blockly.Xml.domToWorkspace(wxml,workspaceB);
 						document.getElementById('blurFormulaHSL').style.display = 'block';
 						document.getElementById('blurFormulaRGB').style.display = 'none';
