@@ -235,6 +235,12 @@ namespace Lapis.QrArt
         				} // text on image
         				
         				if (2==2){ 
+        				
+        					textDrawer.MarginL = 0;
+                            textDrawer.MarginT = 0;
+                            
+            				textDrawer.HashSize = 1;
+            				textDrawer.CellWidth = 1;
 							var qrEncoder = new QRCodeEncoder()
                             {
                                 TypeNumber = 5,
@@ -250,7 +256,8 @@ namespace Lapis.QrArt
 							int theight = (int)bitMatrix.RowCount;
 							int cellSize = 4;
 							Bitmap bmpp = (Bitmap) new Bitmap(twidth*cellSize,theight*cellSize);
-						
+							textDrawer.THeight = theight*cellSize;
+            				textDrawer.TWidth = twidth*cellSize;
 							using (Graphics graph = Graphics.FromImage(bmpp)) {
 								Rectangle ImageSize = new Rectangle(0,0,twidth*cellSize,theight*cellSize);
 								graph.FillRectangle(Brushes.White, ImageSize);
