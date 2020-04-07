@@ -287,7 +287,7 @@ wss.on('connection', function connection(ws) {
         		return (20*d-15*maxD)*2/maxD
         		end
         		"`
-    execCmd += ' -d '+'test'+'Distance';
+    execCmd += ' -d "'+'test'+'Distance"';
     
   	console.log(execCmd);
   	
