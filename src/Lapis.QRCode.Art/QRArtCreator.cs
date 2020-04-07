@@ -40,7 +40,7 @@ namespace Lapis.QRCode.Art
             	int twidth = (int)imageText.Width;
             	int theight = (int)imageText.Height;
             	
-            	Lua state = new Lua ();
+            	Lua state = new SLua ();
         		state.DoString (@"function DistanceFunc (d,maxD)
         		return (20*d-15*maxD)*2/maxD
         		end
