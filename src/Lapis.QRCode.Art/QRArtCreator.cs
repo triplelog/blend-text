@@ -182,7 +182,7 @@ namespace Lapis.QRCode.Art
 					res = arrFunc.Call (arr, maxD);
 					
 					if (i== 0){
-						LuaTable tab = state.GetTable(res[0]);
+						LuaTable tab = res[0] as LuaTable;
 						Console.WriteLine("Luafunc test return "+res[0]);
 					}
 					
