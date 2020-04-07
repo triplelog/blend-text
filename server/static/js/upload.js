@@ -26,6 +26,7 @@ function handleDrop(e) {
 	document.getElementById('imgUrl').style.display = 'none';
 	document.getElementById('imgDrag').style.display = 'inline-block';
 	document.getElementById('imgDrag').textContent = "Image Uploaded";
+	document.getElementById('imgType').value = 'drag';
 }
 
 
