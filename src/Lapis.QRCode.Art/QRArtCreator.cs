@@ -51,7 +51,10 @@ namespace Lapis.QRCode.Art
         		";
         		
         		int[] arr2 = new int[1000];
-        		arr2[0] = 3;
+        		for (var i=0;i<1000;i++){
+        			arr2[i] = i+3;
+        		}
+        		
         		
         		
         		string arrCode = @"function DistanceFunc (d,maxD)
