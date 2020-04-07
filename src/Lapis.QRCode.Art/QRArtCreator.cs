@@ -40,7 +40,7 @@ namespace Lapis.QRCode.Art
             	int twidth = (int)imageText.Width;
             	int theight = (int)imageText.Height;
             	
-
+				var luaSvr = new LuaSvr();
             	var luaState = new LuaState();
             	
             	luaState.doString (@"function DistanceFunc (d,maxD)
