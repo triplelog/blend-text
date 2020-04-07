@@ -133,6 +133,9 @@ wss.on('connection', function connection(ws) {
 		console.log(dm.url);
 		var wget = 'wget -O '+inSrc + ' ' + dm.url + '" && echo "done"';
 		var child = exec(wget, function(err, stdout, stderr) {
+			console.log("err: ",err);
+			console.log("stdout: ",stdout);
+			console.log("stderr: ",stderr);
 		});
 		return;
 	}
