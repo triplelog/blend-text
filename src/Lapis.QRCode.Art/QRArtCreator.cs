@@ -131,6 +131,7 @@ namespace Lapis.QRCode.Art
                 			if (i<minY){minY = i;}
                 			if (ii>maxX){maxX = ii;}
                 			if (ii<minX){minX = ii;}
+                			
                 			if (tripMatrix[i-1,ii] > 0){
                 				startiii = i;
                 			}
