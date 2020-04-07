@@ -248,16 +248,17 @@ namespace Lapis.QrArt
 							Graphics graph1 = Graphics.FromImage(bmp);
 							int twidth = (int)bitMatrix.ColumnCount;
 							int theight = (int)bitMatrix.RowCount;
-							Bitmap bmpp = (Bitmap) new Bitmap(twidth,theight);
+							int cellSize = 4;
+							Bitmap bmpp = (Bitmap) new Bitmap(twidth*cellSize,theight*cellSize);
 						
 							using (Graphics graph = Graphics.FromImage(bmpp)) {
-								Rectangle ImageSize = new Rectangle(0,0,twidth*4,theight*4);
+								Rectangle ImageSize = new Rectangle(0,0,twidth*cellSize,theight*cellSize);
 								graph.FillRectangle(Brushes.White, ImageSize);
 								
 								for (var r=0;r<theight;r++) {
 									for (var c=0;c<twidth;c++) {
 										if (bitMatrix[r,c]){
-											graph.FillRectangle(Brushes.Black, c*4, r*4, 4, 4);
+											graph.FillRectangle(Brushes.Black, c*cellSize, r*cellSize, cellSize, cellSize);
 										}
 									}
 								}
