@@ -188,24 +188,38 @@ namespace Lapis.QRCode.Art
                 			if (ii>maxX){maxX = ii;}
                 			if (ii<minX){minX = ii;}
                 			
-                			if (tripMatrix[i-1,ii] > 0){
+                			if (i==0){
+                				startiii = 0;
+                			}
+                			else if (tripMatrix[i-1,ii] > 0){
                 				startiii = i;
                 			}
                 			else {
                 				startiii = i-blurRadius;
                 			}
-                			if (tripMatrix[i+1,ii] > 0){
+                			
+                			if (i+1==theight){
+                				endiii=i+1;
+                			}
+                			else if (tripMatrix[i+1,ii] > 0){
                 				endiii = i+1;
                 			}
                 			else {
                 				endiii = i+blurRadius+1;
                 			}
                 			
-                			if (tripMatrix[i,ii-1] > 0){
+                			if (ii==0){
+                				startiiii = 0;
+                			}
+                			else if (tripMatrix[i,ii-1] > 0){
                 				startiiii = ii;
                 			}
                 			else {
                 				startiiii = ii-blurRadius;
+                			}
+                			
+                			if (ii+1==twidth){
+                				endiiii = ii+1;
                 			}
                 			if (tripMatrix[i,ii+1] > 0){
                 				endiiii = ii+1;

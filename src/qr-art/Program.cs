@@ -273,7 +273,7 @@ namespace Lapis.QrArt
 							}
 							bitmapText = new BitmapFrame(bmpp);
 							bitmap = new BitmapFrame(bmp);
-							blurRadius = 1;
+							blurRadius = 0;
 						} //create qr
 						
 						
