@@ -212,20 +212,28 @@ namespace Lapis.QRCode.Art
 									if (tripMatrix[iii,iiii] == 0){
 										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
 										if ( d <= maxD/2){
+											if (dhash.TryGetValue(d, out outval)){
+												tripMatrix[iii,iiii] = outval;
+											}
+											else {
+												tripMatrix[iii,iiii] = -30;
+											}
 											//res = script.Call(luaFactFunction, DynValue.NewNumber(d), DynValue.NewNumber(maxD));
 											//res = scriptFunc.Call (d, maxD);
 											//tripMatrix[iii,iiii] = Convert.ToInt32(res[0]);
 											//tripMatrix[iii,iiii] = (20*d-15*maxD)*2/maxD;
-											tripMatrix[iii,iiii] = -10;
+											//tripMatrix[iii,iiii] = -10;
 										}
 									}
 									else if (tripMatrix[iii,iiii] < 0){
 										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
 										if ( d <= maxD/2 ){
-											var dd = (20*d-15*maxD)*2/maxD;
-											if (dd < tripMatrix[iii,iiii]) {
-												tripMatrix[iii,iiii] = dd;
+											if (dhash.TryGetValue(d, out outval)){
+												if (outval < tripMatrix[iii,iiii]) {
+													tripMatrix[iii,iiii] = outval;
+												}
 											}
+											
 										}
 									}
 								}
