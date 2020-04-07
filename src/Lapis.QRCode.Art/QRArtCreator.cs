@@ -196,7 +196,7 @@ namespace Lapis.QRCode.Art
 							
 						}
 						else {
-							dhash[d] = Convert.ToInt32(tab[ii] as double);
+							dhash[d] = Convert.ToInt32(tab[ii]);
 						}
 					}
 					
