@@ -66,7 +66,6 @@ namespace Lapis.QRCode.Art
         		for ii=0,maxii-1 do
 					d = i*i+ii*ii
 					arr[ii]=(20*d-15*maxD)*2/maxD
-					end
         		end
         		return arr
         		end
