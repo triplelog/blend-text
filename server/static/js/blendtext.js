@@ -96,7 +96,7 @@ function updateImage(evt){
 				}
 				else {
 					var formula = formulas[parseInt(el.value)];
-					if (formula.type == 'rgb'){
+					if (formula.formulaType == 'rgb'){
 						var wxml = Blockly.Xml.textToDom(formula.workspace);
 						Blockly.Xml.domToWorkspace(wxml,workspaceBRGB);
 						document.getElementById('blurFormulaHSL').style.display = 'none';
@@ -353,7 +353,7 @@ function saveFormula() {
 	}
 	
 	var outspace = Blockly.Xml.domToText(wxml);
-	var jsonmessage = {'type':'saveFormula','name':'First Formula','message':outspace,'type':formulaType};
+	var jsonmessage = {'type':'saveFormula','name':'First Formula','message':outspace,'formulaType':formulaType};
 	ws.send(JSON.stringify(jsonmessage));
 }
 

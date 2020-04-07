@@ -131,7 +131,7 @@ wss.on('connection', function connection(ws) {
 	}
 	else if (dm.type && dm.type == 'saveFormula'){
 		if (dm.message && username != ''){
-			var formula = {'name':dm.name,'workspace':dm.message};
+			var formula = {'name':dm.name,'workspace':dm.message,'formulaType':dm.formulaType};
 			//Add a Check that there does not exist a formula of that name already.
 			User.updateOne({ username: username }, {$push: {"formulas": formula}}, function(err, result) {});
 		}
