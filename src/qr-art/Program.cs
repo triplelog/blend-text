@@ -87,6 +87,10 @@ namespace Lapis.QrArt
 						Bitmap bmp = null;
 						IRgb24BitmapBase bitmapText = null;
 						IRgb24BitmapBase bitmap = null;
+						Stopwatch stopWatch = new Stopwatch();
+						stopWatch.Start();
+					
+						Console.WriteLine("Start Program ");
 						if (2 == 2){ 
 						
 						
@@ -102,14 +106,7 @@ namespace Lapis.QrArt
 							else {
 								widthout = -1;
 								font = new Font(fontVal, fontSize);
-							}
-						
-							Console.WriteLine(font.FontFamily);
-						
-							Stopwatch stopWatch = new Stopwatch();
-							stopWatch.Start();
-						
-							Console.WriteLine("Start Program ");
+							}	
 						
 							
 							try
