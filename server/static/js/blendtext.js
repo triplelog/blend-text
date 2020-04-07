@@ -106,7 +106,7 @@ function updateImage(evt){
 					}
 					else {
 						var wxml = Blockly.Xml.textToDom(formula.workspace);
-						Blockly.Xml.domToWorkspace(wxml,workspaceBHSL);
+						Blockly.Xml.domToWorkspace(wxml,workspaceB);
 						document.getElementById('blurFormulaHSL').style.display = 'block';
 						document.getElementById('blurFormulaRGB').style.display = 'none';
 						imgData.blurType = 'hsl';
