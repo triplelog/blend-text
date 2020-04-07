@@ -285,8 +285,7 @@ wss.on('connection', function connection(ws) {
   	
   	var luaDistanceFormula = `function DistanceFunc (d,maxD)
         		return (20*d-15*maxD)*2/maxD
-        		end
-        		"`
+        		end`;
     execCmd += ' -d "'+'test'+'Distance"';
     
   	console.log(execCmd);
