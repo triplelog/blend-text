@@ -180,8 +180,10 @@ namespace Lapis.QRCode.Art
 						}*/
 					}
 					res = arrFunc.Call (arr, maxD) as object[];
+					
 					if (i== 0){
-						Console.WriteLine("Luafunc test return "+res[0][0]);
+						LuaTable tab = state.GetTable(res[0]);
+						Console.WriteLine("Luafunc test return "+res[0]);
 					}
 					
 					
