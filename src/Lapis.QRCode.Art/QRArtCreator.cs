@@ -191,6 +191,7 @@ namespace Lapis.QRCode.Art
 					res = arrFunc.Call (i,maxD,maxii);
 					LuaTable tab = res[0] as LuaTable;
 					for (var ii=0;ii<maxii;ii++) {
+						int d = ii*ii + i*i;
 						if (dhash.TryGetValue(d, out outval)){
 							
 						}
