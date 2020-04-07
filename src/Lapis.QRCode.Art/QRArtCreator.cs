@@ -52,10 +52,18 @@ namespace Lapis.QRCode.Art
         		
         		int[] arr2 = new int[1000];
         		arr2[0] = 3;
+        		
+        		
         		string arrCode = @"function DistanceFunc (d,maxD)
-        		return d[0]
+        		arr = {}
+        		for i=0,10 do
+        		arr[i]=(20*d[i]-15*maxD)*2/maxD
+        		end
+        		return arr
         		end
         		";
+        		
+        		
         		state.DoString (arrCode);
 				var arrFunc = state ["DistanceFunc"] as LuaFunction;
 				var res = arrFunc.Call (arr2,10);
