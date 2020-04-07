@@ -96,11 +96,23 @@ function updateImage(evt){
 				}
 				else {
 					var formula = formulas[parseInt(el.value)];
-					console.log(formula);
-					document.getElementById('blurFormulaHSL').style.display = 'block';
-					document.getElementById('blurFormulaRGB').style.display = 'none';
-					imgData.blurType = 'hsl';
-					updateBHSL();
+					if (formula.type == 'rgb'){
+						var wxml = Blockly.Xml.textToDom(formula.workspace);
+						Blockly.Xml.domToWorkspace(wxml,workspaceBRGB);
+						document.getElementById('blurFormulaHSL').style.display = 'none';
+						document.getElementById('blurFormulaRGB').style.display = 'block';
+						imgData.blurType = 'rgb';
+						updateBRGB();
+					}
+					else {
+						var wxml = Blockly.Xml.textToDom(formula.workspace);
+						Blockly.Xml.domToWorkspace(wxml,workspaceBHSL);
+						document.getElementById('blurFormulaHSL').style.display = 'block';
+						document.getElementById('blurFormulaRGB').style.display = 'none';
+						imgData.blurType = 'hsl';
+						updateBHSL();
+					}
+					
 				}
 			}
 			else {
@@ -320,12 +332,14 @@ updateBHSL();
 
 function saveFormula() {
 	var wxml;
+	var formulaType = 'hsl';
 	if (blurOrText == 'blur'){
 		if (imgData.blurType == 'hsl'){
 			wxml = Blockly.Xml.workspaceToDom(workspaceB);
 		}
 		else{
 			wxml = Blockly.Xml.workspaceToDom(workspaceBRGB);
+			formulaType = 'rgb';
 		}
 	}
 	else {
@@ -334,11 +348,12 @@ function saveFormula() {
 		}
 		else{
 			wxml = Blockly.Xml.workspaceToDom(workspaceTRGB);
+			formulaType = 'rgb';
 		}
 	}
 	
 	var outspace = Blockly.Xml.domToText(wxml);
-	var jsonmessage = {'type':'saveFormula','name':'First Formula','message':outspace};
+	var jsonmessage = {'type':'saveFormula','name':'First Formula','message':outspace,'type':formulaType};
 	ws.send(JSON.stringify(jsonmessage));
 }
 
