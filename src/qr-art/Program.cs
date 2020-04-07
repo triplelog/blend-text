@@ -83,8 +83,14 @@ namespace Lapis.QrArt
 							
                         }
 						
-						
-						
+						if (2==2){
+							var qrEncoder = new QRCodeEncoder()
+                            {
+                                TypeNumber = 5,
+                                ErrorCorrectLevel = ErrorCorrectLevel.M;
+                            },
+							var bitMatrix = qrEncoder.Build(data);
+						}
 						
 						int blurRadius = 5;
         				if (int.TryParse(blurRadiusOpt.Value(), out blurRadius)){}
