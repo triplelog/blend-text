@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using NLua;
+using slua-standalone;
 
 namespace Lapis.QRCode.Art
 {
