@@ -91,7 +91,7 @@ namespace Lapis.QrArt
 						stopWatch.Start();
 					
 						Console.WriteLine("Start Program ");
-						if (2 == 2){ 
+						if (2 == 3){ 
 						
 						
 							if (int.TryParse(blurRadiusOpt.Value(), out blurRadius)){}
@@ -234,13 +234,37 @@ namespace Lapis.QrArt
 							}
         				} // text on image
         				
-        				if (2==3){ 
+        				if (2==2){ 
 							var qrEncoder = new QRCodeEncoder()
                             {
                                 TypeNumber = 5,
                                 ErrorCorrectLevel = ErrorCorrectLevel.M
                             };
 							var bitMatrix = qrEncoder.Build("espn.com");
+							
+							bmp = Bitmap.FromFile(imageArg.Value) as Bitmap;
+								//textDrawer.bgImage = bmp;
+							
+							Graphics graph1 = Graphics.FromImage(bmp);
+							int twidth = (int)bitMatrix.ColumnCount;
+							int theight = (int)bitMatrix.RowCount;
+							Bitmap bmpp = (Bitmap) new Bitmap(twidth,theight);
+						
+							using (Graphics graph = Graphics.FromImage(bmpp)) {
+								Rectangle ImageSize = new Rectangle(0,0,twidth,theight);
+								graph.FillRectangle(Brushes.White, ImageSize);
+								
+								for (var r=0;r<theight;r++) {
+									for (var c=0;c<twidth;c++) {
+										if (bitMatrix[r,c]){
+											graph.FillRectangle(Brushes.Black, c, r, 1, 1);
+										}
+									}
+								}
+								
+							}
+							bitmapText = new BitmapFrame(bmpp);
+							bitmap = new BitmapFrame(bmp);
 						} //create qr
 						
 						
