@@ -176,13 +176,13 @@ namespace Lapis.QRCode.Art
 						
 						if (d <= 1000*1000/2){
 							arr[ii] = d;
-							if (dhash.TryGetValue(d, out outval)){
+							/*if (dhash.TryGetValue(d, out outval)){
 							
 							}
 							else {
 								res = scriptFunc.Call (d, maxD);
 								dhash[d] = Convert.ToInt32(res[0]);
-							}
+							}*/
 							
 						}
 						else {
