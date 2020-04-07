@@ -144,7 +144,7 @@ namespace Lapis.QRCode.Art
 				for (var i=0;i<1000;i++){
 					for (var ii=0;ii<1000;ii++){
 						int d = ii*ii + i*i;
-						if (d <= maxD/2){
+						if (d <= 1000*1000/2){
 							if (dhash.TryGetValue(d, out outval)){
 							
 							}
@@ -164,7 +164,7 @@ namespace Lapis.QRCode.Art
 				string elapsedTimeLua = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
 					tsLua.Hours, tsLua.Minutes, tsLua.Seconds,
 					tsLua.Milliseconds / 10);
-				Console.WriteLine("QRArtCreatorTime " + elapsedTimeLua);
+				Console.WriteLine("LuaTime " + elapsedTimeLua);
 				
         		int startiii = 0;
         		int endiii = 0;
