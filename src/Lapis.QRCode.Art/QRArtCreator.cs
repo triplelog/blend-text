@@ -66,7 +66,7 @@ namespace Lapis.QRCode.Art
         		
         		state.DoString (arrCode);
 				var arrFunc = state ["DistanceFunc"] as LuaFunction;
-				var res = arrFunc.Call (arr2,10);
+				int[] res = arrFunc.Call (arr2,10) as int[];
         		//Console.WriteLine("Luafunc test return "+res[0]);
         		/*string scriptCode = @"function DistanceFunc (d,maxD)
         		return -10
@@ -179,7 +179,7 @@ namespace Lapis.QRCode.Art
 							
 						}*/
 					}
-					res = arrFunc.Call (arr, maxD);
+					res = arrFunc.Call (arr, maxD) as int[];
 					if (i== 0){
 						Console.WriteLine("Luafunc test return "+res[0][0]);
 					}
