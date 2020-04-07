@@ -45,15 +45,15 @@ namespace Lapis.QRCode.Art
         		//V8ScriptEngine v8 = new V8ScriptEngine();
 				Lua state = new Lua ();
         		
-            	/*string scriptCode = @"function DistanceFunc (d,maxD)
+            	string scriptCode = @"function DistanceFunc (d,maxD)
         		return (20*d-15*maxD)*2/maxD
         		end
-        		";*/
+        		";
         		
-        		string scriptCode = @"function DistanceFunc (d,maxD)
+        		/*string scriptCode = @"function DistanceFunc (d,maxD)
         		return -10
         		end
-        		";
+        		";*/
         		
         		state.DoString (scriptCode);
 				var scriptFunc = state ["DistanceFunc"] as LuaFunction;
@@ -136,11 +136,20 @@ namespace Lapis.QRCode.Art
                 
 				int maxD = blurRadius*blurRadius;
 				
+				Dictionary<int, int> dhash = new Dictionary<int, int>();
+				
 				for (var i=0;i<blurRadius;i++){
 					for (var ii=0;ii<blurRadius;ii++){
 						int d = ii*ii + i*i;
 						if (d <= maxD/2){
-							res = scriptFunc.Call (d, maxD);
+							if (dhash.TryGetValue(d, out outval)){
+							
+							}
+							else {
+								res = scriptFunc.Call (d, maxD);
+								dhash[d] = Convert.ToInt32(res[0]);
+							}
+							
 						}
 					}
 				}
