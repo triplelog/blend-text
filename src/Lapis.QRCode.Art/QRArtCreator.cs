@@ -42,7 +42,7 @@ namespace Lapis.QRCode.Art
             	int twidth = (int)imageText.Width;
             	int theight = (int)imageText.Height;
             	
-				var engine = new V8ScriptEngine();
+				//var engine = new V8ScriptEngine();
         		
         		/*
             	Lua state = new Lua ();
