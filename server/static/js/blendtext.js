@@ -94,6 +94,14 @@ function updateImage(evt){
 					imgData.blurType = 'hsl';
 					updateBHSL();
 				}
+				else {
+					var formula = formulas[parseInt(el.value)];
+					console.log(formula);
+					document.getElementById('blurFormulaHSL').style.display = 'block';
+					document.getElementById('blurFormulaRGB').style.display = 'none';
+					imgData.blurType = 'hsl';
+					updateBHSL();
+				}
 			}
 			else {
 				if (el.value =='rgb'){
