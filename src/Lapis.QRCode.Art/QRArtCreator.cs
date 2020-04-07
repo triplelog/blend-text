@@ -58,7 +58,9 @@ namespace Lapis.QRCode.Art
 
 				script.DoString(scriptCode);
 				
-				DynValue res = script.Call(script.Globals["DistanceFunc"], 4,10);
+				DynValue luaFactFunction = script.Globals.Get("DistanceFunc");
+				
+				DynValue res = script.Call(luaFactFunction, DynValue.NewNumber(4), DynValue.NewNumber(10));
 				
         		int minI = blurRadius;
         		int minII = blurRadius;
@@ -192,7 +194,7 @@ namespace Lapis.QRCode.Art
 									if (tripMatrix[iii,iiii] == 0){
 										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
 										if ( d <= maxD/2){
-											res = script.Call(script.Globals["DistanceFunc"], d, maxD);
+											res = script.Call(luaFactFunction, DynValue.NewNumber(d), DynValue.NewNumber(maxD));
 											//var res = distanceFunc.call (d, maxD);
 											//tripMatrix[iii,iiii] = Convert.ToInt32(res[0]);
 											//tripMatrix[iii,iiii] = (20*d-15*maxD)*2/maxD;
