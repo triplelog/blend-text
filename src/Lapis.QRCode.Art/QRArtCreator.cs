@@ -49,13 +49,14 @@ namespace Lapis.QRCode.Art
         		
         		var distanceFunc = luaState ["DistanceFunc"] as LuaFunction;
         		
-        		
+        		/*
             	Lua state = new Lua ();
         		state.DoString (@"function DistanceFunc (d,maxD)
         		return (20*d-15*maxD)*2/maxD
         		end
         		");
 				var distanceFunc = state ["DistanceFunc"] as LuaFunction;
+				*/
 				
         		int minI = blurRadius;
         		int minII = blurRadius;
