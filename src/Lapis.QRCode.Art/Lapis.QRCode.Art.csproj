@@ -9,6 +9,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lapis.QRCode.Imaging\Lapis.QRCode.Imaging.csproj" />
+    <PackageReference Include="NLua" Version="1.4.30" />
   </ItemGroup>
 
 </Project>
