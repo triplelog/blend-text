@@ -131,6 +131,9 @@ wss.on('connection', function connection(ws) {
 	}
 	else if (dm.type && dm.type == 'download'){
 		console.log(dm.url);
+		var wget = 'wget -O '+inSrc + ' ' + dm.url + '" && echo "done"';
+		var child = exec(wget, function(err, stdout, stderr) {
+		});
 		return;
 	}
 	else if (dm.type && dm.type == 'saveFormula'){
