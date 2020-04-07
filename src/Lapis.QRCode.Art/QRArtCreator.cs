@@ -11,7 +11,8 @@ using Microsoft.ClearScript;
 using Microsoft.ClearScript.JavaScript;
 using Microsoft.ClearScript.V8;
 
-using NLua;
+ 
+using MoonSharp.Interpreter;
 
 namespace Lapis.QRCode.Art
 {
@@ -48,14 +49,16 @@ namespace Lapis.QRCode.Art
         		//V8ScriptEngine v8 = new V8ScriptEngine();
 
         		
-            	Lua state = new Lua ();
-            	/*
-        		state.DoString (@"function DistanceFunc (d,maxD)
+            	string scriptCode = @"function DistanceFunc (d,maxD)
         		return (20*d-15*maxD)*2/maxD
         		end
-        		");
-				var distanceFunc = state ["DistanceFunc"] as LuaFunction;
-				*/
+        		";
+        		
+        		Script script = new Script();
+
+				script.DoString(scriptCode);
+				
+				DynValue res = script.Call(script.Globals["DistanceFunc"], 4,10);
 				
         		int minI = blurRadius;
         		int minII = blurRadius;
@@ -189,6 +192,7 @@ namespace Lapis.QRCode.Art
 									if (tripMatrix[iii,iiii] == 0){
 										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
 										if ( d <= maxD/2){
+											res = script.Call(script.Globals["DistanceFunc"], d, maxD);
 											//var res = distanceFunc.call (d, maxD);
 											//tripMatrix[iii,iiii] = Convert.ToInt32(res[0]);
 											//tripMatrix[iii,iiii] = (20*d-15*maxD)*2/maxD;
