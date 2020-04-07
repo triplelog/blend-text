@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using SLua;
+using Microsoft.ClearScript;
+using Microsoft.ClearScript.JavaScript;
+using Microsoft.ClearScript.V8;
 
 namespace Lapis.QRCode.Art
 {
@@ -40,16 +42,7 @@ namespace Lapis.QRCode.Art
             	int twidth = (int)imageText.Width;
             	int theight = (int)imageText.Height;
             	
-				var luaSvr = new LuaSvr();
-            	var luaState = new LuaState();
-            	
-            	luaState.doString (@"function DistanceFunc (d,maxD)
-        		return (20*d-15*maxD)*2/maxD
-        		end
-        		return DistanceFunc
-        		");
-        		
-        		var distanceFunc = luaState ["DistanceFunc"] as LuaFunction;
+				var engine = new V8ScriptEngine();
         		
         		/*
             	Lua state = new Lua ();
@@ -192,7 +185,7 @@ namespace Lapis.QRCode.Art
 									if (tripMatrix[iii,iiii] == 0){
 										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
 										if ( d <= maxD/2){
-											var res = distanceFunc.call (d, maxD);
+											//var res = distanceFunc.call (d, maxD);
 											//tripMatrix[iii,iiii] = Convert.ToInt32(res[0]);
 											//tripMatrix[iii,iiii] = (20*d-15*maxD)*2/maxD;
 											tripMatrix[iii,iiii] = -10;
