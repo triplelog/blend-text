@@ -45,8 +45,13 @@ namespace Lapis.QRCode.Art
         		//V8ScriptEngine v8 = new V8ScriptEngine();
 				Lua state = new Lua ();
         		
-            	string scriptCode = @"function DistanceFunc (d,maxD)
+            	/*string scriptCode = @"function DistanceFunc (d,maxD)
         		return (20*d-15*maxD)*2/maxD
+        		end
+        		";*/
+        		
+        		string scriptCode = @"function DistanceFunc (d,maxD)
+        		return -10
         		end
         		";
         		
