@@ -221,7 +221,7 @@ namespace Lapis.QRCode.Art
                 			if (ii+1==twidth){
                 				endiiii = ii+1;
                 			}
-                			if (tripMatrix[i,ii+1] > 0){
+                			else if (tripMatrix[i,ii+1] > 0){
                 				endiiii = ii+1;
                 			}
                 			else {
