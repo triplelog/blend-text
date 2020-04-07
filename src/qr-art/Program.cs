@@ -87,7 +87,7 @@ namespace Lapis.QrArt
 							var qrEncoder = new QRCodeEncoder()
                             {
                                 TypeNumber = 5,
-                                ErrorCorrectLevel = ErrorCorrectLevel.M;
+                                ErrorCorrectLevel = ErrorCorrectLevel.M
                             },
 							var bitMatrix = qrEncoder.Build(data);
 						}
