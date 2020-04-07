@@ -7,12 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Microsoft.ClearScript;
-using Microsoft.ClearScript.JavaScript;
-using Microsoft.ClearScript.V8;
-
  
-using MoonSharp.Interpreter;
+using NLua;
 
 namespace Lapis.QRCode.Art
 {
@@ -47,20 +43,15 @@ namespace Lapis.QRCode.Art
             	
 				//var engine = new V8ScriptEngine();
         		//V8ScriptEngine v8 = new V8ScriptEngine();
-
+				Lua state = new Lua ();
         		
             	string scriptCode = @"function DistanceFunc (d,maxD)
         		return (20*d-15*maxD)*2/maxD
         		end
         		";
         		
-        		Script script = new Script();
-
-				script.DoString(scriptCode);
-				
-				DynValue luaFactFunction = script.Globals.Get("DistanceFunc");
-				
-				DynValue res = script.Call(luaFactFunction, DynValue.NewNumber(4), DynValue.NewNumber(10));
+        		state.DoString (scriptCode);
+				var scriptFunc = state ["DistanceFunc"] as LuaFunction;
 				
         		int minI = blurRadius;
         		int minII = blurRadius;
@@ -194,8 +185,8 @@ namespace Lapis.QRCode.Art
 									if (tripMatrix[iii,iiii] == 0){
 										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
 										if ( d <= maxD/2){
-											res = script.Call(luaFactFunction, DynValue.NewNumber(d), DynValue.NewNumber(maxD));
-											//var res = distanceFunc.call (d, maxD);
+											//res = script.Call(luaFactFunction, DynValue.NewNumber(d), DynValue.NewNumber(maxD));
+											var res = scriptFunc.call (d, maxD);
 											//tripMatrix[iii,iiii] = Convert.ToInt32(res[0]);
 											//tripMatrix[iii,iiii] = (20*d-15*maxD)*2/maxD;
 											tripMatrix[iii,iiii] = -10;
