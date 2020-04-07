@@ -47,6 +47,8 @@ namespace Lapis.QRCode.Art
         		end
         		");
         		
+        		var distanceFunc = luaState ["DistanceFunc"] as LuaFunction;
+        		
         		
             	Lua state = new Lua ();
         		state.DoString (@"function DistanceFunc (d,maxD)
