@@ -59,7 +59,7 @@ namespace Lapis.QRCode.Art
         		
         		string arrCode = @"function DistanceFunc (d,maxD)
         		arr = {}
-        		for i=0,1000 do
+        		for i=0,999 do
         		arr[i]=(20*d[i]-15*maxD)*2/maxD
         		end
         		return arr
