@@ -135,6 +135,15 @@ namespace Lapis.QRCode.Art
             	TripMatrixDrawer.TWidth = tripMatrix.ColumnCount;
                 
 				int maxD = blurRadius*blurRadius;
+				
+				for (var i=0;i<blurRadius;i++){
+					for (var ii=0;ii<blurRadius;ii++){
+						int d = ii*ii + i*i;
+						if (d <= maxD/2){
+							res = scriptFunc.Call (d, maxD);
+						}
+					}
+				}
         		int startiii = 0;
         		int endiii = 0;
         		int startiiii = 0;
@@ -211,13 +220,7 @@ namespace Lapis.QRCode.Art
 										}
 									}
 								}
-								//int d2 = 5;
-								//int maxD2 = 10;
-								//res = scriptFunc.Call (d2, maxD2);
 							}
-							int d2 = 5;
-							int maxD2 = 10;
-							res = scriptFunc.Call (d2, maxD2);
                 		}
                 		
                 	}
