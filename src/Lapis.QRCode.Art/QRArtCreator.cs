@@ -165,14 +165,14 @@ namespace Lapis.QRCode.Art
 				Stopwatch stopWatchLua = new Stopwatch();
         		stopWatchLua.Start();
         		
-				for (var i=0;i<100;i++){
+				for (var i=0;i<blurRadius;i++){
 					//int[] arr = new int[1000];
-					int maxii = 100;
-					for (var ii=0;ii<100;ii++){
+					int maxii = blurRadius;
+					for (var ii=0;ii<blurRadius;ii++){
 						
 						int d = ii*ii + i*i;
 						
-						if (d <= 100*100/2){
+						if (d <= maxD/2){
 							//arr[ii] = d;
 							if (dhash.TryGetValue(d, out outval)){
 							
@@ -188,17 +188,6 @@ namespace Lapis.QRCode.Art
 							break;
 						}
 					}
-					/*res = arrFunc.Call (i,maxD,maxii);
-					LuaTable tab = res[0] as LuaTable;
-					for (var ii=0;ii<maxii;ii++) {
-						int d = ii*ii + i*i;
-						if (dhash.TryGetValue(d, out outval)){
-							
-						}
-						else {
-							dhash[d] = Convert.ToInt32(tab[ii]);
-						}
-					}*/
 					
 					
 				}
@@ -277,11 +266,7 @@ namespace Lapis.QRCode.Art
 											else {
 												tripMatrix[iii,iiii] = -30;
 											}
-											//res = script.Call(luaFactFunction, DynValue.NewNumber(d), DynValue.NewNumber(maxD));
-											//res = scriptFunc.Call (d, maxD);
-											//tripMatrix[iii,iiii] = Convert.ToInt32(res[0]);
 											//tripMatrix[iii,iiii] = (20*d-15*maxD)*2/maxD;
-											//tripMatrix[iii,iiii] = -10;
 										}
 									}
 									else if (tripMatrix[iii,iiii] < 0){
@@ -305,10 +290,10 @@ namespace Lapis.QRCode.Art
                 if (maxY + blurRadius >= theight){maxY = theight -blurRadius;}
                 if (minX < blurRadius){minX = blurRadius;}
                 if (maxX + blurRadius >= twidth){maxX = twidth -blurRadius;}
+                int dd = (10*maxD-15*maxD)*2/maxD;
                 for (var i=minY-blurRadius;i<maxY+blurRadius;i++){
                 	for (var ii=minX-blurRadius;ii<maxX+blurRadius;ii++){
                 		if (tripMatrix[i,ii] == 0){
-                			int dd = (10*maxD-15*maxD)*2/maxD;
                 			tripMatrix[i,ii] = dd;
                 		}
                 	}
