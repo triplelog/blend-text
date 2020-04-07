@@ -65,9 +65,9 @@ namespace Lapis.QRCode.Imaging
         
         int THeight { get; set; }
         
-        int CellWidth { get; set; };
+        int CellWidth { get; set; }
         
-		int HashSize { get; set; };
+		int HashSize { get; set; }
         
         string BlurFormula { get; set; }
         
