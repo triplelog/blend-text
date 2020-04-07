@@ -142,7 +142,7 @@ namespace Lapis.QRCode.Art
 						
 						int d = ii*ii + i*i;
 						
-						if (d <= maxD/2){
+						if (d <= maxD){
 							//arr[ii] = d;
 							if (dhash.TryGetValue(d, out outval)){
 							
@@ -216,10 +216,7 @@ namespace Lapis.QRCode.Art
                 			
                 			
                 			for (var iii=startiii;iii<endiii;iii++){
-                				int[] arr = new int[endiiii-startiiii];
-                				
 								for (var iiii=startiiii;iiii<endiiii;iiii++){
-									arr[iiii-startiiii]=tripMatrix[iii,iiii];
 									/*if (tripMatrix[iii,iiii] == 0){
 										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
 										if ( d <= maxD/2){
@@ -229,25 +226,16 @@ namespace Lapis.QRCode.Art
 									
 									if (tripMatrix[iii,iiii] == 0){
 										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
-										if ( d <= maxD/2){
-											if (dhash.TryGetValue(d, out outval)){
-												tripMatrix[iii,iiii] = outval;
-											}
-											else {
-												tripMatrix[iii,iiii] = -30;
-											}
-											//tripMatrix[iii,iiii] = (20*d-15*maxD)*2/maxD;
+										if (dhash.TryGetValue(d, out outval)){
+											tripMatrix[iii,iiii] = outval;
 										}
 									}
 									else if (tripMatrix[iii,iiii] < 0){
 										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
-										if ( d <= maxD/2 ){
-											if (dhash.TryGetValue(d, out outval)){
-												if (outval < tripMatrix[iii,iiii]) {
-													tripMatrix[iii,iiii] = outval;
-												}
+										if (dhash.TryGetValue(d, out outval)){
+											if (outval < tripMatrix[iii,iiii]) {
+												tripMatrix[iii,iiii] = outval;
 											}
-											
 										}
 									}
 								}

@@ -228,7 +228,7 @@ wss.on('connection', function connection(ws) {
   	var code = Blockly.Lua.workspaceToCode(workspace);
   	console.log(code);
   	if (dm.blurType == 'hsl'){
-		luaBlurFormula = `function ScriptFunc (val,h,s,l)
+		luaBlurFormula = `function ScriptFunc (d,h,s,l)
 		`+code+`
 		return h,s,l
 		end
@@ -238,7 +238,7 @@ wss.on('connection', function connection(ws) {
 		execCmd += ' -B hsl';
   	}
   	else {
-  		luaBlurFormula = `function ScriptFunc (val,r,g,b)
+  		luaBlurFormula = `function ScriptFunc (d,r,g,b)
 		`+code+`
 		return r,g,b
 		end
@@ -254,7 +254,7 @@ wss.on('connection', function connection(ws) {
   	code = Blockly.Lua.workspaceToCode(workspace);
   	console.log(code);
   	if (dm.textType == 'hsl'){
-		luaTextFormula = `function TextFunc (val,h,s,l)
+		luaTextFormula = `function TextFunc (d,h,s,l)
 		`+code+`
 		return h,s,l
 		end
@@ -264,7 +264,7 @@ wss.on('connection', function connection(ws) {
 		execCmd += ' -C hsl';
   	}
   	else {
-  		luaTextFormula = `function TextFunc (val,r,g,b)
+  		luaTextFormula = `function TextFunc (d,r,g,b)
 		`+code+`
 		return r,g,b
 		end
@@ -284,7 +284,7 @@ wss.on('connection', function connection(ws) {
   	execCmd += ' -t '+dm.type;
   	
   	var luaDistanceFormula = `function DistanceFunc (d,maxD)
-        		return (20*d-15*maxD)*2/maxD
+        		return (10*d-15*maxD)*2/maxD
         		end`;
     execCmd += ' -d "'+'test'+'Distance"';
     
