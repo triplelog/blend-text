@@ -104,9 +104,9 @@ namespace Lapis.QRCode.Imaging
 		
 		public int MarginT { get; set; } = 0;
 		
-		public int cellWidth { get; set; } = 2;
+		public int CellWidth { get; set; } = 2;
 		
-		public int hashSize { get; set; } = 4;
+		public int HashSize { get; set; } = 4;
 		
 		public int TWidth { get; set; } = 0;
 		
