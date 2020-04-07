@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using NLua;
+
 namespace Lapis.QRCode.Art
 {
     public interface IQRArtCreator
@@ -38,7 +40,12 @@ namespace Lapis.QRCode.Art
             	int twidth = (int)imageText.Width;
             	int theight = (int)imageText.Height;
             	
-        		
+        		state.DoString (@"function DistanceFunc (d,maxD)
+        		return (20*d-15*maxD)*2/maxD
+        		end
+        		");
+				var distanceFunc = state ["DistanceFunc"] as LuaFunction;
+				
         		int minI = blurRadius;
         		int minII = blurRadius;
         		bool foundminI = false;
@@ -171,7 +178,9 @@ namespace Lapis.QRCode.Art
 									if (tripMatrix[iii,iiii] == 0){
 										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
 										if ( d <= maxD/2){
-											tripMatrix[iii,iiii] = (20*d-15*maxD)*2/maxD;
+											var res = distanceFunc.Call (d, maxD);
+											tripMatrix[iii,iiii] = Convert.ToInt32(res[0]);
+											//tripMatrix[iii,iiii] = (20*d-15*maxD)*2/maxD;
 										}
 									}
 									else if (tripMatrix[iii,iiii] < 0){

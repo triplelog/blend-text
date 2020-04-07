@@ -60,6 +60,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 				int newdarkcell =0;
 				int repdarkcell = 0;
 				int cellWidth = 2;
+				int hashSize = 4;
                 for (var r = startR; r < THeight && r + MarginT < bmp.Height; r += cellWidth)
                 {
                     for (var c = startC; c < TWidth && c + MarginL < bmp.Width; c += cellWidth)
@@ -84,9 +85,11 @@ namespace Lapis.QRCode.Imaging.Drawing
                             int gr = pixColor.G * pixColor.A / 255 + (255-pixColor.A);
                             int bl = pixColor.B * pixColor.A / 255 + (255-pixColor.A);
                             
-                            
-							Color hashColor = Color.FromArgb(re,gr,bl);
+                            Color hashColor = Color.FromArgb((re/hashSize)*hashSize,(gr/hashSize)*hashSize,(bl/hashSize)*hashSize);
 							int imgC = hashColor.GetHashCode();
+							
+							//Color hashColor = Color.FromArgb(re,gr,bl);
+							//int imgC = hashColor.GetHashCode();
 								
                             int outval = 0;
                             if (tripMatrix[r, c] > 2 && darkhash.TryGetValue(imgC, out outval))
@@ -217,7 +220,7 @@ namespace Lapis.QRCode.Imaging.Drawing
                             int re = pixColor.R * pixColor.A / 255 + (255-pixColor.A);
                             int gr = pixColor.G * pixColor.A / 255 + (255-pixColor.A);
                             int bl = pixColor.B * pixColor.A / 255 + (255-pixColor.A);
-							Color hashColor = Color.FromArgb((re/4)*4,(gr/4)*4,(bl/4)*4);
+							Color hashColor = Color.FromArgb((re/hashSize)*hashSize,(gr/hashSize)*hashSize,(bl/hashSize)*hashSize);
 							int imgC = hashColor.GetHashCode();
 								
                             int outval = 0;
