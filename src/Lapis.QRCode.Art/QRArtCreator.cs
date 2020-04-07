@@ -179,9 +179,10 @@ namespace Lapis.QRCode.Art
 									if (tripMatrix[iii,iiii] == 0){
 										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
 										if ( d <= maxD/2){
-											var res = distanceFunc.Call (d, maxD);
-											tripMatrix[iii,iiii] = Convert.ToInt32(res[0]);
+											//var res = distanceFunc.Call (d, maxD);
+											//tripMatrix[iii,iiii] = Convert.ToInt32(res[0]);
 											//tripMatrix[iii,iiii] = (20*d-15*maxD)*2/maxD;
+											tripMatrix[iii,iiii] = -10;
 										}
 									}
 									else if (tripMatrix[iii,iiii] < 0){
