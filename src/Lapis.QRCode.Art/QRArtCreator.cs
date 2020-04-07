@@ -50,14 +50,26 @@ namespace Lapis.QRCode.Art
         		end
         		";
         		
+        		int[] arr2 = new int[1000];
+        		arr2[0] = 3;
+        		string arrCode = @"function DistanceFunc (d,maxD)
+        		return d[0]
+        		end
+        		";
+        		state.DoString (arrCode);
+				var arrFunc = state ["DistanceFunc"] as LuaFunction;
+				var res = scriptFunc.Call (arr2,10);
+        		Console.WriteLine("Luafunc test return "+res[0]);
         		/*string scriptCode = @"function DistanceFunc (d,maxD)
         		return -10
         		end
         		";*/
         		
+        		/*
         		state.DoString (scriptCode);
 				var scriptFunc = state ["DistanceFunc"] as LuaFunction;
 				var res = scriptFunc.Call (1,10);
+				*/
 				
         		int minI = blurRadius;
         		int minII = blurRadius;
@@ -142,8 +154,12 @@ namespace Lapis.QRCode.Art
         		stopWatchLua.Start();
         		
 				for (var i=0;i<1000;i++){
+					int[] arr = new int[1000];
 					for (var ii=0;ii<1000;ii++){
+						
 						int d = ii*ii + i*i;
+						arr[ii] = d;
+						/*
 						if (d <= 1000*1000/2){
 							if (dhash.TryGetValue(d, out outval)){
 							
@@ -153,8 +169,10 @@ namespace Lapis.QRCode.Art
 								dhash[d] = Convert.ToInt32(res[0]);
 							}
 							
-						}
+						}*/
 					}
+					res = arrFunc.Call (arr, maxD);
+					
 				}
 				stopWatchLua.Stop();
 				// Get the elapsed time as a TimeSpan value.
