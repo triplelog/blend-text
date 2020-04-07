@@ -165,14 +165,14 @@ namespace Lapis.QRCode.Art
 				Stopwatch stopWatchLua = new Stopwatch();
         		stopWatchLua.Start();
         		
-				for (var i=0;i<1000;i++){
+				for (var i=0;i<100;i++){
 					//int[] arr = new int[1000];
-					int maxii = 1000;
-					for (var ii=0;ii<1000;ii++){
+					int maxii = 100;
+					for (var ii=0;ii<100;ii++){
 						
 						int d = ii*ii + i*i;
 						
-						if (d <= 1000*1000/2){
+						if (d <= 100*100/2){
 							//arr[ii] = d;
 							if (dhash.TryGetValue(d, out outval)){
 							
