@@ -61,7 +61,13 @@ namespace Lapis.QRCode.Art
         		for i=0,999 do
         		arr[i]=(20*i-15*1000)*2/1000
         		end
-        		function DistanceFunc (d,maxD,ii)
+        		function DistanceFunc (i,maxD,maxii)
+        		
+        		for ii=0,maxii-1 do
+					d = i*i+ii*ii
+					arr[ii]=(20*d-15*maxD)*2/maxD
+					end
+        		end
         		return arr
         		end
         		";
@@ -165,14 +171,14 @@ namespace Lapis.QRCode.Art
         		stopWatchLua.Start();
         		
 				for (var i=0;i<1000;i++){
-					int[] arr = new int[1000];
+					//int[] arr = new int[1000];
 					int maxii = 1000;
 					for (var ii=0;ii<1000;ii++){
 						
 						int d = ii*ii + i*i;
 						
 						if (d <= 1000*1000/2){
-							arr[ii] = d;
+							//arr[ii] = d;
 							/*if (dhash.TryGetValue(d, out outval)){
 							
 							}
@@ -187,7 +193,7 @@ namespace Lapis.QRCode.Art
 							break;
 						}
 					}
-					res = arrFunc.Call (arr, maxD,maxii);
+					res = arrFunc.Call (i,maxD,maxii);
 					
 					if (i== 0){
 						LuaTable tab = res[0] as LuaTable;
