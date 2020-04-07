@@ -251,13 +251,13 @@ namespace Lapis.QrArt
 							Bitmap bmpp = (Bitmap) new Bitmap(twidth,theight);
 						
 							using (Graphics graph = Graphics.FromImage(bmpp)) {
-								Rectangle ImageSize = new Rectangle(0,0,twidth,theight);
+								Rectangle ImageSize = new Rectangle(0,0,twidth*4,theight*4);
 								graph.FillRectangle(Brushes.White, ImageSize);
 								
 								for (var r=0;r<theight;r++) {
 									for (var c=0;c<twidth;c++) {
 										if (bitMatrix[r,c]){
-											graph.FillRectangle(Brushes.Black, c, r, 1, 1);
+											graph.FillRectangle(Brushes.Black, c*4, r*4, 4, 4);
 										}
 									}
 								}
