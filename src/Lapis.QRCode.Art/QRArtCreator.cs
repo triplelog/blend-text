@@ -189,10 +189,15 @@ namespace Lapis.QRCode.Art
 						}
 					}
 					res = arrFunc.Call (i,maxD,maxii);
-					
-					if (i== 0){
-						LuaTable tab = res[0] as LuaTable;
-						Console.WriteLine("Luafunc test return "+tab[0]);
+					LuaTable tab = res[0] as LuaTable;
+					for (var ii=0;ii<maxii;ii++) {
+						if (dhash.TryGetValue(d, out outval)){
+							
+						}
+						else {
+							res = tab[ii];
+							dhash[d] = Convert.ToInt32(res[0]);
+						}
 					}
 					
 					
