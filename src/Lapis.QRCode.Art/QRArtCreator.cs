@@ -138,8 +138,11 @@ namespace Lapis.QRCode.Art
 				int outval;
 				Dictionary<int, int> dhash = new Dictionary<int, int>();
 				
-				for (var i=0;i<blurRadius;i++){
-					for (var ii=0;ii<blurRadius;ii++){
+				Stopwatch stopWatchLua = new Stopwatch();
+        		stopWatchLua.Start();
+        		
+				for (var i=0;i<1000;i++){
+					for (var ii=0;ii<1000;ii++){
 						int d = ii*ii + i*i;
 						if (d <= maxD/2){
 							if (dhash.TryGetValue(d, out outval)){
@@ -153,6 +156,16 @@ namespace Lapis.QRCode.Art
 						}
 					}
 				}
+				stopWatchLua.Stop();
+				// Get the elapsed time as a TimeSpan value.
+				TimeSpan tsLua = stopWatchLua.Elapsed;
+				
+				// Format and display the TimeSpan value.
+				string elapsedTimeLua = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+					tsLua.Hours, tsLua.Minutes, tsLua.Seconds,
+					tsLua.Milliseconds / 10);
+				Console.WriteLine("QRArtCreatorTime " + elapsedTimeLua);
+				
         		int startiii = 0;
         		int endiii = 0;
         		int startiiii = 0;
