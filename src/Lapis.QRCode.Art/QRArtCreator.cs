@@ -135,7 +135,7 @@ namespace Lapis.QRCode.Art
             	TripMatrixDrawer.TWidth = tripMatrix.ColumnCount;
                 
 				int maxD = blurRadius*blurRadius;
-				
+				int outval;
 				Dictionary<int, int> dhash = new Dictionary<int, int>();
 				
 				for (var i=0;i<blurRadius;i++){
