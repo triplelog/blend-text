@@ -129,6 +129,10 @@ wss.on('connection', function connection(ws) {
 		}
 		return;
 	}
+	else if (dm.type && dm.type == 'download'){
+		console.log(dm.url);
+		return;
+	}
 	else if (dm.type && dm.type == 'saveFormula'){
 		if (dm.message && username != ''){
 			var formula = {'name':dm.name,'workspace':dm.message,'formulaType':dm.formulaType};

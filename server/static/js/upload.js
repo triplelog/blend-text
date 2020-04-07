@@ -22,10 +22,14 @@ function handleDrop(e) {
   //document.getElementById('dropArea').style.display = 'none';
   var ffile = files[0];
 	sendImage(ffile);
+	document.getElementById('imgSrc').style.display = 'none';
+	document.getElementById('imgUrl').style.display = 'none';
+	document.getElementById('imgDrag').style.display = 'inline-block';
+	document.getElementById('imgDrag').textContent = "Image Uploaded";
 }
 
 
-document.querySelector('#imgSrc').addEventListener('change', function(inp) {
+document.getElementById('imgSrc').addEventListener('change', function(inp) {
 	
 	//document.getElementById('dropArea').style.display = 'none';
 	var ffile = this.files[0];
@@ -45,6 +49,35 @@ document.querySelector('#imgSrc').addEventListener('change', function(inp) {
 
 }, false);
 
+function chgImgType(evt){
+	var imgType = evt.target.value;
+	if (imgType == 'upload'){
+		document.getElementById('imgSrc').style.display = 'inline-block';
+		document.getElementById('imgUrl').style.display = 'none';
+		document.getElementById('imgDrag').style.display = 'none';
+	}
+	else if (imgType == 'url'){
+		document.getElementById('imgSrc').style.display = 'none';
+		document.getElementById('imgUrl').style.display = 'inline-block';
+		document.getElementById('imgDrag').style.display = 'none';
+	}
+	else if (imgType == 'drag'){
+		document.getElementById('imgSrc').style.display = 'none';
+		document.getElementById('imgUrl').style.display = 'none';
+		document.getElementById('imgDrag').style.display = 'inline-block';
+		document.getElementById('imgDrag').textContent = "";
+	}
+}
+document.getElementById('imgType').addEventListener('change', chgImgType);
+
+function chgImgUrl(evt) {
+	var url = evt.target.value;
+	var jsonmessage = {'type':'download','url':url};
+	console.log(jsonmessage);
+	ws.send(JSON.stringify(jsonmessage));
+}
+
+document.getElementById('imgUrl').addEventListener('change', chgImgUrl);
 function sendImage(img) {
 	var readerF = new FileReader();
 	readerF.onload = function() {
@@ -56,5 +89,7 @@ function sendImage(img) {
 }
 
 
-
+document.getElementById('imgSrc').style.display = 'inline-block';
+document.getElementById('imgUrl').style.display = 'none';
+document.getElementById('imgDrag').style.display = 'none';
 
