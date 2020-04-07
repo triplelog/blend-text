@@ -72,6 +72,8 @@ namespace Lapis.QrArt
                             textDrawer.MarginT = 0;
                             textDrawer.THeight = 0;
             				textDrawer.TWidth = 0;
+            				textDrawer.HashSize = 2;
+            				textDrawer.CellWidth = 1;
                             textDrawer.Type = typeOpt.Value();
                             textDrawer.BlurType = blurTypeOpt.Value();
                             textDrawer.TextType = textTypeOpt.Value();
@@ -86,6 +88,7 @@ namespace Lapis.QrArt
 						
 						int blurRadius = 5;
         				if (int.TryParse(blurRadiusOpt.Value(), out blurRadius)){}
+						textDrawer.HashSize = 1 + blurRadius / 20;
 						
 						string fontVal = getFont(fontOpt.Value().ToLower());
 						Font font = new Font(fontVal, 16);
@@ -144,6 +147,7 @@ namespace Lapis.QrArt
 									}
 									oldSize = newSize;
 								}
+								textDrawer.CellWidth = 1 + oldSize / 100;
 							}
 							Bitmap bmpp = (Bitmap) new Bitmap(twidth+2*blurRadius,theight+2*blurRadius);
 							
