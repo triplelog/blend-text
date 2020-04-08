@@ -420,9 +420,167 @@ namespace Lapis.QRCode.Art
 			for (var i=0;i<theight;i++){
 				for (var ii=0;ii<twidth;ii++){
 					if (tripMatrix[i,ii] > 0){ //first is row, second is col
-						if (circledict.TryGetValue(i*twidth+ii, out int outval)) {
+						int minr = 0;
 						
+						bool stillpossible = true;
+						int iii = 1;
+						int testmini = 0;
+						int testminii = 0;
+						int testmaxi = theight;
+						int testmaxii = twidth;
+						
+						while (stillpossible){
+							testi = i+iii;
+							testii = ii;
+							/*if (circledict.TryGetValue(testi*twidth+testii, out int outval)) {
+								if (outval < iii*iii){
+									stillpossible = false;
+									testmaxi = iii;
+								}
+							}*/
+							if (tripMatrix[testi,testii]<= 0){
+								stillpossible = false;
+								testmaxi = iii;
+							}
+							iii++;
 						}
+						stillpossible = true;
+						iii = 1;
+						while (stillpossible){
+							testi = i-iii;
+							testii = ii;
+							/*if (circledict.TryGetValue(testi*twidth+testii, out int outval)) {
+								if (outval < iii*iii){
+									stillpossible = false;
+									testmini = -1*iii;
+								}
+							}*/
+							if (tripMatrix[testi,testii]<= 0){
+								stillpossible = false;
+								testmini = -1*iii;
+							}
+							iii++;
+						}
+						stillpossible = true;
+						iii = 1;
+						while (stillpossible){
+							testi = i;
+							testii = ii+iii;
+							/*if (circledict.TryGetValue(testi*twidth+testii, out int outval)) {
+								if (outval < iii*iii){
+									stillpossible = false;
+									testmaxii = iii;
+								}
+							}*/
+							if (tripMatrix[testi,testii]<= 0){
+								stillpossible = false;
+								testmaxii = iii;
+							}
+							iii++;
+						}
+						stillpossible = true;
+						iii = 1;
+						while (stillpossible){
+							testi = i;
+							testii = ii-iii;
+							/*if (circledict.TryGetValue(testi*twidth+testii, out int outval)) {
+								if (outval < iii*iii){
+									stillpossible = false;
+									testminii = -1*iii;
+								}
+							}*/
+							if (tripMatrix[testi,testii]<= 0){
+								stillpossible = false;
+								testminii = -1*iii;
+							}
+							iii++;
+						}
+						
+						int maxri = testmini*testmini;
+						if (testmaxi > -1*testmini){
+							maxri = testmaxi*testmaxi;
+						}
+						int maxrii = testminii*testminii;
+						if (testmaxii > -1*testminii){
+							maxrii = testmaxii*testmaxii;
+						}
+						int maxr = maxri+maxrii
+						
+						for (var iii=testmini/2;iii<testmaxi/2+1;iii++){
+							for (var iiii=testminii/2;iiii<testmaxii/2+1;iiii++){
+								if (circledict.TryGetValue((i+iii)*twidth+ii+iiii, out int outval)) {
+									if (outval > minr){
+										minr = outval;
+									}
+								}
+							}
+						}
+						
+						if (minr == 0){
+							outMatrix[i,ii]=-100;
+						}
+						else if (circledict.TryGetValue(i*twidth+ii, out int outval)) {
+							outMatrix[i,ii]=outval*-100/minr;
+						}
+						else {
+							outMatrix[i,ii]=-101;
+						}
+						
+						
+						
+					
+						/*
+						int minr = 0;
+						//int maxr = twidth*twidth+theight*theight;
+						if (circledict.TryGetValue(i*twidth+ii, out int outval)) {
+							minr = outval;
+						}
+						int radius = minr + (maxr+1-minr)/2;
+						bool stillpossible  = true;
+						int testi = 0;
+						int testii = 0;
+						
+						int testmini = 0;
+						int testminii = 0;
+						int testmaxi = theight;
+						int testmaxii = twidth;
+						bool foundone = false;
+						while (stillpossible){
+							//if (radius > maxr){stillpossible = false; break;}
+							if (radiusdict.TryGetValue(radius, out List<int[]> outlist)) {
+								foundone = false;
+								foreach (int[] intpair in outlist){
+									testi = intpair[0];
+									testii = intpair[1];
+									if (circledict.TryGetValue(testi*twidth+testii, out int outval)) {
+										if (outval >= radius){
+											minr = outval;
+											foundone = true;
+										}
+										else {
+											if (testi < i){
+												if 
+											}
+										}
+									}
+								}
+							}
+							else {
+								radius++;
+								continue;
+							}
+							
+							
+							
+							maxr =
+							minr = 
+							radius = minr + (maxr+1-minr)/2;
+						}
+						for (var radius=minr+1;radius<)
+						*/
+					}
+					else {
+						outMatrix[i,ii]=-101;
 					}
 				}
 			}
