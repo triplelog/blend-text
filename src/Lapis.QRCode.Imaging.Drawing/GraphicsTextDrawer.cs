@@ -45,7 +45,7 @@ namespace Lapis.QRCode.Imaging.Drawing
         		if (MarginL < 0){
         			startC = 0 - MarginL;
         		}
-        		//Console.WriteLine(BlurFormula);
+        		Console.WriteLine("CellWidth: "+CellWidth);
 				
 				Dictionary<int, int> lighthash = new Dictionary<int, int>();
 				Dictionary<int, int> darkhash = new Dictionary<int, int>();
