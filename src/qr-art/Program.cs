@@ -253,14 +253,15 @@ namespace Lapis.QrArt
 							var Merger = new Merger();
 							bmp = Bitmap.FromFile(imageArg.Value) as Bitmap;
 							Graphics graph1 = Graphics.FromImage(bmp);
-							int twidth = (int)bitMatrix.ColumnCount;
-							int theight = (int)bitMatrix.RowCount;
-							int cellSize = 9;
+							
 							
 							var bgImage = new BitmapFrame(bmp);
 							var imgMatrix = Binarizer.Binarize(bgImage, moduleCount * 3, moduleCount * 3);
 							bitMatrix = Merger.Merge(bitMatrix, 5, imgMatrix, 3);
 							
+							int twidth = (int)bitMatrix.ColumnCount;
+							int theight = (int)bitMatrix.RowCount;
+							int cellSize = 3;
 							
 							Bitmap bmpp = (Bitmap) new Bitmap(twidth*cellSize,theight*cellSize);
 							textDrawer.THeight = theight*cellSize;
