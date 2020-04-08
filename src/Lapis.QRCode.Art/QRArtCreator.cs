@@ -274,7 +274,7 @@ namespace Lapis.QRCode.Art
                 		}
                 	}
                 }
-                Console.WriteLine("min: "+ minX + " max: "+maxX);
+                Console.WriteLine("min: "+ minY + " max: "+maxY);
                 
                 //TripMatrixDrawer.THeight = (maxY+blurRadius) - (minY-blurRadius);
                 //TripMatrixDrawer.TWidth = (maxX+blurRadius) - (minX-blurRadius);
