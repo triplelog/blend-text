@@ -131,6 +131,6 @@ namespace Lapis.QRCode.Imaging
 
         public int Background { get; set; } = 0xFFFFFF;
 
-        public abstract IImage Draw(TripMatrix tripMatrix, string imagePath);
+        public abstract IImage Draw(TripMatrix tripMatrix);
     }
 }
