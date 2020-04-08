@@ -181,6 +181,7 @@ namespace Lapis.QRCode.Art
         		int minX = twidth;
         		int maxY = 0;
         		int minY = theight;
+        		Console.WriteLine("min: "+ minY + " max: "+maxY);
                 for (var i=blurRadius;i<theight-blurRadius;i++){
                 	for (var ii=blurRadius;ii<twidth-blurRadius;ii++){
                 		
