@@ -322,7 +322,8 @@ wss.on('connection', function connection(ws) {
   		execCmd += ' -f '+dm.font;
   	}
   	
-  	execCmd += ' -t '+dm.type;
+  	//execCmd += ' -t '+dm.type;
+  	execCmd += ' -t '+'gradient';
   	
   	if (dm.threshold){
   		execCmd += ' -l '+dm.threshold;

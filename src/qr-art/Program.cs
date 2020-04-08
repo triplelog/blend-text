@@ -237,6 +237,150 @@ namespace Lapis.QrArt
 							textDrawer.bmp = bmp;
         				} // text on image
         				
+        				if (textDrawer.Type == "gradient"){ 
+						
+						
+							if (int.TryParse(blurRadiusOpt.Value(), out blurRadius)){}
+							textDrawer.HashSize = 1 + blurRadius / 20;
+						
+							string fontVal = getFont(fontOpt.Value().ToLower());
+							Font font = new Font(fontVal, 16);
+							int widthout = -1;
+							if (int.TryParse(widthOpt.Value(), out widthout)){
+							
+							}
+							else {
+								widthout = -1;
+								font = new Font(fontVal, fontSize);
+								textDrawer.CellWidth = 1 + fontSize / 100;
+							}	
+						
+							
+							try
+							{
+								bmp = Bitmap.FromFile(imageArg.Value) as Bitmap;
+								//textDrawer.bgImage = bmp;
+							
+								Graphics graph1 = Graphics.FromImage(bmp);
+								string measureString = contentArg.Value;
+							
+								SizeF stringSize = new SizeF();
+								stringSize = graph1.MeasureString(measureString, font);
+								Console.WriteLine("width "+stringSize.Width + " height "+ stringSize.Height + "fSize "+fontSize);
+								int twidth = (int)stringSize.Width;
+								int theight = (int)stringSize.Height;
+								if (widthout > -1){
+									int oldSize = 16;
+									int newSize = 0;
+									int idx = 0;
+									for (idx=0;idx<10;idx++){
+										newSize = oldSize * widthout * bmp.Width / 100 / twidth;
+										if (newSize > oldSize * bmp.Height / theight ){
+											newSize = oldSize * bmp.Height / theight;
+											oldSize = newSize;
+										}
+										font = new Font(fontVal, newSize );
+										stringSize = graph1.MeasureString(measureString, font);
+								
+										twidth = (int)stringSize.Width;
+										theight = (int)stringSize.Height;
+										Console.WriteLine("Percent "+ (twidth*100/bmp.Width) );
+										if (newSize == oldSize){
+											break;
+										}
+										if ((twidth*100/bmp.Width) == widthout){
+											break;
+										}
+										oldSize = newSize;
+									}
+									textDrawer.CellWidth = 1 + oldSize / 100;
+								}
+								Bitmap bmpp = (Bitmap) new Bitmap(twidth+2*blurRadius,theight+2*blurRadius);
+							
+						
+							
+							
+								using (Graphics graph = Graphics.FromImage(bmpp))
+								{
+									Rectangle ImageSize = new Rectangle(0,0,twidth+2*blurRadius,theight+2*blurRadius);
+									graph.FillRectangle(Brushes.White, ImageSize);
+									graph.SmoothingMode = SmoothingMode.AntiAlias;
+									graph.InterpolationMode = InterpolationMode.HighQualityBicubic;
+									graph.PixelOffsetMode = PixelOffsetMode.HighQuality;
+									graph.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+									StringFormat format = new StringFormat()
+									{
+										Alignment = StringAlignment.Center,
+										LineAlignment = StringAlignment.Center
+									};
+									graph.FillPie(Brushes.Black, ImageSize, 0, 45);
+									
+								}
+								bitmapText = new BitmapFrame(bmpp);
+								bitmap = new BitmapFrame(bmp);
+							
+								{
+									int xPct = 0;
+									int xType = 0;
+									if (int.TryParse(locXOpt.Value(), out int locXout)){
+										xPct = (locXout+200)%200;
+										xType = locXout/200;
+										if (xPct > 149){
+											xPct -= 200;
+											xType += 1;
+										}
+							
+									}
+									int yPct = 0;
+									int yType = 0;
+									if (int.TryParse(locYOpt.Value(), out int locYout)){
+										yPct = (locYout+200)%200;
+										yType = locYout/200;
+										if (yPct > 149){
+											yPct -= 200;
+											yType += 1;
+										}
+									}
+									if (xType == 0){
+										//middle at (bmp.Width * xPct)/100
+										textDrawer.MarginL = (bmp.Width * xPct)/100 - (twidth+2*blurRadius)/2;
+									}
+									else if (xType == 1){
+										//left at (bmp.Width * xPct)/100
+										textDrawer.MarginL = (bmp.Width * xPct)/100 - blurRadius;
+									}
+									else if (xType == 2){
+										//right at (bmp.Width * xPct)/100
+										textDrawer.MarginL = (bmp.Width * xPct)/100 - (twidth+2*blurRadius) + blurRadius;
+									}
+									else {
+										textDrawer.MarginL = bmp.Width/2 - (twidth+2*blurRadius)/2;
+									}
+							
+									if (yType == 0){
+										//middle at (bmp.Height * yPct)/100
+										textDrawer.MarginT = (bmp.Height * yPct)/100 - (theight+2*blurRadius)/2;
+									}
+									else if (yType == 1){
+										//top at 
+										textDrawer.MarginT = (bmp.Height * yPct)/100 - blurRadius;
+									}
+									else if (yType == 2){
+										//bottom at 
+										textDrawer.MarginT = (bmp.Height * yPct)/100 - (theight+2*blurRadius) + blurRadius;
+									}
+									else {
+										textDrawer.MarginT = bmp.Height/2 - (theight+2*blurRadius)/2;
+									}
+								} //set margins
+							}
+							catch (Exception ex)
+							{
+								LogError(ex.Message);
+								bitmapText = null;
+							}
+							textDrawer.bmp = bmp;
+        				} // text on image
         				if (textDrawer.Type == "qr"){ 
         				
         					textDrawer.MarginL = 0;
