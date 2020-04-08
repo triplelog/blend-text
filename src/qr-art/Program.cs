@@ -256,12 +256,12 @@ namespace Lapis.QrArt
 							
 							
 							var bgImage = new BitmapFrame(bmp);
-							var imgMatrix = Binarizer.Binarize(bgImage, moduleCount * 9, moduleCount * 9);
-							bitMatrix = Merger.Merge(bitMatrix, 5, imgMatrix, 9);
+							var imgMatrix = Binarizer.Binarize(bgImage, moduleCount * 3, moduleCount * 3);
+							bitMatrix = Merger.Merge(bitMatrix, 5, imgMatrix, 3);
 							
 							int twidth = (int)bitMatrix.ColumnCount;
 							int theight = (int)bitMatrix.RowCount;
-							int cellSize = 9;
+							int cellSize = 1;
 							
 							Bitmap bmpp = (Bitmap) new Bitmap(twidth*cellSize,theight*cellSize);
 							textDrawer.THeight = theight*cellSize;
