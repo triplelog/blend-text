@@ -97,6 +97,7 @@
 .content-13:hover {
 	grid-row:  1 / 4;
 	grid-column:  2 / 4;
+	z-index: 10;
 }
 .content-13 img {
 	display: block;
@@ -104,6 +105,7 @@
 	max-height: 90%;
 	margin: auto;
 	overflow: hidden;
+	padding: 5px;
 }
 .content-33 {
 	grid-row:  3;
@@ -290,7 +292,7 @@ input[name="size31"] {
 			
 		</div>
 		{% endif %}
-		{% if type == 'text' %}
+		{% if type == 'text' || type == 'image' %}
 		<div class="content" id="fileDrag">
 			
 			<div>
