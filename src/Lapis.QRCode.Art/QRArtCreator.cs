@@ -288,12 +288,105 @@ namespace Lapis.QRCode.Art
 					ts.Milliseconds / 10);
 				Console.WriteLine("QRArtCreatorTime " + elapsedTime);
                 
-                
+                getEdgeDistance(tripMatrix);
                 return TripMatrixDrawer.Draw(tripMatrix);
             }
             else {
             	return null;
             }
+        }
+        public static void getEdgeDistance(TripMatrix tripMatrix) {
+        	int theight = tripMatrix.RowCount;
+        	int twidth = tripMatrix.ColumnCount;
+        	for (var i=0;i<theight;i++){
+				for (var ii=0;ii<twidth;ii++){
+					if (tripMatrix[i,ii] > 0){ //first is row, second is col
+						int mindist = twidth*twidth+theight*theight;
+						double pct = 50.0;
+						for (var d=-45;d<45;d++){
+							int iii = 1; bool isBlack = true;
+							int distr = 0;
+							while (isBlack){
+								double rad = 3.14159265/180;
+								rad *= d;
+								int h = Convert.ToInt32(Math.Tan(rad)*iii);
+								
+								if (i+h<0 || i+h>=theight || ii+iii>=twidth ||  tripMatrix[i+h,ii+iii]<=0){
+									isBlack = false;
+									distr = iii*iii+h*h;
+								}
+								iii++;
+							}
+							
+							int iii = 1; bool isBlack = true;
+							int distl = 0;
+							while (isBlack){
+								double rad = 3.14159265/180;
+								rad *= d;
+								int h = Convert.ToInt32(Math.Tan(rad)*iii);
+								
+								if (i-h>=theight || i-h<0 || ii-iii<0 ||  tripMatrix[i-h,ii-iii]<=0){
+									isBlack = false;
+									distl = iii*iii+h*h;
+								}
+								iii++;
+							}
+							if (distl+distr<mindist){
+								mindist = distl+distr;
+								if (distl>=distr){
+									pct = distl*100.0;
+									pct /= (distl+distr);
+								}
+								else{
+									pct = distr*100.0;
+									pct /= (distl+distr);
+								}
+							}
+						}
+						for (var d=45;d<135;d++){
+							int iii = 1; bool isBlack = true;
+							int distu = 0;
+							while (isBlack){
+								double rad = 3.14159265/180;
+								rad *= d;
+								int w = Convert.ToInt32(Math.Cos(rad)/Math.Sin(rad)*iii);
+								
+								if (ii+w<0 || ii+w>=twidth || i-iii<0 ||  tripMatrix[i-iii,ii+w]<=0){
+									isBlack = false;
+									distu = iii*iii+w*w;
+								}
+								iii++;
+							}
+							
+							int iii = 1; bool isBlack = true;
+							int distd = 0;
+							while (isBlack){
+								double rad = 3.14159265/180;
+								rad *= d;
+								int w = Convert.ToInt32(Math.Cos(rad)/Math.Sin(rad)*iii);
+								
+								if (ii+w<0 || ii+w>=twidth || i+iii>=theight ||  tripMatrix[i+iii,ii-w]<=0){
+									isBlack = false;
+									distd = iii*iii+w*w;
+								}
+								iii++;
+							}
+							if (distu+distd<mindist){
+								mindist = distu+distd;
+								if (distu>=distd){
+									pct = distu*100.0;
+									pct /= (distu+distd);
+								}
+								else{
+									pct = distd*100.0;
+									pct /= (distu+distd);
+								}
+							}
+						}
+						Console.WriteLine("i: "+i+" ii: "+ii+" pct: "+pct);
+					} 
+				}
+			}//~20 ms since else if
         }
     }
 }
