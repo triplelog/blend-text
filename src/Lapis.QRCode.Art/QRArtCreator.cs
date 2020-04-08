@@ -300,11 +300,15 @@ namespace Lapis.QRCode.Art
         	int theight = tripMatrix.RowCount;
         	int twidth = tripMatrix.ColumnCount;
         	outMatrix = new TripMatrix(theight,twidth);
+        	Dictionary<int, int> circledict = new Dictionary<int, int>();
+        	
+        	Dictionary<int, int> radiusdict = new Dictionary<int, int[]>();
+        	
         	for (var i=0;i<theight;i++){
 				for (var ii=0;ii<twidth;ii++){
 					if (tripMatrix[i,ii] > 0){ //first is row, second is col
 						int mindist1 = twidth*twidth+theight*theight;//radius/diameter? of largest circle centered at point
-						int mindist2 = twidth*twidth+theight*theight;//radius/diameter? of largest circle containing point
+						//int mindist2 = twidth*twidth+theight*theight;//radius/diameter? of largest circle containing point
 						double sumdist = 0;
 						
 						double pct = 50.0;
@@ -339,167 +343,74 @@ namespace Lapis.QRCode.Art
 							distr--;
 							distl--;
 							
-							if (distl+distr<mindist2){
-								mindist2 = distl+distr;
-								/*if (mindist2 == 0){
-									pct = 100.0;
-								}
-								else if (distl>=distr){
-									pct = distl*100.0;
-									pct /= (distl+distr);
-								}
-								else{
-									pct = distr*100.0;
-									pct /= (distl+distr);
-								}*/
+							if (distl == 0 || distr == 0){
+								mindist1 = 0;
+								break;
 							}
 							if (distl<mindist1){
 								mindist1 = distl;
-								/*if (mindist1 == 0){
-									pct = 100.0;
-								}
-								else if (distl>=distr){
-									pct = distl*100.0;
-									pct /= (distl+distr);
-								}
-								else{
-									pct = distr*100.0;
-									pct /= (distl+distr);
-								}*/
 							}
 							if (distr<mindist1){
 								mindist1 = distr;
-								/*if (mindist == 0){
-									pct = 100.0;
-								}
-								else if (distl>=distr){
-									pct = distl*100.0;
-									pct /= (distl+distr);
-								}
-								else{
-									pct = distr*100.0;
-									pct /= (distl+distr);
-								}*/
 							}
-							/*
-							if (distl==0 || distr == 0){
-								sumdist += 100.0;
-							}
-							if (distl>=distr){
-								pct = distl*100.0;
-								pct /= (distl+distr);
-								sumdist += pct;
-							}
-							else{
-								pct = distr*100.0;
-								pct /= (distl+distr);
-								sumdist += pct;
-							}*/
 						}
-						for (var d=45;d<135;d++){
-							int iii = 1; bool isBlack = true;
-							int distu = 0;
-							while (isBlack){
-								double rad = 3.14159265/180;
-								rad *= d;
-								int w = Convert.ToInt32(Math.Cos(rad)/Math.Sin(rad)*iii);
+						if (mindist1 > 0){
+							for (var d=45;d<135;d++){
+								int iii = 1; bool isBlack = true;
+								int distu = 0;
+								while (isBlack){
+									double rad = 3.14159265/180;
+									rad *= d;
+									int w = Convert.ToInt32(Math.Cos(rad)/Math.Sin(rad)*iii);
 								
-								if (ii+w<0 || ii+w>=twidth || i-iii<0 ||  tripMatrix[i-iii,ii+w]<=0){
-									isBlack = false;
-									distu = iii*iii+w*w;
+									if (ii+w<0 || ii+w>=twidth || i-iii<0 ||  tripMatrix[i-iii,ii+w]<=0){
+										isBlack = false;
+										distu = iii*iii+w*w;
+									}
+									iii++;
 								}
-								iii++;
-							}
 							
-							iii = 1; isBlack = true;
-							int distd = 0;
-							while (isBlack){
-								double rad = 3.14159265/180;
-								rad *= d;
-								int w = Convert.ToInt32(Math.Cos(rad)/Math.Sin(rad)*iii);
+								iii = 1; isBlack = true;
+								int distd = 0;
+								while (isBlack){
+									double rad = 3.14159265/180;
+									rad *= d;
+									int w = Convert.ToInt32(Math.Cos(rad)/Math.Sin(rad)*iii);
 								
-								if (ii+w<0 || ii+w>=twidth || i+iii>=theight ||  tripMatrix[i+iii,ii-w]<=0){
-									isBlack = false;
-									distd = iii*iii+w*w;
+									if (ii+w<0 || ii+w>=twidth || i+iii>=theight ||  tripMatrix[i+iii,ii-w]<=0){
+										isBlack = false;
+										distd = iii*iii+w*w;
+									}
+									iii++;
 								}
-								iii++;
-							}
-							distu--;
-							distd--;
+								distu--;
+								distd--;
 							
-							if (distu+distd<mindist2){
-								mindist2 = distu+distd;
-								/*if (mindist2 == 0){
-									pct = 100.0;
+								if (distu==0 || distd == 0){
+									mindist1 = 0;
+									break;
 								}
-								else if (distu>=distd){
-									pct = distu*100.0;
-									pct /= (distu+distd);
+								if (distu<mindist1){
+									mindist1 = distu;
 								}
-								else{
-									pct = distd*100.0;
-									pct /= (distu+distd);
-								}*/
+								if (distd<mindist1){
+									mindist1 = distd;
+								}
 							}
-							
-							if (distu<mindist1){
-								mindist1 = distu;
-								/*if (mindist1 == 0){
-									pct = 100.0;
-								}
-								else if (distu>=distd){
-									pct = distu*100.0;
-									pct /= (distu+distd);
-								}
-								else{
-									pct = distd*100.0;
-									pct /= (distu+distd);
-								}*/
-							}
-							if (distd<mindist1){
-								mindist1 = distd;
-								/*if (mindist1 == 0){
-									pct = 100.0;
-								}
-								else if (distu>=distd){
-									pct = distu*100.0;
-									pct /= (distu+distd);
-								}
-								else{
-									pct = distd*100.0;
-									pct /= (distu+distd);
-								}*/
-							}
-							/*
-							if (distu==0 || distd == 0){
-								sumdist += 100.0;
-							}
-							if (distu>=distd){
-								pct = distu*100.0;
-								pct /= (distu+distd);
-								sumdist += pct;
-							}
-							else{
-								pct = distd*100.0;
-								pct /= (distu+distd);
-								sumdist += pct;
-							}*/
 						}
-						//Console.WriteLine("i: "+i+" ii: "+ii+" pct: "+pct);
-						if (mindist2 < 1){
-							pct = 0.0;
-						}
-						else {
-							pct = mindist1*100.0/mindist2;
-						}
-						Console.WriteLine("i: "+i+" ii: "+ii+" pct: "+pct);
-						outMatrix[i,ii] = Convert.ToInt32(pct*-1);
-					} 
-					else {
-						outMatrix[i,ii] = -101;
+						circledict[i*twidth+ii]=mindist1+1;
 					}
 				}
-			}//~20 ms since else if
+			}//end of setting the dict
+			for (var i=0;i<theight;i++){
+				for (var ii=0;ii<twidth;ii++){
+					if (tripMatrix[i,ii] > 0){ //first is row, second is col
+						if (circledict.TryGetValue(i*twidth+ii, out outval)) {
+						
+						}
+					}
+				}
+			}
         }
     }
 }
