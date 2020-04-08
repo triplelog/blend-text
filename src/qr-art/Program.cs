@@ -251,6 +251,7 @@ namespace Lapis.QrArt
 							int moduleCount = bitMatrix.Size;
 							var Binarizer = new Binarizer();
 							var Merger = new Merger();
+							bmp = Bitmap.FromFile(imageArg.Value) as Bitmap;
 							var bgImage = new BitmapFrame(bmp);
 							var imgMatrix = Binarizer.Binarize(bgImage, moduleCount * 3, moduleCount * 3);
 							bitMatrix = Merger.Merge(bitMatrix, 5, imgMatrix);
