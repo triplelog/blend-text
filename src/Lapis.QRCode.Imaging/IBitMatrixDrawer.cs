@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -69,7 +70,7 @@ namespace Lapis.QRCode.Imaging
         
 		int HashSize { get; set; }
 		
-		public Bitmap bmp { get; set; }
+		Bitmap bmp { get; set; }
         
         string BlurFormula { get; set; }
         
