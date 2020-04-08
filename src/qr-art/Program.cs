@@ -107,7 +107,6 @@ namespace Lapis.QrArt
 								widthout = -1;
 								font = new Font(fontVal, fontSize);
 								textDrawer.CellWidth = 1 + fontSize / 100;
-								Console.WriteLine(textDrawer.CellWidth);
 							}	
 						
 							
