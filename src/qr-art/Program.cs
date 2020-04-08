@@ -248,13 +248,20 @@ namespace Lapis.QrArt
                             };
 							var bitMatrix = qrEncoder.Build("espn.com");
 							
+							int moduleCount = bitMatrix.Size;
+							var Binarizer = new Binarizer();
+							var Merger = new Merger();
+							var bgImage = new BitmapFrame(bmp);
+							var imgMatrix = Binarizer.Binarize(bgImage, moduleCount * 3, moduleCount * 3);
+							bitMatrix = Merger.Merge(bitMatrix, TypeNumber, imgMatrix);
+							
 							bmp = Bitmap.FromFile(imageArg.Value) as Bitmap;
 								//textDrawer.bgImage = bmp;
 							
 							Graphics graph1 = Graphics.FromImage(bmp);
 							int twidth = (int)bitMatrix.ColumnCount;
 							int theight = (int)bitMatrix.RowCount;
-							int cellSize = 4;
+							int cellSize = 12;
 							Bitmap bmpp = (Bitmap) new Bitmap(twidth*cellSize,theight*cellSize);
 							textDrawer.THeight = theight*cellSize;
             				textDrawer.TWidth = twidth*cellSize;
@@ -271,6 +278,10 @@ namespace Lapis.QrArt
 								}
 								
 							}
+							
+							
+                
+                
 							bitmapText = new BitmapFrame(bmpp);
 							bitmap = new BitmapFrame(bmp);
 							blurRadius = 0;
