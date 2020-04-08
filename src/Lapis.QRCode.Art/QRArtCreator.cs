@@ -333,9 +333,14 @@ namespace Lapis.QRCode.Art
 								}
 								iii++;
 							}
+							distr--;
+							distl--;
 							if (distl+distr<mindist){
 								mindist = distl+distr;
-								if (distl>=distr){
+								if (mindist == 0){
+									pct = 100.0;
+								}
+								else if (distl>=distr){
 									pct = distl*100.0;
 									pct /= (distl+distr);
 								}
@@ -373,9 +378,14 @@ namespace Lapis.QRCode.Art
 								}
 								iii++;
 							}
+							distu--;
+							distd--;
 							if (distu+distd<mindist){
 								mindist = distu+distd;
-								if (distu>=distd){
+								if (mindist == 0){
+									pct = 100.0;
+								}
+								else if (distu>=distd){
 									pct = distu*100.0;
 									pct /= (distu+distd);
 								}
@@ -385,7 +395,7 @@ namespace Lapis.QRCode.Art
 								}
 							}
 						}
-						Console.WriteLine("i: "+i+" ii: "+ii+" pct: "+pct);
+						//Console.WriteLine("i: "+i+" ii: "+ii+" pct: "+pct);
 						outMatrix[i,ii] = Convert.ToInt32(pct*-1+49);
 					} 
 					else {
