@@ -168,11 +168,12 @@ namespace Lapis.QrArt
 										LineAlignment = StringAlignment.Center
 									};
 									graph.DrawString(contentArg.Value, font, Brushes.Black, ImageSize, format);
-									for (var ii=0;ii<twidth;ii++){
-										Console.WriteLine("c: "+imageText.GetPixel(ii,75));
-									}
+									
 								}
 								bitmapText = new BitmapFrame(bmpp);
+								for (var ii=0;ii<twidth;ii++){
+										Console.WriteLine("c: "+bitmapText.GetPixel(ii,75));
+									}
 								bitmap = new BitmapFrame(bmp);
 							
 								{
