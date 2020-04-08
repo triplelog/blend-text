@@ -232,6 +232,7 @@ namespace Lapis.QrArt
 								LogError(ex.Message);
 								bitmapText = null;
 							}
+							textDrawer.bmp = bmp;
         				} // text on image
         				
         				if (2==2){ 
@@ -258,7 +259,7 @@ namespace Lapis.QrArt
 							int toCenterL = ( moduleCount * 9 * textDrawer.CellWidth - bmp.Width ) / 2;
 							int toCenterT = ( moduleCount * 9 * textDrawer.CellWidth - bmp.Height ) / 2;
 							using (Graphics graph = Graphics.FromImage(nbmp)) {
-								graph.DrawImage(bmp, new Rectange(toCenterL,toCenterT,bmp.Width,bmp.Height));
+								graph.DrawImage(bmp, new Rectangle(toCenterL,toCenterT,bmp.Width,bmp.Height));
 							}
 							
 							
@@ -298,11 +299,12 @@ namespace Lapis.QrArt
 							bitmapText = new BitmapFrame(bmpp);
 							bitmap = new BitmapFrame(nbmp);
 							blurRadius = 0;
+							textDrawer.bmp = nbmp;
 						} //create qr
 						
 						
         				string DistanceFormula = System.IO.File.ReadAllText(@"/home/rwilcox/blend-text/server/formulas/"+distanceFormulaOpt.Value()+".txt");
-						textDrawer.bmp = bmp;
+						
                         var image = builder.Create(contentArg.Value, bitmap, bitmapText, blurRadius, DistanceFormula);
                         //bitmap.Save("static/newbmp1.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
                         
