@@ -251,19 +251,29 @@ namespace Lapis.QrArt
 							int moduleCount = bitMatrix.Size;
 							var Binarizer = new Binarizer();
 							var Merger = new Merger();
+							textDrawer.CellWidth = 3;
+							
+							Bitmap nbmp = (Bitmap) new Bitmap(moduleCount * 9 * textDrawer.CellWidth,moduleCount * 9 * textDrawer.CellWidth);
 							bmp = Bitmap.FromFile(imageArg.Value) as Bitmap;
+							int toCenterL = ( moduleCount * 9 * textDrawer.CellWidth - bmp.Width ) / 2;
+							int toCenterT = ( moduleCount * 9 * textDrawer.CellWidth - bmp.Height ) / 2;
+							using (Graphics graph = Graphics.FromImage(nbmp)) {
+								graph.DrawImage(bmp, new Rectange(toCenterL,toCenterT,bmp.Width,bmp.Height));
+							}
+							
+							
 							Graphics graph1 = Graphics.FromImage(bmp);
 							
 							
-							var bgImage = new BitmapFrame(bmp);
+							var bgImage = new BitmapFrame(nbmp);
 							int threshold = 200;
 							var imgMatrix = Binarizer.Binarize(bgImage, moduleCount * 3, moduleCount * 3, threshold);
 							bitMatrix = Merger.Merge(bitMatrix, 5, imgMatrix, 3);
 							
 							int twidth = (int)bitMatrix.ColumnCount;
 							int theight = (int)bitMatrix.RowCount;
-							int cellSize = 9;
-							textDrawer.CellWidth = 3;
+							int cellSize = textDrawer.CellWidth * 3;
+							
 							
 							Bitmap bmpp = (Bitmap) new Bitmap(twidth*cellSize,theight*cellSize);
 							textDrawer.THeight = theight*cellSize;
@@ -286,14 +296,14 @@ namespace Lapis.QrArt
                 
                 
 							bitmapText = new BitmapFrame(bmpp);
-							bitmap = new BitmapFrame(bmp);
+							bitmap = new BitmapFrame(nbmp);
 							blurRadius = 0;
 						} //create qr
 						
 						
         				string DistanceFormula = System.IO.File.ReadAllText(@"/home/rwilcox/blend-text/server/formulas/"+distanceFormulaOpt.Value()+".txt");
 
-                        var image = builder.Create(contentArg.Value, bitmap, bitmapText, imageArg.Value, blurRadius, DistanceFormula);
+                        var image = builder.Create(contentArg.Value, bitmap, bitmapText, bmp, blurRadius, DistanceFormula);
                         //bitmap.Save("static/newbmp1.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
                         
                          stopWatch.Stop();
