@@ -299,7 +299,7 @@ namespace Lapis.QRCode.Art
         public static void getEdgeDistance(TripMatrix tripMatrix, out TripMatrix outMatrix) {
         	int theight = tripMatrix.RowCount;
         	int twidth = tripMatrix.ColumnCount;
-        	var outMatrix = new TripMatrix(theight,twidth);
+        	outMatrix = new TripMatrix(theight,twidth);
         	for (var i=0;i<theight;i++){
 				for (var ii=0;ii<twidth;ii++){
 					if (tripMatrix[i,ii] > 0){ //first is row, second is col
