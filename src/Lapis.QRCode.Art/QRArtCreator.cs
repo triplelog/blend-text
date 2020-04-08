@@ -106,10 +106,11 @@ namespace Lapis.QRCode.Art
                 for (var i=blurRadius;i<theight-blurRadius;i++){
                 	for (var ii=blurRadius;ii<twidth-blurRadius;ii++){
                 		p = imageText.GetPixel(ii+blankL,i+blankT);
-                		if (p < 16000000){//first is x (col), second is y
-                			if (i>66){
-                				Console.WriteLine("y: "+i);
+                		if (i>66){
+                				Console.WriteLine("y: "+i+" c: "+p);
                 			}
+                		if (p < 16000000){//first is x (col), second is y
+                			
                 			
                 			if (p < 8000000){
 								if (p < 4000000){
