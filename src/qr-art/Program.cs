@@ -259,6 +259,8 @@ namespace Lapis.QrArt
 							int toCenterL = ( moduleCount * 9 * textDrawer.CellWidth - bmp.Width ) / 2;
 							int toCenterT = ( moduleCount * 9 * textDrawer.CellWidth - bmp.Height ) / 2;
 							using (Graphics graph = Graphics.FromImage(nbmp)) {
+								Rectangle ImageSize = new Rectangle(0,0,nbmp.Width,nbmp.Height);
+								graph.FillRectangle(Brushes.White, ImageSize);
 								graph.DrawImage(bmp, new Rectangle(toCenterL,toCenterT,bmp.Width,bmp.Height));
 							}
 							
