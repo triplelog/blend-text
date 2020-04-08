@@ -41,7 +41,7 @@ namespace Lapis.QRCode.Art
                 	int r = (rgb24s[i, j] & 0xFF0000) >> 16;
                     int g = (rgb24s[i, j] & 0xFF00) >> 8;
                     int b = rgb24s[i, j] & 0xFF;
-                    RgbToHls(int r, int g, int b, out double h, out double l, out double s);
+                    RgbToHls(r, g, b, out double h, out double l, out double s);
                     bitMatrix[i, j] = l < threshold;
                 }
             }
