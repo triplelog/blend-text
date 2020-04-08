@@ -252,7 +252,7 @@ namespace Lapis.QrArt
 							else {
 								widthout = -1;
 								font = new Font(fontVal, fontSize);
-								textDrawer.CellWidth = 1 + fontSize / 100;
+								textDrawer.CellWidth = 1;
 							}	
 						
 							
@@ -313,7 +313,7 @@ namespace Lapis.QrArt
 										Alignment = StringAlignment.Center,
 										LineAlignment = StringAlignment.Center
 									};
-									graph.FillPie(Brushes.Black, ImageSize, 0, 45);
+									graph.FillEllipse(Brushes.Black, ImageSize);
 									
 								}
 								bitmapText = new BitmapFrame(bmpp);
