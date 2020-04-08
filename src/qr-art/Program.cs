@@ -91,7 +91,7 @@ namespace Lapis.QrArt
 						stopWatch.Start();
 					
 						Console.WriteLine("Start Program ");
-						if (textDrawer.Type == "text"){ 
+						if (textDrawer.Type == "text" || textDrawer.Type == "image"){ 
 						
 						
 							if (int.TryParse(blurRadiusOpt.Value(), out blurRadius)){}
