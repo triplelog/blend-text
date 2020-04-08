@@ -318,7 +318,7 @@ namespace Lapis.QRCode.Art
 								iii++;
 							}
 							
-							int iii = 1; bool isBlack = true;
+							iii = 1; isBlack = true;
 							int distl = 0;
 							while (isBlack){
 								double rad = 3.14159265/180;
