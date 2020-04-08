@@ -20,9 +20,9 @@ namespace Lapis.QRCode.Art
                 throw new ArgumentNullException(nameof(qrCode));
             if (backgroundMatrix == null)
                 throw new ArgumentNullException(nameof(backgroundMatrix));
-
+			int CellSize = 12;
             int moduleCount = qrCode.Size;
-            var result = new BitSquare(moduleCount * 3);
+            var result = new BitSquare(moduleCount * CellSize);
             backgroundMatrix.CopyTo(result);
 
             for (var r = 0; r < moduleCount; r += 1)
@@ -31,9 +31,9 @@ namespace Lapis.QRCode.Art
                 {
                     if (QRCodeHelper.IsPositionProbePattern(typeNumber, r, c) ||
                         QRCodeHelper.IsPositionAdjustPattern(typeNumber, r, c))                    
-                        result.Fill(r * 3, c * 3, 3, 3, qrCode[r, c]);                    
+                        result.Fill(r * CellSize, c * CellSize, CellSize, CellSize, qrCode[r, c]);                    
                     else                    
-                        result[r * 3 + 1, c * 3 + 1] = qrCode[r, c];                    
+                        result[r * CellSize + 1, c * CellSize + 1] = qrCode[r, c];                    
                 }
             }
             return result;
