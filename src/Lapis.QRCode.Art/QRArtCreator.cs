@@ -302,8 +302,14 @@ namespace Lapis.QRCode.Art
         	outMatrix = new TripMatrix(theight,twidth);
         	Dictionary<int, int> circledict = new Dictionary<int, int>();
         	
-        	Dictionary<int, int[]> radiusdict = new Dictionary<int, int[]>();
-        	
+        	Dictionary<int, List<int>> radiusdict = new Dictionary<int, List<int>>();
+        	for (var i=0;i<theight;i++){
+				for (var ii=0;ii<twidth;ii++){
+					int radius = i*i+ii*ii;
+					if (radiusdict.TryGetValue(radius, out List<int> outval)) {
+					}
+				}
+			}
         	for (var i=0;i<theight;i++){
 				for (var ii=0;ii<twidth;ii++){
 					if (tripMatrix[i,ii] > 0){ //first is row, second is col
