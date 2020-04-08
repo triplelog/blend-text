@@ -168,6 +168,7 @@ namespace Lapis.QrArt
 										LineAlignment = StringAlignment.Center
 									};
 									RectangleF rectf = new RectangleF(blurRadius, blurRadius, twidth,theight);
+									Console.WriteLine("theight: "+theight);
 									graph.DrawString(contentArg.Value, font, Brushes.Black, rectf, format);
 								}
 								bitmapText = new BitmapFrame(bmpp);
