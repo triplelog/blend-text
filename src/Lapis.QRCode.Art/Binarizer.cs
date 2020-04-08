@@ -10,7 +10,7 @@ namespace Lapis.QRCode.Art
 {
     public interface IBinarizer
     {
-        BitMatrix Binarize(IRgb24BitmapBase bitmap, int rowCount, int columnCount);
+        BitMatrix Binarize(IRgb24BitmapBase bitmap, int rowCount, int columnCount, int threshold);
     }
 
     public class Binarizer : IBinarizer
