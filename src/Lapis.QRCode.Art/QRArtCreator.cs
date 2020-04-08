@@ -186,7 +186,7 @@ namespace Lapis.QRCode.Art
                 	for (var ii=blurRadius;ii<twidth-blurRadius;ii++){
                 		
                 		if (tripMatrix[i,ii] > 0){
-                			if (i>maxY){maxY = i;}
+                			if (i>maxY){maxY = i; Console.WriteLine("min: "+ minY + " max: "+maxY);}
                 			if (i<minY){minY = i;}
                 			if (ii>maxX){maxX = ii;}
                 			if (ii<minX){minX = ii;}
