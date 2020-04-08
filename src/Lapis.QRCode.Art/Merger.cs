@@ -9,18 +9,17 @@ namespace Lapis.QRCode.Art
 {
     public interface IMerger
     {
-        BitSquare Merge(BitSquare qrCode, int typeNumber, BitMatrix backgroundMatrix);
+        BitSquare Merge(BitSquare qrCode, int typeNumber, BitMatrix backgroundMatrix, int CellSize);
     }
 
     public class Merger : IMerger
     {        
-        public BitSquare Merge(BitSquare qrCode, int typeNumber, BitMatrix backgroundMatrix)
+        public BitSquare Merge(BitSquare qrCode, int typeNumber, BitMatrix backgroundMatrix, int CellSize)
         {
             if (qrCode == null)
                 throw new ArgumentNullException(nameof(qrCode));
             if (backgroundMatrix == null)
                 throw new ArgumentNullException(nameof(backgroundMatrix));
-			int CellSize = 12;
             int moduleCount = qrCode.Size;
             var result = new BitSquare(moduleCount * CellSize);
             backgroundMatrix.CopyTo(result);
