@@ -40,6 +40,7 @@ namespace Lapis.QrArt
             var fontOpt = app.Option("-f <string>", "Font", CommandOptionType.SingleValue);
             var typeOpt = app.Option("-t <string>", "Type", CommandOptionType.SingleValue);
             var distanceFormulaOpt = app.Option("-d <string>", "Distance Formula", CommandOptionType.SingleValue);
+            var thresholdOpt = app.Option("-h <number>", "Threshold", CommandOptionType.SingleValue);
             //legacy below
             //var foregdOpt = app.Option("-f|--foreground <color>", "Foreground color.", CommandOptionType.SingleValue);
             //var backgdOpt = app.Option("-b|--background <color>", "Background color.", CommandOptionType.SingleValue);
@@ -277,7 +278,9 @@ namespace Lapis.QrArt
 							
 							
 							var bgImage = new BitmapFrame(nbmp);
-							int threshold = 200;
+							int threshold = 128;
+							if (int.TryParse(thresholdOpt.Value(), out threshold)){}
+							
 							var imgMatrix = Binarizer.Binarize(bgImage, moduleCount * 3, moduleCount * 3, threshold);
 							bitMatrix = Merger.Merge(bitMatrix, 5, imgMatrix, 3);
 							
