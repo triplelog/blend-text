@@ -324,6 +324,10 @@ wss.on('connection', function connection(ws) {
   	
   	execCmd += ' -t '+dm.type;
   	
+  	if (dm.threshold){
+  		execCmd += ' -h '+dm.threshold;
+  	}
+  	
   	var luaDistanceFormula = `function DistanceFunc (d,maxD)
         		return (10*d-15*maxD)*2/maxD
         		end`;
