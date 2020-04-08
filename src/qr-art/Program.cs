@@ -244,7 +244,7 @@ namespace Lapis.QrArt
 							var qrEncoder = new QRCodeEncoder()
                             {
                                 TypeNumber = 5,
-                                ErrorCorrectLevel = ErrorCorrectLevel.M
+                                ErrorCorrectLevel = ErrorCorrectLevel.H
                             };
 							var bitMatrix = qrEncoder.Build("espn.com");
 							
