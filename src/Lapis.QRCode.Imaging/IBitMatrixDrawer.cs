@@ -70,7 +70,7 @@ namespace Lapis.QRCode.Imaging
         
 		int HashSize { get; set; }
 		
-		Lapis.QRCode.Imaging.Drawing.Bitmap bmp { get; set; }
+		Drawing.Bitmap bmp { get; set; }
         
         string BlurFormula { get; set; }
         
