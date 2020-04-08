@@ -288,16 +288,18 @@ namespace Lapis.QRCode.Art
 					ts.Milliseconds / 10);
 				Console.WriteLine("QRArtCreatorTime " + elapsedTime);
                 
-                getEdgeDistance(tripMatrix);
-                return TripMatrixDrawer.Draw(tripMatrix);
+                getEdgeDistance(tripMatrix, out TripMatrix outMatrix);
+                //return TripMatrixDrawer.Draw(tripMatrix);
+                return TripMatrixDrawer.Draw(outMatrix);
             }
             else {
             	return null;
             }
         }
-        public static void getEdgeDistance(TripMatrix tripMatrix) {
+        public static void getEdgeDistance(TripMatrix tripMatrix, out TripMatrix outMatrix) {
         	int theight = tripMatrix.RowCount;
         	int twidth = tripMatrix.ColumnCount;
+        	var outMatrix = new TripMatrix(theight,twidth);
         	for (var i=0;i<theight;i++){
 				for (var ii=0;ii<twidth;ii++){
 					if (tripMatrix[i,ii] > 0){ //first is row, second is col
@@ -384,7 +386,11 @@ namespace Lapis.QRCode.Art
 							}
 						}
 						Console.WriteLine("i: "+i+" ii: "+ii+" pct: "+pct);
+						outMatrix[i,ii] = Convert.ToInt32(pct*-1+49);
 					} 
+					else {
+						outMatrix[i,ii] = -100;
+					}
 				}
 			}//~20 ms since else if
         }
