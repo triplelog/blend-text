@@ -507,7 +507,7 @@ namespace Lapis.QRCode.Art
 						}
 						int maxr = maxri+maxrii;
 						
-						for (var iii=testmini/2;iii<testmaxi/2+1;iii++){
+						for (iii=testmini/2;iii<testmaxi/2+1;iii++){
 							for (var iiii=testminii/2;iiii<testmaxii/2+1;iiii++){
 								if (circledict.TryGetValue((i+iii)*twidth+ii+iiii, out int outval)) {
 									if (outval > minr){
