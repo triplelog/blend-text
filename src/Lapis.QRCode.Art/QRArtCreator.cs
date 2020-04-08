@@ -504,7 +504,7 @@ namespace Lapis.QRCode.Art
 						if (testmaxii > -1*testminii){
 							maxrii = testmaxii*testmaxii;
 						}
-						int maxr = maxri+maxrii
+						int maxr = maxri+maxrii;
 						
 						for (var iii=testmini/2;iii<testmaxi/2+1;iii++){
 							for (var iiii=testminii/2;iiii<testmaxii/2+1;iiii++){
