@@ -278,7 +278,7 @@ namespace Lapis.QrArt
 							
 							
 							var bgImage = new BitmapFrame(nbmp);
-							int threshold = 128;
+							double threshold = .5;
 							if (int.TryParse(thresholdOpt.Value(), out threshold)){}
 							
 							var imgMatrix = Binarizer.Binarize(bgImage, moduleCount * 3, moduleCount * 3, threshold);
