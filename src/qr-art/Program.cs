@@ -262,7 +262,7 @@ namespace Lapis.QrArt
 							
 							int twidth = (int)bitMatrix.ColumnCount;
 							int theight = (int)bitMatrix.RowCount;
-							int cellSize = 9;
+							int cellSize = 3;
 							
 							Bitmap bmpp = (Bitmap) new Bitmap(twidth*cellSize,theight*cellSize);
 							textDrawer.THeight = theight*cellSize;
