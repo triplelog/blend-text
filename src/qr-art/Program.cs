@@ -262,7 +262,7 @@ namespace Lapis.QrArt
 							using (Graphics graph = Graphics.FromImage(nbmp)) {
 								Rectangle ImageSize = new Rectangle(0,0,nbmp.Width,nbmp.Height);
 								graph.FillRectangle(Brushes.White, ImageSize);
-								graph.DrawImage(bmp, new Rectangle(toCenterL,toCenterT,bmp.Width,bmp.Height));
+								graph.DrawImage(bmp, new Rectangle(toCenterL/2,toCenterT/2,bmp.Width*2,bmp.Height*2));
 							}
 							
 							
