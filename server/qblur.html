@@ -234,8 +234,55 @@ input[name="size31"] {
 				<label for="size11-3"><i class="fas fa-expand"></i></label>
 			</span>
 		</div>
+		{% if type == 'qr' %}
 		<div class="content" id="fileDrag">
-				
+			
+			<div>
+				Image: 
+				<select id="imgType">
+					<option value="upload">Upload</option>
+					<option value="url">URL</option>
+					<option value="drag">Drag/Drop</option>
+				</select>
+				<input type="file" name="imgSrc" id="imgSrc"></input>
+				<input type="text" name="imgUrl" id="imgUrl"></input>
+				<span id="imgDrag"></span>
+			</div>
+			<div id="fontSize">
+				Size: 
+				<select>
+					<option value="font">Font Size</option>
+					<option value="width">Width</option>
+				</select>= <input type="number" value="40"></input><span></span>
+			</div>
+			<div id="locX">
+				Location X: 
+				<select>
+					<option value="0">Middle</option>
+					<option value="200">Left</option>
+					<option value="400">Right</option>
+				</select>
+				 @ 
+				 <input type="number" value="50"></input>%
+			</div>
+			<div id="locY">
+				Location Y: 
+				<select>
+					<option value="0">Middle</option>
+					<option value="200">Top</option>
+					<option value="400">Bottom</option>
+				</select>
+				 @ 
+				 <input type="number" value="50"></input>%
+			</div>
+
+			
+			
+		</div>
+		{% endif %}
+		{% if type == 'text' %}
+		<div class="content" id="fileDrag">
+			
 			<div>
 				Image: 
 				<select id="imgType">
@@ -258,7 +305,7 @@ input[name="size31"] {
 				<select>
 					<option value="font">Font Size</option>
 					<option value="width">Width</option>
-				<select>= <input type="number" value="40"></input><span></span>
+				</select>= <input type="number" value="40"></input><span></span>
 			</div>
 			<div id="locX">
 				Location X: 
@@ -285,7 +332,9 @@ input[name="size31"] {
 				Blur Radius: <input type="number" id="blurRadius" value="10"></input>
 			</div>
 			
+			
 		</div>
+		{% endif %}
 	</div>
 	<div class="content-13">
 		<div class="title">Preview</div>

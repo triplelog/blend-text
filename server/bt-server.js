@@ -66,9 +66,21 @@ app.get('/qr',
 
 app.get('/text', 
 	function(req, res) {
+		var tkey = crypto.randomBytes(100).toString('hex').substr(2, 18);
+		var formulas = [];
+		if (req.isAuthenticated()){
+			tempKeys[tkey] = {username:req.user.username};
+			formulas = req.user.formulas;
+			for (var i=0;i<formulas.length;i++){
+				formulas[i].id = i;
+			}
+			
+		}
 		
-		res.write(nunjucks.render('blendtext.html',{
+		res.write(nunjucks.render('qblur.html',{
 			type: 'text',
+			tkey: tkey,
+			formulas: formulas,
 		}));
 		res.end();
 	}

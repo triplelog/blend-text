@@ -91,7 +91,7 @@ namespace Lapis.QrArt
 						stopWatch.Start();
 					
 						Console.WriteLine("Start Program ");
-						if (2 == 3){ 
+						if (textDrawer.Type == "text"){ 
 						
 						
 							if (int.TryParse(blurRadiusOpt.Value(), out blurRadius)){}
@@ -235,7 +235,7 @@ namespace Lapis.QrArt
 							textDrawer.bmp = bmp;
         				} // text on image
         				
-        				if (2==2){ 
+        				if (textDrawer.Type == "qr"){ 
         				
         					textDrawer.MarginL = 0;
                             textDrawer.MarginT = 0;
