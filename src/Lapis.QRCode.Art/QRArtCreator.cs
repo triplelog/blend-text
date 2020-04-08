@@ -303,7 +303,8 @@ namespace Lapis.QRCode.Art
         	for (var i=0;i<theight;i++){
 				for (var ii=0;ii<twidth;ii++){
 					if (tripMatrix[i,ii] > 0){ //first is row, second is col
-						int mindist = twidth*twidth+theight*theight;
+						int mindist1 = twidth*twidth+theight*theight;//radius/diameter? of largest circle centered at point
+						int mindist2 = twidth*twidth+theight*theight;//radius/diameter? of largest circle containing point
 						double sumdist = 0;
 						
 						double pct = 50.0;
@@ -337,49 +338,50 @@ namespace Lapis.QRCode.Art
 							}
 							distr--;
 							distl--;
+							
+							if (distl+distr<mindist2){
+								mindist2 = distl+distr;
+								/*if (mindist2 == 0){
+									pct = 100.0;
+								}
+								else if (distl>=distr){
+									pct = distl*100.0;
+									pct /= (distl+distr);
+								}
+								else{
+									pct = distr*100.0;
+									pct /= (distl+distr);
+								}*/
+							}
+							if (distl<mindist1){
+								mindist1 = distl;
+								/*if (mindist1 == 0){
+									pct = 100.0;
+								}
+								else if (distl>=distr){
+									pct = distl*100.0;
+									pct /= (distl+distr);
+								}
+								else{
+									pct = distr*100.0;
+									pct /= (distl+distr);
+								}*/
+							}
+							if (distr<mindist1){
+								mindist1 = distr;
+								/*if (mindist == 0){
+									pct = 100.0;
+								}
+								else if (distl>=distr){
+									pct = distl*100.0;
+									pct /= (distl+distr);
+								}
+								else{
+									pct = distr*100.0;
+									pct /= (distl+distr);
+								}*/
+							}
 							/*
-							if (distl+distr<mindist){
-								mindist = distl+distr;
-								if (mindist == 0){
-									pct = 100.0;
-								}
-								else if (distl>=distr){
-									pct = distl*100.0;
-									pct /= (distl+distr);
-								}
-								else{
-									pct = distr*100.0;
-									pct /= (distl+distr);
-								}
-							}
-							if (distl<mindist){
-								mindist = distl;
-								if (mindist == 0){
-									pct = 100.0;
-								}
-								else if (distl>=distr){
-									pct = distl*100.0;
-									pct /= (distl+distr);
-								}
-								else{
-									pct = distr*100.0;
-									pct /= (distl+distr);
-								}
-							}
-							if (distr<mindist){
-								mindist = distr;
-								if (mindist == 0){
-									pct = 100.0;
-								}
-								else if (distl>=distr){
-									pct = distl*100.0;
-									pct /= (distl+distr);
-								}
-								else{
-									pct = distr*100.0;
-									pct /= (distl+distr);
-								}
-							}*/
 							if (distl==0 || distr == 0){
 								sumdist += 100.0;
 							}
@@ -392,7 +394,7 @@ namespace Lapis.QRCode.Art
 								pct = distr*100.0;
 								pct /= (distl+distr);
 								sumdist += pct;
-							}
+							}*/
 						}
 						for (var d=45;d<135;d++){
 							int iii = 1; bool isBlack = true;
@@ -424,51 +426,51 @@ namespace Lapis.QRCode.Art
 							}
 							distu--;
 							distd--;
+							
+							if (distu+distd<mindist2){
+								mindist2 = distu+distd;
+								/*if (mindist2 == 0){
+									pct = 100.0;
+								}
+								else if (distu>=distd){
+									pct = distu*100.0;
+									pct /= (distu+distd);
+								}
+								else{
+									pct = distd*100.0;
+									pct /= (distu+distd);
+								}*/
+							}
+							
+							if (distu<mindist1){
+								mindist1 = distu;
+								/*if (mindist1 == 0){
+									pct = 100.0;
+								}
+								else if (distu>=distd){
+									pct = distu*100.0;
+									pct /= (distu+distd);
+								}
+								else{
+									pct = distd*100.0;
+									pct /= (distu+distd);
+								}*/
+							}
+							if (distd<mindist1){
+								mindist1 = distd;
+								/*if (mindist1 == 0){
+									pct = 100.0;
+								}
+								else if (distu>=distd){
+									pct = distu*100.0;
+									pct /= (distu+distd);
+								}
+								else{
+									pct = distd*100.0;
+									pct /= (distu+distd);
+								}*/
+							}
 							/*
-							if (distu+distd<mindist){
-								mindist = distu+distd;
-								if (mindist == 0){
-									pct = 100.0;
-								}
-								else if (distu>=distd){
-									pct = distu*100.0;
-									pct /= (distu+distd);
-								}
-								else{
-									pct = distd*100.0;
-									pct /= (distu+distd);
-								}
-							}
-							
-							if (distu<mindist){
-								mindist = distu;
-								if (mindist == 0){
-									pct = 100.0;
-								}
-								else if (distu>=distd){
-									pct = distu*100.0;
-									pct /= (distu+distd);
-								}
-								else{
-									pct = distd*100.0;
-									pct /= (distu+distd);
-								}
-							}
-							if (distd<mindist){
-								mindist = distd;
-								if (mindist == 0){
-									pct = 100.0;
-								}
-								else if (distu>=distd){
-									pct = distu*100.0;
-									pct /= (distu+distd);
-								}
-								else{
-									pct = distd*100.0;
-									pct /= (distu+distd);
-								}
-							}*/
-							
 							if (distu==0 || distd == 0){
 								sumdist += 100.0;
 							}
@@ -481,13 +483,14 @@ namespace Lapis.QRCode.Art
 								pct = distd*100.0;
 								pct /= (distu+distd);
 								sumdist += pct;
-							}
+							}*/
 						}
 						//Console.WriteLine("i: "+i+" ii: "+ii+" pct: "+pct);
-						outMatrix[i,ii] = Convert.ToInt32(sumdist*-1/360+49);
+						pct = mindist1/mindist2;
+						outMatrix[i,ii] = Convert.ToInt32(pct*-1);
 					} 
 					else {
-						outMatrix[i,ii] = -100;
+						outMatrix[i,ii] = -101;
 					}
 				}
 			}//~20 ms since else if
