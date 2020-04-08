@@ -335,8 +335,37 @@ namespace Lapis.QRCode.Art
 							}
 							distr--;
 							distl--;
+							/*
 							if (distl+distr<mindist){
 								mindist = distl+distr;
+								if (mindist == 0){
+									pct = 100.0;
+								}
+								else if (distl>=distr){
+									pct = distl*100.0;
+									pct /= (distl+distr);
+								}
+								else{
+									pct = distr*100.0;
+									pct /= (distl+distr);
+								}
+							}*/
+							if (distl<mindist){
+								mindist = distl;
+								if (mindist == 0){
+									pct = 100.0;
+								}
+								else if (distl>=distr){
+									pct = distl*100.0;
+									pct /= (distl+distr);
+								}
+								else{
+									pct = distr*100.0;
+									pct /= (distl+distr);
+								}
+							}
+							if (distr<mindist){
+								mindist = distr;
 								if (mindist == 0){
 									pct = 100.0;
 								}
@@ -380,8 +409,38 @@ namespace Lapis.QRCode.Art
 							}
 							distu--;
 							distd--;
+							/*
 							if (distu+distd<mindist){
 								mindist = distu+distd;
+								if (mindist == 0){
+									pct = 100.0;
+								}
+								else if (distu>=distd){
+									pct = distu*100.0;
+									pct /= (distu+distd);
+								}
+								else{
+									pct = distd*100.0;
+									pct /= (distu+distd);
+								}
+							}
+							*/
+							if (distu<mindist){
+								mindist = distu;
+								if (mindist == 0){
+									pct = 100.0;
+								}
+								else if (distu>=distd){
+									pct = distu*100.0;
+									pct /= (distu+distd);
+								}
+								else{
+									pct = distd*100.0;
+									pct /= (distu+distd);
+								}
+							}
+							if (distd<mindist){
+								mindist = distd;
 								if (mindist == 0){
 									pct = 100.0;
 								}
