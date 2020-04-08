@@ -171,9 +171,6 @@ namespace Lapis.QrArt
 									
 								}
 								bitmapText = new BitmapFrame(bmpp);
-								for (var ii=0;ii<twidth;ii++){
-										Console.WriteLine("c: "+bitmapText.GetPixel(ii,75));
-									}
 								bitmap = new BitmapFrame(bmp);
 							
 								{
