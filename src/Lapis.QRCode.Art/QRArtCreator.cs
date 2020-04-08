@@ -259,8 +259,8 @@ namespace Lapis.QRCode.Art
                 		
                 	}
                 }
-                //maxX++;
-                //maxY++;
+                maxX++;
+                maxY++;
                 if (minY < blurRadius){minY = blurRadius;}
                 if (maxY + blurRadius >= theight){maxY = theight -blurRadius;}
                 if (minX < blurRadius){minX = blurRadius;}
@@ -274,8 +274,8 @@ namespace Lapis.QRCode.Art
                 	}
                 }
                 
-                TripMatrixDrawer.THeight = (maxY+blurRadius) - (minY-blurRadius);
-                TripMatrixDrawer.TWidth = (maxX+blurRadius) - (minX-blurRadius);
+                //TripMatrixDrawer.THeight = (maxY+blurRadius) - (minY-blurRadius);
+                //TripMatrixDrawer.TWidth = (maxX+blurRadius) - (minX-blurRadius);
                 
                 stopWatch.Stop();
 				// Get the elapsed time as a TimeSpan value.
