@@ -255,7 +255,7 @@ namespace Lapis.QrArt
 							Graphics graph1 = Graphics.FromImage(bmp);
 							int twidth = (int)bitMatrix.ColumnCount;
 							int theight = (int)bitMatrix.RowCount;
-							int cellSize = 9;
+							int cellSize = 3;
 							
 							var bgImage = new BitmapFrame(bmp);
 							var imgMatrix = Binarizer.Binarize(bgImage, moduleCount * cellSize, moduleCount * cellSize);
