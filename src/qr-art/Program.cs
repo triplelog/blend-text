@@ -302,8 +302,8 @@ namespace Lapis.QrArt
 						
 						
         				string DistanceFormula = System.IO.File.ReadAllText(@"/home/rwilcox/blend-text/server/formulas/"+distanceFormulaOpt.Value()+".txt");
-
-                        var image = builder.Create(contentArg.Value, bitmap, bitmapText, bmp, blurRadius, DistanceFormula);
+						textDrawer.bmp = bmp;
+                        var image = builder.Create(contentArg.Value, bitmap, bitmapText, blurRadius, DistanceFormula);
                         //bitmap.Save("static/newbmp1.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
                         
                          stopWatch.Stop();

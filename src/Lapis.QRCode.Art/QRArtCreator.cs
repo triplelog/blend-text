@@ -14,7 +14,7 @@ namespace Lapis.QRCode.Art
 {
     public interface IQRArtCreator
     {
-        IImage Create(string data, IRgb24BitmapBase image, IRgb24BitmapBase imageText, Bitmap imgBmp, int blurRadius, string DistanceFormula);
+        IImage Create(string data, IRgb24BitmapBase image, IRgb24BitmapBase imageText, int blurRadius, string DistanceFormula);
     }
 
     public class QRArtCreator : IQRArtCreator
@@ -32,7 +32,7 @@ namespace Lapis.QRCode.Art
         
         public ITripMatrixDrawer TripMatrixDrawer { get; }
 
-        public virtual IImage Create(string data, IRgb24BitmapBase image, IRgb24BitmapBase imageText, Bitmap imgBmp, int blurRadius, string DistanceFormula)
+        public virtual IImage Create(string data, IRgb24BitmapBase image, IRgb24BitmapBase imageText, int blurRadius, string DistanceFormula)
         {
         	
 
@@ -286,7 +286,7 @@ namespace Lapis.QRCode.Art
 				Console.WriteLine("QRArtCreatorTime " + elapsedTime);
                 
                 
-                return TripMatrixDrawer.Draw(tripMatrix, imgBmp);
+                return TripMatrixDrawer.Draw(tripMatrix);
             }
             else {
             	return null;

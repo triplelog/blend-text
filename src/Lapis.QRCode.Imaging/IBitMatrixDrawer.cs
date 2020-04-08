@@ -68,6 +68,8 @@ namespace Lapis.QRCode.Imaging
         int CellWidth { get; set; }
         
 		int HashSize { get; set; }
+		
+		public Bitmap bmp { get; set; }
         
         string BlurFormula { get; set; }
         
@@ -107,6 +109,8 @@ namespace Lapis.QRCode.Imaging
 		public int CellWidth { get; set; } = 2;
 		
 		public int HashSize { get; set; } = 4;
+		
+		public Bitmap bmp { get; set; } = new Bitmap(10,10);
 		
 		public int TWidth { get; set; } = 0;
 		

@@ -20,7 +20,7 @@ namespace Lapis.QRCode.Art
 
         public Func<IReadOnlyList<IRgb24BitmapFrame>, IRgb24BitmapBase> FrameMerger { get; }
 
-        public override IImage Create(string data, IRgb24BitmapBase image, IRgb24BitmapBase imageText, Bitmap imgBmp, int blurRadius, string DistanceFomrula)
+        public override IImage Create(string data, IRgb24BitmapBase image, IRgb24BitmapBase imageText, int blurRadius, string DistanceFomrula)
         {
             var bitmap = image as IRgb24Bitmap;
             if (bitmap?.FrameCount > 1)

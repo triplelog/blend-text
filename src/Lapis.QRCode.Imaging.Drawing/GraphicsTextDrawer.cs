@@ -14,7 +14,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 {
     public class GraphicsTextDrawer : TripMatrixDrawerBase
     {
-        public override IImage Draw(TripMatrix tripMatrix, Bitmap imgBmp)
+        public override IImage Draw(TripMatrix tripMatrix)
         {
             if (tripMatrix == null)
                 throw new ArgumentNullException(nameof(tripMatrix));
@@ -23,8 +23,7 @@ namespace Lapis.QRCode.Imaging.Drawing
         	stopWatch.Start();
         		
             
-            //var bitmap = new Bitmap(imageHeight, imageWidth);
-            var bmp = imgBmp;
+
             int imageHeight = bmp.Height;
             int imageWidth = bmp.Width;
 			
