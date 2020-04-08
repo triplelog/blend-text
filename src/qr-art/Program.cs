@@ -257,12 +257,19 @@ namespace Lapis.QrArt
 							
 							Bitmap nbmp = (Bitmap) new Bitmap(moduleCount * 9 * textDrawer.CellWidth,moduleCount * 9 * textDrawer.CellWidth);
 							bmp = Bitmap.FromFile(imageArg.Value) as Bitmap;
-							int toCenterL = ( moduleCount * 9 * textDrawer.CellWidth - bmp.Width ) / 2;
-							int toCenterT = ( moduleCount * 9 * textDrawer.CellWidth - bmp.Height ) / 2;
+							int imgWidth = bmp.Width;
+							int imgHeight = bmp.Height;
+							if (int.TryParse(widthOpt.Value(), out imgWidth)){
+								imgWidth = moduleCount * 9 * textDrawer.CellWidth * imgWidth / 100;
+								imgHeight = imgWidth * bmp.Height / bmp.Width;
+							}
+							
+							int toCenterL = ( moduleCount * 9 * textDrawer.CellWidth - imgWidth ) / 2;
+							int toCenterT = ( moduleCount * 9 * textDrawer.CellWidth - imgHeight ) / 2;
 							using (Graphics graph = Graphics.FromImage(nbmp)) {
 								Rectangle ImageSize = new Rectangle(0,0,nbmp.Width,nbmp.Height);
 								graph.FillRectangle(Brushes.White, ImageSize);
-								graph.DrawImage(bmp, new Rectangle(toCenterL/2,toCenterT/2,bmp.Width*2,bmp.Height*2));
+								graph.DrawImage(bmp, new Rectangle(toCenterL,toCenterT,imgWidth,imgHeight));
 							}
 							
 							
