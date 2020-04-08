@@ -428,7 +428,8 @@ namespace Lapis.QRCode.Art
 						int testminii = 0;
 						int testmaxi = theight;
 						int testmaxii = twidth;
-						
+						int testi = 0;
+						int testii = 0;
 						while (stillpossible){
 							testi = i+iii;
 							testii = ii;
