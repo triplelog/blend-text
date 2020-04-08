@@ -61,6 +61,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 				
                 for (var r = startR; r < THeight && r + MarginT < bmp.Height; r += CellWidth)
                 {
+                	Console.WriteLine(r);
                     for (var c = startC; c < TWidth && c + MarginL < bmp.Width; c += CellWidth)
                     {
                         if (tripMatrix[r, c] == 0)
