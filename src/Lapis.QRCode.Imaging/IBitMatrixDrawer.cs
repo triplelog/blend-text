@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Drawing;
-using System.Drawing.Common;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Lapis.QRCode.Encoding;
 
-namespace Lapis.QRCode.Imaging.Drawing
+namespace Lapis.QRCode.Imaging
 {
     public interface IBitMatrixDrawer
     {
@@ -71,7 +70,7 @@ namespace Lapis.QRCode.Imaging.Drawing
         
 		int HashSize { get; set; }
 		
-		Bitmap bmp { get; set; }
+		System.Drawing.Bitmap bmp { get; set; }
         
         string BlurFormula { get; set; }
         
