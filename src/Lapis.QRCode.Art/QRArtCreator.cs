@@ -309,6 +309,13 @@ namespace Lapis.QRCode.Art
 					if (radiusdict.TryGetValue(radius, out List<int[]> outval)) {
 						int[] twoints = {i,ii};
 						outval.Add(twoints);
+						radiusdict[radius]=outval;
+					}
+					else {
+						int[] twoints = {i,ii};
+						List<int[]> newval = new List<int[]>;
+						newval.Add(twoints);
+						radiusdict[radius]=newval;
 					}
 				}
 			}
