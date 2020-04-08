@@ -107,6 +107,9 @@ namespace Lapis.QRCode.Art
                 	for (var ii=blurRadius;ii<twidth-blurRadius;ii++){
                 		p = imageText.GetPixel(ii+blankL,i+blankT);
                 		if (p < 16000000){//first is x (col), second is y
+                			if (i>66){
+                				Console.WriteLine("y: "+i);
+                			}
                 			
                 			if (p < 8000000){
 								if (p < 4000000){
@@ -181,12 +184,11 @@ namespace Lapis.QRCode.Art
         		int minX = twidth;
         		int maxY = 0;
         		int minY = theight;
-        		Console.WriteLine("min: "+ minY + " max: "+maxY);
                 for (var i=blurRadius;i<theight-blurRadius;i++){
                 	for (var ii=blurRadius;ii<twidth-blurRadius;ii++){
                 		
                 		if (tripMatrix[i,ii] > 0){
-                			if (i>maxY){maxY = i; Console.WriteLine("min: "+ minY + " max: "+maxY);}
+                			if (i>maxY){maxY = i;}
                 			if (i<minY){minY = i;}
                 			if (ii>maxX){maxX = ii;}
                 			if (ii<minX){minX = ii;}
