@@ -253,7 +253,7 @@ namespace Lapis.QrArt
 							var Merger = new Merger();
 							var bgImage = new BitmapFrame(bmp);
 							var imgMatrix = Binarizer.Binarize(bgImage, moduleCount * 3, moduleCount * 3);
-							bitMatrix = Merger.Merge(bitMatrix, TypeNumber, imgMatrix);
+							bitMatrix = Merger.Merge(bitMatrix, 5, imgMatrix);
 							
 							bmp = Bitmap.FromFile(imageArg.Value) as Bitmap;
 								//textDrawer.bgImage = bmp;
