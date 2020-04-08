@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Lapis.QRCode.Encoding;
 
-namespace Lapis.QRCode.Imaging
+namespace Lapis.QRCode.Imaging.Drawing
 {
     public interface IBitMatrixDrawer
     {
