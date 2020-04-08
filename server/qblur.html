@@ -248,10 +248,16 @@ input[name="size31"] {
 				<input type="text" name="imgUrl" id="imgUrl"></input>
 				<span id="imgDrag"></span>
 			</div>
+			<div>
+				Text: <input type="text" id="text" value=" "></input>
+			</div>
+			<div style="display: none;">
+				Font: <input type="text" id="font" value="Tahoma"><!--Autocomplete w/ fonts, use CSS sprites with available fonts--></input>
+			</div>
 			<div id="fontSize">
 				Size: 
 				<select>
-					<option value="font">Font Size</option>
+					<option value="font" style="display: none;">Font Size</option>
 					<option value="width">Width</option>
 				</select>= <input type="number" value="40"></input><span></span>
 			</div>
@@ -274,6 +280,10 @@ input[name="size31"] {
 				</select>
 				 @ 
 				 <input type="number" value="50"></input>%
+			</div>
+			
+			<div style="display: none;">
+				Blur Radius: <input type="number" id="blurRadius" value="10"></input>
 			</div>
 
 			
