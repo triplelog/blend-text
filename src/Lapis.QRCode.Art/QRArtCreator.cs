@@ -128,7 +128,7 @@ namespace Lapis.QRCode.Art
 				
                 TripMatrixDrawer.THeight = tripMatrix.RowCount;
             	TripMatrixDrawer.TWidth = tripMatrix.ColumnCount;
-                Console.WriteLine("New Height "+TripMatrixDrawer.THeight);
+                
 				int maxD = blurRadius*blurRadius;
 				if (maxD == 0){maxD = 1;}
 				int outval;
@@ -274,6 +274,7 @@ namespace Lapis.QRCode.Art
                 		}
                 	}
                 }
+                Console.WriteLine("min: "+ minX + " max: "+maxX);
                 
                 //TripMatrixDrawer.THeight = (maxY+blurRadius) - (minY-blurRadius);
                 //TripMatrixDrawer.TWidth = (maxX+blurRadius) - (minX-blurRadius);
