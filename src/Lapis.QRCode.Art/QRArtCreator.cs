@@ -486,7 +486,13 @@ namespace Lapis.QRCode.Art
 							}*/
 						}
 						//Console.WriteLine("i: "+i+" ii: "+ii+" pct: "+pct);
-						pct = mindist1/mindist2;
+						if (mindist2 < 1){
+							pct = 0.0;
+						}
+						else {
+							pct = mindist1*100.0/mindist2;
+						}
+						Console.WriteLine("i: "+i+" ii: "+ii+" pct: "+pct);
 						outMatrix[i,ii] = Convert.ToInt32(pct*-1);
 					} 
 					else {
