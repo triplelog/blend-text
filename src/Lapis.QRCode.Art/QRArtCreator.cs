@@ -306,6 +306,7 @@ namespace Lapis.QRCode.Art
         	stopWatch.Start();
         	int ystep = 3;
         	int xstep = 3;
+        	int maxmaxr = 0;
         	for (var i=0;i<theight;i+=ystep){
 				for (var ii=0;ii<twidth;ii+=xstep){
 					if (tripMatrix[i,ii] > 0){ //first is row, second is col
@@ -379,7 +380,7 @@ namespace Lapis.QRCode.Art
 							}
 						}
 						circledicttemp[i*twidth+ii]=d;
-						
+						if (d>maxmaxr){maxmaxr = d;}
 						/*
 						int dd = d;
 						mindist1 = twidth*twidth+theight*theight;
@@ -687,7 +688,7 @@ namespace Lapis.QRCode.Art
 							outMatrix[i,ii]=-100;
 						}
 						else if (circledict.TryGetValue(i*twidth+ii, out int outval)) {
-							outMatrix[i,ii]=(10+outval)*-100/(10+minr);
+							outMatrix[i,ii]=(10+outval)*-200/(20+maxmaxr+minr);
 						}
 						else {
 							outMatrix[i,ii]=-101;
