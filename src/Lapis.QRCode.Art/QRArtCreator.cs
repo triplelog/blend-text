@@ -737,8 +737,14 @@ namespace Lapis.QRCode.Art
 					else {
 						outMatrix[i,ii]=-101;
 					}
+					
+					
+					if (i+1<theight){
+						outMatrix[i+1,ii]=outMatrix[i,ii];
+					}
 				}
 			}
+			/*
 			if (ystep > 1 || xstep > 1){
 				for (var yoffset=0;yoffset<ystep;yoffset++){
 					for (var xoffset=0;xoffset<xstep;xoffset++){
@@ -806,7 +812,7 @@ namespace Lapis.QRCode.Art
 						}
 					}
 				}
-			}
+			}*/
 			
 			stopWatch.Stop();
 			// Get the elapsed time as a TimeSpan value.
