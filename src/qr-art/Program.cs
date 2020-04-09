@@ -249,7 +249,7 @@ namespace Lapis.QrArt
 							try
 							{
 								bmp = Bitmap.FromFile(imageArg.Value) as Bitmap;
-							
+								
 								Bitmap bmpp = (Bitmap) new Bitmap(bmp.Width,bmp.Height);
 							
 							
@@ -258,6 +258,12 @@ namespace Lapis.QrArt
 									Rectangle ImageSize = new Rectangle(0,0,bmp.Width,bmp.Height);
 									graph.FillRectangle(Brushes.White, ImageSize);
 									graph.DrawImage(bmp, new Rectangle(blurRadius,blurRadius,bmp.Width,bmp.Height));
+									
+								}
+								using (Graphics graph = Graphics.FromImage(bmp))
+								{
+									Rectangle ImageSize = new Rectangle(0,0,bmp.Width,bmp.Height);
+									graph.FillRectangle(Brushes.White, ImageSize);
 									
 								}
 								bitmapText = new BitmapFrame(bmpp);

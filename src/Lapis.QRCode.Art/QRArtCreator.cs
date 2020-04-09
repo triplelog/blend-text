@@ -305,8 +305,8 @@ namespace Lapis.QRCode.Art
 
 			Stopwatch stopWatch = new Stopwatch();
         	stopWatch.Start();
-        	int ystep = 3;
-        	int xstep = 3;
+        	int ystep = 1 + outMatrix.RowCount / 200;
+        	int xstep = 1 + outMatrix.ColumnCount / 200;
         	int maxmaxr = 0;
         	long sumr = 0;
         	int nr = 0;
