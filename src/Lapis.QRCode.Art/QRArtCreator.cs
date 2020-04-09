@@ -307,6 +307,8 @@ namespace Lapis.QRCode.Art
         	int ystep = 2;
         	int xstep = 2;
         	int maxmaxr = 0;
+        	long sumr = 0;
+        	int nr = 0;
         	for (var i=0;i<theight;i+=ystep){
 				for (var ii=0;ii<twidth;ii+=xstep){
 					if (tripMatrix[i,ii] > 0){ //first is row, second is col
@@ -381,6 +383,8 @@ namespace Lapis.QRCode.Art
 						}
 						circledicttemp[i*twidth+ii]=d;
 						if (d>maxmaxr){maxmaxr = d;}
+						sumr += d;
+						nr++;
 						/*
 						int dd = d;
 						mindist1 = twidth*twidth+theight*theight;
@@ -484,7 +488,9 @@ namespace Lapis.QRCode.Art
 					}
 				}
 			}
-			
+			double avgr = sumr;
+			avgr /= nr;
+			int avgavgr = Convert.ToInt32(avgr);
 			Dictionary<int, int> circledict = new Dictionary<int, int>();
 
         	for (var i=0;i<theight;i+=ystep){
@@ -688,7 +694,7 @@ namespace Lapis.QRCode.Art
 							outMatrix[i,ii]=-100;
 						}
 						else if (circledict.TryGetValue(i*twidth+ii, out int outval)) {
-							outMatrix[i,ii]=(10+outval)*-125/(13+maxmaxr/4+minr);
+							outMatrix[i,ii]=(10+outval)*-125/(13+avgavgr/4+minr);
 							if (outMatrix[i,ii]<-100){
 								outMatrix[i,ii]=-100;
 							}
