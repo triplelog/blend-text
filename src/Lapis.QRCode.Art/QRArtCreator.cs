@@ -340,7 +340,7 @@ namespace Lapis.QRCode.Art
 							}
 						}
 						mindist1 = maxi;
-						for (var iii=1;iii<mindist1;iii++){
+						/*for (var iii=1;iii<mindist1;iii++){
 							if (i-iii <0 || tripMatrix[i-iii,ii]<=0){
 								mini = iii;
 								break;
@@ -366,7 +366,7 @@ namespace Lapis.QRCode.Art
 						}
 						if (minii < mindist1){
 							mindist1 = minii;
-						}
+						}*/
 						int d = mindist1*mindist1;
 						int od = mindist1*mindist1;
 						for (var iii=-1*mindist1+1;iii<mindist1;iii++){
@@ -470,7 +470,7 @@ namespace Lapis.QRCode.Art
 						}
 						
 						circledict[i*twidth+ii]=mindist1+1;
-						if (mindist1+1 != d){
+						if (mindist1+1 != dd){
 							Console.WriteLine("d: "+dd+" md: "+(mindist1+1)+" od: "+od);
 						}
 						
