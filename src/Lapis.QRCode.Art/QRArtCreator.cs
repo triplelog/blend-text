@@ -578,6 +578,7 @@ namespace Lapis.QRCode.Art
 			
 			stopWatch = new Stopwatch();
         	stopWatch.Start();
+        	xstep = 1;
 			for (var i=0;i<theight;i+=ystep){
 				for (var ii=0;ii<twidth;ii+=xstep){
 					if (tripMatrix[i,ii] > 0){ //first is row, second is col
