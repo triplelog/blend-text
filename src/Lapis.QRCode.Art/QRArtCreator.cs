@@ -684,7 +684,7 @@ namespace Lapis.QRCode.Art
 						for (iii=testmini/2;iii<testmaxi/2+1;iii+=ystep){
 							for (var iiii=testminii/2;iiii<testmaxii/2+1;iiii+=xstep){
 								if (circledict.TryGetValue((i+iii)*twidth+ii+iiii, out int outval)) {
-									if (outval > minr){
+									if (outval > iiii*iiii+iii*iii && outval > minr){
 										minr = outval;
 									}
 								}
