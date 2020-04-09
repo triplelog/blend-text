@@ -380,11 +380,15 @@ namespace Lapis.QRCode.Art
 										}
 									}
 									else {
-										d = iii*iii+iiii*iiii;
+										if (iii*iii+iiii*iiii<d){
+											d = iii*iii+iiii*iiii;
+										}
 									}
 								}
 								else {
-									d = iii*iii+iiii*iiii;
+									if (iii*iii+iiii*iiii<d){
+										d = iii*iii+iiii*iiii;
+									}
 								}
 								
 							}
