@@ -304,8 +304,8 @@ namespace Lapis.QRCode.Art
 
 			Stopwatch stopWatch = new Stopwatch();
         	stopWatch.Start();
-        	int ystep = 3;
-        	int xstep = 3;
+        	int ystep = 2;
+        	int xstep = 2;
         	int maxmaxr = 0;
         	for (var i=0;i<theight;i+=ystep){
 				for (var ii=0;ii<twidth;ii+=xstep){
@@ -688,7 +688,7 @@ namespace Lapis.QRCode.Art
 							outMatrix[i,ii]=-100;
 						}
 						else if (circledict.TryGetValue(i*twidth+ii, out int outval)) {
-							outMatrix[i,ii]=(10+outval)*-200/(20+maxmaxr+minr);
+							outMatrix[i,ii]=(10+outval)*-150/(15+maxmaxr/2+minr);
 							if (outMatrix[i,ii]<-100){
 								outMatrix[i,ii]=-100;
 							}
