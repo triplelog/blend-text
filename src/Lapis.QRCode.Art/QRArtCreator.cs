@@ -425,7 +425,7 @@ namespace Lapis.QRCode.Art
 							}
 						}
 						if (mindist1 > 0){
-							for (var d=45;d<135;d++){
+							for (d=45;d<135;d++){
 								int iii = 1; bool isBlack = true;
 								int distu = 0;
 								while (isBlack){
