@@ -314,7 +314,9 @@ namespace Lapis.QrArt
 										LineAlignment = StringAlignment.Center
 									};
 									Bitmap scbmp = Bitmap.FromFile("images/in/scmap.jpg") as Bitmap;
-									graph.DrawImage(bmp, new Rectangle(0,0,245,205));
+									Console.WriteLine(scbmp.Width);
+									Console.WriteLine(scbmp.Height);
+									graph.DrawImage(scbmp, new Rectangle(0,0,245,205));
 									/*
 									Rectangle TopPart = new Rectangle(10,10,twidth,twidth/2);
 									graph.FillRectangle(Brushes.Black, TopPart);
