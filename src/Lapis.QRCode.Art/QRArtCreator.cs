@@ -510,7 +510,8 @@ namespace Lapis.QRCode.Art
 									int trval = 1;
 									int blval = 1;
 									int brval = 1;
-									if (circledict.TryGetValue((i-yoffset)*twidth+ii-xoffset, out int val1)) {
+									int val1;
+									if (circledict.TryGetValue((i-yoffset)*twidth+ii-xoffset, out val1)) {
 										tlval = val1;
 									}
 									else {
@@ -518,21 +519,21 @@ namespace Lapis.QRCode.Art
 									}
 									
 
-									if (circledict.TryGetValue((i+ystep-yoffset)*twidth+ii-xoffset, out int val1)) {
+									if (circledict.TryGetValue((i+ystep-yoffset)*twidth+ii-xoffset, out val1)) {
 										blval = val1;
 									}
 									else {
 										blval = 1;
 									}
 
-									if (circledict.TryGetValue((i+ystep-yoffset)*twidth+ii+xstep-xoffset, out int val1)) {
+									if (circledict.TryGetValue((i+ystep-yoffset)*twidth+ii+xstep-xoffset, out val1)) {
 										brval = val1;
 									}
 									else {
 										brval = 1;
 									}
 									
-									if (circledict.TryGetValue((i-yoffset)*twidth+ii+xstep-xoffset, out int val1)) {
+									if (circledict.TryGetValue((i-yoffset)*twidth+ii+xstep-xoffset, out val1)) {
 										trval = val1;
 									}
 									else {
