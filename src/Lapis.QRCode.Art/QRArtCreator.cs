@@ -578,7 +578,7 @@ namespace Lapis.QRCode.Art
 			
 			stopWatch = new Stopwatch();
         	stopWatch.Start();
-        	xstep = 1;
+        	//xstep = 1;
 			for (var i=0;i<theight;i+=ystep){
 				for (var ii=0;ii<twidth;ii+=xstep){
 					if (tripMatrix[i,ii] > 0){ //first is row, second is col
@@ -739,12 +739,9 @@ namespace Lapis.QRCode.Art
 					}
 					
 					
-					if (i+1<theight){
-						outMatrix[i+1,ii]=outMatrix[i,ii];
-					}
 				}
 			}
-			/*
+			
 			if (ystep > 1 || xstep > 1){
 				for (var yoffset=0;yoffset<ystep;yoffset++){
 					for (var xoffset=0;xoffset<xstep;xoffset++){
@@ -755,8 +752,7 @@ namespace Lapis.QRCode.Art
 							for (var ii=xoffset;ii<twidth;ii+=xstep){
 								if (tripMatrix[i,ii] > 0){ //first is row, second is col
 								
-									outMatrix[i,ii]= outMatrix[i-yoffset,ii-xoffset];
-									continue;
+									
 									int tlval = -100;
 									int trval = -100;
 									int blval = -100;
@@ -789,10 +785,6 @@ namespace Lapis.QRCode.Art
 										}
 									}
 									
-
-									
-									
-									
 									
 									if (yoffset ==0 ){
 										outMatrix[i,ii]=(tlval+trval)/2;
@@ -812,7 +804,7 @@ namespace Lapis.QRCode.Art
 						}
 					}
 				}
-			}*/
+			}
 			
 			stopWatch.Stop();
 			// Get the elapsed time as a TimeSpan value.
