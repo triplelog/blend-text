@@ -118,15 +118,37 @@ app.get('/gradient',
 			for (var i=0;i<formulas.length;i++){
 				formulas[i].id = i;
 			}
+			res.write(nunjucks.render('qblur.html',{
+				type: 'gradient',
+				tkey: tkey,
+				formulas: formulas,
+			}));
+			res.end();
+		}
+		else {
+			User.findOne({ username: 'e' }, function(err, result) {
+				formulas = result.formulas;
+				for (var i=0;i<formulas.length;i++){
+					formulas[i].id = i;
+				}
+				res.write(nunjucks.render('qblur.html',{
+					type: 'gradient',
+					tkey: tkey,
+					formulas: formulas,
+				}));
+				res.end();
+			});
+			
 			
 		}
 		
+		/*
 		res.write(nunjucks.render('qblur.html',{
 			type: 'gradient',
 			tkey: tkey,
 			formulas: formulas,
 		}));
-		res.end();
+		res.end();*/
 	}
 );
 app.get('/chart', 
