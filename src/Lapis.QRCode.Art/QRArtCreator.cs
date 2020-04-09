@@ -478,6 +478,9 @@ namespace Lapis.QRCode.Art
 						*/
 						
 					}
+					else {
+						circledicttemp[(i)*twidth+ii]=0;
+					}
 				}
 			}
 			
