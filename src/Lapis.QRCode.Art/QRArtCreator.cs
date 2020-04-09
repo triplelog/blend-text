@@ -300,25 +300,8 @@ namespace Lapis.QRCode.Art
         	int theight = tripMatrix.RowCount;
         	int twidth = tripMatrix.ColumnCount;
         	outMatrix = new TripMatrix(theight,twidth);
-        	Dictionary<int, int> circledict = new Dictionary<int, int>();
-        	/*
-        	Dictionary<int, List<int[]>> radiusdict = new Dictionary<int, List<int[]>>();
-        	for (var i=0;i<theight;i++){
-				for (var ii=0;ii<twidth;ii++){
-					int radius = i*i+ii*ii;
-					if (radiusdict.TryGetValue(radius, out List<int[]> outval)) {
-						int[] twoints = {i,ii};
-						outval.Add(twoints);
-						radiusdict[radius]=outval;
-					}
-					else {
-						int[] twoints = {i,ii};
-						List<int[]> newval = new List<int[]>();
-						newval.Add(twoints);
-						radiusdict[radius]=newval;
-					}
-				}
-			}*/
+        	Dictionary<int, int> circledicttemp = new Dictionary<int, int>();
+
 			Stopwatch stopWatch = new Stopwatch();
         	stopWatch.Start();
         	int ystep = 3;
@@ -395,7 +378,7 @@ namespace Lapis.QRCode.Art
 								
 							}
 						}
-						circledict[i*twidth+ii]=d;
+						circledicttemp[i*twidth+ii]=d;
 						
 						/*
 						int dd = d;
@@ -493,6 +476,33 @@ namespace Lapis.QRCode.Art
 							Console.WriteLine("d: "+dd+" md: "+(mindist1+1)+" od: "+od);
 						}
 						*/
+						
+					}
+				}
+			}
+			
+			Dictionary<int, int> circledict = new Dictionary<int, int>();
+			int ystep = 3;
+        	int xstep = 3;
+        	for (var i=0;i<theight;i+=ystep){
+				for (var ii=0;ii<twidth;ii+=xstep){
+					if (tripMatrix[i,ii] > 0){ //first is row, second is col
+						if (i-ystep>=0 && ii-xstep >= 0 && i+ystep <theight && ii+xstep<twidth){
+							int a = circledicttemp[(i-ystep)*twidth+ii-xstep];
+							a += circledicttemp[(i+ystep)*twidth+ii-xstep];
+							a += circledicttemp[(i-ystep)*twidth+ii+xstep];
+							a += circledicttemp[(i+ystep)*twidth+ii+xstep];
+							
+							int b = circledicttemp[(i-ystep)*twidth+ii];
+							b += circledicttemp[(i+ystep)*twidth+ii];
+							b += circledicttemp[(i)*twidth+ii-xstep];
+							b += circledicttemp[(i)*twidth+ii+xstep];
+							
+							circledict[i*twidth+ii]=(a+2*b+4*circledicttemp[i*twidth+ii])/12;
+						}
+						else {
+							circledict[i*twidth+ii]=circledicttemp[i*twidth+ii];
+						}
 						
 					}
 				}
@@ -739,6 +749,29 @@ namespace Lapis.QRCode.Art
 					}
 					
 					
+				}
+			}
+			for (var i=0;i<theight;i+=ystep){
+				for (var ii=0;ii<twidth;ii+=xstep){
+					if (tripMatrix[i,ii] > 0){ //first is row, second is col
+						if (i-ystep>=0 && ii-xstep >= 0 && i+ystep <theight && ii+xstep<twidth){
+							int a = outMatrix[(i-ystep),ii-xstep];
+							a += outMatrix[(i+ystep),ii-xstep];
+							a += outMatrix[(i-ystep),ii+xstep];
+							a += circledicttemp[(i+ystep),ii+xstep];
+							
+							int b = outMatrix[(i-ystep),ii];
+							b += outMatrix[(i+ystep),ii];
+							b += outMatrix[(i),ii-xstep];
+							b += outMatrix[(i),ii+xstep];
+							
+							outMatrix[i,ii]=(a+2*b+4*circledicttemp[i,ii])/12;
+						}
+						else {
+							outMatrix[i,ii]=outMatrix[i,ii];
+						}
+						
+					}
 				}
 			}
 			
