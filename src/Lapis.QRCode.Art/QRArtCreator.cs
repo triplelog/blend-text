@@ -482,8 +482,7 @@ namespace Lapis.QRCode.Art
 			}
 			
 			Dictionary<int, int> circledict = new Dictionary<int, int>();
-			int ystep = 3;
-        	int xstep = 3;
+
         	for (var i=0;i<theight;i+=ystep){
 				for (var ii=0;ii<twidth;ii+=xstep){
 					if (tripMatrix[i,ii] > 0){ //first is row, second is col
@@ -758,14 +757,14 @@ namespace Lapis.QRCode.Art
 							int a = outMatrix[(i-ystep),ii-xstep];
 							a += outMatrix[(i+ystep),ii-xstep];
 							a += outMatrix[(i-ystep),ii+xstep];
-							a += circledicttemp[(i+ystep),ii+xstep];
+							a += outMatrix[(i+ystep),ii+xstep];
 							
 							int b = outMatrix[(i-ystep),ii];
 							b += outMatrix[(i+ystep),ii];
 							b += outMatrix[(i),ii-xstep];
 							b += outMatrix[(i),ii+xstep];
 							
-							outMatrix[i,ii]=(a+2*b+4*circledicttemp[i,ii])/12;
+							outMatrix[i,ii]=(a+2*b+4*outMatrix[i,ii])/12;
 						}
 						else {
 							outMatrix[i,ii]=outMatrix[i,ii];
