@@ -615,7 +615,7 @@ namespace Lapis.QRCode.Art
 						while (stillpossible){
 							testi = i+iii;
 							testii = ii;
-							if (testi>=theight || testii >=twidth){
+							if (testi>=theight){
 								stillpossible = false;
 								testmaxi = iii;
 							}
@@ -630,9 +630,9 @@ namespace Lapis.QRCode.Art
 						while (stillpossible){
 							testi = i-iii;
 							testii = ii;
-							if (testi< 0|| testii >=twidth){
+							if (testi< 0){
 								stillpossible = false;
-								testmaxi = iii;
+								testmini = -1*iii;
 							}
 							else if (tripMatrix[testi,testii]<= 0){
 								stillpossible = false;
@@ -645,9 +645,9 @@ namespace Lapis.QRCode.Art
 						while (stillpossible){
 							testi = i;
 							testii = ii+iii;
-							if (testi>=theight || testii >=twidth){
+							if (testii >=twidth){
 								stillpossible = false;
-								testmaxi = iii;
+								testmaxii = iii;
 							}
 							else if (tripMatrix[testi,testii]<= 0){
 								stillpossible = false;
@@ -660,9 +660,9 @@ namespace Lapis.QRCode.Art
 						while (stillpossible){
 							testi = i;
 							testii = ii-iii;
-							if (testi>=theight || testii < 0){
+							if (testii < 0){
 								stillpossible = false;
-								testmaxi = iii;
+								testminii = -1*iii;
 							}
 							else if (tripMatrix[testi,testii]<= 0){
 								stillpossible = false;
@@ -697,7 +697,7 @@ namespace Lapis.QRCode.Art
 						else if (circledict.TryGetValue(i*twidth+ii, out int outval)) {
 							//outMatrix[i,ii]=(10+outval)*-125/(13+avgavgr/4+minr);
 							//outMatrix[i,ii]=outval*-100/(maxmaxr);
-							outMatrix[i,ii]=minr*-150/(maxmaxr);
+							outMatrix[i,ii]=minr*-50/(maxmaxr);
 							if (outMatrix[i,ii]<-100){
 								outMatrix[i,ii]=-100;
 							}
