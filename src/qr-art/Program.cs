@@ -242,67 +242,19 @@ namespace Lapis.QrArt
 						
 							if (int.TryParse(blurRadiusOpt.Value(), out blurRadius)){}
 							textDrawer.HashSize = 1 + blurRadius / 20;
-						
-							string fontVal = getFont(fontOpt.Value().ToLower());
-							Font font = new Font(fontVal, 16);
-							int widthout = -1;
-							if (int.TryParse(widthOpt.Value(), out widthout)){
-							
-							}
-							else {
-								widthout = -1;
-								font = new Font(fontVal, fontSize);
-								textDrawer.CellWidth = 1;
-							}	
+							textDrawer.CellWidth = 1;
 						
 							
 							try
 							{
 								bmp = Bitmap.FromFile(imageArg.Value) as Bitmap;
-								//textDrawer.bgImage = bmp;
 							
-								Graphics graph1 = Graphics.FromImage(bmp);
-								string measureString = contentArg.Value;
-							
-								SizeF stringSize = new SizeF();
-								stringSize = graph1.MeasureString(measureString, font);
-								Console.WriteLine("width "+stringSize.Width + " height "+ stringSize.Height + "fSize "+fontSize);
-								int twidth = (int)stringSize.Width;
-								int theight = (int)stringSize.Height;
-								if (widthout > -1){
-									int oldSize = 16;
-									int newSize = 0;
-									int idx = 0;
-									for (idx=0;idx<10;idx++){
-										newSize = oldSize * widthout * bmp.Width / 100 / twidth;
-										if (newSize > oldSize * bmp.Height / theight ){
-											newSize = oldSize * bmp.Height / theight;
-											oldSize = newSize;
-										}
-										font = new Font(fontVal, newSize );
-										stringSize = graph1.MeasureString(measureString, font);
-								
-										twidth = (int)stringSize.Width;
-										theight = (int)stringSize.Height;
-										Console.WriteLine("Percent "+ (twidth*100/bmp.Width) );
-										if (newSize == oldSize){
-											break;
-										}
-										if ((twidth*100/bmp.Width) == widthout){
-											break;
-										}
-										oldSize = newSize;
-									}
-									textDrawer.CellWidth = 1 + oldSize / 100;
-								}
-								Bitmap bmpp = (Bitmap) new Bitmap(twidth+2*blurRadius,theight+2*blurRadius);
-							
-						
+								Bitmap bmpp = (Bitmap) new Bitmap(bmp.Width+2*blurRadius,bmp.Height+2*blurRadius);
 							
 							
 								using (Graphics graph = Graphics.FromImage(bmpp))
 								{
-									Rectangle ImageSize = new Rectangle(0,0,twidth+2*blurRadius,theight+2*blurRadius);
+									Rectangle ImageSize = new Rectangle(0,0,bmp.Width+2*blurRadius,bmp.Height+2*blurRadius);
 									graph.FillRectangle(Brushes.White, ImageSize);
 									graph.SmoothingMode = SmoothingMode.AntiAlias;
 									graph.InterpolationMode = InterpolationMode.HighQualityBicubic;
@@ -313,17 +265,7 @@ namespace Lapis.QrArt
 										Alignment = StringAlignment.Center,
 										LineAlignment = StringAlignment.Center
 									};
-									Bitmap scbmp = Bitmap.FromFile("images/in/scmap.jpg") as Bitmap;
-									Console.WriteLine(scbmp.Width);
-									Console.WriteLine(scbmp.Height);
-									graph.DrawImage(scbmp, new Rectangle(0,0,scbmp.Width/3,scbmp.Height/3));
-									/*
-									Rectangle TopPart = new Rectangle(10,10,twidth,twidth/2);
-									graph.FillRectangle(Brushes.Black, TopPart);
-									Rectangle SidePart = new Rectangle(10,10,twidth/2,twidth);
-									graph.FillRectangle(Brushes.Black, SidePart);
-									*/
-									//graph.DrawString(contentArg.Value, font, Brushes.Black, ImageSize, format);
+									graph.DrawImage(bmp, new Rectangle(blurRadius,blurRadius,bmp.Width,bmp.Height));
 									
 								}
 								bitmapText = new BitmapFrame(bmpp);
