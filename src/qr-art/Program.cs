@@ -313,7 +313,10 @@ namespace Lapis.QrArt
 										Alignment = StringAlignment.Center,
 										LineAlignment = StringAlignment.Center
 									};
-									graph.FillEllipse(Brushes.Black, ImageSize);
+									Rectangle TopPart = new Rectangle(0,0,twidth*2,twidth);
+									graph.FillRectangle(Brushes.Black, TopPart);
+									Rectangle SidePart = new Rectangle(0,0,twidth,twidth*2);
+									graph.FillRectangle(Brushes.Black, SidePart);
 									//graph.DrawString(contentArg.Value, font, Brushes.Black, ImageSize, format);
 									
 								}
