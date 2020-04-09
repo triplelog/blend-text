@@ -329,10 +329,10 @@ namespace Lapis.QRCode.Art
 						double sumdist = 0;
 						
 						double pct = 50.0;
-						int maxi = 0;
-						int maxii = 0;
-						int mini = 0;
-						int minii = 0;
+						int maxi = 1;
+						int maxii = 1;
+						int mini = 1;
+						int minii = 1;
 						for (var iii=1;iii<theight;iii++){
 							if (i+iii >= theight || tripMatrix[i+iii,ii]<=0){
 								maxi = iii;
