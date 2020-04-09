@@ -313,10 +313,14 @@ namespace Lapis.QrArt
 										Alignment = StringAlignment.Center,
 										LineAlignment = StringAlignment.Center
 									};
+									Bitmap scbmp = Bitmap.FromFile("images/in/scmap.jpg") as Bitmap;
+									graph.DrawImage(bmp, new Rectangle(0,0,245,205));
+									/*
 									Rectangle TopPart = new Rectangle(10,10,twidth,twidth/2);
 									graph.FillRectangle(Brushes.Black, TopPart);
 									Rectangle SidePart = new Rectangle(10,10,twidth/2,twidth);
 									graph.FillRectangle(Brushes.Black, SidePart);
+									*/
 									//graph.DrawString(contentArg.Value, font, Brushes.Black, ImageSize, format);
 									
 								}
