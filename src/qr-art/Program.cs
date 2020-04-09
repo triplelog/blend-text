@@ -241,7 +241,7 @@ namespace Lapis.QrArt
         				
         				if (textDrawer.Type == "gradient"){ 
 						
-							builder = new GradientCreator(
+							var builderG = new GradientCreator(
 								new Triparizer(),
 								textDrawer
 							);
@@ -383,7 +383,12 @@ namespace Lapis.QrArt
 						
         				string DistanceFormula = System.IO.File.ReadAllText(@"/home/rwilcox/blend-text/server/formulas/"+distanceFormulaOpt.Value()+".txt");
 						
-                        var image = builder.Create(contentArg.Value, bitmap, bitmapText, blurRadius, DistanceFormula);
+						if (textDrawer.Type == "gradient"){
+							var image = builderG.Create(contentArg.Value, bitmap, bitmapText, blurRadius, DistanceFormula);
+						}
+						else {
+                        	var image = builder.Create(contentArg.Value, bitmap, bitmapText, blurRadius, DistanceFormula);
+                        }
                         //bitmap.Save("static/newbmp1.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
                         
                          stopWatch.Stop();
