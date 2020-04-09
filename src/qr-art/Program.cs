@@ -313,7 +313,8 @@ namespace Lapis.QrArt
 										Alignment = StringAlignment.Center,
 										LineAlignment = StringAlignment.Center
 									};
-									graph.FillEllipse(Brushes.Black, ImageSize);
+									//graph.FillEllipse(Brushes.Black, ImageSize);
+									graph.DrawString(contentArg.Value, font, Brushes.Black, ImageSize, format);
 									
 								}
 								bitmapText = new BitmapFrame(bmpp);
