@@ -321,7 +321,8 @@ namespace Lapis.QRCode.Art
 			}*/
 			Stopwatch stopWatch = new Stopwatch();
         	stopWatch.Start();
-        	for (var i=0;i<theight;i++){
+        	int ystep = 2;
+        	for (var i=0;i<theight;i+=ystep){
 				for (var ii=0;ii<twidth;ii++){
 					if (tripMatrix[i,ii] > 0){ //first is row, second is col
 						int mindist1 = twidth*twidth+theight*theight;//radius/diameter? of largest circle centered at point
@@ -333,14 +334,14 @@ namespace Lapis.QRCode.Art
 						int maxii = 1;
 						int mini = 1;
 						int minii = 1;
-						for (var iii=1;iii<theight;iii++){
+						for (var iii=1;iii<theight;iii+=ystep){
 							if (i+iii >= theight || tripMatrix[i+iii,ii]<=0){
 								maxi = iii;
 								break;
 							}
 						}
 						mindist1 = maxi;
-						for (var iii=1;iii<theight;iii++){
+						for (var iii=1;iii<theight;iii+=ystep){
 							if (i-iii <0 || tripMatrix[i-iii,ii]<=0){
 								mini = iii;
 								break;
@@ -369,7 +370,7 @@ namespace Lapis.QRCode.Art
 						}
 						int d = mindist1*mindist1;
 						int od = mindist1*mindist1;
-						for (var iii=-1*mindist1+1;iii<mindist1;iii++){
+						for (var iii=-1*mindist1+1;iii<mindist1;iii+=ystep){
 							for (var iiii=-1*mindist1+1;iiii<mindist1;iiii++){
 								if (i+iii >=0 && i+iii < theight){
 									if (ii+iiii >=0 && ii+iiii < twidth){
@@ -494,7 +495,36 @@ namespace Lapis.QRCode.Art
 						
 					}
 				}
-			}//end of setting the dict
+			}
+			if (ystep > 1){
+				for (var yoffset=1;yoffset<ystep;yoffset++){
+					for (var i=yoffset;i<theight;i+=ystep){
+						for (var ii=0;ii<twidth;ii++){
+							if (tripMatrix[i,ii] > 0){ //first is row, second is col
+								int lessval = 1;
+								int moreval = 1;
+								if (circledict.TryGetValue((i-yoffset)*twidth+ii, out int val1)) {
+									lessval = val1;
+									if (i+ystep-yoffset >= theight){
+										moreval = 1;
+									}
+									else if (circledict.TryGetValue((i+ystep-yoffset)*twidth+ii, out int val2)) {
+										moreval = val2;
+									}
+									else {
+										moreval = 1;
+									}
+								}
+								else {
+									lessval = 1;
+								}
+								circledict[i*twidth+ii]=(lessval +moreval )/2;
+							}
+						}
+					}
+				}
+			}
+			//end of setting the dict
 			stopWatch.Stop();
 			// Get the elapsed time as a TimeSpan value.
 			TimeSpan ts = stopWatch.Elapsed;
