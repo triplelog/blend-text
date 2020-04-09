@@ -83,6 +83,27 @@ namespace Lapis.QrArt
 							textDrawer.TextFormula = System.IO.File.ReadAllText(@"/home/rwilcox/blend-text/server/formulas/"+textFormulaOpt.Value()+".txt");
 							
                         }
+                        var builderG = new GradientCreator(
+							new Triparizer(),
+							textDrawer
+						);
+						{
+							//textDrawer.Foreground = foregd;
+							//textDrawer.Background = backgd;
+							textDrawer.MarginL = 0;
+							textDrawer.MarginT = 0;
+							textDrawer.THeight = 0;
+							textDrawer.TWidth = 0;
+							textDrawer.HashSize = 2;
+							textDrawer.CellWidth = 1;
+							textDrawer.Type = typeOpt.Value();
+							textDrawer.BlurType = blurTypeOpt.Value();
+							textDrawer.TextType = textTypeOpt.Value();
+							//textDrawer.BlurFormula = blurFormulaOpt.Value();
+							textDrawer.BlurFormula = System.IO.File.ReadAllText(@"/home/rwilcox/blend-text/server/formulas/"+blurFormulaOpt.Value()+".txt");
+							textDrawer.TextFormula = System.IO.File.ReadAllText(@"/home/rwilcox/blend-text/server/formulas/"+textFormulaOpt.Value()+".txt");
+						
+						}
                         
                         
 						
@@ -241,27 +262,7 @@ namespace Lapis.QrArt
         				
         				if (textDrawer.Type == "gradient"){ 
 						
-							var builderG = new GradientCreator(
-								new Triparizer(),
-								textDrawer
-							);
-							{
-								//textDrawer.Foreground = foregd;
-								//textDrawer.Background = backgd;
-								textDrawer.MarginL = 0;
-								textDrawer.MarginT = 0;
-								textDrawer.THeight = 0;
-								textDrawer.TWidth = 0;
-								textDrawer.HashSize = 2;
-								textDrawer.CellWidth = 1;
-								textDrawer.Type = typeOpt.Value();
-								textDrawer.BlurType = blurTypeOpt.Value();
-								textDrawer.TextType = textTypeOpt.Value();
-								//textDrawer.BlurFormula = blurFormulaOpt.Value();
-								textDrawer.BlurFormula = System.IO.File.ReadAllText(@"/home/rwilcox/blend-text/server/formulas/"+blurFormulaOpt.Value()+".txt");
-								textDrawer.TextFormula = System.IO.File.ReadAllText(@"/home/rwilcox/blend-text/server/formulas/"+textFormulaOpt.Value()+".txt");
 							
-							}
 							if (int.TryParse(blurRadiusOpt.Value(), out blurRadius)){}
 							blurRadius = 0;
 							textDrawer.HashSize = 1 + blurRadius / 20;
@@ -383,11 +384,12 @@ namespace Lapis.QrArt
 						
         				string DistanceFormula = System.IO.File.ReadAllText(@"/home/rwilcox/blend-text/server/formulas/"+distanceFormulaOpt.Value()+".txt");
 						
+						var image = null;
 						if (textDrawer.Type == "gradient"){
-							var image = builderG.Create(contentArg.Value, bitmap, bitmapText, blurRadius, DistanceFormula);
+							image = builderG.Create(contentArg.Value, bitmap, bitmapText, blurRadius, DistanceFormula);
 						}
 						else {
-                        	var image = builder.Create(contentArg.Value, bitmap, bitmapText, blurRadius, DistanceFormula);
+                        	image = builder.Create(contentArg.Value, bitmap, bitmapText, blurRadius, DistanceFormula);
                         }
                         //bitmap.Save("static/newbmp1.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
                         
