@@ -599,7 +599,7 @@ namespace Lapis.QRCode.Art
 			stopWatch = new Stopwatch();
         	stopWatch.Start();
         	//xstep = 1;
-        	int narrowFactor = (10+maxmaxr)/4;
+        	int narrowFactor = (10+maxmaxr)/8;
 			int narrowAdj = (10+maxmaxr+narrowFactor)*-100/(10+maxmaxr);
 			for (var i=0;i<theight;i+=ystep){
 				for (var ii=0;ii<twidth;ii+=xstep){
