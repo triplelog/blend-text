@@ -301,7 +301,7 @@ namespace Lapis.QRCode.Art
         	int twidth = tripMatrix.ColumnCount;
         	outMatrix = new TripMatrix(theight,twidth);
         	Dictionary<int, int> circledict = new Dictionary<int, int>();
-        	
+        	/*
         	Dictionary<int, List<int[]>> radiusdict = new Dictionary<int, List<int[]>>();
         	for (var i=0;i<theight;i++){
 				for (var ii=0;ii<twidth;ii++){
@@ -318,7 +318,9 @@ namespace Lapis.QRCode.Art
 						radiusdict[radius]=newval;
 					}
 				}
-			}
+			}*/
+			Stopwatch stopWatch = new Stopwatch();
+        	stopWatch.Start();
         	for (var i=0;i<theight;i++){
 				for (var ii=0;ii<twidth;ii++){
 					if (tripMatrix[i,ii] > 0){ //first is row, second is col
@@ -417,6 +419,18 @@ namespace Lapis.QRCode.Art
 					}
 				}
 			}//end of setting the dict
+			stopWatch.Stop();
+			// Get the elapsed time as a TimeSpan value.
+			TimeSpan ts = stopWatch.Elapsed;
+			
+			// Format and display the TimeSpan value.
+			string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+				ts.Hours, ts.Minutes, ts.Seconds,
+				ts.Milliseconds / 10);
+			Console.WriteLine("Set circledict: " + elapsedTime);
+			
+			stopWatch = new Stopwatch();
+        	stopWatch.Start();
 			for (var i=0;i<theight;i++){
 				for (var ii=0;ii<twidth;ii++){
 					if (tripMatrix[i,ii] > 0){ //first is row, second is col
@@ -585,6 +599,16 @@ namespace Lapis.QRCode.Art
 					}
 				}
 			}
+			
+			stopWatch.Stop();
+			// Get the elapsed time as a TimeSpan value.
+			ts = stopWatch.Elapsed;
+			
+			// Format and display the TimeSpan value.
+			elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+				ts.Hours, ts.Minutes, ts.Seconds,
+				ts.Milliseconds / 10);
+			Console.WriteLine("Set outMatrix: " + elapsedTime);
         }
     }
 }
