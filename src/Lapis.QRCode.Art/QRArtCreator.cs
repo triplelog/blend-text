@@ -322,8 +322,9 @@ namespace Lapis.QRCode.Art
 			Stopwatch stopWatch = new Stopwatch();
         	stopWatch.Start();
         	int ystep = 2;
+        	int xstep = 2;
         	for (var i=0;i<theight;i+=ystep){
-				for (var ii=0;ii<twidth;ii++){
+				for (var ii=0;ii<twidth;ii+=xstep){
 					if (tripMatrix[i,ii] > 0){ //first is row, second is col
 						int mindist1 = twidth*twidth+theight*theight;//radius/diameter? of largest circle centered at point
 						//int mindist2 = twidth*twidth+theight*theight;//radius/diameter? of largest circle containing point
@@ -350,7 +351,7 @@ namespace Lapis.QRCode.Art
 						if (mini < mindist1){
 							mindist1 = mini;
 						}
-						for (var iii=1;iii<twidth;iii++){
+						for (var iii=1;iii<twidth;iii+=xstep){
 							if (ii+iii >= twidth || tripMatrix[i,ii+iii]<=0){
 								maxii = iii;
 								break;
@@ -359,7 +360,7 @@ namespace Lapis.QRCode.Art
 						if (maxii < mindist1){
 							mindist1 = maxii;
 						}
-						for (var iii=1;iii<twidth;iii++){
+						for (var iii=1;iii<twidth;iii+=xstep){
 							if (ii-iii < 0 || tripMatrix[i,ii-iii]<=0){
 								minii = iii;
 								break;
@@ -371,7 +372,7 @@ namespace Lapis.QRCode.Art
 						int d = mindist1*mindist1;
 						int od = mindist1*mindist1;
 						for (var iii=-1*mindist1+1;iii<mindist1;iii+=ystep){
-							for (var iiii=-1*mindist1+1;iiii<mindist1;iiii++){
+							for (var iiii=-1*mindist1+1;iiii<mindist1;iiii+=xstep){
 								if (i+iii >=0 && i+iii < theight){
 									if (ii+iiii >=0 && ii+iiii < twidth){
 										if (tripMatrix[i+iii,ii+iiii]<=0){
@@ -496,29 +497,68 @@ namespace Lapis.QRCode.Art
 					}
 				}
 			}
-			if (ystep > 1){
-				for (var yoffset=1;yoffset<ystep;yoffset++){
-					for (var i=yoffset;i<theight;i+=ystep){
-						for (var ii=0;ii<twidth;ii++){
-							if (tripMatrix[i,ii] > 0){ //first is row, second is col
-								int lessval = 1;
-								int moreval = 1;
-								if (circledict.TryGetValue((i-yoffset)*twidth+ii, out int val1)) {
-									lessval = val1;
-									if (i+ystep-yoffset >= theight){
-										moreval = 1;
-									}
-									else if (circledict.TryGetValue((i+ystep-yoffset)*twidth+ii, out int val2)) {
-										moreval = val2;
+			if (ystep > 1 || xstep > 1){
+				for (var yoffset=0;yoffset<ystep;yoffset++){
+					for (var xoffset=0;xoffset<xstep;xoffset++){
+						if (yoffset==0 && xoffset ==0){
+							continue;
+						}
+						for (var i=yoffset;i<theight;i+=ystep){
+							for (var ii=xoffset;ii<twidth;ii+=xstep){
+								if (tripMatrix[i,ii] > 0){ //first is row, second is col
+									int tlval = 1;
+									int trval = 1;
+									int blval = 1;
+									int brval = 1;
+									if (circledict.TryGetValue((i-yoffset)*twidth+ii-xoffset, out int val1)) {
+										tlval = val1;
 									}
 									else {
-										moreval = 1;
+										tlval = 1;
 									}
+									
+
+									if (circledict.TryGetValue((i+ystep-yoffset)*twidth+ii-xoffset, out int val1)) {
+										blval = val1;
+									}
+									else {
+										blval = 1;
+									}
+
+									if (circledict.TryGetValue((i+ystep-yoffset)*twidth+ii+xstep-xoffset, out int val1)) {
+										brval = val1;
+									}
+									else {
+										brval = 1;
+									}
+									
+									if (circledict.TryGetValue((i-yoffset)*twidth+ii+xstep-xoffset, out int val1)) {
+										trval = val1;
+									}
+									else {
+										trval = 1;
+									}
+									
+									if (ii+xstep-xoffset >= twidth){
+										trval = 1;
+										brval = 1;
+									}
+									if (i+ystep-yoffset >= theight){
+										blval = 1;
+										brval = 1;
+									}
+									
+									if (yoffset ==0 ){
+										circledict[i*twidth+ii]=(tlval+trval)/2;
+									}
+									else if (xoffset ==0 ){
+										circledict[i*twidth+ii]=(tlval+blval)/2;
+									}
+									else {
+										circledict[i*twidth+ii]=(tlval+trval+blval+brval)/4;
+									}
+									
 								}
-								else {
-									lessval = 1;
-								}
-								circledict[i*twidth+ii]=(lessval +moreval )/2;
 							}
 						}
 					}
