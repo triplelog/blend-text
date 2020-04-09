@@ -340,7 +340,7 @@ namespace Lapis.QRCode.Art
 							}
 						}
 						mindist1 = maxi;
-						/*for (var iii=1;iii<mindist1;iii++){
+						for (var iii=1;iii<theight;iii++){
 							if (i-iii <0 || tripMatrix[i-iii,ii]<=0){
 								mini = iii;
 								break;
@@ -349,7 +349,7 @@ namespace Lapis.QRCode.Art
 						if (mini < mindist1){
 							mindist1 = mini;
 						}
-						for (var iii=1;iii<mindist1;iii++){
+						for (var iii=1;iii<twidth;iii++){
 							if (ii+iii >= twidth || tripMatrix[i,ii+iii]<=0){
 								maxii = iii;
 								break;
@@ -358,7 +358,7 @@ namespace Lapis.QRCode.Art
 						if (maxii < mindist1){
 							mindist1 = maxii;
 						}
-						for (var iii=1;iii<mindist1;iii++){
+						for (var iii=1;iii<twidth;iii++){
 							if (ii-iii < 0 || tripMatrix[i,ii-iii]<=0){
 								minii = iii;
 								break;
@@ -366,7 +366,7 @@ namespace Lapis.QRCode.Art
 						}
 						if (minii < mindist1){
 							mindist1 = minii;
-						}*/
+						}
 						int d = mindist1*mindist1;
 						int od = mindist1*mindist1;
 						for (var iii=-1*mindist1+1;iii<mindist1;iii++){
