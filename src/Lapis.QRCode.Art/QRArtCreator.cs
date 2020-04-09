@@ -471,7 +471,7 @@ namespace Lapis.QRCode.Art
 						
 						circledict[i*twidth+ii]=mindist1+1;
 						if (mindist1+1 != d){
-							Console.WriteLine("d: "+d+" md: "+(mindist1+1)+" od: "+od)
+							Console.WriteLine("d: "+d+" md: "+(mindist1+1)+" od: "+od);
 						}
 						
 					}
