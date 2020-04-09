@@ -300,12 +300,13 @@ namespace Lapis.QRCode.Art
         	int theight = tripMatrix.RowCount;
         	int twidth = tripMatrix.ColumnCount;
         	outMatrix = new TripMatrix(theight,twidth);
+        	Console.WriteLine("outW: "+outMatrix.ColumnCount+" outH: "+outMatrix.RowCount);
         	Dictionary<int, int> circledicttemp = new Dictionary<int, int>();
 
 			Stopwatch stopWatch = new Stopwatch();
         	stopWatch.Start();
-        	int ystep = 2;
-        	int xstep = 2;
+        	int ystep = 3;
+        	int xstep = 3;
         	int maxmaxr = 0;
         	long sumr = 0;
         	int nr = 0;

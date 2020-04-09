@@ -256,15 +256,6 @@ namespace Lapis.QrArt
 								{
 									Rectangle ImageSize = new Rectangle(0,0,bmp.Width+2*blurRadius,bmp.Height+2*blurRadius);
 									graph.FillRectangle(Brushes.White, ImageSize);
-									graph.SmoothingMode = SmoothingMode.AntiAlias;
-									graph.InterpolationMode = InterpolationMode.HighQualityBicubic;
-									graph.PixelOffsetMode = PixelOffsetMode.HighQuality;
-									graph.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-									StringFormat format = new StringFormat()
-									{
-										Alignment = StringAlignment.Center,
-										LineAlignment = StringAlignment.Center
-									};
 									graph.DrawImage(bmp, new Rectangle(blurRadius,blurRadius,bmp.Width,bmp.Height));
 									
 								}
