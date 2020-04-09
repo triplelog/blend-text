@@ -371,11 +371,22 @@ namespace Lapis.QRCode.Art
 						int od = mindist1*mindist1;
 						for (var iii=-1*mindist1+1;iii<mindist1;iii++){
 							for (var iiii=-1*mindist1+1;iiii<mindist1;iiii++){
-								if (tripMatrix[i+iii,ii+iiii]<=0){
-									if (iii*iii+iiii*iiii<d){
+								if (i+iii >=0 && i+iii < theight){
+									if (ii+iiii >=0 && ii+iiii < twidth){
+										if (tripMatrix[i+iii,ii+iiii]<=0){
+											if (iii*iii+iiii*iiii<d){
+												d = iii*iii+iiii*iiii;
+											}
+										}
+									}
+									else {
 										d = iii*iii+iiii*iiii;
 									}
 								}
+								else {
+									d = iii*iii+iiii*iiii;
+								}
+								
 							}
 						}
 						circledict[i*twidth+ii]=d;
