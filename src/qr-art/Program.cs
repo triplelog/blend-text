@@ -316,7 +316,7 @@ namespace Lapis.QrArt
 									Bitmap scbmp = Bitmap.FromFile("images/in/scmap.jpg") as Bitmap;
 									Console.WriteLine(scbmp.Width);
 									Console.WriteLine(scbmp.Height);
-									graph.DrawImage(scbmp, new Rectangle(0,0,scmap.Width/3,scmap.Height/3));
+									graph.DrawImage(scbmp, new Rectangle(0,0,scbmp.Width/3,scbmp.Height/3));
 									/*
 									Rectangle TopPart = new Rectangle(10,10,twidth,twidth/2);
 									graph.FillRectangle(Brushes.Black, TopPart);
