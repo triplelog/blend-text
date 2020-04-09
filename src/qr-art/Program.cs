@@ -239,8 +239,9 @@ namespace Lapis.QrArt
         				
         				if (textDrawer.Type == "gradient"){ 
 						
-						
+							
 							if (int.TryParse(blurRadiusOpt.Value(), out blurRadius)){}
+							blurRadius = 0;
 							textDrawer.HashSize = 1 + blurRadius / 20;
 							textDrawer.CellWidth = 1;
 						
@@ -249,20 +250,20 @@ namespace Lapis.QrArt
 							{
 								bmp = Bitmap.FromFile(imageArg.Value) as Bitmap;
 							
-								Bitmap bmpp = (Bitmap) new Bitmap(bmp.Width+2*blurRadius,bmp.Height+2*blurRadius);
+								Bitmap bmpp = (Bitmap) new Bitmap(bmp.Width,bmp.Height);
 							
 							
 								using (Graphics graph = Graphics.FromImage(bmpp))
 								{
-									Rectangle ImageSize = new Rectangle(0,0,bmp.Width+2*blurRadius,bmp.Height+2*blurRadius);
+									Rectangle ImageSize = new Rectangle(0,0,bmp.Width,bmp.Height);
 									graph.FillRectangle(Brushes.White, ImageSize);
 									graph.DrawImage(bmp, new Rectangle(blurRadius,blurRadius,bmp.Width,bmp.Height));
 									
 								}
 								bitmapText = new BitmapFrame(bmpp);
 								bitmap = new BitmapFrame(bmp);
-								textDrawer.MarginL = blurRadius;
-								textDrawer.MarginT = blurRadius;
+								textDrawer.MarginL = 0;
+								textDrawer.MarginT = 0;
 								
 							}
 							catch (Exception ex)
