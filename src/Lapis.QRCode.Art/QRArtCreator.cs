@@ -379,10 +379,10 @@ namespace Lapis.QRCode.Art
 							}
 						}
 						circledict[i*twidth+ii]=d;
+						int dd = d;
+						mindist1 = twidth*twidth+theight*theight;
 						
-						int mindist1 = twidth*twidth+theight*theight;
-						
-						for (var d=-45;d<45;d++){
+						for (d=-45;d<45;d++){
 							int iii = 1; bool isBlack = true;
 							int distr = 0;
 							while (isBlack){
@@ -471,7 +471,7 @@ namespace Lapis.QRCode.Art
 						
 						circledict[i*twidth+ii]=mindist1+1;
 						if (mindist1+1 != d){
-							Console.WriteLine("d: "+d+" md: "+(mindist1+1)+" od: "+od);
+							Console.WriteLine("d: "+dd+" md: "+(mindist1+1)+" od: "+od);
 						}
 						
 					}
