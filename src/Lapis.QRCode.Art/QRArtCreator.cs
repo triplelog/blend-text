@@ -603,7 +603,7 @@ namespace Lapis.QRCode.Art
 								stillpossible = false;
 								testmaxi = iii;
 							}
-							iii+=ystep;
+							iii++;
 						}
 						stillpossible = true;
 						iii = 1;
@@ -618,7 +618,7 @@ namespace Lapis.QRCode.Art
 								stillpossible = false;
 								testmini = -1*iii;
 							}
-							iii+=ystep;
+							iii++;
 						}
 						stillpossible = true;
 						iii = 1;
@@ -633,7 +633,7 @@ namespace Lapis.QRCode.Art
 								stillpossible = false;
 								testmaxii = iii;
 							}
-							iii+=xstep;
+							iii++;
 						}
 						stillpossible = true;
 						iii = 1;
@@ -648,7 +648,7 @@ namespace Lapis.QRCode.Art
 								stillpossible = false;
 								testminii = -1*iii;
 							}
-							iii+=xstep;
+							iii++;
 						}
 						
 						int maxri = testmini*testmini;
