@@ -688,12 +688,12 @@ namespace Lapis.QRCode.Art
 							outMatrix[i,ii]=-100;
 						}
 						else if (circledict.TryGetValue(i*twidth+ii, out int outval)) {
-							outMatrix[i,ii]=(10+outval)*-150/(15+maxmaxr/2+minr);
+							outMatrix[i,ii]=(10+outval)*-125/(13+maxmaxr/4+minr);
 							if (outMatrix[i,ii]<-100){
 								outMatrix[i,ii]=-100;
 							}
-							else if (outMatrix[i,ii]>0){
-								outMatrix[i,ii]=0;
+							else if (outMatrix[i,ii]>-1){
+								outMatrix[i,ii]=-1;
 							}
 						}
 						else {
@@ -841,8 +841,8 @@ namespace Lapis.QRCode.Art
 									if (outMatrix[i,ii]<-100){
 										outMatrix[i,ii]=-100;
 									}
-									else if (outMatrix[i,ii]>0){
-										outMatrix[i,ii]=0;
+									else if (outMatrix[i,ii]>-1){
+										outMatrix[i,ii]=-1;
 									}
 									
 								}
