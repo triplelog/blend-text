@@ -687,7 +687,7 @@ namespace Lapis.QRCode.Art
 							outMatrix[i,ii]=-100;
 						}
 						else if (circledict.TryGetValue(i*twidth+ii, out int outval)) {
-							outMatrix[i,ii]=outval*-100/minr;
+							outMatrix[i,ii]=(10+outval)*-100/(10+minr);
 						}
 						else {
 							outMatrix[i,ii]=-101;
@@ -753,6 +753,7 @@ namespace Lapis.QRCode.Art
 					
 				}
 			}
+			/*
 			for (var i=0;i<theight;i+=ystep){
 				for (var ii=0;ii<twidth;ii+=xstep){
 					if (tripMatrix[i,ii] > 0){ //first is row, second is col
@@ -775,7 +776,7 @@ namespace Lapis.QRCode.Art
 						
 					}
 				}
-			}
+			}*/
 			
 			if (ystep > 1 || xstep > 1){
 				for (var yoffset=0;yoffset<ystep;yoffset++){
