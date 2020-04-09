@@ -394,6 +394,8 @@ namespace Lapis.QRCode.Art
 							}
 						}
 						circledict[i*twidth+ii]=d;
+						
+						/*
 						int dd = d;
 						mindist1 = twidth*twidth+theight*theight;
 						
@@ -488,6 +490,7 @@ namespace Lapis.QRCode.Art
 						if (mindist1+1 != dd){
 							Console.WriteLine("d: "+dd+" md: "+(mindist1+1)+" od: "+od);
 						}
+						*/
 						
 					}
 				}
