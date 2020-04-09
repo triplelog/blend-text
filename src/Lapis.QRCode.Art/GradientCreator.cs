@@ -14,7 +14,7 @@ namespace Lapis.QRCode.Art
 {
     public interface GradientRCreator
     {
-        IImage Create(string data, IRgb24BitmapBase image, IRgb24BitmapBase imageText, int blurRadius, string DistanceFormula);
+        IImage Create(IRgb24BitmapBase gradientImage, int narrowQuotient);
     }
 
     public class GradientCreator : GradientRCreator
@@ -32,11 +32,11 @@ namespace Lapis.QRCode.Art
         
         public ITripMatrixDrawer TripMatrixDrawer { get; }
 
-        public virtual IImage Create(string data, IRgb24BitmapBase image, IRgb24BitmapBase gradientImage, int blurRadius, string DistanceFormula)
+        public virtual IImage Create(IRgb24BitmapBase gradientImage, int narrowQuotient)
         {
         	
 
-            if (image != null) //text on image
+            if (gradientImage != null) //text on image
             {
             	int twidth = (int)gradientImage.Width;
             	int theight = (int)gradientImage.Height;
@@ -97,7 +97,7 @@ namespace Lapis.QRCode.Art
 					ts.Milliseconds / 10);
 				Console.WriteLine("GradientCreatorTime " + elapsedTime);
                 
-                getEdgeDistance(tripMatrix, out TripMatrix outMatrix);
+                getEdgeDistance(tripMatrix, narrowQuotient, out TripMatrix outMatrix);
                 //return TripMatrixDrawer.Draw(tripMatrix);
                 return TripMatrixDrawer.Draw(outMatrix);
             }
@@ -105,7 +105,7 @@ namespace Lapis.QRCode.Art
             	return null;
             }
         }
-        public static void getEdgeDistance(TripMatrix tripMatrix, out TripMatrix outMatrix) {
+        public static void getEdgeDistance(TripMatrix tripMatrix, int narrowQuotient, out TripMatrix outMatrix) {
         	int theight = tripMatrix.RowCount;
         	int twidth = tripMatrix.ColumnCount;
         	outMatrix = new TripMatrix(theight,twidth);
@@ -123,10 +123,7 @@ namespace Lapis.QRCode.Art
 				for (var ii=0;ii<twidth;ii+=xstep){
 					if (tripMatrix[i,ii] > 0){ //first is row, second is col
 						int mindist1 = twidth*twidth+theight*theight;//radius/diameter? of largest circle centered at point
-						//int mindist2 = twidth*twidth+theight*theight;//radius/diameter? of largest circle containing point
-						double sumdist = 0;
-						
-						double pct = 50.0;
+
 						int maxi = 1;
 						int maxii = 1;
 						int mini = 1;
@@ -195,102 +192,7 @@ namespace Lapis.QRCode.Art
 						if (d>maxmaxr){maxmaxr = d;}
 						sumr += d;
 						nr++;
-						/*
-						int dd = d;
-						mindist1 = twidth*twidth+theight*theight;
 						
-						for (d=-45;d<45;d++){
-							int iii = 1; bool isBlack = true;
-							int distr = 0;
-							while (isBlack){
-								double rad = 3.14159265/180;
-								rad *= d;
-								int h = Convert.ToInt32(Math.Tan(rad)*iii);
-								
-								if (i+h<0 || i+h>=theight || ii+iii>=twidth ||  tripMatrix[i+h,ii+iii]<=0){
-									isBlack = false;
-									distr = iii*iii+h*h;
-								}
-								iii++;
-							}
-							
-							iii = 1; isBlack = true;
-							int distl = 0;
-							while (isBlack){
-								double rad = 3.14159265/180;
-								rad *= d;
-								int h = Convert.ToInt32(Math.Tan(rad)*iii);
-								
-								if (i-h>=theight || i-h<0 || ii-iii<0 ||  tripMatrix[i-h,ii-iii]<=0){
-									isBlack = false;
-									distl = iii*iii+h*h;
-								}
-								iii++;
-							}
-							distr--;
-							distl--;
-							
-							if (distl == 0 || distr == 0){
-								mindist1 = 0;
-								break;
-							}
-							if (distl<mindist1){
-								mindist1 = distl;
-							}
-							if (distr<mindist1){
-								mindist1 = distr;
-							}
-						}
-						if (mindist1 > 0){
-							for (d=45;d<135;d++){
-								int iii = 1; bool isBlack = true;
-								int distu = 0;
-								while (isBlack){
-									double rad = 3.14159265/180;
-									rad *= d;
-									int w = Convert.ToInt32(Math.Cos(rad)/Math.Sin(rad)*iii);
-								
-									if (ii+w<0 || ii+w>=twidth || i-iii<0 ||  tripMatrix[i-iii,ii+w]<=0){
-										isBlack = false;
-										distu = iii*iii+w*w;
-									}
-									iii++;
-								}
-							
-								iii = 1; isBlack = true;
-								int distd = 0;
-								while (isBlack){
-									double rad = 3.14159265/180;
-									rad *= d;
-									int w = Convert.ToInt32(Math.Cos(rad)/Math.Sin(rad)*iii);
-								
-									if (ii+w<0 || ii+w>=twidth || i+iii>=theight ||  tripMatrix[i+iii,ii-w]<=0){
-										isBlack = false;
-										distd = iii*iii+w*w;
-									}
-									iii++;
-								}
-								distu--;
-								distd--;
-							
-								if (distu==0 || distd == 0){
-									mindist1 = 0;
-									break;
-								}
-								if (distu<mindist1){
-									mindist1 = distu;
-								}
-								if (distd<mindist1){
-									mindist1 = distd;
-								}
-							}
-						}
-						
-						circledict[i*twidth+ii]=mindist1+1;
-						if (mindist1+1 != dd){
-							Console.WriteLine("d: "+dd+" md: "+(mindist1+1)+" od: "+od);
-						}
-						*/
 						
 					}
 					else {
@@ -408,7 +310,7 @@ namespace Lapis.QRCode.Art
 			stopWatch = new Stopwatch();
         	stopWatch.Start();
         	//xstep = 1;
-        	int narrowFactor = (10+maxmaxr)/8;
+        	int narrowFactor = (10+maxmaxr)/narrowQuotient;
 			int narrowAdj = (10+maxmaxr+narrowFactor)*-100/(10+maxmaxr);
 			for (var i=0;i<theight;i+=ystep){
 				for (var ii=0;ii<twidth;ii+=xstep){
