@@ -261,8 +261,8 @@ namespace Lapis.QrArt
 								}
 								bitmapText = new BitmapFrame(bmpp);
 								bitmap = new BitmapFrame(bmp);
-								textDrawer.MarginL = 0;
-								textDrawer.MarginT = 0;
+								textDrawer.MarginL = blurRadius;
+								textDrawer.MarginT = blurRadius;
 								
 							}
 							catch (Exception ex)
