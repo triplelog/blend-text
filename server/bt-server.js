@@ -108,6 +108,27 @@ app.get('/image',
 	}
 );
 
+app.get('/gradient', 
+	function(req, res) {
+		var tkey = crypto.randomBytes(100).toString('hex').substr(2, 18);
+		var formulas = [];
+		if (req.isAuthenticated()){
+			tempKeys[tkey] = {username:req.user.username};
+			formulas = req.user.formulas;
+			for (var i=0;i<formulas.length;i++){
+				formulas[i].id = i;
+			}
+			
+		}
+		
+		res.write(nunjucks.render('qblur.html',{
+			type: 'gradient',
+			tkey: tkey,
+			formulas: formulas,
+		}));
+		res.end();
+	}
+);
 app.get('/chart', 
 	function(req, res) {
 		
@@ -322,8 +343,7 @@ wss.on('connection', function connection(ws) {
   		execCmd += ' -f '+dm.font;
   	}
   	
-  	//execCmd += ' -t '+dm.type;
-  	execCmd += ' -t '+'gradient';
+  	execCmd += ' -t '+dm.type;
   	
   	if (dm.threshold){
   		execCmd += ' -l '+dm.threshold;

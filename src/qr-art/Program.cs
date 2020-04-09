@@ -391,6 +391,7 @@ namespace Lapis.QrArt
 							}
 							textDrawer.bmp = bmp;
         				} // text on image
+        				
         				if (textDrawer.Type == "qr"){ 
         				
         					textDrawer.MarginL = 0;
