@@ -386,7 +386,7 @@ namespace Lapis.QrArt
 						
 						IImage image = null;
 						if (textDrawer.Type == "gradient"){
-							image = builderG.Create(bitmapText, 1);
+							image = builderG.Create(bitmapText, 100);
 						}
 						else {
                         	image = builder.Create(contentArg.Value, bitmap, bitmapText, blurRadius, DistanceFormula);
