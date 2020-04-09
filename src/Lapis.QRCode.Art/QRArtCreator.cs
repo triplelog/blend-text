@@ -748,6 +748,9 @@ namespace Lapis.QRCode.Art
 						for (var i=yoffset;i<theight;i+=ystep){
 							for (var ii=xoffset;ii<twidth;ii+=xstep){
 								if (tripMatrix[i,ii] > 0){ //first is row, second is col
+								
+									outMatrix[i,ii]= outMatrix[i-yoffset,ii-xoffset];
+									continue;
 									int tlval = -100;
 									int trval = -100;
 									int blval = -100;
@@ -755,6 +758,8 @@ namespace Lapis.QRCode.Art
 									int val1;
 									
 									tlval = outMatrix[i-yoffset,ii-xoffset];
+									
+									
 									
 									if (ii+xstep-xoffset >= twidth){
 										trval = -100;
