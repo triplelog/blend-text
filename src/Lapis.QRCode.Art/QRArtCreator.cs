@@ -329,6 +329,56 @@ namespace Lapis.QRCode.Art
 						double sumdist = 0;
 						
 						double pct = 50.0;
+						int maxi = 0;
+						int maxii = 0;
+						int mini = 0;
+						int minii = 0;
+						for (var iii=1;iii<theight;iii++){
+							if (i+iii >= theight || tripMatrix[i+iii,ii]<=0){
+								maxi = iii;
+								break;
+							}
+						}
+						mindist1 = maxi;
+						for (var iii=1;iii<mindist1;iii++){
+							if (i-iii <0 || tripMatrix[i-iii,ii]<=0){
+								mini = iii;
+								break;
+							}
+						}
+						if (mini < mindist1){
+							mindist1 = mini;
+						}
+						for (var iii=1;iii<mindist1;iii++){
+							if (ii+iii >= twidth || tripMatrix[i,ii+iii]<=0){
+								maxii = iii;
+								break;
+							}
+						}
+						if (maxii < mindist1){
+							mindist1 = maxii;
+						}
+						for (var iii=1;iii<mindist1;iii++){
+							if (ii-iii < 0 || tripMatrix[i,ii-iii]<=0){
+								minii = iii;
+								break;
+							}
+						}
+						if (minii < mindist1){
+							mindist1 = minii;
+						}
+						int d = mindist1*mindist1;
+						for (var iii=-1*mindist1+1;iii<mindist1;iii++){
+							for (var iiii=-1*mindist1+1;iiii<mindist1;iiii++){
+								if (tripMatrix[i+iii,ii+iiii]<=0){
+									if (iii*iii+iiii*iiii<d){
+										d = iii*iii+iiii*iiii;
+									}
+								}
+							}
+						}
+						circledict[i*twidth+ii]=d;
+						/*
 						for (var d=-45;d<45;d++){
 							int iii = 1; bool isBlack = true;
 							int distr = 0;
@@ -415,7 +465,9 @@ namespace Lapis.QRCode.Art
 								}
 							}
 						}
+						
 						circledict[i*twidth+ii]=mindist1+1;
+						*/
 					}
 				}
 			}//end of setting the dict
