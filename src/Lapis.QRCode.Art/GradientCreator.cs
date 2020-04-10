@@ -608,7 +608,7 @@ namespace Lapis.QRCode.Art
 					}
 					
 					Console.WriteLine("x: "+avgx+" y: "+avgy);
-					int nyears = 10;
+					int nyears = 1000;
 					int minr = nyears;
         			int maxr = 0;
         			int dd = 0;
@@ -712,7 +712,7 @@ namespace Lapis.QRCode.Art
 					string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
 						ts.Hours, ts.Minutes, ts.Seconds,
 						ts.Milliseconds / 10);
-					Console.WriteLine("GradientCreatorTime " + elapsedTime);
+					Console.WriteLine("GradientLifeCreatorTime " + elapsedTime);
 				
                 	return TripMatrixDrawer.Draw(outMatrix);
                 }
