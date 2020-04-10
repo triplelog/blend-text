@@ -608,7 +608,7 @@ namespace Lapis.QRCode.Art
 					}
 					
 					Console.WriteLine("x: "+avgx+" y: "+avgy);
-					int nyears = 1000;
+					int nyears = 100;
 					int minr = nyears;
         			int maxr = 0;
         			int dd = 0;
@@ -618,8 +618,15 @@ namespace Lapis.QRCode.Art
 							for (var ii=0;ii<twidth;ii+=xstep){
 								if (tripMatrix[i,ii] > 0){
 									if (year == 0){
-										outMatrix[i,ii] = 1;
-										outMatrixEven[i,ii] = 1;
+										outMatrix[i,ii] = 0;
+										outMatrixEven[i,ii] = 0;
+										if (i-avgy < 10 && avgy-i<10){
+											if (ii-avgx < 10 && avgx-ii<10){
+												outMatrix[i,ii] = 1;
+												outMatrixEven[i,ii] = 1;
+											}
+										}
+										
 									}
 									else if (year%2 == 0){
 										ln = 0;
