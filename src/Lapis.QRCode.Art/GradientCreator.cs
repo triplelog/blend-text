@@ -408,6 +408,8 @@ namespace Lapis.QRCode.Art
 							}
 						}
 						n = 0;
+						int x1 = 0;
+						int x2 = 0;
 						for (var ii=0;ii<twidth;ii+=xstep){
 							for (var i=0;i<theight;i+=ystep){
 								if (tripMatrix[i,ii] > 0){
