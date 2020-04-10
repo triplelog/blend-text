@@ -175,7 +175,7 @@ for (var i=0;i<2;i++){
 	if (i>=1){
 		vars = ["d","h","s","l"];
 	}
-	for (var ii=0;ii<2;ii++){
+	for (var ii=0;ii<4;ii++){
 		workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
 	}
 	var wxml = Blockly.Xml.textToDom(defaults[i]);
