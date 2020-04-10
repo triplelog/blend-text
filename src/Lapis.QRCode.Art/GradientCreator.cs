@@ -262,7 +262,7 @@ namespace Lapis.QRCode.Art
                 }
                 else if (gtype == "radial"){
                 	//get center
-                	string centerType = "median";
+                	string centerType = "centroid";
                 	
                 	theight = tripMatrix.RowCount;
 					twidth = tripMatrix.ColumnCount;
