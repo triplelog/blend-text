@@ -225,8 +225,13 @@ namespace Lapis.QRCode.Imaging.Drawing
                             int gr = pixColor.G * pixColor.A / 255 + (255-pixColor.A);
                             int bl = pixColor.B * pixColor.A / 255 + (255-pixColor.A);
 							Color hashColor = Color.FromArgb((re/HashSize)*HashSize,(gr/HashSize)*HashSize,(bl/HashSize)*HashSize);
-							int imgC = hashColor.GetHashCode();
-								
+							//int imgC = hashColor.GetHashCode();
+							int imgC = hashColor.R;
+							imgC *= 256;
+							imgC += hashColor.G;
+							imgC *= 256;
+							imgC += hashColor.B;
+							
                             int outval = 0;
                             if (lighthash.TryGetValue(imgC, out outval))
 							{
