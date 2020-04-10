@@ -226,6 +226,7 @@ wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
   	
   	if (typeof message !== 'string'){
+  		console.log("af",performance.now());
   		var buffer = Buffer.from(message);
   		/*for (var i=0;i<imgTypes.length;i++){
 			if (dm.url.substring(dm.url.length-imgTypes[i].length,dm.url.length) == imgTypes[i]){
@@ -233,8 +234,10 @@ wss.on('connection', function connection(ws) {
 				wget = 'wget --accept "*"'+imgTypes[i]+' -O '+inSrc + ' "' + dm.url + '" && echo "done"';	
 			}
 		}*/
+		console.log("bf",performance.now());
   		fs.writeFile(inSrc, buffer, function (err) {
   			console.log(err);
+  			console.log("cf",performance.now());
   		});
   		return;
   	}
