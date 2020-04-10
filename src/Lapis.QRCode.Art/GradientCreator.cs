@@ -96,8 +96,10 @@ namespace Lapis.QRCode.Art
 					ts.Hours, ts.Minutes, ts.Seconds,
 					ts.Milliseconds / 10);
 				Console.WriteLine("GradientCreatorTime " + elapsedTime);
-                
-                getEdgeDistance(tripMatrix, narrowQuotient, out TripMatrix outMatrix);
+                int maxmaxr = 0;
+                Dictionary<int, int> circledict = new Dictionary<int, int>();
+                getEdgeDistance(tripMatrix,  out circledict, out maxmaxr);
+                getEdgePercentage(tripMatrix, circledict, maxmaxr, narrowQuotient, out TripMatrix outMatrix);
                 //return TripMatrixDrawer.Draw(tripMatrix);
                 return TripMatrixDrawer.Draw(outMatrix);
             }
@@ -105,7 +107,7 @@ namespace Lapis.QRCode.Art
             	return null;
             }
         }
-        public static void getEdgeDistance(TripMatrix tripMatrix, int narrowQuotient, out TripMatrix outMatrix) {
+        public static void getEdgeDistance(TripMatrix tripMatrix, out Dictionary<int, int> circledict, out int maxmaxr) {
         	int theight = tripMatrix.RowCount;
         	int twidth = tripMatrix.ColumnCount;
         	outMatrix = new TripMatrix(theight,twidth);
@@ -116,9 +118,7 @@ namespace Lapis.QRCode.Art
         	stopWatch.Start();
         	int ystep = 1 + outMatrix.RowCount / 200;
         	int xstep = 1 + outMatrix.ColumnCount / 200;
-        	int maxmaxr = 0;
-        	long sumr = 0;
-        	int nr = 0;
+        	maxmaxr = 0;
         	for (var i=0;i<theight;i+=ystep){
 				for (var ii=0;ii<twidth;ii+=xstep){
 					if (tripMatrix[i,ii] > 0){ //first is row, second is col
@@ -190,8 +190,6 @@ namespace Lapis.QRCode.Art
 						}
 						circledicttemp[i*twidth+ii]=d;
 						if (d>maxmaxr){maxmaxr = d;}
-						sumr += d;
-						nr++;
 						
 						
 					}
@@ -200,10 +198,7 @@ namespace Lapis.QRCode.Art
 					}
 				}
 			}
-			double avgr = sumr;
-			avgr /= nr;
-			int avgavgr = Convert.ToInt32(avgr);
-			Dictionary<int, int> circledict = new Dictionary<int, int>();
+
 
         	for (var i=0;i<theight;i+=ystep){
 				for (var ii=0;ii<twidth;ii+=xstep){
@@ -296,18 +291,28 @@ namespace Lapis.QRCode.Art
 					}
 				}
 			}
+			
 			//end of setting the dict
 			stopWatch.Stop();
 			// Get the elapsed time as a TimeSpan value.
 			TimeSpan ts = stopWatch.Elapsed;
+			
 			
 			// Format and display the TimeSpan value.
 			string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
 				ts.Hours, ts.Minutes, ts.Seconds,
 				ts.Milliseconds / 10);
 			Console.WriteLine("Set circledict: " + elapsedTime);
+		}
+		public static void getEdgePercentage(TripMatrix tripMatrix, Dictionary<int, int> circledict, int maxmaxr, int narrowQuotient, out TripMatrix outMatrix) {
+        	
 			
-			stopWatch = new Stopwatch();
+			
+			int theight = tripMatrix.RowCount;
+        	int twidth = tripMatrix.ColumnCount;
+        	outMatrix = new TripMatrix(theight,twidth);
+        	
+			Stopwatch stopWatch = new Stopwatch();
         	stopWatch.Start();
         	//xstep = 1;
         	int narrowFactor = (10+maxmaxr)*10/narrowQuotient;
@@ -426,55 +431,7 @@ namespace Lapis.QRCode.Art
 						
 						
 					
-						/*
-						int minr = 0;
-						//int maxr = twidth*twidth+theight*theight;
-						if (circledict.TryGetValue(i*twidth+ii, out int outval)) {
-							minr = outval;
-						}
-						int radius = minr + (maxr+1-minr)/2;
-						bool stillpossible  = true;
-						int testi = 0;
-						int testii = 0;
 						
-						int testmini = 0;
-						int testminii = 0;
-						int testmaxi = theight;
-						int testmaxii = twidth;
-						bool foundone = false;
-						while (stillpossible){
-							//if (radius > maxr){stillpossible = false; break;}
-							if (radiusdict.TryGetValue(radius, out List<int[]> outlist)) {
-								foundone = false;
-								foreach (int[] intpair in outlist){
-									testi = intpair[0];
-									testii = intpair[1];
-									if (circledict.TryGetValue(testi*twidth+testii, out int outval)) {
-										if (outval >= radius){
-											minr = outval;
-											foundone = true;
-										}
-										else {
-											if (testi < i){
-												if 
-											}
-										}
-									}
-								}
-							}
-							else {
-								radius++;
-								continue;
-							}
-							
-							
-							
-							maxr =
-							minr = 
-							radius = minr + (maxr+1-minr)/2;
-						}
-						for (var radius=minr+1;radius<)
-						*/
 					}
 					else {
 						outMatrix[i,ii]=-101;
@@ -483,7 +440,7 @@ namespace Lapis.QRCode.Art
 					
 				}
 			}
-			/*
+			
 			for (var i=0;i<theight;i+=ystep){
 				for (var ii=0;ii<twidth;ii+=xstep){
 					if (tripMatrix[i,ii] > 0){ //first is row, second is col
@@ -506,7 +463,7 @@ namespace Lapis.QRCode.Art
 						
 					}
 				}
-			}*/
+			}
 			
 			if (ystep > 1 || xstep > 1){
 				for (var yoffset=0;yoffset<ystep;yoffset++){
@@ -580,10 +537,11 @@ namespace Lapis.QRCode.Art
 			
 			stopWatch.Stop();
 			// Get the elapsed time as a TimeSpan value.
-			ts = stopWatch.Elapsed;
+			TimeSpan ts = stopWatch.Elapsed;
+			
 			
 			// Format and display the TimeSpan value.
-			elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+			string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
 				ts.Hours, ts.Minutes, ts.Seconds,
 				ts.Milliseconds / 10);
 			Console.WriteLine("Set outMatrix: " + elapsedTime);
