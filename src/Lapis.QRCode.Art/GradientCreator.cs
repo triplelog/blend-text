@@ -87,17 +87,9 @@ namespace Lapis.QRCode.Art
                 
 				
                 
-                stopWatch.Stop();
-				// Get the elapsed time as a TimeSpan value.
-				TimeSpan ts = stopWatch.Elapsed;
-				
-				// Format and display the TimeSpan value.
-				string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-					ts.Hours, ts.Minutes, ts.Seconds,
-					ts.Milliseconds / 10);
-				Console.WriteLine("GradientCreatorTime " + elapsedTime);
+                
                 int maxmaxr = 0;
-                string gtype = "radial";
+                string gtype = "life";
                 if (gtype == "shape"){
 					getEdgeDistance(tripMatrix,  out Dictionary<int, int> circledict, out maxmaxr);
 					getEdgePercentage(tripMatrix, circledict, true, maxmaxr, narrowQuotient, out TripMatrix outMatrix);
@@ -377,6 +369,10 @@ namespace Lapis.QRCode.Art
 						skewX = 1;
 						skewY = 1;
 					}
+					else if (skewType == "custom"){
+						skewX = 1;
+						skewY = 1;
+					}
 					else if (skewType == "median"){
 						long sumx = 0;
 						long sumy = 0;
@@ -519,6 +515,205 @@ namespace Lapis.QRCode.Art
 					
                 	//get distance from center
                 	//find max and get percentages
+                	return TripMatrixDrawer.Draw(outMatrix);
+                }
+                else if (gtype == "life"){
+                	//get center
+                	string centerType = "centroid";
+                	
+                	theight = tripMatrix.RowCount;
+					twidth = tripMatrix.ColumnCount;
+					TripMatrix outMatrixOdd = new TripMatrix(theight,twidth);
+					TripMatrix outMatrixEven = new TripMatrix(theight,twidth);
+					TripMatrix outMatrix = new TripMatrix(theight,twidth);
+					int avgx = 0;
+					int avgy = 0;
+					int ystep = 1;
+					int xstep = 1;
+					if (centerType == "centroid"){
+						long sumx = 0;
+						long sumy = 0;
+						int n = 0;
+						
+						for (var i=0;i<theight;i+=ystep){
+							for (var ii=0;ii<twidth;ii+=xstep){
+								if (tripMatrix[i,ii] > 0){
+									n++;
+									sumx += ii;
+									sumy += i;
+								}
+							}
+						}
+					
+						long avgxl = sumx/n;
+						long avgyl = sumy/n;
+						avgx = Convert.ToInt32(avgxl);
+						avgy = Convert.ToInt32(avgyl);
+					}
+					else if (centerType == "median"){
+						long sumx = 0;
+						long sumy = 0;
+						int n = 0;
+						int medn = 0;
+						for (var i=0;i<theight;i+=ystep){
+							for (var ii=0;ii<twidth;ii+=xstep){
+								if (tripMatrix[i,ii] > 0){
+									n++;
+								}
+							}
+						}
+						medn = n/2;
+						n = 0;
+						for (var i=0;i<theight;i+=ystep){
+							for (var ii=0;ii<twidth;ii+=xstep){
+								if (tripMatrix[i,ii] > 0){
+									n++;
+									if (n==medn){
+										avgy = i;
+										break;
+									}
+								}
+							}
+						}
+						n = 0;
+						for (var ii=0;ii<twidth;ii+=xstep){
+							for (var i=0;i<theight;i+=ystep){
+								if (tripMatrix[i,ii] > 0){
+									n++;
+									if (n==medn){
+										avgx = ii;
+										break;
+									}
+								}
+							}
+						}
+					}
+					else if (centerType == "box"){
+						int mini = theight;
+						int minii = twidth;
+						int maxi = 0;
+						int maxii = 0;
+						for (var i=0;i<theight;i+=ystep){
+							for (var ii=0;ii<twidth;ii+=xstep){
+								if (tripMatrix[i,ii] > 0){
+									if (i>maxi){maxi = i;}
+									if (i<mini){mini = i;}
+									if (ii>maxii){maxii = ii;}
+									if (ii<minii){minii = ii;}
+								}
+							}
+						}
+						avgx = (maxii+minii)/2;
+						avgy = (maxi+mini)/2;
+					}
+					
+					Console.WriteLine("x: "+avgx+" y: "+avgy);
+					int nyears = 10;
+					int minr = nyears;
+        			int maxr = 0;
+        			int dd = 0;
+        			int ln = 0;
+        			for (var year=0;year<nyears;year++){
+        				for (var i=0;i<theight;i+=ystep){
+							for (var ii=0;ii<twidth;ii+=xstep){
+								if (tripMatrix[i,ii] > 0){
+									if (year == 0){
+										outMatrix[i,ii] = 1;
+										outMatrixEven[i,ii] = 1;
+									}
+									else if (year%2 == 0){
+										ln = 0;
+										for (var iii=-1;iii<2;iii++){
+											if (i+iii>0 && i+iii<theight-1){
+												for (var iiii=-1;iiii<2;iiii++){
+													if (ii+iiii>0 && ii+iiii<twidth-1 &&  (iii!=0 || iiii!=0) ){
+														ln += outMatrixOdd[i+iii,ii+iiii];
+													}
+												}
+											}
+											if (ln>3){break;}
+										}
+										if (ln == 3){
+											outMatrixEven[i,ii]==1;
+											outMatrix[i,ii]++;
+										} 
+										else if (ln == 2 && outMatrixOdd[i,ii]==1){
+											outMatrixEven[i,ii]=1;
+											outMatrix[i,ii]++;
+										}
+										else {
+											outMatrixEven[i,ii]=0;
+										}
+									}
+									else if (year%2 == 1){
+										ln = 0;
+										for (var iii=-1;iii<2;iii++){
+											if (i+iii>0 && i+iii<theight-1){
+												for (var iiii=-1;iiii<2;iiii++){
+													if (ii+iiii>0 && ii+iiii<twidth-1 &&  (iii!=0 || iiii!=0) ){
+														ln += outMatrixEven[i+iii,ii+iiii];
+													}
+												}
+											}
+											if (ln>3){break;}
+										}
+										if (ln == 3){
+											outMatrixOdd[i,ii]==1;
+											outMatrix[i,ii]++;
+										} 
+										else if (ln == 2 && outMatrixEven[i,ii]==1){
+											outMatrixOdd[i,ii]=1;
+											outMatrix[i,ii]++;
+										}
+										else {
+											outMatrixOdd[i,ii]=0;
+										}
+									}
+									
+									
+								}
+								else {
+									if (year == 0){
+										outMatrix[i,ii] = 0;
+										outMatrixOdd[i,ii] = 0;
+										outMatrixEven[i,ii] = 0;
+									}
+								}
+							}
+						}
+        			}
+					for (var i=0;i<theight;i+=ystep){
+						for (var ii=0;ii<twidth;ii+=xstep){
+							if (tripMatrix[i,ii] > 0){
+								dd = outMatrix[i,ii];
+								if (dd>maxr){maxr=dd;}
+								if (dd<minr){minr=dd;}
+							}
+						}
+					}
+					for (var i=0;i<theight;i+=ystep){
+						for (var ii=0;ii<twidth;ii+=xstep){
+							if (tripMatrix[i,ii]>0){
+								outMatrix[i,ii]=(outMatrix[i,ii]-minr)*-100/(maxr-minr) - 1;
+							}
+							else {
+								outMatrix[i,ii]=-101;
+							}
+						}
+					}
+					
+                	//get distance from center
+                	//find max and get percentages
+                	stopWatch.Stop();
+					// Get the elapsed time as a TimeSpan value.
+					TimeSpan ts = stopWatch.Elapsed;
+				
+					// Format and display the TimeSpan value.
+					string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+						ts.Hours, ts.Minutes, ts.Seconds,
+						ts.Milliseconds / 10);
+					Console.WriteLine("GradientCreatorTime " + elapsedTime);
+				
                 	return TripMatrixDrawer.Draw(outMatrix);
                 }
                 else {
