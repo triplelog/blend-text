@@ -174,7 +174,7 @@ namespace Lapis.QRCode.Art
 						for (var i=0;i<theight;i+=ystep){
 							for (var ii=0;ii<twidth;ii+=xstep){
 								if (tripMatrix[i,ii]>0){
-									outMatrix[i,ii]=(outMatrix[i,ii]-minr)*-100/(maxr-minr);
+									outMatrix[i,ii]=(outMatrix[i,ii]-minr)*-100/(maxr-minr) - 1;
 								}
 								else {
 									outMatrix[i,ii]=-101;
