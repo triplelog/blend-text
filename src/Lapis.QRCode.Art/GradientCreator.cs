@@ -153,16 +153,14 @@ namespace Lapis.QRCode.Art
                 	}
                 	else if (angle == 90 || angle == 270){
                 		//distance is y coord
-                		double y;
                 		int dd;
                 		int ystep = 1;
                 		int xstep = 1;
                 		for (var i=0;i<theight;i+=ystep){
 							for (var ii=0;ii<twidth;ii+=xstep){
 								if (tripMatrix[i,ii]>0){
-									y = theight-1-i;
 									if (angle == 90){
-										dd = y;
+										dd = theight-1-i;
 									}
 									else {
 										dd = i;	
