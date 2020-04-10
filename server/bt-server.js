@@ -409,6 +409,7 @@ wss.on('connection', function connection(ws) {
 
 		execCmd += ' -x '+dm.locX;
 		execCmd += ' -y '+dm.locY;
+		execCmd += ' -r '+dm.spread;
 	
 		var workspace = new Blockly.Workspace();
 		var wxml = Blockly.Xml.textToDom(dm.blurFormula);
