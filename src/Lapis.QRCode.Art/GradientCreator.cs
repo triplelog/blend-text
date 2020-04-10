@@ -97,7 +97,6 @@ namespace Lapis.QRCode.Art
 					ts.Milliseconds / 10);
 				Console.WriteLine("GradientCreatorTime " + elapsedTime);
                 int maxmaxr = 0;
-                Dictionary<int, int> circledict = new Dictionary<int, int>();
                 getEdgeDistance(tripMatrix,  out circledict, out maxmaxr);
                 getEdgePercentage(tripMatrix, circledict, maxmaxr, narrowQuotient, out TripMatrix outMatrix);
                 //return TripMatrixDrawer.Draw(tripMatrix);
@@ -112,11 +111,12 @@ namespace Lapis.QRCode.Art
         	int twidth = tripMatrix.ColumnCount;
         	Console.WriteLine("outW: "+tripMatrix.ColumnCount+" outH: "+tripMatrix.RowCount);
         	Dictionary<int, int> circledicttemp = new Dictionary<int, int>();
+        	circledict = new Dictionary<int, int>();
 
 			Stopwatch stopWatch = new Stopwatch();
         	stopWatch.Start();
-        	int ystep = 1 + outMatrix.RowCount / 200;
-        	int xstep = 1 + outMatrix.ColumnCount / 200;
+        	int ystep = 1 + tripMatrix.RowCount / 200;
+        	int xstep = 1 + tripMatrix.ColumnCount / 200;
         	maxmaxr = 0;
         	for (var i=0;i<theight;i+=ystep){
 				for (var ii=0;ii<twidth;ii+=xstep){
