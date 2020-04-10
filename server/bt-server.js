@@ -63,7 +63,7 @@ app.get('/qr',
 			});
 		}
 		else {
-			UserData.findOne({ username: "g" }, function(err, result) {
+			UserData.findOne({ username: "h" }, function(err, result) {
 				formulas = result.formulas.color;
 				for (var i=0;i<formulas.length;i++){
 					formulas[i].id = i;
@@ -99,7 +99,7 @@ app.get('/text',
 			});
 		}
 		else {
-			UserData.findOne({ username: "g" }, function(err, result) {
+			UserData.findOne({ username: "h" }, function(err, result) {
 				formulas = result.formulas.color;
 				for (var i=0;i<formulas.length;i++){
 					formulas[i].id = i;
@@ -135,7 +135,7 @@ app.get('/image',
 			});
 		}
 		else {
-			UserData.findOne({ username: "g" }, function(err, result) {
+			UserData.findOne({ username: "h" }, function(err, result) {
 				formulas = result.formulas.color;
 				for (var i=0;i<formulas.length;i++){
 					formulas[i].id = i;
@@ -173,7 +173,7 @@ app.get('/gradient',
 			});
 		}
 		else {
-			UserData.findOne({ username: 'g' }, function(err, result) {
+			UserData.findOne({ username: 'h' }, function(err, result) {
 				formulas = result.formulas.gradient;
 				for (var i=0;i<formulas.length;i++){
 					formulas[i].id = i;
