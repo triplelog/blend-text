@@ -519,6 +519,7 @@ namespace Lapis.QRCode.Art
                 }
                 else if (gtype == "life"){
                 	//get center
+                	getEdgeDistance(tripMatrix,  out Dictionary<int, int> circledict, out maxmaxr);
                 	string centerType = "centroid";
                 	
                 	theight = tripMatrix.RowCount;
@@ -622,12 +623,19 @@ namespace Lapis.QRCode.Art
 									if (year == 0){
 										outMatrix[i,ii] = 0;
 										outMatrixEven[i,ii] = 0;
-										if (i-avgy < 10 && avgy-i<10){
-											if (ii-avgx < 10 && avgx-ii<10){
+										if (circledict.TryGetValue(i*twidth+ii, out int outval)) {
+											if (outval <= 26){
 												outMatrix[i,ii] = 1;
 												outMatrixEven[i,ii] = 1;
 											}
 										}
+										
+										/*if (i-avgy < 10 && avgy-i<10){
+											if (ii-avgx < 10 && avgx-ii<10){
+												outMatrix[i,ii] = 1;
+												outMatrixEven[i,ii] = 1;
+											}
+										}*/
 										/*if (i%3 == ii%3){
 											outMatrix[i,ii] = 1;
 											outMatrixEven[i,ii] = 1;
