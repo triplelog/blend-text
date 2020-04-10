@@ -644,14 +644,14 @@ namespace Lapis.QRCode.Art
 											}
 											if (ln>3){break;}
 										}
-										if (ln == 3){
+										if (ln == 2){
 											outMatrixEven[i,ii]=1;
 											if (outMatrix[i,ii]==0){
 												outMatrix[i,ii]=year+1;
 											}
 											//outMatrix[i,ii]++;
 										} 
-										else if (ln == 2 && outMatrixOdd[i,ii]==1){
+										else if (ln == 1 && outMatrixOdd[i,ii]==1){
 											outMatrixEven[i,ii]=1;
 											if (outMatrix[i,ii]==0){
 												outMatrix[i,ii]=year+1;
@@ -674,14 +674,14 @@ namespace Lapis.QRCode.Art
 											}
 											if (ln>3){break;}
 										}
-										if (ln == 3){
+										if (ln == 2){
 											outMatrixOdd[i,ii]=1;
 											if (outMatrix[i,ii]==0){
 												outMatrix[i,ii]=year+1;
 											}
 											//outMatrix[i,ii]++;
 										} 
-										else if (ln == 2 && outMatrixEven[i,ii]==1){
+										else if (ln == 1 && outMatrixEven[i,ii]==1){
 											outMatrixOdd[i,ii]=1;
 											if (outMatrix[i,ii]==0){
 												outMatrix[i,ii]=year+1;
