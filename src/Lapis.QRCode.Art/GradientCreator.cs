@@ -262,8 +262,29 @@ namespace Lapis.QRCode.Art
                 }
                 else if (gtype == "radial"){
                 	//get center
-                	string centerType = "box";
-                	string distanceType = "square";
+                	string centerType = "centroid";
+                	string distanceType = "euclidean";
+                	if (narrowQuotient% 10 == 0){
+                		centerType = "centroid";
+                	}
+                	else if (narrowQuotient% 10 == 1){
+                		centerType = "median";
+                	}
+                	else if (narrowQuotient% 10 == 2){
+                		centerType = "box";
+                	}
+                	
+                	if (narrowQuotient/ 10 == 0){
+                		distanceType = "euclidean";
+                	}
+                	else if (narrowQuotient/ 10 == 1){
+                		distanceType = "diamond";
+                	}
+                	else if (narrowQuotient/ 10 == 2){
+                		distanceType = "square";
+                	}
+                	
+                	
                 	theight = tripMatrix.RowCount;
 					twidth = tripMatrix.ColumnCount;
 					TripMatrix outMatrix = new TripMatrix(theight,twidth);
