@@ -62,6 +62,7 @@ namespace Lapis.QrArt
                     {
                     	
         				QRArtCreator builder = null;
+        				
         				if (typeOpt.Value() != "gradient"){
 							builder = new QRArtCreator(
 								new Triparizer(),
@@ -381,13 +382,14 @@ namespace Lapis.QrArt
 						} //create qr
 						
 						
-        				string DistanceFormula = System.IO.File.ReadAllText(@"/home/rwilcox/blend-text/server/formulas/"+distanceFormulaOpt.Value()+".txt");
-						
+        				
 						IImage image = null;
 						if (textDrawer.Type == "gradient"){
 							image = builderG.Create(bitmapText, 100);
 						}
 						else {
+							string DistanceFormula = System.IO.File.ReadAllText(@"/home/rwilcox/blend-text/server/formulas/"+distanceFormulaOpt.Value()+".txt");
+						
                         	image = builder.Create(contentArg.Value, bitmap, bitmapText, blurRadius, DistanceFormula);
                         }
                         //bitmap.Save("static/newbmp1.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
