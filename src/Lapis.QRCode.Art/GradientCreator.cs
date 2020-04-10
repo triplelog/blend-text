@@ -609,7 +609,7 @@ namespace Lapis.QRCode.Art
 					}
 					
 					Console.WriteLine("x: "+avgx+" y: "+avgy);
-					int nyears = 200;
+					int nyears = 250;
 					int minr = nyears;
         			int maxr = 0;
         			int dd = 0;
@@ -624,7 +624,7 @@ namespace Lapis.QRCode.Art
 										outMatrix[i,ii] = 0;
 										outMatrixEven[i,ii] = 0;
 										if (circledict.TryGetValue(i*twidth+ii, out int outval)) {
-											if (outval <= 20){
+											if (outval <= 40){
 												outMatrix[i,ii] = 1;
 												outMatrixEven[i,ii] = 1;
 											}
@@ -642,7 +642,10 @@ namespace Lapis.QRCode.Art
 										}*/
 										
 									}
-									else if (circledict.TryGetValue(i*twidth+ii, out int outval) && outval <= year*year/4) {
+									else if (circledict.TryGetValue(i*twidth+ii, out int outval) && outval <= year*year/10) {
+										if (outMatrix[i,ii]==0){
+											outMatrix[i,ii]=year+1;
+										}
 										outMatrixEven[i,ii] = 1;
 										outMatrixOdd[i,ii] = 1;
 									}
