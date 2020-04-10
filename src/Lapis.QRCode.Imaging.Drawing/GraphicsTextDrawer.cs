@@ -21,8 +21,15 @@ namespace Lapis.QRCode.Imaging.Drawing
 			
 			Stopwatch stopWatch = new Stopwatch();
         	stopWatch.Start();
-        		
-            
+        	
+        	
+            if (BlurType[0] == 'h'){
+				BlurType = "hsl";
+			}
+			else {
+				BlurType = "rgb";
+			}
+			char[] usedvars = new char[4];
 
             int imageHeight = bmp.Height;
             int imageWidth = bmp.Width;

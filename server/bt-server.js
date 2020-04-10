@@ -313,7 +313,7 @@ wss.on('connection', function connection(ws) {
 		var varstr = "";
 		for (var i=0;i<usedvars.length;i++){
 			console.log(usedvars[i].id_);
-			varstr += usedvars[i].id_.substring(5,1);
+			varstr += usedvars[i].id_.substring(6,7);
 		}
 		var code = Blockly.Lua.workspaceToCode(workspace);
 		console.log(code);
