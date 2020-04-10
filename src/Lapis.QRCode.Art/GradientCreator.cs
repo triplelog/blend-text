@@ -110,7 +110,15 @@ namespace Lapis.QRCode.Art
                 }
                 else if (gtype == "linear"){
                 	//get angle
-                	int angle = 270; // from 0 to 359
+                	int angle = narrowQuotient; // from 0 to 359
+                	if (angle > 359){
+                		angle = angle %360;
+                	}
+                	else if (angle < 0){
+                		angle = angle %360;
+                		angle += 720;
+                		angle = angle %360;
+                	}
                 	theight = tripMatrix.RowCount;
 					twidth = tripMatrix.ColumnCount;
 					TripMatrix outMatrix = new TripMatrix(theight,twidth);
