@@ -408,13 +408,34 @@ input[name="size31"] {
 				Threshold: <input type="number" id="threshold" value="128"></input>
 			</div>
 			<div>
-				Gradient: <select>
+				Gradient: <select id="gradientType">
 					<option>Linear</option>
 					<option>Radial</option>
 					<option>Edge</option>
 					<option>Shape</option>
 					</select>
 			</div>
+			<div>
+				Angle: <input type="number" id="gradientAngle" value="0"></input>
+			</div>
+			<div>
+				Center: <select id="gradientCenter">
+					<option>Centroid</option>
+					<option>Bounding Box</option>
+					<option>Custom</option>
+					</select>
+			</div>
+			<div>
+				Distance: <select id="gradientDistance">
+					<option>Normal</option>
+					<option>Diamond</option>
+					<option>Square</option>
+					</select>
+			</div>
+			<div>
+				Spread: <input type="number" id="gradientSpread" value="10"></input>
+			</div>
+			
 			
 			
 		</div>
@@ -528,7 +549,12 @@ input[name="size31"] {
 <script>var type = {{ type | dump | safe }}</script>
 <script>var tkey = {{ tkey | dump | safe }}</script>
 <script>var formulas = {{ formulas | dump | safe }};</script>
+<script src="../js/creator.js"></script>
+{% if type == "gradient" %}
+<script src="../js/gradientCreator.js"></script>
+{% else %}
 <script src="../js/blendtext.js"></script>
+{% endif %}
 <script src="../js/upload.js"></script>
 </body>
 </html>
