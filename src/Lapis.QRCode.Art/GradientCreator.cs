@@ -110,8 +110,7 @@ namespace Lapis.QRCode.Art
         public static void getEdgeDistance(TripMatrix tripMatrix, out Dictionary<int, int> circledict, out int maxmaxr) {
         	int theight = tripMatrix.RowCount;
         	int twidth = tripMatrix.ColumnCount;
-        	outMatrix = new TripMatrix(theight,twidth);
-        	Console.WriteLine("outW: "+outMatrix.ColumnCount+" outH: "+outMatrix.RowCount);
+        	Console.WriteLine("outW: "+tripMatrix.ColumnCount+" outH: "+tripMatrix.RowCount);
         	Dictionary<int, int> circledicttemp = new Dictionary<int, int>();
 
 			Stopwatch stopWatch = new Stopwatch();
@@ -311,6 +310,8 @@ namespace Lapis.QRCode.Art
 			int theight = tripMatrix.RowCount;
         	int twidth = tripMatrix.ColumnCount;
         	outMatrix = new TripMatrix(theight,twidth);
+        	int ystep = 1 + outMatrix.RowCount / 200;
+        	int xstep = 1 + outMatrix.ColumnCount / 200;
         	
 			Stopwatch stopWatch = new Stopwatch();
         	stopWatch.Start();
