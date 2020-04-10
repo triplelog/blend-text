@@ -263,7 +263,7 @@ namespace Lapis.QRCode.Art
                 else if (gtype == "radial"){
                 	//get center
                 	string centerType = "box";
-                	string distanceType = "diamond";
+                	string distanceType = "square";
                 	theight = tripMatrix.RowCount;
 					twidth = tripMatrix.ColumnCount;
 					TripMatrix outMatrix = new TripMatrix(theight,twidth);
@@ -339,8 +339,8 @@ namespace Lapis.QRCode.Art
 								if (tripMatrix[i,ii] > 0){
 									if (i>maxi){maxi = i;}
 									if (i<mini){mini = i;}
-									if (i>maxii){maxii = ii;}
-									if (i<minii){minii = ii;}
+									if (ii>maxii){maxii = ii;}
+									if (ii<minii){minii = ii;}
 								}
 							}
 						}
