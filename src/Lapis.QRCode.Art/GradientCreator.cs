@@ -110,7 +110,7 @@ namespace Lapis.QRCode.Art
                 }
                 else if (gtype == "linear"){
                 	//get angle
-                	int angle = 315; // from 0 to 359
+                	int angle = 0; // from 0 to 359
                 	theight = tripMatrix.RowCount;
 					twidth = tripMatrix.ColumnCount;
 					TripMatrix outMatrix = new TripMatrix(theight,twidth);
@@ -118,9 +118,75 @@ namespace Lapis.QRCode.Art
         			int maxr = 0;
                 	if (angle == 0 || angle == 180){
                 		//distance is x coord
+                		int dd;
+                		int ystep = 1;
+                		int xstep = 1;
+                		for (var i=0;i<theight;i+=ystep){
+							for (var ii=0;ii<twidth;ii+=xstep){
+								if (tripMatrix[i,ii]>0){
+									if (angle == 0){
+										dd = ii;
+									}
+									else {
+										dd = twidth -1 -ii;	
+									}
+									if (dd<minr){minr=dd;}
+									if (dd>maxr){maxr=dd;}
+									outMatrix[i,ii]=dd;
+								}
+								else {
+									outMatrix[i,ii]=-101;
+								}
+							}
+						}
+						for (var i=0;i<theight;i+=ystep){
+							for (var ii=0;ii<twidth;ii+=xstep){
+								if (tripMatrix[i,ii]>0){
+									outMatrix[i,ii]=(outMatrix[i,ii]-minr)*-100/(maxr-minr) - 1;
+								}
+								else {
+									outMatrix[i,ii]=-101;
+								}
+							}
+						}
+						return TripMatrixDrawer.Draw(outMatrix);
                 	}
                 	else if (angle == 90 || angle == 270){
                 		//distance is y coord
+                		double y;
+                		int dd;
+                		int ystep = 1;
+                		int xstep = 1;
+                		for (var i=0;i<theight;i+=ystep){
+							for (var ii=0;ii<twidth;ii+=xstep){
+								if (tripMatrix[i,ii]>0){
+									y = theight-1-i;
+									if (angle == 90){
+										dd = y;
+									}
+									else {
+										dd = i;	
+									}
+									if (dd<minr){minr=dd;}
+									if (dd>maxr){maxr=dd;}
+									outMatrix[i,ii]=dd;
+								}
+								else {
+									outMatrix[i,ii]=-101;
+								}
+							}
+						}
+						for (var i=0;i<theight;i+=ystep){
+							for (var ii=0;ii<twidth;ii+=xstep){
+								if (tripMatrix[i,ii]>0){
+									outMatrix[i,ii]=(outMatrix[i,ii]-minr)*-100/(maxr-minr) - 1;
+								}
+								else {
+									outMatrix[i,ii]=-101;
+								}
+							}
+						}
+						return TripMatrixDrawer.Draw(outMatrix);
                 	}
                 	else {
                 		double radians = 3.14159265/180;
