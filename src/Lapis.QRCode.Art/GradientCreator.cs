@@ -634,7 +634,7 @@ namespace Lapis.QRCode.Art
 											if (ln>3){break;}
 										}
 										if (ln == 3){
-											outMatrixEven[i,ii]==1;
+											outMatrixEven[i,ii]=1;
 											outMatrix[i,ii]++;
 										} 
 										else if (ln == 2 && outMatrixOdd[i,ii]==1){
@@ -658,7 +658,7 @@ namespace Lapis.QRCode.Art
 											if (ln>3){break;}
 										}
 										if (ln == 3){
-											outMatrixOdd[i,ii]==1;
+											outMatrixOdd[i,ii]=1;
 											outMatrix[i,ii]++;
 										} 
 										else if (ln == 2 && outMatrixEven[i,ii]==1){
