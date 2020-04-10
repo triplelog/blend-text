@@ -97,10 +97,49 @@ namespace Lapis.QRCode.Art
 					ts.Milliseconds / 10);
 				Console.WriteLine("GradientCreatorTime " + elapsedTime);
                 int maxmaxr = 0;
-                getEdgeDistance(tripMatrix,  out Dictionary<int, int> circledict, out maxmaxr);
-                getEdgePercentage(tripMatrix, circledict, maxmaxr, narrowQuotient, out TripMatrix outMatrix);
+                if (2 == 3){
+					getEdgeDistance(tripMatrix,  out Dictionary<int, int> circledict, out maxmaxr);
+					getEdgePercentage(tripMatrix, circledict, maxmaxr, narrowQuotient, out TripMatrix outMatrix);
+					return TripMatrixDrawer.Draw(outMatrix);
+                }
+                else {
+                	getEdgeDistance(tripMatrix,  out Dictionary<int, int> circledict, out maxmaxr);
+                	
+                	int theight = tripMatrix.RowCount;
+					int twidth = tripMatrix.ColumnCount;
+					int ystep = 1 + tripMatrix.RowCount / 200;
+        			int xstep = 1 + tripMatrix.ColumnCount / 200;
+					TripMatrix outMatrix = new TripMatrix(theight,twidth);
+					for (var i=0;i<theight;i+=ystep){
+						for (var ii=0;ii<twidth;ii+=xstep){
+							if (tripMatrix[i,ii] > 0){ //first is row, second is col
+
+								if (circledict.TryGetValue(i*twidth+ii, out int outval)) {
+							
+									outMatrix[i,ii]=outval*-100/maxmaxr;
+									if (outMatrix[i,ii]<-100){
+										outMatrix[i,ii]=-100;
+									}
+									else if (outMatrix[i,ii]>-1){
+										outMatrix[i,ii]=-1;
+									}
+								}
+								else {
+									outMatrix[i,ii]=-101;
+								}
+						
+							}
+							else {
+								outMatrix[i,ii]=-101;
+							}
+					
+					
+						}
+					}
+					return TripMatrixDrawer.Draw(outMatrix);
+                }
                 //return TripMatrixDrawer.Draw(tripMatrix);
-                return TripMatrixDrawer.Draw(outMatrix);
+                
             }
             else {
             	return null;
