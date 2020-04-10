@@ -227,7 +227,7 @@ wss.on('connection', function connection(ws) {
   	
   	if (typeof message !== 'string'){
   		console.log("af",performance.now());
-  		var buffer = Buffer.from(message);
+  		//var buffer = Buffer.from(message);
   		/*for (var i=0;i<imgTypes.length;i++){
 			if (dm.url.substring(dm.url.length-imgTypes[i].length,dm.url.length) == imgTypes[i]){
 				inSrc.replace('.png',imgTypes[i]);
@@ -235,7 +235,7 @@ wss.on('connection', function connection(ws) {
 			}
 		}*/
 		console.log("bf",performance.now());
-  		fs.writeFile(inSrc, buffer, function (err) {
+  		fs.writeFile(inSrc, Buffer.from(message), function (err) {
   			console.log(err);
   			console.log("cf",performance.now());
   		});
