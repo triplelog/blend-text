@@ -439,6 +439,7 @@ input[name="size31"] {
 	<div class="content-31">
 		
 		<div class="title">
+			{% if type != "gradient" %}
 			<span class="titleLeft">
 				<select id="bort">
 					<option value="blur">Blur</option>
@@ -446,6 +447,7 @@ input[name="size31"] {
 				</select>
 				
 			</span>
+			{% endif %}
 			<span class="titleCenter">
 				Formula
 			</span>

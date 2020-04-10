@@ -176,7 +176,7 @@ for (var i=0;i<2;i++){
 		vars = ["d","h","s","l"];
 	}
 	for (var ii=0;ii<4;ii++){
-		//workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
+		workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
 	}
 	var wxml = Blockly.Xml.textToDom(defaults[i]);
 	Blockly.Xml.domToWorkspace(wxml,workspace);
@@ -246,9 +246,6 @@ function updateWork(workspace,bort) {
 		oldcode = code;
 		if (bort == 'b'){
 			document.getElementById('blurFormula').querySelector('textarea').value = outspace;
-		}
-		else {
-			document.getElementById('textFormula').querySelector('textarea').value = outspace;
 		}
 		
 		updateImage(false);
