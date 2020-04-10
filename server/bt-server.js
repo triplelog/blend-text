@@ -229,19 +229,19 @@ wss.on('connection', function connection(ws) {
   		console.log("af",performance.now());
   		var buffer = Buffer.from(message);
   		FileType.fromBuffer(buffer.slice(0,1000)).then( (val) => {
-  			console.log(val);
-  		});
-  		/*for (var i=0;i<imgTypes.length;i++){
-			if (dm.url.substring(dm.url.length-imgTypes[i].length,dm.url.length) == imgTypes[i]){
-				inSrc.replace('.png',imgTypes[i]);
-				wget = 'wget --accept "*"'+imgTypes[i]+' -O '+inSrc + ' "' + dm.url + '" && echo "done"';	
+  			var ext = '.'+val.ext;
+  			for (var i=0;i<imgTypes.length;i++){
+				if (ext == imgTypes[i]){
+					inSrc.replace('.png',imgTypes[i]);
+					fs.writeFile(inSrc, buffer, function (err) {
+						if (err){console.log(err);}
+						console.log("cf",performance.now());
+					});
+					break;
+				}
 			}
-		}*/
-		console.log("bf",performance.now());
-  		fs.writeFile(inSrc, buffer, function (err) {
-  			if (err){console.log(err);}
-  			console.log("cf",performance.now());
   		});
+		
   		return;
   	}
   	var dm = JSON.parse(message);
