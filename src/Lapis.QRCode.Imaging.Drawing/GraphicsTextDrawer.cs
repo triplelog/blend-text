@@ -22,12 +22,24 @@ namespace Lapis.QRCode.Imaging.Drawing
 			Stopwatch stopWatch = new Stopwatch();
         	stopWatch.Start();
         	
-        	
+        	bool varD = false; bool varR= false; bool varG= false; bool varB= false;
+        	bool varH= false; bool varS= false; bool varL= false;
             if (BlurType[0] == 'h'){
 				BlurType = "hsl";
 			}
 			else {
 				BlurType = "rgb";
+			}
+			for (var i=3;i<7;i++){
+				if (BlurType.Length > i){
+					if (BlurType[i] == 'd'){varD = true;}
+					if (BlurType[i] == 'r'){varR = true;}
+					if (BlurType[i] == 'g'){varG = true;}
+					if (BlurType[i] == 'b'){varB = true;}
+					if (BlurType[i] == 'h'){varH = true;}
+					if (BlurType[i] == 's'){varS = true;}
+					if (BlurType[i] == 'l'){varL = true;}
+				}
 			}
 			char[] usedvars = new char[4];
 
