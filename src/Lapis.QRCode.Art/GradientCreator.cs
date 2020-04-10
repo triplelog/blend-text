@@ -111,15 +111,15 @@ namespace Lapis.QRCode.Art
                 else if (gtype == "linear"){
                 	//get angle
                 	int angle = 45; // from 0 to 359
-                	int theight = tripMatrix.RowCount;
-					int twidth = tripMatrix.ColumnCount;
+                	theight = tripMatrix.RowCount;
+					twidth = tripMatrix.ColumnCount;
 					TripMatrix outMatrix = new TripMatrix(theight,twidth);
         			int minr = theight*theight+twidth*twidth;
         			int maxr = 0;
-                	if (angle == 0 || angle = 180){
+                	if (angle == 0 || angle == 180){
                 		//distance is x coord
                 	}
-                	else if (angle == 90 || angle = 270){
+                	else if (angle == 90 || angle == 270){
                 		//distance is y coord
                 	}
                 	else {
@@ -134,8 +134,8 @@ namespace Lapis.QRCode.Art
                 		double yy;
                 		double d;
                 		int dd;
-                		ystep = 1;
-                		xstep = 1;
+                		int ystep = 1;
+                		int xstep = 1;
                 		for (var i=0;i<theight;i+=ystep){
 							for (var ii=0;ii<twidth;ii+=xstep){
 								x = ii;
