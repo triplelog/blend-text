@@ -7,3 +7,6 @@ echo "deb https://download.mono-project.com/repo/debian stable-buster main" | su
 sudo apt update
 
 sudo apt install libgdiplus
+
+dotnet publish -c Release
+change server to call qr-art from /Release not /Debug

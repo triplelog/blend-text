@@ -48,19 +48,33 @@ app.get('/qr',
 		var formulas = [];
 		if (req.isAuthenticated()){
 			tempKeys[tkey] = {username:req.user.username};
-			formulas = req.user.formulas;
-			for (var i=0;i<formulas.length;i++){
-				formulas[i].id = i;
-			}
-			
+			UserData.findOne({ username: req.user.username }, function(err, result) {
+				formulas = result.formulas.color;
+				for (var i=0;i<formulas.length;i++){
+					formulas[i].id = i;
+				}
+				res.write(nunjucks.render('qblur.html',{
+					type: 'qr',
+					tkey: tkey,
+					formulas: formulas,
+				}));
+				res.end();
+			});
 		}
-		
-		res.write(nunjucks.render('qblur.html',{
-			type: 'qr',
-			tkey: tkey,
-			formulas: formulas,
-		}));
-		res.end();
+		else {
+			UserData.findOne({ username: "g" }, function(err, result) {
+				formulas = result.formulas.color;
+				for (var i=0;i<formulas.length;i++){
+					formulas[i].id = i;
+				}
+				res.write(nunjucks.render('qblur.html',{
+					type: 'qr',
+					tkey: tkey,
+					formulas: formulas,
+				}));
+				res.end();
+			});
+		}
 	}
 );
 
@@ -70,19 +84,33 @@ app.get('/text',
 		var formulas = [];
 		if (req.isAuthenticated()){
 			tempKeys[tkey] = {username:req.user.username};
-			formulas = req.user.formulas;
-			for (var i=0;i<formulas.length;i++){
-				formulas[i].id = i;
-			}
-			
+			UserData.findOne({ username: req.user.username }, function(err, result) {
+				formulas = result.formulas.color;
+				for (var i=0;i<formulas.length;i++){
+					formulas[i].id = i;
+				}
+				res.write(nunjucks.render('qblur.html',{
+					type: 'text',
+					tkey: tkey,
+					formulas: formulas,
+				}));
+				res.end();
+			});
 		}
-		
-		res.write(nunjucks.render('qblur.html',{
-			type: 'text',
-			tkey: tkey,
-			formulas: formulas,
-		}));
-		res.end();
+		else {
+			UserData.findOne({ username: "g" }, function(err, result) {
+				formulas = result.formulas.color;
+				for (var i=0;i<formulas.length;i++){
+					formulas[i].id = i;
+				}
+				res.write(nunjucks.render('qblur.html',{
+					type: 'text',
+					tkey: tkey,
+					formulas: formulas,
+				}));
+				res.end();
+			});
+		}
 	}
 );
 
@@ -92,19 +120,35 @@ app.get('/image',
 		var formulas = [];
 		if (req.isAuthenticated()){
 			tempKeys[tkey] = {username:req.user.username};
-			formulas = req.user.formulas;
-			for (var i=0;i<formulas.length;i++){
-				formulas[i].id = i;
-			}
-			
+			UserData.findOne({ username: req.user.username }, function(err, result) {
+				formulas = result.formulas.color;
+				for (var i=0;i<formulas.length;i++){
+					formulas[i].id = i;
+				}
+				res.write(nunjucks.render('qblur.html',{
+					type: 'image',
+					tkey: tkey,
+					formulas: formulas,
+				}));
+				res.end();
+			});
+		}
+		else {
+			UserData.findOne({ username: "g" }, function(err, result) {
+				formulas = result.formulas.color;
+				for (var i=0;i<formulas.length;i++){
+					formulas[i].id = i;
+				}
+				res.write(nunjucks.render('qblur.html',{
+					type: 'image',
+					tkey: tkey,
+					formulas: formulas,
+				}));
+				res.end();
+			});
 		}
 		
-		res.write(nunjucks.render('qblur.html',{
-			type: 'image',
-			tkey: tkey,
-			formulas: formulas,
-		}));
-		res.end();
+		
 	}
 );
 
@@ -114,20 +158,22 @@ app.get('/gradient',
 		var formulas = [];
 		if (req.isAuthenticated()){
 			tempKeys[tkey] = {username:req.user.username};
-			formulas = req.user.formulas;
-			for (var i=0;i<formulas.length;i++){
-				formulas[i].id = i;
-			}
-			res.write(nunjucks.render('qblur.html',{
-				type: 'gradient',
-				tkey: tkey,
-				formulas: formulas,
-			}));
-			res.end();
+			UserData.findOne({ username: req.user.username }, function(err, result) {
+				formulas = result.formulas.gradient;
+				for (var i=0;i<formulas.length;i++){
+					formulas[i].id = i;
+				}
+				res.write(nunjucks.render('qblur.html',{
+					type: 'gradient',
+					tkey: tkey,
+					formulas: formulas,
+				}));
+				res.end();
+			});
 		}
 		else {
-			User.findOne({ username: 'f' }, function(err, result) {
-				formulas = result.formulas;
+			UserData.findOne({ username: 'g' }, function(err, result) {
+				formulas = result.formulas.gradient;
 				for (var i=0;i<formulas.length;i++){
 					formulas[i].id = i;
 				}
@@ -141,16 +187,10 @@ app.get('/gradient',
 			
 			
 		}
-		
-		/*
-		res.write(nunjucks.render('qblur.html',{
-			type: 'gradient',
-			tkey: tkey,
-			formulas: formulas,
-		}));
-		res.end();*/
+
 	}
 );
+
 app.get('/chart', 
 	function(req, res) {
 		

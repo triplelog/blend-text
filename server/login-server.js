@@ -62,41 +62,44 @@ app.get('/account',
   	else {
   		var tkey = crypto.randomBytes(100).toString('hex').substr(2, 18);
 		tempKeys[tkey] = {username:req.user.username};
-
-		var formulas = req.user.formulas;
-		var workspace;
-  		var wxml;
-  		var code;
-  		console.log(req.user);
-		for (var i=0;i<formulas.length;i++){
-			formulas[i].id = i;
-			workspace = new Blockly.Workspace();
-			wxml = Blockly.Xml.textToDom(formulas[i].workspace);
-  			Blockly.Xml.domToWorkspace(wxml, workspace);
-  			code = Blockly.Lua.workspaceToCode(workspace);
-			formulas[i].code = code;
-		}
 		
-		var images = req.user.images;
-		var templates = req.user.templates;
-		for (var i=0;i<templates.length;i++){
-			templates[i].id = i;
-		}
-		var creations = req.user.creations;
+		UserData.findOne({username:req.user.username}, function(err,result) {
+			var formulas = result.formulas.color;
+			var workspace;
+			var wxml;
+			var code;
+			//console.log(req.user);
+			for (var i=0;i<formulas.length;i++){
+				formulas[i].id = i;
+				workspace = new Blockly.Workspace();
+				wxml = Blockly.Xml.textToDom(formulas[i].workspace);
+				Blockly.Xml.domToWorkspace(wxml, workspace);
+				code = Blockly.Lua.workspaceToCode(workspace);
+				formulas[i].code = code;
+			}
+		
+			var images = result.images;
+			var templates = result.templates;
+			for (var i=0;i<templates.length;i++){
+				templates[i].id = i;
+			}
+			var creations = result.creations;
 		
 		
-  		res.write(nunjucks.render('account.html',{
-  			username: req.user.options.displayName || req.user.username,
-  			name: req.user.name || '',
-  			options: req.user.options,
-  			friends: req.user.friends,
-  			tkey: tkey,
-  			formulas: formulas,
-  			images: images,
-  			templates: templates,
-  			creations: creations,
-  		}));
-		res.end();
+			res.write(nunjucks.render('account.html',{
+				username: req.user.options.displayName || req.user.username,
+				name: req.user.name || '',
+				options: req.user.options,
+				friends: result.friends,
+				tkey: tkey,
+				formulas: formulas,
+				images: images,
+				templates: templates,
+				creations: creations,
+			}));
+			res.end();
+		})
+		
   	}
   	
   }
@@ -105,7 +108,7 @@ app.get('/account',
 app.post('/register',
   function(req, res){
   	console.log('registering: ',performance.now());
-  	var user = new User({username: req.body.username.toLowerCase(), formulas: [], images: [], templates: [], creations: [], friends: [], followers: [],  options: {displayName: req.body.username,robot:1}});
+  	var user = new User({username: req.body.username.toLowerCase(), options: {displayName: req.body.username,robot:1}});
 	User.register(user,req.body.password, function(err) {
 		if (err) {
 		  if (err.name == 'UserExistsError'){
@@ -117,7 +120,8 @@ app.post('/register',
 		  
 		}
 		else {
-		
+			var userData = new UserData({username: req.body.username.toLowerCase(), formulas: {gradient:[],distance:[],color:[]}, images: [], templates: [], creations: [], friends: [], followers: []});
+	
 			console.log('user registered!',performance.now());
 			var robot = 'python3 python/robohash/createrobo.py '+req.body.username.toLowerCase()+' 1';
 			var child = exec(robot, function(err, stdout, stderr) {
