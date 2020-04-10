@@ -233,6 +233,7 @@ wss.on('connection', function connection(ws) {
   			for (var i=0;i<imgTypes.length;i++){
 				if (ext == imgTypes[i]){
 					inSrc.replace('.png',imgTypes[i]);
+					console.log(inSrc);
 					fs.writeFile(inSrc, buffer, function (err) {
 						if (err){console.log(err);}
 						console.log("cf",performance.now());
