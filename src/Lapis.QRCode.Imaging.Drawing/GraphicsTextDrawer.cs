@@ -228,7 +228,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 							int imgC = hashColor.GetHashCode();
 								
                             int outval = 0;
-                            if (2==3 && lighthash.TryGetValue(imgC, out outval))
+                            if (lighthash.TryGetValue(imgC, out outval))
 							{
 								re = (outval & 0xFF0000) >> 16;
 								gr = (outval & 0xFF00) >> 8;
