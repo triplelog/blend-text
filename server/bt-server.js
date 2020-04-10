@@ -228,7 +228,9 @@ wss.on('connection', function connection(ws) {
   	if (typeof message !== 'string'){
   		console.log("af",performance.now());
   		var buffer = Buffer.from(message);
-  		console.log(FileType.fromBuffer(buffer));
+  		FileType.fromBuffer(buffer.slice(0,1000)).then(val) => {
+  			console.log(val);
+  		}
   		/*for (var i=0;i<imgTypes.length;i++){
 			if (dm.url.substring(dm.url.length-imgTypes[i].length,dm.url.length) == imgTypes[i]){
 				inSrc.replace('.png',imgTypes[i]);
