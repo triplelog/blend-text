@@ -226,17 +226,59 @@ namespace Lapis.QRCode.Imaging.Drawing
                             int bl = pixColor.B * pixColor.A / 255 + (255-pixColor.A);
 							Color hashColor = Color.FromArgb((re/HashSize)*HashSize,(gr/HashSize)*HashSize,(bl/HashSize)*HashSize);
 							//int imgC = hashColor.GetHashCode();
-							int imgC = hashColor.R;
-							imgC *= 256;
-							imgC += hashColor.G;
-							imgC *= 256;
-							imgC += hashColor.B;
-							imgC *= 128;
+							
 							if (tripMatrix[r, c]<-100){
 								tripMatrix[r, c]=-100;
 							}
 							tripMatrix[r, c] *= -1;
-							imgC += tripMatrix[r, c];
+							
+							double h; double s; double l;
+							int imgC = 0;
+							
+							if (BlurType == "rgb"){
+								if (varD) {
+									imgC += tripMatrix[r, c];
+									imgC *= 256;
+								}
+								if (varR){
+									imgC += hashColor.R;
+									imgC *= 256;
+								}
+								if (varG){
+									imgC += hashColor.G;
+									imgC *= 256;
+								}
+								if (varB){
+									imgC += hashColor.B;
+								}
+							}
+							else {
+								
+								RgbToHls(hashColor.R,hashColor.G,hashColor.B,out h,out l,out s);
+								if (varH){
+									if (varD) {
+										imgC += tripMatrix[r, c];
+										imgC *= 360;
+									}
+									imgC += Convert.ToInt32(h);
+									imgC *= 200;
+								}
+								else {
+									if (varD) {
+										imgC += tripMatrix[r, c];
+										imgC *= 200;
+									}
+								}
+								if (varS){
+									imgC += Convert.ToInt32(s*200);
+									imgC *= 200;
+								}
+								if (varL){
+									imgC += Convert.ToInt32(l*200);
+								}
+							}
+							
+							
 							
                             int outval = 0;
                             if (lighthash.TryGetValue(imgC, out outval))
@@ -253,8 +295,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 								
 								//Lighten uniformly
 								if (BlurType == "hsl"){
-									double h; double s; double l;
-									RgbToHls(re,gr,bl,out h,out l,out s);
+									
 									var res = scriptFunc.Call (tripMatrix[r, c],h,s,l);
 									h = Convert.ToDouble(res[0]);
 									s = Convert.ToDouble(res[1]);
