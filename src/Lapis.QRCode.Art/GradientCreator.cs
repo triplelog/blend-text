@@ -269,12 +269,13 @@ namespace Lapis.QRCode.Art
 					TripMatrix outMatrix = new TripMatrix(theight,twidth);
 					int avgx = 0;
 					int avgy = 0;
+					int ystep = 1;
+					int xstep = 1;
 					if (centerType == "centroid"){
 						long sumx = 0;
 						long sumy = 0;
 						int n = 0;
-						int ystep = 1;
-						int xstep = 1;
+						
 						for (var i=0;i<theight;i+=ystep){
 							for (var ii=0;ii<twidth;ii+=xstep){
 								if (tripMatrix[i,ii] > 0){
@@ -295,8 +296,6 @@ namespace Lapis.QRCode.Art
 						long sumy = 0;
 						int n = 0;
 						int medn = 0;
-						int ystep = 1;
-						int xstep = 1;
 						for (var i=0;i<theight;i+=ystep){
 							for (var ii=0;ii<twidth;ii+=xstep){
 								if (tripMatrix[i,ii] > 0){
@@ -334,8 +333,6 @@ namespace Lapis.QRCode.Art
 						long sumx = 0;
 						long sumy = 0;
 						int n = 0;
-						int ystep = 1;
-						int xstep = 1;
 						for (var i=0;i<theight;i+=ystep){
 							for (var ii=0;ii<twidth;ii+=xstep){
 								if (tripMatrix[i,ii] > 0){
