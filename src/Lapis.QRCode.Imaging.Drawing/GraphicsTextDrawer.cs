@@ -216,7 +216,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 									
 							
                         }
-                        else {
+                        else { //tripMatrix[r, c]<0 so Background
                         	var x = MarginL + c;
                             var y = MarginT + r;
 							
@@ -231,6 +231,12 @@ namespace Lapis.QRCode.Imaging.Drawing
 							imgC += hashColor.G;
 							imgC *= 256;
 							imgC += hashColor.B;
+							imgC *= 128;
+							if (tripMatrix[r, c]<-100){
+								tripMatrix[r, c]=-100;
+							}
+							tripMatrix[r, c] *= -1;
+							imgC += tripMatrix[r, c];
 							
                             int outval = 0;
                             if (lighthash.TryGetValue(imgC, out outval))
