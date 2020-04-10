@@ -110,7 +110,7 @@ namespace Lapis.QRCode.Art
                 }
                 else if (gtype == "linear"){
                 	//get angle
-                	int angle = 45; // from 0 to 359
+                	int angle = 135; // from 0 to 359
                 	theight = tripMatrix.RowCount;
 					twidth = tripMatrix.ColumnCount;
 					TripMatrix outMatrix = new TripMatrix(theight,twidth);
@@ -148,7 +148,18 @@ namespace Lapis.QRCode.Art
 									//-1*xx=m*m*xx-m*m*x+m*y;
 									//(-1-m*m)*xx=-m*m*x+m*y;
 									xx=(-m*m*x+m*y)/(-1-m*m);
-									yy = -1/m*xx;
+									if (angle >0 && angle < 90){
+										yy = -1/m*xx;
+									}
+									else if (angle >90 && angle < 180) {
+										yy = -1/m*(xx-twidth);
+									}
+									else if (angle >180 && angle < 270) {
+										yy = -1/m*(xx-twidth)+theight;
+									}
+									else if (angle >270 && angle < 360) {
+										yy = -1/m*(xx)+theight;
+									}
 									d = (x-xx)*(x-xx)+(y-yy)*(y-yy);
 									dd = Convert.ToInt32(Math.Sqrt(d));
 									if (dd<minr){minr=dd;}
