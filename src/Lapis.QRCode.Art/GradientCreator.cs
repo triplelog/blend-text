@@ -263,9 +263,11 @@ namespace Lapis.QRCode.Art
                 else if (gtype == "radial"){
                 	//get center
                 	string centerType = "centroid";
+                	
                 	string distanceType = "euclidean";
+                	
                 	int skewX = 10;
-                	int skewY = 3;
+                	int skewY = 5;
                 	if (narrowQuotient% 10 == 0){
                 		centerType = "centroid";
                 	}
@@ -285,7 +287,7 @@ namespace Lapis.QRCode.Art
                 	else if (narrowQuotient/ 10 == 2){
                 		distanceType = "square";
                 	}
-                	
+                	string skewType = "median";
                 	
                 	theight = tripMatrix.RowCount;
 					twidth = tripMatrix.ColumnCount;
@@ -369,6 +371,90 @@ namespace Lapis.QRCode.Art
 						}
 						avgx = (maxii+minii)/2;
 						avgy = (maxi+mini)/2;
+					}
+					
+					if (skewType == "unskewed"){
+						skewX = 1;
+						skewY = 1;
+					}
+					else if (skewType == "median"){
+						long sumx = 0;
+						long sumy = 0;
+						int n = 0;
+						int medn = 0;
+						for (var i=0;i<theight;i+=ystep){
+							for (var ii=0;ii<twidth;ii+=xstep){
+								if (tripMatrix[i,ii] > 0){
+									n++;
+								}
+							}
+						}
+						medn = n/3;
+						n = 0;
+						int y1 = 0;
+						int y2 = 0;
+						for (var i=0;i<theight;i+=ystep){
+							for (var ii=0;ii<twidth;ii+=xstep){
+								if (tripMatrix[i,ii] > 0){
+									n++;
+									if (n==medn){
+										y1 = i;
+									}
+									if (n==medn*2){
+										y2 = i;
+										break;
+									}
+								}
+							}
+						}
+						n = 0;
+						for (var ii=0;ii<twidth;ii+=xstep){
+							for (var i=0;i<theight;i+=ystep){
+								if (tripMatrix[i,ii] > 0){
+									n++;
+									if (n==medn){
+										x1 = ii;
+									}
+									if (n==medn*2){
+										x2 = ii;
+									}
+								}
+							}
+						}
+						if (x2-x1 > y2-y1){//skewed in x direction so skewX is smaller
+							skewX = 10;
+							skewY = (x2-x1)*10/(y2-y1);
+						}
+						else {
+							skewY = 10;
+							skewX = (y2-y1)*10/(x2-x1);
+						}
+					}
+					else if (skewType == "box"){
+						int mini = theight;
+						int minii = twidth;
+						int maxi = 0;
+						int maxii = 0;
+						for (var i=0;i<theight;i+=ystep){
+							for (var ii=0;ii<twidth;ii+=xstep){
+								if (tripMatrix[i,ii] > 0){
+									if (i>maxi){maxi = i;}
+									if (i<mini){mini = i;}
+									if (ii>maxii){maxii = ii;}
+									if (ii<minii){minii = ii;}
+								}
+							}
+						}
+						avgx = (maxii+minii);
+						avgy = (maxi+mini);
+						if (avgx > avgy){//skewed in x direction so skewX is smaller
+							skewX = 10;
+							skewY = (avgx)*10/(avgy);
+						}
+						else {
+							skewY = 10;
+							skewX = (avgy)*10/(avgx);
+						}
 					}
 					Console.WriteLine("x: "+avgx+" y: "+avgy);
 					int minr = theight*theight+twidth*twidth;
