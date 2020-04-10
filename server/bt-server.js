@@ -222,10 +222,18 @@ wss.on('connection', function connection(ws) {
   var imgIndex = 0;
   var username = '';
   var newCreation = true;
+  var imgTypes = ['.png','.jpg','.jpeg','.gif','.tiff','.tif'];//.svg, .psd, .eps, .raw, .pdf?
   ws.on('message', function incoming(message) {
   	
   	if (typeof message !== 'string'){
-  		fs.writeFile(inSrc, Buffer.from(message), function (err) {
+  		var buffer = Buffer.from(message);
+  		/*for (var i=0;i<imgTypes.length;i++){
+			if (dm.url.substring(dm.url.length-imgTypes[i].length,dm.url.length) == imgTypes[i]){
+				inSrc.replace('.png',imgTypes[i]);
+				wget = 'wget --accept "*"'+imgTypes[i]+' -O '+inSrc + ' "' + dm.url + '" && echo "done"';	
+			}
+		}*/
+  		fs.writeFile(inSrc, buffer, function (err) {
   			console.log(err);
   		});
   		return;
@@ -239,7 +247,15 @@ wss.on('connection', function connection(ws) {
 	}
 	else if (dm.type && dm.type == 'download'){
 		console.log(dm.url);
-		var wget = 'wget -O '+inSrc + ' "' + dm.url + '" && echo "done"';
+		
+		var wget = '';
+		for (var i=0;i<imgTypes.length;i++){
+			if (dm.url.substring(dm.url.length-imgTypes[i].length,dm.url.length) == imgTypes[i]){
+				inSrc.replace('.png',imgTypes[i]);
+				wget = 'wget --accept "*"'+imgTypes[i]+' -O '+inSrc + ' "' + dm.url + '" && echo "done"';	
+			}
+		}
+		if (wget == ''){return;}
 		var child = exec(wget, function(err, stdout, stderr) {
 			console.log("err: ",err);
 			console.log("stdout: ",stdout);
