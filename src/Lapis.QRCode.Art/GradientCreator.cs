@@ -284,8 +284,8 @@ namespace Lapis.QRCode.Art
 					
 					long avgxl = sumx/n;
 					long avgyl = sumy/n;
-					int argx = Convert.ToInt32(avgxl);
-					int argy = Convert.ToInt32(avgyl);
+					int avgx = Convert.ToInt32(avgxl);
+					int avgy = Convert.ToInt32(avgyl);
 					int minr = theight*theight+twidth*twidth;
         			int maxr = 0;
         			int dd = 0;
