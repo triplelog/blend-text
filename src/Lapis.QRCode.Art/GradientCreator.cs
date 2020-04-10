@@ -626,7 +626,7 @@ namespace Lapis.QRCode.Art
 												outMatrixEven[i,ii] = 1;
 											}
 										}*/
-										if (i%2 == ii%2){
+										if (i%3 == ii%3){
 											outMatrix[i,ii] = 1;
 											outMatrixEven[i,ii] = 1;
 										}
