@@ -97,114 +97,15 @@ namespace Lapis.QRCode.Art
 					ts.Milliseconds / 10);
 				Console.WriteLine("GradientCreatorTime " + elapsedTime);
                 int maxmaxr = 0;
-                if (2 == 3){
+                string gtype = "shape";
+                if (gtype == "shape"){
 					getEdgeDistance(tripMatrix,  out Dictionary<int, int> circledict, out maxmaxr);
-					getEdgePercentage(tripMatrix, circledict, maxmaxr, narrowQuotient, out TripMatrix outMatrix);
+					getEdgePercentage(tripMatrix, circledict, true, maxmaxr, narrowQuotient, out TripMatrix outMatrix);
 					return TripMatrixDrawer.Draw(outMatrix);
                 }
-                else {
+                else if (gtype == "edge"){
                 	getEdgeDistance(tripMatrix,  out Dictionary<int, int> circledict, out maxmaxr);
-                	
-                	theight = tripMatrix.RowCount;
-					twidth = tripMatrix.ColumnCount;
-					int ystep = 1 + tripMatrix.RowCount / 200;
-        			int xstep = 1 + tripMatrix.ColumnCount / 200;
-					TripMatrix outMatrix = new TripMatrix(theight,twidth);
-					for (var i=0;i<theight;i+=ystep){
-						for (var ii=0;ii<twidth;ii+=xstep){
-							if (tripMatrix[i,ii] > 0){ //first is row, second is col
-
-								if (circledict.TryGetValue(i*twidth+ii, out int outval)) {
-							
-									outMatrix[i,ii]=outval*-100/maxmaxr;
-									if (outMatrix[i,ii]<-100){
-										outMatrix[i,ii]=-100;
-									}
-									else if (outMatrix[i,ii]>-1){
-										outMatrix[i,ii]=-1;
-									}
-								}
-								else {
-									outMatrix[i,ii]=-101;
-								}
-						
-							}
-							else {
-								outMatrix[i,ii]=-101;
-							}
-					
-					
-						}
-					}
-					if (ystep > 1 || xstep > 1){
-						for (var yoffset=0;yoffset<ystep;yoffset++){
-							for (var xoffset=0;xoffset<xstep;xoffset++){
-								if (yoffset==0 && xoffset ==0){
-									continue;
-								}
-								for (var i=yoffset;i<theight;i+=ystep){
-									for (var ii=xoffset;ii<twidth;ii+=xstep){
-										if (tripMatrix[i,ii] > 0){ //first is row, second is col
-								
-									
-											int tlval = -100;
-											int trval = -100;
-											int blval = -100;
-											int brval = -100;
-											int val1;
-									
-											tlval = outMatrix[i-yoffset,ii-xoffset];
-									
-									
-									
-											if (ii+xstep-xoffset >= twidth){
-												trval = -100;
-												brval = -100;
-												if (i+ystep-yoffset >= theight) {
-													blval = -100;
-												}
-												else {
-													blval = outMatrix[i+ystep-yoffset,ii-xoffset];
-												}
-											}
-											else {
-												trval = outMatrix[i-yoffset,ii+xstep-xoffset];
-												if (i+ystep-yoffset >= theight){
-													blval = -100;
-													brval = -100;
-												}
-												else {
-													blval = outMatrix[i+ystep-yoffset,ii-xoffset];
-													brval = outMatrix[i+ystep-yoffset,ii+xstep-xoffset];
-												}
-											}
-									
-									
-											if (yoffset ==0 ){
-												outMatrix[i,ii]=(tlval+trval)/2;
-											}
-											else if (xoffset ==0 ){
-												outMatrix[i,ii]=(tlval+blval)/2;
-											}
-											else {
-												outMatrix[i,ii]=(tlval+trval+blval+brval)/4;
-											}
-											if (outMatrix[i,ii]<-100){
-												outMatrix[i,ii]=-100;
-											}
-											else if (outMatrix[i,ii]>-1){
-												outMatrix[i,ii]=-1;
-											}
-									
-										}
-										else {
-											outMatrix[i,ii]=-101;
-										}
-									}
-								}
-							}
-						}
-					}
+					getEdgePercentage(tripMatrix, circledict, false, maxmaxr, narrowQuotient, out TripMatrix outMatrix);
 					return TripMatrixDrawer.Draw(outMatrix);
                 }
                 //return TripMatrixDrawer.Draw(tripMatrix);
@@ -411,7 +312,7 @@ namespace Lapis.QRCode.Art
 				ts.Milliseconds / 10);
 			Console.WriteLine("Set circledict: " + elapsedTime);
 		}
-		public static void getEdgePercentage(TripMatrix tripMatrix, Dictionary<int, int> circledict, int maxmaxr, int narrowQuotient, out TripMatrix outMatrix) {
+		public static void getEdgePercentage(TripMatrix tripMatrix, Dictionary<int, int> circledict, bool findminr, int maxmaxr, int narrowQuotient, out TripMatrix outMatrix) {
         	
 			
 			
@@ -426,104 +327,114 @@ namespace Lapis.QRCode.Art
         	//xstep = 1;
         	int narrowFactor = (10+maxmaxr)*10/narrowQuotient;
 			int narrowAdj = (10+maxmaxr+narrowFactor)*-100/(10+maxmaxr);
+
 			for (var i=0;i<theight;i+=ystep){
 				for (var ii=0;ii<twidth;ii+=xstep){
 					if (tripMatrix[i,ii] > 0){ //first is row, second is col
 						int minr = 0;
+						if (findminr){
+							
 						
-						bool stillpossible = true;
-						int iii = 1;
-						int testmini = 0;
-						int testminii = 0;
-						int testmaxi = theight;
-						int testmaxii = twidth;
-						int testi = 0;
-						int testii = 0;
-						while (stillpossible){
-							testi = i+iii;
-							testii = ii;
-							if (testi>=theight){
-								stillpossible = false;
-								testmaxi = iii;
+							bool stillpossible = true;
+							int iii = 1;
+							int testmini = 0;
+							int testminii = 0;
+							int testmaxi = theight;
+							int testmaxii = twidth;
+							int testi = 0;
+							int testii = 0;
+							while (stillpossible){
+								testi = i+iii;
+								testii = ii;
+								if (testi>=theight){
+									stillpossible = false;
+									testmaxi = iii;
+								}
+								else if (tripMatrix[testi,testii]<= 0){
+									stillpossible = false;
+									testmaxi = iii;
+								}
+								iii++;
 							}
-							else if (tripMatrix[testi,testii]<= 0){
-								stillpossible = false;
-								testmaxi = iii;
+							stillpossible = true;
+							iii = 1;
+							while (stillpossible){
+								testi = i-iii;
+								testii = ii;
+								if (testi< 0){
+									stillpossible = false;
+									testmini = -1*iii;
+								}
+								else if (tripMatrix[testi,testii]<= 0){
+									stillpossible = false;
+									testmini = -1*iii;
+								}
+								iii++;
 							}
-							iii++;
-						}
-						stillpossible = true;
-						iii = 1;
-						while (stillpossible){
-							testi = i-iii;
-							testii = ii;
-							if (testi< 0){
-								stillpossible = false;
-								testmini = -1*iii;
+							stillpossible = true;
+							iii = 1;
+							while (stillpossible){
+								testi = i;
+								testii = ii+iii;
+								if (testii >=twidth){
+									stillpossible = false;
+									testmaxii = iii;
+								}
+								else if (tripMatrix[testi,testii]<= 0){
+									stillpossible = false;
+									testmaxii = iii;
+								}
+								iii++;
 							}
-							else if (tripMatrix[testi,testii]<= 0){
-								stillpossible = false;
-								testmini = -1*iii;
+							stillpossible = true;
+							iii = 1;
+							while (stillpossible){
+								testi = i;
+								testii = ii-iii;
+								if (testii < 0){
+									stillpossible = false;
+									testminii = -1*iii;
+								}
+								else if (tripMatrix[testi,testii]<= 0){
+									stillpossible = false;
+									testminii = -1*iii;
+								}
+								iii++;
 							}
-							iii++;
-						}
-						stillpossible = true;
-						iii = 1;
-						while (stillpossible){
-							testi = i;
-							testii = ii+iii;
-							if (testii >=twidth){
-								stillpossible = false;
-								testmaxii = iii;
-							}
-							else if (tripMatrix[testi,testii]<= 0){
-								stillpossible = false;
-								testmaxii = iii;
-							}
-							iii++;
-						}
-						stillpossible = true;
-						iii = 1;
-						while (stillpossible){
-							testi = i;
-							testii = ii-iii;
-							if (testii < 0){
-								stillpossible = false;
-								testminii = -1*iii;
-							}
-							else if (tripMatrix[testi,testii]<= 0){
-								stillpossible = false;
-								testminii = -1*iii;
-							}
-							iii++;
-						}
 						
-						int maxri = testmini*testmini;
-						if (testmaxi > -1*testmini){
-							maxri = testmaxi*testmaxi;
-						}
-						int maxrii = testminii*testminii;
-						if (testmaxii > -1*testminii){
-							maxrii = testmaxii*testmaxii;
-						}
-						int maxr = maxri+maxrii;
+							int maxri = testmini*testmini;
+							if (testmaxi > -1*testmini){
+								maxri = testmaxi*testmaxi;
+							}
+							int maxrii = testminii*testminii;
+							if (testmaxii > -1*testminii){
+								maxrii = testmaxii*testmaxii;
+							}
+							int maxr = maxri+maxrii;
 						
-						for (iii=testmini/2;iii<testmaxi/2+1;iii+=ystep){
-							for (var iiii=testminii/2;iiii<testmaxii/2+1;iiii+=xstep){
-								if (circledict.TryGetValue((i+iii)*twidth+ii+iiii, out int outval)) {
-									if (outval > iiii*iiii+iii*iii && outval > minr){
-										minr = outval;
+							for (iii=testmini/2;iii<testmaxi/2+1;iii+=ystep){
+								for (var iiii=testminii/2;iiii<testmaxii/2+1;iiii+=xstep){
+									if (circledict.TryGetValue((i+iii)*twidth+ii+iiii, out int outval)) {
+										if (outval > iiii*iiii+iii*iii && outval > minr){
+											minr = outval;
+										}
 									}
 								}
 							}
 						}
+						else {
 						
+						}
 						if (minr == 0){
 							outMatrix[i,ii]=-100;
 						}
 						else if (circledict.TryGetValue(i*twidth+ii, out int outval)) {
-							
-							outMatrix[i,ii]=(10+outval)*narrowAdj/(10+minr+narrowFactor);
+							if (findminr){
+								outMatrix[i,ii]=(10+outval)*narrowAdj/(10+minr+narrowFactor);
+							}
+							else {
+								outMatrix[i,ii]=outval*-100/maxmaxr;
+							}
 							//outMatrix[i,ii]=outval*-100/(maxmaxr);
 							//outMatrix[i,ii]=minr*-100/(maxmaxr);
 							if (outMatrix[i,ii]<-100){
@@ -537,9 +448,6 @@ namespace Lapis.QRCode.Art
 							outMatrix[i,ii]=-101;
 						}
 						
-						
-						
-					
 						
 					}
 					else {
