@@ -153,7 +153,7 @@ function onresize(evt) {
       element = element.offsetParent;
     } while (element);
     // Position blocklyDiv over blocklyArea.
-    for (var i=0;i<4;i++){
+    for (var i=0;i<2;i++){
 		blocklyDivs[i].style.left = x + 'px';
 		blocklyDivs[i].style.top = y + 'px';
 		blocklyDivs[i].style.width = document.querySelector('.content-31 .content').offsetWidth + 'px';
