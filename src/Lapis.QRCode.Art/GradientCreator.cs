@@ -97,7 +97,7 @@ namespace Lapis.QRCode.Art
 					ts.Milliseconds / 10);
 				Console.WriteLine("GradientCreatorTime " + elapsedTime);
                 int maxmaxr = 0;
-                getEdgeDistance(tripMatrix,  out circledict, out maxmaxr);
+                getEdgeDistance(tripMatrix,  out Dictionary<int, int> circledict, out maxmaxr);
                 getEdgePercentage(tripMatrix, circledict, maxmaxr, narrowQuotient, out TripMatrix outMatrix);
                 //return TripMatrixDrawer.Draw(tripMatrix);
                 return TripMatrixDrawer.Draw(outMatrix);
