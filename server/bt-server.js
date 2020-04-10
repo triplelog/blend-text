@@ -252,13 +252,13 @@ wss.on('connection', function connection(ws) {
 			var formula = {'name':dm.name,'workspace':dm.message,'formulaType':dm.formulaType};
 			//Add a Check that there does not exist a formula of that name already.
 			if (!dm.category || dm.category == 'color'){
-				User.updateOne({ username: username }, {$push: {"formulas.color": formula}}, function(err, result) {});
+				UserData.updateOne({ username: username }, {$push: {"formulas.color": formula}}, function(err, result) {});
 			}
 			else if (dm.category =='gradient') {
-				User.updateOne({ username: username }, {$push: {"formulas.gradient": formula}}, function(err, result) {});
+				UserData.updateOne({ username: username }, {$push: {"formulas.gradient": formula}}, function(err, result) {});
 			}
 			else if (dm.category =='distance') {
-				User.updateOne({ username: username }, {$push: {"formulas.distance": formula}}, function(err, result) {});
+				UserData.updateOne({ username: username }, {$push: {"formulas.distance": formula}}, function(err, result) {});
 			}
 			
 		}
@@ -268,7 +268,7 @@ wss.on('connection', function connection(ws) {
 		if (dm.message && username != ''){
 			var template = {'name':dm.name,'workspace':dm.message};
 			//Add a Check that there does not exist a template of that name already.
-			User.updateOne({ username: username }, {$push: {"templates": template}}, function(err, result) {});
+			UserData.updateOne({ username: username }, {$push: {"templates": template}}, function(err, result) {});
 		}
 		return;
 	}
@@ -277,7 +277,7 @@ wss.on('connection', function connection(ws) {
 			if (!dm.message && dm.message !== 0){
 				return;
 			}
-			User.findOne({ username: username }, "formulas", function(err, result) {
+			UserData.findOne({ username: username }, "formulas", function(err, result) {
 				var newFormula = {};
 				newFormula.name = dm.message + ' 1';
 				var foundMatch = false;
@@ -436,7 +436,7 @@ wss.on('connection', function connection(ws) {
 	
 		if (newCreation && username != ''){
 			//Add a Check that there does not exist a creation of that name already.
-			User.updateOne({ username: username }, {$push: {"creations": outSrc}}, function(err, result) {});
+			UserData.updateOne({ username: username }, {$push: {"creations": outSrc}}, function(err, result) {});
 			newCreation = false;
 		}
 		
@@ -510,7 +510,7 @@ wss.on('connection', function connection(ws) {
 	
 		if (newCreation && username != ''){
 			//Add a Check that there does not exist a creation of that name already.
-			User.updateOne({ username: username }, {$push: {"creations": outSrc}}, function(err, result) {});
+			UserData.updateOne({ username: username }, {$push: {"creations": outSrc}}, function(err, result) {});
 			newCreation = false;
 		}
 		
