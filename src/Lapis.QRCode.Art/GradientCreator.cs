@@ -263,7 +263,7 @@ namespace Lapis.QRCode.Art
                 else if (gtype == "radial"){
                 	//get center
                 	string centerType = "box";
-                	
+                	string distanceType = "diamond";
                 	theight = tripMatrix.RowCount;
 					twidth = tripMatrix.ColumnCount;
 					TripMatrix outMatrix = new TripMatrix(theight,twidth);
@@ -354,7 +354,41 @@ namespace Lapis.QRCode.Art
 					for (var i=0;i<theight;i+=ystep){
 						for (var ii=0;ii<twidth;ii+=xstep){
 							if (tripMatrix[i,ii] > 0){
-								dd = Convert.ToInt32(Math.Sqrt( (i-avgy)*(i-avgy)+(ii-avgx)*(ii-avgx) ));
+								if (distanceType == "euclidean"){
+									dd = Convert.ToInt32(Math.Sqrt( (i-avgy)*(i-avgy)+(ii-avgx)*(ii-avgx) ));
+								}
+								else if (distanceType == "diamond"){
+									if (i>avgy){
+										dd = i-avgy;
+									}
+									else {
+										dd = avgy-i;
+									}
+									if (ii>avgx){
+										dd += ii-avgx;
+									}
+									else {
+										dd += avgx-ii;
+									}
+								}
+								else if (distanceType == "square"){
+									if (i>avgy){
+										dd = i-avgy;
+									}
+									else {
+										dd = avgy-i;
+									}
+									if (ii>avgx){
+										if (ii-avgx>dd){
+											dd = ii-avgx;
+										}
+									}
+									else {
+										if (avgx-ii>dd){
+											dd = avgx-ii;
+										}
+									}
+								}
 								outMatrix[i,ii] = dd;
 								if (dd>maxr){maxr=dd;}
 								if (dd<minr){minr=dd;}
