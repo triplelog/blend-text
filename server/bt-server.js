@@ -251,7 +251,16 @@ wss.on('connection', function connection(ws) {
 		if (dm.message && username != ''){
 			var formula = {'name':dm.name,'workspace':dm.message,'formulaType':dm.formulaType};
 			//Add a Check that there does not exist a formula of that name already.
-			User.updateOne({ username: username }, {$push: {"formulas": formula}}, function(err, result) {});
+			if (!dm.category || dm.category == 'color'){
+				User.updateOne({ username: username }, {$push: {"formulas.color": formula}}, function(err, result) {});
+			}
+			else if (dm.category =='gradient') {
+				User.updateOne({ username: username }, {$push: {"formulas.gradient": formula}}, function(err, result) {});
+			}
+			else if (dm.category =='distance') {
+				User.updateOne({ username: username }, {$push: {"formulas.distance": formula}}, function(err, result) {});
+			}
+			
 		}
 		return;
 	}

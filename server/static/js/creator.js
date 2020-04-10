@@ -1,4 +1,4 @@
-function saveFormula() {
+function saveFormula(category="image") {
 	var wxml;
 	var formulaType = 'hsl';
 	if (blurOrText == 'blur'){
@@ -21,7 +21,7 @@ function saveFormula() {
 	}
 	
 	var outspace = Blockly.Xml.domToText(wxml);
-	var jsonmessage = {'type':'saveFormula','name':'First Formula','message':outspace,'formulaType':formulaType};
+	var jsonmessage = {'type':'saveFormula','name':'First Formula','message':outspace,'formulaType':formulaType,'category':category};
 	ws.send(JSON.stringify(jsonmessage));
 }
 
