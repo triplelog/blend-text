@@ -105,8 +105,8 @@ namespace Lapis.QRCode.Art
                 else {
                 	getEdgeDistance(tripMatrix,  out Dictionary<int, int> circledict, out maxmaxr);
                 	
-                	int theight = tripMatrix.RowCount;
-					int twidth = tripMatrix.ColumnCount;
+                	theight = tripMatrix.RowCount;
+					twidth = tripMatrix.ColumnCount;
 					int ystep = 1 + tripMatrix.RowCount / 200;
         			int xstep = 1 + tripMatrix.ColumnCount / 200;
 					TripMatrix outMatrix = new TripMatrix(theight,twidth);
