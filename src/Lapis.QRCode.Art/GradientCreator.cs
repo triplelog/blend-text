@@ -131,7 +131,7 @@ namespace Lapis.QRCode.Art
                 		double x;
                 		double y;
                 		double xx;
-                		double yy;
+                		double yy = 0;
                 		double d;
                 		int dd;
                 		int ystep = 1;
