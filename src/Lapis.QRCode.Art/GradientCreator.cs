@@ -292,8 +292,8 @@ namespace Lapis.QRCode.Art
 					for (var i=0;i<theight;i+=ystep){
 						for (var ii=0;ii<twidth;ii+=xstep){
 							if (tripMatrix[i,ii] > 0){
-								dd = (i-avgy)*(i-avgy)+(ii-avgx)*(ii-avgx);
-								outMatrix[i,ii] = Math.Sqrt(dd);
+								dd = Convert.ToInt32(Math.Sqrt( (i-avgy)*(i-avgy)+(ii-avgx)*(ii-avgx) ));
+								outMatrix[i,ii] = dd;
 								if (dd>maxr){maxr=dd;}
 								if (dd<minr){minr=dd;}
 							}
