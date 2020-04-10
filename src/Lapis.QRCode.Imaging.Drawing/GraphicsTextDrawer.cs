@@ -242,8 +242,8 @@ namespace Lapis.QRCode.Imaging.Drawing
 							Color hashColor = Color.FromArgb((re/HashSize)*HashSize,(gr/HashSize)*HashSize,(bl/HashSize)*HashSize);
 							//int imgC = hashColor.GetHashCode();
 							
-							if (tripMatrix[r, c]<-100){
-								tripMatrix[r, c]=-100;
+							if (tripMatrix[r, c]<-101){
+								tripMatrix[r, c]=-101;
 							}
 							tripMatrix[r, c] *= -1;
 							
