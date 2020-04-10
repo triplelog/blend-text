@@ -232,7 +232,7 @@ wss.on('connection', function connection(ws) {
   			var ext = '.'+val.ext;
   			for (var i=0;i<imgTypes.length;i++){
 				if (ext == imgTypes[i]){
-					inSrc.replace('.png',imgTypes[i]);
+					inSrc = inSrc.replace('.png',imgTypes[i]);
 					console.log(inSrc);
 					fs.writeFile(inSrc, buffer, function (err) {
 						if (err){console.log(err);}
@@ -258,7 +258,7 @@ wss.on('connection', function connection(ws) {
 		var wget = '';
 		for (var i=0;i<imgTypes.length;i++){
 			if (dm.url.substring(dm.url.length-imgTypes[i].length,dm.url.length) == imgTypes[i]){
-				inSrc.replace('.png',imgTypes[i]);
+				inSrc = inSrc.replace('.png',imgTypes[i]);
 				wget = 'wget --accept "*"'+imgTypes[i]+' -O '+inSrc + ' "' + dm.url + '" && echo "done"';	
 			}
 		}
