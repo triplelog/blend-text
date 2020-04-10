@@ -138,26 +138,36 @@ namespace Lapis.QRCode.Art
                 		int xstep = 1;
                 		for (var i=0;i<theight;i+=ystep){
 							for (var ii=0;ii<twidth;ii+=xstep){
-								x = ii;
-								y = theight-1-i;
-								//equation of line
-								//yy = m*(xx-x)+y;
-								//solve
-								//-1/m*(xx)=m*(xx-x)+y;
-								//-1*xx=m*m*xx-m*m*x+m*y;
-								//(-1-m*m)*xx=-m*m*x+m*y;
-								xx=(-m*m*x+m*y)/(-1-m*m);
-								yy = -1/m*xx;
-								d = (x-xx)*(x-xx)+(y-yy)*(y-yy);
-								dd = Convert.ToInt32(d);
-								if (dd<minr){minr=dd;}
-								if (dd>maxr){maxr=dd;}
-								outMatrix[i,ii]=dd;
+								if (tripMatrix[i,ii]>0){
+									x = ii;
+									y = theight-1-i;
+									//equation of line
+									//yy = m*(xx-x)+y;
+									//solve
+									//-1/m*(xx)=m*(xx-x)+y;
+									//-1*xx=m*m*xx-m*m*x+m*y;
+									//(-1-m*m)*xx=-m*m*x+m*y;
+									xx=(-m*m*x+m*y)/(-1-m*m);
+									yy = -1/m*xx;
+									d = (x-xx)*(x-xx)+(y-yy)*(y-yy);
+									dd = Convert.ToInt32(d);
+									if (dd<minr){minr=dd;}
+									if (dd>maxr){maxr=dd;}
+									outMatrix[i,ii]=dd;
+								}
+								else {
+									outMatrix[i,ii]=-101;
+								}
 							}
 						}
 						for (var i=0;i<theight;i+=ystep){
 							for (var ii=0;ii<twidth;ii+=xstep){
-								outMatrix[i,ii]=(outMatrix[i,ii]-minr)*-100/(maxr-minr);
+								if (tripMatrix[i,ii]>0){
+									outMatrix[i,ii]=(outMatrix[i,ii]-minr)*-100/(maxr-minr);
+								}
+								else {
+									outMatrix[i,ii]=-101;
+								}
 							}
 						}
 						return TripMatrixDrawer.Draw(outMatrix);
