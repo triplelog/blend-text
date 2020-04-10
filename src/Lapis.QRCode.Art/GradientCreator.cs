@@ -262,7 +262,7 @@ namespace Lapis.QRCode.Art
                 }
                 else if (gtype == "radial"){
                 	//get center
-                	string centerType = "centroid";
+                	string centerType = "box";
                 	
                 	theight = tripMatrix.RowCount;
 					twidth = tripMatrix.ColumnCount;
@@ -330,23 +330,22 @@ namespace Lapis.QRCode.Art
 						}
 					}
 					else if (centerType == "box"){
-						long sumx = 0;
-						long sumy = 0;
-						int n = 0;
+						int mini = theight;
+						int minii = twidth;
+						int maxi = 0;
+						int maxii = 0;
 						for (var i=0;i<theight;i+=ystep){
 							for (var ii=0;ii<twidth;ii+=xstep){
 								if (tripMatrix[i,ii] > 0){
-									n++;
-									sumx += ii;
-									sumy += i;
+									if (i>maxi){maxi = i;}
+									if (i<mini){mini = i;}
+									if (i>maxii){maxii = ii;}
+									if (i<minii){minii = ii;}
 								}
 							}
 						}
-					
-						long avgxl = sumx/n;
-						long avgyl = sumy/n;
-						avgx = Convert.ToInt32(avgxl);
-						avgy = Convert.ToInt32(avgyl);
+						avgx = (maxii+minii)/2;
+						avgy = (maxi+mini)/2;
 					}
 					Console.WriteLine("x: "+avgx+" y: "+avgy);
 					int minr = theight*theight+twidth*twidth;
