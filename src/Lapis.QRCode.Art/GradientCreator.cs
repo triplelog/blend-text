@@ -262,30 +262,96 @@ namespace Lapis.QRCode.Art
                 }
                 else if (gtype == "radial"){
                 	//get center
-                	string centerType = "centroid";
+                	string centerType = "median";
                 	
                 	theight = tripMatrix.RowCount;
 					twidth = tripMatrix.ColumnCount;
 					TripMatrix outMatrix = new TripMatrix(theight,twidth);
-                	long sumx = 0;
-                	long sumy = 0;
-                	int n = 0;
-                	int ystep = 1;
-                	int xstep = 1;
-                	for (var i=0;i<theight;i+=ystep){
+					int avgx = 0;
+					int avgy = 0;
+					if (centerType == "centroid"){
+						long sumx = 0;
+						long sumy = 0;
+						int n = 0;
+						int ystep = 1;
+						int xstep = 1;
+						for (var i=0;i<theight;i+=ystep){
+							for (var ii=0;ii<twidth;ii+=xstep){
+								if (tripMatrix[i,ii] > 0){
+									n++;
+									sumx += ii;
+									sumy += i;
+								}
+							}
+						}
+					
+						long avgxl = sumx/n;
+						long avgyl = sumy/n;
+						avgx = Convert.ToInt32(avgxl);
+						avgy = Convert.ToInt32(avgyl);
+					}
+					else if (centerType == "median"){
+						long sumx = 0;
+						long sumy = 0;
+						int n = 0;
+						int medn = 0;
+						int ystep = 1;
+						int xstep = 1;
+						for (var i=0;i<theight;i+=ystep){
+							for (var ii=0;ii<twidth;ii+=xstep){
+								if (tripMatrix[i,ii] > 0){
+									n++;
+								}
+							}
+						}
+						medn = n/2;
+						n = 0;
+						for (var i=0;i<theight;i+=ystep){
+							for (var ii=0;ii<twidth;ii+=xstep){
+								if (tripMatrix[i,ii] > 0){
+									n++;
+									if (n==medn){
+										avgy = i;
+										break;
+									}
+								}
+							}
+						}
+						n = 0;
 						for (var ii=0;ii<twidth;ii+=xstep){
-							if (tripMatrix[i,ii] > 0){
-								n++;
-								sumx += ii;
-								sumy += i;
+							for (var i=0;i<theight;i+=ystep){
+								if (tripMatrix[i,ii] > 0){
+									n++;
+									if (n==medn){
+										avgx = ii;
+										break;
+									}
+								}
 							}
 						}
 					}
+					else if (centerType == "box"){
+						long sumx = 0;
+						long sumy = 0;
+						int n = 0;
+						int ystep = 1;
+						int xstep = 1;
+						for (var i=0;i<theight;i+=ystep){
+							for (var ii=0;ii<twidth;ii+=xstep){
+								if (tripMatrix[i,ii] > 0){
+									n++;
+									sumx += ii;
+									sumy += i;
+								}
+							}
+						}
 					
-					long avgxl = sumx/n;
-					long avgyl = sumy/n;
-					int avgx = Convert.ToInt32(avgxl);
-					int avgy = Convert.ToInt32(avgyl);
+						long avgxl = sumx/n;
+						long avgyl = sumy/n;
+						avgx = Convert.ToInt32(avgxl);
+						avgy = Convert.ToInt32(avgyl);
+					}
+					Console.WriteLine("x: "+avgx+" y: "+avgy);
 					int minr = theight*theight+twidth*twidth;
         			int maxr = 0;
         			int dd = 0;
