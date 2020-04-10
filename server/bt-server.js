@@ -310,8 +310,10 @@ wss.on('connection', function connection(ws) {
 		var wxml = Blockly.Xml.textToDom(dm.blurFormula);
 		Blockly.Xml.domToWorkspace(wxml, workspace);
 		var usedvars = workspace.getAllVariables();
+		var varstr = "";
 		for (var i=0;i<usedvars.length;i++){
 			console.log(usedvars[i].id_);
+			varstr += usedvars[i].id_.substring(5,1);
 		}
 		var code = Blockly.Lua.workspaceToCode(workspace);
 		console.log(code);
@@ -323,7 +325,7 @@ wss.on('connection', function connection(ws) {
 			`
 	
 			execCmd += ' -b "testBlur"';
-			execCmd += ' -B hsl';
+			execCmd += ' -B hsl'+varstr;
 		}
 		else {
 			luaBlurFormula = `function ScriptFunc (d,r,g,b)
@@ -333,7 +335,7 @@ wss.on('connection', function connection(ws) {
 			`
 	
 			execCmd += ' -b "testBlur"';
-			execCmd += ' -B rgb';
+			execCmd += ' -B rgb'+varstr;
 		}
 	
 		workspace = new Blockly.Workspace();
