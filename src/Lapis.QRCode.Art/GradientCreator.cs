@@ -608,7 +608,7 @@ namespace Lapis.QRCode.Art
 					}
 					
 					Console.WriteLine("x: "+avgx+" y: "+avgy);
-					int nyears = 100;
+					int nyears = 1000;
 					int minr = nyears;
         			int maxr = 0;
         			int dd = 0;
