@@ -620,16 +620,16 @@ namespace Lapis.QRCode.Art
 									if (year == 0){
 										outMatrix[i,ii] = 0;
 										outMatrixEven[i,ii] = 0;
-										/*if (i-avgy < 10 && avgy-i<10){
+										if (i-avgy < 10 && avgy-i<10){
 											if (ii-avgx < 10 && avgx-ii<10){
 												outMatrix[i,ii] = 1;
 												outMatrixEven[i,ii] = 1;
 											}
-										}*/
-										if (i%3 == ii%3){
+										}
+										/*if (i%3 == ii%3){
 											outMatrix[i,ii] = 1;
 											outMatrixEven[i,ii] = 1;
-										}
+										}*/
 										
 									}
 									else if (year%2 == 0){
@@ -646,11 +646,17 @@ namespace Lapis.QRCode.Art
 										}
 										if (ln == 3){
 											outMatrixEven[i,ii]=1;
-											outMatrix[i,ii]++;
+											if (outMatrix[i,ii]==0){
+												outMatrix[i,ii]=year+1;
+											}
+											//outMatrix[i,ii]++;
 										} 
 										else if (ln == 2 && outMatrixOdd[i,ii]==1){
 											outMatrixEven[i,ii]=1;
-											outMatrix[i,ii]++;
+											if (outMatrix[i,ii]==0){
+												outMatrix[i,ii]=year+1;
+											}
+											//outMatrix[i,ii]++;
 										}
 										else {
 											outMatrixEven[i,ii]=0;
@@ -670,11 +676,17 @@ namespace Lapis.QRCode.Art
 										}
 										if (ln == 3){
 											outMatrixOdd[i,ii]=1;
-											outMatrix[i,ii]++;
+											if (outMatrix[i,ii]==0){
+												outMatrix[i,ii]=year+1;
+											}
+											//outMatrix[i,ii]++;
 										} 
 										else if (ln == 2 && outMatrixEven[i,ii]==1){
 											outMatrixOdd[i,ii]=1;
-											outMatrix[i,ii]++;
+											if (outMatrix[i,ii]==0){
+												outMatrix[i,ii]=year+1;
+											}
+											//outMatrix[i,ii]++;
 										}
 										else {
 											outMatrixOdd[i,ii]=0;
