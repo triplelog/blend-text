@@ -24,12 +24,7 @@ namespace Lapis.QRCode.Imaging.Drawing
         	
         	bool varD = false; bool varR= false; bool varG= false; bool varB= false;
         	bool varH= false; bool varS= false; bool varL= false;
-            if (BlurType[0] == 'h'){
-				BlurType = "hsl";
-			}
-			else {
-				BlurType = "rgb";
-			}
+            
 			for (var i=3;i<7;i++){
 				if (BlurType.Length > i){
 					if (BlurType[i] == 'd'){varD = true;}
@@ -43,7 +38,14 @@ namespace Lapis.QRCode.Imaging.Drawing
 				}
 				
 			}
-			Console.WriteLine(varH+" l: "+varL);
+			Console.WriteLine(BlurType+" h: "+varH+" l: "+varL);
+			
+			if (BlurType[0] == 'h'){
+				BlurType = "hsl";
+			}
+			else {
+				BlurType = "rgb";
+			}
 			char[] usedvars = new char[4];
 
             int imageHeight = bmp.Height;
