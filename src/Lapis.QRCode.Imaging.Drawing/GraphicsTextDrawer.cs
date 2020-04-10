@@ -39,8 +39,11 @@ namespace Lapis.QRCode.Imaging.Drawing
 					if (BlurType[i] == 'h'){varH = true;}
 					if (BlurType[i] == 's'){varS = true;}
 					if (BlurType[i] == 'l'){varL = true;}
+					Console.WriteLine(BlurType[i]);
 				}
+				
 			}
+			Console.WriteLine(varH+" l: "+varL);
 			char[] usedvars = new char[4];
 
             int imageHeight = bmp.Height;
