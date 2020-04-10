@@ -262,9 +262,55 @@ namespace Lapis.QRCode.Art
                 }
                 else if (gtype == "radial"){
                 	//get center
+                	string centerType = "centroid";
+                	
+                	theight = tripMatrix.RowCount;
+					twidth = tripMatrix.ColumnCount;
+					TripMatrix outMatrix = new TripMatrix(theight,twidth);
+                	long sumx = 0;
+                	long sumy = 0;
+                	int n = 0;
+                	int ystep = 1;
+                	int xstep = 1;
+                	for (var i=0;i<theight;i+=ystep){
+						for (var ii=0;ii<twidth;ii+=xstep){
+							if (tripMatrix[i,ii] > 0){
+								n++;
+								sumx += ii;
+								sumy += i;
+							}
+						}
+					}
+					int avgx = sumx/n;
+					int avgy = sumy/n;
+					
+					int minr = theight*theight+twidth*twidth;
+        			int maxr = 0;
+        			int dd = 0;
+					for (var i=0;i<theight;i+=ystep){
+						for (var ii=0;ii<twidth;ii+=xstep){
+							if (tripMatrix[i,ii] > 0){
+								dd = (i-avgy)*(i-avgy)+(ii-avgx)*(ii-avgx);
+								outMatrix[i,ii] = dd;
+								if (dd>maxr){maxr=dd;}
+								if (dd<minr){minr=dd;}
+							}
+						}
+					}
+					for (var i=0;i<theight;i+=ystep){
+						for (var ii=0;ii<twidth;ii+=xstep){
+							if (tripMatrix[i,ii]>0){
+								outMatrix[i,ii]=(outMatrix[i,ii]-minr)*-100/(maxr-minr) - 1;
+							}
+							else {
+								outMatrix[i,ii]=-101;
+							}
+						}
+					}
+					
                 	//get distance from center
                 	//find max and get percentages
-                	return TripMatrixDrawer.Draw(tripMatrix);
+                	return TripMatrixDrawer.Draw(outMatrix);
                 }
                 else {
                 	return TripMatrixDrawer.Draw(tripMatrix);
