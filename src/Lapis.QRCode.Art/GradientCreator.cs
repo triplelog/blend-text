@@ -150,7 +150,7 @@ namespace Lapis.QRCode.Art
 									xx=(-m*m*x+m*y)/(-1-m*m);
 									yy = -1/m*xx;
 									d = (x-xx)*(x-xx)+(y-yy)*(y-yy);
-									dd = Convert.ToInt32(d);
+									dd = Convert.ToInt32(Math.Sqrt(d));
 									if (dd<minr){minr=dd;}
 									if (dd>maxr){maxr=dd;}
 									outMatrix[i,ii]=dd;
