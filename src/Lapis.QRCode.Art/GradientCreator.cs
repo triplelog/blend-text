@@ -264,6 +264,8 @@ namespace Lapis.QRCode.Art
                 	//get center
                 	string centerType = "centroid";
                 	string distanceType = "euclidean";
+                	int skewX = 10;
+                	int skewY = 3;
                 	if (narrowQuotient% 10 == 0){
                 		centerType = "centroid";
                 	}
@@ -376,37 +378,37 @@ namespace Lapis.QRCode.Art
 						for (var ii=0;ii<twidth;ii+=xstep){
 							if (tripMatrix[i,ii] > 0){
 								if (distanceType == "euclidean"){
-									dd = Convert.ToInt32(Math.Sqrt( (i-avgy)*(i-avgy)+(ii-avgx)*(ii-avgx) ));
+									dd = Convert.ToInt32(Math.Sqrt( skewY*(i-avgy)*(i-avgy)+skewX*(ii-avgx)*(ii-avgx) ));
 								}
 								else if (distanceType == "diamond"){
 									if (i>avgy){
-										dd = i-avgy;
+										dd = skewY*(i-avgy);
 									}
 									else {
-										dd = avgy-i;
+										dd = skewY*(avgy-i);
 									}
 									if (ii>avgx){
-										dd += ii-avgx;
+										dd += skewX*(ii-avgx);
 									}
 									else {
-										dd += avgx-ii;
+										dd += skewX*(avgx-ii);
 									}
 								}
 								else if (distanceType == "square"){
 									if (i>avgy){
-										dd = i-avgy;
+										dd = skewY*(i-avgy);
 									}
 									else {
-										dd = avgy-i;
+										dd = skewY*(avgy-i);
 									}
 									if (ii>avgx){
-										if (ii-avgx>dd){
-											dd = ii-avgx;
+										if (skewX*(ii-avgx)>dd){
+											dd = skewX*(ii-avgx);
 										}
 									}
 									else {
-										if (avgx-ii>dd){
-											dd = avgx-ii;
+										if (skewX*(avgx-ii)>dd){
+											dd = skewX*(avgx-ii);
 										}
 									}
 								}
