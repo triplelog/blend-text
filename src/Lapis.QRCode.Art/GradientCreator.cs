@@ -97,7 +97,7 @@ namespace Lapis.QRCode.Art
 					ts.Milliseconds / 10);
 				Console.WriteLine("GradientCreatorTime " + elapsedTime);
                 int maxmaxr = 0;
-                string gtype = "shape";
+                string gtype = "edge";
                 if (gtype == "shape"){
 					getEdgeDistance(tripMatrix,  out Dictionary<int, int> circledict, out maxmaxr);
 					getEdgePercentage(tripMatrix, circledict, true, maxmaxr, narrowQuotient, out TripMatrix outMatrix);
