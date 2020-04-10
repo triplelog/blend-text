@@ -608,11 +608,13 @@ namespace Lapis.QRCode.Art
 					}
 					
 					Console.WriteLine("x: "+avgx+" y: "+avgy);
-					int nyears = 100;
+					int nyears = 200;
 					int minr = nyears;
         			int maxr = 0;
         			int dd = 0;
         			int ln = 0;
+        			int bothlive = 2;
+        			int livelive = 1;
         			for (var year=0;year<nyears;year++){
         				for (var i=0;i<theight;i+=ystep){
 							for (var ii=0;ii<twidth;ii+=xstep){
@@ -644,14 +646,14 @@ namespace Lapis.QRCode.Art
 											}
 											if (ln>3){break;}
 										}
-										if (ln == 2){
+										if (ln == bothlive){
 											outMatrixEven[i,ii]=1;
 											if (outMatrix[i,ii]==0){
 												outMatrix[i,ii]=year+1;
 											}
 											//outMatrix[i,ii]++;
 										} 
-										else if (ln == 1 && outMatrixOdd[i,ii]==1){
+										else if (ln == livelive && outMatrixOdd[i,ii]==1){
 											outMatrixEven[i,ii]=1;
 											if (outMatrix[i,ii]==0){
 												outMatrix[i,ii]=year+1;
@@ -674,14 +676,14 @@ namespace Lapis.QRCode.Art
 											}
 											if (ln>3){break;}
 										}
-										if (ln == 2){
+										if (ln == bothlive){
 											outMatrixOdd[i,ii]=1;
 											if (outMatrix[i,ii]==0){
 												outMatrix[i,ii]=year+1;
 											}
 											//outMatrix[i,ii]++;
 										} 
-										else if (ln == 1 && outMatrixEven[i,ii]==1){
+										else if (ln == livelive && outMatrixEven[i,ii]==1){
 											outMatrixOdd[i,ii]=1;
 											if (outMatrix[i,ii]==0){
 												outMatrix[i,ii]=year+1;
