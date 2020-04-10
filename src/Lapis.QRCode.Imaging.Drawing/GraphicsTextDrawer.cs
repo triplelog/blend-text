@@ -244,7 +244,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 							}
 							tripMatrix[r, c] *= -1;
 							
-							double h; double s; double l;
+							double h =0; double s=0; double l=0;
 							int imgC = 0;
 							
 							if (BlurType == "rgb"){
