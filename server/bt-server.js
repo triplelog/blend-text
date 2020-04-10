@@ -12,7 +12,7 @@ const options = {
   cert: fs.readFileSync('/etc/letsencrypt/live/matherrors.com/fullchain.pem')
 };
 const { PerformanceObserver, performance } = require('perf_hooks');
-
+const FileType = require('file-type');
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/qblur', {useNewUrlParser: true});
@@ -227,7 +227,8 @@ wss.on('connection', function connection(ws) {
   	
   	if (typeof message !== 'string'){
   		console.log("af",performance.now());
-  		//var buffer = Buffer.from(message);
+  		var buffer = Buffer.from(message);
+  		console.log(await FileType.fromBuffer(buffer));
   		/*for (var i=0;i<imgTypes.length;i++){
 			if (dm.url.substring(dm.url.length-imgTypes[i].length,dm.url.length) == imgTypes[i]){
 				inSrc.replace('.png',imgTypes[i]);
@@ -235,8 +236,8 @@ wss.on('connection', function connection(ws) {
 			}
 		}*/
 		console.log("bf",performance.now());
-  		fs.writeFile(inSrc, Buffer.from(message), function (err) {
-  			console.log(err);
+  		fs.writeFile(inSrc, buffer, function (err) {
+  			if (err){console.log(err);}
   			console.log("cf",performance.now());
   		});
   		return;
