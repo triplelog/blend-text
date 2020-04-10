@@ -108,7 +108,9 @@ namespace Lapis.QRCode.Art
 					getEdgePercentage(tripMatrix, circledict, false, maxmaxr, narrowQuotient, out TripMatrix outMatrix);
 					return TripMatrixDrawer.Draw(outMatrix);
                 }
-                //return TripMatrixDrawer.Draw(tripMatrix);
+                else {
+                	return TripMatrixDrawer.Draw(tripMatrix);
+                }
                 
             }
             else {
