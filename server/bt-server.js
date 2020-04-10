@@ -309,6 +309,7 @@ wss.on('connection', function connection(ws) {
 		var workspace = new Blockly.Workspace();
 		var wxml = Blockly.Xml.textToDom(dm.blurFormula);
 		Blockly.Xml.domToWorkspace(wxml, workspace);
+		console.log(workspace.getAllVariables());
 		var code = Blockly.Lua.workspaceToCode(workspace);
 		console.log(code);
 		if (dm.blurType == 'hsl'){
