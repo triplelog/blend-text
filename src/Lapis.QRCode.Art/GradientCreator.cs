@@ -97,7 +97,7 @@ namespace Lapis.QRCode.Art
 					ts.Milliseconds / 10);
 				Console.WriteLine("GradientCreatorTime " + elapsedTime);
                 int maxmaxr = 0;
-                string gtype = "edge";
+                string gtype = "linear";
                 if (gtype == "shape"){
 					getEdgeDistance(tripMatrix,  out Dictionary<int, int> circledict, out maxmaxr);
 					getEdgePercentage(tripMatrix, circledict, true, maxmaxr, narrowQuotient, out TripMatrix outMatrix);
@@ -107,6 +107,71 @@ namespace Lapis.QRCode.Art
                 	getEdgeDistance(tripMatrix,  out Dictionary<int, int> circledict, out maxmaxr);
 					getEdgePercentage(tripMatrix, circledict, false, maxmaxr, narrowQuotient, out TripMatrix outMatrix);
 					return TripMatrixDrawer.Draw(outMatrix);
+                }
+                else if (gtype == "linear"){
+                	//get angle
+                	int angle = 45; // from 0 to 359
+                	int theight = tripMatrix.RowCount;
+					int twidth = tripMatrix.ColumnCount;
+					TripMatrix outMatrix = new TripMatrix(theight,twidth);
+        			int minr = theight*theight+twidth*twidth;
+        			int maxr = 0;
+                	if (angle == 0 || angle = 180){
+                		//distance is x coord
+                	}
+                	else if (angle == 90 || angle = 270){
+                		//distance is y coord
+                	}
+                	else {
+                		double radians = 3.14159265/180;
+                		radians *= angle;
+                		//get equation of start line
+                		double m = Math.Tan(radians);
+                		//yy = -1/m*(xx-0)+0;
+                		double x;
+                		double y;
+                		double xx;
+                		double yy;
+                		double d;
+                		int dd;
+                		ystep = 1;
+                		xstep = 1;
+                		for (var i=0;i<theight;i+=ystep){
+							for (var ii=0;ii<twidth;ii+=xstep){
+								x = ii;
+								y = theight-1-i;
+								//equation of line
+								//yy = m*(xx-x)+y;
+								//solve
+								//-1/m*(xx)=m*(xx-x)+y;
+								//-1*xx=m*m*xx-m*m*x+m*y;
+								//(-1-m*m)*xx=-m*m*x+m*y;
+								xx=(-m*m*x+m*y)/(-1-m*m);
+								yy = -1/m*xx;
+								d = (x-xx)*(x-xx)+(y-yy)*(y-yy);
+								dd = Convert.ToInt32(d);
+								if (dd<minr){minr=dd;}
+								if (dd>maxr){maxr=dd;}
+								outMatrix[i,ii]=dd;
+							}
+						}
+						for (var i=0;i<theight;i+=ystep){
+							for (var ii=0;ii<twidth;ii+=xstep){
+								outMatrix[i,ii]=(outMatrix[i,ii]-minr)*-100/(maxr-minr);
+							}
+						}
+						return TripMatrixDrawer.Draw(outMatrix);
+                		
+                	}
+                	//scan
+                	//find max and get percentages
+                	return TripMatrixDrawer.Draw(tripMatrix);
+                }
+                else if (gtype == "radial"){
+                	//get center
+                	//get distance from center
+                	//find max and get percentages
+                	return TripMatrixDrawer.Draw(tripMatrix);
                 }
                 else {
                 	return TripMatrixDrawer.Draw(tripMatrix);
