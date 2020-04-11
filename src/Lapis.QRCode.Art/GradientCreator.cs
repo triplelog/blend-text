@@ -256,9 +256,10 @@ namespace Lapis.QRCode.Art
                 	string centerType = "centroid";
                 	
                 	string distanceType = "euclidean";
+                	string skewType = "none";
                 	
                 	int skewX = 10;
-                	int skewY = 5;
+                	int skewY = 10;
                 	if (narrowQuotient% 10 == 0){
                 		centerType = "centroid";
                 	}
@@ -269,16 +270,25 @@ namespace Lapis.QRCode.Art
                 		centerType = "box";
                 	}
                 	
-                	if (narrowQuotient/ 10 == 0){
+                	if ( (narrowQuotient/ 10 )%10 == 0){
                 		distanceType = "euclidean";
                 	}
-                	else if (narrowQuotient/ 10 == 1){
+                	else if ((narrowQuotient/ 10)%10 == 1){
                 		distanceType = "diamond";
                 	}
-                	else if (narrowQuotient/ 10 == 2){
+                	else if ((narrowQuotient/ 10)%10 == 2){
                 		distanceType = "square";
                 	}
-                	string skewType = "median";
+                	
+                	if ( (narrowQuotient/ 100 )%10 == 0){
+                		skewType = "none";
+                	}
+                	else if ((narrowQuotient/ 100)%10 == 1){
+                		skewType = "median";
+                	}
+                	else if ((narrowQuotient/ 100)%10 == 2){
+                		skewType = "box";
+                	}
                 	
                 	theight = tripMatrix.RowCount;
 					twidth = tripMatrix.ColumnCount;
@@ -364,7 +374,7 @@ namespace Lapis.QRCode.Art
 						avgy = (maxi+mini)/2;
 					}
 					
-					if (skewType == "unskewed"){
+					if (skewType == "none"){
 						skewX = 1;
 						skewY = 1;
 					}

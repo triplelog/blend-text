@@ -25,6 +25,7 @@ imgData.gradientAngle = parseInt(document.getElementById('gradientAngle').queryS
 imgData.gradientType = document.getElementById('gradientType').querySelector('select').value;
 imgData.gradientCenter = parseInt(document.getElementById('gradientCenter').querySelector('select').value);
 imgData.gradientDistance = parseInt(document.getElementById('gradientDistance').querySelector('select').value);
+imgData.gradientSkew = parseInt(document.getElementById('gradientSkew').querySelector('select').value);
 imgData.blurFormula = document.getElementById('blurFormula').querySelector('textarea').value;
 imgData.blurType = 'hsl';
 imgData.type = type;
@@ -40,8 +41,8 @@ for (var i=0;i<2;i++){
 	var el = document.getElementById(numberEls[i]).querySelector('input');
 	el.addEventListener('change',updateImage);
 }
-var selectEls = ['gradientType','gradientCenter','gradientDistance'];
-for (var i=0;i<3;i++){
+var selectEls = ['gradientType','gradientCenter','gradientDistance','gradientSkew'];
+for (var i=0;i<4;i++){
 	var el = document.getElementById(selectEls[i]).querySelector('select');
 	el.addEventListener('change',updateImage);
 }
@@ -56,6 +57,7 @@ document.getElementById('gradientAngle').style.display = 'block';
 document.getElementById('gradientSpread').style.display = 'none';
 document.getElementById('gradientCenter').style.display = 'none';
 document.getElementById('gradientDistance').style.display = 'none';
+document.getElementById('gradientSkew').style.display = 'none';
 					
 var blurOrText = 'blur';
 function updateImage(evt){
@@ -140,7 +142,7 @@ function updateImage(evt){
 				var id = el.parentElement.id;
 				imgData[id] = parseInt(el.value);
 			}
-			else if (el.parentElement.id == 'gradientCenter' || el.parentElement.id == 'gradientDistance'){
+			else if (el.parentElement.id == 'gradientCenter' || el.parentElement.id == 'gradientDistance' || el.parentElement.id == 'gradientSkew'){
 				var id = el.parentElement.id;
 				imgData[id] = parseInt(el.value);
 			}
@@ -152,18 +154,21 @@ function updateImage(evt){
 					document.getElementById('gradientSpread').style.display = 'none';
 					document.getElementById('gradientCenter').style.display = 'none';
 					document.getElementById('gradientDistance').style.display = 'none';
+					document.getElementById('gradientSkew').style.display = 'none';
 				}
 				else if (el.value == 'radial'){
 					document.getElementById('gradientAngle').style.display = 'none';
 					document.getElementById('gradientSpread').style.display = 'none';
 					document.getElementById('gradientCenter').style.display = 'block';
 					document.getElementById('gradientDistance').style.display = 'block';
+					document.getElementById('gradientSkew').style.display = 'block';
 				}
 				else if (el.value == 'edge'){
 					document.getElementById('gradientAngle').style.display = 'none';
 					document.getElementById('gradientSpread').style.display = 'block';
 					document.getElementById('gradientCenter').style.display = 'none';
 					document.getElementById('gradientDistance').style.display = 'none';
+					document.getElementById('gradientSkew').style.display = 'none';
 				}
 			}
 		}

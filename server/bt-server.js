@@ -492,7 +492,7 @@ wss.on('connection', function connection(ws) {
 			execCmd += ' -r '+dm.gradientAngle;
 		}
 		else if (dm.gradientType == 'radial'){
-			execCmd += ' -r '+(dm.gradientCenter+dm.gradientDistance);
+			execCmd += ' -r '+(dm.gradientCenter+dm.gradientDistance+dm.gradientSkew);
 		}
 		else if (dm.gradientType == 'edge'){
 			execCmd += ' -r '+dm.gradientSpread;
