@@ -737,10 +737,18 @@ namespace Lapis.QRCode.Art
 						for (var ii=0;ii<twidth;ii+=xstep){
 							if (tripMatrix[i,ii] > 0){
 								dd = outMatrix[i,ii];
-								if (dd==0){dd=nyears;}
 								
 								if (dd>maxr){maxr=dd;}
 								if (dd<minr){minr=dd;}
+							}
+						}
+					}
+					for (var i=0;i<theight;i+=ystep){
+						for (var ii=0;ii<twidth;ii+=xstep){
+							if (tripMatrix[i,ii] > 0){
+								if (outMatrix[i,ii]==0){
+									outMatrix[i,ii]=maxr;
+								}
 							}
 						}
 					}
