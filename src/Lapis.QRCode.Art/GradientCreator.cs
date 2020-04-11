@@ -92,12 +92,12 @@ namespace Lapis.QRCode.Art
                 string gtype = "life";
                 if (gtype == "edge"){
                 	getEdgeDistance(tripMatrix,  out Dictionary<int, int> circledict, out maxmaxr);
+                	bool checkminr = true;
                 	if (narrowQuotient == 0){
-						getEdgePercentage(tripMatrix, circledict, false, maxmaxr, narrowQuotient, out TripMatrix outMatrix);
-					}
-					else {
-						getEdgePercentage(tripMatrix, circledict, true, maxmaxr, narrowQuotient, out TripMatrix outMatrix);
-					}
+                		checkminr = false;
+                	}
+					getEdgePercentage(tripMatrix, circledict, checkminr, maxmaxr, narrowQuotient, out TripMatrix outMatrix);
+
 					return TripMatrixDrawer.Draw(outMatrix);
                 }
                 else if (gtype == "linear"){
