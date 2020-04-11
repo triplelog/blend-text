@@ -26,6 +26,11 @@ imgData.gradientType = document.getElementById('gradientType').querySelector('se
 imgData.gradientCenter = parseInt(document.getElementById('gradientCenter').querySelector('select').value);
 imgData.gradientDistance = parseInt(document.getElementById('gradientDistance').querySelector('select').value);
 imgData.gradientSkew = parseInt(document.getElementById('gradientSkew').querySelector('select').value);
+imgData.gradientYears = parseInt(document.getElementById('gradientYears').querySelector('input').value);
+imgData.gradientDeadMin = parseInt(document.getElementById('gradientDeadMin').querySelector('input').value);
+imgData.gradientDeadMax = parseInt(document.getElementById('gradientDeadMax').querySelector('input').value);
+imgData.gradientLiveMin = parseInt(document.getElementById('gradientLiveMin').querySelector('input').value);
+imgData.gradientLiveMax = parseInt(document.getElementById('gradientLiveMax').querySelector('input').value);
 imgData.blurFormula = document.getElementById('blurFormula').querySelector('textarea').value;
 imgData.blurType = 'hsl';
 imgData.type = type;
@@ -36,8 +41,8 @@ for (var i=0;i<2;i++){
 	var el = document.getElementById(singleEls[i]);
 	el.addEventListener('change',updateImage);
 }
-var numberEls = ['gradientSpread','gradientAngle'];
-for (var i=0;i<2;i++){
+var numberEls = ['gradientSpread','gradientAngle','gradientYears','gradientDeadMin','gradientDeadMax','gradientLiveMin','gradientLiveMax'];
+for (var i=0;i<7;i++){
 	var el = document.getElementById(numberEls[i]).querySelector('input');
 	el.addEventListener('change',updateImage);
 }
@@ -58,6 +63,7 @@ document.getElementById('gradientSpread').style.display = 'none';
 document.getElementById('gradientCenter').style.display = 'none';
 document.getElementById('gradientDistance').style.display = 'none';
 document.getElementById('gradientSkew').style.display = 'none';
+document.getElementById('lifeOptions').style.display = 'none';
 					
 var blurOrText = 'blur';
 function updateImage(evt){
@@ -142,6 +148,10 @@ function updateImage(evt){
 				var id = el.parentElement.id;
 				imgData[id] = parseInt(el.value);
 			}
+			else if (el.parentElement.id == 'gradientYears' || el.parentElement.id == 'gradientDeadMin' || el.parentElement.id == 'gradientDeadMax' || el.parentElement.id == 'gradientLiveMin' || el.parentElement.id == 'gradientLiveMax'){
+				var id = el.parentElement.id;
+				imgData[id] = parseInt(el.value);
+			}
 			else if (el.parentElement.id == 'gradientCenter' || el.parentElement.id == 'gradientDistance' || el.parentElement.id == 'gradientSkew'){
 				var id = el.parentElement.id;
 				imgData[id] = parseInt(el.value);
@@ -155,6 +165,7 @@ function updateImage(evt){
 					document.getElementById('gradientCenter').style.display = 'none';
 					document.getElementById('gradientDistance').style.display = 'none';
 					document.getElementById('gradientSkew').style.display = 'none';
+					document.getElementById('lifeOptions').style.display = 'none';
 				}
 				else if (el.value == 'radial'){
 					document.getElementById('gradientAngle').style.display = 'none';
@@ -162,6 +173,7 @@ function updateImage(evt){
 					document.getElementById('gradientCenter').style.display = 'block';
 					document.getElementById('gradientDistance').style.display = 'block';
 					document.getElementById('gradientSkew').style.display = 'block';
+					document.getElementById('lifeOptions').style.display = 'none';
 				}
 				else if (el.value == 'edge'){
 					document.getElementById('gradientAngle').style.display = 'none';
@@ -169,6 +181,15 @@ function updateImage(evt){
 					document.getElementById('gradientCenter').style.display = 'none';
 					document.getElementById('gradientDistance').style.display = 'none';
 					document.getElementById('gradientSkew').style.display = 'none';
+					document.getElementById('lifeOptions').style.display = 'none';
+				}
+				else if (el.value == 'life'){
+					document.getElementById('gradientAngle').style.display = 'none';
+					document.getElementById('gradientSpread').style.display = 'none';
+					document.getElementById('gradientCenter').style.display = 'none';
+					document.getElementById('gradientDistance').style.display = 'none';
+					document.getElementById('gradientSkew').style.display = 'none';
+					document.getElementById('lifeOptions').style.display = 'block';
 				}
 			}
 		}

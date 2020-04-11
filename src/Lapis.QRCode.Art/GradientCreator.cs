@@ -653,7 +653,7 @@ namespace Lapis.QRCode.Art
 										}*/
 										
 									}
-									else if (circledict.TryGetValue(i*twidth+ii, out int outval) && outval <= year*year*maxmaxr/(nyears*nyears) ) {
+									else if (circledict.TryGetValue(i*twidth+ii, out int outval) && outval <= 100 ) {
 										if (outMatrix[i,ii]==0){
 											outMatrix[i,ii]=year+1;
 										}

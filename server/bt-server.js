@@ -488,11 +488,6 @@ wss.on('connection', function connection(ws) {
 
 		execCmd += ' -x '+dm.locX;
 		execCmd += ' -y '+dm.locY;
-		dm.gradientYears = 250;
-		dm.gradientDeadMin = 2;
-		dm.gradientDeadMax = 3;
-		dm.gradientLiveMin = 3;
-		dm.gradientLiveMax = 4;
 		if (dm.gradientType == 'linear'){
 			execCmd += ' -r '+dm.gradientAngle;
 		}
