@@ -392,34 +392,33 @@ input[name="size31"] {
 			<div style="display: none;">
 				Threshold: <input type="number" id="threshold" value="128"></input>
 			</div>
-			<div>
-				Gradient: <select id="gradientType">
-					<option>Linear</option>
-					<option>Radial</option>
-					<option>Edge</option>
-					<option>Shape</option>
+			<div id="gradientType">
+				Gradient: <select>
+					<option value="linear">Linear</option>
+					<option value="radial">Radial</option>
+					<option value="edge">Edge</option>
 					</select>
 			</div>
-			<div>
-				Angle: <input type="number" id="gradientAngle" value="0"></input>
-			</div>
-			<div>
-				Center: <select id="gradientCenter">
-					<option>Centroid</option>
-					<option>Median</option>
-					<option>Bounding Box</option>
-					<option>Custom</option>
+			
+			<div id="gradientCenter">
+				Center: <select>
+					<option value="0">Centroid</option>
+					<option value="1">Median</option>
+					<option value="2">Bounding Box</option>
 					</select>
 			</div>
-			<div>
-				Distance: <select id="gradientDistance">
-					<option>Normal</option>
-					<option>Diamond</option>
-					<option>Square</option>
+			<div id="gradientDistance">
+				Distance: <select>
+					<option value="0">Normal</option>
+					<option value="10">Diamond</option>
+					<option value="20">Square</option>
 					</select>
 			</div>
-			<div>
-				Spread: <input type="number" id="gradientSpread" value="10"></input>
+			<div id="gradientAngle">
+				Angle: <input type="number" value="0"></input>
+			</div>
+			<div id="gradientSpread">
+				Spread: <input type="number" value="10"></input>
 			</div>
 			
 			

@@ -488,7 +488,15 @@ wss.on('connection', function connection(ws) {
 
 		execCmd += ' -x '+dm.locX;
 		execCmd += ' -y '+dm.locY;
-		execCmd += ' -r '+dm.gradientSpread;
+		if (dm.gradientType == 'linear'){
+			execCmd += ' -r '+dm.gradientAngle;
+		}
+		else if (dm.gradientType == 'radial'){
+			execCmd += ' -r '+(dm.gradientCenter+dm.gradientDistance*10);
+		}
+		else if (dm.gradientType == 'edge'){
+			execCmd += ' -r '+dm.gradientSpread;
+		}
 	
 		var workspace = new Blockly.Workspace();
 		var wxml = Blockly.Xml.textToDom(dm.blurFormula);

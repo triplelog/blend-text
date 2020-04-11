@@ -21,11 +21,42 @@ imgData.locY += parseInt(document.getElementById('locY').querySelector('input').
 imgData.locX = parseInt(document.getElementById('locX').querySelector('select').value);
 imgData.locX += parseInt(document.getElementById('locX').querySelector('input').value);
 imgData.gradientSpread = document.getElementById('gradientSpread').value;
+imgData.gradientAngle = document.getElementById('gradientAngle').value;
+imgData.gradientType = document.getElementById('gradientType').value;
+imgData.gradientCenter = document.getElementById('gradientCenter').value;
+imgData.gradientDistance = document.getElementById('gradientDistance').value;
 imgData.blurFormula = document.getElementById('blurFormula').querySelector('textarea').value;
 imgData.blurType = 'hsl';
 imgData.type = type;
 imgData.threshold = document.getElementById('threshold').value;
 
+var singleEls = ['hslrgb','threshold'];
+for (var i=0;i<2;i++){
+	var el = document.getElementById(singleEls[i]);
+	el.addEventListener('change',updateImage);
+}
+var numberEls = ['gradientSpread','gradientAngle'];
+for (var i=0;i<2;i++){
+	var el = document.getElementById(numberEls[i]).querySelector('input');
+	el.addEventListener('change',updateImage);
+}
+var selectEls = ['gradientType','gradientCenter','gradientDistance'];
+for (var i=0;i<3;i++){
+	var el = document.getElementById(selectEls[i]).querySelector('select');
+	el.addEventListener('change',updateImage);
+}
+var doubleEls = ['locY','locX'];
+for (var i=0;i<2;i++){
+	var el = document.getElementById(doubleEls[i]);
+	el.querySelector('select').addEventListener('change',updateImage);
+	el.querySelector('input').addEventListener('change',updateImage);
+}
+
+document.getElementById('gradientAngle').style.display = 'block';
+document.getElementById('gradientSpread').style.display = 'none';
+document.getElementById('gradientCenter').style.display = 'none';
+document.getElementById('gradientDistance').style.display = 'none';
+					
 var blurOrText = 'blur';
 function updateImage(evt){
 	if (!evt){
@@ -105,6 +136,36 @@ function updateImage(evt){
 				imgData[id] = parseInt(document.getElementById(id).querySelector('select').value);
 				imgData[id] += parseInt(document.getElementById(id).querySelector('input').value);
 			}
+			else if (el.parentElement.id == 'gradientAngle' || el.parentElement.id == 'gradientSpread'){
+				var id = el.parentElement.id;
+				imgData[id] = parseInt(el.value);
+			}
+			else if (el.parentElement.id == 'gradientCenter' || el.parentElement.id == 'gradientDistance'){
+				var id = el.parentElement.id;
+				imgData[id] = parseInt(el.value);
+			}
+			else if (el.parentElement.id == 'gradientType'){
+				var id = el.parentElement.id;
+				imgData[id] = el.value;
+				if (el.value == 'linear'){
+					document.getElementById('gradientAngle').style.display = 'block';
+					document.getElementById('gradientSpread').style.display = 'none';
+					document.getElementById('gradientCenter').style.display = 'none';
+					document.getElementById('gradientDistance').style.display = 'none';
+				}
+				else if (el.value == 'radial'){
+					document.getElementById('gradientAngle').style.display = 'none';
+					document.getElementById('gradientSpread').style.display = 'none';
+					document.getElementById('gradientCenter').style.display = 'block';
+					document.getElementById('gradientDistance').style.display = 'block';
+				}
+				else if (el.value == 'edge'){
+					document.getElementById('gradientAngle').style.display = 'none';
+					document.getElementById('gradientSpread').style.display = 'block';
+					document.getElementById('gradientCenter').style.display = 'none';
+					document.getElementById('gradientDistance').style.display = 'none';
+				}
+			}
 		}
 	}
 	//check imgData is valid?
@@ -124,17 +185,7 @@ function updateImage(evt){
 	
 	
 }
-var singleEls = ['gradientSpread','hslrgb','threshold'];
-for (var i=0;i<3;i++){
-	var el = document.getElementById(singleEls[i]);
-	el.addEventListener('change',updateImage);
-}
-var doubleEls = ['locY','locX'];
-for (var i=0;i<2;i++){
-	var el = document.getElementById(doubleEls[i]);
-	el.querySelector('select').addEventListener('change',updateImage);
-	el.querySelector('input').addEventListener('change',updateImage);
-}
+
 
 
 var oldcode = '';

@@ -90,14 +90,14 @@ namespace Lapis.QRCode.Art
                 
                 int maxmaxr = 0;
                 string gtype = "life";
-                if (gtype == "shape"){
-					getEdgeDistance(tripMatrix,  out Dictionary<int, int> circledict, out maxmaxr);
-					getEdgePercentage(tripMatrix, circledict, true, maxmaxr, narrowQuotient, out TripMatrix outMatrix);
-					return TripMatrixDrawer.Draw(outMatrix);
-                }
-                else if (gtype == "edge"){
+                if (gtype == "edge"){
                 	getEdgeDistance(tripMatrix,  out Dictionary<int, int> circledict, out maxmaxr);
-					getEdgePercentage(tripMatrix, circledict, false, maxmaxr, narrowQuotient, out TripMatrix outMatrix);
+                	if (narrowQuotient == 0){
+						getEdgePercentage(tripMatrix, circledict, false, maxmaxr, narrowQuotient, out TripMatrix outMatrix);
+					}
+					else {
+						getEdgePercentage(tripMatrix, circledict, true, maxmaxr, narrowQuotient, out TripMatrix outMatrix);
+					}
 					return TripMatrixDrawer.Draw(outMatrix);
                 }
                 else if (gtype == "linear"){
