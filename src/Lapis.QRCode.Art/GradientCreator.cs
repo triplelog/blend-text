@@ -747,7 +747,7 @@ namespace Lapis.QRCode.Art
 						for (var ii=0;ii<twidth;ii+=xstep){
 							if (tripMatrix[i,ii] > 0){
 								if (outMatrix[i,ii]==0){
-									outMatrix[i,ii]=maxr;
+									//outMatrix[i,ii]=maxr;
 								}
 							}
 						}
