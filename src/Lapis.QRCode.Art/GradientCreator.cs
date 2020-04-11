@@ -14,7 +14,7 @@ namespace Lapis.QRCode.Art
 {
     public interface GradientRCreator
     {
-        IImage Create(IRgb24BitmapBase gradientImage, int narrowQuotient);
+        IImage Create(IRgb24BitmapBase gradientImage, int narrowQuotient, string gtype);
     }
 
     public class GradientCreator : GradientRCreator
@@ -32,7 +32,7 @@ namespace Lapis.QRCode.Art
         
         public ITripMatrixDrawer TripMatrixDrawer { get; }
 
-        public virtual IImage Create(IRgb24BitmapBase gradientImage, int narrowQuotient)
+        public virtual IImage Create(IRgb24BitmapBase gradientImage, int narrowQuotient, string gtype)
         {
         	
 
@@ -89,7 +89,6 @@ namespace Lapis.QRCode.Art
                 
                 
                 int maxmaxr = 0;
-                string gtype = "life";
                 if (gtype == "edge"){
                 	getEdgeDistance(tripMatrix,  out Dictionary<int, int> circledict, out maxmaxr);
                 	bool checkminr = true;

@@ -41,6 +41,7 @@ namespace Lapis.QrArt
             var typeOpt = app.Option("-t <string>", "Type", CommandOptionType.SingleValue);
             var distanceFormulaOpt = app.Option("-d <string>", "Distance Formula", CommandOptionType.SingleValue);
             var thresholdOpt = app.Option("-l <number>", "Threshold", CommandOptionType.SingleValue);
+            var gradientTypeOpt = app.Option("-g <string>", "Gradient Type", CommandOptionType.SingleValue);
             //legacy below
             //var foregdOpt = app.Option("-f|--foreground <color>", "Foreground color.", CommandOptionType.SingleValue);
             //var backgdOpt = app.Option("-b|--background <color>", "Background color.", CommandOptionType.SingleValue);
@@ -387,7 +388,8 @@ namespace Lapis.QrArt
 						if (textDrawer.Type == "gradient"){
 							if (int.TryParse(blurRadiusOpt.Value(), out blurRadius)){}
 							else {blurRadius = 10;}
-							image = builderG.Create(bitmapText, blurRadius);
+							
+							image = builderG.Create(bitmapText, blurRadius, gradientTypeOpt.Value());
 						}
 						else {
 							string DistanceFormula = System.IO.File.ReadAllText(@"/home/rwilcox/blend-text/server/formulas/"+distanceFormulaOpt.Value()+".txt");
