@@ -976,8 +976,12 @@ namespace Lapis.QRCode.Art
 			Stopwatch stopWatch = new Stopwatch();
         	stopWatch.Start();
         	//xstep = 1;
-        	int narrowFactor = (10+maxmaxr)*10/narrowQuotient;
-			int narrowAdj = (10+maxmaxr+narrowFactor)*-100/(10+maxmaxr);
+        	int narrowFactor = 1;
+        	int narrowAdj = 1;
+        	if (findminr){
+        		narrowFactor = (10+maxmaxr)*10/narrowQuotient;
+				narrowAdj = (10+maxmaxr+narrowFactor)*-100/(10+maxmaxr);
+			}
 
 			for (var i=0;i<theight;i+=ystep){
 				for (var ii=0;ii<twidth;ii+=xstep){
