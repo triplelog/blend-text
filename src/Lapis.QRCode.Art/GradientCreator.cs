@@ -618,13 +618,15 @@ namespace Lapis.QRCode.Art
 					}
 					
 					Console.WriteLine("x: "+avgx+" y: "+avgy);
-					int nyears = 250;
+					int nyears = narrowQuotient % 10000;
 					int minr = nyears;
         			int maxr = 0;
         			int dd = 0;
         			int ln = 0;
-        			int bothlive = 2;
-        			int livelive = 1;
+        			int deadmin = (narrowQuotient / 10000) % 10;
+        			int deadmax = (narrowQuotient / 100000) % 10;
+        			int livemin = (narrowQuotient / 1000000) % 10;
+        			int livemax = (narrowQuotient / 10000000) % 10;
         			for (var year=0;year<nyears;year++){
         				for (var i=0;i<theight;i+=ystep){
 							for (var ii=0;ii<twidth;ii+=xstep){
@@ -633,7 +635,7 @@ namespace Lapis.QRCode.Art
 										outMatrix[i,ii] = 0;
 										outMatrixEven[i,ii] = 0;
 										if (circledict.TryGetValue(i*twidth+ii, out int outval)) {
-											if (outval <= 40){
+											if (outval <= 100){
 												outMatrix[i,ii] = 1;
 												outMatrixEven[i,ii] = 1;
 											}
@@ -651,7 +653,7 @@ namespace Lapis.QRCode.Art
 										}*/
 										
 									}
-									else if (circledict.TryGetValue(i*twidth+ii, out int outval) && outval <= year*year/10) {
+									else if (circledict.TryGetValue(i*twidth+ii, out int outval) && outval <= year*year*maxmaxr/(nyears*nyears) ) {
 										if (outMatrix[i,ii]==0){
 											outMatrix[i,ii]=year+1;
 										}
@@ -668,16 +670,16 @@ namespace Lapis.QRCode.Art
 													}
 												}
 											}
-											if (ln>3){break;}
+											if (ln>deadmax && ln>livemax){break;}
 										}
-										if (ln == bothlive){
+										if (ln <=deadmax && ln >= deadmin && outMatrixOdd[i,ii]==0){
 											outMatrixEven[i,ii]=1;
 											if (outMatrix[i,ii]==0){
 												outMatrix[i,ii]=year+1;
 											}
 											//outMatrix[i,ii]++;
 										} 
-										else if (ln == livelive && outMatrixOdd[i,ii]==1){
+										else if (ln <=livemax && ln >= livemin && outMatrixOdd[i,ii]==1){
 											outMatrixEven[i,ii]=1;
 											if (outMatrix[i,ii]==0){
 												outMatrix[i,ii]=year+1;
@@ -698,16 +700,16 @@ namespace Lapis.QRCode.Art
 													}
 												}
 											}
-											if (ln>3){break;}
+											if (ln>deadmax && ln>livemax){break;}
 										}
-										if (ln == bothlive){
+										if (ln <=deadmax && ln >= deadmin && outMatrixEven[i,ii]==0){
 											outMatrixOdd[i,ii]=1;
 											if (outMatrix[i,ii]==0){
 												outMatrix[i,ii]=year+1;
 											}
 											//outMatrix[i,ii]++;
 										} 
-										else if (ln == livelive && outMatrixEven[i,ii]==1){
+										else if (ln <=livemax && ln >= livemin && outMatrixEven[i,ii]==1){
 											outMatrixOdd[i,ii]=1;
 											if (outMatrix[i,ii]==0){
 												outMatrix[i,ii]=year+1;

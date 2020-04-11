@@ -488,6 +488,11 @@ wss.on('connection', function connection(ws) {
 
 		execCmd += ' -x '+dm.locX;
 		execCmd += ' -y '+dm.locY;
+		dm.gradientYears = 250;
+		dm.gradientDeadMin = 2;
+		dm.gradientDeadMax = 3;
+		dm.gradientLiveMin = 3;
+		dm.gradientLiveMax = 4;
 		if (dm.gradientType == 'linear'){
 			execCmd += ' -r '+dm.gradientAngle;
 		}
@@ -496,6 +501,9 @@ wss.on('connection', function connection(ws) {
 		}
 		else if (dm.gradientType == 'edge'){
 			execCmd += ' -r '+dm.gradientSpread;
+		}
+		else if (dm.gradientType == 'life'){
+			execCmd += ' -r '+(dm.gradientYears+dm.gradientDeadMin*10000+dm.gradientDeadMax*100000+dm.gradientLiveMin*1000000+dm.gradientLiveMax*10000000);
 		}
 		execCmd += ' -g '+dm.gradientType;
 	
