@@ -497,6 +497,7 @@ wss.on('connection', function connection(ws) {
 		else if (dm.gradientType == 'edge'){
 			execCmd += ' -r '+dm.gradientSpread;
 		}
+		execCmd += ' -g '+dm.gradientType;
 	
 		var workspace = new Blockly.Workspace();
 		var wxml = Blockly.Xml.textToDom(dm.blurFormula);
