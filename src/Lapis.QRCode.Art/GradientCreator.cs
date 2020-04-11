@@ -538,8 +538,8 @@ namespace Lapis.QRCode.Art
 					TripMatrix outMatrix = new TripMatrix(theight,twidth);
 					int avgx = 0;
 					int avgy = 0;
-					int ystep = 1;
-					int xstep = 1;
+					int ystep = 1 + tripMatrix.RowCount / 200;
+        			int xstep = 1 + tripMatrix.ColumnCount / 200;
 					if (centerType == "centroid"){
 						long sumx = 0;
 						long sumy = 0;
@@ -662,9 +662,9 @@ namespace Lapis.QRCode.Art
 									}
 									else if (year%2 == 0){
 										ln = 0;
-										for (var iii=-1;iii<2;iii++){
+										for (var iii=-1*ystep;iii<ystep+1;iii+=ystep){
 											if (i+iii>0 && i+iii<theight-1){
-												for (var iiii=-1;iiii<2;iiii++){
+												for (var iiii=-1*xstep;iiii<xstep+1;iiii+=xstep){
 													if (ii+iiii>0 && ii+iiii<twidth-1 &&  (iii!=0 || iiii!=0) ){
 														ln += outMatrixOdd[i+iii,ii+iiii];
 													}
@@ -692,9 +692,9 @@ namespace Lapis.QRCode.Art
 									}
 									else if (year%2 == 1){
 										ln = 0;
-										for (var iii=-1;iii<2;iii++){
+										for (var iii=-1*ystep;iii<ystep+1;iii+=ystep){
 											if (i+iii>0 && i+iii<theight-1){
-												for (var iiii=-1;iiii<2;iiii++){
+												for (var iiii=-1*xstep;iiii<xstep+1;iiii+=xstep){
 													if (ii+iiii>0 && ii+iiii<twidth-1 &&  (iii!=0 || iiii!=0) ){
 														ln += outMatrixEven[i+iii,ii+iiii];
 													}
@@ -751,6 +751,76 @@ namespace Lapis.QRCode.Art
 							}
 							else {
 								outMatrix[i,ii]=-101;
+							}
+						}
+					}
+					
+					if (ystep > 1 || xstep > 1){
+						for (var yoffset=0;yoffset<ystep;yoffset++){
+							for (var xoffset=0;xoffset<xstep;xoffset++){
+								if (yoffset==0 && xoffset ==0){
+									continue;
+								}
+								for (var i=yoffset;i<theight;i+=ystep){
+									for (var ii=xoffset;ii<twidth;ii+=xstep){
+										if (tripMatrix[i,ii] > 0){ //first is row, second is col
+								
+									
+											int tlval = -100;
+											int trval = -100;
+											int blval = -100;
+											int brval = -100;
+											int val1;
+									
+											tlval = outMatrix[i-yoffset,ii-xoffset];
+									
+									
+									
+											if (ii+xstep-xoffset >= twidth){
+												trval = -100;
+												brval = -100;
+												if (i+ystep-yoffset >= theight) {
+													blval = -100;
+												}
+												else {
+													blval = outMatrix[i+ystep-yoffset,ii-xoffset];
+												}
+											}
+											else {
+												trval = outMatrix[i-yoffset,ii+xstep-xoffset];
+												if (i+ystep-yoffset >= theight){
+													blval = -100;
+													brval = -100;
+												}
+												else {
+													blval = outMatrix[i+ystep-yoffset,ii-xoffset];
+													brval = outMatrix[i+ystep-yoffset,ii+xstep-xoffset];
+												}
+											}
+									
+									
+											if (yoffset ==0 ){
+												outMatrix[i,ii]=(tlval+trval)/2;
+											}
+											else if (xoffset ==0 ){
+												outMatrix[i,ii]=(tlval+blval)/2;
+											}
+											else {
+												outMatrix[i,ii]=(tlval+trval+blval+brval)/4;
+											}
+											if (outMatrix[i,ii]<-100){
+												outMatrix[i,ii]=-100;
+											}
+											else if (outMatrix[i,ii]>-1){
+												outMatrix[i,ii]=-1;
+											}
+									
+										}
+										else {
+											outMatrix[i,ii]=-101;
+										}
+									}
+								}
 							}
 						}
 					}
