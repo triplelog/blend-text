@@ -36,7 +36,7 @@ app.use('/',express.static('static'));
 app.get('/', 
 	function(req, res) {
 		
-		res.write(nunjucks.render('index.html',{
+		res.write(nunjucks.render('templates/index.html',{
 			
 		}));
 		res.end();
