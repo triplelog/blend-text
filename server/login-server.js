@@ -14,7 +14,7 @@ const { PerformanceObserver, performance } = require('perf_hooks');
 
 var tempKeys = {};
 const User = require('./models/user');
-const QblurData = require('./models/qblurdata');
+const QblurData = require('./models/userdata');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://45.32.213.227:27017/triplelog', {useNewUrlParser: true});
 var passport = require('passport')
