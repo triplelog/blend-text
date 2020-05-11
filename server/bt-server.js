@@ -174,7 +174,7 @@ app.get('/gradient',
 		}
 		else {
 			UserData.findOne({ username: 'h' }, function(err, result) {
-				console.log(result);
+				console.log(result.formulas.gradient);
 				formulas = result.formulas.gradient;
 				for (var i=0;i<formulas.length;i++){
 					formulas[i].id = i;
