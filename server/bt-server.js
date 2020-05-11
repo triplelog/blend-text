@@ -15,9 +15,9 @@ const { PerformanceObserver, performance } = require('perf_hooks');
 const FileType = require('file-type');
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://45.32.213.227:27017/triplelog', {useNewUrlParser: true});
+mongoose.connect('mongodb://localhost/qblur', {useNewUrlParser: true});
 const User = require('./models/user');
-const QblurData = require('./models/qblurdata');
+const QblurData = require('./models/userdata');
 
 var express = require('express');
 
