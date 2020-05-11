@@ -15,9 +15,9 @@ const { PerformanceObserver, performance } = require('perf_hooks');
 const FileType = require('file-type');
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/qblur', {useNewUrlParser: true});
+mongoose.connect('mongodb://45.32.213.227:27017/triplelog', {useNewUrlParser: true});
 const User = require('./models/user');
-const UserData = require('./models/userdata');
+const QblurData = require('./models/qblurdata');
 
 var express = require('express');
 
@@ -49,7 +49,7 @@ app.get('/qr',
 		var formulas = [];
 		if (req.isAuthenticated()){
 			tempKeys[tkey] = {username:req.user.username};
-			UserData.findOne({ username: req.user.username }, function(err, result) {
+			QblurData.findOne({ username: req.user.username }, function(err, result) {
 				formulas = result.formulas.color;
 				for (var i=0;i<formulas.length;i++){
 					formulas[i].id = i;
@@ -63,7 +63,7 @@ app.get('/qr',
 			});
 		}
 		else {
-			UserData.findOne({ username: "h" }, function(err, result) {
+			QblurData.findOne({ username: "h" }, function(err, result) {
 				formulas = result.formulas.color;
 				for (var i=0;i<formulas.length;i++){
 					formulas[i].id = i;
@@ -85,7 +85,7 @@ app.get('/text',
 		var formulas = [];
 		if (req.isAuthenticated()){
 			tempKeys[tkey] = {username:req.user.username};
-			UserData.findOne({ username: req.user.username }, function(err, result) {
+			QblurData.findOne({ username: req.user.username }, function(err, result) {
 				formulas = result.formulas.color;
 				for (var i=0;i<formulas.length;i++){
 					formulas[i].id = i;
@@ -99,7 +99,7 @@ app.get('/text',
 			});
 		}
 		else {
-			UserData.findOne({ username: "h" }, function(err, result) {
+			QblurData.findOne({ username: "h" }, function(err, result) {
 				formulas = result.formulas.color;
 				for (var i=0;i<formulas.length;i++){
 					formulas[i].id = i;
@@ -121,7 +121,7 @@ app.get('/image',
 		var formulas = [];
 		if (req.isAuthenticated()){
 			tempKeys[tkey] = {username:req.user.username};
-			UserData.findOne({ username: req.user.username }, function(err, result) {
+			QblurData.findOne({ username: req.user.username }, function(err, result) {
 				formulas = result.formulas.color;
 				for (var i=0;i<formulas.length;i++){
 					formulas[i].id = i;
@@ -135,7 +135,7 @@ app.get('/image',
 			});
 		}
 		else {
-			UserData.findOne({ username: "h" }, function(err, result) {
+			QblurData.findOne({ username: "h" }, function(err, result) {
 				formulas = result.formulas.color;
 				for (var i=0;i<formulas.length;i++){
 					formulas[i].id = i;
@@ -159,7 +159,7 @@ app.get('/gradient',
 		var formulas = [];
 		if (req.isAuthenticated()){
 			tempKeys[tkey] = {username:req.user.username};
-			UserData.findOne({ username: req.user.username }, function(err, result) {
+			QblurData.findOne({ username: req.user.username }, function(err, result) {
 				formulas = result.formulas.gradient;
 				for (var i=0;i<formulas.length;i++){
 					formulas[i].id = i;
@@ -173,7 +173,7 @@ app.get('/gradient',
 			});
 		}
 		else {
-			UserData.findOne({ username: 'h' }, function(err, result) {
+			QblurData.findOne({ username: 'h' }, function(err, result) {
 				console.log(result.formulas.gradient);
 				formulas = result.formulas.gradient;
 				for (var i=0;i<formulas.length;i++){
@@ -276,13 +276,13 @@ wss.on('connection', function connection(ws) {
 			var formula = {'name':dm.name,'workspace':dm.message,'formulaType':dm.formulaType};
 			//Add a Check that there does not exist a formula of that name already.
 			if (!dm.category || dm.category == 'color'){
-				UserData.updateOne({ username: username }, {$push: {"formulas.color": formula}}, function(err, result) {});
+				QblurData.updateOne({ username: username }, {$push: {"formulas.color": formula}}, function(err, result) {});
 			}
 			else if (dm.category =='gradient') {
-				UserData.updateOne({ username: username }, {$push: {"formulas.gradient": formula}}, function(err, result) {});
+				QblurData.updateOne({ username: username }, {$push: {"formulas.gradient": formula}}, function(err, result) {});
 			}
 			else if (dm.category =='distance') {
-				UserData.updateOne({ username: username }, {$push: {"formulas.distance": formula}}, function(err, result) {});
+				QblurData.updateOne({ username: username }, {$push: {"formulas.distance": formula}}, function(err, result) {});
 			}
 			
 		}
@@ -292,7 +292,7 @@ wss.on('connection', function connection(ws) {
 		if (dm.message && username != ''){
 			var template = {'name':dm.name,'workspace':dm.message};
 			//Add a Check that there does not exist a template of that name already.
-			UserData.updateOne({ username: username }, {$push: {"templates": template}}, function(err, result) {});
+			QblurData.updateOne({ username: username }, {$push: {"templates": template}}, function(err, result) {});
 		}
 		return;
 	}
@@ -301,7 +301,7 @@ wss.on('connection', function connection(ws) {
 			if (!dm.message && dm.message !== 0){
 				return;
 			}
-			UserData.findOne({ username: username }, "formulas", function(err, result) {
+			QblurData.findOne({ username: username }, "formulas", function(err, result) {
 				var newFormula = {};
 				newFormula.name = dm.message + ' 1';
 				var foundMatch = false;
@@ -460,7 +460,7 @@ wss.on('connection', function connection(ws) {
 	
 		if (newCreation && username != ''){
 			//Add a Check that there does not exist a creation of that name already.
-			UserData.updateOne({ username: username }, {$push: {"creations": outSrc}}, function(err, result) {});
+			QblurData.updateOne({ username: username }, {$push: {"creations": outSrc}}, function(err, result) {});
 			newCreation = false;
 		}
 		
@@ -546,7 +546,7 @@ wss.on('connection', function connection(ws) {
 	
 		if (newCreation && username != ''){
 			//Add a Check that there does not exist a creation of that name already.
-			UserData.updateOne({ username: username }, {$push: {"creations": outSrc}}, function(err, result) {});
+			QblurData.updateOne({ username: username }, {$push: {"creations": outSrc}}, function(err, result) {});
 			newCreation = false;
 		}
 		
@@ -616,3 +616,4 @@ function createGradient(ws,execCmd,outSrc,imgIndex, luaBlurFormula) {
   	});
 	
 }
+
