@@ -43,19 +43,19 @@ app.get('/account',
   function(req, res){
   	if (!req.isAuthenticated()){
   		if (req.query.e && req.query.e=='duplicate'){
-  			res.write(nunjucks.render('loginregister.html',{
+  			res.write(nunjucks.render('templates/loginregisterbase.html',{
 				duplicate: true,
 			}));
 			res.end();
   		}
   		else if (req.query.e && req.query.e=='badlogin'){
-  			res.write(nunjucks.render('loginregister.html',{
+  			res.write(nunjucks.render('templates/loginregisterbase.html',{
 				badlogin: true,
 			}));
 			res.end();
   		}
   		else {
-  			res.write(nunjucks.render('loginregister.html',{}));
+  			res.write(nunjucks.render('templates/loginregisterbase.html',{}));
 			res.end();
   		}
 		
@@ -87,7 +87,7 @@ app.get('/account',
 			var creations = result.creations;
 		
 		
-			res.write(nunjucks.render('account.html',{
+			res.write(nunjucks.render('templates/accountbase.html',{
 				username: req.user.options.displayName || req.user.username,
 				name: req.user.name || '',
 				options: req.user.options,
