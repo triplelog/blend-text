@@ -27,6 +27,55 @@ body {
 	background-size: cover;
 	
 }
+
+label[for="formula--1"] {
+	position: absolute;
+	display: block;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 150%;
+}
+
+{% for formula in range(0,10 + formulas.length*3/2) %}
+#formula-{{formula}}:checked ~ label[for="formula-{{formula}}"] {
+	pointer-events: none;
+	
+}
+#formula-{{formula}}:checked ~ label[for="formula-{{formula}}"] + div.formulaCode {
+	display: block;
+	
+}
+{% endfor %}
+.content-11 {
+	overflow: auto;
+}
+.formulaLabel {
+	position: relative;
+	display: block;
+}
+.formulaCode {
+	display: none;
+	position: absolute;
+	left: 1rem;
+	padding: 1rem;
+	z-index: 5;
+	border: 1px solid black;
+	background: white;
+	pointer-events: none;
+}
+.formulaCode div{
+	pointer-events: all;
+}
+
+
+.creations .content{
+	overflow: auto;
+}
+.creations .content img{
+	max-width: 40%;
+	display: inline-block;
+}
 {% endblock %}
 
 
@@ -42,7 +91,7 @@ body {
 		
 	</span>
 	<span class="titleCenter">
-		<a href="https://sudokufarm.com">My Puzzles</a>
+		<a href="https://sudokufarm.com">Formulas</a>
 	</span>
 	<span class="titleRight">
 		<label for="radio11-1"><i class="fas fa-compress-alt"></i></label>
@@ -52,11 +101,23 @@ body {
 </div>
 {% endblock %}
 {% block content11 %}
-<ul>
-	<li>In Progress</li>
-	<li>Completed</li>
-	<li>Suggested</li>
-</ul>
+	<input type="radio" name="formula" style="display: none;" id="formula--1" checked="checked"></input>
+	{% for formula in formulas %}
+	<input type="radio" name="formula" style="display: none;" id="formula-{{ formula.id }}"></input>
+	{% endfor %}
+	<label for="formula--1"></label>
+	{% for formula in formulas %}
+	<label class="formulaLabel" for="formula-{{ formula.id }}">{{ formula.name }}</label>
+	<div class="formulaCode">
+		<div>
+			<i class="fas fa-trash"></i>
+			<i class="fas fa-edit"></i>
+			<i class="fas fa-copy" onclick="copyFormula('{{ formula.name }}')"></i>
+		</div>
+		<pre class="language-python"><code class="language-python">{{ formula.code }}</code></pre>
+		
+	</div>
+	{% endfor %}
 {% endblock %}	
 
 {% block title13 %}
@@ -71,7 +132,7 @@ body {
 	
 	</span>
 	<span class="titleCenter">
-		<a href="https://gifsaw.com">Created Puzzles</a>
+		<a href="https://gifsaw.com">Images</a>
 	</span>
 	<span class="titleRight">
 		<label for="radio13-3"><i class="fas fa-expand"></i></label>
@@ -84,9 +145,9 @@ body {
 {% endblock %}
 {% block content13 %}
 
-{% for key, puzzle in created %}
-<div><a href="{{ puzzle.url }}">{{ puzzle.name }}</a>
-</div>
+	{% for image in images %}
+	<img src="{{image.src}}">
+	{% endfor %}
 {% endfor %}
 
 {% endblock %}	
@@ -103,7 +164,7 @@ body {
 		
 	</span>
 	<span class="titleCenter">
-		<a href="https://csshole.com">Stats</a>
+		<a href="https://csshole.com">Templates</a>
 	</span>
 	<span class="titleRight">
 		<label for="radio31-1"><i class="fas fa-compress-alt"></i></label>
@@ -113,7 +174,9 @@ body {
 </div>
 {% endblock %}
 {% block content31 %}
-0 puzzles finished
+	{% for template in templates %}
+	<label class="templateLabel" for="template-{{ template.id }}">{{ template.name }}</label>
+	{% endfor %}
 {% endblock %}
 
 {% block title33 %}
@@ -128,7 +191,7 @@ body {
 		
 	</span>
 	<span class="titleCenter">
-		<a href="https://qblur.com">Friends</a>
+		<a href="https://qblur.com">Creations</a>
 	</span>
 	<span class="titleRight">
 		<label for="radio33-1"><i class="fas fa-compress-alt"></i></label>
@@ -138,17 +201,11 @@ body {
 </div>
 {% endblock %}
 {% block content33 %}
-{% if notMyAccount %}
-<div><a href="../friend?q={{ username }}">Add {{ username }} as a friend</a></div>
-{% else %}
-<div>Add Friend: <input type="text" id="friendName"></input><button onclick="newFriend()">Add</button></div>
-{% endif %}
 
-<div id="friendList">
-	{% for friend in friends %}
-	<div>{{ friend }}</div>
+	{% for creation in creations %}
+	<img src="{{creation}}">
 	{% endfor %}
-</div>
+
 
 {% endblock %}
 
@@ -157,6 +214,9 @@ body {
 
 {% block content22 %}
 	<img src="../robots/{{ username }}1.png" style="width: 80%;">
+	<span>Settings</span>
+			<span>Friends</span>
+			<span>Stats</span>
 {% endblock %}
 
 
@@ -170,6 +230,29 @@ body {
 
 
 {% block scripts %}
+<xml id="toolbox" style="display: none">
+  <category name="Control">
+	<block type="controls_if"></block>
+	<block type="controls_whileUntil"></block>
+	<block type="controls_for">
+  </category>
+  <category name="Logic">
+	<block type="logic_compare"></block>
+	<block type="logic_operation"></block>
+	<block type="logic_boolean"></block>
+  </category>
+  <category name="Math">
+	<block type="math_number"></block>
+	<block type="math_arithmetic"></block>
+  </category>
+  <category name="Variables" custom="VARIABLE"></category>
+  <category name="Functions" custom="PROCEDURE"></category>
+
+</xml>
+<script src="../js/prism.js"></script>
+<script>var tkey = {{ tkey | dump | safe }}</script>
+<script src="../js/account.js"></script>
+
 <script>
 var ws = false;
 var tkey = '{{tkey}}';
