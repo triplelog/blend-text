@@ -10,3 +10,7 @@ sudo apt install libgdiplus
 
 dotnet publish -c Release
 change server to call qr-art from /Release not /Debug
+
+pip3 install robohash
+
+sudo systemctl start mongod
