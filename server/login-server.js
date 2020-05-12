@@ -65,6 +65,24 @@ app.get('/account',
 		tempKeys[tkey] = {username:req.user.username};
 		
 		QblurData.findOne({username:req.user.username}, function(err,result) {
+			if (result == null){
+				result = {username: req.user.username.toLowerCase(), formulas: {gradient:baseGradients,distance:[],color:[]}, images: [], templates: [], creations: [], friends: [], followers: []};
+				var qblurData = new QblurData(result);
+				qblurData.save(function(err2,result2){
+					console.log('user registered!',performance.now());
+					var robot = 'python3 python/robohash/createrobo.py '+req.user.username.toLowerCase()+' 1';
+					var child = exec(robot, function(err, stdout, stderr) {
+						console.log('robot created: ',performance.now());
+						req.login(user, function(err) {
+						  if (err) { res.redirect('/'); }
+						  else {
+							console.log('logged in: ',performance.now());
+						  }
+						});
+					});
+				})
+			
+			}
 			var formulas = result.formulas.color;
 			var workspace;
 			var wxml;
