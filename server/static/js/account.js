@@ -58,3 +58,30 @@ function copyFormula(name){
 	jsonmessage.message = name;
 	ws.send(JSON.stringify(jsonmessage));
 }
+function newFriend() {
+	if (!ws){
+		ws = new WebSocket('wss://qblur.com:8080');
+		ws.onopen = function(evt) {
+			var jsonmessage = {'type':'accountKey'};
+			jsonmessage.message = tkey;
+			ws.send(JSON.stringify(jsonmessage));
+			
+			jsonmessage = {'type':'newFriend','message':document.getElementById('friendName').value};
+			ws.send(JSON.stringify(jsonmessage));
+		}
+		ws.onmessage = function(evt){
+			//Add friend
+			var dm = JSON.parse(evt.data);
+			if (dm.operation == 'friend'){
+				var el = document.getElementById("friendList");
+				var ell = document.createElement("div");
+				ell.textContent = dm.message;
+				el.appendChild(ell);
+			}
+		}
+	}
+	else {
+		jsonmessage = {'type':'newFriend','message':document.getElementById('friendName').value};
+		ws.send(JSON.stringify(jsonmessage));
+	}
+}
