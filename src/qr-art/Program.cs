@@ -358,7 +358,7 @@ namespace Lapis.QrArt
 								threshold = threshold / 256;
 							}
 							
-							var imgMatrix = Binarizer.Binarize(bgImage, moduleCount * pixels / 3, moduleCount * pixels / 3, threshold);
+							var imgMatrix = Binarizer.Binarize(bgImage, moduleCount * 3, moduleCount * 3, threshold);
 							bitMatrix = Merger.Merge(bitMatrix, 5, imgMatrix, 3);
 							
 							int twidth = (int)bitMatrix.ColumnCount;
