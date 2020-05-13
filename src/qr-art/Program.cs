@@ -330,18 +330,18 @@ namespace Lapis.QrArt
 							var Binarizer = new Binarizer();
 							var Merger = new Merger();
 							textDrawer.CellWidth = 3;
-							
-							Bitmap nbmp = (Bitmap) new Bitmap(moduleCount * 9 * textDrawer.CellWidth,moduleCount * 9 * textDrawer.CellWidth);
+							var pixels = 3;
+							Bitmap nbmp = (Bitmap) new Bitmap(moduleCount * pixels * textDrawer.CellWidth,moduleCount * pixels * textDrawer.CellWidth);
 							bmp = Bitmap.FromFile(imageArg.Value) as Bitmap;
 							int imgWidth = bmp.Width;
 							int imgHeight = bmp.Height;
 							if (int.TryParse(widthOpt.Value(), out imgWidth)){
-								imgWidth = moduleCount * 9 * textDrawer.CellWidth * imgWidth / 100;
+								imgWidth = moduleCount * pixels * textDrawer.CellWidth * imgWidth / 100;
 								imgHeight = imgWidth * bmp.Height / bmp.Width;
 							}
 							
-							int toCenterL = ( ( moduleCount * 9 * textDrawer.CellWidth ) * xPct - imgWidth * 50) / 100;
-							int toCenterT = ( ( moduleCount * 9 * textDrawer.CellWidth ) * yPct - imgHeight * 50) / 100;
+							int toCenterL = ( ( moduleCount * pixels * textDrawer.CellWidth ) * xPct - imgWidth * 50) / 100;
+							int toCenterT = ( ( moduleCount * pixels * textDrawer.CellWidth ) * yPct - imgHeight * 50) / 100;
 							using (Graphics graph = Graphics.FromImage(nbmp)) {
 								Rectangle ImageSize = new Rectangle(0,0,nbmp.Width,nbmp.Height);
 								graph.FillRectangle(Brushes.White, ImageSize);

@@ -371,10 +371,10 @@ wss.on('connection', function connection(ws) {
 		//var inSrc = 'test.jpg';
 	
 		var execCmd = '../src/qr-art/bin/Debug/netcoreapp3.1/publish/qr-art "'+dm.text+'" '+inSrc+' png static/'+outSrc;
-		execCmd += ' -s 10';
+		execCmd += ' -s 1';
 		execCmd += ' -x '+dm.locX;
 		execCmd += ' -y '+dm.locY;
-		execCmd += ' -r 10';
+		execCmd += ' -r 1';
 		if (dm.width && dm.width != -1){
 			execCmd += ' -w '+dm.width;
 		}
