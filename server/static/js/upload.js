@@ -5,7 +5,11 @@ var syncWorker = new Worker('../wasm/uploadworker.js');
 var syncWorker2 = new Worker('../wasm/datatypeworker.js');
 */
 
-
+document.querySelector('.content-11 .content').addEventListener('drop', handleDrop, false);
+var names = ['dragenter', 'dragover', 'dragleave', 'drop'];
+names.forEach(eventName => {
+  document.querySelector('.content-11 .content').addEventListener(eventName, preventDefaults, false)
+})
 
 function preventDefaults(e) {
 	e.preventDefault();
