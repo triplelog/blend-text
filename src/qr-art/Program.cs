@@ -330,7 +330,7 @@ namespace Lapis.QrArt
 							var Binarizer = new Binarizer();
 							var Merger = new Merger();
 							textDrawer.CellWidth = 3;
-							var pixels = 27;
+							var pixels = 9;
 							Bitmap nbmp = (Bitmap) new Bitmap(moduleCount * pixels * textDrawer.CellWidth,moduleCount * pixels * textDrawer.CellWidth);
 							bmp = Bitmap.FromFile(imageArg.Value) as Bitmap;
 							int imgWidth = bmp.Width;
