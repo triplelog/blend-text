@@ -41,7 +41,7 @@ namespace Lapis.QrArt
             var typeOpt = app.Option("-t <string>", "Type", CommandOptionType.SingleValue);
             var distanceFormulaOpt = app.Option("-d <string>", "Distance Formula", CommandOptionType.SingleValue);
             var thresholdOpt = app.Option("-l <number>", "Threshold", CommandOptionType.SingleValue);
-            var gradientTypeOpt = app.Option("-g <string>", "Gradient Type", CommandOptionType.SingleValue);
+            var gradientTypeOpt = app.Option("-g <string>", "Gradient Type -- or error correct level", CommandOptionType.SingleValue);
             //legacy below
             //var foregdOpt = app.Option("-f|--foreground <color>", "Foreground color.", CommandOptionType.SingleValue);
             //var backgdOpt = app.Option("-b|--background <color>", "Background color.", CommandOptionType.SingleValue);

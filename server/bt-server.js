@@ -54,7 +54,7 @@ app.get('/qr',
 				for (var i=0;i<formulas.length;i++){
 					formulas[i].id = i;
 				}
-				res.write(nunjucks.render('qblur.html',{
+				res.write(nunjucks.render('templates/qblurbase.html',{
 					type: 'qr',
 					tkey: tkey,
 					formulas: formulas,
@@ -68,7 +68,7 @@ app.get('/qr',
 				for (var i=0;i<formulas.length;i++){
 					formulas[i].id = i;
 				}
-				res.write(nunjucks.render('qblur.html',{
+				res.write(nunjucks.render('templates/qblurbase.html',{
 					type: 'qr',
 					tkey: tkey,
 					formulas: formulas,
@@ -90,7 +90,7 @@ app.get('/text',
 				for (var i=0;i<formulas.length;i++){
 					formulas[i].id = i;
 				}
-				res.write(nunjucks.render('qblur.html',{
+				res.write(nunjucks.render('templates/qblurbase.html',{
 					type: 'text',
 					tkey: tkey,
 					formulas: formulas,
@@ -104,7 +104,7 @@ app.get('/text',
 				for (var i=0;i<formulas.length;i++){
 					formulas[i].id = i;
 				}
-				res.write(nunjucks.render('qblur.html',{
+				res.write(nunjucks.render('templates/qblurbase.html',{
 					type: 'text',
 					tkey: tkey,
 					formulas: formulas,
@@ -126,7 +126,7 @@ app.get('/image',
 				for (var i=0;i<formulas.length;i++){
 					formulas[i].id = i;
 				}
-				res.write(nunjucks.render('qblur.html',{
+				res.write(nunjucks.render('templates/qblurbase.html',{
 					type: 'image',
 					tkey: tkey,
 					formulas: formulas,
@@ -140,7 +140,7 @@ app.get('/image',
 				for (var i=0;i<formulas.length;i++){
 					formulas[i].id = i;
 				}
-				res.write(nunjucks.render('qblur.html',{
+				res.write(nunjucks.render('templates/qblurbase.html',{
 					type: 'image',
 					tkey: tkey,
 					formulas: formulas,
@@ -164,7 +164,7 @@ app.get('/gradient',
 				for (var i=0;i<formulas.length;i++){
 					formulas[i].id = i;
 				}
-				res.write(nunjucks.render('qblur.html',{
+				res.write(nunjucks.render('templates/qblurbase.html',{
 					type: 'gradient',
 					tkey: tkey,
 					formulas: formulas,
@@ -178,7 +178,7 @@ app.get('/gradient',
 				for (var i=0;i<formulas.length;i++){
 					formulas[i].id = i;
 				}
-				res.write(nunjucks.render('qblur.html',{
+				res.write(nunjucks.render('templates/qblurbase.html',{
 					type: 'gradient',
 					tkey: tkey,
 					formulas: formulas,
@@ -374,6 +374,7 @@ wss.on('connection', function connection(ws) {
 		execCmd += ' -s '+dm.typeNumber;
 		execCmd += ' -x '+dm.locX;
 		execCmd += ' -y '+dm.locY;
+		execCmd += ' -g '+dm.errorCorrect;
 		execCmd += ' -r 1';
 		if (dm.width && dm.width != -1){
 			execCmd += ' -w '+dm.width;
