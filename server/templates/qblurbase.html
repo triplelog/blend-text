@@ -50,11 +50,17 @@ img {
 }
 .content-13 img {
 	display: block;
-	max-width: 90%;
-	max-height: calc((var(--height-container) - var(--height-center)) / 2 - 2 * var(--border-radius));
+	max-width: calc(100% - 1.5rem);
+	max-height: calc((var(--height-container) - var(--height-center)) / 2 - 2 * var(--border-radius) - 1.5rem);
 	margin: auto;
 	overflow: hidden;
-	padding: 5px;
+	padding: .5rem;
+}
+#radio13-2:checked ~ .content-13 img {
+	max-height: calc((var(--height-container) - var(--height-center)) / 2 - 2 * var(--border-radius) - 1.5rem + var(--height-center));
+}
+#radio13-3:checked ~ .content-13 img {
+	max-height: calc((var(--height-container) - var(--height-center)) - 2 * var(--border-radius) - 1.5rem + var(--height-center));
 }
 {% endblock %}
 
