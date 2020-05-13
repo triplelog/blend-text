@@ -354,8 +354,125 @@ wss.on('connection', function connection(ws) {
 		return;
 	}
 	
+	//Start creating image if made it this far
+	if (dm.type =="qr"){
+		
+		if (username != ''){
+			console.log('username: '+username);
+		}
+		//console.log(dm);
+		if (!dm){
+			return;
+		}
+		// add more checks
 	
-	if (dm.type !="gradient"){
+
+		//download or upload file to 'inputs/imgid'+fileExt and set inputSrc
+		//var inSrc = 'test.jpg';
+	
+		var execCmd = '../src/qr-art/bin/Debug/netcoreapp3.1/publish/qr-art "'+dm.text+'" '+inSrc+' png static/'+outSrc;
+		execCmd += ' -s 10';
+		execCmd += ' -x '+dm.locX;
+		execCmd += ' -y '+dm.locY;
+		execCmd += ' -r 10';
+		if (dm.width && dm.width != -1){
+			execCmd += ' -w '+dm.width;
+		}
+	
+		var workspace = new Blockly.Workspace();
+		var wxml = Blockly.Xml.textToDom(dm.blurFormula);
+		Blockly.Xml.domToWorkspace(wxml, workspace);
+		var usedvars = workspace.getAllVariables();
+		var varstr = "";
+		for (var i=0;i<usedvars.length;i++){
+			console.log(usedvars[i].id_);
+			varstr += usedvars[i].id_.substring(6,7);
+		}
+		var code = Blockly.Lua.workspaceToCode(workspace);
+		console.log(code);
+		if (dm.blurType == 'hsl'){
+			luaBlurFormula = `function ScriptFunc (d,h,s,l)
+			`+code+`
+			return h,s,l
+			end
+			`
+	
+			execCmd += ' -b "testBlur"';
+			execCmd += ' -B hsl'+varstr;
+		}
+		else {
+			luaBlurFormula = `function ScriptFunc (d,r,g,b)
+			`+code+`
+			return r,g,b
+			end
+			`
+	
+			execCmd += ' -b "testBlur"';
+			execCmd += ' -B rgb'+varstr;
+		}
+	
+		workspace = new Blockly.Workspace();
+		wxml = Blockly.Xml.textToDom(dm.textFormula);
+		Blockly.Xml.domToWorkspace(wxml, workspace);
+		code = Blockly.Lua.workspaceToCode(workspace);
+		console.log(code);
+		if (dm.textType == 'hsl'){
+			luaTextFormula = `function TextFunc (d,h,s,l)
+			`+code+`
+			return h,s,l
+			end
+			`
+	
+			execCmd += ' -c "testText"';
+			execCmd += ' -C hsl';
+		}
+		else {
+			luaTextFormula = `function TextFunc (d,r,g,b)
+			`+code+`
+			return r,g,b
+			end
+			`
+	
+			execCmd += ' -c "testText"';
+			execCmd += ' -C rgb';
+		}
+
+		if (dm.font.indexOf('"')==-1 && dm.font.indexOf(' ')>0){
+			execCmd += ' -f "'+dm.font+'"';
+		}
+		else {
+			execCmd += ' -f '+dm.font;
+		}
+	
+		execCmd += ' -t '+dm.type;
+	
+		if (dm.threshold){
+			execCmd += ' -l '+dm.threshold;
+		}
+	
+		var luaDistanceFormula = `function DistanceFunc (d,maxD)
+					return (10*d-15*maxD)*2/maxD
+					end`;
+		execCmd += ' -d "'+'test'+'Distance"';
+	
+		console.log(execCmd);
+	
+		if (newCreation && username != ''){
+			//Add a Check that there does not exist a creation of that name already.
+			QblurData.updateOne({ username: username }, {$push: {"creations": outSrc}}, function(err, result) {});
+			newCreation = false;
+		}
+		
+		if (myTimeout){
+			clearTimeout(myTimeout);
+			myTimeout = setTimeout(function(){ runCommand(ws,execCmd,outSrc,imgIndex, luaBlurFormula, luaTextFormula, luaDistanceFormula); }, 1000);
+		}
+		else {
+			myTimeout = setTimeout(function(){ runCommand(ws,execCmd,outSrc,imgIndex, luaBlurFormula, luaTextFormula, luaDistanceFormula); }, 1000);
+		}
+		imgIndex++;
+  	}
+  	else if (dm.type !="gradient"){
 		//Start creating image if made it this far
 		if (username != ''){
 			console.log('username: '+username);
