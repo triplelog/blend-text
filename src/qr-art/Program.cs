@@ -28,7 +28,7 @@ namespace Lapis.QrArt
             var imageArg = app.Argument("image", "An image to be used as background.");
             var formatArg = app.Argument("format", "Output image format. [png|gif|svg]");
             var pathArg = app.Argument("outpath", "Output path.");
-            var fontSizeOpt = app.Option("-s|--size <number>", "Font Size", CommandOptionType.SingleValue);
+            var fontSizeOpt = app.Option("-s|--size <number>", "Font Size -- Type # for QR", CommandOptionType.SingleValue);
             var widthOpt = app.Option("-w|--width <number>", "Width", CommandOptionType.SingleValue);
             var locXOpt = app.Option("-x <number>", "location X", CommandOptionType.SingleValue);
             var locYOpt = app.Option("-y <number>", "location Y", CommandOptionType.SingleValue);
@@ -321,7 +321,7 @@ namespace Lapis.QrArt
 							}
 							var qrEncoder = new QRCodeEncoder()
                             {
-                                TypeNumber = 5,
+                                TypeNumber = fontSize,
                                 ErrorCorrectLevel = ErrorCorrectLevel.H
                             };
 							var bitMatrix = qrEncoder.Build(contentArg.Value);
@@ -359,7 +359,7 @@ namespace Lapis.QrArt
 							}
 							
 							var imgMatrix = Binarizer.Binarize(bgImage, moduleCount * 3, moduleCount * 3, threshold);
-							bitMatrix = Merger.Merge(bitMatrix, 5, imgMatrix, 3);
+							bitMatrix = Merger.Merge(bitMatrix, fontSize, imgMatrix, 3);
 							
 							int twidth = (int)bitMatrix.ColumnCount;
 							int theight = (int)bitMatrix.RowCount;
