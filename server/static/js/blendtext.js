@@ -35,6 +35,12 @@ imgData.textFormula = document.getElementById('textFormula').querySelector('text
 imgData.textType = 'hsl';
 imgData.type = type;
 imgData.threshold = document.getElementById('threshold').value;
+if (document.getElementById('typeNumber')){
+	imgData.typeNumber = document.getElementById('typeNumber').value;
+}
+if (document.getElementById('errorCorrect')){
+	imgData.errorCorrect = document.getElementById('errorCorrect').value;
+}
 
 var blurOrText = 'blur';
 function updateImage(evt){
@@ -212,10 +218,12 @@ function updateImage(evt){
 	
 	
 }
-var singleEls = ['text','font','blurRadius','hslrgb','bort','threshold'];
-for (var i=0;i<6;i++){
+var singleEls = ['text','font','blurRadius','hslrgb','bort','threshold','typeNumber','errorCorrect'];
+for (var i=0;i<8;i++){
 	var el = document.getElementById(singleEls[i]);
-	el.addEventListener('change',updateImage);
+	if (el){
+		el.addEventListener('change',updateImage);
+	}
 }
 var doubleEls = ['locY','locX','fontSize'];
 for (var i=0;i<3;i++){

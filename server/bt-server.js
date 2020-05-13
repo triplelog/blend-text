@@ -371,7 +371,7 @@ wss.on('connection', function connection(ws) {
 		//var inSrc = 'test.jpg';
 	
 		var execCmd = '../src/qr-art/bin/Debug/netcoreapp3.1/publish/qr-art "'+dm.text+'" '+inSrc+' png static/'+outSrc;
-		execCmd += ' -s 1';
+		execCmd += ' -s '+dm.typeNumber;
 		execCmd += ' -x '+dm.locX;
 		execCmd += ' -y '+dm.locY;
 		execCmd += ' -r 1';

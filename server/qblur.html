@@ -257,7 +257,12 @@ input[name="size31"] {
 				Type #: <input type="number" id="typeNumber" value="5"></input>
 			</div>
 			<div>
-				Error Correct: <input type="number" id="errorCorrect" value="M"></input>
+				Error Correct: <select id="errorCorrect">
+				<option value="L">Low</option>
+				<option value="M" selected>Medium</option>
+				<option value="H">High</option>
+				
+				</select>
 			</div>
 			<div style="display: none;">
 				Font: <input type="text" id="font" value="Tahoma"><!--Autocomplete w/ fonts, use CSS sprites with available fonts--></input>
