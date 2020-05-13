@@ -236,7 +236,7 @@ for (var i=0;i<3;i++){
 var oldcode = '';
 
 for (var i=1;i<4;i++){
-	document.getElementById('size31-'+i).addEventListener('change', onresize, false);
+	document.getElementById('radio31-'+i).addEventListener('change', onresize, false);
 }
 
 function onresize(evt) {
