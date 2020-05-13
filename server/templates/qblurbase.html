@@ -51,7 +51,7 @@ img {
 .content-13 img {
 	display: block;
 	max-width: 90%;
-	max-height: 90%;
+	max-height: calc((var(--height-container) - var(--height-center)) / 2 - 2 * var(--border-radius));
 	margin: auto;
 	overflow: hidden;
 	padding: 5px;
@@ -101,7 +101,7 @@ img {
 				Error Correct: <select id="errorCorrect">
 				<option value="L">Low</option>
 				<option value="M" selected>Medium</option>
-				<option value="Q" selected>Quartile</option>
+				<option value="Q">Quartile</option>
 				<option value="H">High</option>
 				
 				</select>
