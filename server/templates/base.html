@@ -171,29 +171,12 @@
   	overflow: auto;
 }
 
-.puzzlePieces {
-	stroke-dasharray: 100;
-    stroke-dashoffset: 100;
-    transition: stroke-dashoffset 2s linear;
-}
 
-.title:hover .puzzlePieces {
-	stroke-dashoffset: 0;
-    transition: stroke-dashoffset 1s linear;
-}
 .titleBG {
 	position: absolute;
 }
 
-/*svg {
-	display: block;
-	pointer-events: none;
-	position:absolute;
-	top:0px;
-	left:0px;
-	width:100%;
-	height:100%;
-}*/
+
 
 .logoDiv {
 	position: relative;
@@ -383,8 +366,10 @@ button.basic:hover {
 	<div class="content-31">
 		{% block title31 %}
 		{% endblock %}
-		{% block content31 %}
+		<div class="content">
+			{% block content31 %}
 			{% endblock %}
+		</div>
 
 	</div>
 	
