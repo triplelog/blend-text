@@ -319,11 +319,11 @@ namespace Lapis.QrArt
 							if (int.TryParse(locYOpt.Value(), out int locYout)){
 								yPct = (locYout+200)%200;
 							}
-							var errorCorrect = "H";
+							var errorCorrect = ErrorCorrectLevel.H;
 							var qrEncoder = new QRCodeEncoder()
                             {
                                 TypeNumber = fontSize,
-                                ErrorCorrectLevel = ErrorCorrectLevel[errorCorrect]
+                                ErrorCorrectLevel = errorCorrect
                             };
 							var bitMatrix = qrEncoder.Build(contentArg.Value);
 							
