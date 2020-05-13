@@ -217,11 +217,11 @@ function updateImage(evt){
 var oldcode = '';
 
 for (var i=1;i<4;i++){
-	document.getElementById('size31-'+i).addEventListener('change', onresize, false);
+	document.getElementById('radio31-'+i).addEventListener('change', onresize, false);
 }
 
 function onresize(evt) {
-	var element = document.querySelector('.content-31 .content');
+	var element = document.getElementById('formulaDiv');
     var x = 0;
     var y = 0;
     do {
@@ -233,8 +233,8 @@ function onresize(evt) {
     for (var i=0;i<2;i++){
 		blocklyDivs[i].style.left = x + 'px';
 		blocklyDivs[i].style.top = y + 'px';
-		blocklyDivs[i].style.width = document.querySelector('.content-31 .content').offsetWidth + 'px';
-		blocklyDivs[i].style.height = document.querySelector('.content-31 .content').offsetHeight + 'px';
+		blocklyDivs[i].style.width = document.getElementById('formulaDiv').offsetWidth + 'px';
+		blocklyDivs[i].style.height = document.getElementById('formulaDiv').offsetHeight + 'px';
 		Blockly.svgResize(workspaces[i]);
     }
 }

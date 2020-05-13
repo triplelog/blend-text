@@ -333,25 +333,29 @@ img {
 </div>
 {% endblock %}
 {% block content31 %}
-	<button onclick="saveFormula('{{ type }}')">Save</button>
-	Load:
-	<select id="hslrgb">
+	<div>
+		<button onclick="saveFormula('{{ type }}')">Save</button>
+		Load:
+		<select id="hslrgb">
 		
-		<option value="hsl" selected="selected">Custom HSL</option>
-		<option value="rgb">Custom RGB</option>
-		{% for formula in formulas %}
-		<option value="{{ formula.id }}">{{ formula.name }}</option>
-		{% endfor %}
-	</select>
-	<div id="blurFormulaHSL" style="width: 500px;"></div>
-	<div id="blurFormulaRGB" style="width: 500px;"></div>
-	<div id="textFormulaHSL" style="width: 500px;"></div>
-	<div id="textFormulaRGB" style="width: 500px;"></div>
-	<div id="blurFormula" style="display: none;">
-		<textarea rows="4" cols="50"></textarea>
+			<option value="hsl" selected="selected">Custom HSL</option>
+			<option value="rgb">Custom RGB</option>
+			{% for formula in formulas %}
+			<option value="{{ formula.id }}">{{ formula.name }}</option>
+			{% endfor %}
+		</select>
 	</div>
-	<div id="textFormula" style="display: none;">
-		<textarea rows="4" cols="50"></textarea>
+	<div id="formulaDiv">
+		<div id="blurFormulaHSL" style="width: 500px;"></div>
+		<div id="blurFormulaRGB" style="width: 500px;"></div>
+		<div id="textFormulaHSL" style="width: 500px;"></div>
+		<div id="textFormulaRGB" style="width: 500px;"></div>
+		<div id="blurFormula" style="display: none;">
+			<textarea rows="4" cols="50"></textarea>
+		</div>
+		<div id="textFormula" style="display: none;">
+			<textarea rows="4" cols="50"></textarea>
+		</div>
 	</div>
 {% endblock %}
 
