@@ -311,6 +311,14 @@ namespace Lapis.QrArt
                             
             				textDrawer.HashSize = 1;
             				textDrawer.CellWidth = 1;
+            				int xPct = 0;
+							if (int.TryParse(locXOpt.Value(), out int locXout)){
+								xPct = (locXout+200)%200;
+							}
+							int yPct = 0;
+							if (int.TryParse(locYOpt.Value(), out int locYout)){
+								yPct = (locYout+200)%200;
+							}
 							var qrEncoder = new QRCodeEncoder()
                             {
                                 TypeNumber = 5,
@@ -332,8 +340,8 @@ namespace Lapis.QrArt
 								imgHeight = imgWidth * bmp.Height / bmp.Width;
 							}
 							
-							int toCenterL = ( moduleCount * 9 * textDrawer.CellWidth - imgWidth ) / 2;
-							int toCenterT = ( moduleCount * 9 * textDrawer.CellWidth - imgHeight ) / 2;
+							int toCenterL = ( moduleCount * 9 * textDrawer.CellWidth - imgWidth ) * xPct / 100;
+							int toCenterT = ( moduleCount * 9 * textDrawer.CellWidth - imgHeight ) * yPct / 100;
 							using (Graphics graph = Graphics.FromImage(nbmp)) {
 								Rectangle ImageSize = new Rectangle(0,0,nbmp.Width,nbmp.Height);
 								graph.FillRectangle(Brushes.White, ImageSize);
