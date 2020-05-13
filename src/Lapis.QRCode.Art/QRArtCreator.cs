@@ -275,8 +275,8 @@ namespace Lapis.QRCode.Art
                 		}
                 	}
                 }
-                //TripMatrixDrawer.THeight = (maxY+blurRadius) - (minY-blurRadius);
-                //TripMatrixDrawer.TWidth = (maxX+blurRadius) - (minX-blurRadius);
+                TripMatrixDrawer.THeight = (maxY+blurRadius) - (minY-blurRadius);
+                TripMatrixDrawer.TWidth = (maxX+blurRadius) - (minX-blurRadius);
                 
                 stopWatch.Stop();
 				// Get the elapsed time as a TimeSpan value.
