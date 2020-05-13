@@ -56,7 +56,7 @@ namespace Lapis.QRCode.Imaging.Drawing
                 //graph.Clear(Color.FromArgb(255,255,255));
                 //var foreBrush = new SolidBrush(ColorHelper.FromIntRgb24(Foreground));
                 var foreBrush = new SolidBrush(Color.FromArgb(40,40,40));
-                var foreBrushB = new SolidBrush(Color.FromArgb(255,0,0));
+                var foreBrushB = new SolidBrush(Color.FromArgb(0,0,0,0));
                 
         		var foreBrushCustom = new SolidBrush(Color.FromArgb(0,0,120));
         		int startR = 0;
