@@ -41,6 +41,9 @@ if (document.getElementById('typeNumber')){
 if (document.getElementById('errorCorrect')){
 	imgData.errorCorrect = document.getElementById('errorCorrect').value;
 }
+if (document.getElementById('crop')) {
+	imgData.crop = document.getElementById('crop').checked;
+}
 
 var blurOrText = 'blur';
 function updateImage(evt){
@@ -178,6 +181,9 @@ function updateImage(evt){
 			}
 			onresize();
 		}
+		else if (el.id && el.id == 'crop'){
+			imgData[el.id] = el.checked;
+		}
 		else if (el.id){
 			imgData[el.id] = el.value;
 		}
@@ -218,8 +224,8 @@ function updateImage(evt){
 	
 	
 }
-var singleEls = ['text','font','blurRadius','hslrgb','bort','threshold','typeNumber','errorCorrect'];
-for (var i=0;i<8;i++){
+var singleEls = ['text','font','blurRadius','hslrgb','bort','threshold','typeNumber','errorCorrect','crop'];
+for (var i=0;i<9;i++){
 	var el = document.getElementById(singleEls[i]);
 	if (el){
 		el.addEventListener('change',updateImage);

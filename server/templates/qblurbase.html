@@ -149,7 +149,7 @@ img {
 
 			
 		{% endif %}
-		{% if type == 'text' or type == 'image' %}
+		{% if type == 'text' %}
 			
 			<div>
 				Image: 
@@ -199,8 +199,8 @@ img {
 			<div>
 				Blur Radius: <input type="number" id="blurRadius" value="10"></input>
 			</div>
-			<div style="display: none;">
-				Threshold: <input type="number" id="threshold" value="128"></input>
+			<div>
+				Crop Text: <input type="checkbox" id="crop"></input>
 			</div>
 			
 			

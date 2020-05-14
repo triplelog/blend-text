@@ -115,44 +115,6 @@ app.get('/text',
 	}
 );
 
-app.get('/image', 
-	function(req, res) {
-		var tkey = crypto.randomBytes(100).toString('hex').substr(2, 18);
-		var formulas = [];
-		if (req.isAuthenticated()){
-			tempKeys[tkey] = {username:req.user.username};
-			QblurData.findOne({ username: req.user.username }, function(err, result) {
-				formulas = result.formulas.color;
-				for (var i=0;i<formulas.length;i++){
-					formulas[i].id = i;
-				}
-				res.write(nunjucks.render('templates/qblurbase.html',{
-					type: 'image',
-					tkey: tkey,
-					formulas: formulas,
-				}));
-				res.end();
-			});
-		}
-		else {
-			QblurData.findOne({ username: "h" }, function(err, result) {
-				formulas = result.formulas.color;
-				for (var i=0;i<formulas.length;i++){
-					formulas[i].id = i;
-				}
-				res.write(nunjucks.render('templates/qblurbase.html',{
-					type: 'image',
-					tkey: tkey,
-					formulas: formulas,
-				}));
-				res.end();
-			});
-		}
-		
-		
-	}
-);
-
 app.get('/gradient', 
 	function(req, res) {
 		var tkey = crypto.randomBytes(100).toString('hex').substr(2, 18);
@@ -473,7 +435,7 @@ wss.on('connection', function connection(ws) {
 		}
 		imgIndex++;
   	}
-  	else if (dm.type !="gradient"){
+  	else if (dm.type == "text"){
 		//Start creating image if made it this far
 		if (username != ''){
 			console.log('username: '+username);
@@ -483,7 +445,8 @@ wss.on('connection', function connection(ws) {
 			return;
 		}
 		// add more checks
-	
+		if (dm.crop){dm.type = 'text';}
+		else {dm.type = 'image';}
 
 		//download or upload file to 'inputs/imgid'+fileExt and set inputSrc
 		//var inSrc = 'test.jpg';
