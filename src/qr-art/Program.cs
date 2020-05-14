@@ -181,7 +181,7 @@ namespace Lapis.QrArt
 							
 								using (Graphics graph = Graphics.FromImage(bmpp))
 								{
-									Rectangle ImageSize = new Rectangle(0,0,twidth+2*blurRadius,theight+2*blurRadius);
+									Rectangle ImageSize = new Rectangle(0,0,twidth,theight);
 									graph.FillRectangle(Brushes.White, ImageSize);
 									graph.SmoothingMode = SmoothingMode.AntiAlias;
 									graph.InterpolationMode = InterpolationMode.HighQualityBicubic;
@@ -222,7 +222,7 @@ namespace Lapis.QrArt
 									}
 									if (xType == 0){
 										//middle at (bmp.Width * xPct)/100
-										textDrawer.MarginL = (bmp.Width * xPct)/100 - (twidth+2*blurRadius)/2;
+										textDrawer.MarginL = (bmp.Width * xPct)/100 - (twidth)/2;
 									}
 									else if (xType == 1){
 										//left at (bmp.Width * xPct)/100
@@ -230,15 +230,15 @@ namespace Lapis.QrArt
 									}
 									else if (xType == 2){
 										//right at (bmp.Width * xPct)/100
-										textDrawer.MarginL = (bmp.Width * xPct)/100 - (twidth+2*blurRadius) + blurRadius;
+										textDrawer.MarginL = (bmp.Width * xPct)/100 - (twidth) + blurRadius;
 									}
 									else {
-										textDrawer.MarginL = bmp.Width/2 - (twidth+2*blurRadius)/2;
+										textDrawer.MarginL = bmp.Width/2 - (twidth)/2;
 									}
 							
 									if (yType == 0){
 										//middle at (bmp.Height * yPct)/100
-										textDrawer.MarginT = (bmp.Height * yPct)/100 - (theight+2*blurRadius)/2;
+										textDrawer.MarginT = (bmp.Height * yPct)/100 - (theight)/2;
 									}
 									else if (yType == 1){
 										//top at 
@@ -246,10 +246,10 @@ namespace Lapis.QrArt
 									}
 									else if (yType == 2){
 										//bottom at 
-										textDrawer.MarginT = (bmp.Height * yPct)/100 - (theight+2*blurRadius) + blurRadius;
+										textDrawer.MarginT = (bmp.Height * yPct)/100 - (theight) + blurRadius;
 									}
 									else {
-										textDrawer.MarginT = bmp.Height/2 - (theight+2*blurRadius)/2;
+										textDrawer.MarginT = bmp.Height/2 - (theight)/2;
 									}
 								} //set margins
 							}
