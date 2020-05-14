@@ -131,33 +131,33 @@ namespace Lapis.QRCode.Imaging.Drawing
 										h = Convert.ToDouble(res[0]);
 										s = Convert.ToDouble(res[1]);
 										l = Convert.ToDouble(res[2]);
+										HlsToRgb(h, l, s,out re, out gr, out bl);
 									}
 									else {
 										var resD = textFunc.Call (tripMatrix[r, c],h,s,l);
+										HlsToRgb(Convert.ToDouble(resD[0]), Convert.ToDouble(resD[2]), Convert.ToDouble(resD[1]),out reD, out grD, out blD);
 										var resL = scriptFunc.Call (30,h,s,l);
-										h = Convert.ToDouble(resD[0]);
-										h += Convert.ToDouble(resL[0]);
-										s = Convert.ToDouble(resD[1]);
-										s += Convert.ToDouble(resL[1]);
-										l = Convert.ToDouble(resD[2]);
-										l += Convert.ToDouble(resL[2]);
+										HlsToRgb(Convert.ToDouble(resL[0]), Convert.ToDouble(resL[2]), Convert.ToDouble(resL[1]),out reL, out grL, out blL);
+										re = reD + reL;
+										gr = grD + grL;
+										bl = blD + blL;
 										
 										if (tripMatrix[r, c] ==1){
-											h += Convert.ToDouble(resL[0]);
-											s += Convert.ToDouble(resL[1]);
-											l += Convert.ToDouble(resL[2]);
+											re += reL;
+											gr += grL;
+											bl += blL;
 										}
 										else if (tripMatrix[r, c] == 2){
-											h += Convert.ToDouble(resD[0]);
-											s += Convert.ToDouble(resD[1]);
-											l += Convert.ToDouble(resD[2]);
+											re += reD;
+											gr += grD;
+											bl += blD;
 										}
-										h /= 3;
-										s /= 3;
-										l /= 3;
+										re /= 3;
+										gr /= 3;
+										bl /= 3;
 									}
 									
-									HlsToRgb(h, l, s,out re, out gr, out bl);
+									
 								
 									if (tripMatrix[r, c] > 2){
 										int newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));

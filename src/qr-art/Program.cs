@@ -146,8 +146,8 @@ namespace Lapis.QrArt
 								SizeF stringSize = new SizeF();
 								stringSize = graph1.MeasureString(measureString, font);
 								Console.WriteLine("width "+stringSize.Width + " height "+ stringSize.Height + "fSize "+fontSize);
-								int twidth = (int)stringSize.Width;
-								int theight = (int)stringSize.Height;
+								int twidth = (int)stringSize.Width + 2*blurRadius;
+								int theight = (int)stringSize.Height + 2*blurRadius;
 								if (widthout > -1){
 									int oldSize = 16;
 									int newSize = 0;
@@ -161,8 +161,8 @@ namespace Lapis.QrArt
 										font = new Font(fontVal, newSize );
 										stringSize = graph1.MeasureString(measureString, font);
 								
-										twidth = (int)stringSize.Width;
-										theight = (int)stringSize.Height;
+										twidth = (int)stringSize.Width + 2*blurRadius;
+										theight = (int)stringSize.Height + 2*blurRadius;
 										Console.WriteLine("Percent "+ (twidth*100/bmp.Width) );
 										if (newSize == oldSize){
 											break;
@@ -174,7 +174,7 @@ namespace Lapis.QrArt
 									}
 									textDrawer.CellWidth = 1 + oldSize / 100;
 								}
-								Bitmap bmpp = (Bitmap) new Bitmap(twidth+2*blurRadius,theight+2*blurRadius);
+								Bitmap bmpp = (Bitmap) new Bitmap(twidth,theight);
 							
 						
 							
