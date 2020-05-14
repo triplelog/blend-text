@@ -134,7 +134,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 									}
 									else {
 										var resD = textFunc.Call (tripMatrix[r, c],h,s,l);
-										var resL = scriptFunc.Call (-1,h,s,l);
+										var resL = scriptFunc.Call (30,h,s,l);
 										h = Convert.ToDouble(resD[0]);
 										h += Convert.ToDouble(resL[0]);
 										s = Convert.ToDouble(resD[1]);
@@ -198,7 +198,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 									}
 									else {
 										var resD = textFunc.Call (tripMatrix[r, c],re,gr,bl);
-										var resL = scriptFunc.Call (-1,re,gr,bl);
+										var resL = scriptFunc.Call (30,re,gr,bl);
 										re = Convert.ToInt32(resD[0]);
 										gr = Convert.ToInt32(resD[1]);
 										bl = Convert.ToInt32(resD[2]);
