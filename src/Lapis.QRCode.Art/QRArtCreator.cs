@@ -267,7 +267,8 @@ namespace Lapis.QRCode.Art
                 if (maxY + blurRadius >= theight){maxY = theight -blurRadius;}
                 if (minX < blurRadius){minX = blurRadius;}
                 if (maxX + blurRadius >= twidth){maxX = twidth -blurRadius;}
-                int dd = (10*maxD-15*maxD)*2/maxD;
+                res = scriptFunc.Call (maxD, maxD);
+                int dd = Convert.ToInt32(res[0]);
                 for (var i=minY-blurRadius;i<maxY+blurRadius;i++){
                 	for (var ii=minX-blurRadius;ii<maxX+blurRadius;ii++){
                 		if (tripMatrix[i,ii] == 0){

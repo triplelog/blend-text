@@ -16,7 +16,7 @@ var tempKeys = {};
 const User = require('./models/user');
 const QblurData = require('./models/qblurdata');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://45.32.213.227:27017/triplelog', {useNewUrlParser: true});
+mongoose.connect('mongodb://triplelog:kZGWGda3A@45.32.213.227:27017/triplelog', {useNewUrlParser: true});
 var passport = require('passport')
 var LocalStrategy = require('passport-local').Strategy;
 // use static authenticate method of model in LocalStrategy
