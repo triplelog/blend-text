@@ -34,7 +34,10 @@ imgData.blurType = 'hsl';
 imgData.textFormula = document.getElementById('textFormula').querySelector('textarea').value;
 imgData.textType = 'hsl';
 imgData.type = type;
-imgData.threshold = document.getElementById('threshold').value;
+
+if (document.getElementById('threshold')){
+	imgData.threshold = document.getElementById('threshold').value;
+}
 if (document.getElementById('typeNumber')){
 	imgData.typeNumber = document.getElementById('typeNumber').value;
 }
