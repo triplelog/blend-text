@@ -135,6 +135,8 @@ namespace Lapis.QRCode.Imaging.Drawing
 									}
 									else {
 										var resD = textFunc.Call (tripMatrix[r, c],h,s,l);
+										int reD; int grD; int blD;
+										int reL; int grL; int blL;
 										HlsToRgb(Convert.ToDouble(resD[0]), Convert.ToDouble(resD[2]), Convert.ToDouble(resD[1]),out reD, out grD, out blD);
 										var resL = scriptFunc.Call (30,h,s,l);
 										HlsToRgb(Convert.ToDouble(resL[0]), Convert.ToDouble(resL[2]), Convert.ToDouble(resL[1]),out reL, out grL, out blL);
