@@ -289,7 +289,6 @@ namespace Lapis.QRCode.Art
                 	else if ((narrowQuotient/ 100)%10 == 2){
                 		skewType = "box";
                 	}
-                	
                 	theight = tripMatrix.RowCount;
 					twidth = tripMatrix.ColumnCount;
 					TripMatrix outMatrix = new TripMatrix(theight,twidth);
@@ -452,15 +451,13 @@ namespace Lapis.QRCode.Art
 								}
 							}
 						}
-						avgx = (maxii+minii);
-						avgy = (maxi+mini);
-						if (avgx > avgy){//skewed in x direction so skewX is smaller
+						if (maxii+minii > maxi+mini){//skewed in x direction so skewX is smaller
 							skewX = 10;
-							skewY = (avgx)*10/(avgy);
+							skewY = (maxii+minii)*10/(maxi+mini);
 						}
 						else {
 							skewY = 10;
-							skewX = (avgy)*10/(avgx);
+							skewX = (maxi+mini)*10/(maxii+minii);
 						}
 					}
 					Console.WriteLine("x: "+avgx+" y: "+avgy);
