@@ -293,8 +293,8 @@ function addFilter() {
 	div.appendChild(input);
 	el.appendChild(div);
 	
-	filters[filterType][input.value)].hslrgb = 'h';
-	imgData.filters.push(filters[filterType][input.value)]);
+	filters[filterType][input.value].hslrgb = 'h';
+	imgData.filters.push(filters[filterType][input.value]);
 	currentFilterID = imgData.filters.length - 1;
 	updateImage();
 }
