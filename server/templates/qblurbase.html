@@ -339,9 +339,6 @@ img {
 		
 			
 			{% if type == "filter" %}
-				{% for i in range(0,filters.Contrast.length) %}
-				<option value="{{ i }}">{{ filters.Contrast[i].name }}</option>
-				{% endfor %}
 			{% else %}
 				{% for formula in formulas %}
 				<option value="{{ formula.id }}">{{ formula.name }}</option>

@@ -55,7 +55,7 @@ function updateImage(evt){
 				updateWork();
 			}
 			else {
-				var formula = filters.Contrast[parseInt(el.value)];
+				var formula = filters[currentFilterType][parseInt(el.value)];
 				if (formula.hslrgb == 'r'){
 					var wxml = Blockly.Xml.textToDom(formula.workspace);
 					workspace.clear();
@@ -154,7 +154,37 @@ var vars = ["d","h","s","l"];
 for (var ii=0;ii<4;ii++){
 	workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
 }
-var wxml = Blockly.Xml.textToDom(filters.Contrast[0].workspace);
+var currentFilterType ='Brightness';
+setFilterOptions(0);
+function setFilterOptions(selectedID) {
+	var filterOptions = document.getElementById('hslrgb');
+	filterOptions.innerHTML = '';
+	for (var i=0;i<filters[currentFilterType].length;i++){
+		var option = document.createElement('option');
+		option.value = i;
+		option.textContent = filters[currentFilterType].name;
+		if (i == selectedID || (i==0 && !selectedID)){
+			option.setAttribute('selected','selected');
+		}
+		filterOptions.appendChild(option);
+	}
+	var option = document.createElement('option');
+	option.value = 'hsl';
+	option.textContent = "Custom HSL";
+	filterOptions.appendChild(option);
+	if (-2 == selectedID){
+		option.setAttribute('selected','selected');
+	}
+	option = document.createElement('option');
+	option.value = 'rgb';
+	option.textContent = "Custom RGB";
+	if (-1 == selectedID){
+		option.setAttribute('selected','selected');
+	}
+	filterOptions.appendChild(option);
+}
+
+var wxml = Blockly.Xml.textToDom(filters[currentFilterType][0].workspace);
 Blockly.Xml.domToWorkspace(wxml,workspace);
 onresize();
 
@@ -265,7 +295,8 @@ function editFilter(evt) {
 		Blockly.Xml.domToWorkspace(wxml,workspace);
 		updateWork();
 	}
-	//set the dropdown
+	currentFilterType = el.getAttribute('data-filter');
+	setFilterOptions(0);
 	
 }
 
@@ -294,6 +325,9 @@ function addFilter() {
 	imgData.filters.push(newFilter);
 	currentFilterID = imgData.filters.length - 1;
 	div.setAttribute('data-type',currentFilterID);
+	div.setAttribute('data-filter',filterType);
+	currentFilterType = filterType;
+	setFilterOptions(0);
 	updateImage();
 }
 document.getElementById('addFilter').querySelector('button').addEventListener('click',addFilter);

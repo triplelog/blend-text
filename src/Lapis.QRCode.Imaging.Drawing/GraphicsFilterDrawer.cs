@@ -109,15 +109,15 @@ namespace Lapis.QRCode.Imaging.Drawing
 							}
 							
 							if (re > 255 || gr > 255 || bl > 255){
-								Console.WriteLine(" red: "+re+" gr: "+gr+" bl: "+bl+" a: "+pixColor.A);
-								Console.WriteLine(" redC: "+pixColor.R+" grC: "+pixColor.G+" blC: "+pixColor.B);
+								//Console.WriteLine(" red: "+re+" gr: "+gr+" bl: "+bl+" a: "+pixColor.A);
+								//Console.WriteLine(" redC: "+pixColor.R+" grC: "+pixColor.G+" blC: "+pixColor.B);
 								if (re > 255){re = 255;}
 								if (gr > 255){gr = 255;}
 								if (bl > 255){bl = 255;}
 							}
 							else if (re < 0 || gr < 0 || bl < 0){
-								Console.WriteLine(" red0: "+re+" gr: "+gr+" bl: "+bl+" a: "+pixColor.A);
-								Console.WriteLine(" redC: "+pixColor.R+" grC: "+pixColor.G+" blC: "+pixColor.B);
+								//Console.WriteLine(" red0: "+re+" gr: "+gr+" bl: "+bl+" a: "+pixColor.A);
+								//Console.WriteLine(" redC: "+pixColor.R+" grC: "+pixColor.G+" blC: "+pixColor.B);
 								if (re < 0){re = 0;}
 								if (gr < 0){gr = 0;}
 								if (bl < 0){bl = 0;}
