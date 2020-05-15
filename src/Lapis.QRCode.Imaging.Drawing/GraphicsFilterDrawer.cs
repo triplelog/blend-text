@@ -70,7 +70,8 @@ namespace Lapis.QRCode.Imaging.Drawing
 				Dictionary<int, int> darkhash = new Dictionary<int, int>();
 
         		state.DoString (TextFormula);
-				var filter1 = state ["Filter1"] as LuaFunction;
+        		var[1] filters;
+				filters[0] = state ["Filter1"] as LuaFunction;
 				int newcell =0;
 				int repcell = 0;
 				int newdarkcell =0;
@@ -111,7 +112,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 								double h; double s; double l;
 								RgbToHls(re,gr,bl,out h,out l,out s);
 								
-								var res = filter1.Call (h,s,l);
+								var res = filters[0].Call (h,s,l);
 								h = Convert.ToDouble(res[0]);
 								s = Convert.ToDouble(res[1]);
 								l = Convert.ToDouble(res[2]);
@@ -141,7 +142,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 								
 							}
 							else {
-								var res = filter1.Call (re,gr,bl);
+								var res = filters[0].Call (re,gr,bl);
 								re = Convert.ToInt32(res[0]);
 								gr = Convert.ToInt32(res[1]);
 								bl = Convert.ToInt32(res[2]);
