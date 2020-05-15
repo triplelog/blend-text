@@ -369,9 +369,11 @@ function reorderFilterList(elID){
 		if (filterListEls[i].getAttribute('data-type')==elID){
 			currentFilterID = i;
 			filterListEls[i].setAttribute('data-type',i);
+			filterListEls[i].style.background = 'gray';
 		}
 		else {
 			filterListEls[i].setAttribute('data-type',i);
+			filterListEls[i].style.removeProperty('background');
 		}
 	}
 	imgData.filters.splice(currentFilterID,0,removedFilter);
