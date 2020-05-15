@@ -162,7 +162,7 @@ function setFilterOptions(selectedID) {
 	for (var i=0;i<filters[currentFilterType].length;i++){
 		var option = document.createElement('option');
 		option.value = i;
-		option.textContent = filters[currentFilterType].name;
+		option.textContent = filters[currentFilterType][i].name;
 		if (i == selectedID || (i==0 && !selectedID)){
 			option.setAttribute('selected','selected');
 		}
