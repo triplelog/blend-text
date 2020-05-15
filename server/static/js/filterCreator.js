@@ -260,7 +260,10 @@ function updateWork(workspace) {
 		
 		oldcode = code;
 		document.getElementById('blurFormula').querySelector('textarea').value = outspace;
-		imgData.filters[currentFilterID].workspace = outspace;
+		if (imgData.filters[currentFilterID]){
+			imgData.filters[currentFilterID].workspace = outspace;
+		}
+		
 		
 		updateImage(false);
 		document.getElementById('myCode').querySelector('code').textContent = code;
