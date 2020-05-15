@@ -454,7 +454,12 @@ namespace Lapis.QrArt
 							
 							image = builderG.Create(bitmapText, blurRadius, gradientTypeOpt.Value());
 						}
-						else {
+						else if (textDrawer.Type == "filter"){
+							string DistanceFormula = "";
+						
+                        	image = builder.Create(contentArg.Value, bitmap, bitmapText, blurRadius, DistanceFormula);
+                        }
+                        else {
 							string DistanceFormula = System.IO.File.ReadAllText(@"/home/rwilcox/blend-text/server/formulas/"+distanceFormulaOpt.Value()+".txt");
 						
                         	image = builder.Create(contentArg.Value, bitmap, bitmapText, blurRadius, DistanceFormula);

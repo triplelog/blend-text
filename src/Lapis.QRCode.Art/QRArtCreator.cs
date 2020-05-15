@@ -47,7 +47,9 @@ namespace Lapis.QRCode.Art
             	
         		
         		string scriptCode = DistanceFormula;
-        		
+        		if (scriptCode == ""){
+        			scriptCode = "function DistanceFunc (d,maxD)\nreturn -30\nend";
+        		}
         		state.DoString (scriptCode);
 				var scriptFunc = state ["DistanceFunc"] as LuaFunction;
 				var res = scriptFunc.Call (1,10);
