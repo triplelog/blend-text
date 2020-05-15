@@ -295,6 +295,11 @@ function editFilter(evt) {
 }
 
 function addFilter() {
+	var els = document.getElementById('filterList').querySelectorAll('div');
+	for (var i=0;i<els.length;i++){
+		els[i].style.removeProperty('background');
+	}
+	
 	var filterType = document.getElementById('addFilter').querySelector('select').value;
 	var el = document.getElementById('filterList');
 	var div = document.createElement('div');
