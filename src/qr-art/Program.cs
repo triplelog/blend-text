@@ -270,7 +270,6 @@ namespace Lapis.QrArt
 						
 							textDrawer.HashSize = 1;
 							textDrawer.CellWidth = 1;
-							textDrawer.TextFormula = System.IO.File.ReadAllText(@"/home/rwilcox/blend-text/server/formulas/"+blurFormulaOpt.Value()+".txt");
 							
 							
 							try
