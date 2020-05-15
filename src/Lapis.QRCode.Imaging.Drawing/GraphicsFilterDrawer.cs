@@ -63,9 +63,9 @@ namespace Lapis.QRCode.Imaging.Drawing
                     for (var c = 0; c < TWidth && c + MarginL < bmp.Width; c += CellWidth)
                     {
                         
-						Color pixColor = bmp.GetPixel(c, r);
-						foreBrushCustom = new SolidBrush(pixColor);
-						graph.FillRectangle(foreBrushCustom, c, r, 1,1);
+						//Color pixColor = bmp.GetPixel(c, r);
+						//foreBrushCustom = new SolidBrush(pixColor);
+						graph.FillRectangle(foreBrushB, c, r, 1,1);
 						continue;
 						
 						var x = MarginL + c;
