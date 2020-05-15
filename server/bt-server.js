@@ -678,6 +678,10 @@ wss.on('connection', function connection(ws) {
 			`+code+`
 			return h,s,l
 			end
+			function Filter2 (r,g,b)
+			r = 200
+			return r,g,b
+			end
 			`
 	
 			execCmd += ' -b "testBlur"';
@@ -686,6 +690,10 @@ wss.on('connection', function connection(ws) {
 		else {
 			luaBlurFormula = `function Filter1 (r,g,b)
 			`+code+`
+			return r,g,b
+			end
+			function Filter2 (r,g,b)
+			r = 100
 			return r,g,b
 			end
 			`

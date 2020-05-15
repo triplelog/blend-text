@@ -22,35 +22,8 @@ namespace Lapis.QRCode.Imaging.Drawing
 			Stopwatch stopWatch = new Stopwatch();
         	stopWatch.Start();
         	
-        	bool varD = false; bool varR= false; bool varG= false; bool varB= false;
-        	bool varH= false; bool varS= false; bool varL= false;
-            
-			for (var i=3;i<7;i++){
-				if (BlurType.Length > i){
-					if (BlurType[i] == 'd'){varD = true;}
-					if (BlurType[i] == 'r'){varR = true;}
-					if (BlurType[i] == 'g'){varG = true;}
-					if (BlurType[i] == 'b'){varB = true;}
-					if (BlurType[i] == 'h'){varH = true;}
-					if (BlurType[i] == 's'){varS = true;}
-					if (BlurType[i] == 'l'){varL = true;}
-				}
-				
-			}
+        	
 			
-			if (BlurType[0] == 'h'){
-				BlurType = "hsl";
-			}
-			else {
-				BlurType = "rgb";
-			}
-			if (TextType[0] == 'h'){
-				TextType = "hsl";
-			}
-			else {
-				TextType = "rgb";
-			}
-			char[] usedvars = new char[4];
 
             int imageHeight = bmp.Height;
             int imageWidth = bmp.Width;
@@ -71,6 +44,8 @@ namespace Lapis.QRCode.Imaging.Drawing
 
         		state.DoString (TextFormula);
         		LuaFunction[] filters = {state ["Filter1"] as LuaFunction};
+        		filters[1] = state ["Filter2"] as LuaFunction;
+        		int[] filterTypes = {0,1};//0 is hsl
 				//filters[0] = state ["Filter1"] as LuaFunction;
 				int newcell =0;
 				int repcell = 0;
@@ -108,51 +83,45 @@ namespace Lapis.QRCode.Imaging.Drawing
 						}
 						else
 						{
-							if (TextType == "hsl"){
-								double h; double s; double l;
-								RgbToHls(re,gr,bl,out h,out l,out s);
+							for (var filterIdx=0;filterIdx<2;filterIdx++){
+								if (filterTypes[filterIdx] == 0){
+									double h; double s; double l;
+									RgbToHls(re,gr,bl,out h,out l,out s);
 								
-								var res = filters[0].Call (h,s,l);
-								h = Convert.ToDouble(res[0]);
-								s = Convert.ToDouble(res[1]);
-								l = Convert.ToDouble(res[2]);
-								HlsToRgb(h, l, s,out re, out gr, out bl);
+									var res = filters[filterIdx].Call (h,s,l);
+									h = Convert.ToDouble(res[0]);
+									s = Convert.ToDouble(res[1]);
+									l = Convert.ToDouble(res[2]);
+									HlsToRgb(h, l, s,out re, out gr, out bl);
 								
 								
-								
-							
-								int newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
-								darkhash.Add(imgC, newcol);
-								
-								if (re > 255 || gr > 255 || bl > 255){
-									Console.WriteLine(" red: "+re+" gr: "+gr+" bl: "+bl+" a: "+pixColor.A);
-									Console.WriteLine(" redC: "+pixColor.R+" grC: "+pixColor.G+" blC: "+pixColor.B);
-									
-								}
-								else if (re < 0 || gr < 0 || bl < 0){
-									Console.WriteLine(" red0: "+re+" gr: "+gr+" bl: "+bl+" a: "+pixColor.A);
-									Console.WriteLine(" redC: "+pixColor.R+" grC: "+pixColor.G+" blC: "+pixColor.B);
-									
 								}
 								else {
-									foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
-									graph.FillRectangle(foreBrushCustom, x, y, CellWidth, CellWidth);
+									var res = filters[filterIdx].Call (re,gr,bl);
+									re = Convert.ToInt32(res[0]);
+									gr = Convert.ToInt32(res[1]);
+									bl = Convert.ToInt32(res[2]);
 								}
-								
-								
+							}
+							
+							int newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
+							darkhash.Add(imgC, newcol);
+						
+							if (re > 255 || gr > 255 || bl > 255){
+								Console.WriteLine(" red: "+re+" gr: "+gr+" bl: "+bl+" a: "+pixColor.A);
+								Console.WriteLine(" redC: "+pixColor.R+" grC: "+pixColor.G+" blC: "+pixColor.B);
+							
+							}
+							else if (re < 0 || gr < 0 || bl < 0){
+								Console.WriteLine(" red0: "+re+" gr: "+gr+" bl: "+bl+" a: "+pixColor.A);
+								Console.WriteLine(" redC: "+pixColor.R+" grC: "+pixColor.G+" blC: "+pixColor.B);
+							
 							}
 							else {
-								var res = filters[0].Call (re,gr,bl);
-								re = Convert.ToInt32(res[0]);
-								gr = Convert.ToInt32(res[1]);
-								bl = Convert.ToInt32(res[2]);
-								int newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
-								darkhash.Add(imgC, newcol);
-								
-							
 								foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
 								graph.FillRectangle(foreBrushCustom, x, y, CellWidth, CellWidth);
 							}
+							
 							newdarkcell++;
 							
 						}
