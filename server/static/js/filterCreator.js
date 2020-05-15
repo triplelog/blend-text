@@ -280,26 +280,32 @@ workspaceBRGB.addChangeListener(updateBRGB);
 document.getElementById('blurFormulaRGB').style.display = 'none';
 updateBHSL();
 
-
+function editFilter(evt) {
+	var el = evt.target;
+	el.style.background = 'gray';
+	currentFilterID = parseInt(el.getAttribute('data-type'));
+	
+}
 
 function addFilter() {
 	var filterType = document.getElementById('addFilter').querySelector('select').value;
 	var el = document.getElementById('filterList');
 	var div = document.createElement('div');
+	div.addEventListener('click',editFilter);
+	
 	var span = document.createElement('span');
 	span.textContent = filters[filterType][0].name;
 	div.appendChild(span);
 	var input = document.createElement('input');
 	input.style.display = 'none';
-	input.value = 0;
-	input.setAttribute('data-type',filterType);
 	div.appendChild(input);
 	el.appendChild(div);
 	var newFilter = {'hslrgb':'h'};
-	newFilter.name = filters[filterType][input.value].name;
-	newFilter.workspace = filters[filterType][input.value].workspace;
+	newFilter.name = filters[filterType][0].name;
+	newFilter.workspace = filters[filterType][0].workspace;
 	imgData.filters.push(newFilter);
 	currentFilterID = imgData.filters.length - 1;
+	div.setAttribute('data-type',currentFilterID);
 	updateImage();
 }
 document.getElementById('addFilter').querySelector('button').addEventListener('click',addFilter);
