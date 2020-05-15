@@ -154,7 +154,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 				string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
 					ts.Hours, ts.Minutes, ts.Seconds,
 					ts.Milliseconds / 10);
-				Console.WriteLine("GraphicsTextDrawerTime " + elapsedTime +" new/rep "+newcell+'/'+repcell +" newd/repd "+newdarkcell+'/'+repdarkcell);
+				Console.WriteLine("GraphicsFilterDrawerTime " + elapsedTime +" newd/repd "+newdarkcell+'/'+repdarkcell);
             }
 			
 				
