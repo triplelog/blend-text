@@ -32,7 +32,7 @@ function updateImage(evt){
 		if (el.id && el.id == 'hslrgb'){
 			var filterListEls = document.getElementById('filterList').querySelectorAll('div');
 			if (filterListEls[currentFilterID]){
-				filterListEls[currentFilterID].querySelector('span').textContent = el.textContent;
+				filterListEls[currentFilterID].querySelector('span').textContent = el.querySelector(':selected').textContent;
 			}
 			if (el.value =='rgb'){
 				workspace.clear();
