@@ -70,8 +70,8 @@ namespace Lapis.QRCode.Imaging.Drawing
 				Dictionary<int, int> darkhash = new Dictionary<int, int>();
 
         		state.DoString (TextFormula);
-        		var[] filters;
-				filters[0] = state ["Filter1"] as LuaFunction;
+        		var[] filters = {state ["Filter1"] as LuaFunction};
+				//filters[0] = state ["Filter1"] as LuaFunction;
 				int newcell =0;
 				int repcell = 0;
 				int newdarkcell =0;
