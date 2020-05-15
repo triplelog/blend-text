@@ -73,7 +73,6 @@ namespace Lapis.QRCode.Imaging.Drawing
 				
         		state.DoString (BlurFormula);
         		state.DoString (TextFormula);
-        		Console.WriteLine(BlurFormula);
         		Console.WriteLine(TextFormula);
 				var scriptFunc = state ["ScriptFunc"] as LuaFunction;
 				var textFunc = state ["TextFunc"] as LuaFunction;

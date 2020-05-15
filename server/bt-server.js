@@ -671,7 +671,7 @@ wss.on('connection', function connection(ws) {
 		var code = Blockly.Lua.workspaceToCode(workspace);
 		console.log(code);
 		if (dm.blurType == 'hsl'){
-			luaBlurFormula = `function ScriptFunc (d,h,s,l)
+			luaBlurFormula = `function TextFunc (d,h,s,l)
 			`+code+`
 			return h,s,l
 			end
@@ -681,7 +681,7 @@ wss.on('connection', function connection(ws) {
 			execCmd += ' -B hsl'+varstr;
 		}
 		else {
-			luaBlurFormula = `function ScriptFunc (d,r,g,b)
+			luaBlurFormula = `function TextFunc (d,r,g,b)
 			`+code+`
 			return r,g,b
 			end
