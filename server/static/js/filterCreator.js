@@ -19,9 +19,10 @@ var myTimeout;
 //imgData.imageSrc = document.getElementById('imageSrc').value;
 imgData.blurType = 'hsl';
 imgData.type = type;
+imgData.filters = [];
+var currentFilterID = 0;
 
 
-var blurOrText = 'blur';
 function updateImage(evt){
 	if (!evt){
 		imgData['blurFormula'] = document.getElementById('blurFormula').querySelector('textarea').value;
@@ -259,8 +260,7 @@ function updateWork(workspace) {
 		
 		oldcode = code;
 		document.getElementById('blurFormula').querySelector('textarea').value = outspace;
-		filters[currentFilterType][currentFilterID].workspace = outspace;
-		updateFilterList();
+		imgData.filters[currentFilterID].workspace = outspace;
 		
 		updateImage(false);
 		document.getElementById('myCode').querySelector('code').textContent = code;
@@ -271,23 +271,13 @@ function updateWork(workspace) {
 function updateBHSL(event) {updateWork(workspaceB);}
 function updateBRGB(event) {updateWork(workspaceBRGB);}
 
-var currentFilterType = 'Contrast';
-var currentFilterID = 0;
+
 workspaceB.addChangeListener(updateBHSL);
 workspaceBRGB.addChangeListener(updateBRGB);
 document.getElementById('blurFormulaRGB').style.display = 'none';
 updateBHSL();
 
-function updateFilterList() {
-	imgData.filters = [];
-	var els = document.getElementById('filterList').querySelectorAll('input');
-	for (var i=0;i<els.length;i++){
-		filters[els[i].getAttribute('data-type')][parseInt(els[i].value)].hslrgb = 'h';
-		imgData.filters.push(filters[els[i].getAttribute('data-type')][parseInt(els[i].value)]);
-	}
-	console.log(imgData.filters);
-	updateImage();
-}
+
 
 function addFilter() {
 	var filterType = document.getElementById('addFilter').querySelector('select').value;
@@ -302,7 +292,11 @@ function addFilter() {
 	input.setAttribute('data-type',filterType);
 	div.appendChild(input);
 	el.appendChild(div);
-	updateFilterList();
+	
+	filters[filterType][input.value)].hslrgb = 'h';
+	imgData.filters.push(filters[filterType][input.value)]);
+	currentFilterID = imgData.filters.length - 1;
+	updateImage();
 }
 document.getElementById('addFilter').querySelector('button').addEventListener('click',addFilter);
 
