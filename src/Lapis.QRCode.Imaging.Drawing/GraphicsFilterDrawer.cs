@@ -43,9 +43,12 @@ namespace Lapis.QRCode.Imaging.Drawing
 				Dictionary<int, int> darkhash = new Dictionary<int, int>();
 
         		state.DoString (TextFormula);
-        		LuaFunction[] filters = {state ["Filter1"] as LuaFunction};
+        		LuaFunction[] filters = new LuaFunction[2];
+        		filters[0] = state ["Filter1"] as LuaFunction;
         		filters[1] = state ["Filter2"] as LuaFunction;
-        		int[] filterTypes = {0,1};//0 is hsl
+        		int[] filterTypes = new int[2];
+        		filterTypes[0] = 0;
+        		filterTypes[1] = 1;//0 is hsl
 				//filters[0] = state ["Filter1"] as LuaFunction;
 				int newcell =0;
 				int repcell = 0;
