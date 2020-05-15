@@ -85,9 +85,11 @@ namespace Lapis.QrArt
 								textDrawer.BlurFormula = System.IO.File.ReadAllText(@"/home/rwilcox/blend-text/server/formulas/"+blurFormulaOpt.Value()+".txt");
 								if (typeOpt.Value() == "filter"){
 									textDrawer.TextFormula = System.IO.File.ReadAllText(@"/home/rwilcox/blend-text/server/formulas/"+blurFormulaOpt.Value()+".txt");
+									textDrawer.TextType = blurTypeOpt.Value();
 								}
 								else {
 									textDrawer.TextFormula = System.IO.File.ReadAllText(@"/home/rwilcox/blend-text/server/formulas/"+textFormulaOpt.Value()+".txt");
+									textDrawer.TextType = textTypeOpt.Value();
 								}
 								
 							}

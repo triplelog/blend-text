@@ -71,10 +71,10 @@ namespace Lapis.QRCode.Imaging.Drawing
 				Dictionary<int, int> lighthash = new Dictionary<int, int>();
 				Dictionary<int, int> darkhash = new Dictionary<int, int>();
 				
-        		//state.DoString (BlurFormula);
+        		state.DoString (BlurFormula);
         		state.DoString (TextFormula);
         		Console.WriteLine("Formula: "+TextFormula);
-				var scriptFunc = state ["TextFunc"] as LuaFunction;
+				var scriptFunc = state ["ScriptFunc"] as LuaFunction;
 				var textFunc = state ["TextFunc"] as LuaFunction;
 				int newcell =0;
 				int repcell = 0;
