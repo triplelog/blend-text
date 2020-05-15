@@ -80,6 +80,80 @@ img {
 </div>
 {% endblock %}
 {% block content11 %}
+		{% if type == 'overlay' %}
+			
+			<div>
+				Image: 
+				<select id="imgType">
+					<option value="upload">Upload</option>
+					<option value="url">URL</option>
+					<option value="drag">Drag/Drop</option>
+				</select>
+				<input type="file" name="imgSrc" id="imgSrc"></input>
+				<input type="text" name="imgUrl" id="imgUrl"></input>
+				<span id="imgDrag"></span>
+			</div>
+			<div>
+				<input type="radio" name="overlayType" id="overlayText"></input>Text
+				<input type="radio" name="overlayType" id="overlayQR"></input>QR
+			<div>
+				<span class="qrType">Coded Message: </span><span class="textType">Text: </span><input type="text" id="text" value=""></input>
+			</div>
+			<div class="textType">
+				Font: <input type="text" id="font" value="Tahoma"><!--Autocomplete w/ fonts, use CSS sprites with available fonts--></input>
+			</div>
+			<div id="fontSize">
+				Size: 
+				<select>
+					<option value="font">Font Size</option>
+					<option value="width">Width</option>
+				</select>= <input type="number" value="40"></input><span></span>
+			</div>
+			<div id="locX">
+				Location X: 
+				<select>
+					<option value="0">Middle</option>
+					<option value="200">Left</option>
+					<option value="400">Right</option>
+				</select>
+				 @ 
+				 <input type="number" value="50"></input>%
+			</div>
+			<div id="locY">
+				Location Y: 
+				<select>
+					<option value="0">Middle</option>
+					<option value="200">Top</option>
+					<option value="400">Bottom</option>
+				</select>
+				 @ 
+				 <input type="number" value="50"></input>%
+			</div>
+			
+			<div class="textType">
+				Blur Radius: <input type="number" id="blurRadius" value="10"></input>
+			</div>
+			<div class="textType">
+				Crop Text: <input type="checkbox" id="crop"></input>
+			</div>
+			<div class="qrType">
+				Type #: <input type="number" id="typeNumber" value="5"></input>
+			</div>
+			<div class="qrType">
+				Error Correct: <select id="errorCorrect">
+				<option value="L">Low</option>
+				<option value="M" selected>Medium</option>
+				<option value="Q">Quartile</option>
+				<option value="H">High</option>
+				
+				</select>
+			</div>
+			<div class="qrType">
+				Threshold: <input type="number" id="threshold" value="50"></input>%
+			</div>
+			
+			
+		{% endif %}
 	{% if type == 'qr' %}
 			
 			<div>
