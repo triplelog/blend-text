@@ -17,7 +17,7 @@ ws.onmessage = function(evt){
 var imgData = {};
 var myTimeout;
 //imgData.imageSrc = document.getElementById('imageSrc').value;
-
+imgData.blurType = 'hsl';
 imgData.type = type;
 
 

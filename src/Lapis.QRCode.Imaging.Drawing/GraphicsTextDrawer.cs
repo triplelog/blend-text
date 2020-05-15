@@ -73,7 +73,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 				
         		state.DoString (BlurFormula);
         		state.DoString (TextFormula);
-        		Console.WriteLine(TextFormula);
+        		Console.WriteLine("Formula: "+TextFormula);
 				var scriptFunc = state ["ScriptFunc"] as LuaFunction;
 				var textFunc = state ["TextFunc"] as LuaFunction;
 				int newcell =0;
@@ -231,7 +231,7 @@ namespace Lapis.QRCode.Imaging.Drawing
                         else { //tripMatrix[r, c]<0 so Background
                         	var x = MarginL + c;
                             var y = MarginT + r;
-							
+							Console.WriteLine("Bad");
                             Color pixColor = bmp.GetPixel(x, y);
                             int re = pixColor.R * pixColor.A / 255 + (255-pixColor.A);
                             int gr = pixColor.G * pixColor.A / 255 + (255-pixColor.A);
