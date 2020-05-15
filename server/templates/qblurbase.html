@@ -269,12 +269,12 @@ img {
 			<div id="addFilter">
 				Add Filter: <select>
 					
-					<option value="brightness">Brightness</option>
-					<option value="">Saturation</option>
-					<option value="hue">Hue (Rotate/Invert/Random)</option>
-					<option value="contrast">Contrast</option>
-					<option value="grayscale">Grayscale/Sepia</option>
-					<option value="">Palette</option>
+					<option value="Brightness">Brightness</option>
+					<option value="Saturation">Saturation</option>
+					<option value="Hue">Hue (Rotate/Invert/Random)</option>
+					<option value="Contrast">Contrast</option>
+					<option value="Grayscale">Grayscale/Sepia</option>
+					<option value="Palette">Palette</option>
 					</select>
 					<button>Add</button>
 			</div>
@@ -445,10 +445,12 @@ img {
 <script>var type = {{ type | dump | safe }}</script>
 <script>var tkey = {{ tkey | dump | safe }}</script>
 <script>var formulas = {{ formulas | dump | safe }};</script>
+
 <script src="../js/creator.js"></script>
 {% if type == "gradient" %}
 <script src="../js/gradientCreator.js"></script>
 {% elif type == "filter" %}
+<script>var filters = {{ filters | dump | safe }};</script>
 <script src="../js/dragula.js"></script>
 <script src="../js/filterCreator.js"></script>
 {% else %}

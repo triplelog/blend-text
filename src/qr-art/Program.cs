@@ -65,6 +65,9 @@ namespace Lapis.QrArt
         				QRArtCreator builder = null;
         				
         				if (typeOpt.Value() != "gradient"){
+        					if (typeOpt.Value() == "filter"){
+        						textDrawer = new GraphicsFilterDrawer();
+        					}
 							builder = new QRArtCreator(
 								new Triparizer(),
 								textDrawer

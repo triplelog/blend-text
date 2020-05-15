@@ -280,6 +280,7 @@ function updateFilterList() {
 		imgData.filters.push(els[i].value);
 	}
 	console.log(imgData.filters);
+	updateImage();
 }
 
 function addFilter() {
@@ -291,7 +292,7 @@ function addFilter() {
 	div.appendChild(span);
 	var input = document.createElement('input');
 	input.style.display = 'none';
-	input.value = "Test Value";
+	input.value = filters[filterType][0];
 	div.appendChild(input);
 	el.appendChild(div);
 	updateFilterList();
