@@ -391,6 +391,7 @@ function switchType(evt) {
 	if (evt){
 		el = evt.target;
 	}
+	console.log(el);
 	if (!el || el.id == 'overlayText'){
 		if ((!el && document.getElementById('overlayText').checked) || (el && el.checked)){
 			var els = document.querySelectorAll('.textType');
