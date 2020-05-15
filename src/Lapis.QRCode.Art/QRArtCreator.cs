@@ -45,18 +45,18 @@ namespace Lapis.QRCode.Art
 				if (2==2){
 					TripMatrixDrawer.MarginL = 0;
 					TripMatrixDrawer.MarginT = 0;
-					var tripMatrix = new TripMatrix(theight,twidth);
+					var tripMatrixFilter = new TripMatrix(theight,twidth);
 				
 					for (var i=0;i<theight;i++){
 						for (var ii=0;ii<twidth;ii++){
-							tripMatrix[i,ii] = 3; //first is row, second is col
+							tripMatrixFilter[i,ii] = 3; //first is row, second is col
 						}
 					}//~20 ms since else if
 				
 					TripMatrixDrawer.THeight = tripMatrix.RowCount;
 					TripMatrixDrawer.TWidth = tripMatrix.ColumnCount;
 				
-					return TripMatrixDrawer.Draw(tripMatrix);
+					return TripMatrixDrawer.Draw(tripMatrixFilter);
                 }
                 
                 
