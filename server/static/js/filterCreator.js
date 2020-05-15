@@ -270,16 +270,19 @@ document.getElementById('blurFormulaRGB').style.display = 'none';
 updateWork();
 
 function editFilter(evt) {
-	var el = evt.target;
-	if (el.tagName != 'div'){
-		el = el.parentElement;
+	if (evt){
+		var el = evt.target;
+		if (el.tagName != 'div'){
+			el = el.parentElement;
+		}
+		var els = document.getElementById('filterList').querySelectorAll('div');
+		for (var i=0;i<els.length;i++){
+			els[i].style.removeProperty('background');
+		}
+		el.style.background = 'gray';
+		currentFilterID = parseInt(el.getAttribute('data-type'));
+		currentFilterType = el.getAttribute('data-filter');
 	}
-	var els = document.getElementById('filterList').querySelectorAll('div');
-	for (var i=0;i<els.length;i++){
-		els[i].style.removeProperty('background');
-	}
-	el.style.background = 'gray';
-	currentFilterID = parseInt(el.getAttribute('data-type'));
 	
 	var wxml = Blockly.Xml.textToDom(imgData.filters[currentFilterID].workspace);
 	workspace.clear();
@@ -299,7 +302,7 @@ function editFilter(evt) {
 		Blockly.Xml.domToWorkspace(wxml,workspace);
 		updateWork();
 	}
-	currentFilterType = el.getAttribute('data-filter');
+	
 	setFilterOptions(0);
 	
 }
@@ -356,11 +359,31 @@ function addFilter() {
 }
 document.getElementById('addFilter').querySelector('button').addEventListener('click',addFilter);
 
+function reorderFilterList(elID){
+	console.log(elID);
+	var filterListEls = document.getElementById('filterList').querySelectorAll('div');
+	var removedFilter = imgData.filters[elID];
+	imgData.filters.splice(elID,1);
+
+	for (var i=0;i<filterListEls.length;i++){
+		if (filterListEls[i].getAttribute('data-type')==elID){
+			currentFilterID = i;
+			filterListEls[i].setAttribute('data-type',i);
+		}
+		else {
+			filterListEls[i].setAttribute('data-type',i);
+		}
+	}
+	imgData.filters.splice(currentFilterID,0,removedFilter);
+	editFilter();
+}
+
 dragula([document.getElementById('filterList')])
   .on('drag', function (el) {
     //el.className = el.className.replace('ex-moved', '');
   }).on('drop', function (el) {
     //el.className += ' ex-moved';
+    reorderFilterList(parseInt(el.getAttribute('data-type')));
   }).on('over', function (el, container) {
     //container.className += ' ex-over';
   }).on('out', function (el, container) {
