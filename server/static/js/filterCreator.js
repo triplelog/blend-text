@@ -277,7 +277,7 @@ function updateFilterList() {
 	imgData.filters = [];
 	var els = document.getElementById('filterList').querySelectorAll('input');
 	for (var i=0;i<els.length;i++){
-		imgData.filters.push(filters[els[i].getAttribute('data-type')][parseInt(els[i].value)]);
+		imgData.filters.push(filters[els[i].getAttribute('data-type')][parseInt(els[i].value)].workspace);
 	}
 	console.log(imgData.filters);
 	updateImage();
@@ -288,7 +288,7 @@ function addFilter() {
 	var el = document.getElementById('filterList');
 	var div = document.createElement('div');
 	var span = document.createElement('span');
-	span.textContent = filterType;
+	span.textContent = filters[filterType][0].name;
 	div.appendChild(span);
 	var input = document.createElement('input');
 	input.style.display = 'none';
