@@ -285,10 +285,12 @@ function editFilter(evt) {
 	if (el.tagName != 'div'){
 		el = el.parentElement;
 	}
+	var els = document.getElementById('filterList').querySelectorAll('div');
+	for (var i=0;i<els.length;i++){
+		els[i].style.removeProperty('background');
+	}
 	el.style.background = 'gray';
 	currentFilterID = parseInt(el.getAttribute('data-type'));
-	console.log(el);
-	console.log(currentFilterID);
 	
 }
 
@@ -297,7 +299,7 @@ function addFilter() {
 	var el = document.getElementById('filterList');
 	var div = document.createElement('div');
 	div.addEventListener('click',editFilter);
-	
+	div.style.background = 'gray';
 	var span = document.createElement('span');
 	span.textContent = filters[filterType][0].name;
 	div.appendChild(span);
