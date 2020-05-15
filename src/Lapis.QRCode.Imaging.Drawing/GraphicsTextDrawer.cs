@@ -73,6 +73,8 @@ namespace Lapis.QRCode.Imaging.Drawing
 				
         		state.DoString (BlurFormula);
         		state.DoString (TextFormula);
+        		Console.WriteLine(BlurFormula);
+        		Console.WriteLine(TextFormula);
 				var scriptFunc = state ["ScriptFunc"] as LuaFunction;
 				var textFunc = state ["TextFunc"] as LuaFunction;
 				int newcell =0;
@@ -184,12 +186,6 @@ namespace Lapis.QRCode.Imaging.Drawing
 									
 								}
 								else {
-									if (tripMatrix[r, c] ==1){
-										
-									}
-									else if (tripMatrix[r, c] == 2){
-										
-									}
 									if (tripMatrix[r, c] > 2){
 										var res = textFunc.Call (tripMatrix[r, c],re,gr,bl);
 										re = Convert.ToInt32(res[0]);
