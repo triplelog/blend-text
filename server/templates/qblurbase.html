@@ -337,11 +337,18 @@ img {
 		Load:
 		<select id="hslrgb">
 		
-			<option value="hsl" selected="selected">Custom HSL</option>
+			
+			{% if type == "filter" %}
+				{% for i in range(0,filters.Contrast.length) %}
+				<option value="{{ i }}">{{ filters.Contrast[i].name }}</option>
+				{% endfor %}
+			{% else %}
+				{% for formula in formulas %}
+				<option value="{{ formula.id }}">{{ formula.name }}</option>
+				{% endfor %}
+			{% endif %}
+			<option value="hsl">Custom HSL</option>
 			<option value="rgb">Custom RGB</option>
-			{% for formula in formulas %}
-			<option value="{{ formula.id }}">{{ formula.name }}</option>
-			{% endfor %}
 		</select>
 	</div>
 	<div id="formulaDiv">

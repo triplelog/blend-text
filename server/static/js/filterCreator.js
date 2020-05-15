@@ -30,92 +30,51 @@ function updateImage(evt){
 	else {
 		var el = evt.target;
 		if (el.id && el.id == 'hslrgb'){
-			if (blurOrText == 'blur'){
-				if (el.value =='rgb'){
-					document.getElementById('blurFormulaHSL').style.display = 'none';
-					document.getElementById('blurFormulaRGB').style.display = 'block';
-					imgData.blurType = 'rgb';
-					updateBRGB();
+			if (el.value =='rgb'){
+				workspace.clear();
+				var vars = ["d","r","g","b"];
+				for (var ii=0;ii<4;ii++){
+					workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
 				}
-				else if (el.value =='hsl'){
-					document.getElementById('blurFormulaHSL').style.display = 'block';
-					document.getElementById('blurFormulaRGB').style.display = 'none';
-					imgData.blurType = 'hsl';
-					updateBHSL();
+				imgData.blurType = 'rgb';
+				updateWork(workspace);
+			}
+			else if (el.value =='hsl'){
+				workspace.clear();
+				var vars = ["d","h","s","l"];
+				for (var ii=0;ii<4;ii++){
+					workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
 				}
-				else {
-					var formula = formulas[parseInt(el.value)];
-					if (formula.formulaType == 'rgb'){
-						var wxml = Blockly.Xml.textToDom(formula.workspace);
-						workspaceBRGB.clear();
-						var vars = ["d","r","g","b"];
-						for (var ii=0;ii<4;ii++){
-							workspaceBRGB.createVariable(vars[ii],null,"qblur_"+vars[ii]);
-						}
-						Blockly.Xml.domToWorkspace(wxml,workspaceBRGB);
-						document.getElementById('blurFormulaHSL').style.display = 'none';
-						document.getElementById('blurFormulaRGB').style.display = 'block';
-						imgData.blurType = 'rgb';
-						updateBRGB();
-					}
-					else {
-						var wxml = Blockly.Xml.textToDom(formula.workspace);
-						workspaceB.clear();
-						var vars = ["d","h","s","l"];
-						for (var ii=0;ii<4;ii++){
-							workspaceB.createVariable(vars[ii],null,"qblur_"+vars[ii]);
-						}
-						Blockly.Xml.domToWorkspace(wxml,workspaceB);
-						document.getElementById('blurFormulaHSL').style.display = 'block';
-						document.getElementById('blurFormulaRGB').style.display = 'none';
-						imgData.blurType = 'hsl';
-						updateBHSL();
-					}
-					
-				}
+				imgData.blurType = 'hsl';
+				updateWork(workspace);
 			}
 			else {
-				if (el.value =='rgb'){
-					document.getElementById('textFormulaHSL').style.display = 'none';
-					document.getElementById('textFormulaRGB').style.display = 'block';
-					imgData.textType = 'rgb';
-					updateTRGB();
-				}
-				else if (el.value =='hsl'){
-					document.getElementById('textFormulaHSL').style.display = 'block';
-					document.getElementById('textFormulaRGB').style.display = 'none';
-					imgData.textType = 'hsl';
-					updateTHSL();
+				var formula = filters.Contrast[parseInt(el.value)];
+				if (formula.formulaType == 'rgb'){
+					var wxml = Blockly.Xml.textToDom(formula.workspace);
+					workspace.clear();
+					var vars = ["d","r","g","b"];
+					for (var ii=0;ii<4;ii++){
+						workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
+					}
+					Blockly.Xml.domToWorkspace(wxml,workspace);
+					imgData.blurType = 'rgb';
+					updateWork(workspace);
 				}
 				else {
-					var formula = formulas[parseInt(el.value)];
-					if (formula.formulaType == 'rgb'){
-						var wxml = Blockly.Xml.textToDom(formula.workspace);
-						workspaceTRGB.clear();
-						var vars = ["d","r","g","b"];
-						for (var ii=0;ii<4;ii++){
-							workspaceTRGB.createVariable(vars[ii],null,"qblur_"+vars[ii]);
-						}
-						Blockly.Xml.domToWorkspace(wxml,workspaceTRGB);
-						document.getElementById('textFormulaHSL').style.display = 'none';
-						document.getElementById('textFormulaRGB').style.display = 'block';
-						imgData.textType = 'rgb';
-						updateTRGB();
+					var wxml = Blockly.Xml.textToDom(formula.workspace);
+					workspace.clear();
+					var vars = ["d","h","s","l"];
+					for (var ii=0;ii<4;ii++){
+						workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
 					}
-					else {
-						var wxml = Blockly.Xml.textToDom(formula.workspace);
-						workspaceT.clear();
-						var vars = ["d","h","s","l"];
-						for (var ii=0;ii<4;ii++){
-							workspaceT.createVariable(vars[ii],null,"qblur_"+vars[ii]);
-						}
-						Blockly.Xml.domToWorkspace(wxml,workspaceT);
-						document.getElementById('textFormulaHSL').style.display = 'block';
-						document.getElementById('textFormulaRGB').style.display = 'none';
-						imgData.textType = 'hsl';
-						updateTHSL();
-					}
+					Blockly.Xml.domToWorkspace(wxml,workspace);
+					imgData.blurType = 'hsl';
+					updateWork(workspace);
 				}
+				
+			}
+
 				
 			}
 			onresize();
@@ -170,35 +129,28 @@ function onresize(evt) {
       element = element.offsetParent;
     } while (element);
     // Position blocklyDiv over blocklyArea.
-    for (var i=0;i<2;i++){
-		blocklyDivs[i].style.left = x + 'px';
-		blocklyDivs[i].style.top = y + 'px';
-		blocklyDivs[i].style.width = document.getElementById('formulaDiv').offsetWidth + 'px';
-		blocklyDivs[i].style.height = document.getElementById('formulaDiv').offsetHeight + 'px';
-		Blockly.svgResize(workspaces[i]);
-    }
+	blocklyDiv.style.left = x + 'px';
+	blocklyDiv.style.top = y + 'px';
+	blocklyDiv.style.width = document.getElementById('formulaDiv').offsetWidth + 'px';
+	blocklyDiv.style.height = document.getElementById('formulaDiv').offsetHeight + 'px';
+	Blockly.svgResize(workspace);
 }
 
 var defaults = ['<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="qblur_r">r</variable></variables><block type="controls_if" id="Il^^YLd2NrFN:|;KKrjz" x="53" y="8"><value name="IF0"><block type="logic_compare" id="ziTZ^NbMl,qw@.Jp?R,B"><field name="OP">LT</field><value name="A"><block type="variables_get" id="]$l^IlghlBfr{3nXw`e{"><field name="VAR" id="qblur_r">r</field></block></value><value name="B"><block type="math_number" id="h2X9B|l.elRcnP+Je:;u"><field name="NUM">200</field></block></value></block></value><statement name="DO0"><block type="variables_set" id="D;pLu7Mt]Bf4$r!guo;-"><field name="VAR" id="qblur_r">r</field><value name="VALUE"><block type="math_number" id="i~V0T-jtCz[Wz(P4:BIV"><field name="NUM">200</field></block></value></block></statement></block></xml>'];
 defaults.push('<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="qblur_l">l</variable></variables><block type="controls_if" id="Wd;mk5}4Of9%Iw%Z7Zp@" x="35" y="18"><value name="IF0"><block type="logic_compare" id="Y]b.Mo8c|Gg]GFgx]d}."><field name="OP">LT</field><value name="A"><block type="variables_get" id="z@^1uBjFU^[PEMP$1M{*"><field name="VAR" id="qblur_l">l</field></block></value><value name="B"><block type="math_number" id="q#8h__fG*5qOgK`l1]dN"><field name="NUM">0.6</field></block></value></block></value><statement name="DO0"><block type="variables_set" id="!{OE7jG|eOuI%-Gmeh$z"><field name="VAR" id="qblur_l">l</field><value name="VALUE"><block type="math_number" id="eSak{(`N-^$A8:Y!TfoB"><field name="NUM">0.6</field></block></value></block></statement></block></xml>');
 
-var blocklyDivs = [document.getElementById('blurFormulaRGB'),document.getElementById('blurFormulaHSL')];
-var workspaceBRGB = Blockly.inject(blocklyDivs[0], {toolbox: document.getElementById('toolbox')});
-var workspaceB = Blockly.inject(blocklyDivs[1], {toolbox: document.getElementById('toolbox')});
-var workspaces = [workspaceBRGB,workspaceB];
-for (var i=0;i<2;i++){
-	var workspace = workspaces[i];
-	var vars = ["d","r","g","b"];
-	if (i>=1){
-		vars = ["d","h","s","l"];
-	}
-	for (var ii=0;ii<4;ii++){
-		workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
-	}
-	var wxml = Blockly.Xml.textToDom(defaults[i]);
-	Blockly.Xml.domToWorkspace(wxml,workspace);
-	onresize();
+var blocklyDiv = document.getElementById('blurFormulaHSL');
+var workspace = Blockly.inject(blocklyDiv, {toolbox: document.getElementById('toolbox')});
+
+var vars = ["d","h","s","l"];
+
+for (var ii=0;ii<4;ii++){
+	workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
 }
+var wxml = Blockly.Xml.textToDom(filters.Contrast[0].workspace);
+Blockly.Xml.domToWorkspace(wxml,workspace);
+onresize();
+
 
 
 
@@ -271,8 +223,6 @@ function updateWork(workspace) {
 	}
 	
 }
-function updateBHSL(event) {updateWork(workspaceB);}
-function updateBRGB(event) {updateWork(workspaceBRGB);}
 
 
 workspaceB.addChangeListener(updateBHSL);
@@ -312,7 +262,8 @@ function addFilter() {
 	input.style.display = 'none';
 	div.appendChild(input);
 	el.appendChild(div);
-	var newFilter = {'hslrgb':'h'};
+	var newFilter = {};
+	newFilter.hslrgb = filters[filterType][0].hslrgb;
 	newFilter.name = filters[filterType][0].name;
 	newFilter.workspace = filters[filterType][0].workspace;
 	imgData.filters.push(newFilter);
