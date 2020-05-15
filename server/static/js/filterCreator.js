@@ -284,6 +284,8 @@ function editFilter(evt) {
 	var el = evt.target;
 	el.style.background = 'gray';
 	currentFilterID = parseInt(el.getAttribute('data-type'));
+	console.log(el);
+	console.log(currentFilterID);
 	
 }
 
