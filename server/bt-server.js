@@ -684,7 +684,7 @@ wss.on('connection', function connection(ws) {
 				hrString += 'h';
 			}
 			else {
-				luaBlurFormula += `function Filter`+(ii+1)+` (h,s,l)
+				luaBlurFormula += `function Filter`+(ii+1)+` (r,g,b)
 				`+code+`
 				return r,g,b
 				end
