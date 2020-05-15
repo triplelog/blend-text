@@ -273,6 +273,14 @@ workspaceBRGB.addChangeListener(updateBRGB);
 document.getElementById('blurFormulaRGB').style.display = 'none';
 updateBHSL();
 
+function addFilter() {
+	var filterType = document.getElementById('addFilter').querySelector('select').value;
+	var el = document.getElementById('filterList');
+	var div = document.createElement('div');
+	div.textContent = filterType;
+	el.appendChild(div);
+}
+document.getElementById('addFilter').querySelector('button').addEventListener('click',addFilter);
 
 
 
