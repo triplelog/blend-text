@@ -390,10 +390,10 @@ function switchType(evt) {
 	if (document.getElementById('overlayText').checked){
 		var els = document.querySelectorAll('.textType');
 		for (var i=0;i<els.length;i++){
-			els[i].style.display = 'initial';
+			els[i].style.display = 'inherit';
 		}
 		var el2 = document.getElementById('fontSize');
-		el2.querySelector('option[value=font]').style.display = 'initial';
+		el2.querySelector('option[value=font]').style.display = 'inherit';
 		if (document.getElementById('crop').checked){
 			imgData.type = 'text';
 		}
@@ -411,7 +411,7 @@ function switchType(evt) {
 	if (document.getElementById('overlayQR').checked){
 		var els = document.querySelectorAll('.qrType');
 		for (var i=0;i<els.length;i++){
-			els[i].style.display = 'initial';
+			els[i].style.display = 'inherit';
 		}
 		var el2 = document.getElementById('fontSize');
 		el2.querySelector('select').value = 'width';
