@@ -36,7 +36,10 @@ function updateImage(evt){
 				for (var ii=0;ii<4;ii++){
 					workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
 				}
-				imgData.blurType = 'rgb';
+				var wxml = Blockly.Xml.workspaceToDom(workspace);
+				var outspace = Blockly.Xml.domToText(wxml);
+				imgData.filters[currentFilterID].workspace = outspace;
+				imgData.filters[currentFilterID].hslrgb = "r";
 				updateWork();
 			}
 			else if (el.value =='hsl'){
@@ -45,12 +48,15 @@ function updateImage(evt){
 				for (var ii=0;ii<4;ii++){
 					workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
 				}
-				imgData.blurType = 'hsl';
+				var wxml = Blockly.Xml.workspaceToDom(workspace);
+				var outspace = Blockly.Xml.domToText(wxml);
+				imgData.filters[currentFilterID].workspace = outspace;
+				imgData.filters[currentFilterID].hslrgb = "h";
 				updateWork();
 			}
 			else {
 				var formula = filters.Contrast[parseInt(el.value)];
-				if (formula.formulaType == 'rgb'){
+				if (formula.hslrgb == 'r'){
 					var wxml = Blockly.Xml.textToDom(formula.workspace);
 					workspace.clear();
 					var vars = ["d","r","g","b"];
@@ -58,7 +64,9 @@ function updateImage(evt){
 						workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
 					}
 					Blockly.Xml.domToWorkspace(wxml,workspace);
-					imgData.blurType = 'rgb';
+					imgData.filters[currentFilterID].workspace = formula.workspace;
+					imgData.filters[currentFilterID].hslrgb = formula.hslrgb;
+					imgData.filters[currentFilterID].name = formula.name;
 					updateWork();
 				}
 				else {
@@ -69,7 +77,9 @@ function updateImage(evt){
 						workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
 					}
 					Blockly.Xml.domToWorkspace(wxml,workspace);
-					imgData.blurType = 'hsl';
+					imgData.filters[currentFilterID].workspace = formula.workspace;
+					imgData.filters[currentFilterID].hslrgb = formula.hslrgb;
+					imgData.filters[currentFilterID].name = formula.name;
 					updateWork();
 				}
 				
