@@ -30,6 +30,10 @@ function updateImage(evt){
 	else {
 		var el = evt.target;
 		if (el.id && el.id == 'hslrgb'){
+			var filterListEls = document.getElementById('filterList').querySelectorAll('div');
+			if (filterListEls[currentFilterID]){
+				filterListEls[currentFilterID].querySelector('span').textContent = el.textContent;
+			}
 			if (el.value =='rgb'){
 				workspace.clear();
 				var vars = ["r","g","b"];
@@ -170,14 +174,14 @@ function setFilterOptions(selectedID) {
 	}
 	var option = document.createElement('option');
 	option.value = 'hsl';
-	option.textContent = "Custom HSL";
+	option.textContent = currentFilterType+" HSL";
 	filterOptions.appendChild(option);
 	if (-2 == selectedID){
 		option.setAttribute('selected','selected');
 	}
 	option = document.createElement('option');
 	option.value = 'rgb';
-	option.textContent = "Custom RGB";
+	option.textContent = currentFilterType+" RGB";
 	if (-1 == selectedID){
 		option.setAttribute('selected','selected');
 	}
