@@ -89,7 +89,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 						}
 						else
 						{
-							for (var filterIdx=0;filterIdx<2;filterIdx++){
+							for (var filterIdx=0;filterIdx<nFilters;filterIdx++){
 								if (filterTypes[filterIdx] == 0){
 									double h; double s; double l;
 									RgbToHls(re,gr,bl,out h,out l,out s);
