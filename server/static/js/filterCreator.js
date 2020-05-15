@@ -32,8 +32,8 @@ function updateImage(evt){
 		if (el.id && el.id == 'hslrgb'){
 			if (el.value =='rgb'){
 				workspace.clear();
-				var vars = ["d","r","g","b"];
-				for (var ii=0;ii<4;ii++){
+				var vars = ["r","g","b"];
+				for (var ii=0;ii<3;ii++){
 					workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
 				}
 				var wxml = Blockly.Xml.workspaceToDom(workspace);
@@ -44,8 +44,8 @@ function updateImage(evt){
 			}
 			else if (el.value =='hsl'){
 				workspace.clear();
-				var vars = ["d","h","s","l"];
-				for (var ii=0;ii<4;ii++){
+				var vars = ["h","s","l"];
+				for (var ii=0;ii<3;ii++){
 					workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
 				}
 				var wxml = Blockly.Xml.workspaceToDom(workspace);
@@ -59,8 +59,8 @@ function updateImage(evt){
 				if (formula.hslrgb == 'r'){
 					var wxml = Blockly.Xml.textToDom(formula.workspace);
 					workspace.clear();
-					var vars = ["d","r","g","b"];
-					for (var ii=0;ii<4;ii++){
+					var vars = ["r","g","b"];
+					for (var ii=0;ii<3;ii++){
 						workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
 					}
 					Blockly.Xml.domToWorkspace(wxml,workspace);
@@ -72,8 +72,8 @@ function updateImage(evt){
 				else {
 					var wxml = Blockly.Xml.textToDom(formula.workspace);
 					workspace.clear();
-					var vars = ["d","h","s","l"];
-					for (var ii=0;ii<4;ii++){
+					var vars = ["h","s","l"];
+					for (var ii=0;ii<3;ii++){
 						workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
 					}
 					Blockly.Xml.domToWorkspace(wxml,workspace);
@@ -246,6 +246,27 @@ function editFilter(evt) {
 	}
 	el.style.background = 'gray';
 	currentFilterID = parseInt(el.getAttribute('data-type'));
+	workspace.clear();
+	if (imgData.filters[currentFilterID].hslrgb == 'r'){
+		var vars = ["r","g","b"];
+		for (var ii=0;ii<3;ii++){
+			workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
+		}
+		var wxml = Blockly.Xml.workspaceToDom(workspace);
+		var outspace = Blockly.Xml.domToText(wxml);
+		imgData.filters[currentFilterID].workspace = outspace;
+		updateWork();
+	}
+	else {
+		var vars = ["h","s","l"];
+		for (var ii=0;ii<3;ii++){
+			workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
+		}
+		var wxml = Blockly.Xml.workspaceToDom(workspace);
+		var outspace = Blockly.Xml.domToText(wxml);
+		imgData.filters[currentFilterID].workspace = outspace;
+		updateWork();
+	}
 	
 }
 
