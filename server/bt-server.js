@@ -693,7 +693,7 @@ wss.on('connection', function connection(ws) {
 			
 			}
 		}
-		
+		console.log(luaBlurFormula);
 		execCmd += ' -b "testBlur"';
 		execCmd += ' -B '+hrString;
 	
