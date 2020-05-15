@@ -57,32 +57,27 @@ namespace Lapis.QRCode.Imaging.Drawing
 				int repcell = 0;
 				int newdarkcell =0;
 				int repdarkcell = 0;
-				
-                for (var r = 0; r < THeight && r + MarginT < bmp.Height; r += CellWidth)
+				Color pixColor;
+				int imgC;
+				int re; int gr; int bl;
+				int outval; int newcol;
+				double h; double s; double l;
+                for (var r = 0; r < THeight; r += CellWidth)
                 {
-                    for (var c = 0; c < TWidth && c + MarginL < bmp.Width; c += CellWidth)
+                    for (var c = 0; c < TWidth; c += CellWidth)
                     {
                         
-						foreBrushCustom.Color = bmp.GetPixel(c, r);
-						graph.FillRectangle(foreBrushCustom, c, r, 1,1);
-						continue;
-						
-						var x = MarginL + c;
-						var y = MarginT + r;
 						//Darken uniformly
-						Color pixColor = bmp.GetPixel(x, y);
+						pixColor = bmp.GetPixel(c, r);
 						
-						int re = pixColor.R * pixColor.A / 255 + (255-pixColor.A);
-						int gr = pixColor.G * pixColor.A / 255 + (255-pixColor.A);
-						int bl = pixColor.B * pixColor.A / 255 + (255-pixColor.A);
+						re = pixColor.R * pixColor.A / 255 + (255-pixColor.A);
+						gr = pixColor.G * pixColor.A / 255 + (255-pixColor.A);
+						bl = pixColor.B * pixColor.A / 255 + (255-pixColor.A);
 						
-						Color hashColor = Color.FromArgb((re/HashSize)*HashSize,(gr/HashSize)*HashSize,(bl/HashSize)*HashSize);
-						int imgC = hashColor.GetHashCode();
-						
-						//Color hashColor = Color.FromArgb(re,gr,bl);
-						//int imgC = hashColor.GetHashCode();
+						imgC = Color.FromArgb((re/HashSize)*HashSize,(gr/HashSize)*HashSize,(bl/HashSize)*HashSize).GetHashCode();
+
 							
-						int outval = 0;
+						outval = 0;
 						if (darkhash.TryGetValue(imgC, out outval))
 						{
 							re = (outval & 0xFF0000) >> 16;
@@ -94,7 +89,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 						{
 							for (var filterIdx=0;filterIdx<nFilters;filterIdx++){
 								if (filterTypes[filterIdx] == 0){
-									double h; double s; double l;
+									
 									RgbToHls(re,gr,bl,out h,out l,out s);
 								
 									var res = filters[filterIdx].Call (h,s,l);
@@ -127,7 +122,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 								if (gr < 0){gr = 0;}
 								if (bl < 0){bl = 0;}
 							}
-							int newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
+							newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
 							darkhash.Add(imgC, newcol);
 						
 							
@@ -137,8 +132,8 @@ namespace Lapis.QRCode.Imaging.Drawing
 						}
 						
 						
-						foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
-						graph.FillRectangle(foreBrushCustom, x, y, CellWidth, CellWidth);
+						foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
+						graph.FillRectangle(foreBrushCustom, c, r, CellWidth, CellWidth);
 							
 									
 							
