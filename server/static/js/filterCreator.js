@@ -246,15 +246,15 @@ function editFilter(evt) {
 	}
 	el.style.background = 'gray';
 	currentFilterID = parseInt(el.getAttribute('data-type'));
+	
+	var wxml = Blockly.Xml.textToDom(imgData.filters[currentFilterID].workspace);
 	workspace.clear();
 	if (imgData.filters[currentFilterID].hslrgb == 'r'){
 		var vars = ["r","g","b"];
 		for (var ii=0;ii<3;ii++){
 			workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
 		}
-		var wxml = Blockly.Xml.workspaceToDom(workspace);
-		var outspace = Blockly.Xml.domToText(wxml);
-		imgData.filters[currentFilterID].workspace = outspace;
+		Blockly.Xml.domToWorkspace(wxml,workspace);
 		updateWork();
 	}
 	else {
@@ -262,11 +262,10 @@ function editFilter(evt) {
 		for (var ii=0;ii<3;ii++){
 			workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
 		}
-		var wxml = Blockly.Xml.workspaceToDom(workspace);
-		var outspace = Blockly.Xml.domToText(wxml);
-		imgData.filters[currentFilterID].workspace = outspace;
+		Blockly.Xml.domToWorkspace(wxml,workspace);
 		updateWork();
 	}
+	//set the dropdown
 	
 }
 
