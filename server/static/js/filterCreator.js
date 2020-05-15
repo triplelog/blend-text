@@ -273,12 +273,28 @@ workspaceBRGB.addChangeListener(updateBRGB);
 document.getElementById('blurFormulaRGB').style.display = 'none';
 updateBHSL();
 
+function updateFilterList() {
+	imgData.filters = [];
+	var els = document.getElementById('filterList').querySelectorAll('input');
+	for (var i=0;i<els.length;i++){
+		imgData.filters.push(els[i].value);
+	}
+	console.log(imgData.filters);
+}
+
 function addFilter() {
 	var filterType = document.getElementById('addFilter').querySelector('select').value;
 	var el = document.getElementById('filterList');
 	var div = document.createElement('div');
-	div.textContent = filterType;
+	var span = document.createElement('span');
+	span.textContent = filterType;
+	div.appendChild(span);
+	var input = document.createElement('input');
+	input.style.display = 'none';
+	input.value = "Test Value";
+	div.appendChild(input);
 	el.appendChild(div);
+	updateFilterList();
 }
 document.getElementById('addFilter').querySelector('button').addEventListener('click',addFilter);
 
