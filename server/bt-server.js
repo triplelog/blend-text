@@ -683,9 +683,6 @@ wss.on('connection', function connection(ws) {
 			return r,g,b
 			end
 			`
-	
-			execCmd += ' -b "testBlur"';
-			execCmd += ' -B hsl'+varstr;
 		}
 		else {
 			luaBlurFormula = `function Filter1 (r,g,b)
@@ -698,10 +695,10 @@ wss.on('connection', function connection(ws) {
 			end
 			`
 	
-			execCmd += ' -b "testBlur"';
-			execCmd += ' -B rgb';
+			
 		}
-	
+		execCmd += ' -b "testBlur"';
+		execCmd += ' -B hr';
 	
 		execCmd += ' -t '+dm.type;
 	

@@ -41,15 +41,18 @@ namespace Lapis.QRCode.Imaging.Drawing
         		
 				Dictionary<int, int> lighthash = new Dictionary<int, int>();
 				Dictionary<int, int> darkhash = new Dictionary<int, int>();
-
+				
+				var nFilters = BlurType.Length;
         		state.DoString (TextFormula);
-        		LuaFunction[] filters = new LuaFunction[2];
-        		filters[0] = state ["Filter1"] as LuaFunction;
-        		filters[1] = state ["Filter2"] as LuaFunction;
-        		int[] filterTypes = new int[2];
-        		filterTypes[0] = 0;
-        		filterTypes[1] = 1;//0 is hsl
-				//filters[0] = state ["Filter1"] as LuaFunction;
+        		LuaFunction[] filters = new LuaFunction[nFilters];
+        		int[] filterTypes = new int[nFilters];
+        		for (var i=0;i<nFilters;i++){
+					if (BlurType[i] == 'h'){filterTypes[i]=0;}
+					if (BlurType[i] == 'r'){filterTypes[i]=1;}
+					int myInt = i+1;
+					string iStr = myInt.ToString();
+					filters[i] = state ["Filter"+iStr] as LuaFunction;
+				}
 				int newcell =0;
 				int repcell = 0;
 				int newdarkcell =0;
