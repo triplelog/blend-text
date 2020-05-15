@@ -268,13 +268,9 @@ img {
 			</div>
 			<div id="addFilter">
 				Add Filter: <select>
-					
-					<option value="Brightness">Brightness</option>
-					<option value="Saturation">Saturation</option>
-					<option value="Hue">Hue (Rotate/Invert/Random)</option>
-					<option value="Contrast">Contrast</option>
-					<option value="Grayscale">Grayscale/Sepia</option>
-					<option value="Palette">Palette</option>
+					{% for i in range(0,filterGroups.length) %}
+					<option value="{{filterGroups[i]}}">{{filterGroups[i]}}</option>
+					{% endfor %}
 					</select>
 					<button>Add</button>
 			</div>
