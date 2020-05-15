@@ -71,7 +71,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 						var x = MarginL + c;
 						var y = MarginT + r;
 						//Darken uniformly
-						Color pixColor = bmp.GetPixel(x, y);
+						//Color pixColor = bmp.GetPixel(x, y);
 						
 						int re = pixColor.R * pixColor.A / 255 + (255-pixColor.A);
 						int gr = pixColor.G * pixColor.A / 255 + (255-pixColor.A);
