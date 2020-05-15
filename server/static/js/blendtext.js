@@ -387,52 +387,43 @@ updateTHSL();
 updateBHSL();
 
 function switchType(evt) {
-	var el = false;
-	if (evt){
-		el = evt.target;
-	}
-	console.log(el);
-	if (!el || el.id == 'overlayText'){
-		if ((!el && document.getElementById('overlayText').checked) || (el && el.checked)){
-			var els = document.querySelectorAll('.textType');
-			for (var i=0;i<els.length;i++){
-				els[i].style.display = 'initial';
-			}
-			var el2 = document.getElementById('fontSize');
-			el2.querySelector('option[value=font]').style.display = 'initial';
-			if (document.getElementById('crop').checked){
-				imgData.type = 'text';
-			}
-			else {
-				imgData.type = 'image';
-			}
-			
+	if (document.getElementById('overlayText').checked){
+		var els = document.querySelectorAll('.textType');
+		for (var i=0;i<els.length;i++){
+			els[i].style.display = 'initial';
+		}
+		var el2 = document.getElementById('fontSize');
+		el2.querySelector('option[value=font]').style.display = 'initial';
+		if (document.getElementById('crop').checked){
+			imgData.type = 'text';
 		}
 		else {
-			var els = document.querySelectorAll('.textType');
-			for (var i=0;i<els.length;i++){
-				els[i].style.display = 'none';
-			}
+			imgData.type = 'image';
+		}
+		
+	}
+	else {
+		var els = document.querySelectorAll('.textType');
+		for (var i=0;i<els.length;i++){
+			els[i].style.display = 'none';
 		}
 	}
-	if (!el || el.id == 'overlayQR'){
-		if ((!el && document.getElementById('overlayQR').checked) || (el && el.checked)){
-			var els = document.querySelectorAll('.qrType');
-			for (var i=0;i<els.length;i++){
-				els[i].style.display = 'initial';
-			}
-			var el2 = document.getElementById('fontSize');
-			el2.querySelector('select').value = 'width';
-			el2.querySelector('option[value=font]').style.display = 'none';
-			imgData.width = document.getElementById('fontSize').querySelector('input').value;
-			document.getElementById('fontSize').querySelector('span').textContent = '%';
-			imgData.type = 'qr';
+	if (document.getElementById('overlayQR').checked){
+		var els = document.querySelectorAll('.qrType');
+		for (var i=0;i<els.length;i++){
+			els[i].style.display = 'initial';
 		}
-		else {
-			var els = document.querySelectorAll('.qrType');
-			for (var i=0;i<els.length;i++){
-				els[i].style.display = 'none';
-			}
+		var el2 = document.getElementById('fontSize');
+		el2.querySelector('select').value = 'width';
+		el2.querySelector('option[value=font]').style.display = 'none';
+		imgData.width = document.getElementById('fontSize').querySelector('input').value;
+		document.getElementById('fontSize').querySelector('span').textContent = '%';
+		imgData.type = 'qr';
+	}
+	else {
+		var els = document.querySelectorAll('.qrType');
+		for (var i=0;i<els.length;i++){
+			els[i].style.display = 'none';
 		}
 	}
 }
