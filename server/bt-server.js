@@ -43,7 +43,7 @@ app.get('/',
 	}
 );
 
-app.get('/qr', 
+app.get('/filter', 
 	function(req, res) {
 		var tkey = crypto.randomBytes(100).toString('hex').substr(2, 18);
 		var formulas = [];
@@ -55,7 +55,7 @@ app.get('/qr',
 					formulas[i].id = i;
 				}
 				res.write(nunjucks.render('templates/qblurbase.html',{
-					type: 'qr',
+					type: 'filter',
 					tkey: tkey,
 					formulas: formulas,
 				}));
@@ -69,43 +69,7 @@ app.get('/qr',
 					formulas[i].id = i;
 				}
 				res.write(nunjucks.render('templates/qblurbase.html',{
-					type: 'qr',
-					tkey: tkey,
-					formulas: formulas,
-				}));
-				res.end();
-			});
-		}
-	}
-);
-
-app.get('/text', 
-	function(req, res) {
-		var tkey = crypto.randomBytes(100).toString('hex').substr(2, 18);
-		var formulas = [];
-		if (req.isAuthenticated()){
-			tempKeys[tkey] = {username:req.user.username};
-			QblurData.findOne({ username: req.user.username }, function(err, result) {
-				formulas = result.formulas.color;
-				for (var i=0;i<formulas.length;i++){
-					formulas[i].id = i;
-				}
-				res.write(nunjucks.render('templates/qblurbase.html',{
-					type: 'text',
-					tkey: tkey,
-					formulas: formulas,
-				}));
-				res.end();
-			});
-		}
-		else {
-			QblurData.findOne({ username: "h" }, function(err, result) {
-				formulas = result.formulas.color;
-				for (var i=0;i<formulas.length;i++){
-					formulas[i].id = i;
-				}
-				res.write(nunjucks.render('templates/qblurbase.html',{
-					type: 'text',
+					type: 'filter',
 					tkey: tkey,
 					formulas: formulas,
 				}));

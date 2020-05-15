@@ -70,7 +70,7 @@ img {
 		
 	</span>
 	<span class="titleCenter">
-		<a href="../qblur">Edit</a>
+		Edit
 	</span>
 	<span class="titleRight">
 		<label for="radio11-1"><i class="fas fa-compress-alt"></i></label>
@@ -155,131 +155,7 @@ img {
 			
 			
 		{% endif %}
-	{% if type == 'qr' %}
-			
-			<div>
-				Image: 
-				<select id="imgType">
-					<option value="upload">Upload</option>
-					<option value="url">URL</option>
-					<option value="drag">Drag/Drop</option>
-				</select>
-				<input type="file" name="imgSrc" id="imgSrc"></input>
-				<input type="text" name="imgUrl" id="imgUrl"></input>
-				<span id="imgDrag"></span>
-			</div>
-			<div>
-				Message: <input type="text" id="text" value=""></input>
-			</div>
-			<div>
-				Type #: <input type="number" id="typeNumber" value="5"></input>
-			</div>
-			<div>
-				Error Correct: <select id="errorCorrect">
-				<option value="L">Low</option>
-				<option value="M" selected>Medium</option>
-				<option value="Q">Quartile</option>
-				<option value="H">High</option>
-				
-				</select>
-			</div>
-			<div style="display: none;">
-				Font: <input type="text" id="font" value="Tahoma"><!--Autocomplete w/ fonts, use CSS sprites with available fonts--></input>
-			</div>
-			<div id="fontSize">
-				Width: 
-				<select style="display: none;">
-					<option value="font" style="display: none;">Font Size</option>
-					<option value="width" selected="selected">Width</option>
-				</select>
-				<input type="number" value="80"></input><span></span>
-			</div>
-			<div id="locX">
-				Location X: 
-				<select style="display: none;">
-					<option value="0">Middle</option>
-					<option value="200">Left</option>
-					<option value="400">Right</option>
-				</select>
-				 
-				 <input type="number" value="50"></input>%
-			</div>
-			<div id="locY">
-				Location Y: 
-				<select style="display: none;">
-					<option value="0">Middle</option>
-					<option value="200">Top</option>
-					<option value="400">Bottom</option>
-				</select>
-				 
-				 <input type="number" value="50"></input>%
-			</div>
-			
-			<div style="display: none;">
-				Blur Radius: <input type="number" id="blurRadius" value="10"></input>
-			</div>
-			<div>
-				Threshold: <input type="number" id="threshold" value="50"></input>%
-			</div>
-
-			
-		{% endif %}
-		{% if type == 'text' %}
-			
-			<div>
-				Image: 
-				<select id="imgType">
-					<option value="upload">Upload</option>
-					<option value="url">URL</option>
-					<option value="drag">Drag/Drop</option>
-				</select>
-				<input type="file" name="imgSrc" id="imgSrc"></input>
-				<input type="text" name="imgUrl" id="imgUrl"></input>
-				<span id="imgDrag"></span>
-			</div>
-			<div>
-				Text: <input type="text" id="text" value=""></input>
-			</div>
-			<div>
-				Font: <input type="text" id="font" value="Tahoma"><!--Autocomplete w/ fonts, use CSS sprites with available fonts--></input>
-			</div>
-			<div id="fontSize">
-				Size: 
-				<select>
-					<option value="font">Font Size</option>
-					<option value="width">Width</option>
-				</select>= <input type="number" value="40"></input><span></span>
-			</div>
-			<div id="locX">
-				Location X: 
-				<select>
-					<option value="0">Middle</option>
-					<option value="200">Left</option>
-					<option value="400">Right</option>
-				</select>
-				 @ 
-				 <input type="number" value="50"></input>%
-			</div>
-			<div id="locY">
-				Location Y: 
-				<select>
-					<option value="0">Middle</option>
-					<option value="200">Top</option>
-					<option value="400">Bottom</option>
-				</select>
-				 @ 
-				 <input type="number" value="50"></input>%
-			</div>
-			
-			<div>
-				Blur Radius: <input type="number" id="blurRadius" value="10"></input>
-			</div>
-			<div>
-				Crop Text: <input type="checkbox" id="crop"></input>
-			</div>
-			
-			
-		{% endif %}
+	
 		{% if type == 'gradient' %}
 			
 			<div>
@@ -373,6 +249,55 @@ img {
 			</div>
 			
 		{% endif %}
+		{% if type == 'filter' %}
+			
+			<div>
+				Image: 
+				<select id="imgType">
+					<option value="upload">Upload</option>
+					<option value="url">URL</option>
+					<option value="drag">Drag/Drop</option>
+				</select>
+				<input type="file" name="imgSrc" id="imgSrc"></input>
+				<input type="text" name="imgUrl" id="imgUrl"></input>
+				<span id="imgDrag"></span>
+			</div>
+			<div id="locX" style="display: none;">
+				Location X: 
+				<select>
+					<option value="0">Middle</option>
+					<option value="200">Left</option>
+					<option value="400">Right</option>
+				</select>
+				 @ 
+				 <input type="number" value="50"></input>%
+			</div>
+			<div id="locY" style="display: none;">
+				Location Y: 
+				<select>
+					<option value="0">Middle</option>
+					<option value="200">Top</option>
+					<option value="400">Bottom</option>
+				</select>
+				 @ 
+				 <input type="number" value="50"></input>%
+			</div>
+			
+
+			<div style="display: none;">
+				Threshold: <input type="number" id="threshold" value="128"></input>
+			</div>
+			<div id="filterList">
+				<div>
+				Add Filter: <select>
+					<option value="linear">Contrast</option>
+					<option value="radial">Brightness</option>
+					<option value="edge">Saturation</option>
+					<option value="life">Custom</option>
+					</select>
+			</div>
+			
+		{% endif %}
 {% endblock %}	
 
 {% block title13 %}
@@ -384,7 +309,7 @@ img {
 	
 	</span>
 	<span class="titleCenter">
-		<a href="../qr">Preview</a>
+		Preview
 	</span>
 	<span class="titleRight">
 		<label for="radio13-3"><i class="fas fa-expand"></i></label>
@@ -405,7 +330,7 @@ img {
 	<div class="titleBG" style="width:100%;height:100%;">
 
 	</div>
-	{% if type != "gradient" %}
+	{% if type == "overlay" %}
 	<span class="titleLeft">
 		<select id="bort">
 			<option value="blur">Blur</option>
@@ -541,6 +466,8 @@ img {
 <script src="../js/creator.js"></script>
 {% if type == "gradient" %}
 <script src="../js/gradientCreator.js"></script>
+{% elif type == "filter" %}
+<script src="../js/filterCreator.js"></script>
 {% else %}
 <script src="../js/blendtext.js"></script>
 {% endif %}
