@@ -295,9 +295,10 @@ function addFilter() {
 	input.setAttribute('data-type',filterType);
 	div.appendChild(input);
 	el.appendChild(div);
-	
-	filters[filterType][input.value].hslrgb = 'h';
-	imgData.filters.push(filters[filterType][input.value]);
+	var newFilter = {'hslrgb':'h'};
+	newFilter.name = filters[filterType][input.value].name;
+	newFilter.workspace = filters[filterType][input.value].workspace;
+	imgData.filters.push(newFilter);
 	currentFilterID = imgData.filters.length - 1;
 	updateImage();
 }
