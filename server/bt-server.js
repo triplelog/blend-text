@@ -353,6 +353,7 @@ wss.on('connection', function connection(ws) {
 	}
 	
 	//Start creating image if made it this far
+	console.log(dm);
 	if (dm.type =="qr"){
 		
 		if (username != ''){
