@@ -74,9 +74,6 @@ function updateImage(evt){
 				}
 				
 			}
-
-				
-			}
 			onresize();
 		}
 		else if (el.id){
