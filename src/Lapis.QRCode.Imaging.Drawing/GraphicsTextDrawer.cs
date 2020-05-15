@@ -44,6 +44,12 @@ namespace Lapis.QRCode.Imaging.Drawing
 			else {
 				BlurType = "rgb";
 			}
+			if (TextType[0] == 'h'){
+				TextType = "hsl";
+			}
+			else {
+				TextType = "rgb";
+			}
 			char[] usedvars = new char[4];
 
             int imageHeight = bmp.Height;
