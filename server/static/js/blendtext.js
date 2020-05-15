@@ -394,12 +394,7 @@ function switchType(evt) {
 		}
 		var el2 = document.getElementById('fontSize');
 		el2.querySelector('option[value=font]').style.removeProperty('display');
-		if (document.getElementById('crop').checked){
-			imgData.type = 'text';
-		}
-		else {
-			imgData.type = 'image';
-		}
+		imgData.type = 'text';
 		
 	}
 	else {
