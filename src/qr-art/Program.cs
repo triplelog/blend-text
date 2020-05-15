@@ -261,6 +261,45 @@ namespace Lapis.QrArt
 							textDrawer.bmp = bmp;
         				} // text on image
         				
+        				if (textDrawer.Type == "filter"){ 
+						
+							textDrawer.HashSize = 1;
+							textDrawer.CellWidth = 1;
+							textDrawer.TextFormula = System.IO.File.ReadAllText(@"/home/rwilcox/blend-text/server/formulas/"+blurFormulaOpt.Value()+".txt");
+							
+							
+							try
+							{
+								bmp = Bitmap.FromFile(imageArg.Value) as Bitmap;
+								//textDrawer.bgImage = bmp;
+							
+								Graphics graph1 = Graphics.FromImage(bmp);
+								int twidth = (int)bmp.Width;
+								int theight = (int)bmp.Height;
+								Bitmap bmpp = (Bitmap) new Bitmap(twidth,theight);
+							
+								
+							
+							
+								using (Graphics graph = Graphics.FromImage(bmpp))
+								{
+									Rectangle ImageSize = new Rectangle(0,0,twidth,theight);
+									graph.FillRectangle(Brushes.Black, ImageSize);
+									
+								}
+								bitmapText = new BitmapFrame(bmpp);
+								bitmap = new BitmapFrame(bmp);
+							
+								
+							}
+							catch (Exception ex)
+							{
+								LogError(ex.Message);
+								bitmapText = null;
+							}
+							textDrawer.bmp = bmp;
+        				} // filter
+        				
         				if (textDrawer.Type == "gradient"){ 
 						
 							

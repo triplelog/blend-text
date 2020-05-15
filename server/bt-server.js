@@ -640,6 +640,81 @@ wss.on('connection', function connection(ws) {
 		}
 		imgIndex++;
   	}
+  	else if (dm.type =="filter") {
+  		//Start creating image if made it this far
+		if (username != ''){
+			console.log('username: '+username);
+		}
+		//console.log(dm);
+		if (!2==2){
+			return;
+		}
+		// add more checks
+	
+	
+		var execCmd = '../src/qr-art/bin/Debug/netcoreapp3.1/publish/qr-art "dummyText" '+inSrc+' png static/'+outSrc;
+
+		execCmd += ' -x 0';
+		execCmd += ' -y 0';
+		execCmd += ' -r 0';
+		execCmd += ' -g contrast';
+	
+		var workspace = new Blockly.Workspace();
+		var wxml = Blockly.Xml.textToDom(dm.blurFormula);
+		Blockly.Xml.domToWorkspace(wxml, workspace);
+		var usedvars = workspace.getAllVariables();
+		var varstr = "";
+		for (var i=0;i<usedvars.length;i++){
+			console.log(usedvars[i].id_);
+			varstr += usedvars[i].id_.substring(6,7);
+		}
+		var code = Blockly.Lua.workspaceToCode(workspace);
+		console.log(code);
+		if (dm.blurType == 'hsl'){
+			luaBlurFormula = `function ScriptFunc (d,h,s,l)
+			`+code+`
+			return h,s,l
+			end
+			`
+	
+			execCmd += ' -b "testBlur"';
+			execCmd += ' -B hsl'+varstr;
+		}
+		else {
+			luaBlurFormula = `function ScriptFunc (d,r,g,b)
+			`+code+`
+			return r,g,b
+			end
+			`
+	
+			execCmd += ' -b "testBlur"';
+			execCmd += ' -B rgb';
+		}
+	
+	
+		execCmd += ' -t '+dm.type;
+	
+		if (dm.threshold){
+			execCmd += ' -l '+dm.threshold;
+		}
+	
+		console.log(execCmd);
+	
+		if (newCreation && username != ''){
+			//Add a Check that there does not exist a creation of that name already.
+			QblurData.updateOne({ username: username }, {$push: {"creations": outSrc}}, function(err, result) {});
+			newCreation = false;
+		}
+		
+		if (myTimeout){
+			clearTimeout(myTimeout);
+			myTimeout = setTimeout(function(){ createGradient(ws,execCmd,outSrc,imgIndex, luaBlurFormula); }, 1000);
+		}
+		else {
+			myTimeout = setTimeout(function(){ createGradient(ws,execCmd,outSrc,imgIndex, luaBlurFormula); }, 1000);
+		}
+		imgIndex++;
+  	}
   	
   	
   });
