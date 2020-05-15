@@ -223,7 +223,7 @@ function updateWork() {
 
 workspace.addChangeListener(updateWork);
 document.getElementById('blurFormulaRGB').style.display = 'none';
-updateBHSL();
+updateWork();
 
 function editFilter(evt) {
 	var el = evt.target;
