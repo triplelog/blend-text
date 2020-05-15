@@ -282,6 +282,9 @@ updateBHSL();
 
 function editFilter(evt) {
 	var el = evt.target;
+	if (el.tagName != 'div'){
+		el = el.parentElement;
+	}
 	el.style.background = 'gray';
 	currentFilterID = parseInt(el.getAttribute('data-type'));
 	console.log(el);
