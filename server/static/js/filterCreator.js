@@ -37,7 +37,7 @@ function updateImage(evt){
 					workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
 				}
 				imgData.blurType = 'rgb';
-				updateWork(workspace);
+				updateWork();
 			}
 			else if (el.value =='hsl'){
 				workspace.clear();
@@ -46,7 +46,7 @@ function updateImage(evt){
 					workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
 				}
 				imgData.blurType = 'hsl';
-				updateWork(workspace);
+				updateWork();
 			}
 			else {
 				var formula = filters.Contrast[parseInt(el.value)];
@@ -59,7 +59,7 @@ function updateImage(evt){
 					}
 					Blockly.Xml.domToWorkspace(wxml,workspace);
 					imgData.blurType = 'rgb';
-					updateWork(workspace);
+					updateWork();
 				}
 				else {
 					var wxml = Blockly.Xml.textToDom(formula.workspace);
@@ -70,7 +70,7 @@ function updateImage(evt){
 					}
 					Blockly.Xml.domToWorkspace(wxml,workspace);
 					imgData.blurType = 'hsl';
-					updateWork(workspace);
+					updateWork();
 				}
 				
 			}
@@ -176,7 +176,7 @@ function chgLanguage(event){
 	
 }
 var code;
-function updateWork(workspace) {
+function updateWork() {
 	if (lang == 'lua'){
 		code = Blockly.Lua.workspaceToCode(workspace);
 	}
@@ -221,9 +221,7 @@ function updateWork(workspace) {
 	
 }
 
-
-workspaceB.addChangeListener(updateBHSL);
-workspaceBRGB.addChangeListener(updateBRGB);
+workspace.addChangeListener(updateWork);
 document.getElementById('blurFormulaRGB').style.display = 'none';
 updateBHSL();
 
