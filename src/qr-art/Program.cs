@@ -273,7 +273,7 @@ namespace Lapis.QrArt
         				
         				if (textDrawer.Type == "filter"){ 
 						
-							textDrawer.HashSize = 2;
+							textDrawer.HashSize = 1;
 							textDrawer.CellWidth = 1;
 							
 							
