@@ -53,8 +53,8 @@ namespace Lapis.QRCode.Art
 						}
 					}//~20 ms since else if
 				
-					TripMatrixDrawer.THeight = tripMatrix.RowCount;
-					TripMatrixDrawer.TWidth = tripMatrix.ColumnCount;
+					TripMatrixDrawer.THeight = tripMatrixFilter.RowCount;
+					TripMatrixDrawer.TWidth = tripMatrixFilter.ColumnCount;
 				
 					return TripMatrixDrawer.Draw(tripMatrixFilter);
                 }
