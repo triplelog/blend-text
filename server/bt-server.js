@@ -661,44 +661,41 @@ wss.on('connection', function connection(ws) {
 		execCmd += ' -y 0';
 		execCmd += ' -r 0';
 		execCmd += ' -g contrast';
-	
-		var workspace = new Blockly.Workspace();
-		var wxml = Blockly.Xml.textToDom(dm.blurFormula);
-		Blockly.Xml.domToWorkspace(wxml, workspace);
-		var usedvars = workspace.getAllVariables();
-		var varstr = "";
-		for (var i=0;i<usedvars.length;i++){
-			console.log(usedvars[i].id_);
-			varstr += usedvars[i].id_.substring(6,7);
-		}
-		var code = Blockly.Lua.workspaceToCode(workspace);
-		console.log(code);
-		if (dm.blurType == 'hsl'){
-			luaBlurFormula = `function Filter1 (h,s,l)
-			`+code+`
-			return h,s,l
-			end
-			function Filter2 (r,g,b)
-			r = 200
-			return r,g,b
-			end
-			`
-		}
-		else {
-			luaBlurFormula = `function Filter1 (r,g,b)
-			`+code+`
-			return r,g,b
-			end
-			function Filter2 (r,g,b)
-			r = 100
-			return r,g,b
-			end
-			`
-	
+		var luaBlurFormula = '';
+		var hrString = '';
+		for (var ii=0;ii<dm.filters.length;ii++){
+			var workspace = new Blockly.Workspace();
+			var wxml = Blockly.Xml.textToDom(dm.filters[ii].workspace);
+			Blockly.Xml.domToWorkspace(wxml, workspace);
+			var usedvars = workspace.getAllVariables();
+			var varstr = "";
+			for (var i=0;i<usedvars.length;i++){
+				console.log(usedvars[i].id_);
+				varstr += usedvars[i].id_.substring(6,7);
+			}
+			var code = Blockly.Lua.workspaceToCode(workspace);
+			console.log(code);
+			if (dm.filters[ii].hslrgb == 'h'){
+				luaBlurFormula += `function Filter`+(ii+1)+` (h,s,l)
+				`+code+`
+				return h,s,l
+				end
+				`
+				hrString += 'h';
+			}
+			else {
+				luaBlurFormula += `function Filter`+(ii+1)+` (h,s,l)
+				`+code+`
+				return r,g,b
+				end
+				`
+				hrString += 'r';
 			
+			}
 		}
+		
 		execCmd += ' -b "testBlur"';
-		execCmd += ' -B hr';
+		execCmd += ' -B '+hrString;
 	
 		execCmd += ' -t '+dm.type;
 	

@@ -226,7 +226,7 @@ function chgLanguage(event){
 	
 }
 var code;
-function updateWork(workspace,bort) {
+function updateWork(workspace) {
 	if (lang == 'lua'){
 		code = Blockly.Lua.workspaceToCode(workspace);
 	}
@@ -259,15 +259,20 @@ function updateWork(workspace,bort) {
 		
 		oldcode = code;
 		document.getElementById('blurFormula').querySelector('textarea').value = outspace;
+		filters[currentFilterType][currentFilterID].workspace = outspace;
+		updateFilterList();
 		
 		updateImage(false);
 		document.getElementById('myCode').querySelector('code').textContent = code;
 		Prism.highlightAll();
 	}
+	
 }
-function updateBHSL(event) {updateWork(workspaceB,'b');}
-function updateBRGB(event) {updateWork(workspaceBRGB,'b');}
+function updateBHSL(event) {updateWork(workspaceB);}
+function updateBRGB(event) {updateWork(workspaceBRGB);}
 
+var currentFilterType = 'Contrast';
+var currentFilterID = 0;
 workspaceB.addChangeListener(updateBHSL);
 workspaceBRGB.addChangeListener(updateBRGB);
 document.getElementById('blurFormulaRGB').style.display = 'none';
@@ -277,7 +282,8 @@ function updateFilterList() {
 	imgData.filters = [];
 	var els = document.getElementById('filterList').querySelectorAll('input');
 	for (var i=0;i<els.length;i++){
-		imgData.filters.push(filters[els[i].getAttribute('data-type')][parseInt(els[i].value)].workspace);
+		filters[els[i].getAttribute('data-type')][parseInt(els[i].value)].hslrgb = 'h';
+		imgData.filters.push(filters[els[i].getAttribute('data-type')][parseInt(els[i].value)]);
 	}
 	console.log(imgData.filters);
 	updateImage();
