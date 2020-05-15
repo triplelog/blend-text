@@ -299,7 +299,7 @@ namespace Lapis.QrArt
 							catch (Exception ex)
 							{
 								LogError(ex.Message);
-								Console.WriteLine('err');
+								Console.WriteLine("err");
 								Console.WriteLine(ex.Message);
 								bitmapText = null;
 							}
