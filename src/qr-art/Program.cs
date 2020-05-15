@@ -299,6 +299,8 @@ namespace Lapis.QrArt
 							catch (Exception ex)
 							{
 								LogError(ex.Message);
+								Console.WriteLine('err');
+								Console.WriteLine(ex.Message);
 								bitmapText = null;
 							}
 							textDrawer.bmp = bmp;
@@ -345,7 +347,7 @@ namespace Lapis.QrArt
 								bitmapText = null;
 							}
 							textDrawer.bmp = bmp;
-        				} // text on image
+        				} // gradient
         				
         				if (textDrawer.Type == "qr"){ 
         				
