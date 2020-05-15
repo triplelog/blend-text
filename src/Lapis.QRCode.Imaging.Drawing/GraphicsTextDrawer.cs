@@ -134,12 +134,10 @@ namespace Lapis.QRCode.Imaging.Drawing
 									RgbToHls(re,gr,bl,out h,out l,out s);
 									
 									if (tripMatrix[r, c] > 2){
-										Console.WriteLine("A H: "+h+"S: "+s+"L: "+l);
 										var res = textFunc.Call (tripMatrix[r, c],h,s,l);
 										h = Convert.ToDouble(res[0]);
 										s = Convert.ToDouble(res[1]);
 										l = Convert.ToDouble(res[2]);
-										Console.WriteLine("B H: "+h+"S: "+s+"L: "+l);
 										HlsToRgb(h, l, s,out re, out gr, out bl);
 									}
 									else {
