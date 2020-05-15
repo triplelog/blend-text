@@ -71,10 +71,10 @@ namespace Lapis.QRCode.Imaging.Drawing
 				Dictionary<int, int> lighthash = new Dictionary<int, int>();
 				Dictionary<int, int> darkhash = new Dictionary<int, int>();
 				
-        		state.DoString (BlurFormula);
+        		//state.DoString (BlurFormula);
         		state.DoString (TextFormula);
         		Console.WriteLine("Formula: "+TextFormula);
-				var scriptFunc = state ["ScriptFunc"] as LuaFunction;
+				var scriptFunc = state ["TextFunc"] as LuaFunction;
 				var textFunc = state ["TextFunc"] as LuaFunction;
 				int newcell =0;
 				int repcell = 0;
@@ -128,10 +128,12 @@ namespace Lapis.QRCode.Imaging.Drawing
 									RgbToHls(re,gr,bl,out h,out l,out s);
 									
 									if (tripMatrix[r, c] > 2){
+										Console.WriteLine("A H: "+h+"S: "+s+"L: "+l);
 										var res = textFunc.Call (tripMatrix[r, c],h,s,l);
 										h = Convert.ToDouble(res[0]);
 										s = Convert.ToDouble(res[1]);
 										l = Convert.ToDouble(res[2]);
+										Console.WriteLine("B H: "+h+"S: "+s+"L: "+l);
 										HlsToRgb(h, l, s,out re, out gr, out bl);
 									}
 									else {
@@ -231,7 +233,6 @@ namespace Lapis.QRCode.Imaging.Drawing
                         else { //tripMatrix[r, c]<0 so Background
                         	var x = MarginL + c;
                             var y = MarginT + r;
-							Console.WriteLine("Bad");
                             Color pixColor = bmp.GetPixel(x, y);
                             int re = pixColor.R * pixColor.A / 255 + (255-pixColor.A);
                             int gr = pixColor.G * pixColor.A / 255 + (255-pixColor.A);
