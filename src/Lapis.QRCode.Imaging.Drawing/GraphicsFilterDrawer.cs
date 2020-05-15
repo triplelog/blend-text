@@ -83,8 +83,6 @@ namespace Lapis.QRCode.Imaging.Drawing
 							re = (outval & 0xFF0000) >> 16;
 							gr = (outval & 0xFF00) >> 8;
 							bl = outval & 0xFF;
-							foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
-							graph.FillRectangle(foreBrushCustom, x, y, CellWidth, CellWidth);
 							repdarkcell++;
 						}
 						else
@@ -113,23 +111,29 @@ namespace Lapis.QRCode.Imaging.Drawing
 							int newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
 							darkhash.Add(imgC, newcol);
 						
-							if (re > 255 || gr > 255 || bl > 255){
-								Console.WriteLine(" red: "+re+" gr: "+gr+" bl: "+bl+" a: "+pixColor.A);
-								Console.WriteLine(" redC: "+pixColor.R+" grC: "+pixColor.G+" blC: "+pixColor.B);
 							
-							}
-							else if (re < 0 || gr < 0 || bl < 0){
-								Console.WriteLine(" red0: "+re+" gr: "+gr+" bl: "+bl+" a: "+pixColor.A);
-								Console.WriteLine(" redC: "+pixColor.R+" grC: "+pixColor.G+" blC: "+pixColor.B);
-							
-							}
-							else {
-								foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
-								graph.FillRectangle(foreBrushCustom, x, y, CellWidth, CellWidth);
-							}
 							
 							newdarkcell++;
 							
+						}
+						
+						if (re > 255 || gr > 255 || bl > 255){
+							Console.WriteLine(" red: "+re+" gr: "+gr+" bl: "+bl+" a: "+pixColor.A);
+							Console.WriteLine(" redC: "+pixColor.R+" grC: "+pixColor.G+" blC: "+pixColor.B);
+							if (re > 255){re = 255;}
+							if (gr > 255){gr = 255;}
+							if (bl > 255){bl = 255;}
+						}
+						else if (re < 0 || gr < 0 || bl < 0){
+							Console.WriteLine(" red0: "+re+" gr: "+gr+" bl: "+bl+" a: "+pixColor.A);
+							Console.WriteLine(" redC: "+pixColor.R+" grC: "+pixColor.G+" blC: "+pixColor.B);
+							if (re < 0){re = 0;}
+							if (gr < 0){gr = 0;}
+							if (bl < 0){bl = 0;}
+						}
+						else {
+							foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
+							graph.FillRectangle(foreBrushCustom, x, y, CellWidth, CellWidth);
 						}
 							
 									
