@@ -1187,13 +1187,13 @@ namespace Lapis.QRCode.Art
 							}
 						}
 						else {
-							outMatrix[i,ii]=-101;
+							outMatrix[i,ii]=0;
 						}
 						
 						
 					}
 					else {
-						outMatrix[i,ii]=-101;
+						outMatrix[i,ii]=0;
 					}
 					
 					
@@ -1235,10 +1235,10 @@ namespace Lapis.QRCode.Art
 								if (tripMatrix[i,ii] > 0){ //first is row, second is col
 								
 									
-									int tlval = -100;
-									int trval = -100;
-									int blval = -100;
-									int brval = -100;
+									int tlval = 0;
+									int trval = 0;
+									int blval = 0;
+									int brval = 0;
 									int val1;
 									
 									tlval = outMatrix[i-yoffset,ii-xoffset];
@@ -1246,10 +1246,10 @@ namespace Lapis.QRCode.Art
 									
 									
 									if (ii+xstep-xoffset >= twidth){
-										trval = -100;
-										brval = -100;
+										trval = 0;
+										brval = 0;
 										if (i+ystep-yoffset >= theight) {
-											blval = -100;
+											blval = 0;
 										}
 										else {
 											blval = outMatrix[i+ystep-yoffset,ii-xoffset];
@@ -1258,8 +1258,8 @@ namespace Lapis.QRCode.Art
 									else {
 										trval = outMatrix[i-yoffset,ii+xstep-xoffset];
 										if (i+ystep-yoffset >= theight){
-											blval = -100;
-											brval = -100;
+											blval = 0;
+											brval = 0;
 										}
 										else {
 											blval = outMatrix[i+ystep-yoffset,ii-xoffset];
@@ -1286,7 +1286,7 @@ namespace Lapis.QRCode.Art
 									
 								}
 								else {
-									outMatrix[i,ii]=-101;
+									outMatrix[i,ii]=0;
 								}
 							}
 						}
