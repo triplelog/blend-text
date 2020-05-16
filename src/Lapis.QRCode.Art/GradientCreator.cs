@@ -1168,7 +1168,7 @@ namespace Lapis.QRCode.Art
 						
 						}
 						if (findminr && minr == 0){
-							outMatrix[i,ii]=-100;
+							outMatrix[i,ii]=0;
 						}
 						else if (circledict.TryGetValue(i*twidth+ii, out int outval)) {
 							if (findminr){
