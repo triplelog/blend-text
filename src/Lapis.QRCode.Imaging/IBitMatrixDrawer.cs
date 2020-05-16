@@ -125,7 +125,7 @@ namespace Lapis.QRCode.Imaging
 		
 		public string BlurType { get; set; } = "";
 		
-		public string TextType { get; set; } = "";
+		public string TextType { get; set; } = "hsl";
 
         public int Foreground { get; set; } = 0x000000;
 
