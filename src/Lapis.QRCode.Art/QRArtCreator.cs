@@ -42,19 +42,12 @@ namespace Lapis.QRCode.Art
             	int twidth = (int)imageText.Width;
             	int theight = (int)imageText.Height;
             	
-				if (2==2){
+				if (DistanceFormula=="filter"){
 					TripMatrixDrawer.MarginL = 0;
 					TripMatrixDrawer.MarginT = 0;
-					var tripMatrixFilter = new TripMatrix(theight,twidth);
-				
-					for (var i=0;i<theight;i++){
-						for (var ii=0;ii<twidth;ii++){
-							tripMatrixFilter[i,ii] = 3; //first is row, second is col
-						}
-					}//~20 ms since else if
-				
-					TripMatrixDrawer.THeight = tripMatrixFilter.RowCount;
-					TripMatrixDrawer.TWidth = tripMatrixFilter.ColumnCount;
+					var tripMatrixFilter = new TripMatrix(1,1);
+					TripMatrixDrawer.THeight = twidth;
+					TripMatrixDrawer.TWidth = theight;
 				
 					return TripMatrixDrawer.Draw(tripMatrixFilter);
                 }

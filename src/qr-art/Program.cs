@@ -273,7 +273,7 @@ namespace Lapis.QrArt
         				
         				if (textDrawer.Type == "filter"){ 
 						
-							textDrawer.HashSize = 10;
+							textDrawer.HashSize = 1;
 							textDrawer.CellWidth = 1;
 							
 							
@@ -285,6 +285,7 @@ namespace Lapis.QrArt
 								Graphics graph1 = Graphics.FromImage(bmp);
 								int twidth = (int)bmp.Width;
 								int theight = (int)bmp.Height;
+								textDrawer.HashSize = 1 + twidth*theight/150000;
 								Bitmap bmpp = (Bitmap) new Bitmap(twidth,theight);
 							
 								
@@ -462,9 +463,8 @@ namespace Lapis.QrArt
 							image = builderG.Create(bitmapText, blurRadius, gradientTypeOpt.Value());
 						}
 						else if (textDrawer.Type == "filter"){
-							string DistanceFormula = System.IO.File.ReadAllText(@"/home/rwilcox/blend-text/server/formulas/testDistance.txt");
-						
-                        	image = builder.Create(contentArg.Value, bitmap, bitmapText, blurRadius, DistanceFormula);
+							
+                        	image = builder.Create(contentArg.Value, bitmap, bitmapText, blurRadius, "filter");
                         }
                         else {
 							string DistanceFormula = System.IO.File.ReadAllText(@"/home/rwilcox/blend-text/server/formulas/"+distanceFormulaOpt.Value()+".txt");
