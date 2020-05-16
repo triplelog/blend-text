@@ -1072,7 +1072,7 @@ namespace Lapis.QRCode.Art
 
 			for (var i=0;i<theight;i+=ystep){
 				for (var ii=0;ii<twidth;ii+=xstep){
-					if (tripMatrix[i,ii] > 0){ //first is row, second is col
+					if (tripMatrix[i,ii] > 1){ //first is row, second is col
 						int minr = 0;
 						if (findminr){
 							
@@ -1204,7 +1204,7 @@ namespace Lapis.QRCode.Art
 			
 			for (var i=0;i<theight;i+=ystep){
 				for (var ii=0;ii<twidth;ii+=xstep){
-					if (tripMatrix[i,ii] > 0){ //first is row, second is col
+					if (tripMatrix[i,ii] > 1){ //first is row, second is col
 						if (i-ystep>=0 && ii-xstep >= 0 && i+ystep <theight && ii+xstep<twidth){
 							int a = outMatrix[(i-ystep),ii-xstep];
 							a += outMatrix[(i+ystep),ii-xstep];
@@ -1222,7 +1222,6 @@ namespace Lapis.QRCode.Art
 							}
 							else if (outMatrix[i,ii]>-1){
 								outMatrix[i,ii]=-1;
-								Console.WriteLine("i: "+i+" ii: "+ii+" om: "+outMatrix[i,ii]);
 							}
 
 						}
@@ -1243,7 +1242,7 @@ namespace Lapis.QRCode.Art
 						}
 						for (var i=yoffset;i<theight;i+=ystep){
 							for (var ii=xoffset;ii<twidth;ii+=xstep){
-								if (tripMatrix[i,ii] > 0){ //first is row, second is col
+								if (tripMatrix[i,ii] > 1){ //first is row, second is col
 								
 									
 									int tlval = 0;
