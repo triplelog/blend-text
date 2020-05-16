@@ -624,6 +624,7 @@ namespace Lapis.QRCode.Art
         			int deadmax = (narrowQuotient / 100000) % 10;
         			int livemin = (narrowQuotient / 1000000) % 10;
         			int livemax = (narrowQuotient / 10000000) % 10;
+        			int border = 30;
         			for (var year=0;year<nyears;year++){
         				for (var i=0;i<theight;i+=ystep){
 							for (var ii=0;ii<twidth;ii+=xstep){
@@ -632,7 +633,7 @@ namespace Lapis.QRCode.Art
 										outMatrix[i,ii] = 0;
 										outMatrixEven[i,ii] = 0;
 										if (circledict.TryGetValue(i*twidth+ii, out int outval)) {
-											if (outval <= 100){
+											if (outval <= border){
 												outMatrix[i,ii] = 1;
 												outMatrixEven[i,ii] = 1;
 											}
@@ -650,7 +651,7 @@ namespace Lapis.QRCode.Art
 										}*/
 										
 									}
-									else if (circledict.TryGetValue(i*twidth+ii, out int outval) && outval <= 100 ) {
+									else if (circledict.TryGetValue(i*twidth+ii, out int outval) && outval <= border) {
 										if (outMatrix[i,ii]==0){
 											outMatrix[i,ii]=year+1;
 										}
