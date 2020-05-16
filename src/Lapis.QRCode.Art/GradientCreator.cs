@@ -1216,11 +1216,8 @@ namespace Lapis.QRCode.Art
 							b += outMatrix[(i),ii-xstep];
 							b += outMatrix[(i),ii+xstep];
 							
-							outMatrix[i,ii]=(a+2*b+4*outMatrix[i,ii])/12;
-							if (outMatrix[i,ii] <-100){ //first is row, second is col
-								Console.WriteLine("a: "+a+" b: "+b+" i: "+i+" ii: "+ii+" ys: "+ystep+" xs: "+xstep+" om: "+outMatrix[i,ii]);
-						
-							}
+							outMatrix[i,ii]=(a+2*b+4*outMatrix[i,ii])/16;
+
 						}
 						else {
 							outMatrix[i,ii]=outMatrix[i,ii];
