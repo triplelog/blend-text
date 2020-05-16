@@ -1217,6 +1217,10 @@ namespace Lapis.QRCode.Art
 							b += outMatrix[(i),ii+xstep];
 							
 							outMatrix[i,ii]=(a+2*b+4*outMatrix[i,ii])/12;
+							if (outMatrix[i,ii] <-100){ //first is row, second is col
+								Console.WriteLine("a: "+a+" b: "+b+" i: "+i+" ii: "+ii+" ys: "+ystep+" xs: "+xstep+" om: "+outMatrix[i,ii]);
+						
+							}
 						}
 						else {
 							outMatrix[i,ii]=outMatrix[i,ii];
@@ -1226,14 +1230,6 @@ namespace Lapis.QRCode.Art
 				}
 			}
 			
-			for (var i=0;i<theight;i++){
-				for (var ii=0;ii<twidth;ii++){
-					if (outMatrix[i,ii] <-100){ //first is row, second is col
-						Console.WriteLine("i: "+i+" ii: "+ii+" ys: "+ystep+" xs: "+xstep+" om: "+outMatrix[i,ii]);
-						
-					}
-				}
-			}
 			
 			if (ystep > 1 || xstep > 1){
 				for (var yoffset=0;yoffset<ystep;yoffset++){
