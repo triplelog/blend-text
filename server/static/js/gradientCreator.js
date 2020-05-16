@@ -31,10 +31,11 @@ imgData.gradientDeadMin = parseInt(document.getElementById('gradientDeadMin').qu
 imgData.gradientDeadMax = parseInt(document.getElementById('gradientDeadMax').querySelector('input').value);
 imgData.gradientLiveMin = parseInt(document.getElementById('gradientLiveMin').querySelector('input').value);
 imgData.gradientLiveMax = parseInt(document.getElementById('gradientLiveMax').querySelector('input').value);
+imgData.gradientBorder = parseInt(document.getElementById('gradientBorder').querySelector('input').value);
 imgData.blurFormula = document.getElementById('blurFormula').querySelector('textarea').value;
 imgData.blurType = 'hsl';
 imgData.type = type;
-imgData.border = 300;
+
 imgData.threshold = document.getElementById('threshold').value;
 
 var singleEls = ['hslrgb','threshold'];
@@ -42,8 +43,8 @@ for (var i=0;i<2;i++){
 	var el = document.getElementById(singleEls[i]);
 	el.addEventListener('change',updateImage);
 }
-var numberEls = ['gradientSpread','gradientAngle','gradientYears','gradientDeadMin','gradientDeadMax','gradientLiveMin','gradientLiveMax'];
-for (var i=0;i<7;i++){
+var numberEls = ['gradientSpread','gradientAngle','gradientYears','gradientDeadMin','gradientDeadMax','gradientLiveMin','gradientLiveMax','gradientBorder'];
+for (var i=0;i<8;i++){
 	var el = document.getElementById(numberEls[i]).querySelector('input');
 	el.addEventListener('change',updateImage);
 }
@@ -149,7 +150,7 @@ function updateImage(evt){
 				var id = el.parentElement.id;
 				imgData[id] = parseInt(el.value);
 			}
-			else if (el.parentElement.id == 'gradientYears' || el.parentElement.id == 'gradientDeadMin' || el.parentElement.id == 'gradientDeadMax' || el.parentElement.id == 'gradientLiveMin' || el.parentElement.id == 'gradientLiveMax'){
+			else if (el.parentElement.id == 'gradientYears' || el.parentElement.id == 'gradientDeadMin' || el.parentElement.id == 'gradientDeadMax' || el.parentElement.id == 'gradientLiveMin' || el.parentElement.id == 'gradientLiveMax' || el.parentElement.id == 'gradientBorder'){
 				var id = el.parentElement.id;
 				imgData[id] = parseInt(el.value);
 			}
