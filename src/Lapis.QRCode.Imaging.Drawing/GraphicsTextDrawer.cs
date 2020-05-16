@@ -122,7 +122,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 								re = (outval & 0xFF0000) >> 16;
 								gr = (outval & 0xFF00) >> 8;
 								bl = outval & 0xFF;
-								foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
+								foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
 								graph.FillRectangle(foreBrushCustom, x, y, CellWidth, CellWidth);
 								repdarkcell++;
 							}
@@ -183,7 +183,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 										
 									}
 									else {
-										foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
+										foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
 										graph.FillRectangle(foreBrushCustom, x, y, CellWidth, CellWidth);
 									}
 									
@@ -223,7 +223,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 										bl /= 3;
 									}
 								
-									foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
+									foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
 									graph.FillRectangle(foreBrushCustom, x, y, CellWidth, CellWidth);
 								}
 								newdarkcell++;

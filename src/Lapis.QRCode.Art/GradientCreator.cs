@@ -632,7 +632,7 @@ namespace Lapis.QRCode.Art
 										outMatrix[i,ii] = 0;
 										outMatrixEven[i,ii] = 0;
 										if (circledict.TryGetValue(i*twidth+ii, out int outval)) {
-											if (outval <= 100){
+											if (outval <= 10){
 												outMatrix[i,ii] = 1;
 												outMatrixEven[i,ii] = 1;
 											}
