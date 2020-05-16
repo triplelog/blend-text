@@ -69,7 +69,7 @@ namespace Lapis.QRCode.Imaging.Drawing
                 	ogr = -1;
                 	obl = -1;
                 	oimgC = -1;
-                    for (var c = 0; c <= TWidth; c += CellWidth)
+                    for (var c = 0; c < TWidth; c += CellWidth)
                     {
                         
 						//Darken uniformly
