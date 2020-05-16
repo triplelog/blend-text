@@ -46,8 +46,8 @@ namespace Lapis.QRCode.Art
 					TripMatrixDrawer.MarginL = 0;
 					TripMatrixDrawer.MarginT = 0;
 					var tripMatrixFilter = new TripMatrix(1,1);
-					TripMatrixDrawer.THeight = twidth;
-					TripMatrixDrawer.TWidth = theight;
+					TripMatrixDrawer.THeight = theight;
+					TripMatrixDrawer.TWidth = twidth;
 				
 					return TripMatrixDrawer.Draw(tripMatrixFilter);
                 }
