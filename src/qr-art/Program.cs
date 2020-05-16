@@ -28,7 +28,7 @@ namespace Lapis.QrArt
             var imageArg = app.Argument("image", "An image to be used as background.");
             var formatArg = app.Argument("format", "Output image format. [png|gif|svg]");
             var pathArg = app.Argument("outpath", "Output path.");
-            var fontSizeOpt = app.Option("-s|--size <number>", "Font Size -- Type # for QR", CommandOptionType.SingleValue);
+            var fontSizeOpt = app.Option("-s|--size <number>", "Font Size -- Type # for QR  -- border for gradient", CommandOptionType.SingleValue);
             var widthOpt = app.Option("-w|--width <number>", "Width", CommandOptionType.SingleValue);
             var locXOpt = app.Option("-x <number>", "location X", CommandOptionType.SingleValue);
             var locYOpt = app.Option("-y <number>", "location Y", CommandOptionType.SingleValue);
@@ -460,7 +460,7 @@ namespace Lapis.QrArt
 							if (int.TryParse(blurRadiusOpt.Value(), out blurRadius)){}
 							else {blurRadius = 10;}
 							
-							image = builderG.Create(bitmapText, blurRadius, gradientTypeOpt.Value());
+							image = builderG.Create(bitmapText, blurRadius, gradientTypeOpt.Value(), fontSize);
 						}
 						else if (textDrawer.Type == "filter"){
 							

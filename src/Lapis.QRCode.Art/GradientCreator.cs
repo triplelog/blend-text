@@ -14,7 +14,7 @@ namespace Lapis.QRCode.Art
 {
     public interface GradientRCreator
     {
-        IImage Create(IRgb24BitmapBase gradientImage, int narrowQuotient, string gtype);
+        IImage Create(IRgb24BitmapBase gradientImage, int narrowQuotient, string gtype, int border);
     }
 
     public class GradientCreator : GradientRCreator
@@ -32,7 +32,7 @@ namespace Lapis.QRCode.Art
         
         public ITripMatrixDrawer TripMatrixDrawer { get; }
 
-        public virtual IImage Create(IRgb24BitmapBase gradientImage, int narrowQuotient, string gtype)
+        public virtual IImage Create(IRgb24BitmapBase gradientImage, int narrowQuotient, string gtype, int border)
         {
         	
 
@@ -624,7 +624,6 @@ namespace Lapis.QRCode.Art
         			int deadmax = (narrowQuotient / 100000) % 10;
         			int livemin = (narrowQuotient / 1000000) % 10;
         			int livemax = (narrowQuotient / 10000000) % 10;
-        			int border = 30;
         			for (var year=0;year<nyears;year++){
         				for (var i=0;i<theight;i+=ystep){
 							for (var ii=0;ii<twidth;ii+=xstep){

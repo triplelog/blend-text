@@ -630,6 +630,8 @@ wss.on('connection', function connection(ws) {
 	
 	
 		execCmd += ' -t '+dm.type;
+		
+		execCmd += ' -s '+dm.border;
 	
 		if (dm.threshold){
 			execCmd += ' -l '+dm.threshold;

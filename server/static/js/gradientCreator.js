@@ -34,6 +34,7 @@ imgData.gradientLiveMax = parseInt(document.getElementById('gradientLiveMax').qu
 imgData.blurFormula = document.getElementById('blurFormula').querySelector('textarea').value;
 imgData.blurType = 'hsl';
 imgData.type = type;
+imgData.border = 300;
 imgData.threshold = document.getElementById('threshold').value;
 
 var singleEls = ['hslrgb','threshold'];
