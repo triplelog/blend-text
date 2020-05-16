@@ -1222,7 +1222,7 @@ namespace Lapis.QRCode.Art
 							}
 							else if (outMatrix[i,ii]>-1){
 								outMatrix[i,ii]=-1;
-								Console.WriteLine("i: "+i+" ii: "+ii+" om: "+outMatrix[i,ii])
+								Console.WriteLine("i: "+i+" ii: "+ii+" om: "+outMatrix[i,ii]);
 							}
 
 						}
