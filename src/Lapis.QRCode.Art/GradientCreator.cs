@@ -632,7 +632,7 @@ namespace Lapis.QRCode.Art
 										outMatrix[i,ii] = 0;
 										outMatrixEven[i,ii] = 0;
 										if (circledict.TryGetValue(i*twidth+ii, out int outval)) {
-											if (outval <= 10){
+											if (outval <= 100){
 												outMatrix[i,ii] = 1;
 												outMatrixEven[i,ii] = 1;
 											}
@@ -650,7 +650,7 @@ namespace Lapis.QRCode.Art
 										}*/
 										
 									}
-									else if (circledict.TryGetValue(i*twidth+ii, out int outval) && outval <= 10 ) {
+									else if (circledict.TryGetValue(i*twidth+ii, out int outval) && outval <= 100 ) {
 										if (outMatrix[i,ii]==0){
 											outMatrix[i,ii]=year+1;
 										}
