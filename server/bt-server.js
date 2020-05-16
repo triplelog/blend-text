@@ -593,6 +593,7 @@ wss.on('connection', function connection(ws) {
 		}
 		else if (dm.gradientType == 'life'){
 			execCmd += ' -r '+(dm.gradientYears+dm.gradientDeadMin*10000+dm.gradientDeadMax*100000+dm.gradientLiveMin*1000000+dm.gradientLiveMax*10000000);
+			execCmd += ' -s '+dm.gradientBorder;
 		}
 		execCmd += ' -g '+dm.gradientType;
 	
@@ -631,7 +632,7 @@ wss.on('connection', function connection(ws) {
 	
 		execCmd += ' -t '+dm.type;
 		
-		execCmd += ' -s '+dm.border;
+		
 	
 		if (dm.threshold){
 			execCmd += ' -l '+dm.threshold;
