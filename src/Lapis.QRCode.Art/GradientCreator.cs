@@ -1187,7 +1187,7 @@ namespace Lapis.QRCode.Art
 							}
 						}
 						else {
-							outMatrix[i,ii]=0;
+							outMatrix[i,ii]=-1;
 						}
 						
 						
