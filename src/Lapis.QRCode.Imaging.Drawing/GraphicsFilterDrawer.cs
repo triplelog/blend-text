@@ -62,9 +62,9 @@ namespace Lapis.QRCode.Imaging.Drawing
 				int re; int gr; int bl;
 				int outval; int newcol;
 				double h; double s; double l;
-                for (var r = 0; r <= THeight-CellWidth*3; r += CellWidth)
+                for (var r = 0; r <= THeight-CellWidth; r += CellWidth)
                 {
-                    for (var c = 0; c <= TWidth-CellWidth*3; c += CellWidth)
+                    for (var c = 0; c <= TWidth; c += CellWidth)
                     {
                         
 						//Darken uniformly
@@ -133,7 +133,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 						
 						
 						foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
-						graph.FillRectangle(foreBrushCustom, c, r, CellWidth*3,CellWidth*3);
+						graph.FillRectangle(foreBrushCustom, c, r, TWidth-c,CellWidth);
 							
 									
 							
