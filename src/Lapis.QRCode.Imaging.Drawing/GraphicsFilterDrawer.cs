@@ -29,8 +29,8 @@ namespace Lapis.QRCode.Imaging.Drawing
             int imageWidth = bmp.Width;
 			
 			Lua state = new Lua ();
-			
-            using (var graph = Graphics.FromImage(bmp))
+			Bitmap bmpp = (Bitmap) new Bitmap(imageWidth,imageHeight);
+            using (var graph = Graphics.FromImage(bmpp))
             {
                 //graph.Clear(Color.FromArgb(255,255,255));
                 //var foreBrush = new SolidBrush(ColorHelper.FromIntRgb24(Foreground));
@@ -62,9 +62,9 @@ namespace Lapis.QRCode.Imaging.Drawing
 				int re; int gr; int bl;
 				int outval; int newcol;
 				double h; double s; double l;
-                for (var r = 0; r < THeight; r += CellWidth)
+                for (var r = 0; r <= THeight-CellWidth*3; r += CellWidth)
                 {
-                    for (var c = 0; c < TWidth; c += CellWidth)
+                    for (var c = 0; c <= TWidth-CellWidth*3; c += CellWidth)
                     {
                         
 						//Darken uniformly
@@ -133,7 +133,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 						
 						
 						foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
-						graph.FillRectangle(foreBrushCustom, c, r, 4,4);
+						graph.FillRectangle(foreBrushCustom, c, r, CellWidth*3,CellWidth*3);
 							
 									
 							
@@ -158,7 +158,7 @@ namespace Lapis.QRCode.Imaging.Drawing
             }
 			
 				
-            return new BitmapFrame(bmp);
+            return new BitmapFrame(bmpp);
         }     
         
         public static void RgbToHls(int r, int g, int b,
