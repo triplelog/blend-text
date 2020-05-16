@@ -62,8 +62,13 @@ namespace Lapis.QRCode.Imaging.Drawing
 				int re; int gr; int bl;
 				int outval; int newcol;
 				double h; double s; double l;
+				int ore; int ogr; int obl; int oimgC;
                 for (var r = 0; r <= THeight-CellWidth; r += CellWidth)
                 {
+                	ore = -1;
+                	ogr = -1;
+                	obl = -1;
+                	oimgC = -1;
                     for (var c = 0; c <= TWidth; c += CellWidth)
                     {
                         
@@ -75,7 +80,8 @@ namespace Lapis.QRCode.Imaging.Drawing
 						bl = pixColor.B * pixColor.A / 255 + (255-pixColor.A);
 						
 						imgC = Color.FromArgb((re/HashSize)*HashSize,(gr/HashSize)*HashSize,(bl/HashSize)*HashSize).GetHashCode();
-
+						if (imgC == oimgC){continue;}
+						else {oimgC = imgC;}
 							
 						outval = 0;
 						if (darkhash.TryGetValue(imgC, out outval))
@@ -131,9 +137,17 @@ namespace Lapis.QRCode.Imaging.Drawing
 							
 						}
 						
+						if (re == ore && gr == ogr && bl == obl){
+							continue;
+						}
+						else {
+							foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
+							graph.FillRectangle(foreBrushCustom, c, r, TWidth-c,CellWidth);
+							ore = re;
+							ogr = gr;
+							obl = bl;
+						}
 						
-						foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
-						graph.FillRectangle(foreBrushCustom, c, r, TWidth-c,CellWidth);
 							
 									
 							
