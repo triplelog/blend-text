@@ -270,7 +270,7 @@ for (var i=0;i<4;i++){
 	for (var ii=0;ii<4;ii++){
 		workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
 	}
-	var wxml = Blockly.Xml.textToDom(defaults[parseInt(i/2)]);
+	var wxml = Blockly.Xml.textToDom(defaults[parseInt(i)]);
 	Blockly.Xml.domToWorkspace(wxml,workspace);
 	onresize();
 }
