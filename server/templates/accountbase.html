@@ -146,7 +146,7 @@ label[for="formula--1"] {
 {% block content13 %}
 
 	{% for i in range(0,creations.length) %}
-	<a href="{% if creations[i].imgData.type == 'text' or creations[i].imgData.type == 'qr'}overlay{% else %}{{creations[i].imgData.type}}{% endif %}?q={{i}}">Link</a>
+	<a href="{% if creations[i].imgData.type == 'text' or creations[i].imgData.type == 'qr' %}overlay{% else %}{{creations[i].imgData.type}}{% endif %}?q={{i}}">Link</a>
 	{% endfor %}
 	
 
