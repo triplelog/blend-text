@@ -115,22 +115,22 @@ img {
 			<div id="locX">
 				Location X: 
 				<select>
-					<option value="0">Middle</option>
-					<option value="200">Left</option>
-					<option value="400">Right</option>
+					<option value="0" {% if imgData and imgData.locX >= 150 %}{% else %}selected{% endif %}>Middle</option>
+					<option value="200" {% if imgData and imgData.locX >= 150 and imgData.locX < 350 %}selected{% else %}{% endif %}>Left</option>
+					<option value="400" {% if imgData and imgData.locX >= 350 %}selected{% else %}{% endif %}>Right</option>
 				</select>
 				 @ 
-				 <input type="number" value="50"></input>%
+				 <input type="number" value="{% if imgData and imgData.locX %}{{ ((imgData.locX + 50)% 200)-50}}{% else %}50{% endif %}"></input>%
 			</div>
 			<div id="locY">
 				Location Y: 
 				<select>
-					<option value="0">Middle</option>
-					<option value="200">Top</option>
-					<option value="400">Bottom</option>
+					<option value="0" {% if imgData and imgData.locY >= 150 %}{% else %}selected{% endif %}>Middle</option>
+					<option value="200" {% if imgData and imgData.locY >= 150 and imgData.locY < 350 %}selected{% else %}{% endif %}>Left</option>
+					<option value="400" {% if imgData and imgData.locY >= 350 %}selected{% else %}{% endif %}>Right</option>
 				</select>
 				 @ 
-				 <input type="number" value="50"></input>%
+				 <input type="number" value="{% if imgData and imgData.locY %}{{ ((imgData.locY + 50)% 200)-50}}{% else %}50{% endif %}"></input>%
 			</div>
 			
 			<div class="textType">
