@@ -27,6 +27,7 @@ function handleDrop(e) {
 	document.getElementById('imgDrag').style.display = 'inline-block';
 	document.getElementById('imgDrag').textContent = "Image Uploaded";
 	document.getElementById('imgType').value = 'drag';
+	document.getElementById('imgSaved').style.display = 'none';
 }
 
 
@@ -56,17 +57,26 @@ function chgImgType(evt){
 		document.getElementById('imgSrc').style.display = 'inline-block';
 		document.getElementById('imgUrl').style.display = 'none';
 		document.getElementById('imgDrag').style.display = 'none';
+		document.getElementById('imgSaved').style.display = 'none';
 	}
 	else if (imgType == 'url'){
 		document.getElementById('imgSrc').style.display = 'none';
 		document.getElementById('imgUrl').style.display = 'inline-block';
 		document.getElementById('imgDrag').style.display = 'none';
+		document.getElementById('imgSaved').style.display = 'none';
 	}
 	else if (imgType == 'drag'){
 		document.getElementById('imgSrc').style.display = 'none';
 		document.getElementById('imgUrl').style.display = 'none';
 		document.getElementById('imgDrag').style.display = 'inline-block';
 		document.getElementById('imgDrag').textContent = "";
+		document.getElementById('imgSaved').style.display = 'none';
+	}
+	else if (imgType == 'saved'){
+		document.getElementById('imgSrc').style.display = 'none';
+		document.getElementById('imgUrl').style.display = 'none';
+		document.getElementById('imgDrag').style.display = 'none';
+		document.getElementById('imgSaved').style.display = 'inline-block';
 	}
 }
 document.getElementById('imgType').addEventListener('change', chgImgType);
@@ -78,7 +88,15 @@ function chgImgUrl(evt) {
 	ws.send(JSON.stringify(jsonmessage));
 }
 
+function savedImgUrl(evt) {
+	var url = evt.target.value;
+	var jsonmessage = {'type':'savedImage','url':url};
+	console.log(jsonmessage);
+	ws.send(JSON.stringify(jsonmessage));
+}
+
 document.getElementById('imgUrl').addEventListener('change', chgImgUrl);
+document.getElementById('imgSaved').addEventListener('change', savedImgUrl);
 function sendImage(img) {
 	var readerF = new FileReader();
 	readerF.onload = function() {
@@ -93,4 +111,5 @@ function sendImage(img) {
 document.getElementById('imgSrc').style.display = 'inline-block';
 document.getElementById('imgUrl').style.display = 'none';
 document.getElementById('imgDrag').style.display = 'none';
+document.getElementById('imgSaved').style.display = 'none';
 

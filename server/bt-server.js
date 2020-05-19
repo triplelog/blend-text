@@ -284,7 +284,7 @@ wss.on('connection', function connection(ws) {
 			
 			QblurData.countDocuments({username:username,'settings.storage': {$lt:10000000}}, function(err, result) {
 				console.log(result);
-				if (2 > 0){
+				if (result > 0){
 					var child = exec(wget, function(err, stdout, stderr) {
 						var sz = 2000000;
 						var szIdx = stdout.indexOf('saved [');
@@ -312,6 +312,16 @@ wss.on('connection', function connection(ws) {
 				}
 			});
 		}
+
+		return;
+	}
+	else if (dm.type && dm.type == 'saved'){
+		console.log(dm.url);
+		
+		QblurData.findOne({username:username}, 'images', function(err, result) {
+			console.log(result.images);
+			inSrc = 'static/'+result.images[0].src;
+		});
 
 		return;
 	}
