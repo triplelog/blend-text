@@ -1,6 +1,6 @@
 var ws = new WebSocket('wss://qblur.com:8080');
 ws.onopen = function(evt) {
-	var jsonmessage = {'type':'key'};
+	var jsonmessage = {'type':'accountKey'};
 	jsonmessage.message = tkey;
 	ws.send(JSON.stringify(jsonmessage));
 }
@@ -51,6 +51,19 @@ ws.onmessage = function(evt){
 		}
 		Prism.highlightAll();
 	}
+	else if (dm.operation == 'friend'){
+		var el = document.getElementById("friendList");
+		var ell = document.createElement("div");
+		ell.textContent = dm.message;
+		el.appendChild(ell);
+	}
+	else if (dm.operation == 'image'){
+		/*var el = document.getElementById("friendList");
+		var ell = document.createElement("div");
+		ell.textContent = dm.message;
+		el.appendChild(ell);*/
+		console.log(dm);
+	}
 }
 
 function copyFormula(name){
@@ -65,30 +78,6 @@ function newFriend() {
 
 }
 
-ws = new WebSocket('wss://qblur.com:8080');
-ws.onopen = function(evt) {
-	var jsonmessage = {'type':'accountKey'};
-	jsonmessage.message = tkey;
-	ws.send(JSON.stringify(jsonmessage));
-	
-}
-ws.onmessage = function(evt){
-	//Add friend
-	var dm = JSON.parse(evt.data);
-	if (dm.operation == 'friend'){
-		var el = document.getElementById("friendList");
-		var ell = document.createElement("div");
-		ell.textContent = dm.message;
-		el.appendChild(ell);
-	}
-	else if (dm.operation == 'image'){
-		/*var el = document.getElementById("friendList");
-		var ell = document.createElement("div");
-		ell.textContent = dm.message;
-		el.appendChild(ell);*/
-		console.log(dm);
-	}
-}
 		
 
 document.querySelector('.content-31 .content').addEventListener('drop', handleDrop, false);
