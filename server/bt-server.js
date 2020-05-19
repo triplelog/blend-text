@@ -198,11 +198,16 @@ wss.on('connection', function connection(ws) {
   var newCreation = true;
   var account = false;
   var imgTypes = ['.png','.jpg','.jpeg','.gif','.tiff','.tif'];//.svg, .psd, .eps, .raw, .pdf?
+  var maxsize = 2000000; //1000000~1MB
   ws.on('message', function incoming(message) {
   	
   	if (typeof message !== 'string'){
   		console.log("af",performance.now());
-  		var buffer = Buffer.from(message);
+  		var buffer = Buffer.from(message).slice(0,maxsize);
+		if (buffer.length>=maxsize-1000){
+			//send message
+			return;
+		}
   		FileType.fromBuffer(buffer.slice(0,1000)).then( (val) => {
   			var ext = '.'+val.ext;
   			for (var i=0;i<imgTypes.length;i++){
@@ -255,11 +260,11 @@ wss.on('connection', function connection(ws) {
 			if (dm.url.substring(dm.url.length-imgTypes[i].length,dm.url.length) == imgTypes[i]){
 				if (account){
 					imgSrc = 'images/'+username+'_'+parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12)+imgTypes[i];
-					wget = 'wget --accept "*"'+imgTypes[i]+' -O '+imgSrc + ' "' + dm.url + '" && echo "done"';
+					wget = '(ulimit -f '+parseInt(maxsize/512)+'; wget --accept "*"'+imgTypes[i]+' -O '+imgSrc + ' "' + dm.url + '" && echo "done"';
 				}
 				else {
 					inSrc = 'images/in/'+imgid+imgTypes[i];
-					wget = 'wget --accept "*"'+imgTypes[i]+' -O '+inSrc + ' "' + dm.url + '" && echo "done"';	
+					wget = '(ulimit -f '+parseInt(maxsize/512)+'; wget --accept "*"'+imgTypes[i]+' -O '+inSrc + ' "' + dm.url + '" && echo "done"';	
 				}
 				
 			}
@@ -270,7 +275,15 @@ wss.on('connection', function connection(ws) {
 			console.log("stdout: ",stdout);
 			console.log("stderr: ",stderr);
 			if (account){
-				QblurData.updateOne({username:username},{$push: {"images": {src:imgSrc,size:buffer.length,name:"Name",description:"",creations:[]}}, $inc: {'settings.storage':buffer.length}}, function(err, result) {});
+				var sz = 2000000;
+				var szIdx = stdout.indexOf('saved [');
+				if (szIdx > -1){
+					var szStr = stdout.substring(szIdx+7);
+					var szIdxe = szStr.indexOf('/');
+					sz = parseInt(szStr.substring(0,szIdxe));
+				}
+				
+				QblurData.updateOne({username:username},{$push: {"images": {src:imgSrc,size:sz,name:"Name",description:"",creations:[]}}, $inc: {'settings.storage':sz}}, function(err, result) {});
 
 			}
 		});
