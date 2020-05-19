@@ -316,11 +316,28 @@ wss.on('connection', function connection(ws) {
 		}
 		return;
 	}
-	else if (dm.type && dm.type == 'saveTemplate'){
-		if (dm.message && username != ''){
-			var template = {'name':dm.name,'workspace':dm.message};
+	else if (dm.type && dm.type == 'saveCreation'){
+		if (dm.imgData && username != ''){
+			var imgSrc;
+			if (inSrc.substring(0,9) == 'images/in'){
+				imgSrc = 'userimages/'+username+'_'+parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12)+imgTypes[i];
+				inSrc = imgSrc;
+				var mvimg = 'mv '+inSrc+' '+imgSrc;
+				QblurData.updateOne({username:username,'settings.storage': {$lt:10000000}},{$push: {"images": {src:imgSrc,size:sz,name:"Name",description:"",creations:[]}}, $inc: {'settings.storage':sz}}, function(err, result) {
+					if (result.n > 0){
+						var child = exec(mvimg, function(err, stdout, stderr) {});
+					}
+					else {
+						//send message saying not enough room
+						return;
+					}
+				});
+				
+			}
+			
+			var creation = {'name':dm.name,'imgData':dm.imgData,'imgSrc':imgSrc};
 			//Add a Check that there does not exist a template of that name already.
-			QblurData.updateOne({ username: username }, {$push: {"templates": template}}, function(err, result) {});
+			QblurData.updateOne({ username: username }, {$push: {"creations": creation}}, function(err, result) {});
 		}
 		return;
 	}

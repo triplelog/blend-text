@@ -25,7 +25,9 @@ function saveFormula(category="image") {
 	ws.send(JSON.stringify(jsonmessage));
 }
 
-function saveTemplate() {
-	var jsonmessage = {'type':'saveTemplate','name':'First Template','message':imgData};
+function saveCreation() {
+	//Save image
+	//Save formula(s) -- should be part of imgData actually
+	var jsonmessage = {'type':'saveCreation','name':'First Creation','imgData':imgData};
 	ws.send(JSON.stringify(jsonmessage));
 }
