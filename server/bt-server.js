@@ -351,7 +351,6 @@ wss.on('connection', function connection(ws) {
 		return;
 	}
 	else if (dm.type && dm.type == 'saveCreation'){
-		console.log('saving creation...');
 		if (dm.imgData && username != ''){
 			var imgSrc;
 			if (inSrc.substring(0,9) == 'images/in'){
@@ -544,7 +543,7 @@ wss.on('connection', function connection(ws) {
 	
 		if (newCreation && username != ''){
 			//Add a Check that there does not exist a creation of that name already.
-			QblurData.updateOne({ username: username }, {$push: {"creations": outSrc}}, function(err, result) {});
+			//QblurData.updateOne({ username: username }, {$push: {"creations": outSrc}}, function(err, result) {});
 			newCreation = false;
 		}
 		
@@ -662,7 +661,7 @@ wss.on('connection', function connection(ws) {
 	
 		if (newCreation && username != ''){
 			//Add a Check that there does not exist a creation of that name already.
-			QblurData.updateOne({ username: username }, {$push: {"creations": outSrc}}, function(err, result) {});
+			//QblurData.updateOne({ username: username }, {$push: {"creations": outSrc}}, function(err, result) {});
 			newCreation = false;
 		}
 		
@@ -751,7 +750,7 @@ wss.on('connection', function connection(ws) {
 	
 		if (newCreation && username != ''){
 			//Add a Check that there does not exist a creation of that name already.
-			QblurData.updateOne({ username: username }, {$push: {"creations": outSrc}}, function(err, result) {});
+			//QblurData.updateOne({ username: username }, {$push: {"creations": outSrc}}, function(err, result) {});
 			newCreation = false;
 		}
 		
@@ -828,7 +827,7 @@ wss.on('connection', function connection(ws) {
 	
 		if (newCreation && username != ''){
 			//Add a Check that there does not exist a creation of that name already.
-			QblurData.updateOne({ username: username }, {$push: {"creations": outSrc}}, function(err, result) {});
+			//QblurData.updateOne({ username: username }, {$push: {"creations": outSrc}}, function(err, result) {});
 			newCreation = false;
 		}
 		
