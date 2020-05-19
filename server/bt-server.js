@@ -114,7 +114,7 @@ app.get('/overlay',
 					type: 'overlay',
 					tkey: tkey,
 					formulas: formulas,
-					imgSaved: result.creations[parseInt(req.query.q)].imgSrc,
+					imgSaved: result.creations[parseInt(req.query.q)].imgName,
 					imgData: result.creations[parseInt(req.query.q)].imgData
 				}));
 			}
@@ -351,6 +351,7 @@ wss.on('connection', function connection(ws) {
 		return;
 	}
 	else if (dm.type && dm.type == 'saveCreation'){
+		console.log('saving creation...');
 		if (dm.imgData && username != ''){
 			var imgSrc;
 			if (inSrc.substring(0,9) == 'images/in'){
