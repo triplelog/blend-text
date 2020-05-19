@@ -95,35 +95,28 @@ app.get('/overlay',
 	function(req, res) {
 		var tkey = crypto.randomBytes(100).toString('hex').substr(2, 18);
 		var formulas = [];
+		var myuser;
 		if (req.isAuthenticated()){
 			tempKeys[tkey] = {username:req.user.username};
-			QblurData.findOne({ username: req.user.username }, function(err, result) {
-				formulas = result.formulas.color;
-				for (var i=0;i<formulas.length;i++){
-					formulas[i].id = i;
-				}
-				res.write(nunjucks.render('templates/qblurbase.html',{
-					type: 'overlay',
-					tkey: tkey,
-					formulas: formulas,
-				}));
-				res.end();
-			});
+			myuser = req.user.username;
 		}
 		else {
-			QblurData.findOne({ username: "h" }, function(err, result) {
-				formulas = result.formulas.color;
-				for (var i=0;i<formulas.length;i++){
-					formulas[i].id = i;
-				}
-				res.write(nunjucks.render('templates/qblurbase.html',{
-					type: 'overlay',
-					tkey: tkey,
-					formulas: formulas,
-				}));
-				res.end();
-			});
+			myuser = "h";
 		}
+		QblurData.findOne({ username: myuser }, function(err, result) {
+			formulas = result.formulas.color;
+			for (var i=0;i<formulas.length;i++){
+				formulas[i].id = i;
+			}
+			res.write(nunjucks.render('templates/qblurbase.html',{
+				type: 'overlay',
+				tkey: tkey,
+				formulas: formulas,
+				text: "Hello",
+				imgSaved: "Name",
+			}));
+			res.end();
+		});
 	}
 );
 
