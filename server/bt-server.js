@@ -108,6 +108,7 @@ app.get('/overlay',
 			for (var i=0;i<formulas.length;i++){
 				formulas[i].id = i;
 			}
+			console.log(result.creations[5]);
 			res.write(nunjucks.render('templates/qblurbase.html',{
 				type: 'overlay',
 				tkey: tkey,

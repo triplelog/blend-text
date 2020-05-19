@@ -96,14 +96,14 @@ img {
 				<span id="imgDrag"></span>
 			</div>
 			<div>
-				<input type="radio" name="overlayType" id="overlayText" checked></input>Text
-				<input type="radio" name="overlayType" id="overlayQR"></input>QR
+				<input type="radio" name="overlayType" id="overlayText" {% if imgData and imgData.type != 'text'%}{% else %}checked{% endif %}></input>Text
+				<input type="radio" name="overlayType" id="overlayQR" {% if imgData and imgData.type != 'text'%}checked{% else %}{% endif %}></input>QR
 			</div>
 			<div>
 				<span class="qrType">Coded Message: </span><span class="textType">Text: </span><input type="text" id="text" value="{{ text}}"></input>
 			</div>
 			<div class="textType">
-				Font: <input type="text" id="font" value="Tahoma"><!--Autocomplete w/ fonts, use CSS sprites with available fonts--></input>
+				Font: <input type="text" id="font" value="{% if imgData %}{{ imgData.font }}{% else %}Tahoma{% endif %}"><!--Autocomplete w/ fonts, use CSS sprites with available fonts--></input>
 			</div>
 			<div id="fontSize">
 				Size: 
