@@ -214,7 +214,7 @@ wss.on('connection', function connection(ws) {
 				if (ext == imgTypes[i]){
 					if (account){
 						var imgSrc = 'userimages/'+username+'_'+parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12)+ext;
-						QblurData.updateOne({username:username,'setting.storage': {$lt:10000000}},{$push: {"images": {src:imgSrc,size:buffer.length,name:"Name",description:"",creations:[]}}, $inc: {'settings.storage':buffer.length}}, function(err, result) {
+						QblurData.updateOne({username:username,'settings.storage': {$lt:10000000}},{$push: {"images": {src:imgSrc,size:buffer.length,name:"Name",description:"",creations:[]}}, $inc: {'settings.storage':buffer.length}}, function(err, result) {
 							console.log(result);
 							fs.writeFile('static/'+imgSrc, buffer, function (err) {
 								if (err){console.log(err);}
