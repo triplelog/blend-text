@@ -356,8 +356,8 @@ wss.on('connection', function connection(ws) {
 			if (inSrc.substring(0,9) == 'images/in'){
 				var ext = inSrc.substring(inSrc.indexOf('.'));
 				imgSrc = 'userimages/'+username+'_'+parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12)+ext;
+				var mvimg = 'mv '+inSrc+' static/'+imgSrc;
 				inSrc = imgSrc;
-				var mvimg = 'mv '+inSrc+' '+imgSrc;
 				var sz = inSrcSz;
 				QblurData.updateOne({username:username,'settings.storage': {$lt:10000000}},{$push: {"images": {src:imgSrc,size:sz,name:imgSrc,description:"",creations:[]}}, $inc: {'settings.storage':sz}}, function(err, result) {
 					if (result.n > 0){
