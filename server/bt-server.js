@@ -108,14 +108,24 @@ app.get('/overlay',
 			for (var i=0;i<formulas.length;i++){
 				formulas[i].id = i;
 			}
-			console.log(result.creations[3].imgData);
-			res.write(nunjucks.render('templates/qblurbase.html',{
-				type: 'overlay',
-				tkey: tkey,
-				formulas: formulas,
-				imgSaved: "Name",
-				imgData: result.creations[3].imgData
-			}));
+			
+			if (req.query && req.query.q){
+				res.write(nunjucks.render('templates/qblurbase.html',{
+					type: 'overlay',
+					tkey: tkey,
+					formulas: formulas,
+					imgSaved: result.creations[parseInt(req.query.q)].imgSrc,
+					imgData: result.creations[parseInt(req.query.q)].imgData
+				}));
+			}
+			else {
+				res.write(nunjucks.render('templates/qblurbase.html',{
+					type: 'overlay',
+					tkey: tkey,
+					formulas: formulas,
+				}));
+			}
+			
 			res.end();
 		});
 	}

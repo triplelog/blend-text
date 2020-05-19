@@ -30,6 +30,7 @@ function saveFormula(category="image") {
 function saveCreation() {
 	//Save image
 	//Save formula(s) -- should be part of imgData actually
+	console.log('saved creation');
 	var jsonmessage = {'type':'saveCreation','name':'First Creation','imgData':imgData};
 	ws.send(JSON.stringify(jsonmessage));
 }

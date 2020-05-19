@@ -145,8 +145,8 @@ label[for="formula--1"] {
 {% endblock %}
 {% block content13 %}
 
-	{% for creation in creations %}
-	<a href="{{creation}}">Link</a>
+	{% for i in range(0,creations.length) %}
+	<a href="overlay?q={{i}}">Link</a>
 	{% endfor %}
 	
 
