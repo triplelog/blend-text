@@ -315,7 +315,7 @@ wss.on('connection', function connection(ws) {
 
 		return;
 	}
-	else if (dm.type && dm.type == 'saved'){
+	else if (dm.type && dm.type == 'savedImage'){
 		console.log(dm.url);
 		
 		QblurData.findOne({username:username}, 'images', function(err, result) {
