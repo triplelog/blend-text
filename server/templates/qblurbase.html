@@ -100,7 +100,7 @@ img {
 				<input type="radio" name="overlayType" id="overlayQR" {% if imgData and imgData.type != 'text'%}checked{% else %}{% endif %}></input>QR
 			</div>
 			<div>
-				<span class="qrType">Coded Message: </span><span class="textType">Text: </span><input type="text" id="text" value="{{ text}}"></input>
+				<span class="qrType">Coded Message: </span><span class="textType">Text: </span><input type="text" id="text" value="{% if imgData %}{{ imgData.text}}{% endif %}"></input>
 			</div>
 			<div class="textType">
 				Font: <input type="text" id="font" value="{% if imgData %}{{ imgData.font }}{% else %}Tahoma{% endif %}"><!--Autocomplete w/ fonts, use CSS sprites with available fonts--></input>
@@ -108,9 +108,9 @@ img {
 			<div id="fontSize">
 				Size: 
 				<select>
-					<option value="font">Font Size</option>
-					<option value="width">Width</option>
-				</select>= <input type="number" value="40"></input><span></span>
+					<option value="font" {% if imgData and imgData.width %}{% else %}checked{% endif %}>Font Size</option>
+					<option value="width" {% if imgData and imgData.width %}checked{% endif %}>Width</option>
+				</select>= <input type="number" value="{% if imgData and imgData.width %}{{ imgData.width}}{% elif imgData %}{{ imgData.fontSize}}{% else %}40{% endif %}"></input><span></span>
 			</div>
 			<div id="locX">
 				Location X: 

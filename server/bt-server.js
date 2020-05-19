@@ -113,8 +113,8 @@ app.get('/overlay',
 				type: 'overlay',
 				tkey: tkey,
 				formulas: formulas,
-				text: "Hello",
 				imgSaved: "Name",
+				imgData: result.creations[3].imgData
 			}));
 			res.end();
 		});
