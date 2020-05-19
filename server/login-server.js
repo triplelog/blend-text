@@ -92,10 +92,7 @@ app.get('/account',
 			}
 		
 			var images = result.images;
-			var templates = result.templates;
-			for (var i=0;i<templates.length;i++){
-				templates[i].id = i;
-			}
+
 			var creations = result.creations;
 		
 		
@@ -107,7 +104,6 @@ app.get('/account',
 				tkey: tkey,
 				formulas: formulas,
 				images: images,
-				templates: templates,
 				creations: creations,
 			}));
 			res.end();
