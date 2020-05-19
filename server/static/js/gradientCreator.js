@@ -169,7 +169,7 @@ function updateImage(evt){
 }
 
 function chgGradientType() {
-	var el = document.getElementById('gradientType');
+	var el = document.getElementById('gradientType').querySelector('select');
 	if (el.value == 'linear'){
 		document.getElementById('gradientAngle').style.display = 'block';
 		document.getElementById('gradientSpread').style.display = 'none';
