@@ -199,6 +199,7 @@ wss.on('connection', function connection(ws) {
   var account = false;
   var imgTypes = ['.png','.jpg','.jpeg','.gif','.tiff','.tif'];//.svg, .psd, .eps, .raw, .pdf?
   var maxsize = 2000000; //1000000~1MB
+  var inSrcSz = 0;
   ws.on('message', function incoming(message) {
   	
   	if (typeof message !== 'string'){
@@ -231,6 +232,7 @@ wss.on('connection', function connection(ws) {
 					}
 					else {
 						inSrc = 'images/in/'+imgid+imgTypes[i];
+						inSrcSz = buffer.length;
 						console.log(inSrc);
 						fs.writeFile(inSrc, buffer, function (err) {
 							if (err){console.log(err);}
@@ -278,23 +280,37 @@ wss.on('connection', function connection(ws) {
 		}
 		if (wget == ''){return;}
 		if (account){
-			var sz = 2000000;
-			var szIdx = stdout.indexOf('saved [');
-			if (szIdx > -1){
-				var szStr = stdout.substring(szIdx+7);
-				var szIdxe = szStr.indexOf('/');
-				sz = parseInt(szStr.substring(0,szIdxe));
-			}
 			
-			QblurData.updateOne({username:username,'settings.storage': {$lt:10000000}},{$push: {"images": {src:imgSrc,size:sz,name:"Name",description:"",creations:[]}}, $inc: {'settings.storage':sz}}, function(err, result) {
-				if (result.n > 0){
-					var child = exec(wget, function(err, stdout, stderr) {});
+			
+			QblurData.countDocument({username:username,'settings.storage': {$lt:10000000}}, function(err, result) {
+				console.log(result);
+				if (2 > 0){
+					var child = exec(wget, function(err, stdout, stderr) {
+						var sz = 2000000;
+						var szIdx = stdout.indexOf('saved [');
+						if (szIdx > -1){
+							var szStr = stdout.substring(szIdx+7);
+							var szIdxe = szStr.indexOf('/');
+							sz = parseInt(szStr.substring(0,szIdxe));
+						}
+						QblurData.updateOne({username:username,'settings.storage': {$lt:10000000}},{$push: {"images": {src:imgSrc,size:sz,name:"Name",description:"",creations:[]}}, $inc: {'settings.storage':sz}}, function(err, result) {
+						
+						});
+					});
 				}
 			});
 			
 		}
 		else {
-			var child = exec(wget, function(err, stdout, stderr) {});
+			var child = exec(wget, function(err, stdout, stderr) {
+				inSrcSz = 2000000;
+				var szIdx = stdout.indexOf('saved [');
+				if (szIdx > -1){
+					var szStr = stdout.substring(szIdx+7);
+					var szIdxe = szStr.indexOf('/');
+					inSrcSz = parseInt(szStr.substring(0,szIdxe));
+				}
+			});
 		}
 
 		return;
@@ -323,6 +339,7 @@ wss.on('connection', function connection(ws) {
 				imgSrc = 'userimages/'+username+'_'+parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12)+imgTypes[i];
 				inSrc = imgSrc;
 				var mvimg = 'mv '+inSrc+' '+imgSrc;
+				var sz = inSrcSz;
 				QblurData.updateOne({username:username,'settings.storage': {$lt:10000000}},{$push: {"images": {src:imgSrc,size:sz,name:"Name",description:"",creations:[]}}, $inc: {'settings.storage':sz}}, function(err, result) {
 					if (result.n > 0){
 						var child = exec(mvimg, function(err, stdout, stderr) {});
