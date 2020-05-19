@@ -277,20 +277,26 @@ wss.on('connection', function connection(ws) {
 			}
 		}
 		if (wget == ''){return;}
-		var child = exec(wget, function(err, stdout, stderr) {
-			if (account){
-				var sz = 2000000;
-				var szIdx = stdout.indexOf('saved [');
-				if (szIdx > -1){
-					var szStr = stdout.substring(szIdx+7);
-					var szIdxe = szStr.indexOf('/');
-					sz = parseInt(szStr.substring(0,szIdxe));
-				}
-				
-				QblurData.updateOne({username:username},{$push: {"images": {src:imgSrc,size:sz,name:"Name",description:"",creations:[]}}, $inc: {'settings.storage':sz}}, function(err, result) {});
-
+		if (account){
+			var sz = 2000000;
+			var szIdx = stdout.indexOf('saved [');
+			if (szIdx > -1){
+				var szStr = stdout.substring(szIdx+7);
+				var szIdxe = szStr.indexOf('/');
+				sz = parseInt(szStr.substring(0,szIdxe));
 			}
-		});
+			
+			QblurData.updateOne({username:username,'settings.storage': {$lt:10000000}},{$push: {"images": {src:imgSrc,size:sz,name:"Name",description:"",creations:[]}}, $inc: {'settings.storage':sz}}, function(err, result) {
+				if (result.n > 0){
+					var child = exec(wget, function(err, stdout, stderr) {});
+				}
+			});
+			
+		}
+		else {
+			var child = exec(wget, function(err, stdout, stderr) {});
+		}
+
 		return;
 	}
 	else if (dm.type && dm.type == 'saveFormula'){
