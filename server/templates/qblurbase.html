@@ -200,58 +200,58 @@ img {
 			</div>
 			<div id="gradientType">
 				Gradient: <select>
-					<option value="linear">Linear</option>
-					<option value="radial">Radial</option>
-					<option value="edge">Edge</option>
-					<option value="life">Life</option>
+					<option value="linear" {% if imgData and imgData.gradientType != 'linear' %}{% else %}selected{% endif %}>Linear</option>
+					<option value="radial" {% if imgData and imgData.gradientType == 'radial' %}selected{% else %}{% endif %}>Radial</option>
+					<option value="edge" {% if imgData and imgData.gradientType == 'edge' %}selected{% else %}{% endif %}>Edge</option>
+					<option value="life" {% if imgData and imgData.gradientType == 'life' %}selected{% else %}{% endif %}>Life</option>
 					</select>
 			</div>
 			
 			<div id="gradientCenter">
 				Center: <select>
-					<option value="0">Centroid</option>
-					<option value="1">Median</option>
-					<option value="2">Bounding Box</option>
+					<option value="0" {% if imgData and imgData.gradientCenter != '0' %}{% else %}selected{% endif %}>Centroid</option>
+					<option value="1" {% if imgData and imgData.gradientCenter == '1' %}selected{% else %}{% endif %}>Median</option>
+					<option value="2" {% if imgData and imgData.gradientCenter == '2' %}selected{% else %}{% endif %}>Bounding Box</option>
 					</select>
 			</div>
 			<div id="gradientDistance">
 				Distance: <select>
-					<option value="0">Normal</option>
-					<option value="10">Diamond</option>
-					<option value="20">Square</option>
+					<option value="0" {% if imgData and imgData.gradientDistance != '0' %}{% else %}selected{% endif %}>Normal</option>
+					<option value="10" {% if imgData and imgData.gradientDistance == '10' %}selected{% else %}{% endif %}>Diamond</option>
+					<option value="20" {% if imgData and imgData.gradientDistance == '20' %}selected{% else %}{% endif %}>Square</option>
 					</select>
 			</div>
 			<div id="gradientSkew">
 				Skew: <select>
-					<option value="0">None</option>
-					<option value="100">Median</option>
-					<option value="200">Bounding Box</option>
+					<option value="0" {% if imgData and imgData.gradientSkew != '0' %}{% else %}selected{% endif %}>None</option>
+					<option value="100" {% if imgData and imgData.gradientSkew == '100' %}selected{% else %}{% endif %}>Median</option>
+					<option value="200" {% if imgData and imgData.gradientSkew == '200' %}selected{% else %}{% endif %}>Bounding Box</option>
 					</select>
 			</div>
 			<div id="gradientAngle">
-				Angle: <input type="number" value="0"></input>
+				Angle: <input type="number" value="{% if imgData and imgData.gradientAngle %}{{ imgData.gradientAngle }}{% else %}0{% endif %}"></input>
 			</div>
 			<div id="gradientSpread">
-				Spread: <input type="number" value="0"></input>
+				Spread: <input type="number" value="{% if imgData and imgData.gradientSpread %}{{ imgData.gradientSpread }}{% else %}0{% endif %}"></input>
 			</div>
 			<div id="lifeOptions">
 				<div id="gradientYears">
-					Years: <input type="number" value="250"></input>
+					Years: <input type="number" value="{% if imgData %}{{ imgData.gradientYears }}{% else %}250{% endif %}"></input>
 				</div>
 				<div id="gradientDeadMin">
-					Dead Min: <input type="number" value="2"></input>
+					Dead Min: <input type="number" value="{% if imgData %}{{ imgData.gradientDeadMin }}{% else %}2{% endif %}"></input>
 				</div>
 				<div id="gradientDeadMax">
-					Dead Max: <input type="number" value="2"></input>
+					Dead Max: <input type="number" value="{% if imgData %}{{ imgData.gradientDeadMax }}{% else %}2{% endif %}"></input>
 				</div>
 				<div id="gradientLiveMin">
-					Live Min: <input type="number" value="1"></input>
+					Live Min: <input type="number" value="{% if imgData %}{{ imgData.gradientLiveMin }}{% else %}1{% endif %}"></input>
 				</div>
 				<div id="gradientLiveMax">
-					Live Max: <input type="number" value="2"></input>
+					Live Max: <input type="number" value="{% if imgData %}{{ imgData.gradientLiveMax }}{% else %}2{% endif %}"></input>
 				</div>
 				<div id="gradientBorder">
-					Border: <input type="number" value="50"></input>
+					Border: <input type="number" value="{% if imgData %}{{ imgData.gradientBorder }}{% else %}50{% endif %}"></input>
 				</div>
 			</div>
 			
@@ -475,6 +475,11 @@ defaults.push('<xml xmlns="https://developers.google.com/blockly/xml"><variables
 	{% endif %}
 {% else %}
 defaults.push('<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="qblur_l">l</variable></variables><block type="controls_if" id="Wd;mk5}4Of9%Iw%Z7Zp@" x="35" y="18"><value name="IF0"><block type="logic_compare" id="Y]b.Mo8c|Gg]GFgx]d}."><field name="OP">LT</field><value name="A"><block type="variables_get" id="z@^1uBjFU^[PEMP$1M{*"><field name="VAR" id="qblur_l">l</field></block></value><value name="B"><block type="math_number" id="q#8h__fG*5qOgK`l1]dN"><field name="NUM">0.6</field></block></value></block></value><statement name="DO0"><block type="variables_set" id="!{OE7jG|eOuI%-Gmeh$z"><field name="VAR" id="qblur_l">l</field><value name="VALUE"><block type="math_number" id="eSak{(`N-^$A8:Y!TfoB"><field name="NUM">0.6</field></block></value></block></statement></block></xml>');
+	{% if imgData and imgData.blurType == 'hsl' %}
+		defaults[1] = '{{ imgData.blurFormula | safe}}';
+	{% elif imgData and imgData.blurType == 'rgb' %}
+		defaults[0] = '{{ imgData.blurFormula | safe}}';
+	{% endif %}
 {% endif %}
 
 
