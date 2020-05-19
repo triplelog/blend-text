@@ -92,7 +92,7 @@ img {
 				</select>
 				<input type="file" name="imgSrc" id="imgSrc"></input>
 				<input type="text" name="imgUrl" id="imgUrl"></input>
-				<input type="text" name="imgSaved" id="imgSaved"></input>
+				<input type="text" name="imgSaved" id="imgSaved" value="{{imgSaved}}"></input>
 				<span id="imgDrag"></span>
 			</div>
 			<div>
@@ -100,7 +100,7 @@ img {
 				<input type="radio" name="overlayType" id="overlayQR"></input>QR
 			</div>
 			<div>
-				<span class="qrType">Coded Message: </span><span class="textType">Text: </span><input type="text" id="text" value=""></input>
+				<span class="qrType">Coded Message: </span><span class="textType">Text: </span><input type="text" id="text" value="{{ text}}"></input>
 			</div>
 			<div class="textType">
 				Font: <input type="text" id="font" value="Tahoma"><!--Autocomplete w/ fonts, use CSS sprites with available fonts--></input>
@@ -170,7 +170,7 @@ img {
 				</select>
 				<input type="file" name="imgSrc" id="imgSrc"></input>
 				<input type="text" name="imgUrl" id="imgUrl"></input>
-				<input type="text" name="imgSaved" id="imgSaved"></input>
+				<input type="text" name="imgSaved" id="imgSaved" value="{{imgSaved}}"></input>
 				<span id="imgDrag"></span>
 			</div>
 			<div id="locX" style="display: none;">
@@ -268,7 +268,7 @@ img {
 				</select>
 				<input type="file" name="imgSrc" id="imgSrc"></input>
 				<input type="text" name="imgUrl" id="imgUrl"></input>
-				<input type="text" name="imgSaved" id="imgSaved"></input>
+				<input type="text" name="imgSaved" id="imgSaved" value="{{imgSaved}}"></input>
 				<span id="imgDrag"></span>
 			</div>
 			
@@ -452,9 +452,13 @@ img {
 <script src="../js/php_compressed.js"></script>
 <script src="../js/javascript_compressed.js"></script>
 <script src="../js/dart_compressed.js"></script>
-<script>var type = {{ type | dump | safe }}</script>
-<script>var tkey = {{ tkey | dump | safe }}</script>
-<script>var formulas = {{ formulas | dump | safe }};</script>
+<script>var type = {{ type | dump | safe }};
+var tkey = {{ tkey | dump | safe }};
+var formulas = {{ formulas | dump | safe }};
+var defaults = ['<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="qblur_r">r</variable></variables><block type="controls_if" id="Il^^YLd2NrFN:|;KKrjz" x="53" y="8"><value name="IF0"><block type="logic_compare" id="ziTZ^NbMl,qw@.Jp?R,B"><field name="OP">LT</field><value name="A"><block type="variables_get" id="]$l^IlghlBfr{3nXw`e{"><field name="VAR" id="qblur_r">r</field></block></value><value name="B"><block type="math_number" id="h2X9B|l.elRcnP+Je:;u"><field name="NUM">200</field></block></value></block></value><statement name="DO0"><block type="variables_set" id="D;pLu7Mt]Bf4$r!guo;-"><field name="VAR" id="qblur_r">r</field><value name="VALUE"><block type="math_number" id="i~V0T-jtCz[Wz(P4:BIV"><field name="NUM">200</field></block></value></block></statement></block></xml>'];
+defaults.push('<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="qblur_l">l</variable></variables><block type="controls_if" id="Wd;mk5}4Of9%Iw%Z7Zp@" x="35" y="18"><value name="IF0"><block type="logic_compare" id="Y]b.Mo8c|Gg]GFgx]d}."><field name="OP">LT</field><value name="A"><block type="variables_get" id="z@^1uBjFU^[PEMP$1M{*"><field name="VAR" id="qblur_l">l</field></block></value><value name="B"><block type="math_number" id="q#8h__fG*5qOgK`l1]dN"><field name="NUM">0.6</field></block></value></block></value><statement name="DO0"><block type="variables_set" id="!{OE7jG|eOuI%-Gmeh$z"><field name="VAR" id="qblur_l">l</field><value name="VALUE"><block type="math_number" id="eSak{(`N-^$A8:Y!TfoB"><field name="NUM">0.6</field></block></value></block></statement></block></xml>');
+
+</script>
 
 <script src="../js/creator.js"></script>
 {% if type == "gradient" %}
@@ -467,5 +471,8 @@ img {
 <script src="../js/blendtext.js"></script>
 {% endif %}
 <script src="../js/upload.js"></script>
+{% if imgSaved && imgSaved != '' %}
+savedImgUrl();
+{% endif %}
 {% endblock %}
 

@@ -319,8 +319,12 @@ wss.on('connection', function connection(ws) {
 		console.log(dm.url);
 		
 		QblurData.findOne({username:username}, 'images', function(err, result) {
-			console.log(result.images);
-			inSrc = 'static/'+result.images[0].src;
+			for (var i=0;i<result.images.length;i++){
+				if (result.images[i].name == dm.url){
+					inSrc = 'static/'+result.images[i].src;
+					break;
+				}
+			}
 		});
 
 		return;
@@ -346,7 +350,8 @@ wss.on('connection', function connection(ws) {
 		if (dm.imgData && username != ''){
 			var imgSrc;
 			if (inSrc.substring(0,9) == 'images/in'){
-				imgSrc = 'userimages/'+username+'_'+parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12)+imgTypes[i];
+				var ext = inSrc.substring(inSrc.indexOf('.'));
+				imgSrc = 'userimages/'+username+'_'+parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12)+ext;
 				inSrc = imgSrc;
 				var mvimg = 'mv '+inSrc+' '+imgSrc;
 				var sz = inSrcSz;

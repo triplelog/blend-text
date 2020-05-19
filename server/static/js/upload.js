@@ -89,7 +89,7 @@ function chgImgUrl(evt) {
 }
 
 function savedImgUrl(evt) {
-	var url = evt.target.value;
+	var url = document.getElementById('imgSaved').value;
 	var jsonmessage = {'type':'savedImage','url':url};
 	console.log(jsonmessage);
 	ws.send(JSON.stringify(jsonmessage));
