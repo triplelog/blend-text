@@ -108,8 +108,8 @@ img {
 			<div id="fontSize">
 				Size: 
 				<select>
-					<option value="font" {% if imgData and imgData.width %}{% else %}checked{% endif %}>Font Size</option>
-					<option value="width" {% if imgData and imgData.width %}checked{% endif %}>Width</option>
+					<option value="font" {% if imgData and imgData.width %}{% else %}selected{% endif %}>Font Size</option>
+					<option value="width" {% if imgData and imgData.width %}selected{% endif %}>Width</option>
 				</select>= <input type="number" value="{% if imgData and imgData.width %}{{ imgData.width}}{% elif imgData %}{{ imgData.fontSize}}{% else %}40{% endif %}"></input><span></span>
 			</div>
 			<div id="locX">
