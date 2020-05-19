@@ -1,17 +1,3 @@
-var ws = new WebSocket('wss://qblur.com:8080');
-ws.onopen = function(evt) {
-	var jsonmessage = {'type':'key'};
-	jsonmessage.message = tkey;
-	ws.send(JSON.stringify(jsonmessage));
-}
-ws.onmessage = function(evt){
-	var dm = JSON.parse(evt.data);
-	var el = document.getElementById('imageHolder');
-	var img = document.createElement('img');
-	img.setAttribute('src',dm.src);
-	el.innerHTML = '';
-	el.appendChild(img);
-}
 
 
 var imgData = {};
