@@ -76,6 +76,11 @@ label[for="formula--1"] {
 	max-width: 40%;
 	display: inline-block;
 }
+#imageList {
+	overflow-y: auto;
+	overflow-x: auto;
+	overflow: auto;
+}
 {% endblock %}
 
 
@@ -166,8 +171,8 @@ label[for="formula--1"] {
 </div>
 {% endblock %}
 {% block content31 %}
-	<button>Add</button><button>Delete</button>
-	<div>
+	<button onclick="toggleAddImage()">Add</button><button>Delete</button>
+	<div id="addImage" style="display: none;">
 		Image: 
 		<select id="imgType">
 			<option value="upload">Upload</option>
@@ -178,11 +183,13 @@ label[for="formula--1"] {
 		<input type="text" name="imgUrl" id="imgUrl"></input>
 		<span id="imgDrag"></span>
 	</div>
-	<ul>
-	{% for image in images %}
-	<li><a href="">{{image.name}} <img src="{{image.src}}"></a> (0 creations)</li>
-	{% endfor %}
-	</ul>
+	<div id="imageList">
+		<ul>
+		{% for image in images %}
+		<li><a href="{{image.src}}">{{image.name}} <img src="{{image.src}}" style="display: none;"></a> (0 creations)</li>
+		{% endfor %}
+		</ul>
+	</div>
 {% endblock %}
 
 {% block title33 %}

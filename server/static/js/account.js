@@ -168,3 +168,13 @@ function sendImage(img) {
 document.getElementById('imgSrc').style.display = 'inline-block';
 document.getElementById('imgUrl').style.display = 'none';
 document.getElementById('imgDrag').style.display = 'none';
+
+function toggleAddImage() {
+	var el = document.getElementById('addImage');
+	if (el.style.display == 'none'){
+		el.style.display = 'block';
+	}
+	else {
+		el.style.display = 'none';
+	}
+}
