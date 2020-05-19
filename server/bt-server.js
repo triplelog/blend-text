@@ -359,7 +359,7 @@ wss.on('connection', function connection(ws) {
 				var ext = inSrc.substring(inSrc.indexOf('.'));
 				imgSrc = 'userimages/'+username+'_'+parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12)+ext;
 				var mvimg = 'mv '+inSrc+' static/'+imgSrc;
-				inSrc = imgSrc;
+				inSrc = 'static/'+imgSrc;
 				var sz = inSrcSz;
 				QblurData.updateOne({username:username,'settings.storage': {$lt:10000000}},{$push: {"images": {src:imgSrc,size:sz,name:imgSrc,description:"",creations:[]}}, $inc: {'settings.storage':sz}}, function(err, result) {
 					if (result.n > 0){
@@ -373,7 +373,7 @@ wss.on('connection', function connection(ws) {
 				
 			}
 			var creationType = 'overlay';
-			var creation = {'name':dm.name,'imgData':dm.imgData,'imgName':inSrc};
+			var creation = {'name':dm.name,'imgData':dm.imgData,'imgName':inSrc.substring(7)};
 			//Add a Check that there does not exist a template of that name already.
 			QblurData.updateOne({ username: username }, {$push: {"creations": creation}}, function(err, result) {
 				console.log(err);
