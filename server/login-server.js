@@ -66,7 +66,7 @@ app.get('/account',
 		
 		QblurData.findOne({username:req.user.username}, function(err,result) {
 			if (result == null){
-				result = {username: req.user.username.toLowerCase(), formulas: {gradient:baseGradients,distance:[],color:[]}, images: [], templates: [], creations: [], friends: [], followers: []};
+				result = {username: req.user.username.toLowerCase(), formulas: {gradient:baseGradients,distance:[],color:[],overlay:[],filters:[]}, images: [], creations: [], friends: [], followers: [], settings: {robot:1,storage:0}};
 				var qblurData = new QblurData(result);
 				qblurData.save(function(err2,result2){
 					console.log('user registered!',performance.now());
@@ -136,7 +136,7 @@ app.post('/register',
 		  
 		}
 		else {
-			var qblurData = new QblurData({username: req.body.username.toLowerCase(), formulas: {gradient:baseGradients,distance:[],color:[]}, images: [], templates: [], creations: [], friends: [], followers: []});
+			var qblurData = new QblurData({username: req.body.username.toLowerCase(), formulas: {gradient:baseGradients,distance:[],color:[],overlay:[],filters:[]}, images: [], creations: [], friends: [], followers: [], settings: {robot:1,storage:0}});
 			qblurData.save(function(err,result){
 				console.log('user registered!',performance.now());
 				var robot = 'python3 python/robohash/createrobo.py '+req.body.username.toLowerCase()+' 1';

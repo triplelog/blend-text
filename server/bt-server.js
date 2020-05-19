@@ -196,6 +196,7 @@ wss.on('connection', function connection(ws) {
   var imgIndex = 0;
   var username = '';
   var newCreation = true;
+  var account = false;
   var imgTypes = ['.png','.jpg','.jpeg','.gif','.tiff','.tif'];//.svg, .psd, .eps, .raw, .pdf?
   ws.on('message', function incoming(message) {
   	
@@ -206,12 +207,24 @@ wss.on('connection', function connection(ws) {
   			var ext = '.'+val.ext;
   			for (var i=0;i<imgTypes.length;i++){
 				if (ext == imgTypes[i]){
-					inSrc = 'images/in/'+imgid+imgTypes[i];
-					console.log(inSrc);
-					fs.writeFile(inSrc, buffer, function (err) {
-						if (err){console.log(err);}
-						console.log("cf",performance.now());
-					});
+					if (account){
+						var imgSrc = 'images/'+username+'_'+parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12)+ext;
+						fs.writeFile(imgSrc, buffer, function (err) {
+							if (err){console.log(err);}
+							console.log("cf",performance.now());
+							//track file size
+							QblurData.updateOne({username:username},{$push: {"images": {src:imgSrc,size:buffer.length,name:"Name",description:"",creations:[]}}, $inc: {'settings.storage':buffer.length}}, function(err, result) {});
+						});
+						
+					}
+					else {
+						inSrc = 'images/in/'+imgid+imgTypes[i];
+						console.log(inSrc);
+						fs.writeFile(inSrc, buffer, function (err) {
+							if (err){console.log(err);}
+							console.log("cf",performance.now());
+						});
+					}
 					break;
 				}
 			}
@@ -226,14 +239,29 @@ wss.on('connection', function connection(ws) {
 		}
 		return;
 	}
+	else if (dm.type && dm.type == 'accountKey'){
+		if (dm.message && tempKeys[dm.message]){
+			username = tempKeys[dm.message].username;
+		}
+		account = true;
+		return;
+	}
 	else if (dm.type && dm.type == 'download'){
 		console.log(dm.url);
 		
 		var wget = '';
+		var imgSrc;
 		for (var i=0;i<imgTypes.length;i++){
 			if (dm.url.substring(dm.url.length-imgTypes[i].length,dm.url.length) == imgTypes[i]){
-				inSrc = 'images/in/'+imgid+imgTypes[i];
-				wget = 'wget --accept "*"'+imgTypes[i]+' -O '+inSrc + ' "' + dm.url + '" && echo "done"';	
+				if (account){
+					imgSrc = 'images/'+username+'_'+parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12)+imgTypes[i];
+					wget = 'wget --accept "*"'+imgTypes[i]+' -O '+imgSrc + ' "' + dm.url + '" && echo "done"';
+				}
+				else {
+					inSrc = 'images/in/'+imgid+imgTypes[i];
+					wget = 'wget --accept "*"'+imgTypes[i]+' -O '+inSrc + ' "' + dm.url + '" && echo "done"';	
+				}
+				
 			}
 		}
 		if (wget == ''){return;}
@@ -241,6 +269,10 @@ wss.on('connection', function connection(ws) {
 			console.log("err: ",err);
 			console.log("stdout: ",stdout);
 			console.log("stderr: ",stderr);
+			if (account){
+				QblurData.updateOne({username:username},{$push: {"images": {src:imgSrc,size:buffer.length,name:"Name",description:"",creations:[]}}, $inc: {'settings.storage':buffer.length}}, function(err, result) {});
+
+			}
 		});
 		return;
 	}
