@@ -213,7 +213,7 @@ wss.on('connection', function connection(ws) {
   			for (var i=0;i<imgTypes.length;i++){
 				if (ext == imgTypes[i]){
 					if (account){
-						var imgSrc = 'images/'+username+'_'+parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12)+ext;
+						var imgSrc = 'static/userimages/'+username+'_'+parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12)+ext;
 						fs.writeFile(imgSrc, buffer, function (err) {
 							if (err){console.log(err);}
 							console.log("cf",performance.now());
@@ -259,7 +259,7 @@ wss.on('connection', function connection(ws) {
 		for (var i=0;i<imgTypes.length;i++){
 			if (dm.url.substring(dm.url.length-imgTypes[i].length,dm.url.length) == imgTypes[i]){
 				if (account){
-					imgSrc = 'images/'+username+'_'+parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12)+imgTypes[i];
+					imgSrc = 'static/userimages/'+username+'_'+parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12)+imgTypes[i];
 					wget = '(ulimit -f '+parseInt(maxsize/512)+'; wget --accept "*"'+imgTypes[i]+' -O '+imgSrc + ' "' + dm.url + '" && echo "done"';
 				}
 				else {

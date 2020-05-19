@@ -14,3 +14,29 @@ change server to call qr-art from /Release not /Debug
 pip3 install robohash
 
 sudo systemctl start mongod
+
+mkdir static/userimages
+
+git clone https://github.com/triplelog/qr-art.git
+
+cd qr-art
+
+wget -O- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg
+sudo mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/
+wget https://packages.microsoft.com/config/debian/10/prod.list
+sudo mv prod.list /etc/apt/sources.list.d/microsoft-prod.list
+sudo chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg
+sudo chown root:root /etc/apt/sources.list.d/microsoft-prod.list
+
+sudo apt-get update
+sudo apt-get install apt-transport-https
+sudo apt-get update
+sudo apt-get install dotnet-sdk-3.1
+sudo apt-get install libgdiplus
+
+cd src
+cd qr-art
+dotnet run --project qr-art.csproj "hello" image format outpath
+dotnet publish
+./bin/Debug/netcoreapp3.1/publish/qr-art "hello" test.jpg png out.png
+use dotnet
