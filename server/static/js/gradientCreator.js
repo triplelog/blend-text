@@ -145,40 +145,8 @@ function updateImage(evt){
 				imgData[id] = parseInt(el.value);
 			}
 			else if (el.parentElement.id == 'gradientType'){
-				var id = el.parentElement.id;
-				imgData[id] = el.value;
-				if (el.value == 'linear'){
-					document.getElementById('gradientAngle').style.display = 'block';
-					document.getElementById('gradientSpread').style.display = 'none';
-					document.getElementById('gradientCenter').style.display = 'none';
-					document.getElementById('gradientDistance').style.display = 'none';
-					document.getElementById('gradientSkew').style.display = 'none';
-					document.getElementById('lifeOptions').style.display = 'none';
-				}
-				else if (el.value == 'radial'){
-					document.getElementById('gradientAngle').style.display = 'none';
-					document.getElementById('gradientSpread').style.display = 'none';
-					document.getElementById('gradientCenter').style.display = 'block';
-					document.getElementById('gradientDistance').style.display = 'block';
-					document.getElementById('gradientSkew').style.display = 'block';
-					document.getElementById('lifeOptions').style.display = 'none';
-				}
-				else if (el.value == 'edge'){
-					document.getElementById('gradientAngle').style.display = 'none';
-					document.getElementById('gradientSpread').style.display = 'block';
-					document.getElementById('gradientCenter').style.display = 'none';
-					document.getElementById('gradientDistance').style.display = 'none';
-					document.getElementById('gradientSkew').style.display = 'none';
-					document.getElementById('lifeOptions').style.display = 'none';
-				}
-				else if (el.value == 'life'){
-					document.getElementById('gradientAngle').style.display = 'none';
-					document.getElementById('gradientSpread').style.display = 'none';
-					document.getElementById('gradientCenter').style.display = 'none';
-					document.getElementById('gradientDistance').style.display = 'none';
-					document.getElementById('gradientSkew').style.display = 'none';
-					document.getElementById('lifeOptions').style.display = 'block';
-				}
+				chgGradientType();
+				
 			}
 		}
 	}
@@ -200,7 +168,42 @@ function updateImage(evt){
 	
 }
 
-
+function chgGradientType() {
+	var el = document.getElementById('gradientType');
+	if (el.value == 'linear'){
+		document.getElementById('gradientAngle').style.display = 'block';
+		document.getElementById('gradientSpread').style.display = 'none';
+		document.getElementById('gradientCenter').style.display = 'none';
+		document.getElementById('gradientDistance').style.display = 'none';
+		document.getElementById('gradientSkew').style.display = 'none';
+		document.getElementById('lifeOptions').style.display = 'none';
+	}
+	else if (el.value == 'radial'){
+		document.getElementById('gradientAngle').style.display = 'none';
+		document.getElementById('gradientSpread').style.display = 'none';
+		document.getElementById('gradientCenter').style.display = 'block';
+		document.getElementById('gradientDistance').style.display = 'block';
+		document.getElementById('gradientSkew').style.display = 'block';
+		document.getElementById('lifeOptions').style.display = 'none';
+	}
+	else if (el.value == 'edge'){
+		document.getElementById('gradientAngle').style.display = 'none';
+		document.getElementById('gradientSpread').style.display = 'block';
+		document.getElementById('gradientCenter').style.display = 'none';
+		document.getElementById('gradientDistance').style.display = 'none';
+		document.getElementById('gradientSkew').style.display = 'none';
+		document.getElementById('lifeOptions').style.display = 'none';
+	}
+	else if (el.value == 'life'){
+		document.getElementById('gradientAngle').style.display = 'none';
+		document.getElementById('gradientSpread').style.display = 'none';
+		document.getElementById('gradientCenter').style.display = 'none';
+		document.getElementById('gradientDistance').style.display = 'none';
+		document.getElementById('gradientSkew').style.display = 'none';
+		document.getElementById('lifeOptions').style.display = 'block';
+	}
+}
+chgGradientType();
 
 var oldcode = '';
 
@@ -226,9 +229,6 @@ function onresize(evt) {
 		Blockly.svgResize(workspaces[i]);
     }
 }
-
-var defaults = ['<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="qblur_r">r</variable></variables><block type="controls_if" id="Il^^YLd2NrFN:|;KKrjz" x="53" y="8"><value name="IF0"><block type="logic_compare" id="ziTZ^NbMl,qw@.Jp?R,B"><field name="OP">LT</field><value name="A"><block type="variables_get" id="]$l^IlghlBfr{3nXw`e{"><field name="VAR" id="qblur_r">r</field></block></value><value name="B"><block type="math_number" id="h2X9B|l.elRcnP+Je:;u"><field name="NUM">200</field></block></value></block></value><statement name="DO0"><block type="variables_set" id="D;pLu7Mt]Bf4$r!guo;-"><field name="VAR" id="qblur_r">r</field><value name="VALUE"><block type="math_number" id="i~V0T-jtCz[Wz(P4:BIV"><field name="NUM">200</field></block></value></block></statement></block></xml>'];
-defaults.push('<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="qblur_l">l</variable></variables><block type="controls_if" id="Wd;mk5}4Of9%Iw%Z7Zp@" x="35" y="18"><value name="IF0"><block type="logic_compare" id="Y]b.Mo8c|Gg]GFgx]d}."><field name="OP">LT</field><value name="A"><block type="variables_get" id="z@^1uBjFU^[PEMP$1M{*"><field name="VAR" id="qblur_l">l</field></block></value><value name="B"><block type="math_number" id="q#8h__fG*5qOgK`l1]dN"><field name="NUM">0.6</field></block></value></block></value><statement name="DO0"><block type="variables_set" id="!{OE7jG|eOuI%-Gmeh$z"><field name="VAR" id="qblur_l">l</field><value name="VALUE"><block type="math_number" id="eSak{(`N-^$A8:Y!TfoB"><field name="NUM">0.6</field></block></value></block></statement></block></xml>');
 
 var blocklyDivs = [document.getElementById('blurFormulaRGB'),document.getElementById('blurFormulaHSL')];
 var workspaceBRGB = Blockly.inject(blocklyDivs[0], {toolbox: document.getElementById('toolbox')});
