@@ -360,7 +360,7 @@ wss.on('connection', function connection(ws) {
 				inSrc = imgSrc;
 				var mvimg = 'mv '+inSrc+' '+imgSrc;
 				var sz = inSrcSz;
-				QblurData.updateOne({username:username,'settings.storage': {$lt:10000000}},{$push: {"images": {src:imgSrc,size:sz,name:"Name",description:"",creations:[]}}, $inc: {'settings.storage':sz}}, function(err, result) {
+				QblurData.updateOne({username:username,'settings.storage': {$lt:10000000}},{$push: {"images": {src:imgSrc,size:sz,name:imgSrc,description:"",creations:[]}}, $inc: {'settings.storage':sz}}, function(err, result) {
 					if (result.n > 0){
 						var child = exec(mvimg, function(err, stdout, stderr) {});
 					}
@@ -372,7 +372,7 @@ wss.on('connection', function connection(ws) {
 				
 			}
 			
-			var creation = {'name':dm.name,'imgData':dm.imgData,'imgSrc':imgSrc};
+			var creation = {'name':dm.name,'imgData':dm.imgData,'imgName':imgSrc};
 			//Add a Check that there does not exist a template of that name already.
 			QblurData.updateOne({ username: username }, {$push: {"creations": creation}}, function(err, result) {});
 		}
