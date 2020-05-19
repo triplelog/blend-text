@@ -488,7 +488,9 @@ ws.onmessage = function(evt){
 {% endif %}
 <script src="../js/upload.js"></script>
 {% if imgSaved and imgSaved != '' %}
+<script>
 savedImgUrl();
+</script>
 {% endif %}
 {% endblock %}
 
