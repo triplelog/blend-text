@@ -282,7 +282,7 @@ wss.on('connection', function connection(ws) {
 		if (account){
 			
 			
-			QblurData.countDocument({username:username,'settings.storage': {$lt:10000000}}, function(err, result) {
+			QblurData.countDocuments({username:username,'settings.storage': {$lt:10000000}}, function(err, result) {
 				console.log(result);
 				if (2 > 0){
 					var child = exec(wget, function(err, stdout, stderr) {
