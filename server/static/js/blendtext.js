@@ -108,7 +108,7 @@ function updateImage(evt){
 				}
 				else {
 					var formula = formulas[parseInt(el.value)];
-					if (formula.formulaType == 'rgb'){
+					if (formula.hslrgb == 'rgb'){
 						var wxml = Blockly.Xml.textToDom(formula.workspace);
 						workspaceBRGB.clear();
 						var vars = ["d","r","g","b"];
@@ -152,7 +152,7 @@ function updateImage(evt){
 				}
 				else {
 					var formula = formulas[parseInt(el.value)];
-					if (formula.formulaType == 'rgb'){
+					if (formula.hslrgb == 'rgb'){
 						var wxml = Blockly.Xml.textToDom(formula.workspace);
 						workspaceTRGB.clear();
 						var vars = ["d","r","g","b"];

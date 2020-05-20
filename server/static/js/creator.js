@@ -2,7 +2,7 @@
 
 function saveFormula(category="overlay") {
 	var wxml;
-	var formulaType = 'hsl';
+	var hslrgb = 'hsl';
 	if (typeof blurOrText === 'undefined' || blurOrText == 'blur'){
 		if (typeof workspaceB === 'undefined'){
 			wxml = Blockly.Xml.workspaceToDom(workspace);
@@ -12,7 +12,7 @@ function saveFormula(category="overlay") {
 		}
 		else{
 			wxml = Blockly.Xml.workspaceToDom(workspaceBRGB);
-			formulaType = 'rgb';
+			hslrgb = 'rgb';
 		}
 	}
 	else {
@@ -21,13 +21,13 @@ function saveFormula(category="overlay") {
 		}
 		else{
 			wxml = Blockly.Xml.workspaceToDom(workspaceTRGB);
-			formulaType = 'rgb';
+			hslrgb = 'rgb';
 		}
 	}
 	
 	var outspace = Blockly.Xml.domToText(wxml);
 	var name = document.getElementById('formulaName').value;
-	var jsonmessage = {'type':'saveFormula','name':name,'message':outspace,'formulaType':formulaType,'category':category};
+	var jsonmessage = {'type':'saveFormula','name':name,'message':outspace,'hslrgb':hslrgb,'category':category};
 	if (category == 'filter'){
 		currentFilterType = document.getElementById('filterGroup').value;
 		if (!filters[currentFilterType]){
@@ -45,13 +45,13 @@ function saveFormula(category="overlay") {
 		for (var i=0;i<filters[currentFilterType].length;i++){
 			if (filters[currentFilterType][i].name == name){
 				filters[currentFilterType][i].workspace = outspace;
-				if (formulaType == 'rgb'){
+				if (hslrgb == 'rgb'){
 					filters[currentFilterType][i].hslrgb = 'r';
 				}
 				else {
 					filters[currentFilterType][i].hslrgb = 'h';
 				}
-				filters[currentFilterType][i].formulaType = formulaType;
+				filters[currentFilterType][i].hslrgb = hslrgb;
 				foundMatch = true;
 				break;
 			}
@@ -63,13 +63,13 @@ function saveFormula(category="overlay") {
 			filters[currentFilterType].push({});
 			filters[currentFilterType][idx].name = name;
 			filters[currentFilterType][idx].workspace = outspace;
-			if (formulaType == 'rgb'){
+			if (hslrgb == 'rgb'){
 				filters[currentFilterType][idx].hslrgb = 'r';
 			}
 			else {
 				filters[currentFilterType][idx].hslrgb = 'h';
 			}
-			filters[currentFilterType][idx].formulaType = formulaType;
+			filters[currentFilterType][idx].hslrgb = hslrgb;
 		}
 		var els = document.getElementById('filterList').querySelectorAll('div');
 		els[currentFilterID].setAttribute('data-filter',currentFilterType);
@@ -93,7 +93,7 @@ function saveFormula(category="overlay") {
 			formulas[idx].name = name;
 			formulas[idx].workspace = outspace;
 			formulas[idx].id = idx;
-			formulas[idx].formulaType = formulaType;
+			formulas[idx].hslrgb = hslrgb;
 		}
 	}
 	ws.send(JSON.stringify(jsonmessage));
