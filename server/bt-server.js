@@ -450,8 +450,8 @@ wss.on('connection', function connection(ws) {
 			
 			QblurData.findOne({ username: username }, "creations", function(err, result) {
 				for (var i=0;i<result.creations.length;i++){
-					if (result.creations[i].name == dm.message){
-						//result.creations.splice(i,1);
+					if (result.creations[i].name == dm.old){
+						result.creations[i].name = dm.new;
 						break;
 					}
 				}

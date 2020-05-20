@@ -171,8 +171,7 @@ function deleteCreation(name,id) {
 }
 function renameCreation(name,id) {
 	var el = document.getElementById('creation-'+id);
-	var newname = el.querySelector('input').value;
-	console.log(el);
+	var newname = el.querySelector("input[name='creationName']").value;
 	jsonmessage = {'type':'renameCreation','old':name,'new':newname};
 	ws.send(JSON.stringify(jsonmessage));
 	el.querySelector('a').textContent = newname;
