@@ -68,11 +68,15 @@ app.get('/filter',
 			if (req.query && req.query.q){
 				var imgName = '';
 				var imgSrc = result.creations[parseInt(req.query.q)].imgSrc;
+				console.log(imgSrc);
+				
 				for (var i=0;i<result.images.length;i++){
+					console.log(result.images[i]);
 					if (result.images[i].src == imgSrc){
 						imgName = result.images[i].name;
 						break;
 					}
+					console.log(imgName);
 				}
 				res.write(nunjucks.render('templates/qblurbase.html',{
 					type: 'filter',
