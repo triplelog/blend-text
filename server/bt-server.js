@@ -63,7 +63,7 @@ app.get('/filter',
 			myuser = "h";
 		}
 		QblurData.findOne({ username: myuser }, function(err, result) {
-			var filters = {'Custom':[{"hslrgb":'h',"name":"Custom HSL",'workspace':""}};
+			var filters = {'Custom':[{"hslrgb":'h',"name":"Custom HSL",'workspace':""}]};
 			if (result.formulas && result.formulas.filter){
 				filters = result.formulas.filter;
 			}
