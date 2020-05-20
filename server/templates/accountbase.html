@@ -75,6 +75,10 @@ label[for="formula--1"] {
 	overflow: auto;
 	max-height: calc(100% - 2 * var(--border-radius));
 }
+.content .fas {
+	font-size: 80%;
+	padding: .1rem .2rem;
+}
 {% endblock %}
 
 
@@ -138,9 +142,9 @@ label[for="formula--1"] {
 {% endblock %}
 {% block content13 %}
 	<div>
-		<input type="checkbox" id="gradient"></input><span>Gradient</span>
-		<input type="checkbox" id="overlay"></input><span>Overlay</span>
-		<input type="checkbox" id="filter"></input><span>Filter</span>
+		<input type="checkbox" id="gradient" checked></input><span>Gradient</span>
+		<input type="checkbox" id="overlay" checked></input><span>Overlay</span>
+		<input type="checkbox" id="filter" checked></input><span>Filter</span>
 	</div>
 	{% for i in range(0,creations.length) %}
 	<div class="{% if creations[i].imgData.type == 'text' or creations[i].imgData.type == 'qr' %}overlay{% else %}{{creations[i].imgData.type}}{% endif %}">
@@ -262,7 +266,26 @@ label[for="formula--1"] {
 <script>
 var ws = false;
 var tkey = {{ tkey | dump | safe }};
-
+document.getElementById('gradient').addEventListener('change',selectCreations);
+document.getElementById('overlay').addEventListener('change',selectCreations);
+document.getElementById('filter').addEventListener('change',selectCreations);
+function selectCreations() {
+	for (var type in ['gradient','overlay','filter']){
+		if (document.getElementById(type).checked){
+			var els = document.querySelectorAll('div.'+type);
+			for (var i=0;i<els.length;i++){
+				els[i].style.display = 'block';
+			}
+		}
+		else {
+			var els = document.querySelectorAll('div.'+type);
+			for (var i=0;i<els.length;i++){
+				els[i].style.display = 'none';
+			}
+		}
+	}
+	
+}
 </script>
 <script src="../js/account.js"></script>
 {% endblock %}
