@@ -64,15 +64,16 @@ app.get('/filter',
 		}
 		QblurData.findOne({ username: myuser }, function(err, result) {
 			//formulas = result.formulas.filter;
-			var imgName = '';
-			var imgSrc = result.creations[parseInt(req.query.q)].imgSrc;
-			for (var i=0;i<result.images.length;i++){
-				if (result.images[i].src == imgSrc){
-					imgName = result.images[i].name;
-					break;
-				}
-			}
+			
 			if (req.query && req.query.q){
+				var imgName = '';
+				var imgSrc = result.creations[parseInt(req.query.q)].imgSrc;
+				for (var i=0;i<result.images.length;i++){
+					if (result.images[i].src == imgSrc){
+						imgName = result.images[i].name;
+						break;
+					}
+				}
 				res.write(nunjucks.render('templates/qblurbase.html',{
 					type: 'filter',
 					tkey: tkey,
@@ -115,15 +116,15 @@ app.get('/overlay',
 			for (var i=0;i<formulas.length;i++){
 				formulas[i].id = i;
 			}
-			var imgName = '';
-			var imgSrc = result.creations[parseInt(req.query.q)].imgSrc;
-			for (var i=0;i<result.images.length;i++){
-				if (result.images[i].src == imgSrc){
-					imgName = result.images[i].name;
-					break;
-				}
-			}
 			if (req.query && req.query.q){
+				var imgName = '';
+				var imgSrc = result.creations[parseInt(req.query.q)].imgSrc;
+				for (var i=0;i<result.images.length;i++){
+					if (result.images[i].src == imgSrc){
+						imgName = result.images[i].name;
+						break;
+					}
+				}
 				res.write(nunjucks.render('templates/qblurbase.html',{
 					type: 'overlay',
 					tkey: tkey,
@@ -162,15 +163,15 @@ app.get('/gradient',
 			for (var i=0;i<formulas.length;i++){
 				formulas[i].id = i;
 			}
-			var imgName = '';
-			var imgSrc = result.creations[parseInt(req.query.q)].imgSrc;
-			for (var i=0;i<result.images.length;i++){
-				if (result.images[i].src == imgSrc){
-					imgName = result.images[i].name;
-					break;
-				}
-			}
 			if (req.query && req.query.q){
+				var imgName = '';
+				var imgSrc = result.creations[parseInt(req.query.q)].imgSrc;
+				for (var i=0;i<result.images.length;i++){
+					if (result.images[i].src == imgSrc){
+						imgName = result.images[i].name;
+						break;
+					}
+				}
 				res.write(nunjucks.render('templates/qblurbase.html',{
 					type: 'gradient',
 					tkey: tkey,
