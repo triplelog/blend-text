@@ -51,7 +51,6 @@ function saveFormula(category="overlay") {
 				else {
 					filters[currentFilterType][i].hslrgb = 'h';
 				}
-				filters[currentFilterType][i].hslrgb = hslrgb;
 				foundMatch = true;
 				break;
 			}
@@ -69,7 +68,6 @@ function saveFormula(category="overlay") {
 			else {
 				filters[currentFilterType][idx].hslrgb = 'h';
 			}
-			filters[currentFilterType][idx].hslrgb = hslrgb;
 		}
 		var els = document.getElementById('filterList').querySelectorAll('div');
 		els[currentFilterID].setAttribute('data-filter',currentFilterType);
