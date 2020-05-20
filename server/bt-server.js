@@ -355,7 +355,11 @@ wss.on('connection', function connection(ws) {
 					if (result.formulas && result.formulas.filter && result.formulas.filter[dm.group]){
 						result.formulas.filter[dm.group].push(formula);
 					}
+					else if (result.formulas && result.formulas.filter){
+						result.formulas.filter[dm.group] = [formula];
+					}
 					else {
+						result.formulas.filter = {};
 						result.formulas.filter[dm.group] = [formula];
 					}
 					result.markModified('formulas.filter');
