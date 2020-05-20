@@ -51,25 +51,50 @@ function saveFormula(category="overlay") {
 				else {
 					filters[currentFilterType][i].hslrgb = 'h';
 				}
+				filters[currentFilterType][i].formulaType = formulaType;
 				foundMatch = true;
 				break;
 			}
 		}
-		var idx = filters[currentFilterType].length;
-		filters[currentFilterType].push({});
+		
+		
 		if (!foundMatch){
+			var idx = filters[currentFilterType].length;
+			filters[currentFilterType].push({});
 			filters[currentFilterType][idx].name = name;
 			filters[currentFilterType][idx].workspace = outspace;
-				if (formulaType == 'rgb'){
-					filters[currentFilterType][idx].hslrgb = 'r';
-				}
-				else {
-					filters[currentFilterType][idx].hslrgb = 'h';
-				}
+			if (formulaType == 'rgb'){
+				filters[currentFilterType][idx].hslrgb = 'r';
+			}
+			else {
+				filters[currentFilterType][idx].hslrgb = 'h';
+			}
+			filters[currentFilterType][idx].formulaType = formulaType;
 		}
 		var els = document.getElementById('filterList').querySelectorAll('div');
 		els[currentFilterID].setAttribute('data-filter',currentFilterType);
+		els[currentFilterID].textContent = name;
 		
+	}
+	else {
+		var foundMatch = false;
+		for (var i=0;i<formulas.length;i++){
+			if (formulas[i].name == name){
+				formulas[i].workspace = outspace;
+				foundMatch = true;
+				break;
+			}
+		}
+		
+		
+		if (!foundMatch){
+			var idx = formulas.length;
+			formulas.push({});
+			formulas[idx].name = name;
+			formulas[idx].workspace = outspace;
+			formulas[idx].id = idx;
+			formulas[idx].formulaType = formulaType;
+		}
 	}
 	ws.send(JSON.stringify(jsonmessage));
 	saveTippy[0].hide();

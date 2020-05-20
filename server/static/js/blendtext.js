@@ -411,7 +411,26 @@ document.getElementById('overlayText').addEventListener('change',switchType);
 document.getElementById('overlayQR').addEventListener('change',switchType);
 switchType();
 
+function setFormulaOptions() {
+	var filterOptions = document.getElementById('hslrgb');
+	filterOptions.innerHTML = '';
+	for (var i=0;i<formulas.length;i++){
+		var option = document.createElement('option');
+		option.value = formulas[i].id;
+		option.textContent = formulas[i].name;
+		filterOptions.appendChild(option);
+	}
+	var option = document.createElement('option');
+	option.value = 'hsl';
+	option.textContent = "Custom HSL";
+	filterOptions.appendChild(option);
 
+	option = document.createElement('option');
+	option.value = 'rgb';
+	option.textContent = "Custom RGB";
+
+	filterOptions.appendChild(option);
+}
 
 
 
