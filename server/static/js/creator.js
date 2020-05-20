@@ -4,8 +4,8 @@ function saveFormula(category="image") {
 	var wxml;
 	var formulaType = 'hsl';
 	if (typeof blurOrText === 'undefined' || blurOrText == 'blur'){
-		if (!workspaceB){
-			wxml = Blockly.Xml.workspaceToDom(workspaceB);
+		if (typeof workspaceB === 'undefined'){
+			wxml = Blockly.Xml.workspaceToDom(workspace);
 		}
 		else if (imgData.blurType == 'hsl'){
 			wxml = Blockly.Xml.workspaceToDom(workspaceB);
