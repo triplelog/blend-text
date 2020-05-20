@@ -382,6 +382,8 @@ wss.on('connection', function connection(ws) {
 				QblurData.updateOne({ username: username }, {$push: {"formulas.distance": formula}}, function(err, result) {});
 			}
 			else if (dm.category =='filter') {
+				if (formula.hslrgb == 'hsl'){formula.hslrgb = 'h';}
+				else {formula.hslrgb = 'r';}
 				QblurData.findOne({ username: username }, "formulas", function(err, result) {
 					console.log(err, username);
 					console.log(result, dm.group);
