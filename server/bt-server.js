@@ -444,6 +444,23 @@ wss.on('connection', function connection(ws) {
 		}
 		return;
 	}
+	else if (dm.type && dm.type == 'renameCreation'){
+		if (username != ''){
+			
+			
+			QblurData.findOne({ username: username }, "creations", function(err, result) {
+				for (var i=0;i<result.creations.length;i++){
+					if (result.creations[i].name == dm.message){
+						//result.creations.splice(i,1);
+						break;
+					}
+				}
+				result.markModified('creations');
+				result.save(function(err,result){});
+			});
+		}
+		return;
+	}
 	else if (dm.type && dm.type == 'copyFormula'){
 		if (username != ''){
 			if (!dm.message && dm.message !== 0){

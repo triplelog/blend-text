@@ -169,6 +169,14 @@ function deleteCreation(name,id) {
 	ws.send(JSON.stringify(jsonmessage));
 	document.getElementById('creation-'+id).style.display = 'none';
 }
+function renameCreation(name,id) {
+	var el = document.getElementById('creation-'+id);
+	var newname = el.querySelector('input').value;
+	console.log(el);
+	jsonmessage = {'type':'renameCreation','old':name,'new':newname};
+	ws.send(JSON.stringify(jsonmessage));
+	el.querySelector('a').textContent = newname;
+}
 
 document.getElementById('imgSrc').style.display = 'inline-block';
 document.getElementById('imgUrl').style.display = 'none';
