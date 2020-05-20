@@ -3,8 +3,11 @@
 function saveFormula(category="image") {
 	var wxml;
 	var formulaType = 'hsl';
-	if (blurOrText == 'blur'){
-		if (imgData.blurType == 'hsl'){
+	if (!blurOrText || blurOrText == 'blur'){
+		if (!workspaceB){
+			wxml = Blockly.Xml.workspaceToDom(workspaceB);
+		}
+		else if (imgData.blurType == 'hsl'){
 			wxml = Blockly.Xml.workspaceToDom(workspaceB);
 		}
 		else{
@@ -23,7 +26,8 @@ function saveFormula(category="image") {
 	}
 	
 	var outspace = Blockly.Xml.domToText(wxml);
-	var jsonmessage = {'type':'saveFormula','name':'First Formula','message':outspace,'formulaType':formulaType,'category':category};
+	var name = document.getElementById('formulaName').value;
+	var jsonmessage = {'type':'saveFormula','name':name,'message':outspace,'formulaType':formulaType,'category':category};
 	ws.send(JSON.stringify(jsonmessage));
 }
 

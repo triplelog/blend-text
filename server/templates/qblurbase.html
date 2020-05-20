@@ -59,18 +59,6 @@ img {
 	max-height: calc((var(--height-container) - var(--height-center)) - 2 * var(--border-radius) - 1.5rem + var(--height-center));
 }
 
-#saveTooltip {
-	background-color: #333;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 13px;
-    z-index: 7;
-}
-
-#loadTooltip {
-
-}
 {% endblock %}
 
 
@@ -341,10 +329,7 @@ img {
 		{% endif %}
 		<button id="saveButton">Save</button>
 		<button>Load</button>
-		<div id="saveTooltip">
-			Name: <input type="text" name="formulaName" id="formulaName"></input>
-			<button onclick="saveFormula('{{ type }}')">Save</button>
-		</div>
+		
 		
 	</span>
 	
@@ -465,6 +450,7 @@ img {
 
 </xml>
 <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
 <script src="../js/prism.js"></script>
 <script src="../js/blockly_compressed.js"></script>
 <script src="../js/blocks_compressed.js"></script>
@@ -555,9 +541,13 @@ ws.onmessage = function(evt){
 
   // Pass the button, the tooltip, and some options, and Popper will do the
   // magic positioning for you:
-  Popper.createPopper(button, tooltip, {
-    placement: 'top',
-  });
+  tippy('#saveButton', {
+	  content: `<div id="saveTooltip">
+			Name: <input type="text" name="formulaName" id="formulaName"></input>
+			<button onclick="saveFormula('{{ type }}')">Save</button>
+		</div>`,
+	  allowHTML: true,
+	});
 </script>
 {% endblock %}
 
