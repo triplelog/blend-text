@@ -585,6 +585,7 @@ ws.onmessage = function(evt){
 {% elif type == "filter" %}
 <script>
 	var filters = {{ filters | dump | safe }};
+	console.log(filters);
 	var loadedFilters = [];
 	{% if imgData %}
 		loadedFilters = {{ imgData.filters | dump | safe }};
