@@ -175,6 +175,10 @@ function renameCreation(name,id) {
 	jsonmessage = {'type':'renameCreation','old':name,'new':newname};
 	ws.send(JSON.stringify(jsonmessage));
 	el.querySelector('a').textContent = newname;
+	const button = el.querySelector('.fa-edit');
+	tippy(button);
+	const instance = button._tippy;
+	instance.hide();
 }
 
 document.getElementById('imgSrc').style.display = 'inline-block';
