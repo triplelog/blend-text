@@ -176,8 +176,10 @@ function renameCreation(name,id) {
 	ws.send(JSON.stringify(jsonmessage));
 	el.querySelector('a').textContent = newname;
 	const button = el.querySelector('.fa-edit');
+	console.log(button._tippy);
 	tippy(button);
 	const instance = button._tippy;
+	console.log(instance);
 	instance.hide();
 }
 
