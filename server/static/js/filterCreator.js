@@ -310,6 +310,7 @@ function addFilter() {
 	newFilter.hslrgb = filters[filterType][0].hslrgb;
 	newFilter.name = filters[filterType][0].name;
 	newFilter.workspace = filters[filterType][0].workspace;
+	newFilter.group = filterType;
 	imgData.filters.push(newFilter);
 	currentFilterID = imgData.filters.length - 1;
 	div.setAttribute('data-type',currentFilterID);
@@ -377,7 +378,7 @@ dragula([document.getElementById('filterList')])
 imgData.filters = [];
 currentFilterID = 0;
 for (var i=0;i<loadedFilters.length;i++){
-	var filterType = loadedFilters[i].type;
+	var filterType = loadedFilters[i].group;
 	var savedFilter = {};
 	if (filters[filterType]){
 		savedFilter.hslrgb = filters[filterType][0].hslrgb;
