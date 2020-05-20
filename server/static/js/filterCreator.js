@@ -176,8 +176,7 @@ function setFilterOptions() {
 	filterOptions.appendChild(option);
 }
 
-var wxml = Blockly.Xml.textToDom('');
-Blockly.Xml.domToWorkspace(wxml,workspace);
+
 onresize();
 
 
