@@ -144,8 +144,8 @@ for (var ii=0;ii<4;ii++){
 	workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
 }
 var currentFilterType ='Brightness';
-setFilterOptions(0);
-function setFilterOptions(selectedID) {
+
+function setFilterOptions(selectedID=0) {
 	var filterOptions = document.getElementById('hslrgb');
 	filterOptions.innerHTML = '';
 	for (var i=0;i<filters[currentFilterType].length;i++){
@@ -283,8 +283,7 @@ function editFilter(evt) {
 		Blockly.Xml.domToWorkspace(wxml,workspace);
 		updateWork();
 	}
-	
-	setFilterOptions(0);
+
 	
 }
 
@@ -316,7 +315,7 @@ function addFilter() {
 	div.setAttribute('data-type',currentFilterID);
 	div.setAttribute('data-filter',filterType);
 	currentFilterType = filterType;
-	setFilterOptions(0);
+
 	
 	var wxml = Blockly.Xml.textToDom(filters[filterType][0].workspace);
 	workspace.clear();

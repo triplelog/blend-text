@@ -507,6 +507,11 @@ defaults.push('<xml xmlns="https://developers.google.com/blockly/xml"><variables
 	  trigger: 'click',
 	  interactive: true,
 	  placement: 'top',
+	  {% if type == 'filter' %}
+	  onShow(instance) {
+		setFilterOptions();
+	  },
+	  {% endif %}
 	});
 
 
