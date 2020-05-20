@@ -294,7 +294,7 @@ img {
 
 	</div>
 	<span class="titleLeft">
-		<button onclick="saveCreation()">Save</button>
+		<span><button id="saveCreationButton">Save</button></span>
 	</span>
 	<span class="titleCenter">
 		Preview
@@ -508,6 +508,18 @@ defaults.push('<xml xmlns="https://developers.google.com/blockly/xml"><variables
 	  },
 	  {% endif %}
 	});
+	
+  const creationTippy = tippy('#saveButton', {
+	  content: `<div id="saveTooltip">
+			<div>Name: <input type="text" name="creationName" id="creationName"></input></div>
+			<button onclick="saveCreation()">Save</button>
+		</div>`,
+	  allowHTML: true,
+	  trigger: 'click',
+	  interactive: true,
+	  placement: 'top',
+	});
+	
   const template = document.getElementById('tippyhslrgb');
   template.style.display = 'block';
   const loadTippy = tippy('#loadButton', {

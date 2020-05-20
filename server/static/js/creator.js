@@ -102,9 +102,7 @@ function saveFormula(category="overlay") {
 }
 
 function saveCreation() {
-	//Save image
-	//Save formula(s) -- should be part of imgData actually
-	console.log('saved creation');
-	var jsonmessage = {'type':'saveCreation','name':'First Creation','imgData':imgData};
+	var name = document.getElementById('creationName').value;
+	var jsonmessage = {'type':'saveCreation','name':name,'imgData':imgData};
 	ws.send(JSON.stringify(jsonmessage));
 }

@@ -64,13 +64,20 @@ app.get('/filter',
 		}
 		QblurData.findOne({ username: myuser }, function(err, result) {
 			//formulas = result.formulas.filter;
-			
+			var imgName = '';
+			var imgSrc = result.creations[parseInt(req.query.q)].imgSrc;
+			for (var i=0;i<result.images.length;i++){
+				if (result.images[i].src == imgSrc){
+					imgName = result.images[i].name;
+					break;
+				}
+			}
 			if (req.query && req.query.q){
 				res.write(nunjucks.render('templates/qblurbase.html',{
 					type: 'filter',
 					tkey: tkey,
 					formulas: formulas,
-					imgSaved: result.creations[parseInt(req.query.q)].imgName,
+					imgSaved: imgName,
 					imgData: result.creations[parseInt(req.query.q)].imgData,
 					filters: filters,
 					filterGroups: filterGroups,
@@ -108,13 +115,20 @@ app.get('/overlay',
 			for (var i=0;i<formulas.length;i++){
 				formulas[i].id = i;
 			}
-			
+			var imgName = '';
+			var imgSrc = result.creations[parseInt(req.query.q)].imgSrc;
+			for (var i=0;i<result.images.length;i++){
+				if (result.images[i].src == imgSrc){
+					imgName = result.images[i].name;
+					break;
+				}
+			}
 			if (req.query && req.query.q){
 				res.write(nunjucks.render('templates/qblurbase.html',{
 					type: 'overlay',
 					tkey: tkey,
 					formulas: formulas,
-					imgSaved: result.creations[parseInt(req.query.q)].imgName,
+					imgSaved: imgName,
 					imgData: result.creations[parseInt(req.query.q)].imgData
 				}));
 			}
@@ -148,13 +162,20 @@ app.get('/gradient',
 			for (var i=0;i<formulas.length;i++){
 				formulas[i].id = i;
 			}
-			
+			var imgName = '';
+			var imgSrc = result.creations[parseInt(req.query.q)].imgSrc;
+			for (var i=0;i<result.images.length;i++){
+				if (result.images[i].src == imgSrc){
+					imgName = result.images[i].name;
+					break;
+				}
+			}
 			if (req.query && req.query.q){
 				res.write(nunjucks.render('templates/qblurbase.html',{
 					type: 'gradient',
 					tkey: tkey,
 					formulas: formulas,
-					imgSaved: result.creations[parseInt(req.query.q)].imgName,
+					imgSaved: imgName,
 					imgData: result.creations[parseInt(req.query.q)].imgData
 				}));
 			}
@@ -373,13 +394,15 @@ wss.on('connection', function connection(ws) {
 	else if (dm.type && dm.type == 'saveCreation'){
 		if (dm.imgData && username != ''){
 			var imgSrc;
+			var imgName;
 			if (inSrc.substring(0,9) == 'images/in'){
 				var ext = inSrc.substring(inSrc.indexOf('.'));
 				imgSrc = 'userimages/'+username+'_'+parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12)+ext;
 				var mvimg = 'mv '+inSrc+' static/'+imgSrc;
 				inSrc = 'static/'+imgSrc;
 				var sz = inSrcSz;
-				QblurData.updateOne({username:username,'settings.storage': {$lt:10000000}},{$push: {"images": {src:imgSrc,size:sz,name:imgSrc,description:"",creations:[]}}, $inc: {'settings.storage':sz}}, function(err, result) {
+				imgName = dm.name;
+				QblurData.updateOne({username:username,'settings.storage': {$lt:10000000}},{$push: {"images": {src:imgSrc,size:sz,name:imgName,description:"",creations:[]}}, $inc: {'settings.storage':sz}}, function(err, result) {
 					if (result.n > 0){
 						var child = exec(mvimg, function(err, stdout, stderr) {});
 					}
@@ -391,7 +414,7 @@ wss.on('connection', function connection(ws) {
 				
 			}
 			var creationType = 'overlay';
-			var creation = {'name':dm.name,'imgData':dm.imgData,'imgName':inSrc.substring(7)};
+			var creation = {'name':dm.name,'imgData':dm.imgData,'imgSrc':imgSrc};
 			//Add a Check that there does not exist a template of that name already.
 			QblurData.updateOne({ username: username }, {$push: {"creations": creation}}, function(err, result) {
 
