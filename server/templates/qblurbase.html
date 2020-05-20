@@ -328,7 +328,7 @@ img {
 		</select>
 		{% endif %}
 		<span><button id="saveButton">Save</button></span>
-		<button>Load</button>
+		<span><button id="loadButton">Load</button></span>
 		
 		
 	</span>
@@ -344,22 +344,7 @@ img {
 </div>
 {% endblock %}
 {% block content31 %}
-	<div>
-		
-		Load:
-		<select id="hslrgb">
-		
-			
-			{% if type == "filter" %}
-			{% else %}
-				{% for formula in formulas %}
-				<option value="{{ formula.id }}">{{ formula.name }}</option>
-				{% endfor %}
-			{% endif %}
-			<option value="hsl">Custom HSL</option>
-			<option value="rgb">Custom RGB</option>
-		</select>
-	</div>
+
 	<div id="formulaDiv">
 		<div id="blurFormulaHSL" style="width: 500px;"></div>
 		<div id="blurFormulaRGB" style="width: 500px;"></div>
@@ -548,6 +533,22 @@ ws.onmessage = function(evt){
 			Name: <input type="text" name="formulaName" id="formulaName"></input>
 			<button onclick="saveFormula('{{ type }}')">Save</button>
 		</div>`,
+	  allowHTML: true,
+	  trigger: 'click',
+	  interactive: true,
+	  placement: 'top',
+	});
+  tippy('#loadButton', {
+	  content: `<select id="hslrgb">
+			{% if type == "filter" %}
+			{% else %}
+				{% for formula in formulas %}
+				<option value="{{ formula.id }}">{{ formula.name }}</option>
+				{% endfor %}
+			{% endif %}
+			<option value="hsl">Custom HSL</option>
+			<option value="rgb">Custom RGB</option>
+		</select>`,
 	  allowHTML: true,
 	  trigger: 'click',
 	  interactive: true,

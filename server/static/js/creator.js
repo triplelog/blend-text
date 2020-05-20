@@ -32,6 +32,7 @@ function saveFormula(category="overlay") {
 		jsonmessage.group = currentFilterType;
 	}
 	ws.send(JSON.stringify(jsonmessage));
+	//close the tippy
 }
 
 function saveCreation() {
