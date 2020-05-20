@@ -349,9 +349,17 @@ wss.on('connection', function connection(ws) {
 				QblurData.updateOne({ username: username }, {$push: {"formulas.distance": formula}}, function(err, result) {});
 			}
 			else if (dm.category =='filter') {
-				QblurData.findOne({ username: username }, "formulas.filter", function(err, result) {
+				QblurData.findOne({ username: username }, "formulas", function(err, result) {
 					console.log(err, username);
 					console.log(result, dm.group);
+					if (result.formulas && result.formulas.filter && result.formulas.filter[dm.group]){
+						result.formulas.filter[dm.group].push(formula);
+					}
+					else {
+						result.formulas.filter[dm.group] = [formula];
+					}
+					result.markModified('formulas.filter');
+					result.save(function(err,result){});
 				});
 			}
 			
