@@ -479,6 +479,34 @@ defaults.push('<xml xmlns="https://developers.google.com/blockly/xml"><variables
 
 
 
+  tippy('#saveButton', {
+	  content: `<div id="saveTooltip">
+			Name: <input type="text" name="formulaName" id="formulaName"></input>
+			<button onclick="saveFormula('{{ type }}')">Save</button>
+		</div>`,
+	  allowHTML: true,
+	  trigger: 'click',
+	  interactive: true,
+	  placement: 'top',
+	});
+  tippy('#loadButton', {
+	  content: `<select id="hslrgb">
+			{% if type == "filter" %}
+			{% else %}
+				{% for formula in formulas %}
+				<option value="{{ formula.id }}">{{ formula.name }}</option>
+				{% endfor %}
+			{% endif %}
+			<option value="hsl">Custom HSL</option>
+			<option value="rgb">Custom RGB</option>
+		</select>`,
+	  allowHTML: true,
+	  trigger: 'click',
+	  interactive: true,
+	  placement: 'top',
+	});
+
+
 
 var loadSaved = false;
 var ws = new WebSocket('wss://qblur.com:8080');
@@ -522,38 +550,6 @@ ws.onmessage = function(evt){
 {% endif %}
 <script src="../js/upload.js"></script>
 
-<script>
-  const button = document.getElementById('saveButton');
-  const tooltip = document.getElementById('saveTooltip');
 
-  // Pass the button, the tooltip, and some options, and Popper will do the
-  // magic positioning for you:
-  tippy('#saveButton', {
-	  content: `<div id="saveTooltip">
-			Name: <input type="text" name="formulaName" id="formulaName"></input>
-			<button onclick="saveFormula('{{ type }}')">Save</button>
-		</div>`,
-	  allowHTML: true,
-	  trigger: 'click',
-	  interactive: true,
-	  placement: 'top',
-	});
-  tippy('#loadButton', {
-	  content: `<select id="hslrgb">
-			{% if type == "filter" %}
-			{% else %}
-				{% for formula in formulas %}
-				<option value="{{ formula.id }}">{{ formula.name }}</option>
-				{% endfor %}
-			{% endif %}
-			<option value="hsl">Custom HSL</option>
-			<option value="rgb">Custom RGB</option>
-		</select>`,
-	  allowHTML: true,
-	  trigger: 'click',
-	  interactive: true,
-	  placement: 'top',
-	});
-</script>
 {% endblock %}
 
