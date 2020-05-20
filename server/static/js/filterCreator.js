@@ -4,7 +4,7 @@
 var imgData = {};
 var myTimeout;
 //imgData.imageSrc = document.getElementById('imageSrc').value;
-imgData.blurType = 'hsl';
+
 imgData.type = type;
 imgData.filters = [];
 var currentFilterID = 0;
@@ -374,6 +374,32 @@ dragula([document.getElementById('filterList')])
   });
 
 
-
+imgData.filters = [];
+currentFilterID = 0;
+for (var i=0;i<loadedFilters.length;i++){
+	var filterType = loadedFilters[i].type;
+	var savedFilter = {};
+	if (filters[filterType]){
+		savedFilter.hslrgb = filters[filterType][0].hslrgb;
+		savedFilter.name = filters[filterType][0].name;
+		savedFilter.workspace = filters[filterType][0].workspace;
+	}
+	else {
+		filters[filterType] = [{}];
+		savedFilter.hslrgb = loadedFilters[i].hslrgb;
+		savedFilter.name = loadedFilters[i].name;
+		savedFilter.workspace = loadedFilters[i].workspace;
+	}
+	document.getElementById('addFilter').querySelector('select').value = filterType;
+	filters[filterType][0].hslrgb = loadedFilters[i].hslrgb;
+	filters[filterType][0].name = loadedFilters[i].name;
+	filters[filterType][0].workspace = loadedFilters[i].workspace;
+	addFilter();
+	
+	filters[filterType][0].hslrgb = savedFilter.hslrgb;
+	filters[filterType][0].name = savedFilter.name;
+	filters[filterType][0].workspace = savedFilter.workspace;
+	
+}
 
 

@@ -513,7 +513,13 @@ ws.onmessage = function(evt){
 {% if type == "gradient" %}
 <script src="../js/gradientCreator.js"></script>
 {% elif type == "filter" %}
-<script>var filters = {{ filters | dump | safe }};</script>
+<script>
+	var filters = {{ filters | dump | safe }};
+	var loadedFilters = [];
+	{% if imgData %}
+		loadedFilters = {{ imgData.filters | dump | safe }};
+	{% endif %}
+</script>
 <script src="../js/dragula.js"></script>
 <script src="../js/filterCreator.js"></script>
 {% else %}
