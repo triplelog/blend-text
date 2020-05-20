@@ -84,6 +84,7 @@ app.get('/filter',
 					formulas: formulas,
 					imgSaved: imgName,
 					imgData: result.creations[parseInt(req.query.q)].imgData,
+					name: result.creations[parseInt(req.query.q)].name,
 					filters: filters,
 					filterGroups: filterGroups,
 				}));
@@ -134,7 +135,8 @@ app.get('/overlay',
 					tkey: tkey,
 					formulas: formulas,
 					imgSaved: imgName,
-					imgData: result.creations[parseInt(req.query.q)].imgData
+					imgData: result.creations[parseInt(req.query.q)].imgData,
+					name: result.creations[parseInt(req.query.q)].name,
 				}));
 			}
 			else {
@@ -181,7 +183,8 @@ app.get('/gradient',
 					tkey: tkey,
 					formulas: formulas,
 					imgSaved: imgName,
-					imgData: result.creations[parseInt(req.query.q)].imgData
+					imgData: result.creations[parseInt(req.query.q)].imgData,
+					name: result.creations[parseInt(req.query.q)].name,
 				}));
 			}
 			else {

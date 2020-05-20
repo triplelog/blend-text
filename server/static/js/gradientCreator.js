@@ -70,12 +70,10 @@ function updateImage(evt){
 			if (el.value == 'blur'){
 				blurOrText = 'blur';
 				if (imgData.blurType == 'hsl') {
-					document.getElementById('hslrgb').value = 'hsl';
 					document.getElementById('blurFormulaHSL').style.display = 'block';
 					updateBHSL();
 				}
 				else {
-					document.getElementById('hslrgb').value = 'rgb';
 					document.getElementById('blurFormulaRGB').style.display = 'block';
 					updateBRGB();
 				}
