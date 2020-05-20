@@ -28,6 +28,9 @@ function saveFormula(category="overlay") {
 	var outspace = Blockly.Xml.domToText(wxml);
 	var name = document.getElementById('formulaName').value;
 	var jsonmessage = {'type':'saveFormula','name':name,'message':outspace,'formulaType':formulaType,'category':category};
+	if (category == 'filter'){
+		jsonmessage.group = currentFilterType;
+	}
 	ws.send(JSON.stringify(jsonmessage));
 }
 

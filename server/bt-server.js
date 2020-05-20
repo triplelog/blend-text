@@ -63,10 +63,7 @@ app.get('/filter',
 			myuser = "h";
 		}
 		QblurData.findOne({ username: myuser }, function(err, result) {
-			formulas = result.formulas.filter;
-			for (var i=0;i<formulas.length;i++){
-				formulas[i].id = i;
-			}
+			//formulas = result.formulas.filter;
 			
 			if (req.query && req.query.q){
 				res.write(nunjucks.render('templates/qblurbase.html',{
@@ -352,8 +349,8 @@ wss.on('connection', function connection(ws) {
 				QblurData.updateOne({ username: username }, {$push: {"formulas.distance": formula}}, function(err, result) {});
 			}
 			else if (dm.category =='filter') {
-				QblurData.updateOne({ username: username }, {$push: {"formulas.filter": formula}}, function(err, result) {
-					console.log(result);
+				QblurData.findOne({ username: username }, "formulas.filter", function(err, result) {
+					console.log(result.formulas.filter, dm.group);
 				});
 			}
 			
