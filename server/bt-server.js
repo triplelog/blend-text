@@ -419,7 +419,7 @@ wss.on('connection', function connection(ws) {
 				
 			}
 			var creationType = 'overlay';
-			var creation = {'name':dm.name,'imgData':dm.imgData,'imgSrc':imgSrc};
+			var creation = {'name':dm.name,'imgData':dm.imgData,'imgSrc':inSrc};
 			//Add a Check that there does not exist a template of that name already.
 			QblurData.updateOne({ username: username }, {$push: {"creations": creation}}, function(err, result) {
 
