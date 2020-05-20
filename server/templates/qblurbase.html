@@ -489,7 +489,7 @@ defaults.push('<xml xmlns="https://developers.google.com/blockly/xml"><variables
 
 
 
-  tippy('#saveButton', {
+  const saveTippy = tippy('#saveButton', {
 	  content: `<div id="saveTooltip">
 			Name: <input type="text" name="formulaName" id="formulaName"></input>
 			<button onclick="saveFormula('{{ type }}')">Save</button>
@@ -501,14 +501,14 @@ defaults.push('<xml xmlns="https://developers.google.com/blockly/xml"><variables
 	});
   const template = document.getElementById('tippyhslrgb');
   template.style.display = 'block';
-  tippy('#loadButton', {
+  const loadTippy = tippy('#loadButton', {
 	  content: template,
 	  allowHTML: true,
 	  trigger: 'click',
 	  interactive: true,
 	  placement: 'top',
 	  {% if type == 'filter' %}
-	  onShow(instance) {
+	  onShown(instance) {
 		setFilterOptions();
 	  },
 	  {% endif %}
