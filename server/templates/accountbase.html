@@ -147,12 +147,11 @@ label[for="formula--1"] {
 		<input type="checkbox" id="filter" checked></input><span>Filter</span>
 	</div>
 	{% for i in range(0,creations.length) %}
-	<div class="{% if creations[i].imgData.type == 'text' or creations[i].imgData.type == 'qr' %}overlay{% else %}{{creations[i].imgData.type}}{% endif %}">
-		<i class="fas fa-trash" onclick=""></i><i class="fas fa-edit" onclick=""></i><a href="{% if creations[i].imgData.type == 'text' or creations[i].imgData.type == 'qr' %}overlay{% else %}{{creations[i].imgData.type}}{% endif %}?q={{i}}">{{ creations[i].name}}</a>
+	<div id="creation-{{i}}" class="{% if creations[i].imgData.type == 'text' or creations[i].imgData.type == 'qr' %}overlay{% else %}{{creations[i].imgData.type}}{% endif %}">
+		<i class="fas fa-trash"></i><i class="fas fa-edit"></i><a href="{% if creations[i].imgData.type == 'text' or creations[i].imgData.type == 'qr' %}overlay{% else %}{{creations[i].imgData.type}}{% endif %}?q={{i}}">{{ creations[i].name}}</a>
 	</div>
 	{% endfor %}
 	
-
 
 {% endblock %}	
 
@@ -261,6 +260,8 @@ label[for="formula--1"] {
   <category name="Functions" custom="PROCEDURE"></category>
 
 </xml>
+<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
 <script src="../js/prism.js"></script>
 
 <script>
@@ -289,6 +290,19 @@ function selectCreations() {
 	}
 	
 }
+
+{% for i in range(0,creations.length) %}
+tippy('#creation-{{i}} > .fa-trash', {
+	  content: `<div>
+			Do you really want to delete {{ creations[i].name }}?
+			<button onclick="deleteCreation({{ i }})">Delete</button>
+		</div>`,
+	  allowHTML: true,
+	  trigger: 'click',
+	  interactive: true,
+	  placement: 'top',
+	});
+{% endif %}
 </script>
 <script src="../js/account.js"></script>
 {% endblock %}
