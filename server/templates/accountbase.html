@@ -270,7 +270,8 @@ document.getElementById('gradient').addEventListener('change',selectCreations);
 document.getElementById('overlay').addEventListener('change',selectCreations);
 document.getElementById('filter').addEventListener('change',selectCreations);
 function selectCreations() {
-	for (var type in ['gradient','overlay','filter']){
+	for (var idx,type in ['gradient','overlay','filter']){
+		console.log(type,idx);
 		if (document.getElementById(type).checked){
 			var els = document.querySelectorAll('div.'+type);
 			for (var i=0;i<els.length;i++){
