@@ -52,32 +52,34 @@ app.get('/filter',
 		filters['Contrast'] = [{"hslrgb":"h","name":"First Contrast","workspace":"<xml xmlns=\"https://developers.google.com/blockly/xml\"><variables><variable id=\"qblur_l\">l</variable><variable id=\"qblur_d\">d</variable></variables><block type=\"variables_set\" id=\"!{OE7jG|eOuI%-Gmeh$z\" x=\"22\" y=\"41\"><field name=\"VAR\" id=\"qblur_l\">l</field><value name=\"VALUE\"><block type=\"math_arithmetic\" id=\"67Ta$Xn*}|J,~^Mjs-.P\"><field name=\"OP\">ADD</field><value name=\"A\"><block type=\"variables_get\" id=\"w(Q=6C.o#CN4JYN=$_%b\"><field name=\"VAR\" id=\"qblur_d\">d</field></block></value><value name=\"B\"><block type=\"math_number\" id=\"eSak{(`N-^$A8:Y!TfoB\"><field name=\"NUM\">0.005</field></block></value></block></value><next><block type=\"math_change\" id=\"O4#ogswjF1~gIg@[4tLX\"><field name=\"VAR\" id=\"qblur_l\">l</field><value name=\"DELTA\"><shadow type=\"math_number\" id=\"ee.gC~#6)ZbV3D)dH!Ee\"><field name=\"NUM\">0.4</field></shadow></value></block></next></block></xml>","formulaType":"hsl"}];
 		filters['Grayscale'] = [{"hslrgb":"h","name":"First Grayscale","workspace":"<xml xmlns=\"https://developers.google.com/blockly/xml\"><variables><variable id=\"qblur_l\">l</variable><variable id=\"qblur_d\">d</variable></variables><block type=\"variables_set\" id=\"!{OE7jG|eOuI%-Gmeh$z\" x=\"22\" y=\"41\"><field name=\"VAR\" id=\"qblur_l\">l</field><value name=\"VALUE\"><block type=\"math_arithmetic\" id=\"67Ta$Xn*}|J,~^Mjs-.P\"><field name=\"OP\">ADD</field><value name=\"A\"><block type=\"variables_get\" id=\"w(Q=6C.o#CN4JYN=$_%b\"><field name=\"VAR\" id=\"qblur_d\">d</field></block></value><value name=\"B\"><block type=\"math_number\" id=\"eSak{(`N-^$A8:Y!TfoB\"><field name=\"NUM\">0.005</field></block></value></block></value><next><block type=\"math_change\" id=\"O4#ogswjF1~gIg@[4tLX\"><field name=\"VAR\" id=\"qblur_l\">l</field><value name=\"DELTA\"><shadow type=\"math_number\" id=\"ee.gC~#6)ZbV3D)dH!Ee\"><field name=\"NUM\">0.4</field></shadow></value></block></next></block></xml>","formulaType":"hsl"}];
 		
-
 		var tkey = crypto.randomBytes(100).toString('hex').substr(2, 18);
 		var formulas = [];
+		var myuser;
 		if (req.isAuthenticated()){
 			tempKeys[tkey] = {username:req.user.username};
-			QblurData.findOne({ username: req.user.username }, function(err, result) {
-				formulas = result.formulas.color;
-				for (var i=0;i<formulas.length;i++){
-					formulas[i].id = i;
-				}
-				res.write(nunjucks.render('templates/qblurbase.html',{
-					type: 'filter',
-					tkey: tkey,
-					formulas: formulas,
-					filters: filters,
-					filterGroups: filterGroups,
-				}));
-				res.end();
-			});
+			myuser = req.user.username;
 		}
 		else {
-			QblurData.findOne({ username: "h" }, function(err, result) {
-				formulas = result.formulas.color;
-				for (var i=0;i<formulas.length;i++){
-					formulas[i].id = i;
-				}
+			myuser = "h";
+		}
+		QblurData.findOne({ username: myuser }, function(err, result) {
+			formulas = result.formulas.color;
+			for (var i=0;i<formulas.length;i++){
+				formulas[i].id = i;
+			}
+			
+			if (req.query && req.query.q){
+				res.write(nunjucks.render('templates/qblurbase.html',{
+					type: 'filter',
+					tkey: tkey,
+					formulas: formulas,
+					imgSaved: result.creations[parseInt(req.query.q)].imgName,
+					imgData: result.creations[parseInt(req.query.q)].imgData,
+					filters: filters,
+					filterGroups: filterGroups,
+				}));
+			}
+			else {
 				res.write(nunjucks.render('templates/qblurbase.html',{
 					type: 'filter',
 					tkey: tkey,
@@ -85,9 +87,10 @@ app.get('/filter',
 					filters: filters,
 					filterGroups: filterGroups,
 				}));
-				res.end();
-			});
-		}
+			}
+			
+			res.end();
+		});
 	}
 );
 
@@ -376,8 +379,7 @@ wss.on('connection', function connection(ws) {
 			var creation = {'name':dm.name,'imgData':dm.imgData,'imgName':inSrc.substring(7)};
 			//Add a Check that there does not exist a template of that name already.
 			QblurData.updateOne({ username: username }, {$push: {"creations": creation}}, function(err, result) {
-				console.log(err);
-				console.log(result);
+
 			});
 		}
 		return;
