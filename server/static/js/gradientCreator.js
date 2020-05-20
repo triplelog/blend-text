@@ -219,6 +219,7 @@ function chgGradientType() {
 		document.getElementById('gradientSkew').style.display = 'none';
 		document.getElementById('lifeOptions').style.display = 'block';
 	}
+	imgData.gradientType = el.value;
 }
 chgGradientType();
 
