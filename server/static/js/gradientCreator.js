@@ -24,8 +24,8 @@ imgData.type = type;
 
 imgData.threshold = document.getElementById('threshold').value;
 
-var singleEls = ['hslrgb','threshold'];
-for (var i=0;i<2;i++){
+var singleEls = ['threshold'];
+for (var i=0;i<1;i++){
 	var el = document.getElementById(singleEls[i]);
 	el.addEventListener('change',updateImage);
 }
@@ -59,7 +59,13 @@ function updateImage(evt){
 		imgData['blurFormula'] = document.getElementById('blurFormula').querySelector('textarea').value;
 	}
 	else {
-		var el = evt.target;
+		var el;
+		if (evt == 'updateHslrgb'){
+			el = document.getElementById('hslrgb');
+		}
+		else {
+			el = evt.target;
+		}
 		if (el.id && el.id == 'bort'){
 			if (el.value == 'blur'){
 				blurOrText = 'blur';
