@@ -318,15 +318,23 @@ img {
 	<div class="titleBG" style="width:100%;height:100%;">
 
 	</div>
-	{% if type == "overlay" %}
+	
 	<span class="titleLeft">
+		{% if type == "overlay" %}
 		<select id="bort">
 			<option value="blur">Blur</option>
 			<option value="text">Fore</option>
 		</select>
+		{% endif %}
+		<button id="saveButton">Save</button>
+		<button>Load</button>
+		<div id="saveTooltip">
+			Name: <input type="text" name="formulaName" id="formulaName"></input>
+			<button onclick="saveFormula('{{ type }}')">Save</button>
+		</div>
 		
 	</span>
-	{% endif %}
+	
 	<span class="titleCenter">
 		Formula
 	</span>
@@ -339,7 +347,7 @@ img {
 {% endblock %}
 {% block content31 %}
 	<div>
-		<button onclick="saveFormula('{{ type }}')">Save</button>
+		
 		Load:
 		<select id="hslrgb">
 		
@@ -443,6 +451,7 @@ img {
   <category name="Functions" custom="PROCEDURE"></category>
 
 </xml>
+<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
 <script src="../js/prism.js"></script>
 <script src="../js/blockly_compressed.js"></script>
 <script src="../js/blocks_compressed.js"></script>
@@ -527,5 +536,15 @@ ws.onmessage = function(evt){
 {% endif %}
 <script src="../js/upload.js"></script>
 
+<script>
+  const button = document.getElementById('saveButton');
+  const tooltip = document.getElementById('saveTooltip');
+
+  // Pass the button, the tooltip, and some options, and Popper will do the
+  // magic positioning for you:
+  Popper.createPopper(button, tooltip, {
+    placement: 'top',
+  });
+</script>
 {% endblock %}
 
