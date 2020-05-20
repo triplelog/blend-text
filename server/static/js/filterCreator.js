@@ -147,6 +147,7 @@ var currentFilterType ='Brightness';
 
 function setFilterOptions(selectedID=0) {
 	var filterOptions = document.getElementById('hslrgb');
+	filterOptions.addEventListener('change',updateImage);
 	filterOptions.innerHTML = '';
 	for (var i=0;i<filters[currentFilterType].length;i++){
 		var option = document.createElement('option');
