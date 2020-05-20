@@ -328,8 +328,8 @@ img {
 		</select>
 		{% endif %}
 		<span><button id="saveButton">Save</button></span>
-		<span><button id="loadButton">Load</button>
-		<select id="hslrgb">
+		<span><button id="loadButton">Load</button></span>
+		<div id="tippyhslrgb"><select id="hslrgb">
 			{% if type == "filter" %}
 			{% else %}
 				{% for formula in formulas %}
@@ -338,7 +338,7 @@ img {
 			{% endif %}
 			<option value="hsl">Custom HSL</option>
 			<option value="rgb">Custom RGB</option>
-		</select></span>
+		</select></div>
 		
 		
 	</span>
@@ -499,8 +499,10 @@ defaults.push('<xml xmlns="https://developers.google.com/blockly/xml"><variables
 	  interactive: true,
 	  placement: 'top',
 	});
+  const template = document.getElementById('tippyhslrgb');
+  template.style.display = 'block';
   tippy('#loadButton', {
-	  content: document.getElementById('hslrgb'),
+	  content: template,
 	  allowHTML: true,
 	  trigger: 'click',
 	  interactive: true,
