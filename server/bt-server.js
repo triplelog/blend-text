@@ -350,7 +350,7 @@ wss.on('connection', function connection(ws) {
 			}
 			else if (dm.category =='filter') {
 				QblurData.findOne({ username: username }, "formulas.filter", function(err, result) {
-					console.log(err);
+					console.log(err, username);
 					console.log(result, dm.group);
 				});
 			}
