@@ -164,6 +164,11 @@ function sendImage(img) {
 	readerF.readAsArrayBuffer(img);
 }
 
+function deleteCreation(name,id) {
+	jsonmessage = {'type':'deleteCreation','message':name};
+	ws.send(JSON.stringify(jsonmessage));
+	document.getElementById('creation-'+id).style.display = 'none';
+}
 
 document.getElementById('imgSrc').style.display = 'inline-block';
 document.getElementById('imgUrl').style.display = 'none';

@@ -294,8 +294,8 @@ function selectCreations() {
 {% for i in range(0,creations.length) %}
 tippy('#creation-{{i}} > .fa-trash', {
 	  content: `<div>
-			Do you really want to delete {{ creations[i].name }}?
-			<button onclick="deleteCreation({{ i }})">Delete</button>
+			<div>Do you really want to delete {{ creations[i].name }}?</div>
+			<button onclick="deleteCreation('{{creations[i].name }}',{{ i }})">Yes, Delete</button>
 		</div>`,
 	  allowHTML: true,
 	  trigger: 'click',
