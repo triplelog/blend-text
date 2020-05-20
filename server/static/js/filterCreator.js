@@ -152,7 +152,9 @@ for (var ii=0;ii<4;ii++){
 }
 var currentFilterType ='Brightness';
 
-
+function setGroup() {
+	document.getElementById('filterGroup').value = currentFilterType;
+}
 function setFilterOptions() {
 	var filterOptions = document.getElementById('hslrgb');
 	filterOptions.innerHTML = '';

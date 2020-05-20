@@ -493,13 +493,20 @@ defaults.push('<xml xmlns="https://developers.google.com/blockly/xml"><variables
 
   const saveTippy = tippy('#saveButton', {
 	  content: `<div id="saveTooltip">
-			Name: <input type="text" name="formulaName" id="formulaName"></input>
+			<div>Name: <input type="text" name="formulaName" id="formulaName"></input></div>
+			{% if type == 'filter' %}<div>Group: <input type="text" name="filterGroup" id="filterGroup"></input></div>{% endif %}
+			
 			<button onclick="saveFormula('{{ type }}')">Save</button>
 		</div>`,
 	  allowHTML: true,
 	  trigger: 'click',
 	  interactive: true,
 	  placement: 'top',
+	  {% if type == 'filter' %}
+	  onShown(instance) {
+		setGroup();
+	  },
+	  {% endif %}
 	});
   const template = document.getElementById('tippyhslrgb');
   template.style.display = 'block';
