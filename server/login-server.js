@@ -77,7 +77,7 @@ app.get('/account',
 				})
 			
 			}
-			var formulas = result.formulas.color;
+			var formulas = result.formulas.overlay;
 			var workspace;
 			var wxml;
 			var code;
