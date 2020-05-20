@@ -63,7 +63,7 @@ app.get('/filter',
 			myuser = "h";
 		}
 		QblurData.findOne({ username: myuser }, function(err, result) {
-			formulas = result.formulas.color;
+			formulas = result.formulas.filter;
 			for (var i=0;i<formulas.length;i++){
 				formulas[i].id = i;
 			}
@@ -107,7 +107,7 @@ app.get('/overlay',
 			myuser = "h";
 		}
 		QblurData.findOne({ username: myuser }, function(err, result) {
-			formulas = result.formulas.color;
+			formulas = result.formulas.overlay;
 			for (var i=0;i<formulas.length;i++){
 				formulas[i].id = i;
 			}
@@ -342,14 +342,19 @@ wss.on('connection', function connection(ws) {
 		if (dm.message && username != ''){
 			var formula = {'name':dm.name,'workspace':dm.message,'formulaType':dm.formulaType};
 			//Add a Check that there does not exist a formula of that name already.
-			if (!dm.category || dm.category == 'color'){
-				QblurData.updateOne({ username: username }, {$push: {"formulas.color": formula}}, function(err, result) {});
+			if (!dm.category || dm.category == 'overlay'){
+				QblurData.updateOne({ username: username }, {$push: {"formulas.overlay": formula}}, function(err, result) {});
 			}
 			else if (dm.category =='gradient') {
 				QblurData.updateOne({ username: username }, {$push: {"formulas.gradient": formula}}, function(err, result) {});
 			}
 			else if (dm.category =='distance') {
 				QblurData.updateOne({ username: username }, {$push: {"formulas.distance": formula}}, function(err, result) {});
+			}
+			else if (dm.category =='filter') {
+				QblurData.updateOne({ username: username }, {$push: {"formulas.filter": formula}}, function(err, result) {
+					console.log(result);
+				});
 			}
 			
 		}

@@ -1,6 +1,6 @@
 
 
-function saveFormula(category="image") {
+function saveFormula(category="overlay") {
 	var wxml;
 	var formulaType = 'hsl';
 	if (typeof blurOrText === 'undefined' || blurOrText == 'blur'){
