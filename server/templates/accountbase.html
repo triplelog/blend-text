@@ -69,14 +69,7 @@ label[for="formula--1"] {
 }
 
 
-.creations .content{
-	overflow: auto;
-}
-.creations .content img{
-	max-width: 40%;
-	display: inline-block;
-}
-.content-31 .content {
+.content {
 	overflow-y: auto;
 	overflow-x: auto;
 	overflow: auto;
@@ -144,9 +137,15 @@ label[for="formula--1"] {
 </div>
 {% endblock %}
 {% block content13 %}
-
+	<div>
+		<input type="checkbox" id="gradient"></input><span>Gradient</span>
+		<input type="checkbox" id="overlay"></input><span>Overlay</span>
+		<input type="checkbox" id="filter"></input><span>Filter</span>
+	</div>
 	{% for i in range(0,creations.length) %}
-	<a href="{% if creations[i].imgData.type == 'text' or creations[i].imgData.type == 'qr' %}overlay{% else %}{{creations[i].imgData.type}}{% endif %}?q={{i}}">{{ creations[i].name}}</a>
+	<div class="{% if creations[i].imgData.type == 'text' or creations[i].imgData.type == 'qr' %}overlay{% else %}{{creations[i].imgData.type}}{% endif %}">
+		<i class="fas fa-trash" onclick=""></i><i class="fas fa-edit" onclick=""></i><a href="{% if creations[i].imgData.type == 'text' or creations[i].imgData.type == 'qr' %}overlay{% else %}{{creations[i].imgData.type}}{% endif %}?q={{i}}">{{ creations[i].name}}</a>
+	</div>
 	{% endfor %}
 	
 
