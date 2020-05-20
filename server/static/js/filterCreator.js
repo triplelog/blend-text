@@ -15,7 +15,13 @@ function updateImage(evt){
 		imgData['blurFormula'] = document.getElementById('blurFormula').querySelector('textarea').value;
 	}
 	else {
-		var el = evt.target;
+		var el;
+		if (evt == 'updateHslrgb'){
+			el = document.getElementById('hslrgb');
+		}
+		else {
+			el = evt.target;
+		}
 		if (el.id && el.id == 'hslrgb'){
 			var filterListEls = document.getElementById('filterList').querySelectorAll('div');
 			if (filterListEls[currentFilterID]){
@@ -146,9 +152,9 @@ for (var ii=0;ii<4;ii++){
 }
 var currentFilterType ='Brightness';
 
+
 function setFilterOptions() {
 	var filterOptions = document.getElementById('hslrgb');
-	filterOptions.addEventListener('change',updateImage);
 	filterOptions.innerHTML = '';
 	for (var i=0;i<filters[currentFilterType].length;i++){
 		var option = document.createElement('option');
