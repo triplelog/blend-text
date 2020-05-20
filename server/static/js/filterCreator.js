@@ -146,7 +146,7 @@ for (var ii=0;ii<4;ii++){
 }
 var currentFilterType ='Brightness';
 
-function setFilterOptions(selectedID=0) {
+function setFilterOptions() {
 	var filterOptions = document.getElementById('hslrgb');
 	filterOptions.addEventListener('change',updateImage);
 	filterOptions.innerHTML = '';
@@ -154,24 +154,17 @@ function setFilterOptions(selectedID=0) {
 		var option = document.createElement('option');
 		option.value = i;
 		option.textContent = filters[currentFilterType][i].name;
-		if (i == selectedID || (i==0 && !selectedID)){
-			option.setAttribute('selected','selected');
-		}
 		filterOptions.appendChild(option);
 	}
 	var option = document.createElement('option');
 	option.value = 'hsl';
 	option.textContent = currentFilterType+" HSL";
 	filterOptions.appendChild(option);
-	if (-2 == selectedID){
-		option.setAttribute('selected','selected');
-	}
+
 	option = document.createElement('option');
 	option.value = 'rgb';
 	option.textContent = currentFilterType+" RGB";
-	if (-1 == selectedID){
-		option.setAttribute('selected','selected');
-	}
+
 	filterOptions.appendChild(option);
 }
 
