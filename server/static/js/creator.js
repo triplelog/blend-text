@@ -32,6 +32,12 @@ function saveFormula(category="overlay") {
 		currentFilterType = document.getElementById('filterGroup').value;
 		if (!filters[currentFilterType]){
 			filters[currentFilterType] = [];
+			//add group to filterlist dropdown
+			var el = document.getElementById('addFilter').querySelector('select');
+			var option = document.createElement('option');
+			option.value = currentFilterType;
+			option.textContent = currentFilterType;
+			el.appendChild(option);
 		}
 		
 		jsonmessage.group = currentFilterType;
@@ -52,7 +58,7 @@ function saveFormula(category="overlay") {
 		var idx = filters[currentFilterType].length;
 		filters[currentFilterType].push({});
 		if (!foundMatch){
-			filters[currentFilterType][idx].name == name;
+			filters[currentFilterType][idx].name = name;
 			filters[currentFilterType][idx].workspace = outspace;
 				if (formulaType == 'rgb'){
 					filters[currentFilterType][idx].hslrgb = 'r';
