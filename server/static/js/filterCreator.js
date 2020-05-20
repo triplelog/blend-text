@@ -98,6 +98,7 @@ function updateImage(evt){
 	img.setAttribute('src','img/loading.jpg');
 	el.innerHTML = '';
 	el.appendChild(img);
+	loadTippy[0].hide();
 	
 	
 }
