@@ -256,7 +256,7 @@ updateWork();
 function editFilter(evt) {
 	if (evt){
 		var el = evt.target;
-		if (el.tagName != 'div'){
+		if (el.tagName != 'DIV'){
 			el = el.parentElement;
 		}
 		var els = document.getElementById('filterList').querySelectorAll('div');
@@ -264,6 +264,7 @@ function editFilter(evt) {
 			els[i].style.removeProperty('background');
 		}
 		el.style.background = 'gray';
+		console.log(el);
 		currentFilterID = parseInt(el.getAttribute('data-type'));
 		currentFilterType = el.getAttribute('data-filter');
 	}
