@@ -3,7 +3,7 @@
 function saveFormula(category="image") {
 	var wxml;
 	var formulaType = 'hsl';
-	if (!blurOrText || blurOrText == 'blur'){
+	if (typeof blurOrText === 'undefined' || blurOrText == 'blur'){
 		if (!workspaceB){
 			wxml = Blockly.Xml.workspaceToDom(workspaceB);
 		}
