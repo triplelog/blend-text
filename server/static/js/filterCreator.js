@@ -267,7 +267,8 @@ function editFilter(evt) {
 		currentFilterID = parseInt(el.getAttribute('data-type'));
 		currentFilterType = el.getAttribute('data-filter');
 	}
-	
+	console.log(currentFilterID);
+	console.log(imgData.filters);
 	var wxml = Blockly.Xml.textToDom(imgData.filters[currentFilterID].workspace);
 	workspace.clear();
 	if (imgData.filters[currentFilterID].hslrgb == 'r'){
