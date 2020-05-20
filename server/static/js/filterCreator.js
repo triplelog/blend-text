@@ -150,7 +150,7 @@ var vars = ["d","h","s","l"];
 for (var ii=0;ii<4;ii++){
 	workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
 }
-var currentFilterType ='Brightness';
+var currentFilterType ='';
 
 function setGroup() {
 	document.getElementById('filterGroup').value = currentFilterType;
@@ -176,7 +176,7 @@ function setFilterOptions() {
 	filterOptions.appendChild(option);
 }
 
-var wxml = Blockly.Xml.textToDom(filters[currentFilterType][0].workspace);
+var wxml = Blockly.Xml.textToDom('');
 Blockly.Xml.domToWorkspace(wxml,workspace);
 onresize();
 
