@@ -108,4 +108,6 @@ function saveCreation() {
 		jsonmessage.overwrite = true;
 	}
 	ws.send(JSON.stringify(jsonmessage));
+	creationTippy[0].hide();
 }
+
