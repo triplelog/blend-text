@@ -57,6 +57,9 @@ ws.onmessage = function(evt){
 		ell.textContent = dm.message;
 		el.appendChild(ell);
 	}
+	else if (dm.type == 'duplicate name'){
+		alert('Name taken');
+	}
 	else if (dm.operation == 'image'){
 		/*var el = document.getElementById("friendList");
 		var ell = document.createElement("div");

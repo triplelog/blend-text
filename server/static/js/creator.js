@@ -104,5 +104,8 @@ function saveFormula(category="overlay") {
 function saveCreation() {
 	var name = document.getElementById('creationName').value;
 	var jsonmessage = {'type':'saveCreation','name':name,'imgData':imgData};
+	if (name == overwriteName){
+		jsonmessage.overwrite = true;
+	}
 	ws.send(JSON.stringify(jsonmessage));
 }

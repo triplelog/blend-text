@@ -420,9 +420,35 @@ wss.on('connection', function connection(ws) {
 			}
 			var creationType = 'overlay';
 			var creation = {'name':dm.name,'imgData':dm.imgData,'imgSrc':inSrc.substring(7)};
-			//Add a Check that there does not exist a template of that name already.
-			QblurData.updateOne({ username: username }, {$push: {"creations": creation}}, function(err, result) {
 
+			QblurData.findOne({ username: username }, "creations", function(err, result) {
+				var foundMatch = false;
+				for (var i=0;i<result.creations.length;i++){
+					if (result.creations[i].name == dm.name){
+						if (dm.overwrite){
+							result.creations[i].imgData = dm.imgData;
+							result.creations[i].imgSrc = inSrc.substring(7);
+							result.markModified('creations');
+							result.save(function(err,result){});
+							var jsonmessage = {"type":'savedCreation','message':dm.name};
+							ws.send(JSON.stringify(jsonmessage));
+						}
+						else {
+							var jsonmessage = {"type":'duplicate name'};
+							ws.send(JSON.stringify(jsonmessage));
+						}
+						foundMatch = true;
+						break;
+					}
+				}
+				if (!foundMatch){
+					result.creations.push(creation);
+					result.markModified('creations');
+					result.save(function(err,result){});
+					var jsonmessage = {"type":'savedCreation','message':dm.name};
+					ws.send(JSON.stringify(jsonmessage));
+				}
+				
 			});
 		}
 		return;
@@ -449,6 +475,13 @@ wss.on('connection', function connection(ws) {
 			
 			
 			QblurData.findOne({ username: username }, "creations", function(err, result) {
+				for (var i=0;i<result.creations.length;i++){
+					if (result.creations[i].name == dm.new){
+						var jsonmessage = {"type":'duplicate name'};
+						ws.send(JSON.stringify(jsonmessage));
+						return;
+					}
+				}
 				for (var i=0;i<result.creations.length;i++){
 					if (result.creations[i].name == dm.old){
 						result.creations[i].name = dm.new;

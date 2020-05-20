@@ -541,7 +541,7 @@ defaults.push('<xml xmlns="https://developers.google.com/blockly/xml"><variables
 
 
 
-
+var overwriteName = '';
 var loadSaved = false;
 var ws = new WebSocket('wss://qblur.com:8080');
 ws.onopen = function(evt) {
@@ -557,11 +557,20 @@ ws.onopen = function(evt) {
 }
 ws.onmessage = function(evt){
 	var dm = JSON.parse(evt.data);
-	var el = document.getElementById('imageHolder');
-	var img = document.createElement('img');
-	img.setAttribute('src',dm.src);
-	el.innerHTML = '';
-	el.appendChild(img);
+	if (dm.type == 'duplicate name'){
+		alert('That name is taken');
+	}
+	else if (dm.type == 'savedCreation'){
+		overwriteName = dm.message;
+	}
+	else {
+		var el = document.getElementById('imageHolder');
+		var img = document.createElement('img');
+		img.setAttribute('src',dm.src);
+		el.innerHTML = '';
+		el.appendChild(img);
+	}
+	
 }
 </script>
 
