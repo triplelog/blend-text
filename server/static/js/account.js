@@ -83,10 +83,10 @@ function newFriend() {
 
 		
 
-document.querySelector('.content-31 .content').addEventListener('drop', handleDrop, false);
+document.querySelector('.content-31').addEventListener('drop', handleDrop, false);
 var names = ['dragenter', 'dragover', 'dragleave', 'drop'];
 names.forEach(eventName => {
-  document.querySelector('.content-31 .content').addEventListener(eventName, preventDefaults, false)
+  document.querySelector('.content-31').addEventListener(eventName, preventDefaults, false)
 })
 
 function preventDefaults(e) {
