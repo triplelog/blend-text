@@ -281,13 +281,11 @@ function chgLanguage(event){
 	var codeEl = document.createElement('code');
 	codeEl.classList.add('language-'+lang);
 	el.appendChild(codeEl);
-	if (blurOrText == 'blur'){
-		if (imgData.blurType == 'hsl') {
-			updateBHSL();
-		}
-		else {
-			updateBRGB();
-		}
+	if (imgData.blurType == 'hsl') {
+		updateBHSL();
+	}
+	else {
+		updateBRGB();
 	}
 	
 	
