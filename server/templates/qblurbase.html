@@ -32,17 +32,26 @@ img {
 	margin: 0px;
 }
 
+div:Not(.content-22) > .content {
+	overflow-y: auto;
+	overflow-x: auto;
+	overflow: auto;
+	height: calc(100% - 2 * var(--border-radius));
+}
+.content-22 .content {
+	text-align: center;
+}
+
 .content-31 {
   	position: relative;
   	overflow: hidden;
 }
 .content-31 .content {
 	clear: both;
-	height: calc(100% - 2 * var(--border-radius));
 }
 #formulaDiv {
 	clear: both;
-	height: calc(100% - 2rem);
+	height: calc(100% - 2 * var(--border-radius));
 }
 .content-13 img {
 	display: block;
@@ -408,10 +417,10 @@ img {
 		<img src="../logo.png" style="width:7rem;">		
 	</div>
 	<div class="centerLink">
-		<button class="basic" onclick="window.location.href='../account';">My Account</button>
+		<button class="basic" onclick="window.location.href='../account';" style="font-size:.85rem; padding: .3rem .5rem;">My Account</button>
 	</div>
 	<div class="centerLink">
-		<button class="basic" onclick="window.location.href='../about';">Help</button>
+		<button class="basic" onclick="window.location.href='../about';" style="font-size:.85rem; padding: .3rem .5rem;">Help</button>
 	</div>
 	
 {% endblock %}
