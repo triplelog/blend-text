@@ -599,7 +599,7 @@ wss.on('connection', function connection(ws) {
 						}
 						var jsonmessage = {'type':'newFormulas'};
 						jsonmessage.formulas = formulas;
-						jsonmessage.formulaType = formulaType;
+						jsonmessage.formulaType = dm.formulaType;
 						ws.send(JSON.stringify(jsonmessage));
 					});
 					
