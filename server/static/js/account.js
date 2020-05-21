@@ -213,4 +213,32 @@ function setListeners() {
 	document.getElementById('imgDrag').style.display = 'none';
 }
 
+/*
+function chgLanguage(event){
+	lang = event.target.value;
+	var workEl = event.target.parentElement.parentElement.querySelector('input.workspace');
+	var el = event.target.parentElement.parentElement.querySelector('pre');
+	el.innerHTML = '';
+	el.classList.remove('language-python');
+	el.classList.remove('language-lua');
+	el.classList.remove('language-php');
+	el.classList.remove('language-js');
+	el.classList.remove('language-dart');
+	el.classList.add('language-'+lang);
+	var codeEl = document.createElement('code');
+	codeEl.classList.add('language-'+lang);
+	el.appendChild(codeEl);
+	// add actually change the code
+	
+	
+	var els = document.querySelectorAll('.langOption');
+	for ( var i=0;i<els.length;i++){
+		els[i].value = ;
+	}
+	
+}
+var els = document.querySelectorAll('.langOption');
+for ( var i=0;i<els.length;i++){
+	els[i].addEventListener('change',chgLanguage);
+}*/
 
