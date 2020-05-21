@@ -60,6 +60,35 @@ ws.onmessage = function(evt){
 	else if (dm.type == 'duplicate name'){
 		alert('Name taken');
 	}
+	else if (dm.type == 'imageSaved'){
+		addImageTippy[0].hide();
+		
+		var el = document.getElementById('imageList');
+		var div = document.createElement('div');
+		div.id = "image--1";
+		var i1 = document.createElement('i');
+		i1.classList.add('fas');
+		i1.classList.add('fa-trash');
+		div.appendChild(i1);
+		var i2 = document.createElement('i');
+		i2.classList.add('fas');
+		i2.classList.add('fa-edit');
+		div.appendChild(i2);
+		var a = document.createElement('a');
+		a.setAttribute('href',dm.src);
+		a.textContent = dm.name;
+		var img = document.createElement('img');
+		img.setAttribute('src',dm.src);
+		img.style.display = 'none';
+		a.appendChild(img);
+		div.appendChild(a);
+		var span = document.createElement('span');
+		span.textContent = '(0 creations)';
+		div.appendChild(span);
+
+		el.insertBefore(div, el.childNodes[0]);
+		
+	}
 	else if (dm.operation == 'image'){
 		/*var el = document.getElementById("friendList");
 		var ell = document.createElement("div");

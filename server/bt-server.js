@@ -250,16 +250,20 @@ wss.on('connection', function connection(ws) {
 		}
   		FileType.fromBuffer(buffer.slice(0,1000)).then( (val) => {
   			var ext = '.'+val.ext;
+  			var name = "";
+			if (dm.name){name = dm.name;}
   			for (var i=0;i<imgTypes.length;i++){
 				if (ext == imgTypes[i]){
 					if (account){
 						var imgSrc = 'userimages/'+username+'_'+parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12)+ext;
-						QblurData.updateOne({username:username,'settings.storage': {$lt:10000000}},{$push: {"images": {src:imgSrc,size:buffer.length,name:"Name",description:"",creations:[]}}, $inc: {'settings.storage':buffer.length}}, function(err, result) {
+						
+						QblurData.updateOne({username:username,'settings.storage': {$lt:10000000}},{$push: {"images": {src:imgSrc,size:buffer.length,name:name,description:"",creations:[]}}, $inc: {'settings.storage':buffer.length}}, function(err, result) {
 							if (result.n > 0){
 								fs.writeFile('static/'+imgSrc, buffer, function (err) {
 									if (err){console.log(err);}
 									console.log("cf",performance.now());
-							
+									var jsonmessage = {'type':'imageSaved','name':name,'src':imgSrc};
+									ws.send(JSON.stringify(jsonmessage));
 								});
 							}
 							else {
@@ -301,7 +305,8 @@ wss.on('connection', function connection(ws) {
 	}
 	else if (dm.type && dm.type == 'download'){
 		console.log(dm.url);
-		
+		var name = "";
+		if (dm.name){name = dm.name;}
 		var wget = '';
 		var imgSrc;
 		for (var i=0;i<imgTypes.length;i++){
@@ -332,8 +337,9 @@ wss.on('connection', function connection(ws) {
 							var szIdxe = szStr.indexOf('/');
 							sz = parseInt(szStr.substring(0,szIdxe));
 						}
-						QblurData.updateOne({username:username,'settings.storage': {$lt:10000000}},{$push: {"images": {src:imgSrc,size:sz,name:"Name",description:"",creations:[]}}, $inc: {'settings.storage':sz}}, function(err, result) {
-						
+						QblurData.updateOne({username:username,'settings.storage': {$lt:10000000}},{$push: {"images": {src:imgSrc,size:sz,name:name,description:"",creations:[]}}, $inc: {'settings.storage':sz}}, function(err, result) {
+							var jsonmessage = {'type':'imageSaved','name':name,'src':imgSrc};
+							ws.send(JSON.stringify(jsonmessage));
 						});
 					});
 				}
