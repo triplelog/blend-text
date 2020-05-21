@@ -109,10 +109,10 @@ label[for="formula--1"] {
 {% block content11 %}
 	<input type="radio" name="formula" style="display: none;" id="formula--1" checked="checked"></input>
 	{% for formula in range(0,15 + formulas.overlay.length*3/2) %}
-	<input type="radio" name="formula" style="display: none;" id="overlay-{{ formula.id }}"></input>
+	<input type="radio" name="formula" style="display: none;" id="overlay-{{ formula }}"></input>
 	{% endfor %}
 	{% for formula in range(0,15 + formulas.gradient.length*3/2) %}
-	<input type="radio" name="formula" style="display: none;" id="gradient-{{ formula.id }}"></input>
+	<input type="radio" name="formula" style="display: none;" id="gradient-{{ formula }}"></input>
 	{% endfor %}
 	<label for="formula--1"></label>
 	<div id="overlayFormulas">
