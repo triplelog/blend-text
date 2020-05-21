@@ -13,6 +13,7 @@ ws.onmessage = function(evt){
 		el.innerHTML = '';
 		if (dm.formulaType == 'filter'){
 			for (group in formulas){
+				console.log(group);
 				for (i in formulas[group]) {
 					var label = document.createElement('label');
 					label.classList.add('formulaLabel');
