@@ -690,8 +690,9 @@ wss.on('connection', function connection(ws) {
 			if (!dm.message && dm.message !== 0){
 				return;
 			}
-			
-			QblurData.updateOne({ username: username }, {settings[dm.setting]:dm.message}, function(err, result) {
+			var obj = {};
+			obj['settings.'+dm.setting]=dm.message;
+			QblurData.updateOne({ username: username }, obj, function(err, result) {
 				console.log(err);
 				console.log(result);
 			});
