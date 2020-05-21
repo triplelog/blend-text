@@ -434,7 +434,7 @@ chgFormulaType();
 document.getElementById('formulaType').addEventListener('change',chgFormulaType);
 document.getElementById('langOption').addEventListener('change',chgLanguage);
 document.getElementById('robot').addEventListener('change',chgRobot);
-document.getElementById('updateEmail').addEventListener('change',chgEmail);
+document.getElementById('updateEmail').addEventListener('click',chgEmail);
 function chgLanguage(){
 	var lang = document.getElementById('langOption').value;
 	var jsonmessage = {type:'updateSettings',setting:'language',message:lang};
