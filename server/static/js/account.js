@@ -9,18 +9,8 @@ ws.onmessage = function(evt){
 	if (dm.type == 'newFormulas'){
 		var formulas = dm.formulas;
 		console.log(formulas);
-		var el = document.getElementById('formulas');
-		el.innerHTML = '<input type="radio" name="formula" style="display: none;" id="formula--1" checked="checked"></input>';
+		var el = document.querySelector(dm.formulaType+'Formulas');
 		
-		for (i in formulas) {
-			var input = document.createElement('input');
-			input.setAttribute('type','radio');
-			input.setAttribute('name','formula');
-			input.setAttribute('style','display: none;');
-			input.id = dm.formulaType+'-'+ formulas[i].id;
-			el.appendChild(input);
-		}
-		el.innerHTML += '<label for="formula--1"></label>';
 		
 		for (i in formulas) {
 			var label = document.createElement('label');
