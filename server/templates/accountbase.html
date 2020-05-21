@@ -297,6 +297,9 @@ tippy('#addImageButton', {
 	  trigger: 'click',
 	  interactive: true,
 	  placement: 'bottom',
+	  onMount(instance) {
+		setListeners();
+	  },
 	});
 {% for i in range(0,creations.length) %}
 tippy('#creation-{{i}} > .fa-trash', {

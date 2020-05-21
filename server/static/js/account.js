@@ -108,25 +108,7 @@ function handleDrop(e) {
 }
 
 
-document.getElementById('imgSrc').addEventListener('change', function(inp) {
-	
-	//document.getElementById('dropArea').style.display = 'none';
-	var ffile = this.files[0];
-	
-	sendImage(ffile);
-	/*
-	syncWorker.postMessage(ffile);
-	syncWorker.onmessage = function(e) {
-		//ctypestr = toTable(e.data.result,e.data.ctypestr);
-		
-		//if (filen != ""){createConfirmForm();}
-		document.getElementById('dataTableModified').innerHTML = '';
-		setTimeout(fullCompression,10,ffile);
-	};*/
-	
-	
 
-}, false);
 
 function chgImgType(evt){
 	var imgType = evt.target.value;
@@ -147,7 +129,7 @@ function chgImgType(evt){
 		document.getElementById('imgDrag').textContent = "";
 	}
 }
-document.getElementById('imgType').addEventListener('change', chgImgType);
+
 
 function chgImgUrl(evt) {
 	var url = evt.target.value;
@@ -156,7 +138,7 @@ function chgImgUrl(evt) {
 	ws.send(JSON.stringify(jsonmessage));
 }
 
-document.getElementById('imgUrl').addEventListener('change', chgImgUrl);
+
 function sendImage(img) {
 	var readerF = new FileReader();
 	readerF.onload = function() {
@@ -182,7 +164,19 @@ function renameCreation(name,id) {
 	button._tippy.hide();
 }
 
-document.getElementById('imgSrc').style.display = 'inline-block';
-document.getElementById('imgUrl').style.display = 'none';
-document.getElementById('imgDrag').style.display = 'none';
+function setListeners() {
+	document.getElementById('imgSrc').addEventListener('change', function(inp) {
+
+		var ffile = this.files[0];
+	
+		sendImage(ffile);
+
+	}, false);
+	document.getElementById('imgType').addEventListener('change', chgImgType);
+	document.getElementById('imgUrl').addEventListener('change', chgImgUrl);
+	document.getElementById('imgSrc').style.display = 'inline-block';
+	document.getElementById('imgUrl').style.display = 'none';
+	document.getElementById('imgDrag').style.display = 'none';
+}
+
 
