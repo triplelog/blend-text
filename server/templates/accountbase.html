@@ -266,11 +266,17 @@ label[for="formula--1"] {
 </div>
 {% endblock %}
 {% block content33 %}
-	Add Friend:
-	Email:
-	Robot:
-	Stats:
-	Default Language:
+	
+	<div>Email: <input type="text" id="email" value="{{ settings.email}}"></input><button id="updateEmail">Update</button></div>
+	<div>Default Language: <select id="langOption">
+			<option value="python" {% if settings.language == 'python' %}selected{% endif %}>Python</option>
+			<option value="javascript" {% if settings.language == 'javascript' %}selected{% endif %}>Javascript</option>
+			<option value="lua" {% if settings.language == 'lua' %}selected{% endif %}>Lua</option>
+			<option value="php" {% if settings.language == 'php' %}selected{% endif %}>PHP</option>
+			<option value="dart" {% if settings.language == 'dart' %}selected{% endif %}>Dart</option>
+		</select>
+	</div>
+	<div>Robot Avatar: <input id="robot" type="number" min="1" max="5" value="{{ settings.robot }}"></input></div>
 
 
 {% endblock %}
@@ -426,6 +432,24 @@ function chgFormulaType(){
 }
 chgFormulaType();
 document.getElementById('formulaType').addEventListener('change',chgFormulaType);
+document.getElementById('langOption').addEventListener('change',chgLanguage);
+document.getElementById('robot').addEventListener('change',chgRobot);
+document.getElementById('updateEmail').addEventListener('change',chgEmail);
+function chgLanguage(){
+	var lang = document.getElementById('langOption').value;
+	var jsonmessage = {type:'updateSettings',setting:'language',message:lang};
+	ws.send(JSON.stringify(jsonmessage));
+}
+function chgRobot(){
+	var robot = document.getElementById('robot').value;
+	var jsonmessage = {type:'updateSettings',setting:'robot',message:robot};
+	ws.send(JSON.stringify(jsonmessage));
+}
+function chgEmail(){
+	var email = document.getElementById('email').value;
+	var jsonmessage = {type:'updateSettings',setting:'email',message:email};
+	ws.send(JSON.stringify(jsonmessage));
+}
 </script>
 <script src="../js/account.js"></script>
 {% endblock %}

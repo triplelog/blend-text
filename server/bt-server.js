@@ -685,6 +685,18 @@ wss.on('connection', function connection(ws) {
 		}
 		return;
 	}
+	else if (dm.type && dm.type == 'updateSettings'){
+		if (username != ''){
+			if (!dm.message && dm.message !== 0){
+				return;
+			}
+			var settingsStr = 'settings.'+dm.setting;
+			QblurData.updateOne({ username: username }, {'settings.'+dm.setting:dm.message}, function(err, result) {
+				
+			});
+		}
+		return;
+	}
 	
 	//Start creating image if made it this far
 

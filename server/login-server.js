@@ -66,7 +66,8 @@ app.get('/account',
 		
 		QblurData.findOne({username:req.user.username}, function(err,result) {
 			if (result == null){
-				result = {username: req.user.username.toLowerCase(), formulas: {gradient:baseGradients,distance:[],overlay:[],filter:{}}, images: [], creations: [], friends: [], followers: [], settings: {robot:1,storage:0}};
+				var useremail = req.user.email;
+				result = {username: req.user.username.toLowerCase(), formulas: {gradient:baseGradients,distance:[],overlay:[],filter:{}}, images: [], creations: [], friends: [], followers: [], settings: {language:'lua',robot:1,storage:0,email: useremail}};
 				var qblurData = new QblurData(result);
 				qblurData.save(function(err2,result2){
 					console.log('user registered!',performance.now());
@@ -121,9 +122,7 @@ app.get('/account',
 		
 			res.write(nunjucks.render('templates/accountbase.html',{
 				username: req.user.options.displayName || req.user.username,
-				name: req.user.name || '',
-				options: req.user.options,
-				friends: result.friends,
+				settings: result.settings,
 				tkey: tkey,
 				formulas: formulas,
 				filterGroups: filterGroups,
@@ -145,7 +144,7 @@ var baseGradients = [{"name":"First Formula","workspace":"<xml xmlns=\"https://d
 app.post('/register',
   function(req, res){
   	console.log('registering: ',performance.now());
-  	var user = new User({username: req.body.username.toLowerCase(), options: {displayName: req.body.username,robot:1}});
+  	var user = new User({username: req.body.username.toLowerCase(),email: req.body.email, options: {displayName: req.body.username,robot:1}});
 	User.register(user,req.body.password, function(err) {
 		if (err) {
 		  if (err.name == 'UserExistsError'){
@@ -157,7 +156,7 @@ app.post('/register',
 		  
 		}
 		else {
-			var qblurData = new QblurData({username: req.body.username.toLowerCase(), formulas: {gradient:baseGradients,distance:[],overlay:[],filter:{}}, images: [], creations: [], friends: [], followers: [], settings: {robot:1,storage:0}});
+			var qblurData = new QblurData({username: req.body.username.toLowerCase(), formulas: {gradient:baseGradients,distance:[],overlay:[],filter:{}}, images: [], creations: [], friends: [], followers: [], settings: {language:'lua',robot:1,storage:0,email: req.body.email}});
 			qblurData.save(function(err,result){
 				console.log('user registered!',performance.now());
 				var robot = 'python3 python/robohash/createrobo.py '+req.body.username.toLowerCase()+' 1';

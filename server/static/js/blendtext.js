@@ -234,7 +234,7 @@ function updateImage(evt){
 	
 }
 function setGroup() {
-	document.getElementById('formulaName').value = overwriteFormula['gradient'];
+	document.getElementById('formulaName').value = overwriteFormula['overlay'];
 }
 var singleEls = ['text','font','blurRadius','bort','threshold','typeNumber','errorCorrect','crop'];
 for (var i=0;i<8;i++){
