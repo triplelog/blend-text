@@ -165,6 +165,7 @@ label[for="formula--1"] {
 	</div>
 	<div id="filterFormulas">
 		{% for group in formulas.filter %}
+			{{ group }}
 			{% for formula in formulas.filter[group] %}
 			<label class="formulaLabel" for="filter-{{ formula.id }}">{{ formula.name }}</label>
 			<div class="formulaCode">
