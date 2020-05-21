@@ -94,7 +94,11 @@ label[for="formula--1"] {
 
 	</div>
 	<span class="titleLeft">
-		
+		<select id="formulaType">
+			<option value="overlay">Overlay</option>
+			<option value="gradient">Gradient</option>
+			<option value="filter">Filter</option>
+		</select>
 	</span>
 	<span class="titleCenter">
 		<a href="https://sudokufarm.com">Formulas</a>
@@ -378,6 +382,16 @@ function imageTippy(el,name) {
 	  placement: 'bottom',
 	});
 }
+function chgFormulaType(){
+	var formulaType = document.getElementById('formulaType').value;
+	document.getElementById('overlayFormulas').style.display = 'none';
+	document.getElementById('gradientFormulas').style.display = 'none';
+	if (document.getElementById(formulaType+'Formulas')){
+		document.getElementById(formulaType+'Formulas').style.display = 'block';
+	}
+}
+chgFormulaType();
+document.getElementById('formulaType').addEventListener('change',chgFormulaType);
 </script>
 <script src="../js/account.js"></script>
 {% endblock %}
