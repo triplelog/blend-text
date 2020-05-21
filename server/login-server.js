@@ -85,10 +85,10 @@ app.get('/account',
 			//console.log(req.user);
 			var blocklyLang = Blockly.Lua;
 			if (result.settings.language == 'python'){blocklyLang = Blockly.Python;}
-			if (result.settings.language == 'javascript'){blocklyLang = Blockly.Javascript;}
+			if (result.settings.language == 'javascript'){blocklyLang = Blockly.JavaScript;}
 			if (result.settings.language == 'php'){blocklyLang = Blockly.PHP;}
 			if (result.settings.language == 'dart'){blocklyLang = Blockly.Dart;}
-
+			console.log()
 			for (var i=0;i<formulas.overlay.length;i++){
 				formulas.overlay[i].id = i;
 				workspace = new Blockly.Workspace();
