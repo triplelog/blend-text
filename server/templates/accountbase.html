@@ -178,8 +178,8 @@ label[for="formula--1"] {
 	<div id="imageList">
 		{% for ii in range(0,images.length) %}
 		{% set image = images[images.length-ii-1] %}
-		<div id="image-{{ii}}">
-			<i class="fas fa-trash"></i><i class="fas fa-edit"></i><a href="{{image.src}}">{{image.name}} <img src="{{image.src}}" style="display: none;"></a> (0 creations)
+		<div id="image-{{images.length-ii-1}}">
+			<i class="fas fa-trash"></i><i class="fas fa-edit"></i><a href="{{image.src}}">{{image.name}}<img src="{{image.src}}" style="display: none;"></a> (0 creations)
 		</div>
 		{% endfor %}
 	</div>
@@ -324,6 +324,31 @@ tippy('#creation-{{i}} > .fa-edit', {
 	});
 	
 {% endfor %}
+for () {
+
+}
+function imageTippy(el,name) {
+	tippy(el.querySelector('.fa-trash'), {
+	  content: `<div>
+			<div>Do you really want to delete `+name+`?</div>
+			<button onclick="deleteImage('`+name+`',`+el.id+`)">Yes, Delete</button>
+		</div>`,
+	  allowHTML: true,
+	  trigger: 'click',
+	  interactive: true,
+	  placement: 'bottom',
+	});
+	tippy(el.querySelector('.fa-edit'), {
+	  content: `<div>
+			<div>Name: <input type="text" name="imageName"></input></div>
+			<button onclick="renameImage('`+name+`',`+el.id+`)">Rename</button>
+		</div>`,
+	  allowHTML: true,
+	  trigger: 'click',
+	  interactive: true,
+	  placement: 'bottom',
+	});
+}
 </script>
 <script src="../js/account.js"></script>
 {% endblock %}

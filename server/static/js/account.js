@@ -193,6 +193,20 @@ function renameCreation(name,id) {
 	button._tippy.hide();
 }
 
+function deleteImage(name,id) {
+	jsonmessage = {'type':'deleteImage','message':name};
+	ws.send(JSON.stringify(jsonmessage));
+	document.getElementById(id).style.display = 'none';
+}
+function renameImage(name,id) {
+	var el = document.getElementById(id);
+	var newname = el.querySelector("input[name='imageName']").value;
+	jsonmessage = {'type':'renameImage','old':name,'new':newname};
+	ws.send(JSON.stringify(jsonmessage));
+	el.querySelector('a').textContent = newname;
+	const button = el.querySelector('.fa-edit');
+	button._tippy.hide();
+}
 function setListeners() {
 	document.getElementById('imgSrc').addEventListener('change', function(inp) {
 

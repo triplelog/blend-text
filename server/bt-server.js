@@ -507,6 +507,47 @@ wss.on('connection', function connection(ws) {
 		}
 		return;
 	}
+	else if (dm.type && dm.type == 'deleteImage'){
+		if (username != ''){
+			
+			
+			QblurData.findOne({ username: username }, "images", function(err, result) {
+				for (var i=0;i<result.images.length;i++){
+					if (result.images[i].name == dm.message){
+						result.images.splice(i,1);
+						break;
+					}
+				}
+				result.markModified('images');
+				result.save(function(err,result){});
+			});
+		}
+		return;
+	}
+	else if (dm.type && dm.type == 'renameImage'){
+		if (username != ''){
+			
+			
+			QblurData.findOne({ username: username }, "images", function(err, result) {
+				for (var i=0;i<result.images.length;i++){
+					if (result.images[i].name == dm.new){
+						var jsonmessage = {"type":'duplicate name'};
+						ws.send(JSON.stringify(jsonmessage));
+						return;
+					}
+				}
+				for (var i=0;i<result.images.length;i++){
+					if (result.images[i].name == dm.old){
+						result.images[i].name = dm.new;
+						break;
+					}
+				}
+				result.markModified('images');
+				result.save(function(err,result){});
+			});
+		}
+		return;
+	}
 	else if (dm.type && dm.type == 'copyFormula'){
 		if (username != ''){
 			if (!dm.message && dm.message !== 0){
