@@ -55,10 +55,10 @@ label[for="formula--1"] {
 {% endfor %}
 
 {% for formula in range(0,15 + totalfilters*3/2) %}
-#filter-{{formula}}:checked ~ #gradientFormulas label[for="filter-{{formula}}"] {
+#filter-{{formula}}:checked ~ #filterFormulas label[for="filter-{{formula}}"] {
 	pointer-events: none;	
 }
-#filter-{{formula}}:checked ~ #gradientFormulas label[for="filter-{{formula}}"] + div.formulaCode {
+#filter-{{formula}}:checked ~ #filterFormulas label[for="filter-{{formula}}"] + div.formulaCode {
 	display: block;
 }
 {% endfor %}
