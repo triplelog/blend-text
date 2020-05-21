@@ -32,7 +32,18 @@ img {
 	margin: 0px;
 }
 
-
+.content {
+	overflow-y: auto;
+	overflow-x: auto;
+	overflow: auto;
+	height: calc(100% - 2 * var(--border-radius));
+	padding: .5rem;
+}
+.content-22 .content {
+	height: unset;
+	text-align: center;
+	padding: 0px;
+}
 {% endblock %}
 
 
@@ -80,7 +91,7 @@ The goal is a limited number of tools with unlimited customization. Play around 
 </div>
 {% endblock %}
 {% block content13 %}
-Create QR codes with embedded images.
+Add one or more filters to have total control over the brightness, hue, saturation, contrast, and color of your image.
 {% endblock %}	
 
 {% block title31 %}
@@ -103,8 +114,7 @@ Create QR codes with embedded images.
 {% endblock %}
 {% block content31 %}
 Create your own gradient by adding a custom function to standard linear or radial gradients.
-Or use edge gradients.
-Or add a bit of randomness with the game of life.
+Or add a gradient based on distance from the edge of a shape.
 {% endblock %}
 
 {% block title33 %}
@@ -127,7 +137,7 @@ Or add a bit of randomness with the game of life.
 {% endblock %}
 {% block content33 %}
 Add text on top of an image and control how it blends into or pops out of a background image.
-Or add an image background to a string of text.
+Or add a QR code on top of your image.
 {% endblock %}
 
 
