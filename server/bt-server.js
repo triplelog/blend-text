@@ -690,12 +690,26 @@ wss.on('connection', function connection(ws) {
 			if (!dm.message && dm.message !== 0){
 				return;
 			}
-			var obj = {};
-			obj['settings.'+dm.setting]=dm.message;
-			QblurData.updateOne({ username: username }, obj, function(err, result) {
-				console.log(err);
-				console.log(result);
-			});
+			
+			if (dm.setting == 'email'){
+				QblurData.updateOne({ username: username }, {'settings.email':dm.message}, function(err, result) {
+					console.log(err);
+					console.log(result);
+				});
+			}
+			else if (dm.setting == 'language'){
+				QblurData.updateOne({ username: username }, {'settings.language':dm.message}, function(err, result) {
+					console.log(err);
+					console.log(result);
+				});
+			}
+			else if (dm.setting == 'robot'){
+				QblurData.updateOne({ username: username }, {'settings.robot':dm.message}, function(err, result) {
+					console.log(err);
+					console.log(result);
+				});
+			}
+			
 		}
 		return;
 	}
