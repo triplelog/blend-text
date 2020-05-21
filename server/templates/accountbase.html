@@ -88,6 +88,9 @@ label[for="formula--1"] {
 	overflow: auto;
 	height: calc(100% - 2 * var(--border-radius));
 }
+.content-22 .content {
+	height: unset;
+}
 .content .fas {
 	font-size: 80%;
 	padding: .1rem .2rem;
@@ -276,7 +279,7 @@ label[for="formula--1"] {
 			<option value="dart" {% if settings.language == 'dart' %}selected{% endif %}>Dart</option>
 		</select>
 	</div>
-	<div>Robot Avatar: <input id="robot" type="number" min="1" max="5" value="{{ settings.robot }}"></input></div>
+	<div>Robot Avatar: <input id="robot" type="number" min="1" max="4" value="{{ settings.robot }}"></input></div>
 
 
 {% endblock %}
@@ -285,9 +288,6 @@ label[for="formula--1"] {
 
 {% block content22 %}
 	<img src="../robots/{{ username }}{{ settings.robot }}.png" style="width: 80%;">
-	<span>Settings</span>
-			<span>Friends</span>
-			<span>Stats</span>
 {% endblock %}
 
 

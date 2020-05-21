@@ -84,10 +84,11 @@ app.get('/account',
 			var code;
 			//console.log(req.user);
 			var blocklyLang = Blockly.Lua;
-			if (result.language == 'python'){blocklyLang = Blockly.Python;}
-			if (result.language == 'javascript'){blocklyLang = Blockly.Javascript;}
-			if (result.language == 'php'){blocklyLang = Blockly.PHP;}
-			if (result.language == 'dart'){blocklyLang = Blockly.Dart;}
+			if (result.settings.language == 'python'){blocklyLang = Blockly.Python;}
+			if (result.settings.language == 'javascript'){blocklyLang = Blockly.Javascript;}
+			if (result.settings.language == 'php'){blocklyLang = Blockly.PHP;}
+			if (result.settings.language == 'dart'){blocklyLang = Blockly.Dart;}
+
 			for (var i=0;i<formulas.overlay.length;i++){
 				formulas.overlay[i].id = i;
 				workspace = new Blockly.Workspace();

@@ -250,7 +250,7 @@ wss.on('connection', function connection(ws) {
 		}
   		FileType.fromBuffer(buffer.slice(0,1000)).then( (val) => {
   			var ext = '.'+val.ext;
-  			var name = "";
+  			var name = parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12);
   			for (var i=0;i<imgTypes.length;i++){
 				if (ext == imgTypes[i]){
 					if (account){
@@ -304,7 +304,7 @@ wss.on('connection', function connection(ws) {
 	}
 	else if (dm.type && dm.type == 'download'){
 		console.log(dm.url);
-		var name = "";
+		var name = parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12);
 		var wget = '';
 		var imgSrc;
 		for (var i=0;i<imgTypes.length;i++){
@@ -693,8 +693,6 @@ wss.on('connection', function connection(ws) {
 			var obj = {};
 			obj['settings.'+dm.setting]=dm.message;
 			QblurData.updateOne({ username: username }, obj, function(err, result) {
-				console.log(err);
-				console.log(result);
 				if (dm.setting == 'robot'){
 					var robot = 'python3 python/robohash/createrobo.py '+username+' '+dm.message;
 					var child = exec(robot, function(err, stdout, stderr) {
