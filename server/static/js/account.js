@@ -9,7 +9,7 @@ ws.onmessage = function(evt){
 	if (dm.type == 'newFormulas'){
 		var formulas = dm.formulas;
 		console.log(formulas);
-		var el = document.querySelector(dm.formulaType+'Formulas');
+		var el = document.getElementById(dm.formulaType+'Formulas');
 		
 		
 		for (i in formulas) {
