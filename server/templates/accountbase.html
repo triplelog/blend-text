@@ -82,6 +82,16 @@ label[for="formula--1"] {
 }
 
 
+.content {
+	overflow-y: auto;
+	overflow-x: auto;
+	overflow: auto;
+	height: calc(100% - 2 * var(--border-radius));
+}
+.content-22 .content {
+	height: unset;
+	text-align: center;
+}
 
 .content .fas {
 	font-size: 80%;
@@ -144,7 +154,7 @@ label[for="formula--1"] {
 		</div>
 		{% endfor %}
 	</div>
-	<div id="gradientFormulas">
+	<div id="gradientFormulas" style="display: none;">
 		{% for formula in formulas.gradient %}
 		<label class="formulaLabel" for="gradient-{{ formula.id }}">{{ formula.name }}</label>
 		<div class="formulaCode">
@@ -158,7 +168,7 @@ label[for="formula--1"] {
 		</div>
 		{% endfor %}
 	</div>
-	<div id="filterFormulas">
+	<div id="filterFormulas" style="display: none;">
 		
 		{% for group in filterGroups %}
 			{% for formula in formulas.filter[group] %}
