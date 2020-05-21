@@ -24,7 +24,6 @@ function updateImage(evt){
 		}
 		if (el.id && el.id == 'hslrgb'){
 			var filterListEls = document.getElementById('filterList').querySelectorAll('div');
-			console.log(currentFilterID);
 			if (filterListEls[currentFilterID]){
 				filterListEls[currentFilterID].querySelector('span').textContent = el.querySelector(':checked').textContent;
 			}

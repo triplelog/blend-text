@@ -71,7 +71,7 @@ function saveFormula(category="overlay") {
 		}
 		var els = document.getElementById('filterList').querySelectorAll('div');
 		els[currentFilterID].setAttribute('data-filter',currentFilterType);
-		els[currentFilterID].textContent = name;
+		els[currentFilterID].querySelector('span').textContent = name;
 		
 	}
 	else {
