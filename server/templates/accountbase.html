@@ -333,7 +333,7 @@ function imageTippy(el,name) {
 	tippy(el.querySelector('.fa-trash'), {
 	  content: `<div>
 			<div>Do you really want to delete `+name+`?</div>
-			<button onclick="deleteImage('`+name+`',`+el.id+`)">Yes, Delete</button>
+			<button onclick="deleteImage('`+name+`','`+el.id+`')">Yes, Delete</button>
 		</div>`,
 	  allowHTML: true,
 	  trigger: 'click',
@@ -343,7 +343,7 @@ function imageTippy(el,name) {
 	tippy(el.querySelector('.fa-edit'), {
 	  content: `<div>
 			<div>Name: <input type="text" name="imageName"></input></div>
-			<button onclick="renameImage('`+name+`',`+el.id+`)">Rename</button>
+			<button onclick="renameImage('`+name+`','`+el.id+`')">Rename</button>
 		</div>`,
 	  allowHTML: true,
 	  trigger: 'click',
