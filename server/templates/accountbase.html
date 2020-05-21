@@ -161,7 +161,7 @@ label[for="formula--1"] {
 
 	</div>
 	<span class="titleLeft">
-		
+		<button id="addImageButton">Add</button>
 	</span>
 	<span class="titleCenter">
 		<a href="">Images</a>
@@ -174,18 +174,6 @@ label[for="formula--1"] {
 </div>
 {% endblock %}
 {% block content31 %}
-	<button onclick="toggleAddImage()">Add</button><button>Delete</button>
-	<div id="addImage" style="display: none;">
-		Image: 
-		<select id="imgType">
-			<option value="upload">Upload</option>
-			<option value="url">URL</option>
-			<option value="drag">Drag/Drop</option>
-		</select>
-		<input type="file" name="imgSrc" id="imgSrc"></input>
-		<input type="text" name="imgUrl" id="imgUrl"></input>
-		<span id="imgDrag"></span>
-	</div>
 	<div id="imageList">
 		{% set ii = 0 %}
 		{% for image in images %}
@@ -293,6 +281,23 @@ function selectCreations() {
 	
 }
 
+tippy('#addImageButton', {
+	  content: `<div id="addImage" style="display: none;">
+		Image: 
+		<select id="imgType">
+			<option value="upload">Upload</option>
+			<option value="url">URL</option>
+			<option value="drag">Drag/Drop</option>
+		</select>
+		<input type="file" name="imgSrc" id="imgSrc"></input>
+		<input type="text" name="imgUrl" id="imgUrl"></input>
+		<span id="imgDrag"></span>
+	</div>`,
+	  allowHTML: true,
+	  trigger: 'click',
+	  interactive: true,
+	  placement: 'bottom',
+	});
 {% for i in range(0,creations.length) %}
 tippy('#creation-{{i}} > .fa-trash', {
 	  content: `<div>
@@ -314,6 +319,7 @@ tippy('#creation-{{i}} > .fa-edit', {
 	  interactive: true,
 	  placement: 'bottom',
 	});
+	
 {% endfor %}
 </script>
 <script src="../js/account.js"></script>
