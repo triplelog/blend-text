@@ -84,6 +84,9 @@ ws.onmessage = function(evt){
 	else if (dm.type == 'duplicate name'){
 		alert('Name taken');
 	}
+	else if (dm.type == 'settingsUpdated'){
+		location.reload();
+	}
 	else if (dm.type == 'imageSaved'){
 		addImageTippy[0].hide();
 		

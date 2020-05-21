@@ -83,12 +83,17 @@ app.get('/account',
 			var wxml;
 			var code;
 			//console.log(req.user);
+			var blocklyLang = Blockly.Lua;
+			if (result.language == 'python'){blocklyLang = Blockly.Python;}
+			if (result.language == 'javascript'){blocklyLang = Blockly.Javascript;}
+			if (result.language == 'php'){blocklyLang = Blockly.PHP;}
+			if (result.language == 'dart'){blocklyLang = Blockly.Dart;}
 			for (var i=0;i<formulas.overlay.length;i++){
 				formulas.overlay[i].id = i;
 				workspace = new Blockly.Workspace();
 				wxml = Blockly.Xml.textToDom(formulas.overlay[i].workspace);
 				Blockly.Xml.domToWorkspace(wxml, workspace);
-				code = Blockly.Lua.workspaceToCode(workspace);
+				code = blocklyLang.workspaceToCode(workspace);
 				formulas.overlay[i].code = code;
 			}
 			for (var i=0;i<formulas.gradient.length;i++){
@@ -96,7 +101,7 @@ app.get('/account',
 				workspace = new Blockly.Workspace();
 				wxml = Blockly.Xml.textToDom(formulas.gradient[i].workspace);
 				Blockly.Xml.domToWorkspace(wxml, workspace);
-				code = Blockly.Lua.workspaceToCode(workspace);
+				code = blocklyLang.workspaceToCode(workspace);
 				formulas.gradient[i].code = code;
 			}
 			var idx = 0;
@@ -108,7 +113,7 @@ app.get('/account',
 					workspace = new Blockly.Workspace();
 					wxml = Blockly.Xml.textToDom(formulas.filter[group][i].workspace);
 					Blockly.Xml.domToWorkspace(wxml, workspace);
-					code = Blockly.Lua.workspaceToCode(workspace);
+					code = blocklyLang.workspaceToCode(workspace);
 					formulas.filter[group][i].code = code;
 					idx++;
 				}

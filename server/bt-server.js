@@ -695,7 +695,20 @@ wss.on('connection', function connection(ws) {
 			QblurData.updateOne({ username: username }, obj, function(err, result) {
 				console.log(err);
 				console.log(result);
+				if (dm.setting == 'robot'){
+					var robot = 'python3 python/robohash/createrobo.py '+username+' '+dm.message;
+					var child = exec(robot, function(err, stdout, stderr) {
+						console.log('robot created: ',performance.now());
+						var jsonmessage = {type:'settingsUpdated'};
+						ws.send(JSON.stringify(jsonmessage));
+					});
+				}
+				else if (dm.setting == 'language'){
+					var jsonmessage = {type:'settingsUpdated'};
+					ws.send(JSON.stringify(jsonmessage));
+				}
 			});
+			
 		}
 		return;
 	}
