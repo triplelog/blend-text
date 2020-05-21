@@ -164,9 +164,9 @@ label[for="formula--1"] {
 		{% endfor %}
 	</div>
 	<div id="filterFormulas">
-		{{ formulas.filter | dump | safe }}
+		
 		{% for group in formulas.filter %}
-			
+			7
 			{% for formula in formulas.filter[group] %}
 			<label class="formulaLabel" for="filter-{{ formula.id }}">{{ formula.name }}</label>
 			<div class="formulaCode">
