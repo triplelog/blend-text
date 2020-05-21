@@ -81,59 +81,60 @@ function updateImage(evt){
 			onresize();
 		}
 		else if (el.id && el.id == 'hslrgb'){
-			if (blurOrText == 'blur'){
-				if (el.value =='rgb'){
+			if (el.value =='rgb'){
+				workspaceBRGB.clear();
+				var vars = ["d","r","g","b"];
+				for (var ii=0;ii<4;ii++){
+					workspaceBRGB.createVariable(vars[ii],null,"qblur_"+vars[ii]);
+				}
+				document.getElementById('blurFormulaHSL').style.display = 'none';
+				document.getElementById('blurFormulaRGB').style.display = 'block';
+				overwriteFormula['gradient'] = '';
+				imgData.blurType = 'rgb';
+				updateBRGB();
+			}
+			else if (el.value =='hsl'){
+				workspaceB.clear();
+				var vars = ["d","h","s","l"];
+				for (var ii=0;ii<4;ii++){
+					workspaceB.createVariable(vars[ii],null,"qblur_"+vars[ii]);
+				}
+				document.getElementById('blurFormulaHSL').style.display = 'block';
+				document.getElementById('blurFormulaRGB').style.display = 'none';
+				overwriteFormula['gradient'] = '';
+				imgData.blurType = 'hsl';
+				updateBHSL();
+			}
+			else {
+				var formula = formulas[parseInt(el.value)];
+				overwriteFormula['gradient'] = formula.name;
+				if (formula.hslrgb == 'rgb'){
+					var wxml = Blockly.Xml.textToDom(formula.workspace);
 					workspaceBRGB.clear();
 					var vars = ["d","r","g","b"];
 					for (var ii=0;ii<4;ii++){
 						workspaceBRGB.createVariable(vars[ii],null,"qblur_"+vars[ii]);
 					}
+					Blockly.Xml.domToWorkspace(wxml,workspaceBRGB);
 					document.getElementById('blurFormulaHSL').style.display = 'none';
 					document.getElementById('blurFormulaRGB').style.display = 'block';
 					imgData.blurType = 'rgb';
 					updateBRGB();
 				}
-				else if (el.value =='hsl'){
+				else {
+					var wxml = Blockly.Xml.textToDom(formula.workspace);
 					workspaceB.clear();
 					var vars = ["d","h","s","l"];
 					for (var ii=0;ii<4;ii++){
 						workspaceB.createVariable(vars[ii],null,"qblur_"+vars[ii]);
 					}
+					Blockly.Xml.domToWorkspace(wxml,workspaceB);
 					document.getElementById('blurFormulaHSL').style.display = 'block';
 					document.getElementById('blurFormulaRGB').style.display = 'none';
 					imgData.blurType = 'hsl';
 					updateBHSL();
 				}
-				else {
-					var formula = formulas[parseInt(el.value)];
-					if (formula.hslrgb == 'rgb'){
-						var wxml = Blockly.Xml.textToDom(formula.workspace);
-						workspaceBRGB.clear();
-						var vars = ["d","r","g","b"];
-						for (var ii=0;ii<4;ii++){
-							workspaceBRGB.createVariable(vars[ii],null,"qblur_"+vars[ii]);
-						}
-						Blockly.Xml.domToWorkspace(wxml,workspaceBRGB);
-						document.getElementById('blurFormulaHSL').style.display = 'none';
-						document.getElementById('blurFormulaRGB').style.display = 'block';
-						imgData.blurType = 'rgb';
-						updateBRGB();
-					}
-					else {
-						var wxml = Blockly.Xml.textToDom(formula.workspace);
-						workspaceB.clear();
-						var vars = ["d","h","s","l"];
-						for (var ii=0;ii<4;ii++){
-							workspaceB.createVariable(vars[ii],null,"qblur_"+vars[ii]);
-						}
-						Blockly.Xml.domToWorkspace(wxml,workspaceB);
-						document.getElementById('blurFormulaHSL').style.display = 'block';
-						document.getElementById('blurFormulaRGB').style.display = 'none';
-						imgData.blurType = 'hsl';
-						updateBHSL();
-					}
-					
-				}
+				
 			}
 			onresize();
 		}

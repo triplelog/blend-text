@@ -92,6 +92,7 @@ function updateImage(evt){
 					}
 					document.getElementById('blurFormulaHSL').style.display = 'none';
 					document.getElementById('blurFormulaRGB').style.display = 'block';
+					overwriteFormula['overlay'] = '';
 					imgData.blurType = 'rgb';
 					updateBRGB();
 				}
@@ -103,11 +104,13 @@ function updateImage(evt){
 					}
 					document.getElementById('blurFormulaHSL').style.display = 'block';
 					document.getElementById('blurFormulaRGB').style.display = 'none';
+					overwriteFormula['overlay'] = '';
 					imgData.blurType = 'hsl';
 					updateBHSL();
 				}
 				else {
 					var formula = formulas[parseInt(el.value)];
+					overwriteFormula['overlay'] = formula.name;
 					if (formula.hslrgb == 'rgb'){
 						var wxml = Blockly.Xml.textToDom(formula.workspace);
 						workspaceBRGB.clear();
@@ -141,17 +144,20 @@ function updateImage(evt){
 				if (el.value =='rgb'){
 					document.getElementById('textFormulaHSL').style.display = 'none';
 					document.getElementById('textFormulaRGB').style.display = 'block';
+					overwriteFormula['overlay'] = '';
 					imgData.textType = 'rgb';
 					updateTRGB();
 				}
 				else if (el.value =='hsl'){
 					document.getElementById('textFormulaHSL').style.display = 'block';
 					document.getElementById('textFormulaRGB').style.display = 'none';
+					overwriteFormula['overlay'] = '';
 					imgData.textType = 'hsl';
 					updateTHSL();
 				}
 				else {
 					var formula = formulas[parseInt(el.value)];
+					overwriteFormula['overlay'] = formula.name;
 					if (formula.hslrgb == 'rgb'){
 						var wxml = Blockly.Xml.textToDom(formula.workspace);
 						workspaceTRGB.clear();

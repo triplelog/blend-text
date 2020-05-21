@@ -37,6 +37,7 @@ function updateImage(evt){
 				var outspace = Blockly.Xml.domToText(wxml);
 				imgData.filters[currentFilterID].workspace = outspace;
 				imgData.filters[currentFilterID].hslrgb = "r";
+				overwriteFormula['filter'] = '--';
 				updateWork();
 			}
 			else if (el.value =='hsl'){
@@ -49,6 +50,7 @@ function updateImage(evt){
 				var outspace = Blockly.Xml.domToText(wxml);
 				imgData.filters[currentFilterID].workspace = outspace;
 				imgData.filters[currentFilterID].hslrgb = "h";
+				overwriteFormula['filter'] = '--';
 				updateWork();
 			}
 			else {
@@ -64,6 +66,7 @@ function updateImage(evt){
 					imgData.filters[currentFilterID].workspace = formula.workspace;
 					imgData.filters[currentFilterID].hslrgb = formula.hslrgb;
 					imgData.filters[currentFilterID].name = formula.name;
+					overwriteFormula['filter'] = currentFilterID+'--'+formula.name;
 					updateWork();
 				}
 				else {
@@ -77,6 +80,7 @@ function updateImage(evt){
 					imgData.filters[currentFilterID].workspace = formula.workspace;
 					imgData.filters[currentFilterID].hslrgb = formula.hslrgb;
 					imgData.filters[currentFilterID].name = formula.name;
+					overwriteFormula['filter'] = currentFilterID+'--'+formula.name;
 					updateWork();
 				}
 				
@@ -154,6 +158,7 @@ var currentFilterType ='';
 
 function setGroup() {
 	document.getElementById('filterGroup').value = currentFilterType;
+	document.getElementById('formulaName').value = overwriteFormula['filter'].substring(overwriteFormula['filter'].indexOf('--'));
 }
 function setFilterOptions() {
 	var filterOptions = document.getElementById('hslrgb');
