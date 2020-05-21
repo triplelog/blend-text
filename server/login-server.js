@@ -85,7 +85,7 @@ app.get('/account',
 			for (var i=0;i<formulas.overlay.length;i++){
 				formulas.overlay[i].id = i;
 				workspace = new Blockly.Workspace();
-				wxml = Blockly.Xml.textToDom(formulas[i].workspace);
+				wxml = Blockly.Xml.textToDom(formulas.overlay[i].workspace);
 				Blockly.Xml.domToWorkspace(wxml, workspace);
 				code = Blockly.Lua.workspaceToCode(workspace);
 				formulas.overlay[i].code = code;
@@ -93,7 +93,7 @@ app.get('/account',
 			for (var i=0;i<formulas.gradient.length;i++){
 				formulas.gradient[i].id = i;
 				workspace = new Blockly.Workspace();
-				wxml = Blockly.Xml.textToDom(formulas[i].workspace);
+				wxml = Blockly.Xml.textToDom(formulas.gradient[i].workspace);
 				Blockly.Xml.domToWorkspace(wxml, workspace);
 				code = Blockly.Lua.workspaceToCode(workspace);
 				formulas.gradient[i].code = code;
