@@ -257,6 +257,7 @@ label[for="formula--1"] {
 <script>
 var ws = false;
 var tkey = {{ tkey | dump | safe }};
+var images = {{ images | dump | safe }};
 document.getElementById('gradient').addEventListener('change',selectCreations);
 document.getElementById('overlay').addEventListener('change',selectCreations);
 document.getElementById('filter').addEventListener('change',selectCreations);
@@ -324,8 +325,9 @@ tippy('#creation-{{i}} > .fa-edit', {
 	});
 	
 {% endfor %}
-for () {
-
+for (var i=0;i<images.length;i++) {
+	var el = document.getElementById('image-'+i);
+	imageTippy(el,images[i].name);
 }
 function imageTippy(el,name) {
 	tippy(el.querySelector('.fa-trash'), {
