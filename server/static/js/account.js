@@ -10,7 +10,7 @@ ws.onmessage = function(evt){
 		var formulas = dm.formulas;
 		console.log(formulas);
 		var el = document.getElementById(dm.formulaType+'Formulas');
-		
+		el.innerHTML = '';
 		
 		for (i in formulas) {
 			var label = document.createElement('label');

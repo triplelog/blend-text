@@ -376,14 +376,39 @@ wss.on('connection', function connection(ws) {
 		if (dm.message && username != ''){
 			var formula = {'name':dm.name,'workspace':dm.message,'hslrgb':dm.hslrgb};
 			//Add a Check that there does not exist a formula of that name already.
-			if (!dm.category || dm.category == 'overlay'){
-				QblurData.updateOne({ username: username }, {$push: {"formulas.overlay": formula}}, function(err, result) {});
-			}
-			else if (dm.category =='gradient') {
-				QblurData.updateOne({ username: username }, {$push: {"formulas.gradient": formula}}, function(err, result) {});
-			}
-			else if (dm.category =='distance') {
-				QblurData.updateOne({ username: username }, {$push: {"formulas.distance": formula}}, function(err, result) {});
+			if (!dm.category || dm.category == 'overlay' || dm.category =='gradient' || dm.category =='distance'){
+				if (!dm.category){dm.category = 'overlay';}
+				QblurData.findOne({ username: username }, "formulas", function(err, result) {
+					var foundMatch = false;
+					var formulas = result.formulas[dm.category];
+					for (var i=0;i<formulas.length;i++){
+						if (formulas[i].name == dm.name){
+							if (dm.overwrite){
+								formulas[i].workspace= dm.message;
+								formulas[i].hslrgb = dm.hslrgb;
+								result.markModified('formulas');
+								result.save(function(err,result){});
+								var jsonmessage = {"type":'savedFormula','message':dm.name};
+								ws.send(JSON.stringify(jsonmessage));
+							}
+							else {
+								var jsonmessage = {"type":'duplicate name'};
+								ws.send(JSON.stringify(jsonmessage));
+							}
+							foundMatch = true;
+							break;
+						}
+					}
+					if (!foundMatch){
+						formulas.push(formula);
+						result.markModified('formulas');
+						result.save(function(err,result){});
+						var jsonmessage = {"type":'savedFormula','message':dm.name};
+						ws.send(JSON.stringify(jsonmessage));
+					}
+				
+				});
+				//QblurData.updateOne({ username: username }, {$push: {"formulas.overlay": formula}}, function(err, result) {});
 			}
 			else if (dm.category =='filter') {
 				if (formula.hslrgb == 'hsl'){formula.hslrgb = 'h';}
@@ -393,16 +418,46 @@ wss.on('connection', function connection(ws) {
 					console.log(result, dm.group);
 					if (result.formulas && result.formulas.filter && result.formulas.filter[dm.group]){
 						result.formulas.filter[dm.group].push(formula);
+						var foundMatch = false;
+						var formulas = result.formulas.filter;
+						for (var i=0;i<formulas.length;i++){
+							if (formulas[i].name == dm.name){
+								if (dm.overwrite){
+									formulas[i].workspace= dm.message;
+									formulas[i].hslrgb = formula.hslrgb;
+									result.markModified('formulas');
+									result.save(function(err,result){});
+									var jsonmessage = {"type":'savedFormula','message':dm.name};
+									ws.send(JSON.stringify(jsonmessage));
+								}
+								else {
+									var jsonmessage = {"type":'duplicate name'};
+									ws.send(JSON.stringify(jsonmessage));
+								}
+								foundMatch = true;
+								break;
+							}
+						}
+						if (!foundMatch){
+							formulas.push(formula);
+							result.markModified('formulas');
+							result.save(function(err,result){});
+							var jsonmessage = {"type":'savedFormula','message':dm.name};
+							ws.send(JSON.stringify(jsonmessage));
+						}
 					}
 					else if (result.formulas && result.formulas.filter){
 						result.formulas.filter[dm.group] = [formula];
+						result.markModified('formulas');
+						result.save(function(err,result){});
 					}
 					else {
 						result.formulas.filter = {};
 						result.formulas.filter[dm.group] = [formula];
+						result.markModified('formulas');
+						result.save(function(err,result){});
 					}
-					result.markModified('formulas.filter');
-					result.save(function(err,result){});
+					
 				});
 			}
 			
