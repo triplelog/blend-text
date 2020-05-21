@@ -305,7 +305,6 @@ wss.on('connection', function connection(ws) {
 	else if (dm.type && dm.type == 'download'){
 		console.log(dm.url);
 		var name = "";
-		if (dm.name){name = dm.name;}
 		var wget = '';
 		var imgSrc;
 		for (var i=0;i<imgTypes.length;i++){
