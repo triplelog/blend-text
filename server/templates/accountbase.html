@@ -37,14 +37,20 @@ label[for="formula--1"] {
 	height: 150%;
 }
 
-{% for formula in range(0,10 + formulas.length*3/2) %}
-#formula-{{formula}}:checked ~ label[for="formula-{{formula}}"] {
-	pointer-events: none;
-	
+{% for formula in range(0,15 + formulas.overlay.length*3/2) %}
+#overlay-{{formula}}:checked ~ label[for="overlay-{{formula}}"] {
+	pointer-events: none;	
 }
-#formula-{{formula}}:checked ~ label[for="formula-{{formula}}"] + div.formulaCode {
+#overlay-{{formula}}:checked ~ label[for="overlay-{{formula}}"] + div.formulaCode {
 	display: block;
-	
+}
+{% endfor %}
+{% for formula in range(0,15 + formulas.gradient.length*3/2) %}
+#gradient-{{formula}}:checked ~ label[for="gradient-{{formula}}"] {
+	pointer-events: none;	
+}
+#gradient-{{formula}}:checked ~ label[for="gradient-{{formula}}"] + div.formulaCode {
+	display: block;
 }
 {% endfor %}
 .content-11 {
