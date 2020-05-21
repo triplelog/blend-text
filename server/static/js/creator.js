@@ -94,6 +94,17 @@ function saveFormula(category="overlay") {
 			formulas[idx].hslrgb = hslrgb;
 		}
 	}
+	if (category == 'filter'){
+		if (overwriteFormula[category] == currentFilterType+'--'+name;){
+			jsonmessage.overwrite = true;
+		}
+	}
+	else {
+		if (overwriteFormula[category] == name;){
+			jsonmessage.overwrite = true;
+		}
+	}
+	
 	ws.send(JSON.stringify(jsonmessage));
 	saveTippy[0].hide();
 	//add formula/filter to dropdown

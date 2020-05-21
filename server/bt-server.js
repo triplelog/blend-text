@@ -388,7 +388,7 @@ wss.on('connection', function connection(ws) {
 								formulas[i].hslrgb = dm.hslrgb;
 								result.markModified('formulas');
 								result.save(function(err,result){});
-								var jsonmessage = {"type":'savedFormula','message':dm.name};
+								var jsonmessage = {"type":'savedFormula','message':dm.name,'category':dm.category};
 								ws.send(JSON.stringify(jsonmessage));
 							}
 							else {
@@ -403,7 +403,7 @@ wss.on('connection', function connection(ws) {
 						formulas.push(formula);
 						result.markModified('formulas');
 						result.save(function(err,result){});
-						var jsonmessage = {"type":'savedFormula','message':dm.name};
+						var jsonmessage = {"type":'savedFormula','message':dm.name,'category':dm.category};
 						ws.send(JSON.stringify(jsonmessage));
 					}
 				
@@ -427,7 +427,7 @@ wss.on('connection', function connection(ws) {
 									formulas[i].hslrgb = formula.hslrgb;
 									result.markModified('formulas');
 									result.save(function(err,result){});
-									var jsonmessage = {"type":'savedFormula','message':dm.name};
+									var jsonmessage = {"type":'savedFormula','message':dm.name,'group':dm.group,'category':dm.category};
 									ws.send(JSON.stringify(jsonmessage));
 								}
 								else {
@@ -442,7 +442,7 @@ wss.on('connection', function connection(ws) {
 							formulas.push(formula);
 							result.markModified('formulas');
 							result.save(function(err,result){});
-							var jsonmessage = {"type":'savedFormula','message':dm.name};
+							var jsonmessage = {"type":'savedFormula','message':dm.name,'group':dm.group,'category':dm.category};
 							ws.send(JSON.stringify(jsonmessage));
 						}
 					}

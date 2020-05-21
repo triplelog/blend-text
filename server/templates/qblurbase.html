@@ -464,6 +464,7 @@ var tkey = {{ tkey | dump | safe }};
 var formulas = {{ formulas | dump | safe }};
 {% endif %}
 var overwriteName = '{{ name }}';
+var overwriteFormula = {'overlay':'','gradient':'','filter':''};
 var defaults = [];
 
 defaults.push('<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="qblur_r">r</variable></variables><block type="controls_if" id="Il^^YLd2NrFN:|;KKrjz" x="53" y="8"><value name="IF0"><block type="logic_compare" id="ziTZ^NbMl,qw@.Jp?R,B"><field name="OP">LT</field><value name="A"><block type="variables_get" id="]$l^IlghlBfr{3nXw`e{"><field name="VAR" id="qblur_r">r</field></block></value><value name="B"><block type="math_number" id="h2X9B|l.elRcnP+Je:;u"><field name="NUM">200</field></block></value></block></value><statement name="DO0"><block type="variables_set" id="D;pLu7Mt]Bf4$r!guo;-"><field name="VAR" id="qblur_r">r</field><value name="VALUE"><block type="math_number" id="i~V0T-jtCz[Wz(P4:BIV"><field name="NUM">200</field></block></value></block></statement></block></xml>');
@@ -566,6 +567,15 @@ ws.onmessage = function(evt){
 	}
 	else if (dm.type == 'savedCreation'){
 		overwriteName = dm.message;
+	}
+	else if (dm.type == 'savedFormula'){
+		if (dm.category == 'filter'){
+			overwriteFormula[dm.category] = dm.group+'--'+dm.message;
+		}
+		else {
+			overwriteFormula[dm.category] = dm.message;
+		}
+		
 	}
 	else {
 		var el = document.getElementById('imageHolder');
