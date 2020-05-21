@@ -647,13 +647,6 @@ wss.on('connection', function connection(ws) {
 					result.markModified("formulas");
 					result.save(function (err, result2) {
 						var formulas = result2.formulas[dm.formulaType];
-						var formulas;
-						if (dm.formulaType == 'filter'){
-							formulas = result2.formulas.filter[dm.group];
-						}
-						else {
-							formulas = result2.formulas[dm.formulaType];
-						}
 						var workspace;
 						var wxml;
 						var code;
