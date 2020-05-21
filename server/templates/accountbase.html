@@ -146,7 +146,8 @@ label[for="formula--1"] {
 		<input type="checkbox" id="overlay" checked></input><span>Overlay</span>
 		<input type="checkbox" id="filter" checked></input><span>Filter</span>
 	</div>
-	{% for i in range(0,creations.length) %}
+	{% for ii in range(0,creations.length) %}
+	{% set i = creations.length-ii-1 %}
 	<div id="creation-{{i}}" class="{% if creations[i].imgData.type == 'text' or creations[i].imgData.type == 'qr' %}overlay{% else %}{{creations[i].imgData.type}}{% endif %}">
 		<i class="fas fa-trash"></i><i class="fas fa-edit"></i><a href="{% if creations[i].imgData.type == 'text' or creations[i].imgData.type == 'qr' %}overlay{% else %}{{creations[i].imgData.type}}{% endif %}?q={{i}}">{{ creations[i].name}}</a>
 	</div>
@@ -175,12 +176,11 @@ label[for="formula--1"] {
 {% endblock %}
 {% block content31 %}
 	<div id="imageList">
-		{% set ii = 0 %}
-		{% for image in images %}
+		{% for ii in range(0,images.length) %}
+		{% set image = images[images.length-ii-1] %}
 		<div id="image-{{ii}}">
 			<i class="fas fa-trash"></i><i class="fas fa-edit"></i><a href="{{image.src}}">{{image.name}} <img src="{{image.src}}" style="display: none;"></a> (0 creations)
 		</div>
-		{% set ii = ii+1 %}
 		{% endfor %}
 	</div>
 {% endblock %}
