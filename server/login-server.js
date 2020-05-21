@@ -77,18 +77,26 @@ app.get('/account',
 				})
 			
 			}
-			var formulas = result.formulas.overlay;
+			var formulas = result.formulas;
 			var workspace;
 			var wxml;
 			var code;
 			//console.log(req.user);
-			for (var i=0;i<formulas.length;i++){
-				formulas[i].id = i;
+			for (var i=0;i<formulas.overlay.length;i++){
+				formulas.overlay[i].id = i;
 				workspace = new Blockly.Workspace();
 				wxml = Blockly.Xml.textToDom(formulas[i].workspace);
 				Blockly.Xml.domToWorkspace(wxml, workspace);
 				code = Blockly.Lua.workspaceToCode(workspace);
-				formulas[i].code = code;
+				formulas.overlay[i].code = code;
+			}
+			for (var i=0;i<formulas.gradient.length;i++){
+				formulas.gradient[i].id = i;
+				workspace = new Blockly.Workspace();
+				wxml = Blockly.Xml.textToDom(formulas[i].workspace);
+				Blockly.Xml.domToWorkspace(wxml, workspace);
+				code = Blockly.Lua.workspaceToCode(workspace);
+				formulas.gradient[i].code = code;
 			}
 		
 			var images = result.images;

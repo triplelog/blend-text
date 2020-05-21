@@ -558,12 +558,13 @@ wss.on('connection', function connection(ws) {
 				newFormula.name = dm.message + ' 1';
 				var foundMatch = false;
 				var foundOne = false;
-				for (var i=0;i<result.formulas.length;i++){
-					if (result.formulas[i].name == newFormula.name){
+				var formulas = result.formulas[dm.formulaType];
+				for (var i=0;i<formulas.length;i++){
+					if (formulas[i].name == newFormula.name){
 						foundOne = true;
 					}
-					if (result.formulas[i].name == dm.message){
-						newFormula.workspace = result.formulas[i].workspace;
+					if (formulas[i].name == dm.message){
+						newFormula.workspace = formulas[i].workspace;
 						foundMatch = true;
 					}
 				}
@@ -571,8 +572,8 @@ wss.on('connection', function connection(ws) {
 				while (foundOne){
 					newFormula.name = dm.message + ' '+ii;
 					foundOne = false;
-					for (var i=0;i<result.formulas.length;i++){
-						if (result.formulas[i].name == newFormula.name){
+					for (var i=0;i<formulas.length;i++){
+						if (formulas[i].name == newFormula.name){
 							foundOne = true;
 							break;
 						}
@@ -580,10 +581,10 @@ wss.on('connection', function connection(ws) {
 					ii++;
 				}
 				if (foundMatch){
-					result.formulas.push(newFormula);
+					formulas.push(newFormula);
 					result.markModified("formulas");
 					result.save(function (err, result2) {
-						var formulas = result.formulas;
+						var formulas = result2.formulas[dm.formulaType];
 					
 						var workspace;
 						var wxml;
@@ -598,6 +599,7 @@ wss.on('connection', function connection(ws) {
 						}
 						var jsonmessage = {'type':'newFormulas'};
 						jsonmessage.formulas = formulas;
+						jsonmessage.formulaType = formulaType;
 						ws.send(JSON.stringify(jsonmessage));
 					});
 					

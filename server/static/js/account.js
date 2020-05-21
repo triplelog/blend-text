@@ -17,7 +17,7 @@ ws.onmessage = function(evt){
 			input.setAttribute('type','radio');
 			input.setAttribute('name','formula');
 			input.setAttribute('style','display: none;');
-			input.id = 'formula-'+ formulas[i].id;
+			input.id = dm.formulaType+'-'+ formulas[i].id;
 			el.appendChild(input);
 		}
 		el.innerHTML += '<label for="formula--1"></label>';
@@ -25,7 +25,7 @@ ws.onmessage = function(evt){
 		for (i in formulas) {
 			var label = document.createElement('label');
 			label.classList.add('formulaLabel');
-			label.setAttribute('for','formula-'+ formulas[i].id);
+			label.setAttribute('for',dm.formulaType+'-'+ formulas[i].id);
 			label.textContent = formulas[i].name;
 			el.appendChild(label);
 			var div = document.createElement('div');
@@ -36,7 +36,7 @@ ws.onmessage = function(evt){
 			var icon = document.createElement('i');
 			icon.classList.add('fas');
 			icon.classList.add('fa-copy');
-			icon.setAttribute('onclick',"copyFormula('"+ formulas[i].name +"')");
+			icon.setAttribute('onclick',"copyFormula('"+ formulas[i].name +"','"+dm.formulaType+"')");
 			div2.appendChild(icon);
 			div.appendChild(div2);
 			var pre = document.createElement('pre');
@@ -98,9 +98,10 @@ ws.onmessage = function(evt){
 	}
 }
 
-function copyFormula(name){
+function copyFormula(name,formulaType){
 	var jsonmessage = {'type':'copyFormula'};
 	jsonmessage.message = name;
+	jsonmessage.formulaType = formulaType;
 	ws.send(JSON.stringify(jsonmessage));
 }
 function newFriend() {

@@ -102,17 +102,32 @@ label[for="formula--1"] {
 {% endblock %}
 {% block content11 %}
 	<input type="radio" name="formula" style="display: none;" id="formula--1" checked="checked"></input>
-	{% for formula in formulas %}
-	<input type="radio" name="formula" style="display: none;" id="formula-{{ formula.id }}"></input>
+	{% for formula in formulas.overlay %}
+	<input type="radio" name="formula" style="display: none;" id="overlay-{{ formula.id }}"></input>
+	{% endfor %}
+	{% for formula in formulas.gradient %}
+	<input type="radio" name="formula" style="display: none;" id="gradient-{{ formula.id }}"></input>
 	{% endfor %}
 	<label for="formula--1"></label>
-	{% for formula in formulas %}
-	<label class="formulaLabel" for="formula-{{ formula.id }}">{{ formula.name }}</label>
+	{% for formula in formulas.overlay %}
+	<label class="formulaLabel" for="overlay-{{ formula.id }}">{{ formula.name }}</label>
 	<div class="formulaCode">
 		<div>
 			<i class="fas fa-trash"></i>
 			<i class="fas fa-edit"></i>
-			<i class="fas fa-copy" onclick="copyFormula('{{ formula.name }}')"></i>
+			<i class="fas fa-copy" onclick="copyFormula('{{ formula.name }}','overlay')"></i>
+		</div>
+		<pre class="language-python"><code class="language-python">{{ formula.code }}</code></pre>
+		
+	</div>
+	{% endfor %}
+	{% for formula in formulas.gradient %}
+	<label class="formulaLabel" for="gradient-{{ formula.id }}">{{ formula.name }}</label>
+	<div class="formulaCode">
+		<div>
+			<i class="fas fa-trash"></i>
+			<i class="fas fa-edit"></i>
+			<i class="fas fa-copy" onclick="copyFormula('{{ formula.name }}','gradient')"></i>
 		</div>
 		<pre class="language-python"><code class="language-python">{{ formula.code }}</code></pre>
 		
