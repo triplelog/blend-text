@@ -95,12 +95,12 @@ function saveFormula(category="overlay") {
 		}
 	}
 	if (category == 'filter'){
-		if (overwriteFormula[category] == currentFilterType+'--'+name;){
+		if (overwriteFormula[category] == currentFilterType+'--'+name){
 			jsonmessage.overwrite = true;
 		}
 	}
 	else {
-		if (overwriteFormula[category] == name;){
+		if (overwriteFormula[category] == name){
 			jsonmessage.overwrite = true;
 		}
 	}
