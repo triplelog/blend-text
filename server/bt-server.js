@@ -251,7 +251,6 @@ wss.on('connection', function connection(ws) {
   		FileType.fromBuffer(buffer.slice(0,1000)).then( (val) => {
   			var ext = '.'+val.ext;
   			var name = "";
-			if (dm.name){name = dm.name;}
   			for (var i=0;i<imgTypes.length;i++){
 				if (ext == imgTypes[i]){
 					if (account){
