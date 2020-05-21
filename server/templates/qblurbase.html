@@ -504,11 +504,9 @@ defaults.push('<xml xmlns="https://developers.google.com/blockly/xml"><variables
 	  trigger: 'click',
 	  interactive: true,
 	  placement: 'top',
-	  {% if type == 'filter' %}
 	  onShown(instance) {
 		setGroup();
 	  },
-	  {% endif %}
 	});
 	
   const creationTippy = tippy('#saveCreationButton', {

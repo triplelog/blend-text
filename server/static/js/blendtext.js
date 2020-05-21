@@ -233,6 +233,9 @@ function updateImage(evt){
 	
 	
 }
+function setGroup() {
+	document.getElementById('formulaName').value = overwriteFormula['gradient'];
+}
 var singleEls = ['text','font','blurRadius','bort','threshold','typeNumber','errorCorrect','crop'];
 for (var i=0;i<8;i++){
 	var el = document.getElementById(singleEls[i]);

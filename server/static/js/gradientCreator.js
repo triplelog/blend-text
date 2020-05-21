@@ -183,7 +183,9 @@ function updateImage(evt){
 	
 	
 }
-
+function setGroup() {
+	document.getElementById('formulaName').value = overwriteFormula['gradient'];
+}
 function chgGradientType() {
 	var el = document.getElementById('gradientType').querySelector('select');
 	if (el.value == 'linear'){

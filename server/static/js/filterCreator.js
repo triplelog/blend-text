@@ -159,8 +159,7 @@ var currentFilterType ='';
 
 function setGroup() {
 	document.getElementById('filterGroup').value = currentFilterType;
-	console.log(overwriteFormula['filter']);
-	document.getElementById('formulaName').value = overwriteFormula['filter'].substring(overwriteFormula['filter'].indexOf('--'));
+	document.getElementById('formulaName').value = overwriteFormula['filter'].substring(overwriteFormula['filter'].indexOf('--')+2);
 }
 function setFilterOptions() {
 	var filterOptions = document.getElementById('hslrgb');
