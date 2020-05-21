@@ -32,17 +32,15 @@ img {
 	margin: 0px;
 }
 
-.content {
+div:Not(.content-22) > .content {
 	overflow-y: auto;
 	overflow-x: auto;
 	overflow: auto;
 	height: calc(100% - 2 * var(--border-radius));
-	padding: .5rem;
+	padding: calc(.5 * var(--border-radius));
 }
 .content-22 .content {
-	height: unset;
 	text-align: center;
-	padding: 0px;
 }
 {% endblock %}
 
