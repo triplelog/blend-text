@@ -9,8 +9,8 @@
 {% endblock %}
 	
 {% block centerSize %}
-	--height-center: 150px;
-	--width-center: 200px;
+	--height-center: 6rem;
+	--width-center: 8rem;
 {% endblock %}
 
 {% block titleCSS %}
@@ -86,7 +86,8 @@ label[for="formula--1"] {
 	overflow-y: auto;
 	overflow-x: auto;
 	overflow: auto;
-	height: calc(100% - 2 * var(--border-radius));
+	padding: calc(.5 * var(--border-radius));
+	height: calc(100% - 3 * var(--border-radius));
 }
 .content-22 .content {
 	height: unset;
