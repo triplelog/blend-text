@@ -100,8 +100,6 @@ app.get('/account',
 			}
 			var idx = 0;
 			for ( var group in formulas.filter){
-				console.log(group);
-				console.log(formulas.filter);
 				for (var i=0;i<formulas.filter[group].length;i++){
 					formulas.filter[group][i].id = idx;
 					workspace = new Blockly.Workspace();
