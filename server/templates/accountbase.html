@@ -187,11 +187,13 @@ label[for="formula--1"] {
 		<span id="imgDrag"></span>
 	</div>
 	<div id="imageList">
-		<ul>
+		{% set ii = 0 %}
 		{% for image in images %}
-		<li><a href="{{image.src}}">{{image.name}} <img src="{{image.src}}" style="display: none;"></a> (0 creations)</li>
+		<div id="image-{{ii}}">
+			<i class="fas fa-trash"></i><i class="fas fa-edit"></i><a href="{{image.src}}">{{image.name}} <img src="{{image.src}}" style="display: none;"></a> (0 creations)
+		</div>
+		{% set ii = ii+1 %}
 		{% endfor %}
-		</ul>
 	</div>
 {% endblock %}
 
