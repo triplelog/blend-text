@@ -692,13 +692,10 @@ wss.on('connection', function connection(ws) {
 			}
 			var obj = {};
 			obj['settings.'+dm.setting]=dm.message;
-			if (dm.setting == 'email'){
-				QblurData.updateOne({ username: username }, obj, function(err, result) {
-					console.log(err);
-					console.log(result);
-				});
-			}
-			
+			QblurData.updateOne({ username: username }, obj, function(err, result) {
+				console.log(err);
+				console.log(result);
+			});
 		}
 		return;
 	}
