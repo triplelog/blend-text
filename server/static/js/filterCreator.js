@@ -55,6 +55,8 @@ function updateImage(evt){
 			}
 			else {
 				var formula = filters[currentFilterType][parseInt(el.value)];
+				overwriteFormula['filter'] = currentFilterType+'--'+formula.name;
+				console.log(overwriteFormula['filter']);
 				if (formula.hslrgb == 'r'){
 					var wxml = Blockly.Xml.textToDom(formula.workspace);
 					workspace.clear();
@@ -66,7 +68,7 @@ function updateImage(evt){
 					imgData.filters[currentFilterID].workspace = formula.workspace;
 					imgData.filters[currentFilterID].hslrgb = formula.hslrgb;
 					imgData.filters[currentFilterID].name = formula.name;
-					overwriteFormula['filter'] = currentFilterID+'--'+formula.name;
+					
 					updateWork();
 				}
 				else {
@@ -80,7 +82,6 @@ function updateImage(evt){
 					imgData.filters[currentFilterID].workspace = formula.workspace;
 					imgData.filters[currentFilterID].hslrgb = formula.hslrgb;
 					imgData.filters[currentFilterID].name = formula.name;
-					overwriteFormula['filter'] = currentFilterID+'--'+formula.name;
 					updateWork();
 				}
 				
@@ -158,6 +159,7 @@ var currentFilterType ='';
 
 function setGroup() {
 	document.getElementById('filterGroup').value = currentFilterType;
+	console.log(overwriteFormula['filter']);
 	document.getElementById('formulaName').value = overwriteFormula['filter'].substring(overwriteFormula['filter'].indexOf('--'));
 }
 function setFilterOptions() {
