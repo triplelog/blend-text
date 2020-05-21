@@ -417,9 +417,9 @@ wss.on('connection', function connection(ws) {
 					console.log(err, username);
 					console.log(result, dm.group);
 					if (result.formulas && result.formulas.filter && result.formulas.filter[dm.group]){
-						result.formulas.filter[dm.group].push(formula);
+						
 						var foundMatch = false;
-						var formulas = result.formulas.filter;
+						var formulas = result.formulas.filter[dm.group];
 						for (var i=0;i<formulas.length;i++){
 							if (formulas[i].name == dm.name){
 								if (dm.overwrite){
@@ -613,13 +613,20 @@ wss.on('connection', function connection(ws) {
 				newFormula.name = dm.message + ' 1';
 				var foundMatch = false;
 				var foundOne = false;
-				var formulas = result.formulas[dm.formulaType];
+				var formulas;
+				if (dm.formulaType == 'filter'){
+					formulas = result.formulas.filter[dm.group];
+				}
+				else {
+					formulas = result.formulas[dm.formulaType];
+				}
 				for (var i=0;i<formulas.length;i++){
 					if (formulas[i].name == newFormula.name){
 						foundOne = true;
 					}
 					if (formulas[i].name == dm.message){
 						newFormula.workspace = formulas[i].workspace;
+						newFormula.hslrgb = formulas[i].hslrgb;
 						foundMatch = true;
 					}
 				}
@@ -640,17 +647,39 @@ wss.on('connection', function connection(ws) {
 					result.markModified("formulas");
 					result.save(function (err, result2) {
 						var formulas = result2.formulas[dm.formulaType];
-					
+						var formulas;
+						if (dm.formulaType == 'filter'){
+							formulas = result2.formulas.filter[dm.group];
+						}
+						else {
+							formulas = result2.formulas[dm.formulaType];
+						}
 						var workspace;
 						var wxml;
 						var code;
-						for (var i=0;i<formulas.length;i++){
-							formulas[i].id = i;
-							workspace = new Blockly.Workspace();
-							wxml = Blockly.Xml.textToDom(formulas[i].workspace);
-							Blockly.Xml.domToWorkspace(wxml, workspace);
-							code = Blockly.Lua.workspaceToCode(workspace);
-							formulas[i].code = code;
+						if (dm.formulaType == 'filter'){
+							var idx = 0;
+							for (var group in formulas){
+								for (var i=0;i<formulas[group].length;i++){
+									formulas[group][i].id = idx;
+									workspace = new Blockly.Workspace();
+									wxml = Blockly.Xml.textToDom(formulas[group][i].workspace);
+									Blockly.Xml.domToWorkspace(wxml, workspace);
+									code = Blockly.Lua.workspaceToCode(workspace);
+									formulas[group][i].code = code;
+									idx++;
+								}
+							}
+						}
+						else {
+							for (var i=0;i<formulas.length;i++){
+								formulas[i].id = i;
+								workspace = new Blockly.Workspace();
+								wxml = Blockly.Xml.textToDom(formulas[i].workspace);
+								Blockly.Xml.domToWorkspace(wxml, workspace);
+								code = Blockly.Lua.workspaceToCode(workspace);
+								formulas[i].code = code;
+							}
 						}
 						var jsonmessage = {'type':'newFormulas'};
 						jsonmessage.formulas = formulas;

@@ -11,34 +11,68 @@ ws.onmessage = function(evt){
 		console.log(formulas);
 		var el = document.getElementById(dm.formulaType+'Formulas');
 		el.innerHTML = '';
-		
-		for (i in formulas) {
-			var label = document.createElement('label');
-			label.classList.add('formulaLabel');
-			label.setAttribute('for',dm.formulaType+'-'+ formulas[i].id);
-			label.textContent = formulas[i].name;
-			el.appendChild(label);
-			var div = document.createElement('div');
-			div.classList.add('formulaCode');
-			var div2 = document.createElement('div');
-			div2.innerHTML = '<i class="fas fa-trash"></i>';
-			div2.innerHTML += '<i class="fas fa-edit"></i>';
-			var icon = document.createElement('i');
-			icon.classList.add('fas');
-			icon.classList.add('fa-copy');
-			icon.setAttribute('onclick',"copyFormula('"+ formulas[i].name +"','"+dm.formulaType+"')");
-			div2.appendChild(icon);
-			div.appendChild(div2);
-			var pre = document.createElement('pre');
-			pre.classList.add('language-lua');
-			var code = document.createElement('code');
-			code.classList.add('language-lua');
-			code.textContent = formulas[i].code;
-			pre.appendChild(code);
-			div.appendChild(pre)
-			el.appendChild(div);
+		if (dm.formulaType == 'filter'){
+			for (group in formulas){
+				for (i in formulas[group]) {
+					var label = document.createElement('label');
+					label.classList.add('formulaLabel');
+					label.setAttribute('for',dm.formulaType+'-'+ formulas[group][i].id);
+					label.textContent = formulas[group][i].name;
+					el.appendChild(label);
+					var div = document.createElement('div');
+					div.classList.add('formulaCode');
+					var div2 = document.createElement('div');
+					div2.innerHTML = '<i class="fas fa-trash"></i>';
+					div2.innerHTML += '<i class="fas fa-edit"></i>';
+					var icon = document.createElement('i');
+					icon.classList.add('fas');
+					icon.classList.add('fa-copy');
+					icon.setAttribute('onclick',"copyFormula('"+ formulas[group][i].name +"','"+dm.formulaType+"','"+group+"')");
+					div2.appendChild(icon);
+					div.appendChild(div2);
+					var pre = document.createElement('pre');
+					pre.classList.add('language-lua');
+					var code = document.createElement('code');
+					code.classList.add('language-lua');
+					code.textContent = formulas[group][i].code;
+					pre.appendChild(code);
+					div.appendChild(pre)
+					el.appendChild(div);
 			
+				}
+			}
 		}
+		else {
+			for (i in formulas) {
+				var label = document.createElement('label');
+				label.classList.add('formulaLabel');
+				label.setAttribute('for',dm.formulaType+'-'+ formulas[i].id);
+				label.textContent = formulas[i].name;
+				el.appendChild(label);
+				var div = document.createElement('div');
+				div.classList.add('formulaCode');
+				var div2 = document.createElement('div');
+				div2.innerHTML = '<i class="fas fa-trash"></i>';
+				div2.innerHTML += '<i class="fas fa-edit"></i>';
+				var icon = document.createElement('i');
+				icon.classList.add('fas');
+				icon.classList.add('fa-copy');
+				icon.setAttribute('onclick',"copyFormula('"+ formulas[i].name +"','"+dm.formulaType+"')");
+				div2.appendChild(icon);
+				div.appendChild(div2);
+				var pre = document.createElement('pre');
+				pre.classList.add('language-lua');
+				var code = document.createElement('code');
+				code.classList.add('language-lua');
+				code.textContent = formulas[i].code;
+				pre.appendChild(code);
+				div.appendChild(pre)
+				el.appendChild(div);
+			
+			}
+		
+		}
+		
 		Prism.highlightAll();
 	}
 	else if (dm.operation == 'friend'){
@@ -88,10 +122,13 @@ ws.onmessage = function(evt){
 	}
 }
 
-function copyFormula(name,formulaType){
+function copyFormula(name,formulaType,group){
 	var jsonmessage = {'type':'copyFormula'};
 	jsonmessage.message = name;
 	jsonmessage.formulaType = formulaType;
+	if (formulaType == 'filter'){
+		jsonmessage.group = group;
+	}
 	ws.send(JSON.stringify(jsonmessage));
 }
 function newFriend() {

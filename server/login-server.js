@@ -98,6 +98,19 @@ app.get('/account',
 				code = Blockly.Lua.workspaceToCode(workspace);
 				formulas.gradient[i].code = code;
 			}
+			var idx = 0;
+			for ( var group in formulas.filter){
+				for (var i=0;i<formulas.filter[group].length;i++){
+					formulas.filter[group][i].id = idx;
+					workspace = new Blockly.Workspace();
+					wxml = Blockly.Xml.textToDom(formulas.filter[group][i].workspace);
+					Blockly.Xml.domToWorkspace(wxml, workspace);
+					code = Blockly.Lua.workspaceToCode(workspace);
+					formulas.filter[group][i].code = code;
+					idx++;
+				}
+			}
+			
 		
 			var images = result.images;
 
@@ -111,6 +124,7 @@ app.get('/account',
 				friends: result.friends,
 				tkey: tkey,
 				formulas: formulas,
+				totalfilters: idx,
 				images: images,
 				creations: creations,
 			}));

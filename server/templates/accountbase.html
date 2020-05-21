@@ -54,6 +54,15 @@ label[for="formula--1"] {
 }
 {% endfor %}
 
+{% for formula in range(0,15 + totalfilters*3/2) %}
+#filter-{{formula}}:checked ~ #gradientFormulas label[for="filter-{{formula}}"] {
+	pointer-events: none;	
+}
+#filter-{{formula}}:checked ~ #gradientFormulas label[for="filter-{{formula}}"] + div.formulaCode {
+	display: block;
+}
+{% endfor %}
+
 .formulaLabel {
 	position: relative;
 	display: block;
@@ -122,6 +131,9 @@ label[for="formula--1"] {
 	{% for formula in range(0,15 + formulas.gradient.length*3/2) %}
 	<input type="radio" name="formula" style="display: none;" id="gradient-{{ formula }}"></input>
 	{% endfor %}
+	{% for formula in range(0,15 + totalfilters*3/2) %}
+	<input type="radio" name="formula" style="display: none;" id="filter-{{ formula }}"></input>
+	{% endfor %}
 	<label for="formula--1"></label>
 	<div id="overlayFormulas">
 		{% for formula in formulas.overlay %}
@@ -132,7 +144,6 @@ label[for="formula--1"] {
 				<i class="fas fa-edit"></i>
 				<i class="fas fa-copy" onclick="copyFormula('{{ formula.name }}','overlay')"></i>
 			</div>
-			<input type="text" class="workspace" style="display: none" value="{{ formula.workspace }}"></input>
 			<pre class="language-lua"><code class="language-lua">{{ formula.code }}</code></pre>
 		
 		</div>
@@ -150,6 +161,22 @@ label[for="formula--1"] {
 			<pre class="language-python"><code class="language-python">{{ formula.code }}</code></pre>
 		
 		</div>
+		{% endfor %}
+	</div>
+	<div id="filterFormulas">
+		{% for group in formulas.filter %}
+			{% for formula in formulas.filter[group] %}
+			<label class="formulaLabel" for="filter-{{ formula.id }}">{{ formula.name }}</label>
+			<div class="formulaCode">
+				<div>
+					<i class="fas fa-trash"></i>
+					<i class="fas fa-edit"></i>
+					<i class="fas fa-copy" onclick="copyFormula('{{ formula.name }}','filter','{{ group }}')"></i>
+				</div>
+				<pre class="language-python"><code class="language-python">{{ formula.code }}</code></pre>
+		
+			</div>
+			{% endfor %}
 		{% endfor %}
 	</div>
 {% endblock %}	
@@ -242,42 +269,11 @@ label[for="formula--1"] {
 	Email:
 	Robot:
 	Stats:
+	Default Language:
 
 
 {% endblock %}
 
-{% block title12 %}
-<div class="title">
-	<div class="titleBG" style="width:100%;height:100%;">
-
-	</div>
-	<span class="titleLeft">
-		<button>Save<button>
-		<button>Discard<button>
-	</span>
-	<span class="titleCenter">
-		<a href="https://qblur.com">Workspace</a>
-	</span>
-	<span class="titleRight">
-		<label for="radio33-1"><i class="fas fa-compress-alt"></i></label>
-		<label for="radio33-2"><i class="fas fa-expand-alt"></i></label>
-		<label for="radio33-3"><i class="fas fa-expand"></i></label>
-	</span>
-</div>
-{% endblock %}
-{% block content12 %}
-	<div id="formulaDiv">
-		<div id="workspaceFormula" style="width: 500px;"></div>
-		<div id="blurFormula" style="display: none;">
-			<textarea rows="4" cols="50"></textarea>
-		</div>
-		<div id="textFormula" style="display: none;">
-			<textarea rows="4" cols="50"></textarea>
-		</div>
-	</div>
-
-
-{% endblock %}
 
 
 {% block content22 %}
@@ -422,6 +418,7 @@ function chgFormulaType(){
 	var formulaType = document.getElementById('formulaType').value;
 	document.getElementById('overlayFormulas').style.display = 'none';
 	document.getElementById('gradientFormulas').style.display = 'none';
+	document.getElementById('filterFormulas').style.display = 'none';
 	if (document.getElementById(formulaType+'Formulas')){
 		document.getElementById(formulaType+'Formulas').style.display = 'block';
 	}
