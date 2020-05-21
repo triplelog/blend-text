@@ -99,7 +99,9 @@ app.get('/account',
 				formulas.gradient[i].code = code;
 			}
 			var idx = 0;
+			var filterGroups= [];
 			for ( var group in formulas.filter){
+				filterGroups.push(group);
 				for (var i=0;i<formulas.filter[group].length;i++){
 					formulas.filter[group][i].id = idx;
 					workspace = new Blockly.Workspace();
@@ -124,6 +126,7 @@ app.get('/account',
 				friends: result.friends,
 				tkey: tkey,
 				formulas: formulas,
+				filterGroups: filterGroups,
 				totalfilters: idx,
 				images: images,
 				creations: creations,
