@@ -556,6 +556,7 @@ namespace Lapis.QrArt
 					minLev = myLev;
 					outFont = ff.Name;
 				}
+				Console.WriteLine(ff.Name);
 			}
 			Console.WriteLine("original" + input_str + " found "+ outFont);
             return outFont;
