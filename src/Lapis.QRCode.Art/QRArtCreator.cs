@@ -119,10 +119,10 @@ namespace Lapis.QRCode.Art
                 	for (var ii=blurRadius;ii<twidth-blurRadius;ii++){
                 		p = imageText.GetPixel(ii+blankL,i+blankT);
                 		
-                		if (p < 16000000){//first is x (col), second is y
+                		if (p < 16000000){
+                			tripMatrix[i,ii] = 16 - p/1000000;
                 			
-                			
-                			if (p < 8000000){
+                			/*if (p < 8000000){
 								if (p < 4000000){
 									tripMatrix[i,ii] = 3;
 								}
@@ -132,7 +132,7 @@ namespace Lapis.QRCode.Art
 							}
 							else {
 								tripMatrix[i,ii] = 1;
-							}
+							}*/
 							
                 		}
                 		

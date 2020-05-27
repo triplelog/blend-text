@@ -117,7 +117,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 							//int imgC = hashColor.GetHashCode();
 								
                             int outval = 0;
-                            if (tripMatrix[r, c] > 2 && darkhash.TryGetValue(imgC, out outval))
+                            if (tripMatrix[r, c] > 15 && darkhash.TryGetValue(imgC, out outval))
 							{
 								re = (outval & 0xFF0000) >> 16;
 								gr = (outval & 0xFF00) >> 8;
@@ -132,7 +132,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 									double h; double s; double l;
 									RgbToHls(re,gr,bl,out h,out l,out s);
 									
-									if (tripMatrix[r, c] > 2){
+									if (tripMatrix[r, c] > 15){
 										var res = textFunc.Call (tripMatrix[r, c],h,s,l);
 										h = Convert.ToDouble(res[0]);
 										s = Convert.ToDouble(res[1]);
@@ -146,28 +146,19 @@ namespace Lapis.QRCode.Imaging.Drawing
 										HlsToRgb(Convert.ToDouble(resD[0]), Convert.ToDouble(resD[2]), Convert.ToDouble(resD[1]),out reD, out grD, out blD);
 										var resL = scriptFunc.Call (30,h,s,l);
 										HlsToRgb(Convert.ToDouble(resL[0]), Convert.ToDouble(resL[2]), Convert.ToDouble(resL[1]),out reL, out grL, out blL);
-										re = reD + reL;
-										gr = grD + grL;
-										bl = blD + blL;
+										re = reD * tripMatrix[r,c] + reL * (16 - tripMatrix[r,c]);
+										gr = grD * tripMatrix[r,c]+ grL * (16 - tripMatrix[r,c]);
+										bl = blD * tripMatrix[r,c]+ blL * (16 - tripMatrix[r,c]);
 										
-										if (tripMatrix[r, c] ==1){
-											re += reL;
-											gr += grL;
-											bl += blL;
-										}
-										else if (tripMatrix[r, c] == 2){
-											re += reD;
-											gr += grD;
-											bl += blD;
-										}
-										re /= 3;
-										gr /= 3;
-										bl /= 3;
+
+										re /= 16;
+										gr /= 16;
+										bl /= 16;
 									}
 									
 									
 								
-									if (tripMatrix[r, c] > 2){
+									if (tripMatrix[r, c] > 15){
 										int newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
 										darkhash.Add(imgC, newcol);
 									}
@@ -190,7 +181,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 									
 								}
 								else {
-									if (tripMatrix[r, c] > 2){
+									if (tripMatrix[r, c] > 15){
 										var res = textFunc.Call (tripMatrix[r, c],re,gr,bl);
 										re = Convert.ToInt32(res[0]);
 										gr = Convert.ToInt32(res[1]);
@@ -201,26 +192,16 @@ namespace Lapis.QRCode.Imaging.Drawing
 									else {
 										var resD = textFunc.Call (tripMatrix[r, c],re,gr,bl);
 										var resL = scriptFunc.Call (30,re,gr,bl);
-										re = Convert.ToInt32(resD[0]);
-										gr = Convert.ToInt32(resD[1]);
-										bl = Convert.ToInt32(resD[2]);
-										re += Convert.ToInt32(resL[0]);
-										gr += Convert.ToInt32(resL[1]);
-										bl += Convert.ToInt32(resL[2]);
+										re = Convert.ToInt32(resD[0]) * (tripMatrix[r,c]);
+										gr = Convert.ToInt32(resD[1]) * (tripMatrix[r,c]);
+										bl = Convert.ToInt32(resD[2]) * (tripMatrix[r,c]);
+										re += Convert.ToInt32(resL[0]) * (16 - tripMatrix[r,c]);
+										gr += Convert.ToInt32(resL[1]) * (16 - tripMatrix[r,c]);
+										bl += Convert.ToInt32(resL[2]) * (16 - tripMatrix[r,c]);
 										
-										if (tripMatrix[r, c] ==1){
-											re += Convert.ToInt32(resL[0]);
-											gr += Convert.ToInt32(resL[1]);
-											bl += Convert.ToInt32(resL[2]);
-										}
-										else if (tripMatrix[r, c] == 2){
-											re += Convert.ToInt32(resD[0]);
-											gr += Convert.ToInt32(resD[1]);
-											bl += Convert.ToInt32(resD[2]);
-										}
-										re /= 3;
-										gr /= 3;
-										bl /= 3;
+										re /= 16;
+										gr /= 16;
+										bl /= 16;
 									}
 								
 									foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
