@@ -186,7 +186,7 @@ Or add a QR code on top of your image.
     <defs>
     	
     	  <clipPath id="leftHalf" clipPathUnits="objectBoundingBox">
-			<path id="pathLeft" d="M0,0 .5,0 .5,1 0,1 Z" />
+			<path id="pathLeft" d="M0,0 1,0 1,1 0,1 Z" />
 		  </clipPath>
 		  <clipPath id="rightHalf" clipPathUnits="objectBoundingBox">
 			<path id="pathRight" d="M.5,0 1,0 1,1 .5,1 Z" />
@@ -201,7 +201,12 @@ Or add a QR code on top of your image.
 
 {% block scripts %}
 <script>
-
+document.getElementById('filterSlider').addEventListener('change',chgFilterSlider);
+function chgFilterSlider() {
+	var val = document.getElementById('filterSlider').value;
+	var el =document.getElementById('pathRight');
+	console.log(val, el);
+}
 </script>
 {% endblock %}
 
