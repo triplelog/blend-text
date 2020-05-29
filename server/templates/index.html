@@ -45,6 +45,17 @@ div:Not(.content-22) > .content {
 .content-22 .content {
 	text-align: center;
 }
+
+#divLeft {
+	-webkit-clip-path:url(#leftHalf);
+	clip-path:url(#leftHalf);
+	position: absolute;
+}
+#divRight {
+	-webkit-clip-path:url(#rightHalf);
+	clip-path:url(#rightHalf);
+	position: absolute;
+}
 {% endblock %}
 
 
@@ -87,10 +98,10 @@ A limited number of tools offer almost unlimited customization. Play around and 
 {% endblock %}
 {% block content13 %}
 Add one or more filters to have total control over the brightness, hue, saturation, contrast, and any other characteristics of your image's color.
-<div>
+<div id="divLeft">
 	<img src="../img/regensburg.jpg" style="width:90%"/>
 </div>
-<div>
+<div id="divRight">
 	<img src="../img/regensgurghbw.png" style="width:90%"/>
 </div>
 {% endblock %}	
@@ -158,7 +169,20 @@ Or add a QR code on top of your image.
 
 
 {% block bodyStart %}
-
+<svg width="0" height="0" viewBox = "0 0 1 1" version = "1.1">
+    <defs>
+    	
+    	  <clipPath id="leftHalf" clipPathUnits="objectBoundingBox">
+			<path id="pathLeft" d="M0,0 .5,0 .5,1 0,1 Z" />
+		  </clipPath>
+		  <clipPath id="rightHalf" clipPathUnits="objectBoundingBox">
+			<path id="pathRight" d="M.5,0 1,0 1,1 .5,1 Z" />
+		  </clipPath>
+    	
+    	  
+    </defs>
+    
+</svg>
 {% endblock %}
 
 
