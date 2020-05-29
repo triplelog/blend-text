@@ -335,12 +335,12 @@ namespace Lapis.QrArt
 									graph.DrawImage(bmp, new Rectangle(0,0,bmp.Width,bmp.Height));
 									
 								}
-								using (Graphics graph = Graphics.FromImage(bmp))
-								{
-									Rectangle ImageSize = new Rectangle(0,0,bmp.Width,bmp.Height);
-									graph.FillRectangle(Brushes.White, ImageSize);
-									
-								}
+								//using (Graphics graph = Graphics.FromImage(bmp))
+								//{
+								//	Rectangle ImageSize = new Rectangle(0,0,bmp.Width,bmp.Height);
+								//	graph.FillRectangle(Brushes.White, ImageSize);
+								//	
+								//}
 								bitmapText = new BitmapFrame(bmpp);
 								bitmap = new BitmapFrame(bmp);
 								textDrawer.MarginL = 0;

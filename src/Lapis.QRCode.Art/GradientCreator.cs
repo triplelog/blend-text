@@ -1057,8 +1057,10 @@ namespace Lapis.QRCode.Art
 			int theight = tripMatrix.RowCount;
         	int twidth = tripMatrix.ColumnCount;
         	outMatrix = new TripMatrix(theight,twidth);
-        	int ystep = 1 + outMatrix.RowCount / 200;
-        	int xstep = 1 + outMatrix.ColumnCount / 200;
+        	//int ystep = 1 + outMatrix.RowCount / 200;
+        	//int xstep = 1 + outMatrix.ColumnCount / 200;
+        	int ystep = 1;
+        	int xstep = 1;
         	
 			Stopwatch stopWatch = new Stopwatch();
         	stopWatch.Start();
