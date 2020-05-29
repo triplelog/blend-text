@@ -49,16 +49,19 @@ div:Not(.content-22) > .content {
 #divLeft {
 	-webkit-clip-path:url(#leftHalf);
 	clip-path:url(#leftHalf);
-	position: absolute;
+	position: relative;
+	left:0px;
+	top:0px;
 	width: calc(100% - 1 * var(--border-radius));
+	display: inline-block;
 }
 #divRight {
 	-webkit-clip-path:url(#rightHalf);
 	clip-path:url(#rightHalf);
 	position: relative;
-	left: calc(.5 * var(--border-radius));
-	top:0px;
+	top:-100%;
 	width: calc(100% - 1 * var(--border-radius));
+	display: inline-block;
 }
 {% endblock %}
 
