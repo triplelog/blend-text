@@ -202,9 +202,11 @@ Or add a QR code on top of your image.
 {% block scripts %}
 <script>
 document.getElementById('filterSlider').addEventListener('change',chgFilterSlider);
+document.getElementById('filterSlider').addEventListener('input',chgFilterSlider);
 function chgFilterSlider() {
 	var val = document.getElementById('filterSlider').value;
 	var el =document.getElementById('pathRight');
+	el.setAttribute('d','M'+(val/100)+',0 1,0 1,1 '+(val/100)+',1 Z');
 	console.log(val, el);
 }
 </script>
