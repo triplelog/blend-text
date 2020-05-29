@@ -38,6 +38,15 @@ namespace Lapis.QRCode.Imaging.Drawing
 				
 			}
 			
+			varD = true;
+			varR = true;
+			varG = true;
+			varB = true;
+			varH = true;
+			varS = true;
+			varL = true;
+					
+			
 			if (BlurType[0] == 'h'){
 				BlurType = "hsl";
 			}
@@ -283,6 +292,8 @@ namespace Lapis.QRCode.Imaging.Drawing
 								re = (outval & 0xFF0000) >> 16;
 								gr = (outval & 0xFF00) >> 8;
 								bl = outval & 0xFF;
+								
+								RgbToHls(hashColor.R,hashColor.G,hashColor.B,out h,out l,out s);
 								foreBrushCustom = new SolidBrush(Color.FromArgb(re,gr,bl));
 								graph.FillRectangle(foreBrushCustom, x, y, CellWidth, CellWidth);
 								repcell++;
