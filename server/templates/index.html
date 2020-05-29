@@ -51,7 +51,7 @@ div:Not(.content-22) > .content {
 	clip-path:url(#leftHalf);
 	position: absolute;
 	
-	width: calc(100% - 1 * var(--border-radius));
+	width: calc((var(--width-container) - var(--width-center)) / 2 - 1 * var(--border-radius));
 	display: inline-block;
 }
 #divRight {
@@ -60,7 +60,7 @@ div:Not(.content-22) > .content {
 	position: relative;
 	left:0px;
 	top:0px;
-	width: calc(100% - 1 * var(--border-radius));
+	width: calc((var(--width-container) - var(--width-center)) / 2 - 1 * var(--border-radius));
 	display: inline-block;
 }
 {% endblock %}
