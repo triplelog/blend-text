@@ -63,6 +63,9 @@ div:Not(.content-22) > .content {
 	width: calc((var(--width-container) - var(--width-center)) / 2 - 1 * var(--border-radius));
 	display: inline-block;
 }
+#filterSlider {
+	width: calc((var(--width-container) - var(--width-center)) / 2 - 1 * var(--border-radius));
+}
 {% endblock %}
 
 
@@ -105,7 +108,8 @@ A limited number of tools offer almost unlimited customization. Play around and 
 {% endblock %}
 {% block content13 %}
 Add one or more filters to have total control over the brightness, hue, saturation, contrast, and any other characteristics of your image's color.
-<div>
+<div style="position:relative;">
+	<input id="filterSlider" type="range" min="0" max="100" value="50"></input>
 	<div id="divLeft">
 		<img src="../img/regensburg.jpg" style="width:100%;"/>
 	</div>
