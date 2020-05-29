@@ -107,7 +107,7 @@ A limited number of tools offer almost unlimited customization. Play around and 
 </div>
 {% endblock %}
 {% block content13 %}
-Add one or more filters to have total control over the brightness, hue, saturation, contrast, and any other characteristics of your image's color.
+Create filters to have total control over your image's color.
 <div style="position:relative;">
 	<input id="filterSlider" type="range" min="0" max="100" value="50"></input>
 	<div id="divLeft">
@@ -207,7 +207,6 @@ function chgFilterSlider() {
 	var val = document.getElementById('filterSlider').value;
 	var el =document.getElementById('pathRight');
 	el.setAttribute('d','M'+(val/100)+',0 1,0 1,1 '+(val/100)+',1 Z');
-	console.log(val, el);
 }
 </script>
 {% endblock %}
