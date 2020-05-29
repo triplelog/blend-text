@@ -50,15 +50,15 @@ div:Not(.content-22) > .content {
 	-webkit-clip-path:url(#leftHalf);
 	clip-path:url(#leftHalf);
 	position: absolute;
-	left:0px;
-	top:0px;
+	width: calc(100% - 1 * var(--border-radius));
 }
 #divRight {
 	-webkit-clip-path:url(#rightHalf);
 	clip-path:url(#rightHalf);
 	position: relative;
-	left:0px;
+	left: calc(.5 * var(--border-radius));
 	top:0px;
+	width: calc(100% - 1 * var(--border-radius));
 }
 {% endblock %}
 
@@ -103,10 +103,10 @@ A limited number of tools offer almost unlimited customization. Play around and 
 {% block content13 %}
 Add one or more filters to have total control over the brightness, hue, saturation, contrast, and any other characteristics of your image's color.
 <div id="divLeft">
-	<img src="../img/regensburg.jpg" style="width:calc(100% - 2rem);"/>
+	<img src="../img/regensburg.jpg" style="width:100%;"/>
 </div>
 <div id="divRight">
-	<img src="../img/regensgurghbw.png" style="width:calc(100% - 2rem);"/>
+	<img src="../img/regensgurghbw.png" style="width:100%;"/>
 </div>
 {% endblock %}	
 
