@@ -316,7 +316,11 @@ namespace Lapis.QRCode.Imaging.Drawing
 								}
 							}
 							
-							
+							if (imgC == oimgC && otm == tripMatrix[r, c]){
+								counter++;
+								//continue;
+							}
+							else {oimgC = imgC;}
 							
                             outval = 0;
                             if (lighthash.TryGetValue(imgC, out outval))
