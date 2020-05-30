@@ -323,8 +323,8 @@ namespace Lapis.QrArt
 							try
 							{
 								bmp = Bitmap.FromFile(imageArg.Value) as Bitmap;
-								textDrawer.HashSize = 2;
-								textDrawer.CellWidth = 2;
+								textDrawer.HashSize = 1;
+								textDrawer.CellWidth = 1;
 								Bitmap bmpp = (Bitmap) new Bitmap(bmp.Width,bmp.Height);
 							
 							
