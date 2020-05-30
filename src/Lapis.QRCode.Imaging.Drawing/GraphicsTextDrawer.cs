@@ -129,21 +129,11 @@ namespace Lapis.QRCode.Imaging.Drawing
                             	var y = MarginT + r;
                         		graph.FillRectangle(foreBrushB, x, y, CellWidth, CellWidth);
                         	}
-                        	ore = -1;
-							ogr = -1;
-							obl = -1;
-							oimgC = -1;
-							counter = 0;
-							otm = 0;
+                        	
                         }
                         else if (tripMatrix[r, c] > 0)
                         {
-                        	ore = -1;
-							ogr = -1;
-							obl = -1;
-							oimgC = -1;
-							counter = 0;
-							otm = 0;
+                        	
 							
                             var x = MarginL + c;
                             var y = MarginT + r;
