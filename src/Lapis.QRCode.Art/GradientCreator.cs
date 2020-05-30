@@ -529,7 +529,7 @@ namespace Lapis.QRCode.Art
                 }
                 else if (gtype == "life"){
                 	//get center
-                	getEdgeDistance(tripMatrix,  out Dictionary<int, int> circledict, out maxmaxr);
+                	getEdgeDistance(tripMatrix, ystep, xstep,  out Dictionary<int, int> circledict, out maxmaxr);
                 	string centerType = "centroid";
                 	
                 	theight = tripMatrix.RowCount;
