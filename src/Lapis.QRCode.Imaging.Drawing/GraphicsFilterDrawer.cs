@@ -167,6 +167,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 								ogr = gr;
 								obl = bl;
 							}
+							counter = 0;
 							
 						}
 						

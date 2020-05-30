@@ -118,6 +118,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 							ogr = -1;
 							obl = -1;
 							oimgC = -1;
+							otm = 0;
                         }
                         
                         if (tripMatrix[r, c] == 0)
@@ -129,6 +130,12 @@ namespace Lapis.QRCode.Imaging.Drawing
                             	var y = MarginT + r;
                         		graph.FillRectangle(foreBrushB, x, y, CellWidth, CellWidth);
                         	}
+                        	counter = 0;
+                        	ore = -1;
+							ogr = -1;
+							obl = -1;
+							oimgC = -1;
+							otm = 0;
                         }
                         else if (tripMatrix[r, c] > 0)
                         {
@@ -309,7 +316,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 								}
 							}
 							
-							if (imgC  == oimgC && otm > 0){
+							if (imgC  == oimgC && otm > 0 && 2 == 3){
 								counter++;
 								continue;
 							}
@@ -322,8 +329,6 @@ namespace Lapis.QRCode.Imaging.Drawing
 								gr = (outval & 0xFF00) >> 8;
 								bl = outval & 0xFF;
 								
-								RgbToHls(hashColor.R,hashColor.G,hashColor.B,out h,out l,out s);
-								foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
 								repcell++;
 							}
 							else {
@@ -342,7 +347,6 @@ namespace Lapis.QRCode.Imaging.Drawing
 									newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
 									lighthash[imgC] =newcol;
 							
-									foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
 								}
 								else {
 									var res = scriptFunc.Call (tripMatrix[r, c],re,gr,bl);
@@ -353,12 +357,11 @@ namespace Lapis.QRCode.Imaging.Drawing
 									newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
 									lighthash[imgC] =newcol;
 							
-									foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
 								}
 								newcell++;
 							}
 							
-							if (re == ore && gr == ogr && bl == obl && tripMatrix[r, c] == otm){
+							if (re == ore && gr == ogr && bl == obl && tripMatrix[r, c] == otm && 2 == 3){
 								counter++;
 								continue;
 							}
