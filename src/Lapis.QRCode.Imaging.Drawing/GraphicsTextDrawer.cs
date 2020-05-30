@@ -94,7 +94,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 				int repcell = 0;
 				int newdarkcell =0;
 				int repdarkcell = 0;
-				
+				Console.WriteLine("cw: "+CellWidth);
                 for (var r = startR; r < THeight && r + MarginT < bmp.Height; r += CellWidth)
                 {
                     for (var c = startC; c < TWidth && c + MarginL < bmp.Width; c += CellWidth)
