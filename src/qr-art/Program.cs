@@ -317,14 +317,14 @@ namespace Lapis.QrArt
 							
 							if (int.TryParse(blurRadiusOpt.Value(), out blurRadius)){}
 							blurRadius = 0;
-							textDrawer.HashSize = 1 + blurRadius / 20;
-							textDrawer.CellWidth = 1;
+							
 						
 							
 							try
 							{
 								bmp = Bitmap.FromFile(imageArg.Value) as Bitmap;
-								
+								textDrawer.HashSize = 2;
+								textDrawer.CellWidth = 2;
 								Bitmap bmpp = (Bitmap) new Bitmap(bmp.Width,bmp.Height);
 							
 							

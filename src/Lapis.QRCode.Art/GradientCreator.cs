@@ -43,8 +43,8 @@ namespace Lapis.QRCode.Art
         public virtual IImage Create(IRgb24BitmapBase gradientImage, int narrowQuotient, string gtype, int border)
         {
         	
-			int xstep = 10;
-			int ystep = 10;
+			int xstep = 1;
+			int ystep = 1;
 			//int ystep = 1 + tripMatrix.RowCount / 200;
         	//int xstep = 1 + tripMatrix.ColumnCount / 200;
         	
