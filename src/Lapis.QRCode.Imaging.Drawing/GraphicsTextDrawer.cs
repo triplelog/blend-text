@@ -114,7 +114,11 @@ namespace Lapis.QRCode.Imaging.Drawing
                     {
                     	if (counter > 15){
                     		ore = -1;
-                			
+							ogr = -1;
+							obl = -1;
+							oimgC = -1;
+							counter = 0;
+							otm = 0;
                     	}
                         if (tripMatrix[r, c] == 0)
                         {
