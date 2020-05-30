@@ -47,8 +47,7 @@ div:Not(.content-22) > .content {
 }
 
 #divLeft {
-	-webkit-clip-path:url(#leftHalf);
-	clip-path:url(#leftHalf);
+
 	position: absolute;
 	
 	width: calc((var(--width-container) - var(--width-center)) / 2 - 1 * var(--border-radius));
@@ -202,9 +201,6 @@ Or add a QR code on top of your image.
 <svg width="0" height="0" viewBox = "0 0 1 1" version = "1.1">
     <defs>
     	
-    	  <clipPath id="leftHalf" clipPathUnits="objectBoundingBox">
-			<path id="pathLeft" d="M0,0 1,0 1,1 0,1 Z" />
-		  </clipPath>
 		  <clipPath id="rightHalf" clipPathUnits="objectBoundingBox">
 			<path id="pathRight" d="M.5,0 1,0 1,1 .5,1 Z" />
 		  </clipPath>
