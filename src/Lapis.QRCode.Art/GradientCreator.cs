@@ -43,16 +43,16 @@ namespace Lapis.QRCode.Art
         public virtual IImage Create(IRgb24BitmapBase gradientImage, int narrowQuotient, string gtype, int border)
         {
         	
-			//int xstep = 1;
-			//int ystep = 1;
-			int ystep = 1 + tripMatrix.RowCount / 200;
-        	int xstep = 1 + tripMatrix.ColumnCount / 200;
+			int xstep = 1;
+			int ystep = 1;
         	
             if (gradientImage != null) //text on image
             {
             	int twidth = (int)gradientImage.Width;
             	int theight = (int)gradientImage.Height;
-            	
+            	ystep = 1 + theight / 200;
+        		xstep = 1 + twidth / 200;
+        		
             	Stopwatch stopWatch = new Stopwatch();
         		stopWatch.Start();
         		
