@@ -318,9 +318,9 @@ namespace Lapis.QRCode.Imaging.Drawing
 							
 							if (imgC == oimgC && otm == tripMatrix[r, c]){
 								counter++;
-								//continue;
+								continue;
 							}
-							else {oimgC = imgC;}
+							else {oimgC = imgC; counter = 0;}
 							
                             outval = 0;
                             if (lighthash.TryGetValue(imgC, out outval))
@@ -364,8 +364,16 @@ namespace Lapis.QRCode.Imaging.Drawing
 								}
 								newcell++;
 							}
-							foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
-							graph.FillRectangle(foreBrushCustom, x, y, CellWidth, CellWidth);
+							
+							if (x>TWidth-CellWidth*20){
+								foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
+								graph.FillRectangle(foreBrushCustom, x, y, TWidth-x,CellWidth);
+							}
+							else {
+								foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
+								graph.FillRectangle(foreBrushCustom, x, y, CellWidth*20,CellWidth);
+							}
+							
 							
                         }
                     }
