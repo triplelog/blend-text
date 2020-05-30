@@ -28,6 +28,12 @@ namespace Lapis.QRCode.Art
             TripMatrixDrawer = tripMatrixDrawer;
         }
         
+
+        public int ystep { get; set; } = 1;
+        public int xstep { get; set; } = 1;
+        //int ystep = 1 + tripMatrix.RowCount / 200;
+        	//int xstep = 1 + tripMatrix.ColumnCount / 200;
+        	
         public ITriparizer Triparizer { get; }
         
         public ITripMatrixDrawer TripMatrixDrawer { get; }
@@ -35,11 +41,8 @@ namespace Lapis.QRCode.Art
         public virtual IImage Create(IRgb24BitmapBase gradientImage, int narrowQuotient, string gtype, int border)
         {
         	
-			int ystep = 1;
-			int xstep = 1;
 			
-			//int ystep = 1 + tripMatrix.RowCount / 200;
-        	//int xstep = 1 + tripMatrix.ColumnCount / 200;
+			
         	
             if (gradientImage != null) //text on image
             {
