@@ -330,8 +330,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 								bl = outval & 0xFF;
 								
 								RgbToHls(hashColor.R,hashColor.G,hashColor.B,out h,out l,out s);
-								foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
-								graph.FillRectangle(foreBrushCustom, x, y, CellWidth, CellWidth);
+								
 								repcell++;
 							}
 							else {
@@ -350,8 +349,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 									newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
 									lighthash[imgC] =newcol;
 							
-									foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
-									graph.FillRectangle(foreBrushCustom, x, y, CellWidth, CellWidth);
+									
 								}
 								else {
 									var res = scriptFunc.Call (tripMatrix[r, c],re,gr,bl);
@@ -362,11 +360,12 @@ namespace Lapis.QRCode.Imaging.Drawing
 									newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
 									lighthash[imgC] =newcol;
 							
-									foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
-									graph.FillRectangle(foreBrushCustom, x, y, CellWidth, CellWidth);
+									
 								}
 								newcell++;
 							}
+							foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
+							graph.FillRectangle(foreBrushCustom, x, y, CellWidth, CellWidth);
 							
                         }
                     }
