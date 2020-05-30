@@ -100,7 +100,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 				int re; int gr; int bl;
 				int outval; int newcol;
 				double h; double s; double l;
-				int ore; int ogr; int obl; int oimgC;
+				int ore; int ogr; int obl; int oimgC; int otm;
 				int counter;
                 for (var r = startR; r <= THeight-CellWidth && r + MarginT <= bmp.Height-CellWidth; r += CellWidth)
                 {
@@ -108,6 +108,7 @@ namespace Lapis.QRCode.Imaging.Drawing
                 	ogr = -1;
                 	obl = -1;
                 	oimgC = -1;
+                	otm = 0;
                 	counter = 0;
                     for (var c = startC; c < TWidth && c + MarginL < bmp.Width; c += CellWidth)
                     {
