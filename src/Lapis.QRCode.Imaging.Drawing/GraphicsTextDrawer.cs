@@ -112,6 +112,10 @@ namespace Lapis.QRCode.Imaging.Drawing
                 	otm = 0;
                     for (var c = startC; c < TWidth && c + MarginL < bmp.Width; c += CellWidth)
                     {
+                    	if (counter > 15){
+                    		ore = -1;
+                			
+                    	}
                         if (tripMatrix[r, c] == 0)
                         {
                         	//keep color as is
