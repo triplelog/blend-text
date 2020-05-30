@@ -26,6 +26,8 @@ namespace Lapis.QRCode.Art
                 throw new ArgumentNullException(nameof(triparizer));
             Triparizer = triparizer;
             TripMatrixDrawer = tripMatrixDrawer;
+            ystep = 1;
+            xstep = 1;
         }
         
 
