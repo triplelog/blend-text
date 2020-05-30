@@ -317,11 +317,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 							}
 							
 							imgC = Color.FromArgb((re/HashSize)*HashSize,(gr/HashSize)*HashSize,(bl/HashSize)*HashSize).GetHashCode();
-							if (imgC == oimgC && otm == tripMatrix[r, c]){
-								counter++;
-								//continue;
-							}
-							else {oimgC = imgC;}
+							
 							
                             outval = 0;
                             if (lighthash.TryGetValue(imgC, out outval))
