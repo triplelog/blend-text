@@ -29,15 +29,12 @@ namespace Lapis.QRCode.Art
                 throw new ArgumentNullException(nameof(triparizer));
             Triparizer = triparizer;
             TripMatrixDrawer = tripMatrixDrawer;
-            ystep = 1;
-    		xstep = 1;
+
         }
         
 
-        public int ystep { get; set; }
-        public int xstep { get; set; }
-        //int ystep = 1 + tripMatrix.RowCount / 200;
-        	//int xstep = 1 + tripMatrix.ColumnCount / 200;
+
+        
         	
         public ITriparizer Triparizer { get; }
         
@@ -46,8 +43,10 @@ namespace Lapis.QRCode.Art
         public virtual IImage Create(IRgb24BitmapBase gradientImage, int narrowQuotient, string gtype, int border)
         {
         	
-			
-			
+			int xstep = 1;
+			int ystep = 1;
+			//int ystep = 1 + tripMatrix.RowCount / 200;
+        	//int xstep = 1 + tripMatrix.ColumnCount / 200;
         	
             if (gradientImage != null) //text on image
             {
@@ -103,12 +102,12 @@ namespace Lapis.QRCode.Art
                 
                 int maxmaxr = 0;
                 if (gtype == "edge"){
-                	getEdgeDistance(tripMatrix,  out Dictionary<int, int> circledict, out maxmaxr);
+                	getEdgeDistance(tripMatrix, ystep, xstep,  out Dictionary<int, int> circledict, out maxmaxr);
                 	bool checkminr = true;
                 	if (narrowQuotient == 0){
                 		checkminr = false;
                 	}
-					getEdgePercentage(tripMatrix, circledict, checkminr, maxmaxr, narrowQuotient, out TripMatrix outMatrix);
+					getEdgePercentage(tripMatrix, ystep, xstep, circledict, checkminr, maxmaxr, narrowQuotient, out TripMatrix outMatrix);
 
 					return TripMatrixDrawer.Draw(outMatrix);
                 }
@@ -856,7 +855,7 @@ namespace Lapis.QRCode.Art
             	return null;
             }
         }
-        public static void getEdgeDistance(TripMatrix tripMatrix, out Dictionary<int, int> circledict, out int maxmaxr) {
+        public static void getEdgeDistance(TripMatrix tripMatrix, int ystep, int xstep, out Dictionary<int, int> circledict, out int maxmaxr) {
         	int theight = tripMatrix.RowCount;
         	int twidth = tripMatrix.ColumnCount;
         	Console.WriteLine("outW: "+tripMatrix.ColumnCount+" outH: "+tripMatrix.RowCount);
@@ -1051,7 +1050,7 @@ namespace Lapis.QRCode.Art
 				ts.Milliseconds / 10);
 			Console.WriteLine("Set circledict: " + elapsedTime);
 		}
-		public static void getEdgePercentage(TripMatrix tripMatrix, Dictionary<int, int> circledict, bool findminr, int maxmaxr, int narrowQuotient, out TripMatrix outMatrix) {
+		public static void getEdgePercentage(TripMatrix tripMatrix, int ystep, int xstep, Dictionary<int, int> circledict, bool findminr, int maxmaxr, int narrowQuotient, out TripMatrix outMatrix) {
         	
 			
 			

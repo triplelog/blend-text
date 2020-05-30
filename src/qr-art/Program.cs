@@ -459,8 +459,6 @@ namespace Lapis.QrArt
 						if (textDrawer.Type == "gradient"){
 							if (int.TryParse(blurRadiusOpt.Value(), out blurRadius)){}
 							else {blurRadius = 10;}
-							builderG.ystep = 1;
-							builderG.xstep = 1;
 							image = builderG.Create(bitmapText, blurRadius, gradientTypeOpt.Value(), fontSize);
 						}
 						else if (textDrawer.Type == "filter"){
