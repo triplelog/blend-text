@@ -35,7 +35,12 @@ namespace Lapis.QRCode.Art
         public virtual IImage Create(IRgb24BitmapBase gradientImage, int narrowQuotient, string gtype, int border)
         {
         	
-
+			int ystep = 1;
+			int xstep = 1;
+			
+			//int ystep = 1 + tripMatrix.RowCount / 200;
+        	//int xstep = 1 + tripMatrix.ColumnCount / 200;
+        	
             if (gradientImage != null) //text on image
             {
             	int twidth = (int)gradientImage.Width;
@@ -118,8 +123,6 @@ namespace Lapis.QRCode.Art
                 	if (angle == 0 || angle == 180){
                 		//distance is x coord
                 		int dd;
-                		int ystep = 1;
-                		int xstep = 1;
                 		for (var i=0;i<theight;i+=ystep){
 							for (var ii=0;ii<twidth;ii+=xstep){
 								if (tripMatrix[i,ii]>0){
@@ -153,8 +156,6 @@ namespace Lapis.QRCode.Art
                 	else if (angle == 90 || angle == 270){
                 		//distance is y coord
                 		int dd;
-                		int ystep = 1;
-                		int xstep = 1;
                 		for (var i=0;i<theight;i+=ystep){
 							for (var ii=0;ii<twidth;ii+=xstep){
 								if (tripMatrix[i,ii]>0){
@@ -197,8 +198,6 @@ namespace Lapis.QRCode.Art
                 		double yy = 0;
                 		double d;
                 		int dd;
-                		int ystep = 1;
-                		int xstep = 1;
                 		for (var i=0;i<theight;i+=ystep){
 							for (var ii=0;ii<twidth;ii+=xstep){
 								if (tripMatrix[i,ii]>0){
@@ -294,8 +293,6 @@ namespace Lapis.QRCode.Art
 					TripMatrix outMatrix = new TripMatrix(theight,twidth);
 					int avgx = 0;
 					int avgy = 0;
-					int ystep = 1;
-					int xstep = 1;
 					if (centerType == "centroid"){
 						long sumx = 0;
 						long sumy = 0;
@@ -535,8 +532,6 @@ namespace Lapis.QRCode.Art
 					TripMatrix outMatrix = new TripMatrix(theight,twidth);
 					int avgx = 0;
 					int avgy = 0;
-					int ystep = 1 + tripMatrix.RowCount / 200;
-        			int xstep = 1 + tripMatrix.ColumnCount / 200;
 					if (centerType == "centroid"){
 						long sumx = 0;
 						long sumy = 0;
@@ -862,8 +857,6 @@ namespace Lapis.QRCode.Art
 
 			Stopwatch stopWatch = new Stopwatch();
         	stopWatch.Start();
-        	int ystep = 1 + tripMatrix.RowCount / 200;
-        	int xstep = 1 + tripMatrix.ColumnCount / 200;
         	maxmaxr = 0;
         	for (var i=0;i<theight;i+=ystep){
 				for (var ii=0;ii<twidth;ii+=xstep){
@@ -1057,10 +1050,6 @@ namespace Lapis.QRCode.Art
 			int theight = tripMatrix.RowCount;
         	int twidth = tripMatrix.ColumnCount;
         	outMatrix = new TripMatrix(theight,twidth);
-        	//int ystep = 1 + outMatrix.RowCount / 200;
-        	//int xstep = 1 + outMatrix.ColumnCount / 200;
-        	int ystep = 1;
-        	int xstep = 1;
         	
 			Stopwatch stopWatch = new Stopwatch();
         	stopWatch.Start();
