@@ -112,14 +112,6 @@ namespace Lapis.QRCode.Imaging.Drawing
                 	otm = 0;
                     for (var c = startC; c < TWidth && c + MarginL < bmp.Width; c += CellWidth)
                     {
-                    	if (counter > 15){
-                    		ore = -1;
-							ogr = -1;
-							obl = -1;
-							oimgC = -1;
-							counter = 0;
-							otm = 0;
-                    	}
                         if (tripMatrix[r, c] == 0)
                         {
                         	//keep color as is
@@ -129,12 +121,9 @@ namespace Lapis.QRCode.Imaging.Drawing
                             	var y = MarginT + r;
                         		graph.FillRectangle(foreBrushB, x, y, CellWidth, CellWidth);
                         	}
-                        	
                         }
                         else if (tripMatrix[r, c] > 0)
                         {
-                        	
-							
                             var x = MarginL + c;
                             var y = MarginT + r;
                             //Darken uniformly
@@ -306,7 +295,6 @@ namespace Lapis.QRCode.Imaging.Drawing
 								}
 							}
 							
-							imgC = Color.FromArgb((re/HashSize)*HashSize,(gr/HashSize)*HashSize,(bl/HashSize)*HashSize).GetHashCode();
 							
 							
                             outval = 0;
