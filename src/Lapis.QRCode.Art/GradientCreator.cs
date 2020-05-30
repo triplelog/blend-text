@@ -15,6 +15,8 @@ namespace Lapis.QRCode.Art
     public interface GradientRCreator
     {
         IImage Create(IRgb24BitmapBase gradientImage, int narrowQuotient, string gtype, int border);
+        int ystep { get; set; }
+        int xstep { get; set; }
     }
 
     public class GradientCreator : GradientRCreator
@@ -26,8 +28,6 @@ namespace Lapis.QRCode.Art
                 throw new ArgumentNullException(nameof(triparizer));
             Triparizer = triparizer;
             TripMatrixDrawer = tripMatrixDrawer;
-            ystep = 1;
-            xstep = 1;
         }
         
 
