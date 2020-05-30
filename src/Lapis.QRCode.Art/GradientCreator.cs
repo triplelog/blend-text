@@ -18,7 +18,9 @@ namespace Lapis.QRCode.Art
         int ystep { get; set; }
         int xstep { get; set; }
     }
-
+	
+	
+        
     public class GradientCreator : GradientRCreator
     {
         public GradientCreator(
@@ -28,11 +30,12 @@ namespace Lapis.QRCode.Art
                 throw new ArgumentNullException(nameof(triparizer));
             Triparizer = triparizer;
             TripMatrixDrawer = tripMatrixDrawer;
+            public int ystep { get; set; } = 1;
+    		public int xstep { get; set; } = 1;
         }
         
 
-        public int ystep { get; set; } = 1;
-        public int xstep { get; set; } = 1;
+        
         //int ystep = 1 + tripMatrix.RowCount / 200;
         	//int xstep = 1 + tripMatrix.ColumnCount / 200;
         	
