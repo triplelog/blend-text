@@ -142,7 +142,6 @@ namespace Lapis.QRCode.Imaging.Drawing
                             		var y = MarginT + r;
                             		pixColor = bmp.GetPixel(x, y);
                             		graph.FillRectangle(foreBrushB, x, y, CellWidth, CellWidth);
-                            		counter++;
 								}
                         	}
                         	
