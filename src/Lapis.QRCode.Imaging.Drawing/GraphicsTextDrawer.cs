@@ -366,14 +366,14 @@ namespace Lapis.QRCode.Imaging.Drawing
 								newcell++;
 							}
 							
-							if (x>TWidth-CellWidth*2){
+							if (x>TWidth-CellWidth*1){
 								foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
 								graph.FillRectangle(foreBrushCustom, x, y, TWidth-x,CellWidth);
-								//Console.WriteLine("H");
+								Console.WriteLine("H");
 							}
 							else {
 								foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
-								graph.FillRectangle(foreBrushCustom, x, y, CellWidth*2,CellWidth);
+								graph.FillRectangle(foreBrushCustom, x, y, CellWidth*1,CellWidth);
 							}
 							//foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
 							//graph.FillRectangle(foreBrushCustom, x, y, CellWidth,CellWidth);
