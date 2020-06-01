@@ -374,7 +374,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 							else {
 								foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
 								graph.FillRectangle(foreBrushCustom, x, y, CellWidth*2,CellWidth);
-								if (x>1890){
+								if (x>1890 && y < 300){
 									Console.WriteLine(x+" r: "+re+" g: "+gr+" b: "+bl);
 								}
 								
