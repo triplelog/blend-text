@@ -113,7 +113,7 @@ namespace Lapis.QRCode.Imaging.Drawing
                 	otm = 0;
                     for (var c = startC; c < TWidth && c + MarginL < bmp.Width; c += CellWidth)
                     {
-                    	if (counter > 15){
+                    	if (counter > -1){
                     		ore = -1;
 							ogr = -1;
 							obl = -1;
