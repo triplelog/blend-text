@@ -75,10 +75,10 @@ namespace Lapis.QRCode.Art
                 	for (var ii=0;ii<twidth;ii++){
                 		p = gradientImage.GetPixel(ii,i);
                 		
-                		if (p < 16700000){//first is x (col), second is y
+                		if (p < 16000000){//first is x (col), second is y
                 			
                 			
-                			if (p < 8000000){
+                			/*if (p < 8000000){
 								if (p < 4000000){
 									tripMatrix[i,ii] = 3;
 								}
@@ -88,7 +88,9 @@ namespace Lapis.QRCode.Art
 							}
 							else {
 								tripMatrix[i,ii] = 1;
-							}
+							}*/
+							
+							tripMatrix[i,ii] = 16;
 							
                 		}
                 		
