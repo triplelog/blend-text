@@ -373,7 +373,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 							}
 							else {
 								foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
-								graph.FillRectangle(foreBrushCustom, x, y, CellWidth*1,CellWidth);
+								graph.FillRectangle(foreBrushCustom, x, y, CellWidth*2,CellWidth);
 							}
 							//foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
 							//graph.FillRectangle(foreBrushCustom, x, y, CellWidth,CellWidth);
