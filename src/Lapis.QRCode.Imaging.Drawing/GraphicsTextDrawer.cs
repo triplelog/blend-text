@@ -102,7 +102,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 				double h; double s; double l;
 				int ore; int ogr; int obl; int oimgC; int otm;
 				int counter;
-				Console.WriteLine("TW: "+TWidth+" ML: "+MarginL+" BW: "+bmp.Width+" sc: "+startC)
+				Console.WriteLine("TW: "+TWidth+" ML: "+MarginL+" BW: "+bmp.Width+" sc: "+startC);
                 for (var r = startR; r <= THeight-CellWidth && r + MarginT <= bmp.Height-CellWidth; r += CellWidth)
                 {
                 	ore = -1;
