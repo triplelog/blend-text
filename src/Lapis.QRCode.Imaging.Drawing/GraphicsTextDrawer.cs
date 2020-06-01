@@ -321,7 +321,10 @@ namespace Lapis.QRCode.Imaging.Drawing
 								counter++;
 								continue;
 							}
-							else {oimgC = imgC; otm = tripMatrix[r, c]; counter = 0;}
+							else {
+								oimgC = imgC;
+								otm = tripMatrix[r, c];
+							}
 							
                             outval = 0;
                             if (lighthash.TryGetValue(imgC, out outval))
@@ -366,6 +369,16 @@ namespace Lapis.QRCode.Imaging.Drawing
 								newcell++;
 							}
 							
+							if (re == ore && gr == ogr && bl == obl){
+								counter++;
+								continue;
+							}
+							else {
+								counter = 0;
+								ore = re;
+								ogr = gr;
+								obl = bl;
+							}
 							if (x>TWidth-CellWidth*20){
 								foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
 								graph.FillRectangle(foreBrushCustom, x, y, TWidth-x,CellWidth);
