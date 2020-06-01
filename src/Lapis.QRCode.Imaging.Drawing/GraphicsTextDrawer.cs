@@ -113,29 +113,41 @@ namespace Lapis.QRCode.Imaging.Drawing
                 	otm = 0;
                     for (var c = startC; c < TWidth && c + MarginL < bmp.Width; c += CellWidth)
                     {
-                    	if (counter > 15){
-                    		ore = -1;
-							ogr = -1;
-							obl = -1;
-							oimgC = -1;
-							counter = 0;
-							otm = 0;
-                    	}
+                    	
                         if (tripMatrix[r, c] == 0)
                         {
                         	//keep color as is
-                        	
                         	if (Type == "text"){
                         		var x = MarginL + c;
                             	var y = MarginT + r;
                         		graph.FillRectangle(foreBrushB, x, y, CellWidth, CellWidth);
+                        		ore = -1;
+								ogr = -1;
+								obl = -1;
+								oimgC = -1;
+								counter = 0;
+								otm = 0;
                         	}
-                        	ore = -1;
-							ogr = -1;
-							obl = -1;
-							oimgC = -1;
-							counter = 0;
-							otm = 0;
+                        	else {
+                        		if (counter >= 19 || otm == 0){
+									ore = -1;
+									ogr = -1;
+									obl = -1;
+									oimgC = -1;
+									counter = 0;
+									otm = 0;
+								}
+								else {
+									var x = MarginL + c;
+                            		var y = MarginT + r;
+                            		pixColor = bmp.GetPixel(x, y);
+                            		graph.FillRectangle(foreBrushB, x, y, CellWidth, CellWidth);
+                            		counter++;
+								}
+                        	}
+                        	
+                        	
+                        	
                         }
                         else if (tripMatrix[r, c] > 0)
                         {
@@ -257,6 +269,14 @@ namespace Lapis.QRCode.Imaging.Drawing
 							
                         }
                         else { //tripMatrix[r, c]<0 so Background
+                        	if (counter >= 19){
+								ore = -1;
+								ogr = -1;
+								obl = -1;
+								oimgC = -1;
+								counter = 0;
+								otm = 0;
+							}
                         	var x = MarginL + c;
                             var y = MarginT + r;
                             pixColor = bmp.GetPixel(x, y);
