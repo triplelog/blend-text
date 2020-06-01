@@ -369,6 +369,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 							if (x>TWidth-CellWidth*20){
 								foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
 								graph.FillRectangle(foreBrushCustom, x, y, TWidth-x,CellWidth);
+								Console.WriteLine("H");
 							}
 							else {
 								foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
