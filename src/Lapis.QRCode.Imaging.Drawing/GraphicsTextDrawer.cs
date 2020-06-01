@@ -65,8 +65,8 @@ namespace Lapis.QRCode.Imaging.Drawing
             int imageWidth = bmp.Width;
 			
 			Lua state = new Lua ();
-			
-            using (var graph = Graphics.FromImage(bmp))
+			Bitmap bmpp = (Bitmap) new Bitmap(imageWidth,imageHeight);
+            using (var graph = Graphics.FromImage(bmpp))
             {
                 //graph.Clear(Color.FromArgb(255,255,255));
                 //var foreBrush = new SolidBrush(ColorHelper.FromIntRgb24(Foreground));
@@ -374,9 +374,6 @@ namespace Lapis.QRCode.Imaging.Drawing
 							else {
 								foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
 								graph.FillRectangle(foreBrushCustom, x, y, CellWidth*2,CellWidth);
-								if (x>1890 && y < 300){
-									Console.WriteLine(x+" y: "+y+" r: "+re+" g: "+gr+" b: "+bl);
-								}
 								
 							}
 							//foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
@@ -405,11 +402,11 @@ namespace Lapis.QRCode.Imaging.Drawing
 			if (Type == "text"){
 				Bitmap nb = new Bitmap(TWidth, THeight);
 				Graphics g = Graphics.FromImage(nb);
-				g.DrawImage(bmp, -MarginL, -MarginT);
-				bmp = nb;
+				g.DrawImage(bmpp, -MarginL, -MarginT);
+				bmpp = nb;
 			}
 				
-            return new BitmapFrame(bmp);
+            return new BitmapFrame(bmpp);
         }     
         
         public static void RgbToHls(int r, int g, int b,
