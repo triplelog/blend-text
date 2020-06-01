@@ -323,7 +323,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 							}
 							else {
 								oimgC = imgC;
-								otm = tripMatrix[r, c];
+								
 							}
 							
                             outval = 0;
@@ -369,7 +369,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 								newcell++;
 							}
 							
-							if (re == ore && gr == ogr && bl == obl){
+							if (re == ore && gr == ogr && bl == obl && otm == tripMatrix[r, c]){
 								counter++;
 								continue;
 							}
@@ -378,6 +378,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 								ore = re;
 								ogr = gr;
 								obl = bl;
+								otm = tripMatrix[r, c];
 							}
 							if (x>TWidth-CellWidth*20){
 								foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
