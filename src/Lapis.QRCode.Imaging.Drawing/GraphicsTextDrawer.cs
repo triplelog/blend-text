@@ -366,10 +366,10 @@ namespace Lapis.QRCode.Imaging.Drawing
 								newcell++;
 							}
 							
-							if (x>TWidth-CellWidth*1){
+							if (x>TWidth-CellWidth*2){
 								foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
 								graph.FillRectangle(foreBrushCustom, x, y, TWidth-x,CellWidth);
-								Console.WriteLine("H");
+								Console.WriteLine(x);
 							}
 							else {
 								foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
