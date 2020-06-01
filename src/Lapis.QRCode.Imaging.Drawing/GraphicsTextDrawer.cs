@@ -113,7 +113,7 @@ namespace Lapis.QRCode.Imaging.Drawing
                 	otm = 0;
                     for (var c = startC; c < TWidth && c + MarginL < bmp.Width; c += CellWidth)
                     {
-                    	if (counter > -1){
+                    	if (counter > 16){
                     		ore = -1;
 							ogr = -1;
 							obl = -1;
@@ -366,7 +366,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 								newcell++;
 							}
 							
-							/*if (x>TWidth-CellWidth*20){
+							if (x>TWidth-CellWidth*20){
 								foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
 								graph.FillRectangle(foreBrushCustom, x, y, TWidth-x,CellWidth);
 								
@@ -375,9 +375,9 @@ namespace Lapis.QRCode.Imaging.Drawing
 								foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
 								graph.FillRectangle(foreBrushCustom, x, y, CellWidth*20,CellWidth);
 								
-							}*/
-							foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
-							graph.FillRectangle(foreBrushCustom, x, y, CellWidth,CellWidth);
+							}
+							//foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
+							//graph.FillRectangle(foreBrushCustom, x, y, CellWidth,CellWidth);
 							
 							
                         }
