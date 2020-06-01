@@ -102,6 +102,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 				double h; double s; double l;
 				int ore; int ogr; int obl; int oimgC; int otm;
 				int counter;
+				Console.WriteLine("TW: "+TWidth+" ML: "+MarginL+" BW: "+bmp.Width+" sc: "+startC)
                 for (var r = startR; r <= THeight-CellWidth && r + MarginT <= bmp.Height-CellWidth; r += CellWidth)
                 {
                 	ore = -1;
@@ -318,7 +319,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 							
 							if (imgC == oimgC && otm == tripMatrix[r, c]){
 								counter++;
-								//continue;
+								continue;
 							}
 							else {oimgC = imgC; counter = 0;}
 							
@@ -365,16 +366,16 @@ namespace Lapis.QRCode.Imaging.Drawing
 								newcell++;
 							}
 							
-							/*if (x>TWidth-CellWidth*20){
+							if (x>TWidth-CellWidth*20){
 								foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
 								graph.FillRectangle(foreBrushCustom, x, y, TWidth-x,CellWidth);
 							}
 							else {
 								foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
 								graph.FillRectangle(foreBrushCustom, x, y, CellWidth*20,CellWidth);
-							}*/
-							foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
-							graph.FillRectangle(foreBrushCustom, x, y, CellWidth,CellWidth);
+							}
+							//foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
+							//graph.FillRectangle(foreBrushCustom, x, y, CellWidth,CellWidth);
 							
 							
                         }
