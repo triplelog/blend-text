@@ -73,6 +73,15 @@ div.container div .title .titleLeft {
 	position: relative;
 	line-height: calc(2 * var(--border-radius));
 	height: calc(2 * var(--border-radius));
+	text-align: left;
+}
+div.container .titleLeft button, div.container .titleLeft select {
+	top: -.25rem;
+	position: relative;
+}
+div.container .titleRight i {
+	top: -.25rem;
+	position: relative;
 }
 div.container div .title .titleCenter {
 	grid-column: 2;
