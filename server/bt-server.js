@@ -308,7 +308,7 @@ wss.on('connection', function connection(ws) {
 		var wget = '';
 		var imgSrc;
 		for (var i=0;i<imgTypes.length;i++){
-			if (dm.url.substring(dm.url.length-imgTypes[i].length,dm.url.length) == imgTypes[i]){
+			if (dm.url.indexOf(imgTypes[i]) > -1){
 				if (account){
 					imgSrc = 'userimages/'+username+'_'+parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12)+imgTypes[i];
 					wget = '(ulimit -f '+parseInt(maxsize/512)+'; wget --accept "*"'+imgTypes[i]+' -O static/'+imgSrc + ' "' + dm.url + '")';
