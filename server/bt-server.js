@@ -236,7 +236,7 @@ wss.on('connection', function connection(ws) {
   var username = '';
   var newCreation = true;
   var account = false;
-  var imgTypes = ['.png','.jpg','.jpeg','.gif','.tiff','.tif'];//.svg, .psd, .eps, .raw, .pdf?
+  var imgTypes = ['.png','.jpg','.jpeg','.gif','.tiff','.tif','.bmp','.webp'];//.svg, .psd, .eps, .raw, .pdf?
   var maxsize = 2000000; //1000000~1MB
   var inSrcSz = 0;
   ws.on('message', function incoming(message) {
@@ -364,7 +364,6 @@ wss.on('connection', function connection(ws) {
 					inSrcSz = parseInt(szStr.substring(0,szIdxe));
 					
 					var jsonmessage = {'type':'imageLoaded'};
-					console.log(jsonmessage);
 					ws.send(JSON.stringify(jsonmessage));
 				}
 			});
