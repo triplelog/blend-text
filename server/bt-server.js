@@ -350,7 +350,7 @@ wss.on('connection', function connection(ws) {
 			var child = exec(wget, function(err, stdout, stderr) {
 				inSrcSz = 2000000;
 				var szIdx = stdout.indexOf('saved [');
-				console.log("szIdx ",szIdx);
+				console.log("szIdx ",szIdx, stdout);
 				if (szIdx > -1){
 					var szStr = stdout.substring(szIdx+7);
 					var szIdxe = szStr.indexOf('/');
