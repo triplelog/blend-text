@@ -236,7 +236,7 @@ wss.on('connection', function connection(ws) {
   var username = '';
   var newCreation = true;
   var account = false;
-  var imgTypes = ['.png','.jpg','.jpeg','.gif','.tiff','.tif','.bmp','.webp'];//.svg, .psd, .eps, .raw, .pdf?
+  var imgTypes = ['.png','.jpg','.jpeg','.gif','.tiff','.tif','.bmp'];//.svg, .psd, .eps, .raw, .pdf?
   var maxsize = 2000000; //1000000~1MB
   var inSrcSz = 0;
   ws.on('message', function incoming(message) {
@@ -310,7 +310,7 @@ wss.on('connection', function connection(ws) {
 		var wget = '';
 		var imgSrc;
 		for (var i=0;i<imgTypes.length;i++){
-			if (dm.url.indexOf(imgTypes[i]) > -1){
+			if (dm.url.toLowerCase().indexOf(imgTypes[i]) > -1){
 				if (account){
 					imgSrc = 'userimages/'+username+'_'+parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12)+imgTypes[i];
 					wget = '(ulimit -f '+parseInt(maxsize/512)+'; wget --accept "*"'+imgTypes[i]+' -O static/'+imgSrc + ' "' + dm.url + '")';
