@@ -103,7 +103,6 @@ namespace Lapis.QRCode.Imaging.Drawing
 				double h; double s; double l;
 				int ore; int ogr; int obl; int oimgC; int otm;
 				int counter;
-				Console.WriteLine("TW: "+TWidth+" ML: "+MarginL+" BW: "+bmp.Width+" sc: "+startC);
                 for (var r = startR; r <= THeight-CellWidth && r + MarginT <= bmp.Height-CellWidth; r += CellWidth)
                 {
                 	ore = -1;
@@ -188,8 +187,6 @@ namespace Lapis.QRCode.Imaging.Drawing
 								re = (outval & 0xFF0000) >> 16;
 								gr = (outval & 0xFF00) >> 8;
 								bl = outval & 0xFF;
-								foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
-								graph.FillRectangle(foreBrushCustom, x, y, CellWidth, CellWidth);
 								repdarkcell++;
 							}
 							else
@@ -210,6 +207,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 										int reL; int grL; int blL;
 										HlsToRgb(Convert.ToDouble(resD[0]), Convert.ToDouble(resD[2]), Convert.ToDouble(resD[1]),out reD, out grD, out blD);
 										var resL = scriptFunc.Call (30,h,s,l);
+										
 										HlsToRgb(Convert.ToDouble(resL[0]), Convert.ToDouble(resL[2]), Convert.ToDouble(resL[1]),out reL, out grL, out blL);
 										re = reD * tripMatrix[r,c] + reL * (16 - tripMatrix[r,c]);
 										gr = grD * tripMatrix[r,c]+ grL * (16 - tripMatrix[r,c]);
@@ -228,20 +226,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 										darkhash.Add(imgC, newcol);
 									}
 									
-									if (re > 255 || gr > 255 || bl > 255){
-										Console.WriteLine(" red: "+re+" gr: "+gr+" bl: "+bl+" a: "+pixColor.A);
-										Console.WriteLine(" redC: "+pixColor.R+" grC: "+pixColor.G+" blC: "+pixColor.B);
-										
-									}
-									else if (re < 0 || gr < 0 || bl < 0){
-										Console.WriteLine(" red0: "+re+" gr: "+gr+" bl: "+bl+" a: "+pixColor.A);
-										Console.WriteLine(" redC: "+pixColor.R+" grC: "+pixColor.G+" blC: "+pixColor.B);
-										
-									}
-									else {
-										foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
-										graph.FillRectangle(foreBrushCustom, x, y, CellWidth, CellWidth);
-									}
+									
 									
 									
 								}
@@ -251,6 +236,12 @@ namespace Lapis.QRCode.Imaging.Drawing
 										re = Convert.ToInt32(res[0]);
 										gr = Convert.ToInt32(res[1]);
 										bl = Convert.ToInt32(res[2]);
+										if (re > 255){re=255;}
+										else if (re < 0){re=0;}
+										if (gr > 255){gr=255;}
+										else if (gr < 0){gr=0;}
+										if (bl > 255){bl=255;}
+										else if (bl < 0){bl=0;}
 										newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
 										darkhash.Add(imgC, newcol);
 									}
@@ -267,14 +258,23 @@ namespace Lapis.QRCode.Imaging.Drawing
 										re /= 16;
 										gr /= 16;
 										bl /= 16;
+										if (re > 255){re=255;}
+										else if (re < 0){re=0;}
+										if (gr > 255){gr=255;}
+										else if (gr < 0){gr=0;}
+										if (bl > 255){bl=255;}
+										else if (bl < 0){bl=0;}
 									}
 								
-									foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
-									graph.FillRectangle(foreBrushCustom, x, y, CellWidth, CellWidth);
 								}
 								newdarkcell++;
 								
 							}
+							
+							
+							
+							foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
+							graph.FillRectangle(foreBrushCustom, x, y, CellWidth, CellWidth);
 							
 									
 							
@@ -350,7 +350,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 							
 							if (imgC == oimgC && otm == tripMatrix[r, c]){
 								counter++;
-								//continue;
+								continue;
 							}
 							else {
 								oimgC = imgC;
@@ -364,7 +364,6 @@ namespace Lapis.QRCode.Imaging.Drawing
 								gr = (outval & 0xFF00) >> 8;
 								bl = outval & 0xFF;
 								
-								RgbToHls(hashColor.R,hashColor.G,hashColor.B,out h,out l,out s);
 								
 								repcell++;
 							}
@@ -380,7 +379,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 									l = Convert.ToDouble(res[2]);
 							
 									HlsToRgb(h, l, s,out re, out gr, out bl);
-								
+									
 									newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
 									lighthash[imgC] =newcol;
 							
@@ -391,7 +390,12 @@ namespace Lapis.QRCode.Imaging.Drawing
 									re = Convert.ToInt32(res[0]);
 									gr = Convert.ToInt32(res[1]);
 									bl = Convert.ToInt32(res[2]);
-								
+									if (re > 255){re=255;}
+									else if (re < 0){re=0;}
+									if (gr > 255){gr=255;}
+									else if (gr < 0){gr=0;}
+									if (bl > 255){bl=255;}
+									else if (bl < 0){bl=0;}
 									newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
 									lighthash[imgC] =newcol;
 							
@@ -402,7 +406,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 							
 							if (re == ore && gr == ogr && bl == obl && otm == tripMatrix[r, c]){
 								counter++;
-								//continue;
+								continue;
 							}
 							else {
 								counter = 0;
@@ -415,11 +419,12 @@ namespace Lapis.QRCode.Imaging.Drawing
 							if (TWidth-x<brushW){brushW = TWidth-x;}
 							if (bmp.Width-x<brushW){brushW = bmp.Width-x;}
 							
+							
 							foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
-							//graph.FillRectangle(foreBrushCustom, x, y, brushW,CellWidth);
+							graph.FillRectangle(foreBrushCustom, x, y, brushW,CellWidth);
 							
 							//foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
-							graph.FillRectangle(foreBrushCustom, x, y, CellWidth,CellWidth);
+							//graph.FillRectangle(foreBrushCustom, x, y, CellWidth,CellWidth);
 							
 							
                         }
@@ -455,6 +460,12 @@ namespace Lapis.QRCode.Imaging.Drawing
 			out double h, out double l, out double s)
 		{
 			// Convert RGB to a 0.0 to 1.0 range.
+			if (r>255){r=255;}
+			else if (r<0){r=0;}
+			if (g>255){g=255;}
+			else if (g<0){g=0;}
+			if (b>255){b=255;}
+			else if (b<0){b=0;}
 			double double_r = r / 255.0;
 			double double_g = g / 255.0;
 			double double_b = b / 255.0;
@@ -497,6 +508,11 @@ namespace Lapis.QRCode.Imaging.Drawing
 		public static void HlsToRgb(double h, double l, double s,
 			out int r, out int g, out int b)
 		{
+			h = h % 360;
+			if (s>1){s=1;}
+			else if (s<0){s=0;}
+			if (l>1){l=1;}
+			else if (l<0){l=0;}
 			double p2;
 			if (l <= 0.5) p2 = l * (1 + s);
 			else p2 = l + s - l * s;

@@ -122,23 +122,16 @@ namespace Lapis.QRCode.Imaging.Drawing
 									re = Convert.ToInt32(res[0]);
 									gr = Convert.ToInt32(res[1]);
 									bl = Convert.ToInt32(res[2]);
+									if (re > 255){re=255;}
+									else if (re < 0){re=0;}
+									if (gr > 255){gr=255;}
+									else if (gr < 0){gr=0;}
+									if (bl > 255){bl=255;}
+									else if (bl < 0){bl=0;}
 								}
 							}
 							
-							if (re > 255 || gr > 255 || bl > 255){
-								//Console.WriteLine(" red: "+re+" gr: "+gr+" bl: "+bl+" a: "+pixColor.A);
-								//Console.WriteLine(" redC: "+pixColor.R+" grC: "+pixColor.G+" blC: "+pixColor.B);
-								if (re > 255){re = 255;}
-								if (gr > 255){gr = 255;}
-								if (bl > 255){bl = 255;}
-							}
-							else if (re < 0 || gr < 0 || bl < 0){
-								//Console.WriteLine(" red0: "+re+" gr: "+gr+" bl: "+bl+" a: "+pixColor.A);
-								//Console.WriteLine(" redC: "+pixColor.R+" grC: "+pixColor.G+" blC: "+pixColor.B);
-								if (re < 0){re = 0;}
-								if (gr < 0){gr = 0;}
-								if (bl < 0){bl = 0;}
-							}
+							
 							newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
 							darkhash.Add(imgC, newcol);
 						
@@ -201,6 +194,12 @@ namespace Lapis.QRCode.Imaging.Drawing
 			out double h, out double l, out double s)
 		{
 			// Convert RGB to a 0.0 to 1.0 range.
+			if (r>255){r=255;}
+			else if (r<0){r=0;}
+			if (g>255){g=255;}
+			else if (g<0){g=0;}
+			if (b>255){b=255;}
+			else if (b<0){b=0;}
 			double double_r = r / 255.0;
 			double double_g = g / 255.0;
 			double double_b = b / 255.0;
@@ -243,6 +242,11 @@ namespace Lapis.QRCode.Imaging.Drawing
 		public static void HlsToRgb(double h, double l, double s,
 			out int r, out int g, out int b)
 		{
+			h = h % 360;
+			if (s>1){s=1;}
+			else if (s<0){s=0;}
+			if (l>1){l=1;}
+			else if (l<0){l=0;}
 			double p2;
 			if (l <= 0.5) p2 = l * (1 + s);
 			else p2 = l + s - l * s;
