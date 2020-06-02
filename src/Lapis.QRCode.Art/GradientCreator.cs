@@ -148,7 +148,7 @@ namespace Lapis.QRCode.Art
 									outMatrix[i,ii]=dd;
 								}
 								else {
-									outMatrix[i,ii]=-101;
+									outMatrix[i,ii]=0;
 								}
 							}
 						}
@@ -158,7 +158,7 @@ namespace Lapis.QRCode.Art
 									outMatrix[i,ii]=(outMatrix[i,ii]-minr)*-100/(maxr-minr) - 1;
 								}
 								else {
-									outMatrix[i,ii]=-101;
+									outMatrix[i,ii]=0;
 								}
 							}
 						}
@@ -180,7 +180,7 @@ namespace Lapis.QRCode.Art
 									outMatrix[i,ii]=dd;
 								}
 								else {
-									outMatrix[i,ii]=-101;
+									outMatrix[i,ii]=0;
 								}
 							}
 						}
@@ -190,7 +190,7 @@ namespace Lapis.QRCode.Art
 									outMatrix[i,ii]=(outMatrix[i,ii]-minr)*-100/(maxr-minr) - 1;
 								}
 								else {
-									outMatrix[i,ii]=-101;
+									outMatrix[i,ii]=0;
 								}
 							}
 						}
@@ -238,7 +238,7 @@ namespace Lapis.QRCode.Art
 									outMatrix[i,ii]=dd;
 								}
 								else {
-									outMatrix[i,ii]=-101;
+									outMatrix[i,ii]=0;
 								}
 							}
 						}
@@ -248,7 +248,7 @@ namespace Lapis.QRCode.Art
 									outMatrix[i,ii]=(outMatrix[i,ii]-minr)*-100/(maxr-minr) - 1;
 								}
 								else {
-									outMatrix[i,ii]=-101;
+									outMatrix[i,ii]=0;
 								}
 							}
 						}
@@ -323,7 +323,7 @@ namespace Lapis.QRCode.Art
 									
 										}
 										else {
-											outMatrix[i,ii]=-101;
+											outMatrix[i,ii]=0;
 										}
 									}
 								}
