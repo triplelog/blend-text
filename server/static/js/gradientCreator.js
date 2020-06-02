@@ -341,7 +341,7 @@ function updateBRGB(event) {updateWork(workspaceBRGB,'b');}
 workspaceB.addChangeListener(updateBHSL);
 workspaceBRGB.addChangeListener(updateBRGB);
 document.getElementById('blurFormulaRGB').style.display = 'none';
-
+document.getElementById('refreshCreation').addEventListener('click',updateImage);
 updateBHSL();
 
 function setFormulaOptions() {

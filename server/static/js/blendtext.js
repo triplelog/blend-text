@@ -432,6 +432,7 @@ function switchType(evt) {
 document.getElementById('overlayText').addEventListener('change',switchType);
 document.getElementById('overlayQR').addEventListener('change',switchType);
 switchType();
+document.getElementById('refreshCreation').addEventListener('click',updateImage);
 
 function setFormulaOptions() {
 	var filterOptions = document.getElementById('hslrgb');

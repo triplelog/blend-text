@@ -349,6 +349,7 @@ function addFilter() {
 	updateImage();
 }
 document.getElementById('addFilter').querySelector('button').addEventListener('click',addFilter);
+document.getElementById('refreshCreation').addEventListener('click',updateImage);
 
 function reorderFilterList(elID){
 	console.log(elID);

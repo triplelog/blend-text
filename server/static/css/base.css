@@ -80,7 +80,7 @@ div.container .titleLeft button, div.container .titleLeft select {
 	position: relative;
 }
 div.container .titleRight i {
-	top: -.25rem;
+	top: -3px;
 	position: relative;
 }
 div.container div .title .titleCenter {
