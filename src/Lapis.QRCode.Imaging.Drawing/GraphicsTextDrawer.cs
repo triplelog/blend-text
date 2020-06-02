@@ -146,7 +146,10 @@ namespace Lapis.QRCode.Imaging.Drawing
 									var x = MarginL + c;
                             		var y = MarginT + r;
                             		pixColor = bmp.GetPixel(x, y);
-                            		graph.FillRectangle(foreBrushB, x, y, CellWidth, CellWidth);
+                            
+                            		foreBrushCustom.Color = Color.FromArgb(pixColor.R,pixColor.G,pixColor.B);
+							
+                            		graph.FillRectangle(foreBrushCustom, x, y, CellWidth, CellWidth);
                             		counter++;
 								}
                         	}
@@ -156,6 +159,7 @@ namespace Lapis.QRCode.Imaging.Drawing
                         }
                         else if (tripMatrix[r, c] > 0)
                         {
+                        	Console.WriteLine("positive");
                         	if (counter >= 19 || otm == 0){
 								ore = -1;
 								ogr = -1;
