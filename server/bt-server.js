@@ -378,6 +378,8 @@ wss.on('connection', function connection(ws) {
 			for (var i=0;i<result.images.length;i++){
 				if (result.images[i].name == dm.url){
 					inSrc = 'static/'+result.images[i].src;
+					var jsonmessage = {'type':'imageLoaded'};
+					ws.send(JSON.stringify(jsonmessage));
 					break;
 				}
 			}
