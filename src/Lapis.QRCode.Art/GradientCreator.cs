@@ -73,7 +73,7 @@ namespace Lapis.QRCode.Art
                 	for (var ii=0;ii<twidth;ii++){
                 		p = gradientImage.GetPixel(ii,i);
                 		
-                		if (p < 12000000){//first is x (col), second is y
+                		if (p < 16700000){//first is x (col), second is y
                 			
                 			
                 			/*if (p < 8000000){
@@ -597,7 +597,7 @@ namespace Lapis.QRCode.Art
 								outMatrix[i,ii]=(outMatrix[i,ii]-minr)*-100/(maxr-minr) - 1;
 							}
 							else {
-								outMatrix[i,ii]=-101;
+								outMatrix[i,ii]=0;
 							}
 						}
 					}
@@ -663,7 +663,7 @@ namespace Lapis.QRCode.Art
 									
 										}
 										else {
-											outMatrix[i,ii]=-101;
+											outMatrix[i,ii]=0;
 										}
 									}
 								}
@@ -904,7 +904,7 @@ namespace Lapis.QRCode.Art
 								outMatrix[i,ii]=(outMatrix[i,ii]-minr)*-99/(maxr-minr) - 1;
 							}
 							else {
-								outMatrix[i,ii]=-101;
+								outMatrix[i,ii]=0;
 							}
 						}
 					}
@@ -987,7 +987,7 @@ namespace Lapis.QRCode.Art
 									
 										}
 										else {
-											outMatrix[i,ii]=-101;
+											outMatrix[i,ii]=0;
 										}
 									}
 								}
@@ -1183,16 +1183,32 @@ namespace Lapis.QRCode.Art
 										blval = 1;
 										brval = 1;
 									}
-									
 									if (yoffset ==0 ){
-										circledict[i*twidth+ii]=(tlval+trval)/2;
+										//outMatrix[i,ii]=(tlval+trval)/2;
+										int x2 = (xstep-xoffset)*(xstep-xoffset);
+										int x1 = (xoffset)*(xoffset);
+										int y2 = (ystep-yoffset)*(ystep-yoffset);
+										int td = x2+y2+x1+y2;
+										circledict[i*twidth+ii]=(tlval*(x2+y2)+trval*(x1+y2))/td;
 									}
 									else if (xoffset ==0 ){
-										circledict[i*twidth+ii]=(tlval+blval)/2;
+										//outMatrix[i,ii]=(tlval+blval)/2;
+										int x2 = (xstep-xoffset)*(xstep-xoffset);
+										int y2 = (ystep-yoffset)*(ystep-yoffset);
+										int y1 = (yoffset)*(yoffset);
+										int td = x2+y2+x2+y1;
+										circledict[i*twidth+ii]=(tlval*(x2+y2)+blval*(x2+y1))/td;
 									}
 									else {
-										circledict[i*twidth+ii]=(tlval+trval+blval+brval)/4;
+										//outMatrix[i,ii]=(tlval+trval+blval+brval)/4;
+										int x2 = (xstep-xoffset)*(xstep-xoffset);
+										int x1 = (xoffset)*(xoffset);
+										int y2 = (ystep-yoffset)*(ystep-yoffset);
+										int y1 = (yoffset)*(yoffset);
+										int td = x2+y2+x2+y1+x1+y2+x1+y1;
+										circledict[i*twidth+ii]=(tlval*(x2+y2)+trval*(x1+y2)+blval*(x2+y1)+brval*(x1+y1))/td;
 									}
+									
 									
 								}
 							}
@@ -1390,6 +1406,9 @@ namespace Lapis.QRCode.Art
 							outMatrix[i,ii]=outMatrix[i,ii];
 						}
 						
+					}
+					else {
+						outMatrix[i,ii]=0;
 					}
 				}
 			}
