@@ -43,15 +43,13 @@ namespace Lapis.QRCode.Art
         public virtual IImage Create(IRgb24BitmapBase gradientImage, int narrowQuotient, string gtype, int border)
         {
         	
-			int xstep = 1;
-			int ystep = 1;
+			int xstep;
+			int ystep;
         	
             if (gradientImage != null) //text on image
             {
             	int twidth = (int)gradientImage.Width;
             	int theight = (int)gradientImage.Height;
-            	ystep = 5;
-        		xstep = 5;
         		ystep = 1 + theight / 100;
         		xstep = 1 + twidth / 100;
         		
@@ -117,6 +115,8 @@ namespace Lapis.QRCode.Art
                 }
                 else if (gtype == "linear"){
                 	//get angle
+                	xstep = 1;
+                	ystep = 1;
                 	int angle = narrowQuotient; // from 0 to 359
                 	if (angle > 359){
                 		angle = angle %360;
@@ -336,6 +336,8 @@ namespace Lapis.QRCode.Art
                 }
                 else if (gtype == "radial"){
                 	//get center
+                	xstep = 1;
+                	ystep = 1;
                 	string centerType = "centroid";
                 	
                 	string distanceType = "euclidean";
@@ -1438,13 +1440,29 @@ namespace Lapis.QRCode.Art
 									
 									
 									if (yoffset ==0 ){
-										outMatrix[i,ii]=(tlval+trval)/2;
+										//outMatrix[i,ii]=(tlval+trval)/2;
+										int x2 = (xstep-xoffset)*(xstep-xoffset);
+										int x1 = (xoffset)*(xoffset);
+										int y2 = (ystep-yoffset)*(ystep-yoffset);
+										int td = x2+y2+x1+y2;
+										outMatrix[i,ii]=(tlval*(x2+y2)+trval*(x1+y2))/td;
 									}
 									else if (xoffset ==0 ){
-										outMatrix[i,ii]=(tlval+blval)/2;
+										//outMatrix[i,ii]=(tlval+blval)/2;
+										int x2 = (xstep-xoffset)*(xstep-xoffset);
+										int y2 = (ystep-yoffset)*(ystep-yoffset);
+										int y1 = (yoffset)*(yoffset);
+										int td = x2+y2+x2+y1;
+										outMatrix[i,ii]=(tlval*(x2+y2)+blval*(x2+y1))/td;
 									}
 									else {
-										outMatrix[i,ii]=(tlval+trval+blval+brval)/4;
+										//outMatrix[i,ii]=(tlval+trval+blval+brval)/4;
+										int x2 = (xstep-xoffset)*(xstep-xoffset);
+										int x1 = (xoffset)*(xoffset);
+										int y2 = (ystep-yoffset)*(ystep-yoffset);
+										int y1 = (yoffset)*(yoffset);
+										int td = x2+y2+x2+y1+x1+y2+x1+y1;
+										outMatrix[i,ii]=(tlval*(x2+y2)+trval*(x1+y2)+blval*(x2+y1)+brval*(x1+y1))/td;
 									}
 									if (outMatrix[i,ii]<-100){
 										outMatrix[i,ii]=-100;
