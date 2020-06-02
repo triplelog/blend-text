@@ -952,10 +952,20 @@ namespace Lapis.QRCode.Art
 									
 									
 											if (yoffset ==0 ){
-												outMatrix[i,ii]=(tlval+trval)/2;
+												//outMatrix[i,ii]=(tlval+trval)/2;
+												int x2 = (xstep-xoffset)*(xstep-xoffset);
+												int x1 = (xoffset)*(xoffset);
+												int y2 = (ystep-yoffset)*(ystep-yoffset);
+												int td = x2+y2+x1+y2;
+												outMatrix[i,ii]=(tlval*(x2+y2)+trval*(x1+y2))/td;
 											}
 											else if (xoffset ==0 ){
-												outMatrix[i,ii]=(tlval+blval)/2;
+												//outMatrix[i,ii]=(tlval+blval)/2;
+												int x2 = (xstep-xoffset)*(xstep-xoffset);
+												int y2 = (ystep-yoffset)*(ystep-yoffset);
+												int y1 = (yoffset)*(yoffset);
+												int td = x2+y2+x2+y1;
+												outMatrix[i,ii]=(tlval*(x2+y2)+blval*(x2+y1))/td;
 											}
 											else {
 												//outMatrix[i,ii]=(tlval+trval+blval+brval)/4;
