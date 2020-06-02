@@ -305,8 +305,15 @@ namespace Lapis.QRCode.Art
 												outMatrix[i,ii]=(tlval+blval)/2;
 											}
 											else {
-												outMatrix[i,ii]=(tlval+trval+blval+brval)/4;
+												//outMatrix[i,ii]=(tlval+trval+blval+brval)/4;
+												int x2 = (xstep-xoffset)*(xstep-xoffset);
+												int x1 = (xoffset)*(xoffset);
+												int y2 = (ystep-yoffset)*(ystep-yoffset);
+												int y1 = (yoffset)*(yoffset);
+												int td = x2+y2+x2+y1+x1+y2+x1+y1;
+												outMatrix[i,ii]=(tlval*(x2+y2)+trval*(x1+y2)+blval*(x2+y1)+brval*(x1+y1))/td;
 											}
+											
 											if (outMatrix[i,ii]<-100){
 												outMatrix[i,ii]=-100;
 											}
