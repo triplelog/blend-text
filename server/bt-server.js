@@ -354,7 +354,9 @@ wss.on('connection', function connection(ws) {
 					var szStr = stdout.substring(szIdx+7);
 					var szIdxe = szStr.indexOf('/');
 					inSrcSz = parseInt(szStr.substring(0,szIdxe));
+					
 					var jsonmessage = {'type':'imageLoaded'};
+					console.log(jsonmessage);
 					ws.send(JSON.stringify(jsonmessage));
 				}
 			});
