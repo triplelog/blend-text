@@ -592,6 +592,10 @@ ws.onmessage = function(evt){
 		}
 		
 	}
+	else if (dm.type == 'imageSaved' || dm.type == 'imageLoaded'){
+		updateImage();
+		
+	}
 	else {
 		var el = document.getElementById('imageHolder');
 		var img = document.createElement('img');

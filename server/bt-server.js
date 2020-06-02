@@ -279,6 +279,8 @@ wss.on('connection', function connection(ws) {
 						fs.writeFile(inSrc, buffer, function (err) {
 							if (err){console.log(err);}
 							console.log("cf",performance.now());
+							var jsonmessage = {'type':'imageLoaded'};
+							ws.send(JSON.stringify(jsonmessage));
 						});
 					}
 					break;
@@ -352,6 +354,8 @@ wss.on('connection', function connection(ws) {
 					var szStr = stdout.substring(szIdx+7);
 					var szIdxe = szStr.indexOf('/');
 					inSrcSz = parseInt(szStr.substring(0,szIdxe));
+					var jsonmessage = {'type':'imageLoaded'};
+					ws.send(JSON.stringify(jsonmessage));
 				}
 			});
 		}
