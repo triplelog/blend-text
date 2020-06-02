@@ -332,6 +332,10 @@ wss.on('connection', function connection(ws) {
 					var child = exec(wget, function(err, stdout, stderr) {
 						var sz = 2000000;
 						var szIdx = stdout.indexOf('saved [');
+						if (szIdx == -1 && stderr.length > 0){
+							stdout = stderr;
+							szIdx = stdout.indexOf('saved [');
+						}
 						if (szIdx > -1){
 							var szStr = stdout.substring(szIdx+7);
 							var szIdxe = szStr.indexOf('/');
@@ -350,9 +354,10 @@ wss.on('connection', function connection(ws) {
 			var child = exec(wget, function(err, stdout, stderr) {
 				inSrcSz = 2000000;
 				var szIdx = stdout.indexOf('saved [');
-				console.log("szIdx ",szIdx, err);
-				console.log("szIdx ",szIdx, stdout);
-				console.log("szIdx ",szIdx, stderr);
+				if (szIdx == -1 && stderr.length > 0){
+					stdout = stderr;
+					szIdx = stdout.indexOf('saved [');
+				}
 				if (szIdx > -1){
 					var szStr = stdout.substring(szIdx+7);
 					var szIdxe = szStr.indexOf('/');
