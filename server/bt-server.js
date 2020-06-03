@@ -95,6 +95,7 @@ app.get('/filter',
 								filterGroups: filterGroups,
 								realSrc: realSrc,
 							}));
+							res.end();
 						}
 						else {
 							res.write(nunjucks.render('templates/qblurbase.html',{
@@ -104,6 +105,7 @@ app.get('/filter',
 								filters: filters,
 								filterGroups: filterGroups,
 							}));
+							res.end();
 						}
 					});
 				}
@@ -130,6 +132,7 @@ app.get('/filter',
 							filterGroups: filterGroups,
 							realSrc: realSrc,
 						}));
+						res.end();
 					}
 					else {
 						res.write(nunjucks.render('templates/qblurbase.html',{
@@ -139,6 +142,7 @@ app.get('/filter',
 							filters: filters,
 							filterGroups: filterGroups,
 						}));
+						res.end();
 					}
 				}
 			}
@@ -150,9 +154,10 @@ app.get('/filter',
 					filters: filters,
 					filterGroups: filterGroups,
 				}));
+				res.end();
 			}
 			
-			res.end();
+			
 		});
 	}
 );
@@ -187,15 +192,7 @@ app.get('/overlay',
 							}
 						}
 						if (creation.id && creation.id.length){
-							var imgSrc = creation.imgSrc;
-							var realSrc = '';
-							for (var i=0;i<result.images.length;i++){
-								if (result.images[i].src == imgSrc){
-									imgName = result.images[i].name;
-									realSrc = imgSrc;
-									break;
-								}
-							}
+							var realSrc = creation.imgSrc;
 							res.write(nunjucks.render('templates/qblurbase.html',{
 								type: 'overlay',
 								tkey: tkey,
@@ -205,6 +202,7 @@ app.get('/overlay',
 								name: creation.name,
 								realSrc: realSrc,
 							}));
+							res.end();
 						}
 						else {
 							res.write(nunjucks.render('templates/qblurbase.html',{
@@ -212,6 +210,7 @@ app.get('/overlay',
 								tkey: tkey,
 								formulas: formulas,
 							}));
+							res.end();
 						}
 						
 					});
@@ -225,15 +224,7 @@ app.get('/overlay',
 						}
 					}
 					if (creation.id && creation.id.length){
-						var imgSrc = creation.imgSrc;
-						var realSrc = '';
-						for (var i=0;i<result.images.length;i++){
-							if (result.images[i].src == imgSrc){
-								imgName = result.images[i].name;
-								realSrc = imgSrc;
-								break;
-							}
-						}
+						var realSrc = creation.imgSrc;
 						res.write(nunjucks.render('templates/qblurbase.html',{
 							type: 'overlay',
 							tkey: tkey,
@@ -243,6 +234,7 @@ app.get('/overlay',
 							name: creation.name,
 							realSrc: realSrc,
 						}));
+						res.end();
 					}
 					else {
 						res.write(nunjucks.render('templates/qblurbase.html',{
@@ -250,6 +242,7 @@ app.get('/overlay',
 							tkey: tkey,
 							formulas: formulas,
 						}));
+						res.end();
 					}
 				}
 				
@@ -260,9 +253,9 @@ app.get('/overlay',
 					tkey: tkey,
 					formulas: formulas,
 				}));
+				res.end();
 			}
 			
-			res.end();
 		});
 	}
 );
