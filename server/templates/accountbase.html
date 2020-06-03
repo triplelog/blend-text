@@ -362,43 +362,41 @@ function imageTippy(el,name) {
 	  trigger: 'click',
 	  interactive: true,
 	  placement: 'bottom',
+	  
 	});
 }
 
 {% for formula in formulas.overlay %}
 tippy(document.getElementById('overlay-{{formula.id}}'),{
-	content: `<div class="formulaCode">
-			{{ formula.code | dump | safe}}
-		</div>`,
+	content: `<div class="formulaCode">{{ formula.code | dump | safe}}</div>`,
 	allowHTML: true,
 	trigger: 'click',
 	interactive: true,
 	placement: 'bottom',
+	appendTo: document.querySelector('.container'),
 });
 
 {% endfor %}
 {% for formula in formulas.gradient %}
 tippy(document.getElementById('gradient-{{formula.id}}'),{
-	content: `<div class="formulaCode">
-			{{ formula.code | dump | safe}}
-		</div>`,
+	content: `<div class="formulaCode">{{ formula.code | dump | safe}}</div>`,
 	allowHTML: true,
 	trigger: 'click',
 	interactive: true,
 	placement: 'bottom',
+	appendTo: document.querySelector('.container'),
 });
 
 {% endfor %}
 {% for group in filterGroups %}
 	{% for formula in formulas.filter[group] %}
 		tippy(document.getElementById('filter-{{formula.id}}'),{
-			content: `<div class="formulaCode">
-					{{ formula.code | dump | safe}}
-				</div>`,
+			content: `<div class="formulaCode">{{ formula.code | dump | safe}}</div>`,
 			allowHTML: true,
 			trigger: 'click',
 			interactive: true,
 			placement: 'bottom',
+			appendTo: document.querySelector('.container'),
 		});
 	{% endfor %}
 {% endfor %}
