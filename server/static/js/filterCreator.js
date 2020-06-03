@@ -326,25 +326,28 @@ function addFilter() {
 	div.setAttribute('data-filter',filterType);
 	currentFilterType = filterType;
 
-	
-	var wxml = Blockly.Xml.textToDom(filters[filterType][0].workspace);
 	workspace.clear();
-	if (filters[filterType][0].hslrgb == 'r'){
-		var vars = ["r","g","b"];
-		for (var ii=0;ii<3;ii++){
-			workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
+	if (filters[filterType][0].workspace != ''){
+		var wxml = Blockly.Xml.textToDom(filters[filterType][0].workspace);
+	
+		if (filters[filterType][0].hslrgb == 'r'){
+			var vars = ["r","g","b"];
+			for (var ii=0;ii<3;ii++){
+				workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
+			}
+			Blockly.Xml.domToWorkspace(wxml,workspace);
 		}
-		Blockly.Xml.domToWorkspace(wxml,workspace);
-		updateWork();
-	}
-	else {
-		var vars = ["h","s","l"];
-		for (var ii=0;ii<3;ii++){
-			workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
+		else {
+			var vars = ["h","s","l"];
+			for (var ii=0;ii<3;ii++){
+				workspace.createVariable(vars[ii],null,"qblur_"+vars[ii]);
+			}
+			Blockly.Xml.domToWorkspace(wxml,workspace);
+			
 		}
-		Blockly.Xml.domToWorkspace(wxml,workspace);
-		updateWork();
 	}
+	updateWork();
+	
 	
 	updateImage();
 }
