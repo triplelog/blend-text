@@ -143,6 +143,85 @@ app.get('/overlay',
 					name: result.creations[parseInt(req.query.q)].name,
 				}));
 			}
+			else if (req.query && req.query.u && req.query.id){
+				var imgName = '';
+				if (req.query.u != myuser){
+					QblurData.findOne({ username: req.query.u }, function(err, result) {
+						var creation = {};
+						for (var i=0;i<result.creations.length;i++){
+							if (result.creations[i].id == req.query.id){
+								creation = result.creations[i];
+								break;
+							}
+						}
+						if (creation.id && creation.id.length){
+							var imgSrc = creation.imgSrc;
+							var realSrc = '';
+							for (var i=0;i<result.images.length;i++){
+								if (result.images[i].src == imgSrc){
+									imgName = result.images[i].name;
+									realSrc = imgSrc;
+									break;
+								}
+							}
+							res.write(nunjucks.render('templates/qblurbase.html',{
+								type: 'overlay',
+								tkey: tkey,
+								formulas: formulas,
+								imgSaved: imgName,
+								imgData: creation.imgData,
+								name: creation.name,
+								realSrc: realSrc,
+							}));
+						}
+						else {
+							res.write(nunjucks.render('templates/qblurbase.html',{
+								type: 'overlay',
+								tkey: tkey,
+								formulas: formulas,
+							}));
+						}
+						
+					}
+				}
+				else {
+					var creation = {};
+					for (var i=0;i<result.creations.length;i++){
+						if (result.creations[i].id == req.query.id){
+							creation = result.creations[i];
+							break;
+						}
+					}
+					if (creation.id && creation.id.length){
+						var imgSrc = creation.imgSrc;
+						var realSrc = '';
+						for (var i=0;i<result.images.length;i++){
+							if (result.images[i].src == imgSrc){
+								imgName = result.images[i].name;
+								realSrc = imgSrc;
+								break;
+							}
+						}
+						res.write(nunjucks.render('templates/qblurbase.html',{
+							type: 'overlay',
+							tkey: tkey,
+							formulas: formulas,
+							imgSaved: imgName,
+							imgData: creation.imgData,
+							name: creation.name,
+							realSrc: realSrc,
+						}));
+					}
+					else {
+						res.write(nunjucks.render('templates/qblurbase.html',{
+							type: 'overlay',
+							tkey: tkey,
+							formulas: formulas,
+						}));
+					}
+				}
+				
+			}
 			else {
 				res.write(nunjucks.render('templates/qblurbase.html',{
 					type: 'overlay',
@@ -373,17 +452,24 @@ wss.on('connection', function connection(ws) {
 	}
 	else if (dm.type && dm.type == 'savedImage'){
 		console.log(dm.url);
-		
-		QblurData.findOne({username:username}, 'images', function(err, result) {
-			for (var i=0;i<result.images.length;i++){
-				if (result.images[i].name == dm.url){
-					inSrc = 'static/'+result.images[i].src;
-					var jsonmessage = {'type':'imageLoaded'};
-					ws.send(JSON.stringify(jsonmessage));
-					break;
+		if (dm.url){
+			inSrc = 'static/'+dm.url;
+			var jsonmessage = {'type':'imageLoaded'};
+			ws.send(JSON.stringify(jsonmessage));
+		}
+		else {
+			QblurData.findOne({username:username}, 'images', function(err, result) {
+				for (var i=0;i<result.images.length;i++){
+					if (result.images[i].name == dm.name){
+						inSrc = 'static/'+result.images[i].src;
+						var jsonmessage = {'type':'imageLoaded'};
+						ws.send(JSON.stringify(jsonmessage));
+						break;
+					}
 				}
-			}
-		});
+			});
+		}
+		
 
 		return;
 	}
@@ -483,9 +569,10 @@ wss.on('connection', function connection(ws) {
 		if (dm.imgData && username != ''){
 			var imgSrc;
 			var imgName;
+			var randid = parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12);
 			if (inSrc.substring(0,9) == 'images/in'){
 				var ext = inSrc.substring(inSrc.indexOf('.'));
-				imgSrc = 'userimages/'+username+'_'+parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12)+ext;
+				imgSrc = 'userimages/'+username+'_'+randid+ext;
 				var mvimg = 'mv '+inSrc+' static/'+imgSrc;
 				inSrc = 'static/'+imgSrc;
 				var sz = inSrcSz;
@@ -502,7 +589,7 @@ wss.on('connection', function connection(ws) {
 				
 			}
 			var creationType = 'overlay';
-			var creation = {'name':dm.name,'imgData':dm.imgData,'imgSrc':inSrc.substring(7)};
+			var creation = {'id':randid,'name':dm.name,'imgData':dm.imgData,'imgSrc':inSrc.substring(7)};
 
 			QblurData.findOne({ username: username }, "creations", function(err, result) {
 				var foundMatch = false;

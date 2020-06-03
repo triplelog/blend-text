@@ -563,13 +563,14 @@ defaults.push('<xml xmlns="https://developers.google.com/blockly/xml"><variables
 
 
 var loadSaved = false;
+var realSrc = '{{ realSrc }}';
 var ws = new WebSocket('wss://qblur.com:8080');
 ws.onopen = function(evt) {
 	var jsonmessage = {'type':'key'};
 	jsonmessage.message = tkey;
 	ws.send(JSON.stringify(jsonmessage));
 	if (savedImgUrl){
-		savedImgUrl();
+		savedImgUrl({'type':'url'};
 	}
 	else {
 		loadSaved = true;

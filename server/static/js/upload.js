@@ -89,20 +89,35 @@ function chgImgUrl(evt) {
 }
 
 function savedImgUrl(evt) {
-	var url = document.getElementById('imgSaved').value;
-	if (url != ''){
-		var jsonmessage = {'type':'savedImage','url':url};
-		console.log(jsonmessage);
-		ws.send(JSON.stringify(jsonmessage));
-		document.getElementById('imgType').value = 'saved';
-		document.getElementById('imgSrc').style.display = 'none';
-		document.getElementById('imgUrl').style.display = 'none';
-		document.getElementById('imgDrag').style.display = 'none';
-		document.getElementById('imgSaved').style.display = 'inline-block';
+	if (evt.type && evt.type == 'url'){
+		if (realSrc != ''){
+			var jsonmessage = {'type':'savedImage','url':realSrc};
+			console.log(jsonmessage);
+			ws.send(JSON.stringify(jsonmessage));
+			document.getElementById('imgType').value = 'saved';
+			document.getElementById('imgSrc').style.display = 'none';
+			document.getElementById('imgUrl').style.display = 'none';
+			document.getElementById('imgDrag').style.display = 'none';
+			document.getElementById('imgSaved').style.display = 'inline-block';
+		}
+	}
+	else {
+		var name = document.getElementById('imgSaved').value;
+		if (name != ''){
+			var jsonmessage = {'type':'savedImage','name':name,'url':};
+			console.log(jsonmessage);
+			ws.send(JSON.stringify(jsonmessage));
+			document.getElementById('imgType').value = 'saved';
+			document.getElementById('imgSrc').style.display = 'none';
+			document.getElementById('imgUrl').style.display = 'none';
+			document.getElementById('imgDrag').style.display = 'none';
+			document.getElementById('imgSaved').style.display = 'inline-block';
+		}
 	}
 	
+	
 }
-if (loadSaved){savedImgUrl();}
+if (loadSaved){savedImgUrl({'type':'url'});
 document.getElementById('imgUrl').addEventListener('change', chgImgUrl);
 document.getElementById('imgSaved').addEventListener('change', savedImgUrl);
 function sendImage(img) {
