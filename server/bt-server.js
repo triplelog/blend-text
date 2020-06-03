@@ -541,14 +541,23 @@ wss.on('connection', function connection(ws) {
 			
 			
 			QblurData.findOne({ username: username }, "creations", function(err, result) {
+				var foundMatch = false;
 				for (var i=0;i<result.creations.length;i++){
 					if (result.creations[i].name == dm.message){
 						result.creations.splice(i,1);
+						foundMatch = true;
 						break;
 					}
 				}
-				result.markModified('creations');
-				result.save(function(err,result){});
+				if (foundMatch){
+					result.markModified('creations');
+					result.save(function(err,result){});
+				}
+				else {
+					var jsonmessage = {'type':'reloadPage'};
+					ws.send(JSON.stringify(jsonmessage));
+				}
+				
 			});
 		}
 		return;
