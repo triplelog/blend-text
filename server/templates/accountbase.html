@@ -28,58 +28,14 @@ body {
 	
 }
 
-label[for="formula--1"] {
-	position: absolute;
-	display: block;
-	left: 0px;
-	top: 0px;
-	width: 100%;
-	height: 100%;
-}
 
-{% for formula in range(0,15 + formulas.overlay.length*3/2) %}
-#overlay-{{formula}}:checked ~ #overlayFormulas label[for="overlay-{{formula}}"] {
-	pointer-events: none;	
-}
-#overlay-{{formula}}:checked ~ #overlayFormulas label[for="overlay-{{formula}}"] + div.formulaCode {
-	display: block;
-}
-{% endfor %}
-{% for formula in range(0,15 + formulas.gradient.length*3/2) %}
-#gradient-{{formula}}:checked ~ #gradientFormulas label[for="gradient-{{formula}}"] {
-	pointer-events: none;	
-}
-#gradient-{{formula}}:checked ~ #gradientFormulas label[for="gradient-{{formula}}"] + div.formulaCode {
-	display: block;
-}
-{% endfor %}
-
-{% for formula in range(0,15 + totalfilters*3/2) %}
-#filter-{{formula}}:checked ~ #filterFormulas label[for="filter-{{formula}}"] {
-	pointer-events: none;	
-}
-#filter-{{formula}}:checked ~ #filterFormulas label[for="filter-{{formula}}"] + div.formulaCode {
-	display: block;
-}
-{% endfor %}
 
 .formulaLabel {
 	position: relative;
 	display: block;
 }
-.formulaCode {
-	display: none;
-	position: absolute;
-	left: 1rem;
-	padding: 1rem;
-	z-index: 5;
-	border: 1px solid black;
-	background: white;
-	pointer-events: none;
-}
-.formulaCode div{
-	pointer-events: all;
-}
+
+
 
 
 div:Not(.content-22) > .content {
@@ -129,59 +85,35 @@ div:Not(.content-22) > .content {
 </div>
 {% endblock %}
 {% block content11 %}
-	<input type="radio" name="formula" style="display: none;" id="formula--1" checked="checked"></input>
-	{% for formula in range(0,15 + formulas.overlay.length*3/2) %}
-	<input type="radio" name="formula" style="display: none;" id="overlay-{{ formula }}"></input>
-	{% endfor %}
-	{% for formula in range(0,15 + formulas.gradient.length*3/2) %}
-	<input type="radio" name="formula" style="display: none;" id="gradient-{{ formula }}"></input>
-	{% endfor %}
-	{% for formula in range(0,15 + totalfilters*3/2) %}
-	<input type="radio" name="formula" style="display: none;" id="filter-{{ formula }}"></input>
-	{% endfor %}
-	<label for="formula--1"></label>
+
 	<div id="overlayFormulas">
 		{% for formula in formulas.overlay %}
-		<label class="formulaLabel" for="overlay-{{ formula.id }}">{{ formula.name }}</label>
-		<div class="formulaCode">
-			<div>
-				<i class="fas fa-trash"></i>
-				<i class="fas fa-edit"></i>
-				<i class="fas fa-copy" onclick="copyFormula('{{ formula.name }}','overlay')"></i>
-			</div>
-			<pre class="language-lua"><code class="language-lua">{{ formula.code }}</code></pre>
+		<i class="fas fa-trash"></i>
+		<i class="fas fa-edit"></i>
+		<i class="fas fa-copy" onclick="copyFormula('{{ formula.name }}','overlay')"></i>
+		<label class="formulaLabel" id="overlay-{{ formula.id }}">{{ formula.name }}</label>
 		
-		</div>
 		{% endfor %}
 	</div>
 	<div id="gradientFormulas" style="display: none;">
 		{% for formula in formulas.gradient %}
-		<label class="formulaLabel" for="gradient-{{ formula.id }}">{{ formula.name }}</label>
-		<div class="formulaCode">
-			<div>
-				<i class="fas fa-trash"></i>
-				<i class="fas fa-edit"></i>
-				<i class="fas fa-copy" onclick="copyFormula('{{ formula.name }}','gradient')"></i>
-			</div>
-			<pre class="language-python"><code class="language-python">{{ formula.code }}</code></pre>
-		
-		</div>
+		<i class="fas fa-trash"></i>
+		<i class="fas fa-edit"></i>
+		<i class="fas fa-copy" onclick="copyFormula('{{ formula.name }}','overlay')"></i>
+		<label class="formulaLabel" id="gradient-{{ formula.id }}">{{ formula.name }}</label>
+
 		{% endfor %}
 	</div>
 	<div id="filterFormulas" style="display: none;">
 		
 		{% for group in filterGroups %}
+			
 			{% for formula in formulas.filter[group] %}
-			<label class="formulaLabel" for="filter-{{ formula.id }}">{{ formula.name }}</label>
-			<div class="formulaCode">
-				<div>
-					<i class="fas fa-trash"></i>
-					<i class="fas fa-edit"></i>
-					<i class="fas fa-copy" onclick="copyFormula('{{ formula.name }}','filter','{{ group }}')"></i>
-				</div>
-				<pre class="language-python"><code class="language-python">{{ formula.code }}</code></pre>
-		
-			</div>
+			<i class="fas fa-trash"></i>
+			<i class="fas fa-edit"></i>
+			<i class="fas fa-copy" onclick="copyFormula('{{ formula.name }}','filter','{{ group }}')"></i>
+			<label class="formulaLabel" id="filter-{{ formula.id }}">{{ formula.name }}</label>
+
 			{% endfor %}
 		{% endfor %}
 	</div>
@@ -429,6 +361,46 @@ function imageTippy(el,name) {
 	  placement: 'bottom',
 	});
 }
+
+{% for formula in formulas.overlay %}
+tippy('overlay-{{formula.id}}',{
+	content: `<div class="formulaCode">
+			{{ formula.code }}
+		</div>`,
+	allowHTML: true,
+	trigger: 'click',
+	interactive: true,
+	placement: 'bottom',
+});
+
+{% endfor %}
+{% for formula in formulas.gradient %}
+tippy('gradient-{{formula.id}}',{
+	content: `<div class="formulaCode">
+			{{ formula.code }}
+		</div>`,
+	allowHTML: true,
+	trigger: 'click',
+	interactive: true,
+	placement: 'bottom',
+});
+
+{% endfor %}
+{% for group in filterGroups %}
+	{% for formula in formulas.filter[group] %}
+		tippy('filter-{{formula.id}}',{
+			content: `<div class="formulaCode">
+					{{ formula.code }}
+				</div>`,
+			allowHTML: true,
+			trigger: 'click',
+			interactive: true,
+			placement: 'bottom',
+		});
+	{% endfor %}
+{% endfor %}
+
+
 function chgFormulaType(){
 	var formulaType = document.getElementById('formulaType').value;
 	document.getElementById('overlayFormulas').style.display = 'none';

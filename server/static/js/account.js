@@ -95,7 +95,7 @@ ws.onmessage = function(evt){
 
 	}
 	else if (dm.type == 'duplicate name'){
-		alert('Name taken');
+		alert('That name is already used. Pick a different name.');
 	}
 	else if (dm.type == 'reloadPage'){
 		location.reload();
