@@ -1075,8 +1075,11 @@ wss.on('connection', function connection(ws) {
 		var hrString = '';
 		for (var ii=0;ii<dm.filters.length;ii++){
 			var workspace = new Blockly.Workspace();
-			var wxml = Blockly.Xml.textToDom(dm.filters[ii].workspace);
-			Blockly.Xml.domToWorkspace(wxml, workspace);
+			if (dm.filters[ii].workspace != ''){
+				var wxml = Blockly.Xml.textToDom(dm.filters[ii].workspace);
+				Blockly.Xml.domToWorkspace(wxml, workspace);
+			}
+			
 			var usedvars = workspace.getAllVariables();
 			var varstr = "";
 			for (var i=0;i<usedvars.length;i++){
