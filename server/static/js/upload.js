@@ -94,11 +94,6 @@ function savedImgUrl(evt) {
 			var jsonmessage = {'type':'savedImage','url':realSrc};
 			console.log(jsonmessage);
 			ws.send(JSON.stringify(jsonmessage));
-			document.getElementById('imgType').value = 'saved';
-			document.getElementById('imgSrc').style.display = 'none';
-			document.getElementById('imgUrl').style.display = 'none';
-			document.getElementById('imgDrag').style.display = 'none';
-			document.getElementById('imgSaved').style.display = 'inline-block';
 		}
 	}
 	else {

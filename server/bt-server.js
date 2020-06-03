@@ -81,16 +81,8 @@ app.get('/filter',
 							}
 						}
 						if (creation.id && creation.id.length){
-				
-							var imgSrc = creation.imgSrc;
-							var realSrc = '';
-							for (var i=0;i<result.images.length;i++){
-								if (result.images[i].src == imgSrc){
-									imgName = result.images[i].name;
-									realSrc = imgSrc;
-									break;
-								}
-							}
+
+							var realSrc = creation.imgSrc;
 				
 							res.write(nunjucks.render('templates/qblurbase.html',{
 								type: 'filter',
@@ -125,15 +117,7 @@ app.get('/filter',
 					}
 					if (creation.id && creation.id.length){
 				
-						var imgSrc = creation.imgSrc;
-						var realSrc = '';
-						for (var i=0;i<result.images.length;i++){
-							if (result.images[i].src == imgSrc){
-								imgName = result.images[i].name;
-								realSrc = imgSrc;
-								break;
-							}
-						}
+						var realSrc = creation.imgSrc;
 				
 						res.write(nunjucks.render('templates/qblurbase.html',{
 							type: 'filter',
