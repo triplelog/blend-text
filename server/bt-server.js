@@ -1040,7 +1040,7 @@ wss.on('connection', function connection(ws) {
 	}
 	else if (dm.type && dm.type == 'deleteFormula'){
 		if (username != ''){
-			if (!dm.newname && dm.newname !== 0){
+			if (!dm.newname && dm.newname !== 0 && !dm.oldname && dm.oldname !== 0){
 				return;
 			}
 			QblurData.findOne({ username: username }, function(err, result) {
