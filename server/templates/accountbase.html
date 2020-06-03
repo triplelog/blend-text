@@ -379,7 +379,7 @@ const addImageTippy = tippy('#addImageButton', {
 	  onMount(instance) {
 		setListeners();
 	  },
-	});
+});
 {% for i in range(0,creations.length) %}
 tippy('#creation-{{i}} > .fa-trash', {
 	  content: `<div>

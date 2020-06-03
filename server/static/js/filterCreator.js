@@ -272,9 +272,9 @@ function editFilter(evt) {
 		}
 		var els = document.getElementById('filterList').querySelectorAll('div');
 		for (var i=0;i<els.length;i++){
-			els[i].style.removeProperty('background');
+			els[i].querySelector('span').style.removeProperty('background');
 		}
-		el.style.background = 'gray';
+		el.querySelector('span').style.background = 'gray';
 		console.log(el);
 		currentFilterID = parseInt(el.getAttribute('data-type'));
 		currentFilterType = el.getAttribute('data-filter');
@@ -321,8 +321,21 @@ function addFilter() {
 	var el = document.getElementById('filterList');
 	var div = document.createElement('div');
 	div.addEventListener('click',editFilter);
-	div.style.background = 'gray';
+	var i = document.createElement('i');
+	i.classList.add('fas');
+	i.classList.add('fa-trash');
+	const deleteFilterTippy = tippy(i, {
+		  content: `<div>
+			Are you sure?
+		</div>`,
+		  allowHTML: true,
+		  trigger: 'click',
+		  interactive: true,
+		  placement: 'bottom',
+	});
+	div.appendChild(i);
 	var span = document.createElement('span');
+	span.style.background = 'gray';
 	span.textContent = filters[filterType][0].name;
 	div.appendChild(span);
 	var input = document.createElement('input');
@@ -382,11 +395,11 @@ function reorderFilterList(elID){
 		if (filterListEls[i].getAttribute('data-type')==elID){
 			currentFilterID = i;
 			filterListEls[i].setAttribute('data-type',i);
-			filterListEls[i].style.background = 'gray';
+			filterListEls[i].querySelector('span').style.background = 'gray';
 		}
 		else {
 			filterListEls[i].setAttribute('data-type',i);
-			filterListEls[i].style.removeProperty('background');
+			filterListEls[i].querySelector('span').style.removeProperty('background');
 		}
 	}
 	imgData.filters.splice(currentFilterID,0,removedFilter);
@@ -401,7 +414,7 @@ function deleteFilter(elID){
 	var foundEl = 0;
 	for (var i=0;i<filterListEls.length;i++){
 		filterListEls[i].setAttribute('data-type',i);
-		filterListEls[i].style.removeProperty('background');
+		filterListEls[i].querySelector('span').style.removeProperty('background');
 		if (foundEl == 0 && filterListEls[i].getAttribute('data-type')==elID){
 			filterListEls[i].parentNode.removeChild(filterListEls[i]);
 			foundEl =1;
@@ -410,7 +423,7 @@ function deleteFilter(elID){
 			else if (filterListEls[i-1]) {
 				currentFilterID = i-1;
 				filterListEls[i-1].setAttribute('data-type',i-1);
-				filterListEls[i-1].style.background = 'gray';
+				filterListEls[i-1].querySelector('span').style.background = 'gray';
 			}
 			else {
 				currentFilterID = 0;
@@ -419,7 +432,7 @@ function deleteFilter(elID){
 		else if (foundEl == 1){
 			currentFilterID = i-1;
 			filterListEls[i].setAttribute('data-type',i-1);
-			filterListEls[i].style.background = 'gray';
+			filterListEls[i].querySelector('span').style.background = 'gray';
 			foundEl = 2;
 		}
 		else if (foundEl == 2){
