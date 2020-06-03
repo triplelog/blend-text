@@ -312,9 +312,9 @@ function editFilter(evt) {
 }
 
 function addFilter() {
-	var els = document.getElementById('filterList').querySelectorAll('div');
+	var els = document.getElementById('filterList').querySelectorAll('div[data-type]');
 	for (var i=0;i<els.length;i++){
-		els[i].style.removeProperty('background');
+		els[i].querySelector('span').style.removeProperty('background');
 	}
 	
 	var filterType = document.getElementById('addFilter').querySelector('select').value;
