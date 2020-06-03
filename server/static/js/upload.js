@@ -117,7 +117,7 @@ function savedImgUrl(evt) {
 	
 	
 }
-if (loadSaved){savedImgUrl({'type':'url'});
+if (loadSaved){savedImgUrl({'type':'url'});}
 document.getElementById('imgUrl').addEventListener('change', chgImgUrl);
 document.getElementById('imgSaved').addEventListener('change', savedImgUrl);
 function sendImage(img) {

@@ -570,7 +570,7 @@ ws.onopen = function(evt) {
 	jsonmessage.message = tkey;
 	ws.send(JSON.stringify(jsonmessage));
 	if (savedImgUrl){
-		savedImgUrl({'type':'url'};
+		savedImgUrl({'type':'url'});
 	}
 	else {
 		loadSaved = true;
