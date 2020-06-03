@@ -268,7 +268,9 @@ function editFilter(evt) {
 	if (evt){
 		var el = evt.target;
 		if (el.tagName != 'DIV'){
+			if (el.tagName == 'BUTTON'){return;}
 			el = el.parentElement;
+			if (el.tagName == 'BUTTON'){return;}
 		}
 		var els = document.getElementById('filterList').querySelectorAll('div[data-type]');
 		for (var i=0;i<els.length;i++){
