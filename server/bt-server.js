@@ -568,6 +568,8 @@ wss.on('connection', function connection(ws) {
 				for (var i=0;i<result.creations.length;i++){
 					if (result.creations[i].name == dm.old){
 						result.creations[i].name = dm.new;
+						var jsonmessage = {"type":'renamedCreation','old':dm.old,'new':dm.new};
+						ws.send(JSON.stringify(jsonmessage));
 						break;
 					}
 				}
@@ -609,6 +611,8 @@ wss.on('connection', function connection(ws) {
 				for (var i=0;i<result.images.length;i++){
 					if (result.images[i].name == dm.old){
 						result.images[i].name = dm.new;
+						var jsonmessage = {"type":'renamedImage','old':dm.old,'new':dm.new};
+						ws.send(JSON.stringify(jsonmessage));
 						break;
 					}
 				}

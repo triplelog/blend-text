@@ -75,6 +75,25 @@ ws.onmessage = function(evt){
 		
 		Prism.highlightAll();
 	}
+	else if (dm.type == 'renamedCreation'){
+		var els = document.querySelector('.content-13 .content').querySelectorAll('div.filter');
+		for (var i=0;i<els.length;i++){
+			if (els[i].querySelector('a').textContent == dm.old){
+				el.querySelector('a').textContent = dm.new;
+				break;
+			}
+		}
+	}
+	else if (dm.type == 'renamedImage'){
+		var els = document.getElementById('imageList').querySelectorAll('div');
+		for (var i=0;i<els.length;i++){
+			if (els[i].querySelector('a').textContent == dm.old){
+				el.querySelector('a').textContent = dm.new;
+				break;
+			}
+		}
+
+	}
 	else if (dm.type == 'duplicate name'){
 		alert('Name taken');
 	}
@@ -188,7 +207,7 @@ function renameCreation(name,id) {
 	var newname = el.querySelector("input[name='creationName']").value;
 	jsonmessage = {'type':'renameCreation','old':name,'new':newname};
 	ws.send(JSON.stringify(jsonmessage));
-	el.querySelector('a').textContent = newname;
+	//el.querySelector('a').textContent = newname;
 	const button = el.querySelector('.fa-edit');
 	button._tippy.hide();
 }
@@ -203,7 +222,7 @@ function renameImage(name,id) {
 	var newname = el.querySelector("input[name='imageName']").value;
 	jsonmessage = {'type':'renameImage','old':name,'new':newname};
 	ws.send(JSON.stringify(jsonmessage));
-	el.querySelector('a').textContent = newname;
+	//el.querySelector('a').textContent = newname;
 	const button = el.querySelector('.fa-edit');
 	button._tippy.hide();
 }
