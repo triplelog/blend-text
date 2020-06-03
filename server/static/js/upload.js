@@ -114,7 +114,6 @@ function savedImgUrl(evt) {
 }
 if (loadSaved){savedImgUrl({'type':'url'});}
 document.getElementById('imgUrl').addEventListener('change', chgImgUrl);
-document.getElementById('imgSaved').addEventListener('change', savedImgUrl);
 document.getElementById('imgSaved').addEventListener('awesomplete-selectcomplete',savedImgUrl);
 
 function sendImage(img) {

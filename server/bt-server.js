@@ -63,6 +63,7 @@ app.get('/filter',
 			myuser = "h";
 		}
 		QblurData.findOne({ username: myuser }, function(err, result) {
+			var images = result.images;
 			var filters = {'Custom':[{"hslrgb":'h',"name":"Custom HSL",'workspace':""}]};
 			if (result.formulas && result.formulas.filter){
 				filters = result.formulas.filter;
@@ -94,6 +95,7 @@ app.get('/filter',
 								filters: filters,
 								filterGroups: filterGroups,
 								realSrc: realSrc,
+								images: images,
 							}));
 							res.end();
 						}
@@ -104,6 +106,7 @@ app.get('/filter',
 								formulas: formulas,
 								filters: filters,
 								filterGroups: filterGroups,
+								images: images,
 							}));
 							res.end();
 						}
@@ -131,6 +134,7 @@ app.get('/filter',
 							filters: filters,
 							filterGroups: filterGroups,
 							realSrc: realSrc,
+							images: images,
 						}));
 						res.end();
 					}
@@ -141,6 +145,7 @@ app.get('/filter',
 							formulas: formulas,
 							filters: filters,
 							filterGroups: filterGroups,
+							images: images,
 						}));
 						res.end();
 					}
@@ -153,6 +158,7 @@ app.get('/filter',
 					formulas: formulas,
 					filters: filters,
 					filterGroups: filterGroups,
+					images: images,
 				}));
 				res.end();
 			}
@@ -175,6 +181,7 @@ app.get('/overlay',
 			myuser = "h";
 		}
 		QblurData.findOne({ username: myuser }, function(err, result) {
+			var images = result.images;
 			formulas = result.formulas.overlay;
 			for (var i=0;i<formulas.length;i++){
 				formulas[i].id = i;
@@ -200,6 +207,7 @@ app.get('/overlay',
 								imgData: creation.imgData,
 								name: creation.name,
 								realSrc: realSrc,
+								images: images,
 							}));
 							res.end();
 						}
@@ -208,6 +216,7 @@ app.get('/overlay',
 								type: 'overlay',
 								tkey: tkey,
 								formulas: formulas,
+								images: images,
 							}));
 							res.end();
 						}
@@ -232,6 +241,7 @@ app.get('/overlay',
 							imgData: creation.imgData,
 							name: creation.name,
 							realSrc: realSrc,
+							images: images,
 						}));
 						res.end();
 					}
@@ -240,6 +250,7 @@ app.get('/overlay',
 							type: 'overlay',
 							tkey: tkey,
 							formulas: formulas,
+							images: images,
 						}));
 						res.end();
 					}
@@ -251,6 +262,7 @@ app.get('/overlay',
 					type: 'overlay',
 					tkey: tkey,
 					formulas: formulas,
+					images: images,
 				}));
 				res.end();
 			}
@@ -652,28 +664,41 @@ wss.on('connection', function connection(ws) {
 			var imgSrc;
 			var imgName;
 			var randid = parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12);
-			if (inSrc.substring(0,9) == 'images/in'){
-				var ext = inSrc.substring(inSrc.indexOf('.'));
-				imgSrc = 'userimages/'+username+'_'+randid+ext;
-				var mvimg = 'mv '+inSrc+' static/'+imgSrc;
-				inSrc = 'static/'+imgSrc;
-				var sz = inSrcSz;
-				imgName = dm.name;
-				QblurData.updateOne({username:username,'settings.storage': {$lt:10000000}},{$push: {"images": {src:imgSrc,size:sz,name:imgName,description:"",creations:[]}}, $inc: {'settings.storage':sz}}, function(err, result) {
-					if (result.n > 0){
-						var child = exec(mvimg, function(err, stdout, stderr) {});
-					}
-					else {
-						//send message saying not enough room
-						return;
-					}
-				});
-				
-			}
+			
 			var creationType = 'overlay';
-			var creation = {'id':randid,'name':dm.name,'imgData':dm.imgData,'imgSrc':inSrc.substring(7)};
+			var creation = {'id':randid,'name':dm.name,'imgData':dm.imgData};
 
-			QblurData.findOne({ username: username }, "creations", function(err, result) {
+			QblurData.findOne({ username: username }, function(err, result) {
+				if (inSrc.substring(0,9) == 'images/in'){
+					if (result.settings.storage > 10000000){
+						//not enough room
+						return
+					}
+					var ext = inSrc.substring(inSrc.indexOf('.'));
+					imgSrc = 'userimages/'+username+'_'+randid+ext;
+					var mvimg = 'mv '+inSrc+' static/'+imgSrc;
+					inSrc = 'static/'+imgSrc;
+					var sz = inSrcSz;
+					imgName = dm.name;
+					for (var i=0;i<result.images.length;i++){
+						if (result.images[i].name == imgName){
+							//var jsonmessage = {"type":'duplicate name'};
+							//ws.send(JSON.stringify(jsonmessage));
+							imgName = parseInt(crypto.randomBytes(50).toString('hex'),16).toString(36).substr(2, 12);
+							break;
+						}
+					}
+					
+					result.images.push({src:imgSrc,size:sz,name:imgName,description:"",creations:[]});
+					result.settings.storage += sz;
+					var child = exec(mvimg, function(err, stdout, stderr) {});
+					result.markModified('images');
+					result.markModified('settings');
+					
+					
+				
+				}
+				creation['imgSrc']=inSrc.substring(7);
 				var foundMatch = false;
 				for (var i=0;i<result.creations.length;i++){
 					if (result.creations[i].name == dm.name){
