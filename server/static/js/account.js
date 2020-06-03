@@ -124,12 +124,18 @@ ws.onmessage = function(evt){
 	}
 }
 
-function copyFormula(name,formulaType,group){
+function copyFormula(name,formulaType,elid,group){
 	var jsonmessage = {'type':'copyFormula'};
-	jsonmessage.message = name;
-	jsonmessage.formulaType = formulaType;
+	var newname = document.getElementById(elid).querySelector('.copy-name').value;
+	var newFormulaType = document.getElementById(elid).querySelector('.copy-type').value;
+	jsonmessage.oldname = name;
+	jsonmessage.newname = newname;
+	jsonmessage.oldFormulaType = formulaType;
+	jsonmessage.newFormulaType = newFormulaType;
+	console.log(jsonmessage);
 	if (formulaType == 'filter'){
-		jsonmessage.group = group;
+		jsonmessage.oldGroup = group;
+		jsonmessage.newGroup = group;
 	}
 	ws.send(JSON.stringify(jsonmessage));
 }

@@ -845,29 +845,41 @@ wss.on('connection', function connection(ws) {
 			}
 			QblurData.findOne({ username: username }, function(err, result) {
 				var newFormula = {};
-				newFormula.name = dm.message + ' 1';
+				newFormula.name = dm.newname;
 				var foundMatch = false;
 				var foundOne = false;
 				var formulas;
-				if (dm.formulaType == 'filter'){
-					formulas = result.formulas.filter[dm.group];
+				if (dm.oldFormulaType == 'filter'){
+					formulas = result.formulas.filter[dm.oldGroup];
 				}
 				else {
-					formulas = result.formulas[dm.formulaType];
+					formulas = result.formulas[dm.oldFormulaType];
 				}
 				for (var i=0;i<formulas.length;i++){
-					if (formulas[i].name == newFormula.name){
-						foundOne = true;
-					}
-					if (formulas[i].name == dm.message){
+					if (formulas[i].name == dm.oldname){
 						newFormula.workspace = formulas[i].workspace;
 						newFormula.hslrgb = formulas[i].hslrgb;
 						foundMatch = true;
 					}
 				}
-				var ii = 2;
+				if (dm.newFormulaType == 'filter' && result.formulas.filter[dm.newGroup]){
+					formulas = result.formulas.filter[dm.newGroup];
+				}
+				else if (dm.newFormulaType == 'filter'){
+					result.formulas.filter[dm.newGroup] = [];
+					formulas = result.formulas.filter[dm.newGroup];
+				}
+				else {
+					formulas = result.formulas[dm.newFormulaType];
+				}
+				for (var i=0;i<formulas.length;i++){
+					if (formulas[i].name == newFormula.name){
+						foundOne = true;
+					}
+				}
+				var ii = 1;
 				while (foundOne){
-					newFormula.name = dm.message + ' '+ii;
+					newFormula.name = dm.newname + ' '+ii;
 					foundOne = false;
 					for (var i=0;i<formulas.length;i++){
 						if (formulas[i].name == newFormula.name){
@@ -881,7 +893,7 @@ wss.on('connection', function connection(ws) {
 					formulas.push(newFormula);
 					result.markModified("formulas");
 					result.save(function (err, result2) {
-						var formulas = result2.formulas[dm.formulaType];
+						var formulas = result2.formulas[dm.newFormulaType];
 						var workspace;
 						var wxml;
 						var code;
@@ -916,7 +928,7 @@ wss.on('connection', function connection(ws) {
 						}
 						var jsonmessage = {'type':'newFormulas'};
 						jsonmessage.formulas = formulas;
-						jsonmessage.formulaType = dm.formulaType;
+						jsonmessage.formulaType = dm.newFormulaType;
 						ws.send(JSON.stringify(jsonmessage));
 					});
 					

@@ -379,7 +379,9 @@ tippy(document.getElementById('overlay-{{formula.id}}').querySelector('label'),{
 	onShown(instance){Prism.highlightAll();},
 });
 tippy(document.getElementById('overlay-{{formula.id}}').querySelector('i.fa-copy'),{
-	content: `<button onclick="copyFormula('{{ formula.name }}','overlay')">Copy</button>`,
+	content: `<div>Name: <input type="text" class="copy-name"></input></div>
+			  <div>Type: <select class="copy-type"><option selected>Overlay</option><option>Gradient</option><option>Filter</option></div>
+	<button onclick="copyFormula('{{ formula.name }}','overlay','overlay-{{formula.id}}')">Copy</button>`,
 	allowHTML: true,
 	trigger: 'click',
 	interactive: true,
@@ -399,7 +401,9 @@ tippy(document.getElementById('gradient-{{formula.id}}').querySelector('label'),
 	onShown(instance){Prism.highlightAll();},
 });
 tippy(document.getElementById('gradient-{{formula.id}}').querySelector('i.fa-copy'),{
-	content: `<button onclick="copyFormula('{{ formula.name }}','gradient')">Copy</button>`,
+	content: `<div>Name: <input type="text" class="copy-name"></input></div>
+			  <div>Type: <select class="copy-type"><option>Overlay</option><option selected>Gradient</option><option>Filter</option></div>
+	<button onclick="copyFormula('{{ formula.name }}','gradient','gradient-{{formula.id}}')">Copy</button>`,
 	allowHTML: true,
 	trigger: 'click',
 	interactive: true,
@@ -420,7 +424,9 @@ tippy(document.getElementById('gradient-{{formula.id}}').querySelector('i.fa-cop
 			onShown(instance){Prism.highlightAll();},
 		});
 		tippy(document.getElementById('filter-{{formula.id}}').querySelector('i.fa-copy'),{
-			content: `<button onclick="copyFormula('{{ formula.name }}','filter','{{ group }}')">Copy</button>`,
+			content: `<div>Name: <input type="text" class="copy-name"></input></div>
+			  <div>Type: <select class="copy-type"><option>Overlay</option><option>Gradient</option><option selected>Filter</option></div>
+	<button onclick="copyFormula('{{ formula.name }}','filter','filter-{{formula.id}}','{{group}}')">Copy</button>`,
 			allowHTML: true,
 			trigger: 'click',
 			interactive: true,
