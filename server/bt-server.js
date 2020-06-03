@@ -125,25 +125,7 @@ app.get('/overlay',
 			for (var i=0;i<formulas.length;i++){
 				formulas[i].id = i;
 			}
-			if (req.query && req.query.q){
-				var imgName = '';
-				var imgSrc = result.creations[parseInt(req.query.q)].imgSrc;
-				for (var i=0;i<result.images.length;i++){
-					if (result.images[i].src == imgSrc){
-						imgName = result.images[i].name;
-						break;
-					}
-				}
-				res.write(nunjucks.render('templates/qblurbase.html',{
-					type: 'overlay',
-					tkey: tkey,
-					formulas: formulas,
-					imgSaved: imgName,
-					imgData: result.creations[parseInt(req.query.q)].imgData,
-					name: result.creations[parseInt(req.query.q)].name,
-				}));
-			}
-			else if (req.query && req.query.u && req.query.id){
+			if (req.query && req.query.u && req.query.id){
 				var imgName = '';
 				if (req.query.u != myuser){
 					QblurData.findOne({ username: req.query.u }, function(err, result) {
