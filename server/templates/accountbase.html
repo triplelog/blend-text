@@ -88,20 +88,22 @@ div:Not(.content-22) > .content {
 
 	<div id="overlayFormulas">
 		{% for formula in formulas.overlay %}
-		<i class="fas fa-trash"></i>
-		<i class="fas fa-edit"></i>
-		<i class="fas fa-copy" onclick="copyFormula('{{ formula.name }}','overlay')"></i>
-		<label class="formulaLabel" id="overlay-{{ formula.id }}">{{ formula.name }}</label>
-		
+		<div>
+			<i class="fas fa-trash"></i>
+			<i class="fas fa-edit"></i>
+			<i class="fas fa-copy" onclick="copyFormula('{{ formula.name }}','overlay')"></i>
+			<label class="formulaLabel" id="overlay-{{ formula.id }}">{{ formula.name }}</label>
+		</div>
 		{% endfor %}
 	</div>
 	<div id="gradientFormulas" style="display: none;">
 		{% for formula in formulas.gradient %}
-		<i class="fas fa-trash"></i>
-		<i class="fas fa-edit"></i>
-		<i class="fas fa-copy" onclick="copyFormula('{{ formula.name }}','overlay')"></i>
-		<label class="formulaLabel" id="gradient-{{ formula.id }}">{{ formula.name }}</label>
-
+		<div>
+			<i class="fas fa-trash"></i>
+			<i class="fas fa-edit"></i>
+			<i class="fas fa-copy" onclick="copyFormula('{{ formula.name }}','overlay')"></i>
+			<label class="formulaLabel" id="gradient-{{ formula.id }}">{{ formula.name }}</label>
+		</div>
 		{% endfor %}
 	</div>
 	<div id="filterFormulas" style="display: none;">
@@ -109,11 +111,12 @@ div:Not(.content-22) > .content {
 		{% for group in filterGroups %}
 			
 			{% for formula in formulas.filter[group] %}
-			<i class="fas fa-trash"></i>
-			<i class="fas fa-edit"></i>
-			<i class="fas fa-copy" onclick="copyFormula('{{ formula.name }}','filter','{{ group }}')"></i>
-			<label class="formulaLabel" id="filter-{{ formula.id }}">{{ formula.name }}</label>
-
+			<div>
+				<i class="fas fa-trash"></i>
+				<i class="fas fa-edit"></i>
+				<i class="fas fa-copy" onclick="copyFormula('{{ formula.name }}','filter','{{ group }}')"></i>
+				<label class="formulaLabel" id="filter-{{ formula.id }}">{{ formula.name }}</label>
+			</div>
 			{% endfor %}
 		{% endfor %}
 	</div>
@@ -365,7 +368,7 @@ function imageTippy(el,name) {
 {% for formula in formulas.overlay %}
 tippy(document.getElementById('overlay-{{formula.id}}'),{
 	content: `<div class="formulaCode">
-			{{ formula.code }}
+			{{ formula.code | dump | safe}}
 		</div>`,
 	allowHTML: true,
 	trigger: 'click',
@@ -377,7 +380,7 @@ tippy(document.getElementById('overlay-{{formula.id}}'),{
 {% for formula in formulas.gradient %}
 tippy(document.getElementById('gradient-{{formula.id}}'),{
 	content: `<div class="formulaCode">
-			{{ formula.code }}
+			{{ formula.code | dump | safe}}
 		</div>`,
 	allowHTML: true,
 	trigger: 'click',
@@ -390,7 +393,7 @@ tippy(document.getElementById('gradient-{{formula.id}}'),{
 	{% for formula in formulas.filter[group] %}
 		tippy(document.getElementById('filter-{{formula.id}}'),{
 			content: `<div class="formulaCode">
-					{{ formula.code }}
+					{{ formula.code | dump | safe}}
 				</div>`,
 			allowHTML: true,
 			trigger: 'click',
