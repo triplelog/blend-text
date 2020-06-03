@@ -398,16 +398,14 @@ function deleteFilter(elID){
 	var filterListEls = document.getElementById('filterList').querySelectorAll('div');
 
 	imgData.filters.splice(elID,1);
-
+	var foundEl = 0;
 	for (var i=0;i<filterListEls.length;i++){
 		filterListEls[i].setAttribute('data-type',i);
 		filterListEls[i].style.removeProperty('background');
-		if (filterListEls[i].getAttribute('data-type')==elID){
+		if (foundEl == 0 && filterListEls[i].getAttribute('data-type')==elID){
 			filterListEls[i].parentNode.removeChild(filterListEls[i]);
-			if (filterListEls[i]){
-				currentFilterID = i;
-				filterListEls[i].setAttribute('data-type',i);
-				filterListEls[i].style.background = 'gray';
+			foundEl =1;
+			if (filterListEls[i+1]){
 			}
 			else if (filterListEls[i-1]) {
 				currentFilterID = i-1;
@@ -417,6 +415,15 @@ function deleteFilter(elID){
 			else {
 				currentFilterID = 0;
 			}
+		}
+		else if (foundEl == 1){
+			currentFilterID = i-1;
+			filterListEls[i].setAttribute('data-type',i-1);
+			filterListEls[i].style.background = 'gray';
+			foundEl = 2;
+		}
+		else if (foundEl == 2){
+			filterListEls[i].setAttribute('data-type',i-1);
 		}
 	}
 
