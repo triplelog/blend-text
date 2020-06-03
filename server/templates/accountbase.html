@@ -388,6 +388,24 @@ tippy(document.getElementById('overlay-{{formula.id}}').querySelector('i.fa-copy
 	placement: 'bottom',
 	appendTo: document.querySelector('.container'),
 });
+tippy(document.getElementById('overlay-{{formula.id}}').querySelector('i.fa-delete'),{
+	content: `<div>Are you sure you want to delete this formula?</div>
+	<button onclick="deleteFormula('{{ formula.name }}','overlay','overlay-{{formula.id}}')">Yes, Delete</button>`,
+	allowHTML: true,
+	trigger: 'click',
+	interactive: true,
+	placement: 'bottom',
+	appendTo: document.querySelector('.container'),
+});
+tippy(document.getElementById('overlay-{{formula.id}}').querySelector('i.fa-edit'),{
+	content: `<div>Name: <input type="text" id="overlay-{{formula.id}}-rename"></input></div>
+		<button onclick="renameFormula('{{ formula.name }}','overlay','overlay-{{formula.id}}')">Rename</button>`,
+	allowHTML: true,
+	trigger: 'click',
+	interactive: true,
+	placement: 'bottom',
+	appendTo: document.querySelector('.container'),
+});
 
 {% endfor %}
 {% for formula in formulas.gradient %}

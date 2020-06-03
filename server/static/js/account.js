@@ -134,7 +134,29 @@ function copyFormula(name,formulaType,elid,group){
 	jsonmessage.newFormulaType = newFormulaType;
 	if (formulaType == 'filter'){
 		jsonmessage.oldGroup = group;
+	}
+	else if (newFormulaType == 'filter'){
 		jsonmessage.newGroup = group;
+	}
+	ws.send(JSON.stringify(jsonmessage));
+}
+function renameFormula(name,formulaType,elid,group){
+	var jsonmessage = {'type':'renameFormula'};
+	var newname = document.getElementById(elid+'-name').value;
+	jsonmessage.oldname = name;
+	jsonmessage.newname = newname;
+	jsonmessage.oldFormulaType = formulaType;
+	if (formulaType == 'filter'){
+		jsonmessage.oldGroup = group;
+	}
+	ws.send(JSON.stringify(jsonmessage));
+}
+function deleteFormula(name,formulaType,elid,group){
+	var jsonmessage = {'type':'deleteFormula'};
+	jsonmessage.oldname = name;
+	jsonmessage.oldFormulaType = formulaType;
+	if (formulaType == 'filter'){
+		jsonmessage.oldGroup = group;
 	}
 	ws.send(JSON.stringify(jsonmessage));
 }

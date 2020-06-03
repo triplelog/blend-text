@@ -862,7 +862,6 @@ wss.on('connection', function connection(ws) {
 						foundMatch = true;
 					}
 				}
-				console.log("nf: ",newFormula);
 				if (dm.newFormulaType == 'filter' && result.formulas.filter[dm.newGroup]){
 					formulas = result.formulas.filter[dm.newGroup];
 				}
@@ -873,7 +872,6 @@ wss.on('connection', function connection(ws) {
 				else {
 					formulas = result.formulas[dm.newFormulaType];
 				}
-				console.log("f: ",formulas);
 				for (var i=0;i<formulas.length;i++){
 					if (formulas[i].name == newFormula.name){
 						foundOne = true;
@@ -931,6 +929,178 @@ wss.on('connection', function connection(ws) {
 						var jsonmessage = {'type':'newFormulas'};
 						jsonmessage.formulas = formulas;
 						jsonmessage.formulaType = dm.newFormulaType;
+						ws.send(JSON.stringify(jsonmessage));
+					});
+					
+				}
+			});
+		}
+		return;
+	}
+	else if (dm.type && dm.type == 'renameFormula'){
+		if (username != ''){
+			if (!dm.newname && dm.newname !== 0){
+				return;
+			}
+			QblurData.findOne({ username: username }, function(err, result) {
+				var newFormula = {};
+				newFormula.name = dm.newname;
+				var foundMatch = false;
+				var foundOne = false;
+				var formulas;
+				if (dm.oldFormulaType == 'filter'){
+					formulas = result.formulas.filter[dm.oldGroup];
+				}
+				else {
+					formulas = result.formulas[dm.oldFormulaType];
+				}
+				for (var i=0;i<formulas.length;i++){
+					if (formulas[i].name == dm.oldname){
+						newFormula.workspace = formulas[i].workspace;
+						newFormula.hslrgb = formulas[i].hslrgb;
+						formulas.splice(i,1);
+						foundMatch = true;
+						break;
+					}
+				}
+				if (dm.oldFormulaType == 'filter' && result.formulas.filter[dm.oldGroup]){
+					formulas = result.formulas.filter[dm.oldGroup];
+				}
+				else if (dm.oldFormulaType == 'filter'){
+					result.formulas.filter[dm.oldGroup] = [];
+					formulas = result.formulas.filter[dm.oldGroup];
+				}
+				else {
+					formulas = result.formulas[dm.oldFormulaType];
+				}
+				for (var i=0;i<formulas.length;i++){
+					if (formulas[i].name == newFormula.name){
+						foundOne = true;
+					}
+				}
+				var ii = 1;
+				while (foundOne){
+					newFormula.name = dm.newname + ' '+ii;
+					foundOne = false;
+					for (var i=0;i<formulas.length;i++){
+						if (formulas[i].name == newFormula.name){
+							foundOne = true;
+							break;
+						}
+					}
+					ii++;
+				}
+				if (foundMatch){
+					formulas.push(newFormula);
+					result.markModified("formulas");
+					result.save(function (err, result2) {
+						var formulas = result2.formulas[dm.oldFormulaType];
+						var workspace;
+						var wxml;
+						var code;
+						var blocklyLang = Blockly.Lua;
+						if (result.settings.language == 'python'){blocklyLang = Blockly.Python;}
+						if (result.settings.language == 'javascript'){blocklyLang = Blockly.JavaScript;}
+						if (result.settings.language == 'php'){blocklyLang = Blockly.PHP;}
+						if (result.settings.language == 'dart'){blocklyLang = Blockly.Dart;}
+						if (dm.formulaType == 'filter'){
+							var idx = 0;
+							for (var group in formulas){
+								for (var i=0;i<formulas[group].length;i++){
+									formulas[group][i].id = idx;
+									workspace = new Blockly.Workspace();
+									wxml = Blockly.Xml.textToDom(formulas[group][i].workspace);
+									Blockly.Xml.domToWorkspace(wxml, workspace);
+									code = '<pre class="language-'+result.settings.language+'"><code class="language-'+result.settings.language+'">'+blocklyLang.workspaceToCode(workspace)+'</code></pre>';
+									formulas[group][i].code = code;
+									idx++;
+								}
+							}
+						}
+						else {
+							for (var i=0;i<formulas.length;i++){
+								formulas[i].id = i;
+								workspace = new Blockly.Workspace();
+								wxml = Blockly.Xml.textToDom(formulas[i].workspace);
+								Blockly.Xml.domToWorkspace(wxml, workspace);
+								code = '<pre class="language-'+result.settings.language+'"><code class="language-'+result.settings.language+'">'+blocklyLang.workspaceToCode(workspace)+'</code></pre>';
+								formulas[i].code = code;
+							}
+						}
+						var jsonmessage = {'type':'newFormulas'};
+						jsonmessage.formulas = formulas;
+						jsonmessage.formulaType = dm.oldFormulaType;
+						ws.send(JSON.stringify(jsonmessage));
+					});
+					
+				}
+			});
+		}
+		return;
+	}
+	else if (dm.type && dm.type == 'deleteFormula'){
+		if (username != ''){
+			if (!dm.newname && dm.newname !== 0){
+				return;
+			}
+			QblurData.findOne({ username: username }, function(err, result) {
+				
+				var foundMatch = false;
+				var foundOne = false;
+				var formulas;
+				if (dm.oldFormulaType == 'filter'){
+					formulas = result.formulas.filter[dm.oldGroup];
+				}
+				else {
+					formulas = result.formulas[dm.oldFormulaType];
+				}
+				for (var i=0;i<formulas.length;i++){
+					if (formulas[i].name == dm.oldname){
+						formulas.splice(i,1);
+						foundMatch = true;
+						break;
+					}
+				}
+				
+				if (foundMatch){
+					result.markModified("formulas");
+					result.save(function (err, result2) {
+						var formulas = result2.formulas[dm.oldFormulaType];
+						var workspace;
+						var wxml;
+						var code;
+						var blocklyLang = Blockly.Lua;
+						if (result.settings.language == 'python'){blocklyLang = Blockly.Python;}
+						if (result.settings.language == 'javascript'){blocklyLang = Blockly.JavaScript;}
+						if (result.settings.language == 'php'){blocklyLang = Blockly.PHP;}
+						if (result.settings.language == 'dart'){blocklyLang = Blockly.Dart;}
+						if (dm.formulaType == 'filter'){
+							var idx = 0;
+							for (var group in formulas){
+								for (var i=0;i<formulas[group].length;i++){
+									formulas[group][i].id = idx;
+									workspace = new Blockly.Workspace();
+									wxml = Blockly.Xml.textToDom(formulas[group][i].workspace);
+									Blockly.Xml.domToWorkspace(wxml, workspace);
+									code = '<pre class="language-'+result.settings.language+'"><code class="language-'+result.settings.language+'">'+blocklyLang.workspaceToCode(workspace)+'</code></pre>';
+									formulas[group][i].code = code;
+									idx++;
+								}
+							}
+						}
+						else {
+							for (var i=0;i<formulas.length;i++){
+								formulas[i].id = i;
+								workspace = new Blockly.Workspace();
+								wxml = Blockly.Xml.textToDom(formulas[i].workspace);
+								Blockly.Xml.domToWorkspace(wxml, workspace);
+								code = '<pre class="language-'+result.settings.language+'"><code class="language-'+result.settings.language+'">'+blocklyLang.workspaceToCode(workspace)+'</code></pre>';
+								formulas[i].code = code;
+							}
+						}
+						var jsonmessage = {'type':'newFormulas'};
+						jsonmessage.formulas = formulas;
+						jsonmessage.formulaType = dm.oldFormulaType;
 						ws.send(JSON.stringify(jsonmessage));
 					});
 					
