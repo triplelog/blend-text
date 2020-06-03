@@ -74,8 +74,8 @@ function saveFormula(category="overlay") {
 		els[currentFilterID].setAttribute('data-filter',currentFilterType);
 		els[currentFilterID].querySelector('span').textContent = name;
 		
-		imgData.filters[currentFilterId].name = name;
-		imgData.filters[currentFilterId].group = currentFilterType;
+		imgData.filters[currentFilterID].name = name;
+		imgData.filters[currentFilterID].group = currentFilterType;
 		console.log(imgData);
 		
 	}
