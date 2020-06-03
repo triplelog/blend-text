@@ -79,7 +79,7 @@ ws.onmessage = function(evt){
 		var els = document.querySelector('.content-13 .content').querySelectorAll('div.filter');
 		for (var i=0;i<els.length;i++){
 			if (els[i].querySelector('a').textContent == dm.old){
-				el.querySelector('a').textContent = dm.new;
+				els[i].querySelector('a').textContent = dm.new;
 				break;
 			}
 		}
@@ -88,7 +88,7 @@ ws.onmessage = function(evt){
 		var els = document.getElementById('imageList').querySelectorAll('div');
 		for (var i=0;i<els.length;i++){
 			if (els[i].querySelector('a').textContent == dm.old){
-				el.querySelector('a').textContent = dm.new;
+				els[i].querySelector('a').textContent = dm.new;
 				break;
 			}
 		}
