@@ -25,7 +25,7 @@ ws.onmessage = function(evt){
 					div.appendChild(label);
 					el.appendChild(div);
 				
-					tippy(document.getElementById(dm.formulaType+'-'+forumulas[group][i].id).querySelector('label'),{
+					tippy(document.getElementById(dm.formulaType+'-'+formulas[group][i].id).querySelector('label'),{
 						content: `<div class="formulaCode">`+formulas[group][i].code+`</div>`,
 						allowHTML: true,
 						trigger: 'click',
@@ -33,7 +33,7 @@ ws.onmessage = function(evt){
 						placement: 'bottom',
 						appendTo: document.querySelector('.container'),
 					});
-					tippy(document.getElementById(dm.formulaType+'-'+forumulas[group][i].id).querySelector('i.fa-copy'),{
+					tippy(document.getElementById(dm.formulaType+'-'+formulas[group][i].id).querySelector('i.fa-copy'),{
 						content: `<button onclick="copyFormula('`+formulas[group][i].name+`','`+dm.formulaType+`','`+group+`')">Copy</button>`,
 						allowHTML: true,
 						trigger: 'click',
@@ -58,7 +58,7 @@ ws.onmessage = function(evt){
 				div.appendChild(label);
 				el.appendChild(div);
 				
-				tippy(document.getElementById(dm.formulaType+'-'+forumulas[i].id).querySelector('label'),{
+				tippy(document.getElementById(dm.formulaType+'-'+formulas[i].id).querySelector('label'),{
 					content: `<div class="formulaCode">`+formulas[i].code+`</div>`,
 					allowHTML: true,
 					trigger: 'click',
@@ -66,7 +66,7 @@ ws.onmessage = function(evt){
 					placement: 'bottom',
 					appendTo: document.querySelector('.container'),
 				});
-				tippy(document.getElementById(dm.formulaType+'-'+forumulas[i].id).querySelector('i.fa-copy'),{
+				tippy(document.getElementById(dm.formulaType+'-'+formulas[i].id).querySelector('i.fa-copy'),{
 					content: `<button onclick="copyFormula('`+formulas[i].name+`','`+dm.formulaType+`')">Copy</button>`,
 					allowHTML: true,
 					trigger: 'click',
