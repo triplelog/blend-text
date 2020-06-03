@@ -214,7 +214,7 @@ div:Not(.content-22) > .content {
 	{% for ii in range(0,creations.length) %}
 	{% set i = creations.length-ii-1 %}
 	<div id="creation-{{i}}" class="{% if creations[i].imgData.type == 'text' or creations[i].imgData.type == 'qr' %}overlay{% else %}{{creations[i].imgData.type}}{% endif %}">
-		<i class="fas fa-trash"></i><i class="fas fa-edit"></i><a href="{% if creations[i].imgData.type == 'text' or creations[i].imgData.type == 'qr' %}overlay{% else %}{{creations[i].imgData.type}}{% endif %}?q={{i}}">{{ creations[i].name}}</a>
+		<i class="fas fa-trash"></i><i class="fas fa-edit"></i><a href="{% if creations[i].imgData.type == 'text' or creations[i].imgData.type == 'qr' %}overlay{% else %}{{creations[i].imgData.type}}{% endif %}?u={{username}}&id={{creations[i].id}}">{{ creations[i].name}}</a>
 	</div>
 	{% endfor %}
 	
