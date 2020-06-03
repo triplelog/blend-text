@@ -104,7 +104,7 @@ function savedImgUrl(evt) {
 	else {
 		var name = document.getElementById('imgSaved').value;
 		if (name != ''){
-			var jsonmessage = {'type':'savedImage','name':name,'url':};
+			var jsonmessage = {'type':'savedImage','name':name};
 			console.log(jsonmessage);
 			ws.send(JSON.stringify(jsonmessage));
 			document.getElementById('imgType').value = 'saved';
