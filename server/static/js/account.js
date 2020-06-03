@@ -142,7 +142,7 @@ function copyFormula(name,formulaType,elid,group){
 }
 function renameFormula(name,formulaType,elid,group){
 	var jsonmessage = {'type':'renameFormula'};
-	var newname = document.getElementById(elid+'-name').value;
+	var newname = document.getElementById(elid+'-rename').value;
 	jsonmessage.oldname = name;
 	jsonmessage.newname = newname;
 	jsonmessage.oldFormulaType = formulaType;

@@ -388,7 +388,7 @@ tippy(document.getElementById('overlay-{{formula.id}}').querySelector('i.fa-copy
 	placement: 'bottom',
 	appendTo: document.querySelector('.container'),
 });
-tippy(document.getElementById('overlay-{{formula.id}}').querySelector('i.fa-delete'),{
+tippy(document.getElementById('overlay-{{formula.id}}').querySelector('i.fa-trash'),{
 	content: `<div>Are you sure you want to delete this formula?</div>
 	<button onclick="deleteFormula('{{ formula.name }}','overlay','overlay-{{formula.id}}')">Yes, Delete</button>`,
 	allowHTML: true,
