@@ -109,11 +109,8 @@ div.content-11 > .content {
 				</select>
 				<input type="file" name="imgSrc" id="imgSrc"></input>
 				<input type="text" name="imgUrl" id="imgUrl"></input>
-				<input type="text" name="imgSaved" id="imgSaved" value="{{imgSaved}}" class="awesomplete" data-list="#imglist"></input>
-				<ul id="imglist">
-					<li>new</li>
-					<li>Filter 1</li>
-				</ul>
+				<input type="text" name="imgSaved" id="imgSaved" value="{{imgSaved}}" class="awesomplete"></input>
+				
 				<span id="imgDrag"></span>
 			</div>
 			<div>
@@ -191,7 +188,7 @@ div.content-11 > .content {
 				</select>
 				<input type="file" name="imgSrc" id="imgSrc"></input>
 				<input type="text" name="imgUrl" id="imgUrl"></input>
-				<input type="text" name="imgSaved" id="imgSaved" value="{{imgSaved}}"></input>
+				<input type="text" name="imgSaved" id="imgSaved" value="{{imgSaved}}" class="awesomplete"></input>
 				<span id="imgDrag"></span>
 			</div>
 			<div id="locX" style="display: none;">
@@ -289,7 +286,7 @@ div.content-11 > .content {
 				</select>
 				<input type="file" name="imgSrc" id="imgSrc"></input>
 				<input type="text" name="imgUrl" id="imgUrl"></input>
-				<input type="text" name="imgSaved" id="imgSaved" value="{{imgSaved}}"></input>
+				<input type="text" name="imgSaved" id="imgSaved" value="{{imgSaved}}" class="awesomplete"></input>
 				<span id="imgDrag"></span>
 			</div>
 			
@@ -564,7 +561,10 @@ defaults.push('<xml xmlns="https://developers.google.com/blockly/xml"><variables
 	  {% endif %}
 	});
 
-
+var imgSaved = document.getElementById("imgSaved");
+new Awesomplete(imgSaved, {
+	list: ["Fil","Dog","Cat"];
+});
 
 
 var loadSaved = false;
