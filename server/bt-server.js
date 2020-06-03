@@ -69,29 +69,94 @@ app.get('/filter',
 			}
 			var filterGroups = Object.keys(filters);
 			console.log(filterGroups);
-			if (req.query && req.query.q){
+			if (req.query && req.query.u && req.query.id){
 				var imgName = '';
-				var imgSrc = result.creations[parseInt(req.query.q)].imgSrc;
-				console.log(imgSrc);
+				if (req.query.u != myuser){
+					QblurData.findOne({ username: req.query.u }, function(err, result) {
+						var creation = {};
+						for (var i=0;i<result.creations.length;i++){
+							if (result.creations[i].id == req.query.id){
+								creation = result.creations[i];
+								break;
+							}
+						}
+						if (creation.id && creation.id.length){
 				
-				for (var i=0;i<result.images.length;i++){
-					console.log(result.images[i]);
-					if (result.images[i].src == imgSrc){
-						imgName = result.images[i].name;
-						break;
-					}
-					console.log(imgName);
+							var imgSrc = creation.imgSrc;
+							var realSrc = '';
+							for (var i=0;i<result.images.length;i++){
+								if (result.images[i].src == imgSrc){
+									imgName = result.images[i].name;
+									realSrc = imgSrc;
+									break;
+								}
+							}
+				
+							res.write(nunjucks.render('templates/qblurbase.html',{
+								type: 'filter',
+								tkey: tkey,
+								formulas: formulas,
+								imgSaved: imgName,
+								imgData: result.creations[parseInt(req.query.q)].imgData,
+								name: result.creations[parseInt(req.query.q)].name,
+								filters: filters,
+								filterGroups: filterGroups,
+								realSrc: realSrc,
+							}));
+						}
+						else {
+							res.write(nunjucks.render('templates/qblurbase.html',{
+								type: 'filter',
+								tkey: tkey,
+								formulas: formulas,
+								filters: filters,
+								filterGroups: filterGroups,
+							}));
+						}
+					});
 				}
-				res.write(nunjucks.render('templates/qblurbase.html',{
-					type: 'filter',
-					tkey: tkey,
-					formulas: formulas,
-					imgSaved: imgName,
-					imgData: result.creations[parseInt(req.query.q)].imgData,
-					name: result.creations[parseInt(req.query.q)].name,
-					filters: filters,
-					filterGroups: filterGroups,
-				}));
+				else {
+					var creation = {};
+					for (var i=0;i<result.creations.length;i++){
+						if (result.creations[i].id == req.query.id){
+							creation = result.creations[i];
+							break;
+						}
+					}
+					if (creation.id && creation.id.length){
+				
+						var imgSrc = creation.imgSrc;
+						var realSrc = '';
+						for (var i=0;i<result.images.length;i++){
+							if (result.images[i].src == imgSrc){
+								imgName = result.images[i].name;
+								realSrc = imgSrc;
+								break;
+							}
+						}
+				
+						res.write(nunjucks.render('templates/qblurbase.html',{
+							type: 'filter',
+							tkey: tkey,
+							formulas: formulas,
+							imgSaved: imgName,
+							imgData: result.creations[parseInt(req.query.q)].imgData,
+							name: result.creations[parseInt(req.query.q)].name,
+							filters: filters,
+							filterGroups: filterGroups,
+							realSrc: realSrc,
+						}));
+					}
+					else {
+						res.write(nunjucks.render('templates/qblurbase.html',{
+							type: 'filter',
+							tkey: tkey,
+							formulas: formulas,
+							filters: filters,
+							filterGroups: filterGroups,
+						}));
+					}
+				}
 			}
 			else {
 				res.write(nunjucks.render('templates/qblurbase.html',{
@@ -172,11 +237,7 @@ app.get('/overlay',
 					for (var i=0;i<result.creations.length;i++){
 						if (result.creations[i].id == req.query.id){
 							creation = result.creations[i];
-							console.log("id:   ",req.query.id,result.creations[i].id);
 							break;
-						}
-						else {
-							console.log("no:   ",req.query.id,result.creations[i].id);
 						}
 					}
 					if (creation.id && creation.id.length){

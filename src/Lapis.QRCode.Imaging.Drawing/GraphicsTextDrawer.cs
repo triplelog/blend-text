@@ -159,7 +159,6 @@ namespace Lapis.QRCode.Imaging.Drawing
                         }
                         else if (tripMatrix[r, c] > 0)
                         {
-                        	Console.WriteLine("positive");
                         	if (counter >= 19 || otm == 0){
 								ore = -1;
 								ogr = -1;
