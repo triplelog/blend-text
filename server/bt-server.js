@@ -189,7 +189,11 @@ app.get('/overlay',
 					for (var i=0;i<result.creations.length;i++){
 						if (result.creations[i].id == req.query.id){
 							creation = result.creations[i];
+							console.log("id:   ",req.query.id,result.creations[i].id);
 							break;
+						}
+						else {
+							console.log("no:   ",req.query.id,result.creations[i].id);
 						}
 					}
 					if (creation.id && creation.id.length){
