@@ -407,7 +407,7 @@ function reorderFilterList(elID){
 }
 
 function deleteFilter(elID){
-	if (elID == -1){elID = currentFIlterID;}
+	if (elID == -1){elID = currentFilterID;}
 	console.log(elID);
 	var filterListEls = document.getElementById('filterList').querySelectorAll('div[data-type]');
 
