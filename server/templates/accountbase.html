@@ -376,6 +376,7 @@ tippy(document.getElementById('overlay-{{formula.id}}').querySelector('label'),{
 	interactive: true,
 	placement: 'bottom',
 	appendTo: document.querySelector('.container'),
+	onShown(instance){Prism.highlightAll();},
 });
 tippy(document.getElementById('overlay-{{formula.id}}').querySelector('i.fa-copy'),{
 	content: `<button onclick="copyFormula('{{ formula.name }}','overlay')">Copy</button>`,
@@ -395,6 +396,7 @@ tippy(document.getElementById('gradient-{{formula.id}}').querySelector('label'),
 	interactive: true,
 	placement: 'bottom',
 	appendTo: document.querySelector('.container'),
+	onShown(instance){Prism.highlightAll();},
 });
 tippy(document.getElementById('gradient-{{formula.id}}').querySelector('i.fa-copy'),{
 	content: `<button onclick="copyFormula('{{ formula.name }}','gradient')">Copy</button>`,
@@ -415,6 +417,7 @@ tippy(document.getElementById('gradient-{{formula.id}}').querySelector('i.fa-cop
 			interactive: true,
 			placement: 'bottom',
 			appendTo: document.querySelector('.container'),
+			onShown(instance){Prism.highlightAll();},
 		});
 		tippy(document.getElementById('filter-{{formula.id}}').querySelector('i.fa-copy'),{
 			content: `<button onclick="copyFormula('{{ formula.name }}','filter','{{ group }}')">Copy</button>`,

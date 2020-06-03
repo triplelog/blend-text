@@ -32,6 +32,7 @@ ws.onmessage = function(evt){
 						interactive: true,
 						placement: 'bottom',
 						appendTo: document.querySelector('.container'),
+						onShown(instance){Prism.highlightAll();},
 					});
 					tippy(document.getElementById(dm.formulaType+'-'+formulas[group][i].id).querySelector('i.fa-copy'),{
 						content: `<button onclick="copyFormula('`+formulas[group][i].name+`','`+dm.formulaType+`','`+group+`')">Copy</button>`,
@@ -65,6 +66,7 @@ ws.onmessage = function(evt){
 					interactive: true,
 					placement: 'bottom',
 					appendTo: document.querySelector('.container'),
+					onShown(instance){Prism.highlightAll();},
 				});
 				tippy(document.getElementById(dm.formulaType+'-'+formulas[i].id).querySelector('i.fa-copy'),{
 					content: `<button onclick="copyFormula('`+formulas[i].name+`','`+dm.formulaType+`')">Copy</button>`,
