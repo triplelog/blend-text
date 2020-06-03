@@ -618,6 +618,7 @@ ws.onmessage = function(evt){
 	var loadedFilters = [];
 	{% if imgData %}
 		loadedFilters = {{ imgData.filters | dump | safe }};
+		filterGroups = {{ filterGroups | dump | safe }};
 	{% endif %}
 </script>
 <script src="../js/dragula.js"></script>
