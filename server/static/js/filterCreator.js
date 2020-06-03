@@ -279,8 +279,7 @@ function editFilter(evt) {
 		currentFilterID = parseInt(el.getAttribute('data-type'));
 		currentFilterType = el.getAttribute('data-filter');
 	}
-	console.log(currentFilterID);
-	console.log(imgData.filters);
+
 	workspace.clear();
 	
 
@@ -327,6 +326,7 @@ function addFilter() {
 	const deleteFilterTippy = tippy(i, {
 		  content: `<div>
 			Are you sure?
+			<button onclick="deleteFilter(-1)">Yes, Delete</button>
 		</div>`,
 		  allowHTML: true,
 		  trigger: 'click',
@@ -407,6 +407,7 @@ function reorderFilterList(elID){
 }
 
 function deleteFilter(elID){
+	if (elID == -1){elID = currentFIlterID;}
 	console.log(elID);
 	var filterListEls = document.getElementById('filterList').querySelectorAll('div[data-type]');
 
