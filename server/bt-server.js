@@ -843,7 +843,7 @@ wss.on('connection', function connection(ws) {
 			if (!dm.message && dm.message !== 0){
 				return;
 			}
-			QblurData.findOne({ username: username }, "formulas", function(err, result) {
+			QblurData.findOne({ username: username }, function(err, result) {
 				var newFormula = {};
 				newFormula.name = dm.message + ' 1';
 				var foundMatch = false;
@@ -893,7 +893,7 @@ wss.on('connection', function connection(ws) {
 									workspace = new Blockly.Workspace();
 									wxml = Blockly.Xml.textToDom(formulas[group][i].workspace);
 									Blockly.Xml.domToWorkspace(wxml, workspace);
-									code = Blockly.Lua.workspaceToCode(workspace);
+									code = '<pre class="language-'+result.settings.language+'"><code class="language-'+result.settings.language+'">'+blocklyLang.workspaceToCode(workspace)+'</code></pre>';
 									formulas[group][i].code = code;
 									idx++;
 								}
@@ -905,7 +905,7 @@ wss.on('connection', function connection(ws) {
 								workspace = new Blockly.Workspace();
 								wxml = Blockly.Xml.textToDom(formulas[i].workspace);
 								Blockly.Xml.domToWorkspace(wxml, workspace);
-								code = Blockly.Lua.workspaceToCode(workspace);
+								code = '<pre class="language-'+result.settings.language+'"><code class="language-'+result.settings.language+'">'+blocklyLang.workspaceToCode(workspace)+'</code></pre>';
 								formulas[i].code = code;
 							}
 						}

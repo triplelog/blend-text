@@ -14,60 +14,66 @@ ws.onmessage = function(evt){
 		if (dm.formulaType == 'filter'){
 			for (group in formulas){
 				for (i in formulas[group]) {
+					var div = document.createElement('div');
+					div.id = dm.formulaType+'-'+ formulas[group][i].id;
+					div.innerHTML = '<i class="fas fa-trash"></i>';
+					div.innerHTML += '<i class="fas fa-edit"></i>';
+					div.innerHTML += '<i class="fas fa-copy"></i>';
 					var label = document.createElement('label');
 					label.classList.add('formulaLabel');
-					label.setAttribute('for',dm.formulaType+'-'+ formulas[group][i].id);
 					label.textContent = formulas[group][i].name;
-					el.appendChild(label);
-					var div = document.createElement('div');
-					div.classList.add('formulaCode');
-					var div2 = document.createElement('div');
-					div2.innerHTML = '<i class="fas fa-trash"></i>';
-					div2.innerHTML += '<i class="fas fa-edit"></i>';
-					var icon = document.createElement('i');
-					icon.classList.add('fas');
-					icon.classList.add('fa-copy');
-					icon.setAttribute('onclick',"copyFormula('"+ formulas[group][i].name +"','"+dm.formulaType+"','"+group+"')");
-					div2.appendChild(icon);
-					div.appendChild(div2);
-					var pre = document.createElement('pre');
-					pre.classList.add('language-lua');
-					var code = document.createElement('code');
-					code.classList.add('language-lua');
-					code.textContent = formulas[group][i].code;
-					pre.appendChild(code);
-					div.appendChild(pre)
+					div.appendChild(label);
 					el.appendChild(div);
+				
+					tippy(document.getElementById(dm.formulaType+'-'+forumulas[group][i].id).querySelector('label'),{
+						content: `<div class="formulaCode">`+formulas[group][i].code+`</div>`,
+						allowHTML: true,
+						trigger: 'click',
+						interactive: true,
+						placement: 'bottom',
+						appendTo: document.querySelector('.container'),
+					});
+					tippy(document.getElementById(dm.formulaType+'-'+forumulas[group][i].id).querySelector('i.fa-copy'),{
+						content: `<button onclick="copyFormula('`+formulas[group][i].name+`','`+dm.formulaType+`','`+group+`')">Copy</button>`,
+						allowHTML: true,
+						trigger: 'click',
+						interactive: true,
+						placement: 'bottom',
+						appendTo: document.querySelector('.container'),
+					});
 			
 				}
 			}
 		}
 		else {
 			for (i in formulas) {
+				var div = document.createElement('div');
+				div.id = dm.formulaType+'-'+ formulas[i].id;
+				div.innerHTML = '<i class="fas fa-trash"></i>';
+				div.innerHTML += '<i class="fas fa-edit"></i>';
+				div.innerHTML += '<i class="fas fa-copy"></i>';
 				var label = document.createElement('label');
 				label.classList.add('formulaLabel');
-				label.setAttribute('for',dm.formulaType+'-'+ formulas[i].id);
 				label.textContent = formulas[i].name;
-				el.appendChild(label);
-				var div = document.createElement('div');
-				div.classList.add('formulaCode');
-				var div2 = document.createElement('div');
-				div2.innerHTML = '<i class="fas fa-trash"></i>';
-				div2.innerHTML += '<i class="fas fa-edit"></i>';
-				var icon = document.createElement('i');
-				icon.classList.add('fas');
-				icon.classList.add('fa-copy');
-				icon.setAttribute('onclick',"copyFormula('"+ formulas[i].name +"','"+dm.formulaType+"')");
-				div2.appendChild(icon);
-				div.appendChild(div2);
-				var pre = document.createElement('pre');
-				pre.classList.add('language-lua');
-				var code = document.createElement('code');
-				code.classList.add('language-lua');
-				code.textContent = formulas[i].code;
-				pre.appendChild(code);
-				div.appendChild(pre)
+				div.appendChild(label);
 				el.appendChild(div);
+				
+				tippy(document.getElementById(dm.formulaType+'-'+forumulas[i].id).querySelector('label'),{
+					content: `<div class="formulaCode">`+formulas[i].code+`</div>`,
+					allowHTML: true,
+					trigger: 'click',
+					interactive: true,
+					placement: 'bottom',
+					appendTo: document.querySelector('.container'),
+				});
+				tippy(document.getElementById(dm.formulaType+'-'+forumulas[i].id).querySelector('i.fa-copy'),{
+					content: `<button onclick="copyFormula('`+formulas[i].name+`','`+dm.formulaType+`')">Copy</button>`,
+					allowHTML: true,
+					trigger: 'click',
+					interactive: true,
+					placement: 'bottom',
+					appendTo: document.querySelector('.container'),
+				});
 			
 			}
 		
