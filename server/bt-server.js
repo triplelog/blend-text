@@ -179,7 +179,6 @@ app.get('/overlay',
 			for (var i=0;i<formulas.length;i++){
 				formulas[i].id = i;
 			}
-			console.log(req.query);
 			if (req.query && req.query.u && req.query.id){
 				var imgName = '';
 				if (req.query.u != myuser){
@@ -277,23 +276,74 @@ app.get('/gradient',
 			for (var i=0;i<formulas.length;i++){
 				formulas[i].id = i;
 			}
-			if (req.query && req.query.q){
+			if (req.query && req.query.u && req.query.id){
 				var imgName = '';
-				var imgSrc = result.creations[parseInt(req.query.q)].imgSrc;
-				for (var i=0;i<result.images.length;i++){
-					if (result.images[i].src == imgSrc){
-						imgName = result.images[i].name;
-						break;
+				if (req.query.u != myuser){
+					QblurData.findOne({ username: req.query.u }, function(err, result) {
+						var creation = {};
+						for (var i=0;i<result.creations.length;i++){
+							if (result.creations[i].id == req.query.id){
+								creation = result.creations[i];
+								break;
+							}
+						}
+						if (creation.id && creation.id.length){
+							var realSrc = creation.imgSrc;
+							res.write(nunjucks.render('templates/qblurbase.html',{
+								type: 'gradient',
+								tkey: tkey,
+								formulas: formulas,
+								imgSaved: imgName,
+								imgData: creation.imgData,
+								name: creation.name,
+								realSrc: realSrc,
+							}));
+							res.end();
+						}
+						else {
+							res.write(nunjucks.render('templates/qblurbase.html',{
+								type: 'gradient',
+								tkey: tkey,
+								formulas: formulas,
+							}));
+							res.end();
+						}
+					});
+				}
+				else {
+					var creation = {};
+					for (var i=0;i<result.creations.length;i++){
+						if (result.creations[i].id == req.query.id){
+							creation = result.creations[i];
+							break;
+						}
+					}
+					if (creation.id && creation.id.length){
+						var realSrc = creation.imgSrc;
+						res.write(nunjucks.render('templates/qblurbase.html',{
+							type: 'gradient',
+							tkey: tkey,
+							formulas: formulas,
+							imgSaved: imgName,
+							imgData: creation.imgData,
+							name: creation.name,
+							realSrc: realSrc,
+						}));
+						res.end();
+					}
+					else {
+						res.write(nunjucks.render('templates/qblurbase.html',{
+							type: 'gradient',
+							tkey: tkey,
+							formulas: formulas,
+						}));
+						res.end();
 					}
 				}
-				res.write(nunjucks.render('templates/qblurbase.html',{
-					type: 'gradient',
-					tkey: tkey,
-					formulas: formulas,
-					imgSaved: imgName,
-					imgData: result.creations[parseInt(req.query.q)].imgData,
-					name: result.creations[parseInt(req.query.q)].name,
-				}));
+						
+						
+						
+				
 			}
 			else {
 				res.write(nunjucks.render('templates/qblurbase.html',{
@@ -301,9 +351,10 @@ app.get('/gradient',
 					tkey: tkey,
 					formulas: formulas,
 				}));
+				res.end();
 			}
 			
-			res.end();
+			
 		});
 
 	}
