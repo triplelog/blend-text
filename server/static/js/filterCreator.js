@@ -388,7 +388,13 @@ dragula([document.getElementById('filterList')])
 imgData.filters = [];
 currentFilterID = 0;
 for (var i=0;i<loadedFilters.length;i++){
-	var filterType = loadedFilters[i].group;
+	var filterType = filterGroups[0];
+	for (var ii=0;ii<filterGroups.length;ii++){
+		if (filterGroups[ii] == loadedFilters[i].group){
+			filterType = loadedFilters[i].group;
+			break;
+		}
+	}
 	var savedFilter = {};
 	if (filters[filterType]){
 		savedFilter.hslrgb = filters[filterType][0].hslrgb;

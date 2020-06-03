@@ -428,7 +428,6 @@ wss.on('connection', function connection(ws) {
 			else if (dm.category =='filter') {
 				if (formula.hslrgb == 'hsl'){formula.hslrgb = 'h';}
 				else {formula.hslrgb = 'r';}
-				console.log('lssldlsdlsldsdld');
 				QblurData.findOne({ username: username }, "formulas", function(err, result) {
 					console.log('lssldlsdlsldsdld',err, username);
 					console.log(result, dm.group);
