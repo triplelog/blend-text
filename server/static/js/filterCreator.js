@@ -270,11 +270,11 @@ function editFilter(evt) {
 		if (el.tagName != 'DIV'){
 			el = el.parentElement;
 		}
-		var els = document.getElementById('filterList').querySelectorAll('div');
+		var els = document.getElementById('filterList').querySelectorAll('div[data-type]');
 		for (var i=0;i<els.length;i++){
 			els[i].querySelector('span').style.removeProperty('background');
 		}
-		el.querySelector('span').style.background = 'gray';
+		el.querySelector('span').style.background = 'rgb(100,255,100)';
 		console.log(el);
 		currentFilterID = parseInt(el.getAttribute('data-type'));
 		currentFilterType = el.getAttribute('data-filter');
@@ -335,7 +335,7 @@ function addFilter() {
 	});
 	div.appendChild(i);
 	var span = document.createElement('span');
-	span.style.background = 'gray';
+	span.style.background = 'rgb(100,255,100)';
 	span.textContent = filters[filterType][0].name;
 	div.appendChild(span);
 	var input = document.createElement('input');
@@ -387,7 +387,7 @@ document.getElementById('refreshCreation').addEventListener('click',updateImage)
 
 function reorderFilterList(elID){
 	console.log(elID);
-	var filterListEls = document.getElementById('filterList').querySelectorAll('div');
+	var filterListEls = document.getElementById('filterList').querySelectorAll('div[data-type]');
 	var removedFilter = imgData.filters[elID];
 	imgData.filters.splice(elID,1);
 
@@ -395,7 +395,7 @@ function reorderFilterList(elID){
 		if (filterListEls[i].getAttribute('data-type')==elID){
 			currentFilterID = i;
 			filterListEls[i].setAttribute('data-type',i);
-			filterListEls[i].querySelector('span').style.background = 'gray';
+			filterListEls[i].querySelector('span').style.background = 'rgb(100,255,100)';
 		}
 		else {
 			filterListEls[i].setAttribute('data-type',i);
@@ -408,7 +408,7 @@ function reorderFilterList(elID){
 
 function deleteFilter(elID){
 	console.log(elID);
-	var filterListEls = document.getElementById('filterList').querySelectorAll('div');
+	var filterListEls = document.getElementById('filterList').querySelectorAll('div[data-type]');
 
 	imgData.filters.splice(elID,1);
 	var foundEl = 0;
@@ -423,7 +423,7 @@ function deleteFilter(elID){
 			else if (filterListEls[i-1]) {
 				currentFilterID = i-1;
 				filterListEls[i-1].setAttribute('data-type',i-1);
-				filterListEls[i-1].querySelector('span').style.background = 'gray';
+				filterListEls[i-1].querySelector('span').style.background = 'rgb(100,255,100)';
 			}
 			else {
 				currentFilterID = 0;
@@ -432,7 +432,7 @@ function deleteFilter(elID){
 		else if (foundEl == 1){
 			currentFilterID = i-1;
 			filterListEls[i].setAttribute('data-type',i-1);
-			filterListEls[i].querySelector('span').style.background = 'gray';
+			filterListEls[i].querySelector('span').style.background = 'rgb(100,255,100)';
 			foundEl = 2;
 		}
 		else if (foundEl == 2){
