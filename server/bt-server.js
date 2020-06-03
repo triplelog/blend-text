@@ -182,7 +182,7 @@ app.get('/overlay',
 							}));
 						}
 						
-					}
+					});
 				}
 				else {
 					var creation = {};
