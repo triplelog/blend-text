@@ -44,6 +44,7 @@ function saveFormula(category="overlay") {
 		var foundMatch = false;
 		for (var i=0;i<filters[currentFilterType].length;i++){
 			if (filters[currentFilterType][i].name == name){
+				
 				filters[currentFilterType][i].workspace = outspace;
 				if (hslrgb == 'rgb'){
 					filters[currentFilterType][i].hslrgb = 'r';
@@ -72,6 +73,10 @@ function saveFormula(category="overlay") {
 		var els = document.getElementById('filterList').querySelectorAll('div');
 		els[currentFilterID].setAttribute('data-filter',currentFilterType);
 		els[currentFilterID].querySelector('span').textContent = name;
+		
+		imgData.filters[currentFilterId].name = name;
+		imgData.filters[currentFilterId].group = currentFilterType;
+		console.log(imgData);
 		
 	}
 	else {
