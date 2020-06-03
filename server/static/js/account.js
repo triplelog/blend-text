@@ -127,7 +127,7 @@ ws.onmessage = function(evt){
 function copyFormula(name,formulaType,elid,group){
 	var jsonmessage = {'type':'copyFormula'};
 	var newname = document.getElementById(elid+'-name').value;
-	var newFormulaType = document.getElementById(elid+'-type').value;
+	var newFormulaType = document.getElementById(elid+'-type').value.toLowerCase();
 	jsonmessage.oldname = name;
 	jsonmessage.newname = newname;
 	jsonmessage.oldFormulaType = formulaType;
