@@ -242,7 +242,7 @@ div:Not(.content-22) > .content {
 		{% for ii in range(0,images.length) %}
 		{% set image = images[images.length-ii-1] %}
 		<div id="image-{{images.length-ii-1}}">
-			<i class="fas fa-trash"></i><i class="fas fa-edit"></i><a href="{{image.src}}">{{image.name}}<img src="{{image.src}}" style="display: none;"></a> (0 creations)
+			<i class="fas fa-trash"></i><i class="fas fa-edit"></i><a href="{{image.src}}">{{image.name}}<img src="{{image.src}}" style="display: none;"></a>
 		</div>
 		{% endfor %}
 	</div>
@@ -283,7 +283,7 @@ div:Not(.content-22) > .content {
 
 
 {% block content22 %}
-	<img src="../robots/{{ username }}{{ settings.robot }}.png" style="width: 96%;">
+	<img src="../robots/{{ username }}{{ settings.robot }}.png" style="width: 96%; top: -1rem; position: relative;">
 	<div class="centerLink">
 		<button class="basic" onclick="window.location.href='../';" style="font-size:.85rem; padding: .3rem .5rem;">Home</button>
 	</div>
