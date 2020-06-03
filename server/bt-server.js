@@ -885,6 +885,11 @@ wss.on('connection', function connection(ws) {
 						var workspace;
 						var wxml;
 						var code;
+						var blocklyLang = Blockly.Lua;
+						if (result.settings.language == 'python'){blocklyLang = Blockly.Python;}
+						if (result.settings.language == 'javascript'){blocklyLang = Blockly.JavaScript;}
+						if (result.settings.language == 'php'){blocklyLang = Blockly.PHP;}
+						if (result.settings.language == 'dart'){blocklyLang = Blockly.Dart;}
 						if (dm.formulaType == 'filter'){
 							var idx = 0;
 							for (var group in formulas){
