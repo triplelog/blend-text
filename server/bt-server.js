@@ -593,14 +593,22 @@ wss.on('connection', function connection(ws) {
 			
 			
 			QblurData.findOne({ username: username }, "images", function(err, result) {
+				var foundMatch = false;
 				for (var i=0;i<result.images.length;i++){
 					if (result.images[i].name == dm.message){
 						result.images.splice(i,1);
+						foundMatch = true;
 						break;
 					}
 				}
-				result.markModified('images');
-				result.save(function(err,result){});
+				if (foundMatch){
+					result.markModified('images');
+					result.save(function(err,result){});
+				}
+				else {
+					var jsonmessage = {'type':'reloadPage'};
+					ws.send(JSON.stringify(jsonmessage));
+				}
 			});
 		}
 		return;
