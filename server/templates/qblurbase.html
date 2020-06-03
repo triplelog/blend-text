@@ -561,10 +561,21 @@ defaults.push('<xml xmlns="https://developers.google.com/blockly/xml"><variables
 	  {% endif %}
 	});
 
+var images = {{ images | dump | safe}};
+var list = [];
+for (i in images){
+	list.push({label:images[i].name,value:images[i].src.toLowerCase()});
+	
+}
+console.log(list);
 var imgSaved = document.getElementById("imgSaved");
 new Awesomplete(imgSaved, {
-	list: ["Fil","Dog","Cat"],
+	minChars: 2,
+	maxItems: 15,
+	autoFirst: true,
+	list: list,
 });
+
 
 
 var loadSaved = false;

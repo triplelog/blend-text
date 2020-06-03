@@ -272,10 +272,7 @@ app.get('/gradient',
 			myuser = "h";
 		}
 		QblurData.findOne({ username: myuser }, function(err, result) {
-			var imageNames = [];
-			for (var i=0;i<result.images.length;i++){
-				imageNames.push(result.images[i].name);
-			}
+			var images = result.images;
 			formulas = result.formulas.gradient;
 			for (var i=0;i<formulas.length;i++){
 				formulas[i].id = i;
@@ -301,7 +298,7 @@ app.get('/gradient',
 								imgData: creation.imgData,
 								name: creation.name,
 								realSrc: realSrc,
-								imageNames: imageNames,
+								images: images,
 							}));
 							res.end();
 						}
@@ -310,7 +307,7 @@ app.get('/gradient',
 								type: 'gradient',
 								tkey: tkey,
 								formulas: formulas,
-								imageNames: imageNames,
+								images: images,
 							}));
 							res.end();
 						}
@@ -334,7 +331,7 @@ app.get('/gradient',
 							imgData: creation.imgData,
 							name: creation.name,
 							realSrc: realSrc,
-							imageNames: imageNames,
+							images: images,
 						}));
 						res.end();
 					}
@@ -343,7 +340,7 @@ app.get('/gradient',
 							type: 'gradient',
 							tkey: tkey,
 							formulas: formulas,
-							imageNames: imageNames,
+							images: images,
 						}));
 						res.end();
 					}
@@ -358,7 +355,7 @@ app.get('/gradient',
 					type: 'gradient',
 					tkey: tkey,
 					formulas: formulas,
-					imageNames: imageNames,
+					images: images,
 				}));
 				res.end();
 			}
