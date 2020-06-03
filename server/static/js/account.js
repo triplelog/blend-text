@@ -132,7 +132,6 @@ function copyFormula(name,formulaType,elid,group){
 	jsonmessage.newname = newname;
 	jsonmessage.oldFormulaType = formulaType;
 	jsonmessage.newFormulaType = newFormulaType;
-	console.log(jsonmessage);
 	if (formulaType == 'filter'){
 		jsonmessage.oldGroup = group;
 		jsonmessage.newGroup = group;

@@ -862,6 +862,7 @@ wss.on('connection', function connection(ws) {
 						foundMatch = true;
 					}
 				}
+				console.log("nf: ",newFormula);
 				if (dm.newFormulaType == 'filter' && result.formulas.filter[dm.newGroup]){
 					formulas = result.formulas.filter[dm.newGroup];
 				}
@@ -872,6 +873,7 @@ wss.on('connection', function connection(ws) {
 				else {
 					formulas = result.formulas[dm.newFormulaType];
 				}
+				console.log("f: ",formulas);
 				for (var i=0;i<formulas.length;i++){
 					if (formulas[i].name == newFormula.name){
 						foundOne = true;
