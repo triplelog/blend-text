@@ -379,7 +379,7 @@ tippy(document.getElementById('overlay-{{formula.id}}'),{
 {% endfor %}
 {% for formula in formulas.gradient %}
 tippy(document.getElementById('gradient-{{formula.id}}'),{
-	content: `<div class="formulaCode">{{ formula.code | dump }}</div>`,
+	content: `<div class="formulaCode">{{ formula.code | safe }}</div>`,
 	allowHTML: true,
 	trigger: 'click',
 	interactive: true,
