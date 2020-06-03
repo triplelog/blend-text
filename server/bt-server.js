@@ -669,6 +669,7 @@ wss.on('connection', function connection(ws) {
 			var creation = {'id':randid,'name':dm.name,'imgData':dm.imgData};
 
 			QblurData.findOne({ username: username }, function(err, result) {
+				var mvimg = '';
 				if (inSrc.substring(0,9) == 'images/in'){
 					if (result.settings.storage > 10000000){
 						//not enough room
@@ -676,7 +677,7 @@ wss.on('connection', function connection(ws) {
 					}
 					var ext = inSrc.substring(inSrc.indexOf('.'));
 					imgSrc = 'userimages/'+username+'_'+randid+ext;
-					var mvimg = 'mv '+inSrc+' static/'+imgSrc;
+					mvimg = 'mv '+inSrc+' static/'+imgSrc;
 					inSrc = 'static/'+imgSrc;
 					var sz = inSrcSz;
 					imgName = dm.name;
@@ -691,9 +692,8 @@ wss.on('connection', function connection(ws) {
 					
 					result.images.push({src:imgSrc,size:sz,name:imgName,description:"",creations:[]});
 					result.settings.storage += sz;
-					var child = exec(mvimg, function(err, stdout, stderr) {});
-					result.markModified('images');
-					result.markModified('settings');
+					
+					
 					
 					
 				
@@ -719,6 +719,11 @@ wss.on('connection', function connection(ws) {
 					}
 				}
 				if (!foundMatch){
+					if (mvimg != ''){
+						var child = exec(mvimg, function(err, stdout, stderr) {});
+						result.markModified('images');
+						result.markModified('settings');
+					}
 					result.creations.push(creation);
 					result.markModified('creations');
 					result.save(function(err,result){});
