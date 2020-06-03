@@ -125,6 +125,7 @@ app.get('/overlay',
 			for (var i=0;i<formulas.length;i++){
 				formulas[i].id = i;
 			}
+			console.log(req.query);
 			if (req.query && req.query.u && req.query.id){
 				var imgName = '';
 				if (req.query.u != myuser){
