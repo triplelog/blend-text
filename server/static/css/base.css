@@ -459,3 +459,12 @@ input.footnote:checked + * + div.footnoteDiv {
 input.footnote:Not(:checked) + * + div.footnoteDiv {
 	display: none;
 }
+
+.awesomplete-thumbnail {
+	height: 2rem;
+	float: right;
+}
+.awesomplete > ul > li {
+	height: 2rem;
+	line-height: 2rem;
+}
