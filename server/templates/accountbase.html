@@ -88,21 +88,21 @@ div:Not(.content-22) > .content {
 
 	<div id="overlayFormulas">
 		{% for formula in formulas.overlay %}
-		<div>
+		<div id="overlay-{{ formula.id }}">
 			<i class="fas fa-trash"></i>
 			<i class="fas fa-edit"></i>
-			<i class="fas fa-copy" onclick="copyFormula('{{ formula.name }}','overlay')"></i>
-			<label class="formulaLabel" id="overlay-{{ formula.id }}">{{ formula.name }}</label>
+			<i class="fas fa-copy"></i>
+			<label class="formulaLabel">{{ formula.name }}</label>
 		</div>
 		{% endfor %}
 	</div>
 	<div id="gradientFormulas" style="display: none;">
 		{% for formula in formulas.gradient %}
-		<div>
+		<div id="gradient-{{ formula.id }}">
 			<i class="fas fa-trash"></i>
 			<i class="fas fa-edit"></i>
-			<i class="fas fa-copy" onclick="copyFormula('{{ formula.name }}','overlay')"></i>
-			<label class="formulaLabel" id="gradient-{{ formula.id }}">{{ formula.name }}</label>
+			<i class="fas fa-copy"></i>
+			<label class="formulaLabel">{{ formula.name }}</label>
 		</div>
 		{% endfor %}
 	</div>
@@ -111,11 +111,11 @@ div:Not(.content-22) > .content {
 		{% for group in filterGroups %}
 			
 			{% for formula in formulas.filter[group] %}
-			<div>
+			<div id="filter-{{ formula.id }}">
 				<i class="fas fa-trash"></i>
 				<i class="fas fa-edit"></i>
-				<i class="fas fa-copy" onclick="copyFormula('{{ formula.name }}','filter','{{ group }}')"></i>
-				<label class="formulaLabel" id="filter-{{ formula.id }}">{{ formula.name }}</label>
+				<i class="fas fa-copy"></i>
+				<label class="formulaLabel">{{ formula.name }}</label>
 			</div>
 			{% endfor %}
 		{% endfor %}
@@ -366,9 +366,19 @@ function imageTippy(el,name) {
 	});
 }
 
+
+
 {% for formula in formulas.overlay %}
-tippy(document.getElementById('overlay-{{formula.id}}'),{
-	content: `<div class="formulaCode">{{ formula.code | dump | safe}}</div>`,
+tippy(document.getElementById('overlay-{{formula.id}}').querySelector('label'),{
+	content: `<div class="formulaCode">{{ formula.code | safe}}</div>`,
+	allowHTML: true,
+	trigger: 'click',
+	interactive: true,
+	placement: 'bottom',
+	appendTo: document.querySelector('.container'),
+});
+tippy(document.getElementById('overlay-{{formula.id}}').querySelector('i.fa-copy'),{
+	content: `<button onclick="copyFormula('{{ formula.name }}','overlay')">Copy</button>`,
 	allowHTML: true,
 	trigger: 'click',
 	interactive: true,
@@ -378,8 +388,16 @@ tippy(document.getElementById('overlay-{{formula.id}}'),{
 
 {% endfor %}
 {% for formula in formulas.gradient %}
-tippy(document.getElementById('gradient-{{formula.id}}'),{
+tippy(document.getElementById('gradient-{{formula.id}}').querySelector('label'),{
 	content: `<div class="formulaCode">{{ formula.code | safe }}</div>`,
+	allowHTML: true,
+	trigger: 'click',
+	interactive: true,
+	placement: 'bottom',
+	appendTo: document.querySelector('.container'),
+});
+tippy(document.getElementById('gradient-{{formula.id}}').querySelector('i.fa-copy'),{
+	content: `<button onclick="copyFormula('{{ formula.name }}','gradient')">Copy</button>`,
 	allowHTML: true,
 	trigger: 'click',
 	interactive: true,
@@ -390,8 +408,16 @@ tippy(document.getElementById('gradient-{{formula.id}}'),{
 {% endfor %}
 {% for group in filterGroups %}
 	{% for formula in formulas.filter[group] %}
-		tippy(document.getElementById('filter-{{formula.id}}'),{
-			content: `<div class="formulaCode">{{ formula.code | dump | safe}}</div>`,
+		tippy(document.getElementById('filter-{{formula.id}}').querySelector('label'),{
+			content: `<div class="formulaCode">{{ formula.code | safe}}</div>`,
+			allowHTML: true,
+			trigger: 'click',
+			interactive: true,
+			placement: 'bottom',
+			appendTo: document.querySelector('.container'),
+		});
+		tippy(document.getElementById('gradient-{{formula.id}}').querySelector('i.fa-copy'),{
+			content: `<button onclick="copyFormula('{{ formula.name }}','filter','{{ group }}')">Copy</button>`,
 			allowHTML: true,
 			trigger: 'click',
 			interactive: true,
@@ -400,6 +426,8 @@ tippy(document.getElementById('gradient-{{formula.id}}'),{
 		});
 	{% endfor %}
 {% endfor %}
+
+
 
 
 function chgFormulaType(){
