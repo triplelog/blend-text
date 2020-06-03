@@ -569,11 +569,11 @@ ws.onopen = function(evt) {
 	var jsonmessage = {'type':'key'};
 	jsonmessage.message = tkey;
 	ws.send(JSON.stringify(jsonmessage));
-	if (savedImgUrl){
-		savedImgUrl({'type':'url'});
+	if (typeof savedImgUrl == "undefined"){
+		loadSaved = true;
 	}
 	else {
-		loadSaved = true;
+		savedImgUrl({'type':'url'});
 	}
 }
 ws.onmessage = function(evt){
