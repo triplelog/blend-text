@@ -109,7 +109,11 @@ div.content-11 > .content {
 				</select>
 				<input type="file" name="imgSrc" id="imgSrc"></input>
 				<input type="text" name="imgUrl" id="imgUrl"></input>
-				<input type="text" name="imgSaved" id="imgSaved" value="{{imgSaved}}"></input>
+				<input type="text" name="imgSaved" id="imgSaved" value="{{imgSaved}}" class="awesomplete" list="imglist"></input>
+				<datalist id="imglist">
+					<option>new</option>
+					<option>Filter 1</option>
+				</datalist>
 				<span id="imgDrag"></span>
 			</div>
 			<div>
@@ -465,6 +469,7 @@ div.content-11 > .content {
 </xml>
 <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
 <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+<script src="../js/awesomplete.js"></script>
 <script src="../js/prism.js"></script>
 <script src="../js/blockly_compressed.js"></script>
 <script src="../js/blocks_compressed.js"></script>
