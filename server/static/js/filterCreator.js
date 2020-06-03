@@ -372,6 +372,38 @@ function reorderFilterList(elID){
 	editFilter();
 }
 
+function deleteFilter(elID){
+	console.log(elID);
+	var filterListEls = document.getElementById('filterList').querySelectorAll('div');
+
+	imgData.filters.splice(elID,1);
+
+	for (var i=0;i<filterListEls.length;i++){
+		filterListEls[i].setAttribute('data-type',i);
+		filterListEls[i].style.removeProperty('background');
+		if (filterListEls[i].getAttribute('data-type')==elID){
+			filterListEls[i].parentNode.removeChild(filterListEls[i]);
+			if (filterListEls[i]){
+				currentFilterID = i;
+				filterListEls[i].setAttribute('data-type',i);
+				filterListEls[i].style.background = 'gray';
+			}
+			else if (filterListEls[i-1]) {
+				currentFilterID = i-1;
+				filterListEls[i-1].setAttribute('data-type',i-1);
+				filterListEls[i-1].style.background = 'gray';
+			}
+			else {
+				currentFilterID = 0;
+			}
+		}
+	}
+
+	
+
+	editFilter();
+}
+
 dragula([document.getElementById('filterList')])
   .on('drag', function (el) {
     //el.className = el.className.replace('ex-moved', '');
