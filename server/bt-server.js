@@ -840,7 +840,7 @@ wss.on('connection', function connection(ws) {
 	}
 	else if (dm.type && dm.type == 'copyFormula'){
 		if (username != ''){
-			if (!dm.message && dm.message !== 0){
+			if (!dm.newname && dm.newname !== 0){
 				return;
 			}
 			QblurData.findOne({ username: username }, function(err, result) {
