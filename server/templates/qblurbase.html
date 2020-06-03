@@ -109,11 +109,11 @@ div.content-11 > .content {
 				</select>
 				<input type="file" name="imgSrc" id="imgSrc"></input>
 				<input type="text" name="imgUrl" id="imgUrl"></input>
-				<input type="text" name="imgSaved" id="imgSaved" value="{{imgSaved}}" class="awesomplete" list="imglist"></input>
-				<datalist id="imglist">
-					<option>new</option>
-					<option>Filter 1</option>
-				</datalist>
+				<input type="text" name="imgSaved" id="imgSaved" value="{{imgSaved}}" class="awesomplete" data-list="#imglist"></input>
+				<ul id="imglist">
+					<li>new</li>
+					<li>Filter 1</li>
+				</ul>
 				<span id="imgDrag"></span>
 			</div>
 			<div>
