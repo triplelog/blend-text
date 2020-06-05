@@ -79,13 +79,14 @@ namespace Lapis.QRCode.Imaging.Drawing
                 Console.WriteLine(size);
                 byte[] data = new byte[size];
                 System.Runtime.InteropServices.Marshal.Copy(bData.Scan0, data, 0, size);
-                for (int i = 0; i < 1; i += bitsPerPixel / 8 )
+                for (int i = 0; i < 100; i += bitsPerPixel / 8 )
 				{
 					//double magnitude = 1/3d*(data[i] +data[i + 1] +data[i + 2]);
 					Console.WriteLine(data[i]);
 					Console.WriteLine(data[i+1]);
 					Console.WriteLine(data[i+2]);
 					Console.WriteLine(data[i+3]);
+					Console.WriteLine("--");
 					//data[i] is the first of 3 bytes of color
 
 				}
