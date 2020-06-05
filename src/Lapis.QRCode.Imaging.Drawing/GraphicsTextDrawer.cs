@@ -412,9 +412,12 @@ namespace Lapis.QRCode.Imaging.Drawing
                             outval = 0;
                             if (lighthash.TryGetValue(imgC, out outval))
 							{
-								re = (outval & 0xFF0000) >> 16;
-								gr = (outval & 0xFF00) >> 8;
-								bl = outval & 0xFF;
+								bl = outval % (2 << 8);
+								gr = (outval - bl) >> 8;
+								re = (outval - gr * 2 << 8 - bl) >> 16;
+								//re = (outval) >> 16;
+								//gr = (outval) >> 8;
+								//bl = outval & 0xFF;
 								
 								
 								repcell++;
@@ -433,7 +436,10 @@ namespace Lapis.QRCode.Imaging.Drawing
 							
 									HlsToRgb(h, l, s,out re, out gr, out bl);
 									
-									newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
+									//newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
+									newcol = re << 16;
+									newcol += gr << 8;
+									newcol += bl;
 									lighthash[imgC] =newcol;
 							
 									
