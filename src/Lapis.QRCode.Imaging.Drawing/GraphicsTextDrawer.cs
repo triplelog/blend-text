@@ -376,7 +376,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 							}
 							else {
 								
-								RgbToHls(hashColor.R,hashColor.G,hashColor.B,out h,out l,out s);
+								RgbToHls(hre,hgr,hbl,out h,out l,out s);
 								if (varH){
 									if (varD) {
 										imgC += tripMatrix[r, c];
