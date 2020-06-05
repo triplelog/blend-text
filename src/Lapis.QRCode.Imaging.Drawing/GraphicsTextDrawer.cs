@@ -217,13 +217,21 @@ namespace Lapis.QRCode.Imaging.Drawing
                             hgr = (gr/HashSize)*HashSize;
                             hbl = (bl/HashSize)*HashSize;
                             
-                            imgC = hre << 16 + hgr << 8 + hbl;
+                            //imgC = hre << 16 + hgr << 8 + hbl;
+							
+							imgC = tripMatrix[r, c];
+							imgC *= 256;
+							imgC += hre;
+							imgC *= 256;
+							imgC += hgr;
+							imgC *= 256;
+							imgC += hbl;
 							
 							//Color hashColor = Color.FromArgb(re,gr,bl);
 							//int imgC = hashColor.GetHashCode();
 								
                             outval = 0;
-                            if (tripMatrix[r, c] > 150 && darkhash.TryGetValue(imgC, out outval))
+                            if (tripMatrix[r, c] > 15 && darkhash.TryGetValue(imgC, out outval))
 							{
 								re = (outval & 0xFF0000) >> 16;
 								gr = (outval & 0xFF00) >> 8;
