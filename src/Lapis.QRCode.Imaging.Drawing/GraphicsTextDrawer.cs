@@ -70,18 +70,7 @@ namespace Lapis.QRCode.Imaging.Drawing
             {
             	graph.DrawImage(bmp, new Rectangle(0,0,bmp.Width,bmp.Height));
             	
-            	stopWatch.Stop();
-				// Get the elapsed time as a TimeSpan value.
-				TimeSpan ts = stopWatch.Elapsed;
-				
-				// Format and display the TimeSpan value.
-				string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-					ts.Hours, ts.Minutes, ts.Seconds,
-					ts.Milliseconds / 10);
-				Console.WriteLine("RedrawImage: " + elapsedTime);
             	
-            	stopWatch = new Stopwatch();
-        		stopWatch.Start();
         	
             	BitmapData bData = bmpp.LockBits(new Rectangle(0,0,bmp.Width,bmp.Height), ImageLockMode.ReadWrite, bmpp.PixelFormat);
                 byte bitsPerPixel = 32;
@@ -141,6 +130,20 @@ namespace Lapis.QRCode.Imaging.Drawing
 				double h; double s; double l;
 				int ore; int ogr; int obl; int oimgC; int otm;
 				int counter;
+				
+				stopWatch.Stop();
+				// Get the elapsed time as a TimeSpan value.
+				TimeSpan ts = stopWatch.Elapsed;
+				
+				// Format and display the TimeSpan value.
+				string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+					ts.Hours, ts.Minutes, ts.Seconds,
+					ts.Milliseconds / 10);
+				Console.WriteLine("RedrawImage: " + elapsedTime);
+            	
+            	stopWatch = new Stopwatch();
+        		stopWatch.Start();
+        		
                 for (var r = startR; r <= THeight-CellWidth && r + MarginT <= bmp.Height-CellWidth; r += CellWidth)
                 {
                 	ore = -1;

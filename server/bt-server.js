@@ -1383,7 +1383,7 @@ wss.on('connection', function connection(ws) {
 			return;
 		}
 		// add more checks
-	
+		console.log('fg',performance.now());
 	
 		var execCmd = '../src/qr-art/bin/Release/netcoreapp3.1/publish/qr-art "dummyText" '+inSrc+' png static/'+outSrc;
 
@@ -1458,6 +1458,7 @@ wss.on('connection', function connection(ws) {
 			myTimeout = setTimeout(function(){ createGradient(ws,execCmd,outSrc,imgIndex, luaBlurFormula); }, 1000);
 		}
 		else {
+			console.log('notimeout',performance.now());
 			myTimeout = setTimeout(function(){ createGradient(ws,execCmd,outSrc,imgIndex, luaBlurFormula); }, 1000);
 		}
 		imgIndex++;
@@ -1576,6 +1577,7 @@ function runCommand(ws,execCmd,outSrc,imgIndex, luaBlurFormula, luaTextFormula, 
 	
 }
 function createGradient(ws,execCmd,outSrc,imgIndex, luaBlurFormula) {
+	console.log('cg',performance.now());
 	var formulaName = 'test';
 	fs.writeFile("formulas/"+formulaName+"Blur.txt", luaBlurFormula, function(err) {
 		if (err){
@@ -1591,6 +1593,7 @@ function createGradient(ws,execCmd,outSrc,imgIndex, luaBlurFormula) {
 					console.log(`stderr: ${stderr}`);
 					return;
 				}
+				console.log('cgd',performance.now());
 				console.log(`stdout: ${stdout}`);
 				var jsonmessage = {'src':outSrc+'?'+imgIndex};
 				ws.send(JSON.stringify(jsonmessage));
