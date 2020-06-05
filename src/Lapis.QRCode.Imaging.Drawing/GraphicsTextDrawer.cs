@@ -85,6 +85,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 					Console.WriteLine(data[i]);
 					Console.WriteLine(data[i+1]);
 					Console.WriteLine(data[i+2]);
+					Console.WriteLine(data[i+3]);
 					//data[i] is the first of 3 bytes of color
 
 				}
