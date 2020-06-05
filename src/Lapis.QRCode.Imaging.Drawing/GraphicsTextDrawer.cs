@@ -123,7 +123,8 @@ namespace Lapis.QRCode.Imaging.Drawing
 				
 				Color pixColor;
 				int imgC;
-				int re; int gr; int bl;
+				int re; int gr; int bl; int al;
+				int hre; int hgr; int hbl;
 				int outval; int newcol;
 				double h; double s; double l;
 				int ore; int ogr; int obl; int oimgC; int otm;
@@ -326,18 +327,26 @@ namespace Lapis.QRCode.Imaging.Drawing
                             	Console.WriteLine(pixColor.B);
                             }*/
                             
-                            pixColor = Color.FromArgb(data[y*bData.Stride+x*4+3], data[y*bData.Stride+x*4+2], data[y*bData.Stride+x*4+1], data[y*bData.Stride+x*4+0]);
+                            /*pixColor = Color.FromArgb(data[y*bData.Stride+x*4+3], data[y*bData.Stride+x*4+2], data[y*bData.Stride+x*4+1], data[y*bData.Stride+x*4+0]);
                         	if (x==400 && y==400){
                             	Console.WriteLine(pixColor.A);
                             	Console.WriteLine(pixColor.R);
                             	Console.WriteLine(pixColor.G);
                             	Console.WriteLine(pixColor.B);
-                            }
-                        	re = pixColor.R * pixColor.A / 255 + (255-pixColor.A);
-                            gr = pixColor.G * pixColor.A / 255 + (255-pixColor.A);
-                            bl = pixColor.B * pixColor.A / 255 + (255-pixColor.A);
+                            }*/
+                            re = data[y*bData.Stride+x*4+2];
+                            gr = data[y*bData.Stride+x*4+1];
+                            bl = data[y*bData.Stride+x*4+0];
+                            al = data[y*bData.Stride+x*4+3];
                             
-							Color hashColor = Color.FromArgb((re/HashSize)*HashSize,(gr/HashSize)*HashSize,(bl/HashSize)*HashSize);
+                        	re = re * al / 255 + (255-al);
+                            gr = gr * al / 255 + (255-al);
+                            bl = bl * al / 255 + (255-al);
+                            
+                            hre = (re/HashSize)*HashSize;
+                            hgr = (gr/HashSize)*HashSize;
+                            hbl = (bl/HashSize)*HashSize;
+							//Color hashColor = Color.FromArgb((re/HashSize)*HashSize,(gr/HashSize)*HashSize,(bl/HashSize)*HashSize);
 							//int imgC = hashColor.GetHashCode();
 							
 							if (tripMatrix[r, c]<-101){
@@ -354,15 +363,15 @@ namespace Lapis.QRCode.Imaging.Drawing
 									imgC *= 256;
 								}
 								if (varR){
-									imgC += hashColor.R;
+									imgC += hre;
 									imgC *= 256;
 								}
 								if (varG){
-									imgC += hashColor.G;
+									imgC += hgr;
 									imgC *= 256;
 								}
 								if (varB){
-									imgC += hashColor.B;
+									imgC += hbl;
 								}
 							}
 							else {
@@ -447,7 +456,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 								newcell++;
 							}
 							
-							if (re == ore && gr == ogr && bl == obl && otm == tripMatrix[r, c]){
+							/*if (re == ore && gr == ogr && bl == obl && otm == tripMatrix[r, c]){
 								counter++;
 								//continue;
 							}
@@ -460,7 +469,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 							}
 							int brushW = CellWidth*20;
 							if (TWidth-c<brushW){brushW = TWidth-c;}
-							if (bmp.Width-x<brushW){brushW = bmp.Width-x;}
+							if (bmp.Width-x<brushW){brushW = bmp.Width-x;}*/
 							
 							
 							//foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
