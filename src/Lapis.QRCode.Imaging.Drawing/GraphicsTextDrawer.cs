@@ -412,13 +412,12 @@ namespace Lapis.QRCode.Imaging.Drawing
                             outval = 0;
                             if (lighthash.TryGetValue(imgC, out outval))
 							{
-								bl = outval % (2 << 8);
-								gr = (outval - bl) >> 8;
-								re = (outval - gr * 2 << 8 - bl) >> 16;
-								//re = (outval) >> 16;
-								//gr = (outval) >> 8;
-								//bl = outval & 0xFF;
-								
+								re = (outval & 0xFF0000) >> 16;
+								gr = (outval & 0xFF00) >> 8;
+								bl = outval & 0xFF;
+								//bl = outval % (2 << 8);
+								//gr = (outval - bl) >> 8;
+								//re = (outval - gr * 2 << 8 - bl) >> 16;
 								
 								repcell++;
 							}
