@@ -318,8 +318,26 @@ namespace Lapis.QRCode.Imaging.Drawing
 							}
                         	var x = MarginL + c;
                             var y = MarginT + r;
-                            //pixColor = bmp.GetPixel(x, y);
+                            pixColor = bmp.GetPixel(x, y);
+                            if (x==500 && y==500){
+                            	Console.WriteLine(pixColor.A);
+                            	Console.WriteLine(pixColor.R);
+                            	Console.WriteLine(pixColor.G);
+                            	Console.WriteLine(pixColor.B);
+                            }
+                            
                             pixColor = Color.FromArgb(data[y*bData.Stride+x*4+3], data[y*bData.Stride+x*4], data[y*bData.Stride+x*4+1], data[y*bData.Stride+x*4+2]);
+                        	if (x==500 && y==500){
+                            	Console.WriteLine(pixColor.A);
+                            	Console.WriteLine(pixColor.R);
+                            	Console.WriteLine(pixColor.G);
+                            	Console.WriteLine(pixColor.B);
+                            	
+                            	Console.WriteLine(data[y*bData.Stride+x*4+0]);
+                            	Console.WriteLine(data[y*bData.Stride+x*4+1]);
+                            	Console.WriteLine(data[y*bData.Stride+x*4+2]);
+                            	Console.WriteLine(data[y*bData.Stride+x*4+3]);
+                            }
                         	re = pixColor.R * pixColor.A / 255 + (255-pixColor.A);
                             gr = pixColor.G * pixColor.A / 255 + (255-pixColor.A);
                             bl = pixColor.B * pixColor.A / 255 + (255-pixColor.A);
