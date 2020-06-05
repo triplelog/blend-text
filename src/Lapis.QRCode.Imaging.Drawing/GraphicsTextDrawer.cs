@@ -69,6 +69,23 @@ namespace Lapis.QRCode.Imaging.Drawing
             using (var graph = Graphics.FromImage(bmpp))
             {
             	graph.DrawImage(bmp, new Rectangle(0,0,bmp.Width,bmp.Height));
+            	
+            	BitmapData bData = bmpp.LockBits(new Rectange(0,0,bmp.Width,bmp.Height), ImageLockMode.ReadWrite, bmpp.PixelFormat);
+                byte bitsPerPixel = GetBitsPerPixel(bData.PixelFormat);
+                int size = bData.Stride * bData.Height;
+                byte[] data = new byte[size];
+                System.Runtime.InteropServices.Marshal.Copy(bData.Scan0, data, 0, size);
+                for (int i = 0; i < size; i += bitsPerPixel / 8 )
+				{
+					//double magnitude = 1/3d*(data[i] +data[i + 1] +data[i + 2]);
+
+					//data[i] is the first of 3 bytes of color
+
+				}
+				System.Runtime.InteropServices.Marshal.Copy(data, 0, bData.Scan0, data.Length);
+				bmpp.UnlockBits(bData);
+
+
                 //graph.Clear(Color.FromArgb(255,255,255));
                 //var foreBrush = new SolidBrush(ColorHelper.FromIntRgb24(Foreground));
                 var foreBrush = new SolidBrush(Color.FromArgb(40,40,40));
