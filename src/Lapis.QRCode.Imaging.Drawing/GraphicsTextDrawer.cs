@@ -70,7 +70,19 @@ namespace Lapis.QRCode.Imaging.Drawing
             {
             	graph.DrawImage(bmp, new Rectangle(0,0,bmp.Width,bmp.Height));
             	
-            
+            	stopWatch.Stop();
+				// Get the elapsed time as a TimeSpan value.
+				TimeSpan ts = stopWatch.Elapsed;
+				
+				// Format and display the TimeSpan value.
+				string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+					ts.Hours, ts.Minutes, ts.Seconds,
+					ts.Milliseconds / 10);
+				Console.WriteLine("RedrawImage: " + elapsedTime);
+            	
+            	stopWatch = new Stopwatch();
+        		stopWatch.Start();
+        	
             	BitmapData bData = bmpp.LockBits(new Rectangle(0,0,bmp.Width,bmp.Height), ImageLockMode.ReadWrite, bmpp.PixelFormat);
                 byte bitsPerPixel = 32;
                 Console.WriteLine(bData.PixelFormat.ToString());
@@ -505,17 +517,17 @@ namespace Lapis.QRCode.Imaging.Drawing
                     }
                 }
                 
-                
+                System.Runtime.InteropServices.Marshal.Copy(data, 0, bData.Scan0, data.Length);
+				bmpp.UnlockBits(bData);
 
                 stopWatch.Stop();
 				// Get the elapsed time as a TimeSpan value.
-				TimeSpan ts = stopWatch.Elapsed;
+				ts = stopWatch.Elapsed;
 				
-				System.Runtime.InteropServices.Marshal.Copy(data, 0, bData.Scan0, data.Length);
-				bmpp.UnlockBits(bData);
+				
 
 				// Format and display the TimeSpan value.
-				string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+				elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
 					ts.Hours, ts.Minutes, ts.Seconds,
 					ts.Milliseconds / 10);
 				Console.WriteLine("GraphicsTextDrawerTime " + elapsedTime +" new/rep "+newcell+'/'+repcell +" newd/repd "+newdarkcell+'/'+repdarkcell);
