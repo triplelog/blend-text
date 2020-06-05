@@ -146,8 +146,12 @@ namespace Lapis.QRCode.Imaging.Drawing
                         	if (Type == "text"){
                         		var x = MarginL + c;
                             	var y = MarginT + r;
-                        		graph.FillRectangle(foreBrushB, x, y, CellWidth, CellWidth);
-                        		if (counter >= 19 || otm == 0){
+                            	data[y*bData.Stride+x*4+2]=0;
+								data[y*bData.Stride+x*4+1]=0;
+								data[y*bData.Stride+x*4+0]=0;
+								data[y*bData.Stride+x*4+3]=255;
+                        		//graph.FillRectangle(foreBrushB, x, y, CellWidth, CellWidth);
+                        		/*if (counter >= 19 || otm == 0){
 									ore = -1;
 									ogr = -1;
 									obl = -1;
@@ -157,9 +161,9 @@ namespace Lapis.QRCode.Imaging.Drawing
 								}
 								else {
                             		counter++;
-								}
+								}*/
                         	}
-                        	else {
+                        	/*else {
                         		if (counter >= 19 || otm == 0){
 									ore = -1;
 									ogr = -1;
@@ -178,14 +182,14 @@ namespace Lapis.QRCode.Imaging.Drawing
                             		graph.FillRectangle(foreBrushCustom, x, y, CellWidth, CellWidth);
                             		counter++;
 								}
-                        	}
+                        	}*/
                         	
                         	
                         	
                         }
                         else if (tripMatrix[r, c] > 0)
                         {
-                        	if (counter >= 19 || otm == 0){
+                        	/*if (counter >= 19 || otm == 0){
 								ore = -1;
 								ogr = -1;
 								obl = -1;
@@ -195,17 +199,25 @@ namespace Lapis.QRCode.Imaging.Drawing
 							}
 							else {
 								counter++;
-							}
+							}*/
 							
                             var x = MarginL + c;
                             var y = MarginT + r;
                             //Darken uniformly
-                            pixColor = bmp.GetPixel(x, y);
-                            re = pixColor.R * pixColor.A / 255 + (255-pixColor.A);
-                        	gr = pixColor.G * pixColor.A / 255 + (255-pixColor.A);
-                            bl = pixColor.B * pixColor.A / 255 + (255-pixColor.A);
+                            re = data[y*bData.Stride+x*4+2];
+                            gr = data[y*bData.Stride+x*4+1];
+                            bl = data[y*bData.Stride+x*4+0];
+                            al = data[y*bData.Stride+x*4+3];
                             
-                            imgC = Color.FromArgb((re/HashSize)*HashSize,(gr/HashSize)*HashSize,(bl/HashSize)*HashSize).GetHashCode();
+                        	re = re * al / 255 + (255-al);
+                            gr = gr * al / 255 + (255-al);
+                            bl = bl * al / 255 + (255-al);
+                            
+                            hre = (re/HashSize)*HashSize;
+                            hgr = (gr/HashSize)*HashSize;
+                            hbl = (bl/HashSize)*HashSize;
+                            
+                            imgC = hre << 16 + hgr << 8 + hbl;
 							
 							//Color hashColor = Color.FromArgb(re,gr,bl);
 							//int imgC = hashColor.GetHashCode();
@@ -251,8 +263,12 @@ namespace Lapis.QRCode.Imaging.Drawing
 									
 								
 									if (tripMatrix[r, c] > 15){
-										newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
-										darkhash.Add(imgC, newcol);
+										newcol = re << 16;
+										newcol += gr << 8;
+										newcol += bl;
+										darkhash[imgC] =newcol;
+										//newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
+										//darkhash.Add(imgC, newcol);
 									}
 									
 									
@@ -271,8 +287,10 @@ namespace Lapis.QRCode.Imaging.Drawing
 										else if (gr < 0){gr=0;}
 										if (bl > 255){bl=255;}
 										else if (bl < 0){bl=0;}
-										newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
-										darkhash.Add(imgC, newcol);
+										newcol = re << 16;
+										newcol += gr << 8;
+										newcol += bl;
+										darkhash[imgC] =newcol;
 									}
 									else {
 										var resD = textFunc.Call (tripMatrix[r, c],re,gr,bl);
@@ -302,38 +320,26 @@ namespace Lapis.QRCode.Imaging.Drawing
 							
 							
 							
-							foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
-							graph.FillRectangle(foreBrushCustom, x, y, CellWidth, CellWidth);
-							
-									
+							//foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
+							//graph.FillRectangle(foreBrushCustom, x, y, CellWidth, CellWidth);
+							data[y*bData.Stride+x*4+2]=Convert.ToByte(re);
+							data[y*bData.Stride+x*4+1]=Convert.ToByte(gr);
+							data[y*bData.Stride+x*4+0]=Convert.ToByte(bl);
+							data[y*bData.Stride+x*4+3]=255;
 							
                         }
                         else { //tripMatrix[r, c]<0 so Background
-                        	if (counter >= 19){
+                        	/*if (counter >= 19){
 								ore = -1;
 								ogr = -1;
 								obl = -1;
 								oimgC = -1;
 								counter = 0;
 								otm = 0;
-							}
+							}*/
                         	var x = MarginL + c;
                             var y = MarginT + r;
-                            /*pixColor = bmp.GetPixel(x, y);
-                            if (x==400 && y==400){
-                            	Console.WriteLine(pixColor.A);
-                            	Console.WriteLine(pixColor.R);
-                            	Console.WriteLine(pixColor.G);
-                            	Console.WriteLine(pixColor.B);
-                            }*/
                             
-                            /*pixColor = Color.FromArgb(data[y*bData.Stride+x*4+3], data[y*bData.Stride+x*4+2], data[y*bData.Stride+x*4+1], data[y*bData.Stride+x*4+0]);
-                        	if (x==400 && y==400){
-                            	Console.WriteLine(pixColor.A);
-                            	Console.WriteLine(pixColor.R);
-                            	Console.WriteLine(pixColor.G);
-                            	Console.WriteLine(pixColor.B);
-                            }*/
                             re = data[y*bData.Stride+x*4+2];
                             gr = data[y*bData.Stride+x*4+1];
                             bl = data[y*bData.Stride+x*4+0];
@@ -400,14 +406,14 @@ namespace Lapis.QRCode.Imaging.Drawing
 								}
 							}
 							
-							if (imgC == oimgC && otm == tripMatrix[r, c]){
+							/*if (imgC == oimgC && otm == tripMatrix[r, c]){
 								counter++;
 								//continue;
 							}
 							else {
 								oimgC = imgC;
 								
-							}
+							}*/
 							
                             outval = 0;
                             if (lighthash.TryGetValue(imgC, out outval))
@@ -415,9 +421,6 @@ namespace Lapis.QRCode.Imaging.Drawing
 								re = (outval & 0xFF0000) >> 16;
 								gr = (outval & 0xFF00) >> 8;
 								bl = outval & 0xFF;
-								//bl = outval % (2 << 8);
-								//gr = (outval - bl) >> 8;
-								//re = (outval - gr * 2 << 8 - bl) >> 16;
 								
 								repcell++;
 							}
@@ -435,7 +438,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 							
 									HlsToRgb(h, l, s,out re, out gr, out bl);
 									
-									//newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
+									
 									newcol = re << 16;
 									newcol += gr << 8;
 									newcol += bl;
@@ -454,7 +457,9 @@ namespace Lapis.QRCode.Imaging.Drawing
 									else if (gr < 0){gr=0;}
 									if (bl > 255){bl=255;}
 									else if (bl < 0){bl=0;}
-									newcol = ColorHelper.ToIntRgb24(Color.FromArgb(re,gr,bl));
+									newcol = re << 16;
+									newcol += gr << 8;
+									newcol += bl;
 									lighthash[imgC] =newcol;
 							
 									
@@ -482,6 +487,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 							data[y*bData.Stride+x*4+2]=Convert.ToByte(re);
 							data[y*bData.Stride+x*4+1]=Convert.ToByte(gr);
 							data[y*bData.Stride+x*4+0]=Convert.ToByte(bl);
+							data[y*bData.Stride+x*4+3]=255;
 							//graph.FillRectangle(foreBrushCustom, x, y, brushW,CellWidth);
 							
 							//graph.FillRectangle(foreBrushCustom, x, y, CellWidth,CellWidth);
