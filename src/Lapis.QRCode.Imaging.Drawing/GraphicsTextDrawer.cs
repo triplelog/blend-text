@@ -430,11 +430,11 @@ namespace Lapis.QRCode.Imaging.Drawing
 								//Lighten uniformly
 								if (BlurType == "hsl"){
 									
-									/*var res = scriptFunc.Call (tripMatrix[r, c],h,s,l);
+									var res = scriptFunc.Call (tripMatrix[r, c],h,s,l);
 									
 									h = Convert.ToDouble(res[0]);
 									s = Convert.ToDouble(res[1]);
-									l = Convert.ToDouble(res[2]);*/
+									l = Convert.ToDouble(res[2]);
 							
 									HlsToRgb(h, l, s,out re, out gr, out bl);
 									
