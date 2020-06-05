@@ -70,6 +70,7 @@ namespace Lapis.QRCode.Imaging.Drawing
             {
             	graph.DrawImage(bmp, new Rectangle(0,0,bmp.Width,bmp.Height));
             	
+            
             	BitmapData bData = bmpp.LockBits(new Rectangle(0,0,bmp.Width,bmp.Height), ImageLockMode.ReadWrite, bmpp.PixelFormat);
                 byte bitsPerPixel = 32;
                 Console.WriteLine(bData.PixelFormat.ToString());
@@ -82,16 +83,15 @@ namespace Lapis.QRCode.Imaging.Drawing
                 for (int i = 0; i < 100; i += bitsPerPixel / 8 )
 				{
 					//double magnitude = 1/3d*(data[i] +data[i + 1] +data[i + 2]);
-					Console.WriteLine(data[i]);
-					Console.WriteLine(data[i+1]);
-					Console.WriteLine(data[i+2]);
-					Console.WriteLine(data[i+3]);
-					Console.WriteLine("--");
+					//Console.WriteLine(data[i]);red
+					//Console.WriteLine(data[i+1]);green
+					//Console.WriteLine(data[i+2]);blue
+					//Console.WriteLine(data[i+3]);alpha
+					//Console.WriteLine("--");
 					//data[i] is the first of 3 bytes of color
 
 				}
-				System.Runtime.InteropServices.Marshal.Copy(data, 0, bData.Scan0, data.Length);
-				bmpp.UnlockBits(bData);
+				
 
 
                 //graph.Clear(Color.FromArgb(255,255,255));
@@ -318,10 +318,12 @@ namespace Lapis.QRCode.Imaging.Drawing
 							}
                         	var x = MarginL + c;
                             var y = MarginT + r;
-                            pixColor = bmp.GetPixel(x, y);
+                            //pixColor = bmp.GetPixel(x, y);
+                            pixColor = Color.FromArgb(data[y*bData.Stride+x*4+3], data[y*bData.Stride+x*4], data[y*bData.Stride+x*4+1], data[y*bData.Stride+x*4+2]);
                         	re = pixColor.R * pixColor.A / 255 + (255-pixColor.A);
                             gr = pixColor.G * pixColor.A / 255 + (255-pixColor.A);
                             bl = pixColor.B * pixColor.A / 255 + (255-pixColor.A);
+                            
 							Color hashColor = Color.FromArgb((re/HashSize)*HashSize,(gr/HashSize)*HashSize,(bl/HashSize)*HashSize);
 							//int imgC = hashColor.GetHashCode();
 							
@@ -464,7 +466,8 @@ namespace Lapis.QRCode.Imaging.Drawing
 				// Get the elapsed time as a TimeSpan value.
 				TimeSpan ts = stopWatch.Elapsed;
 				
-				
+				System.Runtime.InteropServices.Marshal.Copy(data, 0, bData.Scan0, data.Length);
+				bmpp.UnlockBits(bData);
 
 				// Format and display the TimeSpan value.
 				string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
