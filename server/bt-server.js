@@ -1152,7 +1152,7 @@ wss.on('connection', function connection(ws) {
 		//download or upload file to 'inputs/imgid'+fileExt and set inputSrc
 		//var inSrc = 'test.jpg';
 	
-		var execCmd = '../src/qr-art/bin/Debug/netcoreapp3.1/publish/qr-art "'+dm.text+'" '+inSrc+' png static/'+outSrc;
+		var execCmd = '../src/qr-art/bin/Release/netcoreapp3.1/publish/qr-art "'+dm.text+'" '+inSrc+' png static/'+outSrc;
 		execCmd += ' -s '+dm.typeNumber;
 		execCmd += ' -x '+dm.locX;
 		execCmd += ' -y '+dm.locY;
@@ -1271,7 +1271,7 @@ wss.on('connection', function connection(ws) {
 		//download or upload file to 'inputs/imgid'+fileExt and set inputSrc
 		//var inSrc = 'test.jpg';
 	
-		var execCmd = '../src/qr-art/bin/Debug/netcoreapp3.1/publish/qr-art "'+dm.text+'" '+inSrc+' png static/'+outSrc;
+		var execCmd = '../src/qr-art/bin/Release/netcoreapp3.1/publish/qr-art "'+dm.text+'" '+inSrc+' png static/'+outSrc;
 		execCmd += ' -s '+dm.fontSize;
 		execCmd += ' -x '+dm.locX;
 		execCmd += ' -y '+dm.locY;
@@ -1385,7 +1385,7 @@ wss.on('connection', function connection(ws) {
 		// add more checks
 	
 	
-		var execCmd = '../src/qr-art/bin/Debug/netcoreapp3.1/publish/qr-art "dummyText" '+inSrc+' png static/'+outSrc;
+		var execCmd = '../src/qr-art/bin/Release/netcoreapp3.1/publish/qr-art "dummyText" '+inSrc+' png static/'+outSrc;
 
 		execCmd += ' -x '+dm.locX;
 		execCmd += ' -y '+dm.locY;
@@ -1474,7 +1474,7 @@ wss.on('connection', function connection(ws) {
 		// add more checks
 	
 	
-		var execCmd = '../src/qr-art/bin/Debug/netcoreapp3.1/publish/qr-art "dummyText" '+inSrc+' png static/'+outSrc;
+		var execCmd = '../src/qr-art/bin/Release/netcoreapp3.1/publish/qr-art "dummyText" '+inSrc+' png static/'+outSrc;
 
 		execCmd += ' -x 0';
 		execCmd += ' -y 0';
