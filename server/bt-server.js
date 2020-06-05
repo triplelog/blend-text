@@ -1383,7 +1383,6 @@ wss.on('connection', function connection(ws) {
 			return;
 		}
 		// add more checks
-		console.log('fg',performance.now());
 	
 		var execCmd = '../src/qr-art/bin/Release/netcoreapp3.1/publish/qr-art "dummyText" '+inSrc+' png static/'+outSrc;
 
@@ -1455,11 +1454,9 @@ wss.on('connection', function connection(ws) {
 		
 		if (myTimeout){
 			clearTimeout(myTimeout);
-			console.log('timeout',performance.now());
 			myTimeout = setTimeout(function(){ createGradient(ws,execCmd,outSrc,imgIndex, luaBlurFormula); }, 1000);
 		}
 		else {
-			console.log('notimeout',performance.now());
 			myTimeout = setTimeout(function(){ createGradient(ws,execCmd,outSrc,imgIndex, luaBlurFormula); }, 1000);
 		}
 		imgIndex++;
@@ -1585,7 +1582,6 @@ function createGradient(ws,execCmd,outSrc,imgIndex, luaBlurFormula) {
 
 		}
 		else {
-			console.log('fw',performance.now());
 			exec(execCmd, (error, stdout, stderr) => {
 				if (error) {
 					console.log(`error: ${error.message}`);

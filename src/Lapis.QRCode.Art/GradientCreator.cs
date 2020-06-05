@@ -50,8 +50,8 @@ namespace Lapis.QRCode.Art
             {
             	int twidth = (int)gradientImage.Width;
             	int theight = (int)gradientImage.Height;
-        		ystep = 1 + theight / 100;
-        		xstep = 1 + twidth / 100;
+        		ystep = 1 + theight / 200;
+        		xstep = 1 + twidth / 200;
         		
             	Stopwatch stopWatch = new Stopwatch();
         		stopWatch.Start();
