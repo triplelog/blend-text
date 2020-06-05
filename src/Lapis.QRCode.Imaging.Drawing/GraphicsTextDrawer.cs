@@ -464,9 +464,9 @@ namespace Lapis.QRCode.Imaging.Drawing
 							
 							
 							//foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
-							data[y*bData.Stride+x*4+2]=re;
-							data[y*bData.Stride+x*4+1]=gr;
-							data[y*bData.Stride+x*4+0]=bl;
+							data[y*bData.Stride+x*4+2]=byte[re];
+							data[y*bData.Stride+x*4+1]=byte[gr];
+							data[y*bData.Stride+x*4+0]=byte[bl];
 							//graph.FillRectangle(foreBrushCustom, x, y, brushW,CellWidth);
 							
 							//graph.FillRectangle(foreBrushCustom, x, y, CellWidth,CellWidth);
