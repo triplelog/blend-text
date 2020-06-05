@@ -83,9 +83,9 @@ namespace Lapis.QRCode.Imaging.Drawing
                 for (int i = 0; i < 100; i += bitsPerPixel / 8 )
 				{
 					//double magnitude = 1/3d*(data[i] +data[i + 1] +data[i + 2]);
-					//Console.WriteLine(data[i]);red
+					//Console.WriteLine(data[i]);blue
 					//Console.WriteLine(data[i+1]);green
-					//Console.WriteLine(data[i+2]);blue
+					//Console.WriteLine(data[i+2]);red
 					//Console.WriteLine(data[i+3]);alpha
 					//Console.WriteLine("--");
 					//data[i] is the first of 3 bytes of color
@@ -318,13 +318,13 @@ namespace Lapis.QRCode.Imaging.Drawing
 							}
                         	var x = MarginL + c;
                             var y = MarginT + r;
-                            pixColor = bmp.GetPixel(x, y);
+                            /*pixColor = bmp.GetPixel(x, y);
                             if (x==400 && y==400){
                             	Console.WriteLine(pixColor.A);
                             	Console.WriteLine(pixColor.R);
                             	Console.WriteLine(pixColor.G);
                             	Console.WriteLine(pixColor.B);
-                            }
+                            }*/
                             
                             pixColor = Color.FromArgb(data[y*bData.Stride+x*4+3], data[y*bData.Stride+x*4+2], data[y*bData.Stride+x*4+1], data[y*bData.Stride+x*4+0]);
                         	if (x==400 && y==400){
@@ -393,7 +393,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 							
 							if (imgC == oimgC && otm == tripMatrix[r, c]){
 								counter++;
-								continue;
+								//continue;
 							}
 							else {
 								oimgC = imgC;
@@ -449,7 +449,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 							
 							if (re == ore && gr == ogr && bl == obl && otm == tripMatrix[r, c]){
 								counter++;
-								continue;
+								//continue;
 							}
 							else {
 								counter = 0;
@@ -463,8 +463,11 @@ namespace Lapis.QRCode.Imaging.Drawing
 							if (bmp.Width-x<brushW){brushW = bmp.Width-x;}
 							
 							
-							foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
-							graph.FillRectangle(foreBrushCustom, x, y, brushW,CellWidth);
+							//foreBrushCustom.Color = Color.FromArgb(re,gr,bl);
+							data[y*bData.Stride+x*4+2]=re;
+							data[y*bData.Stride+x*4+1]=gr;
+							data[y*bData.Stride+x*4+0]=bl;
+							//graph.FillRectangle(foreBrushCustom, x, y, brushW,CellWidth);
 							
 							//graph.FillRectangle(foreBrushCustom, x, y, CellWidth,CellWidth);
 							
