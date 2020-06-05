@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Drawing.Imaging;
-using System.Windows.Media;
 using NLua;
 
 namespace Lapis.QRCode.Imaging.Drawing
