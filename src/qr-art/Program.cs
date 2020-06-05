@@ -141,7 +141,7 @@ namespace Lapis.QrArt
 							else {
 								widthout = -1;
 								font = new Font(fontVal, fontSize);
-								textDrawer.CellWidth = 1 + fontSize / 500;
+								textDrawer.CellWidth = 1;
 							}	
 						
 							
@@ -182,7 +182,7 @@ namespace Lapis.QrArt
 										}
 										oldSize = newSize;
 									}
-									textDrawer.CellWidth = 1 + oldSize / 500;
+									textDrawer.CellWidth = 1;
 								}
 								Bitmap bmpp = (Bitmap) new Bitmap(twidth,theight);
 							
