@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
+using System.Drawing.Imaging;
 using NLua;
 
 namespace Lapis.QRCode.Imaging.Drawing
@@ -70,7 +70,7 @@ namespace Lapis.QRCode.Imaging.Drawing
             {
             	graph.DrawImage(bmp, new Rectangle(0,0,bmp.Width,bmp.Height));
             	
-            	BitmapData bData = bmpp.LockBits(new Rectange(0,0,bmp.Width,bmp.Height), ImageLockMode.ReadWrite, bmpp.PixelFormat);
+            	BitmapData bData = bmpp.LockBits(new Rectangle(0,0,bmp.Width,bmp.Height), ImageLockMode.ReadWrite, bmpp.PixelFormat);
                 byte bitsPerPixel = GetBitsPerPixel(bData.PixelFormat);
                 int size = bData.Stride * bData.Height;
                 byte[] data = new byte[size];
