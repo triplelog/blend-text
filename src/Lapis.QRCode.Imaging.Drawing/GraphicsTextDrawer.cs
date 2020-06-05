@@ -223,7 +223,7 @@ namespace Lapis.QRCode.Imaging.Drawing
 							//int imgC = hashColor.GetHashCode();
 								
                             outval = 0;
-                            if (tripMatrix[r, c] > 15 && darkhash.TryGetValue(imgC, out outval))
+                            if (tripMatrix[r, c] > 150 && darkhash.TryGetValue(imgC, out outval))
 							{
 								re = (outval & 0xFF0000) >> 16;
 								gr = (outval & 0xFF00) >> 8;
