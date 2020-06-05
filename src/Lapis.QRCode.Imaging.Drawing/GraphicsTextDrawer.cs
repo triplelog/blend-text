@@ -71,7 +71,8 @@ namespace Lapis.QRCode.Imaging.Drawing
             	graph.DrawImage(bmp, new Rectangle(0,0,bmp.Width,bmp.Height));
             	
             	BitmapData bData = bmpp.LockBits(new Rectangle(0,0,bmp.Width,bmp.Height), ImageLockMode.ReadWrite, bmpp.PixelFormat);
-                byte bitsPerPixel = bData.PixelFormat.BitsPerPixel;
+                byte bitsPerPixel = 32;
+                Console.WriteLine(bData.PixelFormat.ToString());
                 int size = bData.Stride * bData.Height;
                 byte[] data = new byte[size];
                 System.Runtime.InteropServices.Marshal.Copy(bData.Scan0, data, 0, size);
