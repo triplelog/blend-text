@@ -40,3 +40,5 @@ dotnet run --project qr-art.csproj "hello" image format outpath
 dotnet publish
 ./bin/Debug/netcoreapp3.1/publish/qr-art "hello" test.jpg png out.png
 use dotnet
+
+save fonts to /usr/shar/fonts
