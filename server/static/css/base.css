@@ -477,7 +477,7 @@ input.footnote:Not(:checked) + * + div.footnoteDiv {
 		width: var(--width-container);
 		max-width: 60rem;
 		margin: .25rem auto;
-		overflow-y: auto;
+		overflow-y: visible;
 		grid-template-columns: 1fr;
 		grid-template-rows: var(--height-center) 13rem 13rem 13rem 13rem auto;
 		grid-row-gap: .5rem;
