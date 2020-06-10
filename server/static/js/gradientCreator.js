@@ -283,7 +283,6 @@ for (var i=0;i<2;i++){
 console.log(document.getElementById('formulaDiv').offsetWidth);
 onresize();
 console.log(document.getElementById('formulaDiv').offsetWidth);
-onresize();
 
 
 var lang = 'python';
