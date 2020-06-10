@@ -240,19 +240,19 @@ function onresize(evt) {
       element = element.offsetParent;
     } while (element);
     // Position blocklyDiv over blocklyArea.
+    var oh = document.getElementById('formulaDiv').offsetHeight;
+    var ow = document.getElementById('formulaDiv').offsetWidth;
     for (var i=0;i<2;i++){
 		blocklyDivs[i].style.left = x + 'px';
 		blocklyDivs[i].style.top = y + 'px';
-		blocklyDivs[i].style.height = document.getElementById('formulaDiv').offsetHeight + 'px';
+		blocklyDivs[i].style.height = oh + 'px';
 	}
 	for (var i=0;i<2;i++){
 		console.log(document.getElementById('formulaDiv').offsetWidth);
-		blocklyDivs[i].style.width = document.getElementById('formulaDiv').offsetWidth + 'px';
+		blocklyDivs[i].style.width = ow + 'px';
 		console.log(document.getElementById('formulaDiv').offsetWidth);
-		console.log(document.getElementById('formulaDiv').offsetHeight);
 		console.log(blocklyDivs[i].style.width);
 		
-		console.log(document.getElementById('formulaDiv').offsetHeight);
 	}
 	for (var i=0;i<2;i++){
 		console.log(document.getElementById('formulaDiv').offsetWidth);
