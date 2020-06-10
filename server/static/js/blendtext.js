@@ -433,11 +433,6 @@ document.getElementById('overlayText').addEventListener('change',switchType);
 document.getElementById('overlayQR').addEventListener('change',switchType);
 switchType();
 document.getElementById('refreshCreation').addEventListener('click',updateImage);
-var el = document.getElementById('imageHolder');
-var img = document.createElement('img');
-img.setAttribute('src','img/loading.jpg');
-el.innerHTML = '';
-el.appendChild(img);
 
 function setFormulaOptions() {
 	var filterOptions = document.getElementById('hslrgb');

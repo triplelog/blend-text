@@ -495,8 +495,4 @@ for (var i=0;i<loadedFilters.length;i++){
 	
 }
 
-var el = document.getElementById('imageHolder');
-var img = document.createElement('img');
-img.setAttribute('src','img/loading.jpg');
-el.innerHTML = '';
-el.appendChild(img);
+

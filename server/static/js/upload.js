@@ -132,3 +132,9 @@ document.getElementById('imgUrl').style.display = 'none';
 document.getElementById('imgDrag').style.display = 'none';
 document.getElementById('imgSaved').style.display = 'none';
 
+var el = document.getElementById('imageHolder');
+var img = document.createElement('img');
+img.setAttribute('src','img/loading.jpg');
+el.innerHTML = '';
+el.appendChild(img);
+

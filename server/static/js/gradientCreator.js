@@ -356,11 +356,7 @@ workspaceBRGB.addChangeListener(updateBRGB);
 document.getElementById('blurFormulaRGB').style.display = 'none';
 document.getElementById('refreshCreation').addEventListener('click',updateImage);
 updateBHSL();
-var el = document.getElementById('imageHolder');
-var img = document.createElement('img');
-img.setAttribute('src','img/loading.jpg');
-el.innerHTML = '';
-el.appendChild(img);
+
 function setFormulaOptions() {
 	var filterOptions = document.getElementById('hslrgb');
 	filterOptions.innerHTML = '';
