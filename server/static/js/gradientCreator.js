@@ -251,7 +251,7 @@ function onresize(evt) {
 	}
 	for (var i=0;i<2;i++){
 		console.log(document.getElementById('formulaDiv').offsetWidth);
-		Blockly.svgResize(workspaces[i]);
+		//Blockly.svgResize(workspaces[i]);
 		console.log(document.getElementById('formulaDiv').offsetWidth);
     }
 }
