@@ -29,6 +29,10 @@ body {
 	background-size: cover;
 	
 }
+.logoDiv {
+	left: -4.5rem;
+	top: .5rem;
+}
 img {
 	padding: 0px;
 	margin: 0px;
@@ -145,9 +149,13 @@ div.content-11 > .content {
 		top:2rem;
 		text-align: center;
 	}
+	.logoDiv {
+		left: 0rem;
+		top: .5rem;
+	}
 	div.logoDiv img {
 		width:var(--width-center);
-		left:calc((100% - var(--width-center)) / 2);
+		left:unset;
 		top:0rem;
 		position:relative;
 	}
@@ -526,7 +534,7 @@ div.content-11 > .content {
 
 {% block content22 %}
 	
-	<div class="logoDiv" style="left:-4.5rem; top:.5rem;">
+	<div class="logoDiv">
 		<img src="../newlogo.png" style="width:16rem;">		
 	</div>
 	<div class="centerLink">
