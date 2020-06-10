@@ -246,8 +246,10 @@ function onresize(evt) {
 		console.log(document.getElementById('formulaDiv').offsetWidth);
 		blocklyDivs[i].style.width = document.getElementById('formulaDiv').offsetWidth + 'px';
 		console.log(document.getElementById('formulaDiv').offsetWidth);
+		console.log(document.getElementById('formulaDiv').offsetHeight);
 		console.log(blocklyDivs[i].style.width);
 		blocklyDivs[i].style.height = document.getElementById('formulaDiv').offsetHeight + 'px';
+		console.log(document.getElementById('formulaDiv').offsetHeight);
 	}
 	for (var i=0;i<2;i++){
 		console.log(document.getElementById('formulaDiv').offsetWidth);
