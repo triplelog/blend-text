@@ -74,7 +74,29 @@ div.content-11 > .content {
 #radio13-3:checked ~ .content-13 img {
 	max-height: calc((var(--height-container) - var(--height-center)) - 2 * var(--border-radius) - 1.5rem + var(--height-center));
 }
-
+@media screen and (max-width: 480px) {
+	.content-11 {
+		grid-row:  1;
+		grid-column:  1;
+	}
+	.content-13 {
+		grid-row:  2;
+		grid-column:  1;
+	}
+	.content-31 {
+		grid-row:  3;
+		grid-column:  1;
+	}
+	.content-33 {
+		grid-row:  4;
+		grid-column:  1;
+	}
+	.content-22 {
+		grid-row:  5;
+		grid-column:  1;
+	}
+	
+}
 {% endblock %}
 
 
