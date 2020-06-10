@@ -99,10 +99,7 @@ function savedImgUrl(evt) {
 		}
 		else {
 			var el = document.getElementById('imageHolder');
-			var img = document.createElement('img');
-			img.setAttribute('src','img/loading.jpg');
 			el.innerHTML = '';
-			el.appendChild(img);
 		}
 	}
 	else {
