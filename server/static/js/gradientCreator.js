@@ -245,21 +245,23 @@ function onresize(evt) {
     for (var i=0;i<2;i++){
 		blocklyDivs[i].style.left = x + 'px';
 		blocklyDivs[i].style.top = y + 'px';
-		console.log(ow,document.getElementById('formulaDiv').offsetWidth);
 		blocklyDivs[i].style.height = oh + 'px';
-		console.log(ow,document.getElementById('formulaDiv').offsetWidth);
-	}
-	for (var i=0;i<2;i++){
-		console.log(ow,document.getElementById('formulaDiv').offsetWidth);
 		blocklyDivs[i].style.width = ow + 'px';
-		console.log(ow,document.getElementById('formulaDiv').offsetWidth);
+	}
+	var newoh = document.getElementById('formulaDiv').offsetHeight;
+    var newow = document.getElementById('formulaDiv').offsetWidth;
+	if (newoh > oh){ oh = newoh;}
+	if (newow > ow){ ow = neww;}
+	for (var i=0;i<2;i++){
+		console.log(ow,newow,document.getElementById('formulaDiv').offsetWidth);
+		blocklyDivs[i].style.height = newoh + 'px';
+		blocklyDivs[i].style.width = newow + 'px';
+		console.log(ow,newow,document.getElementById('formulaDiv').offsetWidth);
 		console.log(blocklyDivs[i].style.width);
 		
 	}
 	for (var i=0;i<2;i++){
-		console.log(document.getElementById('formulaDiv').offsetWidth);
 		Blockly.svgResize(workspaces[i]);
-		console.log(document.getElementById('formulaDiv').offsetWidth);
     }
 }
 
