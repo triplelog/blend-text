@@ -248,6 +248,8 @@ function onresize(evt) {
 		console.log(document.getElementById('formulaDiv').offsetWidth);
 		console.log(blocklyDivs[i].style.width);
 		blocklyDivs[i].style.height = document.getElementById('formulaDiv').offsetHeight + 'px';
+	}
+	for (var i=0;i<2;i++){
 		Blockly.svgResize(workspaces[i]);
 		console.log(document.getElementById('formulaDiv').offsetWidth);
     }
@@ -268,11 +270,11 @@ for (var i=0;i<2;i++){
 	}
 	var wxml = Blockly.Xml.textToDom(defaults[i]);
 	Blockly.Xml.domToWorkspace(wxml,workspace);
-	console.log(document.getElementById('formulaDiv').offsetWidth);
-	onresize();
-	console.log(document.getElementById('formulaDiv').offsetWidth);
+	
 }
-
+console.log(document.getElementById('formulaDiv').offsetWidth);
+onresize();
+console.log(document.getElementById('formulaDiv').offsetWidth);
 
 
 var lang = 'python';
