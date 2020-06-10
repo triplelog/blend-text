@@ -80,6 +80,34 @@ fieldset {
 	width: calc(90% - 1.5em);
 	margin: auto;
 }
+
+@media screen and (max-width: 480px) {
+	div.container {
+		--height-container: calc(100vh - 2rem);
+		--width-container: calc(100vw - 2rem);
+		height: var(--height-container);
+		width: var(--width-container);
+		max-width: 60rem;
+		margin: .25rem auto;
+		overflow-y: visible;
+		grid-template-columns: 1fr;
+		grid-template-rows: var(--height-center) auto auto;
+		grid-row-gap: .5rem;
+	}
+	.content-11 {
+		grid-row:  2;
+		grid-column:  1;
+	}
+	.content-22 {
+		grid-row:  1;
+		grid-column:  1;
+	}
+	.content-13 {
+		grid-row:  3;
+		grid-column:  1;
+	}
+
+}
 {% endblock %}
 
 
