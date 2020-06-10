@@ -71,6 +71,33 @@ div:Not(.content-22) > .content {
 	width: calc((var(--width-container) - var(--width-center)) / 2 - 1 * var(--border-radius));
 	max-width:calc(26rem - 1 * var(--border-radius));
 }
+@media screen and (max-width: 480px) {
+	#divLeft {
+
+		position: absolute;
+		left: 0px;
+		width: calc(var(--width-container) - 1 * var(--border-radius));
+		max-width:calc(30rem - 1 * var(--border-radius));
+		display: inline-block;
+	}
+	#divRight {
+		-webkit-clip-path:url(#rightHalf);
+		clip-path:url(#rightHalf);
+		position: relative;
+		left:0px;
+		top:0px;
+		width: calc(var(--width-container) - 1 * var(--border-radius));
+		max-width:calc(30rem - 1 * var(--border-radius));
+		display: inline-block;
+	}
+	#filterSliderHolder {
+
+	}
+	#filterSlider {
+		width: calc(var(--width-container) - 1 * var(--border-radius));
+		max-width:calc(30rem - 1 * var(--border-radius));
+	}
+}
 {% endblock %}
 
 
