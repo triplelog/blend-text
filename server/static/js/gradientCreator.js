@@ -243,7 +243,10 @@ function onresize(evt) {
     for (var i=0;i<2;i++){
 		blocklyDivs[i].style.left = x + 'px';
 		blocklyDivs[i].style.top = y + 'px';
+		console.log(document.getElementById('formulaDiv').offsetWidth);
 		blocklyDivs[i].style.width = document.getElementById('formulaDiv').offsetWidth + 'px';
+		console.log(document.getElementById('formulaDiv').offsetWidth);
+		console.log(blocklyDivs[i].style.width);
 		blocklyDivs[i].style.height = document.getElementById('formulaDiv').offsetHeight + 'px';
 		Blockly.svgResize(workspaces[i]);
     }
