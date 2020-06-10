@@ -245,12 +245,14 @@ function onresize(evt) {
     for (var i=0;i<2;i++){
 		blocklyDivs[i].style.left = x + 'px';
 		blocklyDivs[i].style.top = y + 'px';
+		console.log(ow,document.getElementById('formulaDiv').offsetWidth);
 		blocklyDivs[i].style.height = oh + 'px';
+		console.log(ow,document.getElementById('formulaDiv').offsetWidth);
 	}
 	for (var i=0;i<2;i++){
-		console.log(document.getElementById('formulaDiv').offsetWidth);
+		console.log(ow,document.getElementById('formulaDiv').offsetWidth);
 		blocklyDivs[i].style.width = ow + 'px';
-		console.log(document.getElementById('formulaDiv').offsetWidth);
+		console.log(ow,document.getElementById('formulaDiv').offsetWidth);
 		console.log(blocklyDivs[i].style.width);
 		
 	}
