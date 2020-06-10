@@ -112,7 +112,7 @@ function updateImage(evt){
 	}
 	var el = document.getElementById('imageHolder');
 	var img = document.createElement('img');
-	img.setAttribute('src','img/loading.jpg');
+	img.setAttribute('src','img/loading.gif');
 	el.innerHTML = '';
 	el.appendChild(img);
 	loadTippy[0].hide();
