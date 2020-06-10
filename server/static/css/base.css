@@ -563,9 +563,14 @@ input.footnote:Not(:checked) + * + div.footnoteDiv {
 	}
 	div.logoDiv img {
 		width:var(--width-center);
-		left:calc((100% - var(--width-center)) / 2);
+		left:unset;
 		top:0rem;
-		position:absolute;
+		position:relative;
+	}
+	.centerLink {
+		text-align: center;
+		position: relative;
+		top: .5rem;
 	}
 	.title label i {
 		font-size: .8rem;

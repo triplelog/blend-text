@@ -253,11 +253,8 @@ function onresize(evt) {
 	if (newoh > oh){ oh = newoh;}
 	if (newow > ow){ ow = newow;}
 	for (var i=0;i<2;i++){
-		console.log(ow,newow,document.getElementById('formulaDiv').offsetWidth);
 		blocklyDivs[i].style.height = oh + 'px';
 		blocklyDivs[i].style.width = ow + 'px';
-		console.log(ow,newow,document.getElementById('formulaDiv').offsetWidth);
-		console.log(blocklyDivs[i].style.width);
 		
 	}
 	for (var i=0;i<2;i++){
@@ -282,9 +279,7 @@ for (var i=0;i<2;i++){
 	Blockly.Xml.domToWorkspace(wxml,workspace);
 	
 }
-console.log(document.getElementById('formulaDiv').offsetWidth);
 onresize();
-console.log(document.getElementById('formulaDiv').offsetWidth);
 
 
 var lang = 'python';
