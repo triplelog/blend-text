@@ -251,7 +251,7 @@ function onresize(evt) {
 	var newoh = document.getElementById('formulaDiv').offsetHeight;
     var newow = document.getElementById('formulaDiv').offsetWidth;
 	if (newoh > oh){ oh = newoh;}
-	if (newow > ow){ ow = neww;}
+	if (newow > ow){ ow = newow;}
 	for (var i=0;i<2;i++){
 		console.log(ow,newow,document.getElementById('formulaDiv').offsetWidth);
 		blocklyDivs[i].style.height = oh + 'px';
