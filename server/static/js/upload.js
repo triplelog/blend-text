@@ -89,12 +89,20 @@ function chgImgUrl(evt) {
 }
 
 function savedImgUrl(evt) {
-	console.log(evt);
+	
 	if (evt.type && evt.type == 'url'){
+		console.log(realSrc);
 		if (realSrc != ''){
 			var jsonmessage = {'type':'savedImage','url':realSrc};
 			console.log(jsonmessage);
 			ws.send(JSON.stringify(jsonmessage));
+		}
+		else {
+			var el = document.getElementById('imageHolder');
+			var img = document.createElement('img');
+			img.setAttribute('src','img/loading.jpg');
+			el.innerHTML = '';
+			el.appendChild(img);
 		}
 	}
 	else {
@@ -133,9 +141,5 @@ document.getElementById('imgUrl').style.display = 'none';
 document.getElementById('imgDrag').style.display = 'none';
 document.getElementById('imgSaved').style.display = 'none';
 
-var el = document.getElementById('imageHolder');
-var img = document.createElement('img');
-img.setAttribute('src','img/loading.jpg');
-el.innerHTML = '';
-el.appendChild(img);
+
 
