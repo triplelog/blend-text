@@ -324,8 +324,8 @@ div:Not(.content-22) > .content {
 
 .logoDiv {
 	position: relative;
-	left:0rem;
-	top: 0rem;
+	left:-5rem;
+	top: .75rem;
 }
 .centerLink {
 	text-align: center;
@@ -566,6 +566,11 @@ input.footnote:Not(:checked) + * + div.footnoteDiv {
 		left:unset;
 		top:0rem;
 		position:relative;
+	}
+	.logoDiv {
+		position: relative;
+		left:0rem;
+		top:0rem;
 	}
 	.centerLink {
 		text-align: center;
