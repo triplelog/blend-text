@@ -179,7 +179,6 @@ function updateImage(evt){
 	img.setAttribute('src','img/loading.gif');
 	el.innerHTML = '';
 	el.appendChild(img);
-	console.log(evt);
 	loadTippy[0].hide();
 	
 	

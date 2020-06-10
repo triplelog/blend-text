@@ -91,7 +91,6 @@ function chgImgUrl(evt) {
 function savedImgUrl(evt) {
 	
 	if (evt.type && evt.type == 'url'){
-		console.log(realSrc);
 		if (realSrc != ''){
 			var jsonmessage = {'type':'savedImage','url':realSrc};
 			console.log(jsonmessage);
