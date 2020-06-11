@@ -58,7 +58,7 @@ namespace Lapis.QRCode.Art
             	
         		
         		//string scriptCode = DistanceFormula;
-        		string scriptCode = "function DistanceFunc (d,maxD)\nreturn -200 - ((99*math.sqrt(d)-199*math.sqrt(maxD))/math.sqrt(maxD))\nend";
+        		string scriptCode = "function DistanceFunc (d,maxD)\nreturn -1 - (99*math.sqrt(d)/math.sqrt(maxD))\nend";
         		if (scriptCode == ""){
         			scriptCode = "function DistanceFunc (d,maxD)\nreturn -30\nend";
         		}
@@ -265,7 +265,7 @@ namespace Lapis.QRCode.Art
 									else if (tripMatrix[iii,iiii] < 0){
 										var d = (i-iii)*(i-iii)+(ii-iiii)*(ii-iiii);
 										if (dhash.TryGetValue(d, out outval)){
-											if (outval < tripMatrix[iii,iiii]) {
+											if (outval > tripMatrix[iii,iiii]) {
 												tripMatrix[iii,iiii] = outval;
 											}
 										}
