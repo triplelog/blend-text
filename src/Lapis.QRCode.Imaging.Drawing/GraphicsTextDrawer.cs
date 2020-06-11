@@ -143,7 +143,7 @@ namespace Lapis.QRCode.Imaging.Drawing
             	
             	stopWatch = new Stopwatch();
         		stopWatch.Start();
-        		
+        		CellWidth = 1;
                 for (var r = startR; r <= THeight-CellWidth && r + MarginT <= bmp.Height-CellWidth; r += CellWidth)
                 {
                 	ore = -1;
