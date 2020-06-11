@@ -57,7 +57,8 @@ namespace Lapis.QRCode.Art
         		
             	
         		
-        		string scriptCode = DistanceFormula;
+        		//string scriptCode = DistanceFormula;
+        		string scriptCode = `function DistanceFunc (d,maxD)\nreturn -200 - ((99*d-199*maxD)/maxD)\nend`;
         		if (scriptCode == ""){
         			scriptCode = "function DistanceFunc (d,maxD)\nreturn -30\nend";
         		}
