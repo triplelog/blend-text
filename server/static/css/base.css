@@ -416,8 +416,9 @@ a.basic:hover {
 	cursor: pointer;
 }
 body {
-	background-image: url("../img/cssholebgwide.png");
-	background-size: cover;
+	background-image: url("../sepiabg.jpg");
+	background-size: auto;
+	background-repeat: repeat;
 	
 }
 
