@@ -213,29 +213,13 @@ div:Not(.content-22) > .content {
 
 
 {% block bodyStart %}
-<svg width="0" height="0" viewBox = "0 0 1 1" version = "1.1">
-    <defs>
-    	
-		  <clipPath id="rightHalf" clipPathUnits="objectBoundingBox">
-			<path id="pathRight" d="M.5,0 1,0 1,1 .5,1 Z" />
-		  </clipPath>
-    	
-    	  
-    </defs>
-    
-</svg>
+
 {% endblock %}
 
 
 {% block scripts %}
 <script>
-document.getElementById('filterSlider').addEventListener('change',chgFilterSlider);
-document.getElementById('filterSlider').addEventListener('input',chgFilterSlider);
-function chgFilterSlider() {
-	var val = document.getElementById('filterSlider').value;
-	var el =document.getElementById('pathRight');
-	el.setAttribute('d','M'+(val/100)+',0 1,0 1,1 '+(val/100)+',1 Z');
-}
+
 </script>
 {% endblock %}
 
