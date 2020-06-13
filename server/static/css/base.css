@@ -462,12 +462,13 @@ input.footnote:Not(:checked) + * + div.footnoteDiv {
 }
 
 .awesomplete-thumbnail {
-	height: 2rem;
+	height: 1.5rem;
 	float: right;
 }
 .awesomplete > ul > li {
-	height: 2rem;
-	line-height: 2rem;
+	height: 1.5rem;
+	line-height: 1.5rem;
+	width: 20rem;
 }
 
 @media screen and (max-width: 700px) {
