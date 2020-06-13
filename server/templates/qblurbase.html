@@ -690,6 +690,7 @@ var fontList = [];
 for (i in availableFonts){
 	fontList.push({label:availableFonts[i],value:"fontpreviews/"+availableFonts[i]+'.jpg'});
 }
+console.log(fontList);
 var fontInput = document.getElementById("font");
 new Awesomplete(fontInput, {
 	list: fontList,
