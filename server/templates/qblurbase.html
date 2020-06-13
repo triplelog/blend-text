@@ -678,7 +678,7 @@ for (i in images){
 console.log(list);
 var imgSaved = document.getElementById("imgSaved");
 new Awesomplete(imgSaved, {
-	minChars: 2,
+	minChars: 1,
 	maxItems: 15,
 	autoFirst: true,
 	list: list,
@@ -694,6 +694,8 @@ for (i in availableFonts){
 
 var fontInput = document.getElementById("font");
 new Awesomplete(fontInput, {
+	minChars: 1,
+	maxItems: 15,
 	list: fontList,
 	autoFirst: true,
 });

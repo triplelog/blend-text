@@ -42,7 +42,33 @@ app.get('/',
 		res.end();
 	}
 );
-
+app.get('/index.html', 
+	function(req, res) {
+		
+		res.write(nunjucks.render('templates/index.html',{
+			
+		}));
+		res.end();
+	}
+);
+app.get('/about', 
+	function(req, res) {
+		
+		res.write(nunjucks.render('templates/aboutbase.html',{
+			
+		}));
+		res.end();
+	}
+);
+app.get('/about.html', 
+	function(req, res) {
+		
+		res.write(nunjucks.render('templates/aboutbase.html',{
+			
+		}));
+		res.end();
+	}
+);
 app.get('/filter', 
 	function(req, res) {
 		/*var filterGroups = ['Brightness','Saturation','Hue','Contrast','Grayscale'];

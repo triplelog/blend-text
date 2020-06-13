@@ -373,9 +373,15 @@ _.CONTAINER = function (input) {
 _.ITEM = function (text, input, item_id) {
 	var html = input.trim() === "" ? text : text.replace(RegExp($.regExpEscape(input.trim()), "gi"), "<mark>$&</mark>");
 	var fullHTML = "<span>"+html+"</span>";
-	for (var i=0;i<fontWord.length;i++){
-		fullHTML +="<img class='awesomplete-thumbnail' src='../"+text.value+"/"+fontWord[i]+".jpg'>";
+	if (text.value.indexOf('fontpreviews')>-1){
+		fullHTML +="<img class='awesomplete-thumbnail' src='../"+text.value+"'>";
 	}
+	else {
+		//for (var i=0;i<fontWord.length;i++){
+		//	fullHTML +="<img class='awesomplete-thumbnail' src='../"+text.value+"/"+fontWord[i]+".jpg'>";
+		//}
+	}
+	
 	return $.create("li", {
 		innerHTML: fullHTML,
 		"role": "option",
