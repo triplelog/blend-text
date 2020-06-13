@@ -1,0 +1,241 @@
+{% extends "templates/base.html" %}
+
+{% block borderRadius %}
+	--border-radius: 1.25rem;
+{% endblock %}
+
+{% block content22CSS %}
+	/*border: 1px solid black;*/
+{% endblock %}
+	
+{% block centerSize %}
+	--height-center: 6rem;
+	--width-center: 8rem;
+{% endblock %}
+
+{% block titleCSS %}
+
+
+
+{% endblock %}
+
+
+{% block moreCSS %}
+
+div:Not(.content-22) > .content {
+	text-align: center;
+}
+
+img {
+	padding: 0px;
+	margin: 0px;
+}
+
+div:Not(.content-22) > .content {
+	overflow-y: auto;
+	overflow-x: auto;
+	overflow: auto;
+	height: calc(100% - 2 * var(--border-radius));
+	padding: calc(.5 * var(--border-radius));
+}
+.content-22 .content {
+	text-align: center;
+}
+
+#divLeft {
+
+	position: absolute;
+	left: 0px;
+	width: calc((var(--width-container) - var(--width-center)) / 2 - 1 * var(--border-radius));
+	max-width:calc(26rem - 1 * var(--border-radius));
+	display: inline-block;
+}
+#divRight {
+	-webkit-clip-path:url(#rightHalf);
+	clip-path:url(#rightHalf);
+	position: relative;
+	left:0px;
+	top:0px;
+	width: calc((var(--width-container) - var(--width-center)) / 2 - 1 * var(--border-radius));
+	max-width:calc(26rem - 1 * var(--border-radius));
+	display: inline-block;
+}
+#filterSliderHolder {
+
+}
+#filterSlider {
+	width: calc((var(--width-container) - var(--width-center)) / 2 - 1 * var(--border-radius));
+	max-width:calc(26rem - 1 * var(--border-radius));
+}
+#bothDivs {
+	max-width:calc(26rem - 1 * var(--border-radius));
+	margin: auto;
+}
+@media screen and (max-width: 700px) {
+	#bothDivs {
+		max-width: calc(30rem - 1 * var(--border-radius));
+	}
+	#divLeft {
+
+		position: absolute;
+		left: 0px;
+		width: calc(var(--width-container) - 1 * var(--border-radius));
+		max-width:calc(30rem - 1 * var(--border-radius));
+		display: inline-block;
+	}
+	#divRight {
+		-webkit-clip-path:url(#rightHalf);
+		clip-path:url(#rightHalf);
+		position: relative;
+		left:0px;
+		top:0px;
+		width: calc(var(--width-container) - 1 * var(--border-radius));
+		max-width:calc(30rem - 1 * var(--border-radius));
+		display: inline-block;
+	}
+	#filterSliderHolder {
+
+	}
+	#filterSlider {
+		width: calc(var(--width-container) - 1 * var(--border-radius));
+		max-width:calc(30rem - 1 * var(--border-radius));
+	}
+	div.container {
+		grid-template-rows: 10rem 13rem 16rem 13rem 13rem auto;
+	}
+}
+{% endblock %}
+
+
+{% block title11 %}
+<div class="title">
+	<div class="titleBG">
+
+	</div>
+	<span class="titleLeft">
+		
+	</span>
+	<span class="titleCenter">
+		Who?
+	</span>
+	<span class="titleRight">
+	</span>
+</div>
+{% endblock %}
+{% block content11 %}
+
+{% endblock %}	
+
+{% block title13 %}
+<div class="title">
+	<div class="titleBG">
+
+	</div>
+	<span class="titleLeft">
+	
+	</span>
+	<span class="titleCenter">
+		What?
+	</span>
+	<span class="titleRight">
+		<label for="radio13-1"><i class="fas fa-compress-alt"></i></label>
+		<label for="radio13-2"><i class="fas fa-expand-alt"></i></label>
+		<label for="radio13-3"><i class="fas fa-expand"></i></label>
+	
+	</span>
+</div>
+{% endblock %}
+{% block content13 %}
+
+{% endblock %}	
+
+{% block title31 %}
+<div class="title">
+	<div class="titleBG">
+
+	</div>
+	<span class="titleLeft">
+		
+	</span>
+	<span class="titleCenter">
+		Why?
+	</span>
+	<span class="titleRight">
+		<label for="radio31-1"><i class="fas fa-compress-alt"></i></label>
+		<label for="radio31-2"><i class="fas fa-expand-alt"></i></label>
+		<label for="radio31-3"><i class="fas fa-expand"></i></label>
+	</span>
+</div>
+{% endblock %}
+{% block content31 %}
+
+{% endblock %}
+
+{% block title33 %}
+<div class="title">
+	<div class="titleBG">
+
+	</div>
+	<span class="titleLeft">
+		
+	</span>
+	<span class="titleCenter">
+		How?
+	</span>
+	<span class="titleRight">
+		<label for="radio33-1"><i class="fas fa-compress-alt"></i></label>
+		<label for="radio33-2"><i class="fas fa-expand-alt"></i></label>
+		<label for="radio33-3"><i class="fas fa-expand"></i></label>
+	</span>
+</div>
+{% endblock %}
+{% block content33 %}
+
+{% endblock %}
+
+
+
+
+{% block content22 %}
+	
+	<div class="logoDiv">
+		<img src="../newlogosmall.png" style="width:18rem;">		
+	</div>
+	<div class="centerLink">
+		<button class="basic" onclick="window.location.href='../account';">My Account</button>
+	</div>
+	
+{% endblock %}
+
+
+
+
+
+
+{% block bodyStart %}
+<svg width="0" height="0" viewBox = "0 0 1 1" version = "1.1">
+    <defs>
+    	
+		  <clipPath id="rightHalf" clipPathUnits="objectBoundingBox">
+			<path id="pathRight" d="M.5,0 1,0 1,1 .5,1 Z" />
+		  </clipPath>
+    	
+    	  
+    </defs>
+    
+</svg>
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+document.getElementById('filterSlider').addEventListener('change',chgFilterSlider);
+document.getElementById('filterSlider').addEventListener('input',chgFilterSlider);
+function chgFilterSlider() {
+	var val = document.getElementById('filterSlider').value;
+	var el =document.getElementById('pathRight');
+	el.setAttribute('d','M'+(val/100)+',0 1,0 1,1 '+(val/100)+',1 Z');
+}
+</script>
+{% endblock %}
+
