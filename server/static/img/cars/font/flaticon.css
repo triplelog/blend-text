@@ -1,0 +1,81 @@
+	/*
+  	Flaticon icon font: Flaticon
+  	Creation date: 22/06/2016 15:03
+  	*/
+
+@font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+  font-family: Flaticon;
+        font-size: 20px;
+font-style: normal;
+margin-left: 20px;
+}
+
+.flaticon-all-terrain-vehicle-motorbike:before { content: "\f100"; }
+.flaticon-bike-side-view:before { content: "\f101"; }
+.flaticon-black-big-car-side-view:before { content: "\f102"; }
+.flaticon-black-car-side-view:before { content: "\f103"; }
+.flaticon-bus-vehicle-side-view:before { content: "\f104"; }
+.flaticon-car-black-case-over-wheels:before { content: "\f105"; }
+.flaticon-car-black-rounded-shape-side-view:before { content: "\f106"; }
+.flaticon-car-black-shape-over-wheels:before { content: "\f107"; }
+.flaticon-car-black-side-silhouette:before { content: "\f108"; }
+.flaticon-car-black-silhouette-side-view:before { content: "\f109"; }
+.flaticon-car-in-black-side-view:before { content: "\f10a"; }
+.flaticon-car-rounded-shape-side-view:before { content: "\f10b"; }
+.flaticon-car-side-shape:before { content: "\f10c"; }
+.flaticon-car-side-view:before { content: "\f10d"; }
+.flaticon-car-side-view-black-shape:before { content: "\f10e"; }
+.flaticon-car-with-top-window-from-side-view:before { content: "\f10f"; }
+.flaticon-carriage-with-big-wheel:before { content: "\f110"; }
+.flaticon-commercial-car-side-view-silhouette:before { content: "\f111"; }
+.flaticon-convertible:before { content: "\f112"; }
+.flaticon-deliver-truck-silhouette:before { content: "\f113"; }
+.flaticon-delivery-truck-with-cargo:before { content: "\f114"; }
+.flaticon-hatchback-car-silhouette:before { content: "\f115"; }
+.flaticon-hatchback-car-variant-side-view-silhouette:before { content: "\f116"; }
+.flaticon-lowered-racing-car-side-view-silhouette:before { content: "\f117"; }
+.flaticon-motorcycle-of-big-size-black-silhouette:before { content: "\f118"; }
+.flaticon-motorcycle-side-view:before { content: "\f119"; }
+.flaticon-motorcycle-side-view-silhouette:before { content: "\f11a"; }
+.flaticon-over-wheels-transport:before { content: "\f11b"; }
+.flaticon-personal-car-side-view-silhouette:before { content: "\f11c"; }
+.flaticon-pick-up-truck-side-view-silhouette:before { content: "\f11d"; }
+.flaticon-racing-car-side-view-silhouette:before { content: "\f11e"; }
+.flaticon-racing-car-with-side-skirts:before { content: "\f11f"; }
+.flaticon-scooter-variant-with-control:before { content: "\f120"; }
+.flaticon-scooter-with-handle:before { content: "\f121"; }
+.flaticon-single-motorbike:before { content: "\f122"; }
+.flaticon-skate-side-view:before { content: "\f123"; }
+.flaticon-small-truck:before { content: "\f124"; }
+.flaticon-small-truck-with-big-wheels-4x4:before { content: "\f125"; }
+.flaticon-sport-car-black-side-shape:before { content: "\f126"; }
+.flaticon-sport-elegant-black-car-side-view:before { content: "\f127"; }
+.flaticon-sportive-car-side-view:before { content: "\f128"; }
+.flaticon-sportive-elegant-car-side-view:before { content: "\f129"; }
+.flaticon-sports-car-top-down-silhouette:before { content: "\f12a"; }
+.flaticon-taxi-side-view:before { content: "\f12b"; }
+.flaticon-top-down-sports-car-silhouette:before { content: "\f12c"; }
+.flaticon-truck-black-silhouette-side-view:before { content: "\f12d"; }
+.flaticon-truck-container-black-rectangular-silhouette-over-wheels:before { content: "\f12e"; }
+.flaticon-van-black-shape-in-right-direction:before { content: "\f12f"; }
+.flaticon-van-black-silhouette-from-side-view:before { content: "\f130"; }
+.flaticon-van-wagon-or-waggon-side-view-silhouette:before { content: "\f131"; }
