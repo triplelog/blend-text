@@ -531,7 +531,7 @@ div.content-11 > .content {
 {% block content22 %}
 	
 	<div class="logoDiv">
-		<img src="../newlogosmall.png" style="width:16rem;">		
+		<a href="../"><img src="../newlogosmall.png" style="width:16rem;"></a>
 	</div>
 	<div class="centerLink">
 		<button class="basic" onclick="window.location.href='../account';" style="font-size:.85rem; padding: .3rem .5rem;">My Account</button>
@@ -684,7 +684,10 @@ new Awesomplete(imgSaved, {
 	list: list,
 });
 
-
+var fontInput = document.getElementById("font");
+new Awesomplete(fontInput, {
+	list: ["AbeeZee", "Parker"]
+});
 
 
 var loadSaved = false;
