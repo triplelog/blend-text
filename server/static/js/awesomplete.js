@@ -372,8 +372,12 @@ _.CONTAINER = function (input) {
 
 _.ITEM = function (text, input, item_id) {
 	var html = input.trim() === "" ? text : text.replace(RegExp($.regExpEscape(input.trim()), "gi"), "<mark>$&</mark>");
+	var fullHTML = "<span>"+html+"</span>";
+	for (var i=0;i<fontWord.length;i++){
+		fullHTML +="<img class='awesomplete-thumbnail' src='../"+text.value+"/"+fontWord[i]+".jpg'>";
+	}
 	return $.create("li", {
-		innerHTML: "<span>"+html+"</span><img class='awesomplete-thumbnail' src='../"+text.value+"'>",
+		innerHTML: fullHTML,
 		"role": "option",
 		"aria-selected": "false",
 		"id": "awesomplete_list_" + this.count + "_item_" + item_id

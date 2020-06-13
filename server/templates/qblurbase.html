@@ -687,10 +687,11 @@ new Awesomplete(imgSaved, {
 
 var availableFonts = ["AbeeZee", "Parker"];
 var fontList = [];
+var fontWord = ["C",'a','t'];
 for (i in availableFonts){
-	fontList.push({label:availableFonts[i],value:"fontpreviews/"+availableFonts[i]+'.jpg'});
+	fontList.push({label:availableFonts[i],value:"fontpreviews/"+availableFonts[i]});
 }
-console.log(fontList);
+
 var fontInput = document.getElementById("font");
 new Awesomplete(fontInput, {
 	list: fontList,
