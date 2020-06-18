@@ -9,7 +9,7 @@
 
 <!--<link rel="stylesheet" href="../icons/fontawesome/css/all.css">-->
 <link rel="stylesheet" href="../css/awesomplete.css">
-<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="https://martianmath.com/css/onebase.css">
 <link rel="stylesheet" href="../css/prism.css">
 <link rel="stylesheet" href="../css/prism-live.css">
 <link rel="stylesheet" href="../css/dragula.css">
@@ -17,14 +17,26 @@
 <style>
 div.container {
 
-	{% block centerSize %}
-	{% endblock %}
 	{% block borderRadius %}
 	{% endblock %}
 }
-
-
-
+.title {
+  	background-image: url("../qblurheader.jpg");
+}
+.logoDiv {
+	position: relative;
+	left:-5rem;
+	top: .75rem;
+}
+.centerLink {
+	text-align: center;
+	position: relative;
+	top: 2rem;
+}
+.title:hover {
+	background-size: 140% 100%;
+  	transition: all 2s linear;
+}
 
 {% block titleCSS %}
 {% endblock %}
@@ -129,7 +141,10 @@ div.container {
 	</div>
 	
 </div>
-
+<div id="footer">
+	{% block footer %}
+	{% endblock %}
+</div>
 {% block scripts %}
 {% endblock %}
 
