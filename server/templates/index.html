@@ -91,8 +91,19 @@ div:Not(.content-22) > .content {
 		width: calc((var(--width-container) - 2 * var(--border-radius) ) / 2);
 		max-width:calc(30rem - 1 * var(--border-radius));
 	}
+	
 	.centerLink {
 		display: none;
+	}
+	.logoDiv {
+		position: relative;
+		left:unset;
+		top: .75rem;
+	}
+	.logoDiv img {
+		width:9.5rem;
+		top: -1.25rem;
+		left:unset;
 	}
 }
 @media screen and (max-width: 599px) {
@@ -123,6 +134,9 @@ div:Not(.content-22) > .content {
 	#filterSlider {
 		width: calc(var(--width-container) - 1 * var(--border-radius));
 		max-width:calc(30rem - 1 * var(--border-radius));
+	}
+	.logoDiv img {
+		
 	}
 }
 {% endblock %}
@@ -235,7 +249,7 @@ Or add a QR code on top of your image.
 {% block content22 %}
 	
 	<div class="logoDiv">
-		<img src="../newlogosmall.png" style="width:18rem;">		
+		<img src="../newlogosmall.png">		
 	</div>
 	<div class="centerLink">
 		<button class="basic" onclick="window.location.href='../account';">My Account</button>
