@@ -62,6 +62,23 @@ div:Not(.content-22) > .content {
 	max-width:calc(26rem - 1 * var(--border-radius));
 	margin: auto;
 }
+div.logoDiv {
+	position: relative;
+	left:unset;
+	top: unset;
+}
+div.logoDiv img {
+	width:22rem;
+	top: 1rem;
+	left:-5.5rem;
+}
+@media screen and (max-width: 959px) {
+	div.logoDiv img {
+		width:20rem;
+		top: 1rem;
+		left:-6.5rem;
+	}
+}
 @media screen and (max-width: 719px) {
 	#bothDivs {
 		max-width: calc(30rem - 1 * var(--border-radius));
