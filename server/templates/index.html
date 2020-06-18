@@ -70,7 +70,7 @@ div:Not(.content-22) > .content {
 
 		position: absolute;
 		left: 0px;
-		width: calc((var(--width-container) - 1 * var(--border-radius) ) / 2);
+		width: calc((var(--width-container) - 2 * var(--border-radius) ) / 2);
 		max-width:calc(30rem - 1 * var(--border-radius));
 		display: inline-block;
 	}
@@ -80,7 +80,7 @@ div:Not(.content-22) > .content {
 		position: relative;
 		left:0px;
 		top:0px;
-		width: calc((var(--width-container) - 1 * var(--border-radius) ) / 2);
+		width: calc((var(--width-container) - 2 * var(--border-radius) ) / 2);
 		max-width:calc(30rem - 1 * var(--border-radius));
 		display: inline-block;
 	}
@@ -88,8 +88,11 @@ div:Not(.content-22) > .content {
 
 	}
 	#filterSlider {
-		width: calc((var(--width-container) - 1 * var(--border-radius) ) / 2);
+		width: calc((var(--width-container) - 2 * var(--border-radius) ) / 2);
 		max-width:calc(30rem - 1 * var(--border-radius));
+	}
+	.centerLink {
+		display: none;
 	}
 }
 @media screen and (max-width: 599px) {
@@ -243,7 +246,10 @@ Or add a QR code on top of your image.
 	
 {% endblock %}
 
-
+{% block footer %}
+	<button class="basic" onclick="window.location.href='../account';">My Account</button>
+	<button class="basic" onclick="window.location.href='../about';">About</button>
+{% endblock %}
 
 
 
