@@ -73,7 +73,36 @@ fieldset {
 	width: calc(90% - 1.5em);
 	margin: auto;
 }
-
+@media screen and (max-width: 959px) {
+	div.container {
+		--height-container: calc(25rem);
+		--width-container: calc(100vw - 2rem);
+		--height-center: 10rem;
+		--width-center: calc(16rem);
+		grid-template-columns: 1fr var(--width-center) 1fr;
+		grid-template-rows: 1fr;
+		column-gap: 1rem;
+		position: relative;
+		top: calc((100vh - var(--height-container)) / 2);
+	}
+}
+@media screen and (max-width: 719px) {
+	div.container {
+		--height-container: calc(100vh - 2rem);
+		--width-container: calc(100vw - 2rem);
+		height: unset;
+		width: var(--width-container);
+		max-width: 60rem;
+		margin: auto;
+		overflow-y: visible;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: var(--height-center) 15rem auto;
+		grid-row-gap: .5rem;
+		grid-column-gap: .5rem;
+		position: relative;
+		top: calc((100vh - var(--height-container)) / 2);
+	}
+}
 @media screen and (max-width: 599px) {
 	div.container {
 		--height-container: calc(100vh - 2rem);
