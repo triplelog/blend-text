@@ -144,17 +144,13 @@ div.content-11 > .content {
 		text-align: center;
 	}
 	.logoDiv {
-		left: 0rem;
-		top: 0rem;
+		display: none;
 	}
-	div.logoDiv img {
-		width:var(--width-center);
-		left:unset;
-		top:0rem;
-		position:relative;
+	#footer {
+		display: block;
 	}
 	.centerLink {
-		top: .5rem;
+		display: none;
 	}
 	.title label i {
 		font-size: .8rem;
@@ -644,12 +640,15 @@ div.content-11 > .content {
 		<button class="basic" onclick="window.location.href='../account';" style="font-size:.85rem; padding: .3rem .5rem;">My Account</button>
 	</div>
 	<div class="centerLink">
-		<button class="basic" onclick="window.location.href='../about';" style="font-size:.85rem; padding: .3rem .5rem;">Help</button>
+		<button class="basic" onclick="window.location.href='../help';" style="font-size:.85rem; padding: .3rem .5rem;">Help</button>
 	</div>
 	
 {% endblock %}
 
-
+{% block footer %}
+	<button class="basic" onclick="window.location.href='../account';">My Account</button>
+	<button class="basic" onclick="window.location.href='../help';">Help</button>
+{% endblock %}
 
 
 
