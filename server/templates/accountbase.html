@@ -54,6 +54,16 @@ div:Not(.content-22) > .content {
 	grid-row: 1 / 4;
 	display: none;
 }
+
+@media screen and (max-width: 719px) {
+
+	.centerLink {
+		display: none;
+	}
+	.content-22 img {
+		display: none;
+	}
+}
 {% endblock %}
 
 
@@ -227,7 +237,12 @@ div:Not(.content-22) > .content {
 {% endblock %}
 
 
-
+{% block footer %}
+	<button class="basic" onclick="window.location.href='../';">Home</button>
+	<button class="basic" onclick="window.location.href='../filter';">Filter</button>
+	<button class="basic" onclick="window.location.href='../gradient';">Gradient</button>
+	<button class="basic" onclick="window.location.href='../overlay';">Overlay</button>
+{% endblock %}
 
 
 
