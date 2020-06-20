@@ -62,7 +62,9 @@ div:Not(.content-22) > .content {
 	max-width:calc(26rem - 1 * var(--border-radius));
 	margin: auto;
 }
-
+.content-13 .content {
+	overflow-y: hidden;
+}
 @media screen and (max-width: 719px) {
 	#bothDivs {
 		max-width: calc(30rem - 1 * var(--border-radius));
@@ -169,7 +171,7 @@ A limited number of tools offer almost unlimited customization. Play around and 
 </div>
 {% endblock %}
 {% block content13 %}
-Create filters to have total control over your image's color.
+Create filters with total control over your image's color.
 <div id="filterSliderHolder">
 	<input id="filterSlider" type="range" min="0" max="100" value="50"></input>
 </div>
