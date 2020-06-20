@@ -632,6 +632,7 @@ wss.on('connection', function connection(ws) {
 				//QblurData.updateOne({ username: username }, {$push: {"formulas.overlay": formula}}, function(err, result) {});
 			}
 			else if (dm.category =='filter') {
+				console.log('hslrgb: ',formula.hslrgb, dm.hslrgb);
 				if (formula.hslrgb == 'hsl'){formula.hslrgb = 'h';}
 				else {formula.hslrgb = 'r';}
 				QblurData.findOne({ username: username }, "formulas", function(err, result) {
