@@ -6,6 +6,9 @@ function saveFormula(category="overlay") {
 	if (typeof blurOrText === 'undefined' || blurOrText == 'blur'){
 		if (typeof workspaceB === 'undefined'){
 			wxml = Blockly.Xml.workspaceToDom(workspace);
+			if (imgData.filters[currentFilterID].hslrgb == 'r'){
+				hslrgb = 'rgb';
+			}
 		}
 		else if (imgData.blurType == 'hsl'){
 			wxml = Blockly.Xml.workspaceToDom(workspaceB);
